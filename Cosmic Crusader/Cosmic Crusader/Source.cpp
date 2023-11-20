@@ -1,24 +1,16 @@
-#include<iostream>
+#include "stdafx.h"
 
-#include "SFML/Window.hpp"
-#include "SFML/Graphics.hpp"
+#include "Game.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 800), "Test");
-	sf::Event e;
+	Game game;
 
-	while (window.isOpen())
+	while (game.GetWindow().isOpen())
 	{
-		while (window.pollEvent(e))
-		{
-			if (e.type == sf::Event::Closed)
-			{
-				window.close();
-			}
-		}
+		game.update();
+		game.render();
 	}
 
-	system("PUASE");
 	return 0;
 }
