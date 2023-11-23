@@ -106,6 +106,30 @@ void Player::handleEvent(const sf::Event& ev)
 			std::cout << "Idle";
 		}*/
 	}
+	else if (ev.type == sf::Event::KeyReleased)
+	{
+		if (ev.key.code == sf::Keyboard::A)
+		{
+			std::cout << "Sebi left" << std::endl;
+			controls["left"] = false;
+
+		}
+		else if (ev.key.code == sf::Keyboard::D)
+		{
+			controls["right"] = false;
+		}
+
+		if (ev.key.code == sf::Keyboard::W)
+		{
+			/*this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+			std::cout << "Moving Right" << std::endl;*/
+			controls["up"] = false;
+		}
+		else if (ev.key.code == sf::Keyboard::S)
+		{
+			controls["down"] = false;
+		}
+	}
 }
 
 void Player::SetPosition(const float x, const float y)

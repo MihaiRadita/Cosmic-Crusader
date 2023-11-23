@@ -31,7 +31,7 @@ const sf::RenderWindow& Game::GetWindow() const
 
 void Game::handleEvents()
 {
-	this->player->resetControls();
+	//this->player->resetControls();
 	while (this->window.pollEvent(this->ev))
 	{
 		this->player->handleEvent(this->ev);
