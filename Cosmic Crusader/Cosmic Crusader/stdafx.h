@@ -3,6 +3,9 @@
 #include<iostream>
 #include<time.h>
 #include<vector>
+#include <map>
+#include<string>
+#include<algorithm>
 
 //SFML
 #include "SFML/System.hpp"

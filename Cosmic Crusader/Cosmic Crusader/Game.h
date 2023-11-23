@@ -24,10 +24,13 @@ public:
 	//Geters
 	const sf::RenderWindow& GetWindow() const;
 
+	void handleEvents();
+
 	//Update functions
 	void update();
 	void updatePlayer();
 	void updateCollision();
+	void updatePlayerCollision();
 
 	//Render functions
 	void render();

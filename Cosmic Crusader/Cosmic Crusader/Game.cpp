@@ -29,10 +29,12 @@ const sf::RenderWindow& Game::GetWindow() const
 	return this->window;
 }
 
-void Game::update()
+void Game::handleEvents()
 {
+	this->player->resetControls();
 	while (this->window.pollEvent(this->ev))
 	{
+		this->player->handleEvent(this->ev);
 		if (this->ev.type == sf::Event::Closed)
 		{
 			this->window.close();
@@ -42,6 +44,11 @@ void Game::update()
 			this->window.close();
 		}
 	}
+}
+
+void Game::update()
+{
+	this->handleEvents();
 
 	this->updatePlayer();
 	this->updateCollision();
@@ -53,6 +60,12 @@ void Game::updatePlayer()
 }
 
 void Game::updateCollision()
+{
+	//Player collisions
+	this->updatePlayerCollision();
+}
+
+void Game::updatePlayerCollision()
 {
 	if (this->player->getBounds().left < 0.f)
 	{
@@ -72,6 +85,7 @@ void Game::updateCollision()
 		this->player->SetPosition(this->player->getBounds().left, this->window.getSize().y - this->player->getBounds().height);
 	}
 }
+
 
 void Game::render()
 {
