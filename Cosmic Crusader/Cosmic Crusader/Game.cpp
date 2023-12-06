@@ -82,6 +82,7 @@ void Game::updatePlayerCollision()
 	}
 	else if (this->player->getBounds().top + this->player->getBounds().height > this->window.getSize().y)
 	{
+		this->player->setIsOnGround(true);
 		this->player->SetPosition(this->player->getBounds().left, this->window.getSize().y - this->player->getBounds().height);
 	}
 }

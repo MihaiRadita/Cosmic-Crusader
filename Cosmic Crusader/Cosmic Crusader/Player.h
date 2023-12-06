@@ -1,6 +1,6 @@
 #pragma once
 
-enum PLAYER_ANIMATION_STATES{IDLE =0, MOVING_LEFT, MOVING_RIGHT,MOVING_UP,MOVING_DOWN, JUMP};
+enum PLAYER_ANIMATION_STATES{IDLE =0, MOVING_LEFT, MOVING_RIGHT, JUMP};
 
 class Player
 {
@@ -9,12 +9,18 @@ private:
 	sf::Texture textureSheet;
 	sf::Clock animationTimer;
 	sf::Event playerInputEvent;
+	sf::Vector2f playerPosition;
 
 	short animationState;
-	float playerSpeed;
+	float moveSpeed;
 	bool IsPLayerEvent;
+	float gravity;
+	bool isGround;
+	bool isJumping;
+	float jumpSpeed;
+	float yVelocity;
 
-	std::map<std::string, bool> controls{ {"up", false },{"down", false}, {"left", false}, {"right", false} };
+	std::map<std::string, bool> controls{ {"left", false}, {"right", false}, {"jump", false}};
 	//std::map<std::string, int> m{ {"CPU", 10}, {"GPU", 15}, {"RAM", 20} };
 public:
 	
@@ -51,6 +57,8 @@ public:
 	void updateMovement();
 	void updateAnimations();
 	void updatePhysics();
+	void updateJump();
+	void setIsOnGround(bool isGround);
 
 	//Render
 	void render(sf::RenderTarget& target);

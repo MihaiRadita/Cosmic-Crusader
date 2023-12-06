@@ -11,9 +11,16 @@ Player::Player()
 
 void Player::initVariables()
 {
+	this->playerPosition = sf::Vector2f(1.f, 1.f);
 	this->IsPLayerEvent = false;
 	this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-	this->playerSpeed = 1.87f;
+	this->moveSpeed = 2.3f;
+	this->gravity = 1.2f;
+
+	this->isGround = false;
+	this->isJumping = false;
+	this->yVelocity = 0.0f;
+	this->jumpSpeed = 30.7f;
 }
 
 void Player::initTexture()
@@ -27,7 +34,7 @@ void Player::initTexture()
 void Player::initSprite()
 {
 	this->sprite.setTexture(this->textureSheet);
-	this, sprite.setScale(0.05f, 0.05f);
+	this->sprite.setScale(0.05f, 0.05f);
 }
 
 void Player::initAnimations()
@@ -79,55 +86,40 @@ void Player::handleEvent(const sf::Event& ev)
 	{
 		if (ev.key.code == sf::Keyboard::A)
 		{
-			std::cout << "Sebi left"<<std::endl;
+			std::cout << "Press left"<<std::endl;
 			controls["left"] = true;
 			
 		}
 		else if (ev.key.code == sf::Keyboard::D)
 		{
 			controls["right"] = true;
-		}
-		
-		if (ev.key.code == sf::Keyboard::W)
-		{
-			/*this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-			std::cout << "Moving Right" << std::endl;*/
-			controls["up"] = true;
-		}
-		else if (ev.key.code == sf::Keyboard::S)
-		{
-			controls["down"] = true;
+			std::cout << "Press right" << std::endl;
 		}
 
-		/*else
+		if (ev.key.code == sf::Keyboard::Space)
 		{
-
-			this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-			std::cout << "Idle";
-		}*/
+			controls["jump"] = true;
+			std::cout << "Press jump" << std::endl;
+		}
 	}
 	else if (ev.type == sf::Event::KeyReleased)
 	{
 		if (ev.key.code == sf::Keyboard::A)
 		{
-			std::cout << "Sebi left" << std::endl;
+			std::cout << "Release left" << std::endl;
 			controls["left"] = false;
 
 		}
 		else if (ev.key.code == sf::Keyboard::D)
 		{
 			controls["right"] = false;
+			std::cout << "Release right" << std::endl;
 		}
 
-		if (ev.key.code == sf::Keyboard::W)
+		if (ev.key.code == sf::Keyboard::Space)
 		{
-			/*this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-			std::cout << "Moving Right" << std::endl;*/
-			controls["up"] = false;
-		}
-		else if (ev.key.code == sf::Keyboard::S)
-		{
-			controls["down"] = false;
+			controls["jump"] = false;
+			std::cout << "Release jump" << std::endl;
 		}
 	}
 }
@@ -162,6 +154,7 @@ void Player::update()
 {
 	this->updateInput();
 	this->updateMovement();
+	this->updateJump();
 	this->updateAnimations();
 	this->updatePhysics();
 }
@@ -180,7 +173,7 @@ void Player::updateMovement()
 		{
 			this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
 		}
-		this->sprite.move(sf::Vector2f(-1.f, 0.f) * this->playerSpeed);
+		this->sprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
 		std::cout << "Moving Left" << std::endl;
 	}
 	else if (this->controls["right"] == true)
@@ -190,36 +183,16 @@ void Player::updateMovement()
 			this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
 
 		}
-			this->sprite.move(sf::Vector2f(1.f, 0.f) * this->playerSpeed);
-			std::cout << "Moving Left" << std::endl;
-	}
-	if (this->controls["up"] == true)
-	{
-		if (this->animationState != PLAYER_ANIMATION_STATES::MOVING_UP)
-		{
-			this->animationState = PLAYER_ANIMATION_STATES::MOVING_UP;
-		}
-			std::cout << "Moving Up" << std::endl;
-			this->sprite.move(sf::Vector2f(0.f, -1.f) * this->playerSpeed);
+			this->sprite.move(this->playerPosition.x  * this->moveSpeed, 0.f);
+			std::cout << "Moving Right" << std::endl;
 	}
 
-	else if (this->controls["down"] == true)
-	{
-		if (this->animationState != PLAYER_ANIMATION_STATES::MOVING_DOWN)
-		{
-			this->animationState = PLAYER_ANIMATION_STATES::MOVING_DOWN;
-
-		}
-			this->sprite.move(sf::Vector2f(0.f, 1.f) * this->playerSpeed);
-			std::cout << "Moving Left" << std::endl;
-	}
 
 	if (!this->isAnyControlActive())
 	{
 		if (this->animationState != PLAYER_ANIMATION_STATES::IDLE)
 		{
 			this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-
 		}
 	}
 	
@@ -231,6 +204,42 @@ void Player::updateAnimations()
 
 void Player::updatePhysics()
 {
+}
+
+void Player::updateJump()
+{
+	if (this->isGround == true)
+	{
+		this->isJumping = false;
+		this->yVelocity = 0.f;
+		std::cout << "veloctiy y = " << this->yVelocity << std::endl;
+		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+	}
+	else
+	{
+		this->yVelocity += this->gravity;
+		std::cout << "veloctiy y = " << this->yVelocity << std::endl;
+	}
+
+  	if (this->controls["jump"] == true && this->isGround == true)
+	{
+		if (this->animationState != PLAYER_ANIMATION_STATES::JUMP && !this->isJumping)
+		{
+			this->isJumping = true;
+			this->animationState = PLAYER_ANIMATION_STATES::JUMP;
+			this->yVelocity = -jumpSpeed;
+			std::cout << "Y velocity = " << this->yVelocity << std::endl;
+			std::cout<<"naimtion state = " << this->animationState << std::endl;
+		}
+
+		this->isGround = false;
+	}
+	this->sprite.move(0.f, this->yVelocity);
+}
+
+void Player::setIsOnGround(bool isGround)
+{
+	this->isGround = isGround;
 }
 
 void Player::render(sf::RenderTarget& target)
