@@ -56,7 +56,7 @@ const sf::FloatRect Player::getBounds() const
 
 sf::Sprite Player::GetPlayerSprite()
 {
-	return sf::Sprite();
+	return this->sprite;
 }
 
 const sf::Vector2f Player::getPlayerPosition() const
@@ -141,13 +141,13 @@ bool Player::isAnyControlActive()
 {
 	for (auto& pair : this->controls)
 	{
-		if (pair.second == false)
+		if (pair.second == true)
 		{
-			return true;
+			return false;
 		}
 	}
 
-	return false;
+	return true;
 }
 
 void Player::update()
@@ -175,6 +175,7 @@ void Player::updateMovement()
 		}
 		this->sprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
 		std::cout << "Moving Left" << std::endl;
+		std::cout << "veloctiy x to left = " << this->getPlayerPosition().x << std::endl;
 	}
 	else if (this->controls["right"] == true)
 	{
@@ -185,11 +186,14 @@ void Player::updateMovement()
 		}
 			this->sprite.move(this->playerPosition.x  * this->moveSpeed, 0.f);
 			std::cout << "Moving Right" << std::endl;
+			std::cout << "veloctiy x to right = " << this->getPlayerPosition().x << std::endl;
 	}
 
 
-	if (!this->isAnyControlActive())
+	if (this->isAnyControlActive())
 	{
+		std::cout << "Idle"<<std::endl;
+		std::cout << this->animationState << std::endl;
 		if (this->animationState != PLAYER_ANIMATION_STATES::IDLE)
 		{
 			this->animationState = PLAYER_ANIMATION_STATES::IDLE;
@@ -212,7 +216,7 @@ void Player::updateJump()
 	{
 		this->isJumping = false;
 		this->yVelocity = 0.f;
-		std::cout << "veloctiy y = " << this->yVelocity << std::endl;
+		//std::cout << "veloctiy y = " << this->yVelocity << std::endl;
 		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 	}
 	else
