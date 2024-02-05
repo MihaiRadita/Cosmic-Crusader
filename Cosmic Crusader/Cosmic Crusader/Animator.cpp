@@ -3,7 +3,7 @@
 
 Animator::Animator()
 {
-	this->abstractAnimation = new AbstractAnimation();
+	this->abstractAnimation = new PlayerAbstractAnimation();
 	this->animationTmp = this->abstractAnimation;
 }
 
@@ -16,22 +16,29 @@ Animator::~Animator()
 	}
 }
 
-AbstractAnimation* Animator::GetAbstractAnimation()
+PlayerAbstractAnimation* Animator::GetAbstractAnimation()
 {
 	return this->abstractAnimation;
 }
 
-void Animator::SetAnimation(AbstractAnimation* anim)
+void Animator::SetAnimation(PlayerAbstractAnimation* anim)
 {
-	if (dynamic_cast<IdleAnimation*>(anim))
+	if (dynamic_cast<PlayerIdleAnimation*>(anim))
 	{
 		this->abstractAnimation = anim;
 	}
-	else if (dynamic_cast<RunningAnimation*>(anim))
+	else if (dynamic_cast<PlayerRunningAnimation*>(anim))
 	{
 		this->abstractAnimation = anim;
 	}
 }
+
+void Animator::Play(PlayerAbstractAnimation* anim, sf::Sprite& sprite)
+{
+	anim->PlayAnimation(&sprite);
+}
+
+
 
 void Animator::ResetAnimIndex(int& animationIndex)
 {

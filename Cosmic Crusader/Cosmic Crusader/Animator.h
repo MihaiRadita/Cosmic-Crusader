@@ -1,14 +1,14 @@
 #pragma once
 
-#include "AbstractAnimation.h"
-#include "IdleAnimation.h"
-#include "RunningAnimation.h"
+#include "PlayerAbstractAnimation.h"
+#include "PlayerIdleAnimation.h"
+#include "PlayerRunningAnimation.h"
 
 class Animator
 {
 private:
-	AbstractAnimation* abstractAnimation;
-	AbstractAnimation* animationTmp;
+	PlayerAbstractAnimation* abstractAnimation;
+	PlayerAbstractAnimation* animationTmp;
 
 public:
 	//Constructor
@@ -19,16 +19,18 @@ public:
 
 
 	//Geters
-	AbstractAnimation* GetAbstractAnimation();
+	PlayerAbstractAnimation* GetAbstractAnimation();
 
 	//Setters
-	void SetAnimation(AbstractAnimation* anim);
+	void SetAnimation(PlayerAbstractAnimation* anim);
+
+	//Play Animation
+	void Play(PlayerAbstractAnimation* playAnim, sf::Sprite& sprite);
 
 	//Other functions
-	void ResetAnimIndex(int &animationIndex);
-	void TickAnimIndex(int &animationIndex);
+	void ResetAnimIndex(int& animationIndex);
+	void TickAnimIndex(int& animationIndex);
 
 
 
 };
-

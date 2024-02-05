@@ -30,13 +30,13 @@
     <ClCompile Include="Animator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractAnimation.cpp">
+    <ClCompile Include="PlayerIdleAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IdleAnimation.cpp">
+    <ClCompile Include="PlayerAbstractAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RunningAnimation.cpp">
+    <ClCompile Include="PlayerRunningAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +53,13 @@
     <ClInclude Include="Animator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractAnimation.h">
+    <ClInclude Include="PlayerIdleAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IdleAnimation.h">
+    <ClInclude Include="PlayerAbstractAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RunningAnimation.h">
+    <ClInclude Include="PlayerRunningAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
