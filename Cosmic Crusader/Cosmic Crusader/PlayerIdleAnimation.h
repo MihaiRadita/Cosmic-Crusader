@@ -5,11 +5,9 @@
 class PlayerIdleAnimation: public PlayerAbstractAnimation
 {
 private:
-	const int maxFrameIndex;
 	const float animTimeLimit;
 	int currentFrameIndex;
 	static std::vector<sf::Texture>* animFrameImg;
-	static std::vector<std::string>* animFrameLinks;
 	sf::Texture currentTexture;
 	sf::Clock animationTimer;
 	
@@ -29,7 +27,6 @@ public:
 
 	//Other functions
 	void AddAnimationFrames();
-	void DestoryAnimationFrames();
 	void DestroyTextureFrames();
 };
 

@@ -23,14 +23,7 @@ PlayerAbstractAnimation* Animator::GetAbstractAnimation()
 
 void Animator::SetAnimation(PlayerAbstractAnimation* anim)
 {
-	if (dynamic_cast<PlayerIdleAnimation*>(anim))
-	{
-		this->abstractAnimation = anim;
-	}
-	else if (dynamic_cast<PlayerRunningAnimation*>(anim))
-	{
-		this->abstractAnimation = anim;
-	}
+	this->abstractAnimation = anim;
 }
 
 void Animator::Play(PlayerAbstractAnimation* anim, sf::Sprite& sprite)

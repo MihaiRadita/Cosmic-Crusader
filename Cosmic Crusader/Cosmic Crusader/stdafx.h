@@ -1,11 +1,12 @@
-#include<cstdlib>
-#include<ctime>
-#include<iostream>
-#include<time.h>
-#include<vector>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <time.h>
+#include <vector>
 #include <map>
-#include<string>
-#include<algorithm>
+#include <string>
+#include <algorithm>
+#include <sstream>
 
 //SFML
 #include "SFML/System.hpp"
