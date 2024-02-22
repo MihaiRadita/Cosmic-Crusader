@@ -19,6 +19,7 @@ Player::Player()
 void Player::initVariables()
 {
 	this->playerPosition = sf::Vector2f(1.f, 1.f);
+	this->playerSpriteScale = sf::Vector2f(0.05f, 0.05f);
 	this->IsPLayerEvent = false;
 	this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 	this->playerAnimSwitch = -1;
@@ -51,7 +52,7 @@ void Player::initTexture()
 void Player::initSprite()
 {
 	this->sprite.setTexture(this->textureSheet);
-	this->sprite.setScale(0.05f, 0.05f);
+	this->sprite.setScale(this->playerSpriteScale);
 }
 
 void Player::initAnimations()
@@ -189,6 +190,7 @@ void Player::updateMovement()
 	if (this->controls["left"] == true)
 	{
 		this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+		this->InvertPlayerMovingSpriteScale(-1);
 		this->sprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
 		std::cout << "Moving Left" << std::endl;
 		std::cout << "veloctiy x to left = " << this->getPlayerPosition().x << std::endl;
@@ -196,6 +198,7 @@ void Player::updateMovement()
 	else if (this->controls["right"] == true)
 	{
 		this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+		this->InvertPlayerMovingSpriteScale(1);
 		this->sprite.move(this->playerPosition.x * this->moveSpeed, 0.f);
 		std::cout << "Moving Right" << std::endl;
 		std::cout << "veloctiy x to right = " << this->getPlayerPosition().x << std::endl;
@@ -293,6 +296,19 @@ void Player::updateJump()
 void Player::setIsOnGround(bool isGround)
 {
 	this->isGround = isGround;
+}
+
+void Player::InvertPlayerMovingSpriteScale(int direction)
+{
+	this->sprite.setScale(this->playerSpriteScale.x * (float)direction, this->playerSpriteScale.y);
+	if (direction < 0)
+	{
+		this->sprite.setOrigin(this->sprite.getGlobalBounds().width / this->playerSpriteScale.x, 0.f);
+	}
+	else
+	{
+		this->sprite.setOrigin(0.f, 0.f);
+	}
 }
 
 void Player::render(sf::RenderTarget& target)

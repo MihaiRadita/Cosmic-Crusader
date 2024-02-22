@@ -18,6 +18,7 @@ private:
 	sf::Vector2f playerPosition;
 	int playerAnimSwitch;
 	sf::Texture normalTexture;
+	sf::Vector2f playerSpriteScale;
 
 	//Player Animation Instances
 	Animator* playerAnimator;
@@ -78,6 +79,7 @@ public:
 	void updatePhysics();
 	void updateJump();
 	void setIsOnGround(bool isGround);
+	void InvertPlayerMovingSpriteScale(int direction);
 
 	//Render
 	void render(sf::RenderTarget& target);
