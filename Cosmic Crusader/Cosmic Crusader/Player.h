@@ -1,15 +1,32 @@
 #pragma once
 
+#include "Animator.h"
+#include "PlayerIdleAnimation.h"
+#include "PlayerRunningAnimation.h"
+
 enum PLAYER_ANIMATION_STATES{IDLE =0, MOVING_LEFT, MOVING_RIGHT, JUMP};
 
 class Player
 {
 private:
+
+	//Player variables
 	sf::Sprite sprite;
 	sf::Texture textureSheet;
 	sf::Clock animationTimer;
 	sf::Event playerInputEvent;
 	sf::Vector2f playerPosition;
+	int playerAnimSwitch;
+	sf::Texture normalTexture;
+
+	//Player Animation Instances
+	Animator* playerAnimator;
+
+	PlayerIdleAnimation* playerIdelAnimation;
+	PlayerRunningAnimation* playerRunningAnimation;
+
+	//Animations Destroy
+	void DestroyPlayerAnimations();
 
 	short animationState;
 	float moveSpeed;
@@ -19,6 +36,8 @@ private:
 	bool isJumping;
 	float jumpSpeed;
 	float yVelocity;
+	bool isMovingLeft;
+	bool isMovigRight;
 
 	std::map<std::string, bool> controls{ {"left", false}, {"right", false}, {"jump", false}};
 	//std::map<std::string, int> m{ {"CPU", 10}, {"GPU", 15}, {"RAM", 20} };
@@ -54,13 +73,16 @@ public:
 	//Update functions
 	void update();
 	void updateInput();
-	void updateMovement();
 	void updateAnimations();
+	void updateMovement();
 	void updatePhysics();
 	void updateJump();
 	void setIsOnGround(bool isGround);
 
 	//Render
 	void render(sf::RenderTarget& target);
+
+	//Destructor
+	~Player();
 };
 

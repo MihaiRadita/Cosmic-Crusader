@@ -7,14 +7,13 @@ class PlayerIdleAnimation: public PlayerAbstractAnimation
 private:
 	const float animTimeLimit;
 	int currentFrameIndex;
+	bool isAnimTransition;
 	static std::vector<sf::Texture>* animFrameImg;
-	sf::Texture currentTexture;
 	sf::Clock animationTimer;
-	
+	bool initialTexture;
 
 public:
-	void PlayAnimation(sf::Sprite* sprite) override;
-	int GetAnimIndex() const override;
+	void PlayAnimation(sf::Sprite& sprite) override;
 
 	//Constructors
 	PlayerIdleAnimation();
@@ -28,6 +27,12 @@ public:
 	//Other functions
 	void AddAnimationFrames();
 	void DestroyTextureFrames();
+	void ResetCurrentAnimIndex() override;
+	void ResetPlayerAnimTimer() override;
+	//Geters Functions	
+	int GetAnimIndex() override;
+	int GetCurrentAnimIndex() override;
+	sf::Clock GetPlayerAnimTimer() override;
 };
 
 

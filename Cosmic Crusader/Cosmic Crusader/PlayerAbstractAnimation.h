@@ -2,7 +2,11 @@
 class PlayerAbstractAnimation
 {
 public:
-	virtual void PlayAnimation(sf::Sprite* sprite);
-	virtual int GetAnimIndex() const;
+	virtual void PlayAnimation(sf::Sprite& sprite);
+	virtual int GetAnimIndex();
+	virtual int GetCurrentAnimIndex();
+	virtual sf::Clock GetPlayerAnimTimer();
+	virtual void ResetCurrentAnimIndex();
+	virtual void ResetPlayerAnimTimer();
 };
 

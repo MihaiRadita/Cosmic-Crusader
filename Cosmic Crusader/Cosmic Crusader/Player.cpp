@@ -1,12 +1,19 @@
 #include "stdafx.h"
 #include "Player.h"
 
+void Player::DestroyPlayerAnimations()
+{
+	delete this->playerAnimator;
+	delete this->playerIdelAnimation;
+	delete this->playerRunningAnimation;
+}
+
 Player::Player()
 {
-	this->initVariables();
 	this->initTexture();
-	this->initSprite();
+	this->initVariables();
 	this->initAnimations();
+	this->initSprite();
 }
 
 void Player::initVariables()
@@ -14,13 +21,22 @@ void Player::initVariables()
 	this->playerPosition = sf::Vector2f(1.f, 1.f);
 	this->IsPLayerEvent = false;
 	this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+	this->playerAnimSwitch = -1;
+
+	//this->playerAnimator->SetAnimation(this->playerIdelAnimation);
+
+	//this->updateAnimations();
+
 	this->moveSpeed = 2.3f;
 	this->gravity = 1.2f;
+
 
 	this->isGround = false;
 	this->isJumping = false;
 	this->yVelocity = 0.0f;
 	this->jumpSpeed = 30.7f;
+	this->isMovingLeft = false;
+	this->isMovigRight = false;
 }
 
 void Player::initTexture()
@@ -29,6 +45,7 @@ void Player::initTexture()
 	{
 		std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
 	}
+	this->normalTexture = this->textureSheet;
 }
 
 void Player::initSprite()
@@ -39,6 +56,9 @@ void Player::initSprite()
 
 void Player::initAnimations()
 {
+	this->playerAnimator = new Animator();
+	this->playerIdelAnimation = new PlayerIdleAnimation();
+	this->playerRunningAnimation = new PlayerRunningAnimation();
 }
 
 void Player::initIdleAnimation()
@@ -81,14 +101,14 @@ void Player::SetBOOLEvent(bool isEv)
 
 void Player::handleEvent(const sf::Event& ev)
 {
-	std::cout << ev.type<<std::endl;
+	std::cout << ev.type << std::endl;
 	if (ev.type == sf::Event::KeyPressed)
 	{
 		if (ev.key.code == sf::Keyboard::A)
 		{
-			std::cout << "Press left"<<std::endl;
+			std::cout << "Press left" << std::endl;
 			controls["left"] = true;
-			
+
 		}
 		else if (ev.key.code == sf::Keyboard::D)
 		{
@@ -152,7 +172,6 @@ bool Player::isAnyControlActive()
 
 void Player::update()
 {
-	this->updateInput();
 	this->updateMovement();
 	this->updateJump();
 	this->updateAnimations();
@@ -161,49 +180,79 @@ void Player::update()
 
 void Player::updateInput()
 {
-	
-	
+
+
 }
 
 void Player::updateMovement()
 {
 	if (this->controls["left"] == true)
 	{
-		if (this->animationState != PLAYER_ANIMATION_STATES::MOVING_LEFT)
-		{
-			this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-		}
+		this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
 		this->sprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
 		std::cout << "Moving Left" << std::endl;
 		std::cout << "veloctiy x to left = " << this->getPlayerPosition().x << std::endl;
 	}
 	else if (this->controls["right"] == true)
 	{
-		if (this->animationState != PLAYER_ANIMATION_STATES::MOVING_RIGHT)
-		{
-			this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-
-		}
-			this->sprite.move(this->playerPosition.x  * this->moveSpeed, 0.f);
-			std::cout << "Moving Right" << std::endl;
-			std::cout << "veloctiy x to right = " << this->getPlayerPosition().x << std::endl;
+		this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+		this->sprite.move(this->playerPosition.x * this->moveSpeed, 0.f);
+		std::cout << "Moving Right" << std::endl;
+		std::cout << "veloctiy x to right = " << this->getPlayerPosition().x << std::endl;
 	}
 
 
 	if (this->isAnyControlActive())
 	{
-		std::cout << "Idle"<<std::endl;
+		std::cout << "Idle" << std::endl;
 		std::cout << this->animationState << std::endl;
-		if (this->animationState != PLAYER_ANIMATION_STATES::IDLE)
-		{
-			this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-		}
+		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 	}
-	
+
 }
 
 void Player::updateAnimations()
 {
+
+	//std::cout << "Player Runs: " << this->animationState  << std::endl;
+	//daca starea curenta != starea anterioara
+	if (this->animationState != this->playerAnimSwitch) {
+
+		//	aplica modificare
+		switch (this->animationState)
+		{
+		case PLAYER_ANIMATION_STATES::IDLE:
+
+			std::cout << "Player Runs idle Animation" << std::endl;
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->SetAnimation(this->playerIdelAnimation);
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			break;
+
+
+		case PLAYER_ANIMATION_STATES::MOVING_LEFT:
+			std::cout << "Player Runs left Animation" << std::endl;
+			this->playerAnimator->ResetAnimationTimer(this->playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->SetAnimation(this->playerRunningAnimation);
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			break;
+
+		case PLAYER_ANIMATION_STATES::MOVING_RIGHT:
+			std::cout << "Player Runs right Animation" << std::endl;
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->SetAnimation(this->playerRunningAnimation);
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			break;
+
+		default:
+			break;
+		}
+		// salveaza stare curenta in stare anterioara
+		this->playerAnimSwitch = this->animationState;
+	}
+
+	this->playerAnimator->Play(this->playerAnimator->GetAbstractAnimation(), this->sprite);
+
 }
 
 void Player::updatePhysics()
@@ -217,7 +266,7 @@ void Player::updateJump()
 		this->isJumping = false;
 		this->yVelocity = 0.f;
 		//std::cout << "veloctiy y = " << this->yVelocity << std::endl;
-		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+		//this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 	}
 	else
 	{
@@ -225,7 +274,7 @@ void Player::updateJump()
 		std::cout << "veloctiy y = " << this->yVelocity << std::endl;
 	}
 
-  	if (this->controls["jump"] == true && this->isGround == true)
+	if (this->controls["jump"] == true && this->isGround == true)
 	{
 		if (this->animationState != PLAYER_ANIMATION_STATES::JUMP && !this->isJumping)
 		{
@@ -233,7 +282,7 @@ void Player::updateJump()
 			this->animationState = PLAYER_ANIMATION_STATES::JUMP;
 			this->yVelocity = -jumpSpeed;
 			std::cout << "Y velocity = " << this->yVelocity << std::endl;
-			std::cout<<"naimtion state = " << this->animationState << std::endl;
+			std::cout << "naimtion state = " << this->animationState << std::endl;
 		}
 
 		this->isGround = false;
@@ -250,3 +299,10 @@ void Player::render(sf::RenderTarget& target)
 {
 	target.draw(this->sprite);
 }
+
+Player::~Player()
+{
+	this->DestroyPlayerAnimations();
+}
+
+

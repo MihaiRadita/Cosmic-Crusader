@@ -28,9 +28,8 @@ public:
 	void Play(PlayerAbstractAnimation* playAnim, sf::Sprite& sprite);
 
 	//Other functions
-	void ResetAnimIndex(int& animationIndex);
+	void ResetAnimIndex(PlayerAbstractAnimation* anim);
+	void ResetAnimationTimer(PlayerAbstractAnimation* anim);
 	void TickAnimIndex(int& animationIndex);
-
-
 
 };

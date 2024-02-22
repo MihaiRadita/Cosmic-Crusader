@@ -28,16 +28,22 @@ void Animator::SetAnimation(PlayerAbstractAnimation* anim)
 
 void Animator::Play(PlayerAbstractAnimation* anim, sf::Sprite& sprite)
 {
-	anim->PlayAnimation(&sprite);
+	anim->PlayAnimation(sprite);
 }
 
 
 
-void Animator::ResetAnimIndex(int& animationIndex)
+void Animator::ResetAnimIndex(PlayerAbstractAnimation* anim)
 {
-	animationIndex = 0;
+	anim->ResetCurrentAnimIndex();
 }
+
 void Animator::TickAnimIndex(int& animtionIndex)
 {
 	animtionIndex++;
+}
+
+void Animator::ResetAnimationTimer(PlayerAbstractAnimation* anim)
+{
+	this->abstractAnimation->ResetPlayerAnimTimer();
 }
