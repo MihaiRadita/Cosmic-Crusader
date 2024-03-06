@@ -4,7 +4,7 @@
 void Player::DestroyPlayerAnimations()
 {
 	delete this->playerAnimator;
-	delete this->playerIdelAnimation;
+	delete this->playerIdleAnimation;
 	delete this->playerRunningAnimation;
 }
 
@@ -36,8 +36,6 @@ void Player::initVariables()
 	this->isJumping = false;
 	this->yVelocity = 0.0f;
 	this->jumpSpeed = 30.7f;
-	this->isMovingLeft = false;
-	this->isMovigRight = false;
 }
 
 void Player::initTexture()
@@ -46,7 +44,6 @@ void Player::initTexture()
 	{
 		std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
 	}
-	this->normalTexture = this->textureSheet;
 }
 
 void Player::initSprite()
@@ -58,12 +55,8 @@ void Player::initSprite()
 void Player::initAnimations()
 {
 	this->playerAnimator = new Animator();
-	this->playerIdelAnimation = new PlayerIdleAnimation();
+	this->playerIdleAnimation = new PlayerIdleAnimation();
 	this->playerRunningAnimation = new PlayerRunningAnimation();
-}
-
-void Player::initIdleAnimation()
-{
 }
 
 void Player::initPhysics()
@@ -95,7 +88,7 @@ bool Player::CheckEvent()
 	return this->IsPLayerEvent;
 }
 
-void Player::SetBOOLEvent(bool isEv)
+void Player::SetBoolEvent(bool isEv)
 {
 	this->IsPLayerEvent = isEv;
 }
@@ -179,12 +172,6 @@ void Player::update()
 	this->updatePhysics();
 }
 
-void Player::updateInput()
-{
-
-
-}
-
 void Player::updateMovement()
 {
 	if (this->controls["left"] == true)
@@ -228,7 +215,7 @@ void Player::updateAnimations()
 
 			std::cout << "Player Runs idle Animation" << std::endl;
 			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->SetAnimation(this->playerIdelAnimation);
+			this->playerAnimator->SetAnimation(this->playerIdleAnimation);
 			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
 			break;
 
@@ -303,7 +290,7 @@ void Player::InvertPlayerMovingSpriteScale(int direction)
 	this->sprite.setScale(this->playerSpriteScale.x * (float)direction, this->playerSpriteScale.y);
 	if (direction < 0)
 	{
-		this->sprite.setOrigin(this->sprite.getGlobalBounds().width / this->playerSpriteScale.x, 0.f);
+		this->sprite.setOrigin(this->getBounds().width / this->playerSpriteScale.x, 0.f);
 	}
 	else
 	{

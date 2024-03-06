@@ -17,13 +17,12 @@ private:
 	sf::Event playerInputEvent;
 	sf::Vector2f playerPosition;
 	int playerAnimSwitch;
-	sf::Texture normalTexture;
 	sf::Vector2f playerSpriteScale;
 
 	//Player Animation Instances
 	Animator* playerAnimator;
 
-	PlayerIdleAnimation* playerIdelAnimation;
+	PlayerIdleAnimation* playerIdleAnimation;
 	PlayerRunningAnimation* playerRunningAnimation;
 
 	//Animations Destroy
@@ -37,8 +36,6 @@ private:
 	bool isJumping;
 	float jumpSpeed;
 	float yVelocity;
-	bool isMovingLeft;
-	bool isMovigRight;
 
 	std::map<std::string, bool> controls{ {"left", false}, {"right", false}, {"jump", false}};
 	//std::map<std::string, int> m{ {"CPU", 10}, {"GPU", 15}, {"RAM", 20} };
@@ -52,7 +49,6 @@ public:
 	void initTexture();
 	void initSprite();
 	void initAnimations();
-	void initIdleAnimation();
 	void initPhysics();
 	//Geters
 	const sf::FloatRect getBounds() const;
@@ -62,7 +58,7 @@ public:
 	bool CheckEvent();
 	
 	//Setters
-	void SetBOOLEvent(bool isEv);
+	void SetBoolEvent(bool isEv);
 
 	void handleEvent(const sf::Event& event);
 
@@ -73,7 +69,6 @@ public:
 
 	//Update functions
 	void update();
-	void updateInput();
 	void updateAnimations();
 	void updateMovement();
 	void updatePhysics();

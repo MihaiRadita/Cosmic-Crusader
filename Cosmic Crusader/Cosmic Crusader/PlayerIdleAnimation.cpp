@@ -21,30 +21,7 @@ void PlayerIdleAnimation::InitVariables()
 	if (animFrameImg == nullptr)
 	{
 		this->animFrameImg = new std::vector<sf::Texture>();
-		bool imageValid = false;
-		do
-		{
-			int imgIndex = PlayerIdleAnimation::animFrameImg->size();
-			int strImgIndex = imgIndex + 1;
-			
-			// Build string
-			std::stringstream ss;
-			ss << "Textures/PlayerTextures/Player1Textures/IdleTextures/";
-			ss << "Idle";
-			ss << strImgIndex;
-			ss << ".png";
-			std::string path = ss.str();
-			ss.clear();
-
-			// Load Texture
-			sf::Texture texture;
-			imageValid = texture.loadFromFile(path);
-			if (imageValid)
-			{
-				PlayerIdleAnimation::animFrameImg->push_back(texture);
-			}
-
-		} while (imageValid);
+		this->AddAnimationFrames();
 	}
 }
 
@@ -57,7 +34,30 @@ int PlayerIdleAnimation::GetAnimIndex()
 
 void PlayerIdleAnimation::AddAnimationFrames()
 {
+	bool imageValid = false;
+	do
+	{
+		int imgIndex = PlayerIdleAnimation::animFrameImg->size();
+		int strImgIndex = imgIndex + 1;
 
+		// Build string
+		std::stringstream ss;
+		ss << "Textures/PlayerTextures/Player1Textures/IdleTextures/";
+		ss << "Idle";
+		ss << strImgIndex;
+		ss << ".png";
+		std::string path = ss.str();
+		ss.clear();
+
+		// Load Texture
+		sf::Texture texture;
+		imageValid = texture.loadFromFile(path);
+		if (imageValid)
+		{
+			PlayerIdleAnimation::animFrameImg->push_back(texture);
+		}
+
+	} while (imageValid);
 }
 
 //Play player animation frames

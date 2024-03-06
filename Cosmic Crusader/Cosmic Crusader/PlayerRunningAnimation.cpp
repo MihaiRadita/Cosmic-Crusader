@@ -18,30 +18,7 @@ void PlayerRunningAnimation::InitVariables()
 	if (animFrameImg == nullptr)
 	{
 		this->animFrameImg = new std::vector<sf::Texture>();
-		bool imageValid = false;
-		do
-		{
-			int imgIndex = PlayerRunningAnimation::animFrameImg->size();
-			int strImgIndex = imgIndex + 1;
-
-			// Build string
-			std::stringstream ss;
-			ss << "Textures/PlayerTextures/Player1Textures/RunTextures/";
-			ss << "Run";
-			ss << strImgIndex;
-			ss << ".png";
-			std::string path = ss.str();
-			ss.clear();
-
-			// Load Texture
-			sf::Texture texture;
-			imageValid = texture.loadFromFile(path);
-			if (imageValid)
-			{
-				PlayerRunningAnimation::animFrameImg->push_back(texture);
-			}
-
-		} while (imageValid);
+		this->AddAnimationFrames();
 	}
 }
 
@@ -54,7 +31,30 @@ int PlayerRunningAnimation::GetAnimIndex()
 
 void PlayerRunningAnimation::AddAnimationFrames()
 {
+	bool imageValid = false;
+	do
+	{
+		int imgIndex = PlayerRunningAnimation::animFrameImg->size();
+		int strImgIndex = imgIndex + 1;
 
+		// Build string
+		std::stringstream ss;
+		ss << "Textures/PlayerTextures/Player1Textures/RunTextures/";
+		ss << "Run";
+		ss << strImgIndex;
+		ss << ".png";
+		std::string path = ss.str();
+		ss.clear();
+
+		// Load Texture
+		sf::Texture texture;
+		imageValid = texture.loadFromFile(path);
+		if (imageValid)
+		{
+			PlayerRunningAnimation::animFrameImg->push_back(texture);
+		}
+
+	} while (imageValid);
 }
 
 //Play player animation frames
