@@ -215,23 +215,29 @@ void Player::updateAnimations()
 
 			std::cout << "Player Runs idle Animation" << std::endl;
 			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
 			this->playerAnimator->SetAnimation(this->playerIdleAnimation);
 			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
 			break;
 
 
 		case PLAYER_ANIMATION_STATES::MOVING_LEFT:
 			std::cout << "Player Runs left Animation" << std::endl;
 			this->playerAnimator->ResetAnimationTimer(this->playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
 			this->playerAnimator->SetAnimation(this->playerRunningAnimation);
 			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
 			break;
 
 		case PLAYER_ANIMATION_STATES::MOVING_RIGHT:
 			std::cout << "Player Runs right Animation" << std::endl;
 			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
 			this->playerAnimator->SetAnimation(this->playerRunningAnimation);
 			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
 			break;
 
 		default:

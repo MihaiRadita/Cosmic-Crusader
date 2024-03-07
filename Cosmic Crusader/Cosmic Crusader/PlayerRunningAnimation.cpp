@@ -14,6 +14,7 @@ void PlayerRunningAnimation::InitVariables()
 
 	this->initialTexture = false;
 	this->animationTimer.restart();
+	this->animationSwitch = true;
 
 	if (animFrameImg == nullptr)
 	{
@@ -69,7 +70,7 @@ void PlayerRunningAnimation::PlayAnimation(sf::Sprite& sprite)
 			std::cout << "PLayer Idle image " << currentFrameIndex << std::endl;
 
 		}
-		if (this->animationTimer.getElapsedTime().asSeconds() >= this->animTimeLimit)
+		if (this->animationTimer.getElapsedTime().asSeconds() >= this->animTimeLimit || this->GetAnimationSwitch())
 		{
 			this->isAnimTransition = true;
 			this->currentFrameIndex++;
@@ -84,7 +85,7 @@ void PlayerRunningAnimation::PlayAnimation(sf::Sprite& sprite)
 			sprite.setTexture((*this->animFrameImg)[currentFrameIndex]);
 			std::cout << "PLayer Idle image " << currentFrameIndex << std::endl;
 		}
-		if (this->animationTimer.getElapsedTime().asSeconds() >= this->animTimeLimit)
+		if (this->animationTimer.getElapsedTime().asSeconds() >= this->animTimeLimit || this->GetAnimationSwitch())
 		{
 			this->isAnimTransition = true;
 			this->currentFrameIndex++;
@@ -116,11 +117,29 @@ void PlayerRunningAnimation::ResetCurrentAnimIndex()
 void PlayerRunningAnimation::ResetPlayerAnimTimer()
 {
 	this->animationTimer.restart();
+	this->animationSwitch = true;
+}
+
+void PlayerRunningAnimation::SetAnimationSwitch(bool animSwitch)
+{
+	this->animationSwitch = animationSwitch;
 }
 
 int PlayerRunningAnimation::GetCurrentAnimIndex()
 {
 	return this->currentFrameIndex;
+}
+
+bool PlayerRunningAnimation::GetAnimationSwitch()
+{
+	bool anim_switch = this->animationSwitch;
+
+	if (this->animationSwitch)
+	{
+		this->animationSwitch = false;
+	}
+
+	return anim_switch;
 }
 
 std::vector<sf::Texture>* PlayerRunningAnimation::animFrameImg;

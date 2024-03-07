@@ -8,5 +8,7 @@ public:
 	virtual sf::Clock GetPlayerAnimTimer();
 	virtual void ResetCurrentAnimIndex();
 	virtual void ResetPlayerAnimTimer();
+	virtual bool GetAnimationSwitch();
+	virtual void SetAnimationSwitch(bool animSwitch);
 };
 

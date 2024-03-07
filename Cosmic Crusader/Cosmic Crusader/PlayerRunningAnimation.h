@@ -8,6 +8,7 @@ private:
 	const float animTimeLimit;
 	int currentFrameIndex;
 	bool isAnimTransition;
+	bool animationSwitch;
 	static std::vector<sf::Texture>* animFrameImg;
 	sf::Clock animationTimer;
 	bool initialTexture;
@@ -29,8 +30,10 @@ public:
 	void DestroyTextureFrames();
 	void ResetCurrentAnimIndex() override;
 	void ResetPlayerAnimTimer() override;
+	void SetAnimationSwitch(bool animSwitch) override;
 	//Geters Functions	
 	int GetAnimIndex() override;
 	int GetCurrentAnimIndex() override;
+	bool GetAnimationSwitch() override;
 };
 

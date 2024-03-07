@@ -26,6 +26,16 @@ void PlayerAbstractAnimation::ResetPlayerAnimTimer()
 	std::cout << "No animation timer to reset!" << std::endl;
 }
 
+bool PlayerAbstractAnimation::GetAnimationSwitch()
+{
+	return false;
+}
+
+void PlayerAbstractAnimation::SetAnimationSwitch(bool animSwitch)
+{
+	std::cout << "No Animation Switch to change";
+}
+
 void PlayerAbstractAnimation::PlayAnimation(sf::Sprite& sprite)
 {
 	std::cout << "Abstract Animation";
