@@ -6,6 +6,7 @@ void Player::DestroyPlayerAnimations()
 	delete this->playerAnimator;
 	delete this->playerIdleAnimation;
 	delete this->playerRunningAnimation;
+	delete this->playerJumpAnimation;
 }
 
 Player::Player()
@@ -57,6 +58,7 @@ void Player::initAnimations()
 	this->playerAnimator = new Animator();
 	this->playerIdleAnimation = new PlayerIdleAnimation();
 	this->playerRunningAnimation = new PlayerRunningAnimation();
+	this->playerJumpAnimation = new PlayerJumpAnimation();
 }
 
 void Player::initPhysics()
@@ -192,7 +194,7 @@ void Player::updateMovement()
 	}
 
 
-	if (this->isAnyControlActive())
+	if (this->isAnyControlActive() && this->isGround)
 	{
 		std::cout << "Idle" << std::endl;
 		std::cout << this->animationState << std::endl;
@@ -239,6 +241,15 @@ void Player::updateAnimations()
 			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
 			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
 			break;
+		case PLAYER_ANIMATION_STATES::JUMP:
+			std::cout << "Player Jump Animation" << std::endl;
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->SetAnimation(this->playerJumpAnimation);
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			
+			break;
 
 		default:
 			break;
@@ -270,7 +281,7 @@ void Player::updateJump()
 		std::cout << "veloctiy y = " << this->yVelocity << std::endl;
 	}
 
-	if (this->controls["jump"] == true && this->isGround == true)
+	if (this->controls["jump"] == true)
 	{
 		if (this->animationState != PLAYER_ANIMATION_STATES::JUMP && !this->isJumping)
 		{
@@ -280,8 +291,8 @@ void Player::updateJump()
 			std::cout << "Y velocity = " << this->yVelocity << std::endl;
 			std::cout << "naimtion state = " << this->animationState << std::endl;
 		}
-
 		this->isGround = false;
+
 	}
 	this->sprite.move(0.f, this->yVelocity);
 }

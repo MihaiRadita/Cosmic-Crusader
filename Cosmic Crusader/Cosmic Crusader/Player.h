@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "PlayerIdleAnimation.h"
 #include "PlayerRunningAnimation.h"
+#include "PlayerJumpAnimation.h"
 
 enum PLAYER_ANIMATION_STATES{IDLE =0, MOVING_LEFT, MOVING_RIGHT, JUMP};
 
@@ -24,6 +25,7 @@ private:
 
 	PlayerIdleAnimation* playerIdleAnimation;
 	PlayerRunningAnimation* playerRunningAnimation;
+	PlayerJumpAnimation* playerJumpAnimation;
 
 	//Animations Destroy
 	void DestroyPlayerAnimations();
