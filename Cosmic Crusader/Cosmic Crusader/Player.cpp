@@ -20,7 +20,7 @@ Player::Player()
 void Player::initVariables()
 {
 	this->playerPosition = sf::Vector2f(1.f, 1.f);
-	this->playerSpriteScale = sf::Vector2f(0.05f, 0.05f);
+	this->playerSpriteScale = sf::Vector2f(0.6f, 0.6f);
 	this->IsPLayerEvent = false;
 	this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 	this->playerAnimSwitch = -1;
