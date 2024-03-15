@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerRunningAnimation.h"
 
-PlayerRunningAnimation::PlayerRunningAnimation() : animTimeLimit(0.2f), currentFrameIndex(0), isAnimTransition(true)
+PlayerRunningAnimation::PlayerRunningAnimation() : animTimeLimit(0.1f), currentFrameIndex(0), isAnimTransition(true)
 {
 	this->InitVariables();
 	this->AddAnimationFrames();
