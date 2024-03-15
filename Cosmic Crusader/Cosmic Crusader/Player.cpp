@@ -36,7 +36,7 @@ void Player::initVariables()
 	this->isGround = false;
 	this->isJumping = false;
 	this->yVelocity = 0.0f;
-	this->jumpSpeed = 30.7f;
+	this->jumpSpeed = 28.7f;
 }
 
 void Player::initTexture()

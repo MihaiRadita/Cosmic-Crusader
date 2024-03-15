@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerJumpAnimation.h"
 
-PlayerJumpAnimation::PlayerJumpAnimation() : animTimeLimit(0.001f), currentFrameIndex(0), isAnimTransition(true)
+PlayerJumpAnimation::PlayerJumpAnimation() : animTimeLimit(0.035f), currentFrameIndex(0), isAnimTransition(true)
 {
 	this->InitVariables();
 	this->AddAnimationFrames();
