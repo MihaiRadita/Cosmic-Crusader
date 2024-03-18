@@ -35,6 +35,7 @@ void Player::initVariables()
 
 	this->isGround = false;
 	this->isJumping = false;
+	this->isStartsJumping = false;
 	this->yVelocity = 0.0f;
 	this->jumpSpeed = 28.7f;
 }
@@ -176,17 +177,23 @@ void Player::update()
 
 void Player::updateMovement()
 {
-	if (this->controls["left"] == true)
+	if (this->controls["left"] == true && !this->isJumping)
 	{
-		this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+		if (!this->isJumping)
+		{
+			this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+		}
 		this->InvertPlayerMovingSpriteScale(-1);
 		this->sprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
 		std::cout << "Moving Left" << std::endl;
 		std::cout << "veloctiy x to left = " << this->getPlayerPosition().x << std::endl;
 	}
-	else if (this->controls["right"] == true)
+	else if (this->controls["right"] == true && !this->isJumping)
 	{
-		this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+		if (!this->isJumping)
+		{
+			this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+		}
 		this->InvertPlayerMovingSpriteScale(1);
 		this->sprite.move(this->playerPosition.x * this->moveSpeed, 0.f);
 		std::cout << "Moving Right" << std::endl;
@@ -201,6 +208,40 @@ void Player::updateMovement()
 		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 	}
 
+}
+
+void Player::updateJump()
+{
+	if (this->isGround == true)
+	{
+		this->isJumping = false;
+		this->isStartsJumping = true;
+		this->yVelocity = 0.f;
+		//std::cout << "veloctiy y = " << this->yVelocity << std::endl;
+		//this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+	}
+	else
+	{
+		this->yVelocity += this->gravity;
+		std::cout << "veloctiy y = " << this->yVelocity << std::endl;
+	}
+
+	if (this->controls["jump"] == true)
+	{
+
+		if (this->animationState != PLAYER_ANIMATION_STATES::JUMP && !this->isJumping && this->isStartsJumping)
+		{
+			this->isStartsJumping = this->playerAnimator->CheckCurrentAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			//this->isJumping = true;
+			this->animationState = PLAYER_ANIMATION_STATES::JUMP;
+			this->yVelocity = -jumpSpeed;
+			std::cout << "Y velocity = " << this->yVelocity << std::endl;
+			std::cout << "Animation state = " << this->animationState << std::endl;
+		}
+		this->isGround = false;
+
+	}
+	this->sprite.move(0.f, this->yVelocity);
 }
 
 void Player::updateAnimations()
@@ -266,36 +307,6 @@ void Player::updatePhysics()
 {
 }
 
-void Player::updateJump()
-{
-	if (this->isGround == true)
-	{
-		this->isJumping = false;
-		this->yVelocity = 0.f;
-		//std::cout << "veloctiy y = " << this->yVelocity << std::endl;
-		//this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-	}
-	else
-	{
-		this->yVelocity += this->gravity;
-		std::cout << "veloctiy y = " << this->yVelocity << std::endl;
-	}
-
-	if (this->controls["jump"] == true)
-	{
-		if (this->animationState != PLAYER_ANIMATION_STATES::JUMP && !this->isJumping)
-		{
-			this->isJumping = true;
-			this->animationState = PLAYER_ANIMATION_STATES::JUMP;
-			this->yVelocity = -jumpSpeed;
-			std::cout << "Y velocity = " << this->yVelocity << std::endl;
-			std::cout << "naimtion state = " << this->animationState << std::endl;
-		}
-		this->isGround = false;
-
-	}
-	this->sprite.move(0.f, this->yVelocity);
-}
 
 void Player::setIsOnGround(bool isGround)
 {

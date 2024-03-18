@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerJumpAnimation.h"
 
-PlayerJumpAnimation::PlayerJumpAnimation() : animTimeLimit(0.035f), currentFrameIndex(0), isAnimTransition(true)
+PlayerJumpAnimation::PlayerJumpAnimation() : animTimeLimit(0.028f), currentFrameIndex(0),animTimeJumpLimit(0.015),jumpAnimFrameIndex(17), isAnimTransition(true)
 {
 	this->InitVariables();
 	this->AddAnimationFrames();
@@ -15,6 +15,7 @@ void PlayerJumpAnimation::InitVariables()
 	this->initialTexture = false;
 	this->animationTimer.restart();
 	this->animationSwitch = true;
+	this->currentJumpTimeLimit = this->animTimeLimit;
 
 	if (animFrameImg == nullptr)
 	{
@@ -70,7 +71,7 @@ void PlayerJumpAnimation::PlayAnimation(sf::Sprite& sprite)
 			std::cout << "PLayer Jump image " << currentFrameIndex << std::endl;
 
 		}
-		if (this->animationTimer.getElapsedTime().asSeconds() >= this->animTimeLimit || this->GetAnimationSwitch())
+		if (this->animationTimer.getElapsedTime().asSeconds() >= this->currentJumpTimeLimit || this->GetAnimationSwitch())
 		{
 			this->isAnimTransition = true;
 			this->currentFrameIndex++;
@@ -79,20 +80,33 @@ void PlayerJumpAnimation::PlayAnimation(sf::Sprite& sprite)
 	}
 	else if (this->currentFrameIndex > 0)
 	{
+
+
+		if (this->currentFrameIndex >= this->GetAnimIndex())
+		{
+			this->currentFrameIndex = 0;
+			return;
+		}
 		if (this->isAnimTransition)
 		{
 			this->isAnimTransition = false;
 			sprite.setTexture((*this->animFrameImg)[currentFrameIndex]);
 			std::cout << "PLayer Jump image " << currentFrameIndex << std::endl;
 		}
-		if (this->animationTimer.getElapsedTime().asSeconds() >= this->animTimeLimit || this->GetAnimationSwitch())
+		if (this->animationTimer.getElapsedTime().asSeconds() >= this->currentJumpTimeLimit || this->GetAnimationSwitch())
 		{
 			this->isAnimTransition = true;
 			this->currentFrameIndex++;
-			if (this->currentFrameIndex >= this->GetAnimIndex())
+
+			if (this->currentFrameIndex == this->jumpAnimFrameIndex)
+			{
+				this->currentJumpTimeLimit = this->animTimeJumpLimit;
+			}
+
+			/*if (this->currentFrameIndex >= this->GetAnimIndex())
 			{
 				this->currentFrameIndex = 0;
-			}
+			}*/
 			this->animationTimer.restart();
 		}
 	}
@@ -140,6 +154,16 @@ bool PlayerJumpAnimation::GetAnimationSwitch()
 	}
 
 	return anim_switch;
+}
+
+bool PlayerJumpAnimation::IsCurrentAnimationIndexValue()
+{
+	if (this->currentFrameIndex == this->jumpAnimFrameIndex)
+	{
+		return  true;
+	}
+
+	return false;
 }
 
 std::vector<sf::Texture>* PlayerJumpAnimation::animFrameImg;

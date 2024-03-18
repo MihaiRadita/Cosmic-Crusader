@@ -38,6 +38,7 @@ private:
 	bool isJumping;
 	float jumpSpeed;
 	float yVelocity;
+	bool isStartsJumping;
 
 	std::map<std::string, bool> controls{ {"left", false}, {"right", false}, {"jump", false}};
 	//std::map<std::string, int> m{ {"CPU", 10}, {"GPU", 15}, {"RAM", 20} };

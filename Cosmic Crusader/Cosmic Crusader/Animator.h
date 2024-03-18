@@ -31,5 +31,5 @@ public:
 	void ResetAnimIndex(PlayerAbstractAnimation* anim);
 	void ResetAnimationTimer(PlayerAbstractAnimation* anim);
 	void TickAnimIndex(int& animationIndex);
-
+	bool CheckCurrentAnimIndex(PlayerAbstractAnimation* anim);
 };

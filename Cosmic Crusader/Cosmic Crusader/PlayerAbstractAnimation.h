@@ -10,5 +10,6 @@ public:
 	virtual void ResetPlayerAnimTimer();
 	virtual bool GetAnimationSwitch();
 	virtual void SetAnimationSwitch(bool animSwitch);
+	virtual bool IsCurrentAnimationIndexValue();
 };
 

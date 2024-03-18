@@ -7,7 +7,10 @@ class PlayerJumpAnimation : public PlayerAbstractAnimation
 private:
 	const float animTimeLimit;
 	int currentFrameIndex;
+	const float animTimeJumpLimit;
+	const int jumpAnimFrameIndex;
 	bool isAnimTransition;
+	float currentJumpTimeLimit;
 	bool animationSwitch;
 	static std::vector<sf::Texture>* animFrameImg;
 	sf::Clock animationTimer;
@@ -35,5 +38,6 @@ public:
 	int GetAnimIndex() override;
 	int GetCurrentAnimIndex() override;
 	bool GetAnimationSwitch() override;
+	bool IsCurrentAnimationIndexValue() override;
 };
 

@@ -43,6 +43,11 @@ void Animator::TickAnimIndex(int& animtionIndex)
 	animtionIndex++;
 }
 
+bool Animator::CheckCurrentAnimIndex(PlayerAbstractAnimation* anim)
+{
+	return anim->IsCurrentAnimationIndexValue();
+}
+
 void Animator::ResetAnimationTimer(PlayerAbstractAnimation* anim)
 {
 	this->abstractAnimation->ResetPlayerAnimTimer();

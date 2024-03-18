@@ -36,6 +36,11 @@ void PlayerAbstractAnimation::SetAnimationSwitch(bool animSwitch)
 	std::cout << "No Animation Switch to change";
 }
 
+bool PlayerAbstractAnimation::IsCurrentAnimationIndexValue()
+{
+	return false;
+}
+
 void PlayerAbstractAnimation::PlayAnimation(sf::Sprite& sprite)
 {
 	std::cout << "Abstract Animation";
