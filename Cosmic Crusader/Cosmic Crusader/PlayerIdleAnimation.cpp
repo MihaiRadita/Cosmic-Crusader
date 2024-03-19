@@ -28,7 +28,7 @@ void PlayerIdleAnimation::InitVariables()
 
 
 //Geters
-int PlayerIdleAnimation::GetAnimIndex() 
+int PlayerIdleAnimation::GetAnimSize() 
 {
 	return this->PlayerIdleAnimation::animFrameImg->size();
 }
@@ -97,7 +97,7 @@ void PlayerIdleAnimation::PlayAnimation(sf::Sprite& sprite)
 		{
 			this->isAnimTransition = true;
 			this->currentFrameIndex++;
-			if (this->currentFrameIndex >= this->GetAnimIndex())
+			if (this->currentFrameIndex >= this->GetAnimSize())
 			{
 				this->currentFrameIndex = 0;
 			}

@@ -35,7 +35,7 @@ void Player::initVariables()
 
 	this->isGround = false;
 	this->isJumping = false;
-	this->isStartsJumping = false;
+	this->isJumpStage = false;
 	this->yVelocity = 0.0f;
 	this->jumpSpeed = 28.7f;
 }
@@ -154,7 +154,7 @@ void Player::resetControls()
 	}
 }
 
-bool Player::isAnyControlActive()
+bool Player::isNoControlActive()
 {
 	for (auto& pair : this->controls)
 	{
@@ -177,22 +177,24 @@ void Player::update()
 
 void Player::updateMovement()
 {
-	if (this->controls["left"] == true && !this->isJumping)
+	if (this->controls["left"] == true)
 	{
 		if (!this->isJumping)
 		{
 			this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+			this->SwitchAnimation();
 		}
 		this->InvertPlayerMovingSpriteScale(-1);
 		this->sprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
 		std::cout << "Moving Left" << std::endl;
 		std::cout << "veloctiy x to left = " << this->getPlayerPosition().x << std::endl;
 	}
-	else if (this->controls["right"] == true && !this->isJumping)
+	else if (this->controls["right"] == true)
 	{
 		if (!this->isJumping)
 		{
 			this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+			this->SwitchAnimation();
 		}
 		this->InvertPlayerMovingSpriteScale(1);
 		this->sprite.move(this->playerPosition.x * this->moveSpeed, 0.f);
@@ -201,21 +203,23 @@ void Player::updateMovement()
 	}
 
 
-	if (this->isAnyControlActive() && this->isGround)
+	if (this->isNoControlActive() && this->animationState != PLAYER_ANIMATION_STATES::JUMP)
 	{
 		std::cout << "Idle" << std::endl;
 		std::cout << this->animationState << std::endl;
 		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+		this->SwitchAnimation();
 	}
 
 }
 
 void Player::updateJump()
 {
-	if (this->isGround == true)
+	if (this->isGround == true && (this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) >= 17)
 	{
+		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 		this->isJumping = false;
-		this->isStartsJumping = true;
+		
 		this->yVelocity = 0.f;
 		//std::cout << "veloctiy y = " << this->yVelocity << std::endl;
 		//this->animationState = PLAYER_ANIMATION_STATES::IDLE;
@@ -223,25 +227,49 @@ void Player::updateJump()
 	else
 	{
 		this->yVelocity += this->gravity;
-		std::cout << "veloctiy y = " << this->yVelocity << std::endl;
+		//std::cout << "veloctiy y = " << this->yVelocity << std::endl;
 	}
+
 
 	if (this->controls["jump"] == true)
 	{
-
-		if (this->animationState != PLAYER_ANIMATION_STATES::JUMP && !this->isJumping && this->isStartsJumping)
+		if (this->animationState != PLAYER_ANIMATION_STATES::JUMP)
 		{
-			this->isStartsJumping = this->playerAnimator->CheckCurrentAnimIndex(this->playerAnimator->GetAbstractAnimation());
-			//this->isJumping = true;
+			//this->isPreparingJump = this->playerAnimator->CheckCurrentAnimIndex(this->playerAnimator->GetAbstractAnimation());
 			this->animationState = PLAYER_ANIMATION_STATES::JUMP;
-			this->yVelocity = -jumpSpeed;
-			std::cout << "Y velocity = " << this->yVelocity << std::endl;
-			std::cout << "Animation state = " << this->animationState << std::endl;
+			this->SwitchAnimation();
 		}
-		this->isGround = false;
 
 	}
-	this->sprite.move(0.f, this->yVelocity);
+
+	//bool preparingJump = this->playerAnimator->CheckCurrentAnimIndex(this->playerAnimator->GetAbstractAnimation());
+
+	if ((this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) + 1 == 17)
+	{
+		this->isJumping = true;
+	}
+
+	/*if (preparingJump != this->isJumpStage)
+	{
+		this->isJumping = true;
+	}*/
+
+
+	if (this->isJumping)
+	{
+		if (this->isGround)
+		{
+			this->yVelocity = -jumpSpeed;
+			this->isGround = false;
+		}
+	}
+
+	/*if (this->isGround == true) {
+		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+	}*/
+	
+ 	this->sprite.move(0.f, this->yVelocity);
+
 }
 
 void Player::updateAnimations()
@@ -249,9 +277,10 @@ void Player::updateAnimations()
 
 	//std::cout << "Player Runs: " << this->animationState  << std::endl;
 	//daca starea curenta != starea anterioara
-	if (this->animationState != this->playerAnimSwitch) {
 
-		//	aplica modificare
+
+	/*if (this->animationState != this->playerAnimSwitch) {
+
 		switch (this->animationState)
 		{
 		case PLAYER_ANIMATION_STATES::IDLE:
@@ -295,9 +324,8 @@ void Player::updateAnimations()
 		default:
 			break;
 		}
-		// salveaza stare curenta in stare anterioara
 		this->playerAnimSwitch = this->animationState;
-	}
+	}*/
 
 	this->playerAnimator->Play(this->playerAnimator->GetAbstractAnimation(), this->sprite);
 
@@ -323,6 +351,59 @@ void Player::InvertPlayerMovingSpriteScale(int direction)
 	else
 	{
 		this->sprite.setOrigin(0.f, 0.f);
+	}
+}
+
+void Player::SwitchAnimation()
+{
+	if (this->animationState != this->playerAnimSwitch) {
+
+		//	aplica modificare
+		switch (this->animationState)
+		{
+		case PLAYER_ANIMATION_STATES::IDLE:
+
+			std::cout << "Player Runs idle Animation" << std::endl;
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->SetAnimation(this->playerIdleAnimation);
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			break;
+
+
+		case PLAYER_ANIMATION_STATES::MOVING_LEFT:
+			std::cout << "Player Runs left Animation" << std::endl;
+			this->playerAnimator->ResetAnimationTimer(this->playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->SetAnimation(this->playerRunningAnimation);
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			break;
+
+		case PLAYER_ANIMATION_STATES::MOVING_RIGHT:
+			std::cout << "Player Runs right Animation" << std::endl;
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->SetAnimation(this->playerRunningAnimation);
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			break;
+		case PLAYER_ANIMATION_STATES::JUMP:
+			std::cout << "Player Jump Animation" << std::endl;
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->SetAnimation(this->playerJumpAnimation);
+			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
+			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+
+			break;
+
+		default:
+			break;
+		}
+		// salveaza stare curenta in stare anterioara
+		this->playerAnimSwitch = this->animationState;
 	}
 }
 

@@ -35,7 +35,7 @@ public:
 	void ResetPlayerAnimTimer() override;
 	void SetAnimationSwitch(bool animSwitch) override;
 	//Geters Functions	
-	int GetAnimIndex() override;
+	int GetAnimSize() override;
 	int GetCurrentAnimIndex() override;
 	bool GetAnimationSwitch() override;
 	bool IsCurrentAnimationIndexValue() override;

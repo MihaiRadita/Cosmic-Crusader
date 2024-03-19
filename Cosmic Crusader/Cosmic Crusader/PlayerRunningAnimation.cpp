@@ -25,7 +25,7 @@ void PlayerRunningAnimation::InitVariables()
 
 
 //Geters
-int PlayerRunningAnimation::GetAnimIndex()
+int PlayerRunningAnimation::GetAnimSize()
 {
 	return this->PlayerRunningAnimation::animFrameImg->size();
 }
@@ -89,7 +89,7 @@ void PlayerRunningAnimation::PlayAnimation(sf::Sprite& sprite)
 		{
 			this->isAnimTransition = true;
 			this->currentFrameIndex++;
-			if (this->currentFrameIndex >= this->GetAnimIndex())
+			if (this->currentFrameIndex >= this->GetAnimSize())
 			{
 				this->currentFrameIndex = 0;
 			}

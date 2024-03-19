@@ -26,7 +26,7 @@ void PlayerJumpAnimation::InitVariables()
 
 
 //Geters
-int PlayerJumpAnimation::GetAnimIndex()
+int PlayerJumpAnimation::GetAnimSize()
 {
 	return this->PlayerJumpAnimation::animFrameImg->size();
 }
@@ -82,9 +82,9 @@ void PlayerJumpAnimation::PlayAnimation(sf::Sprite& sprite)
 	{
 
 
-		if (this->currentFrameIndex >= this->GetAnimIndex())
+		if (this->currentFrameIndex >= this->GetAnimSize())
 		{
-			this->currentFrameIndex = 0;
+			//this->currentFrameIndex = 0;
 			return;
 		}
 		if (this->isAnimTransition)
@@ -160,10 +160,11 @@ bool PlayerJumpAnimation::IsCurrentAnimationIndexValue()
 {
 	if (this->currentFrameIndex == this->jumpAnimFrameIndex)
 	{
-		return  true;
+		return  false;
+		std::cout << "image number action " << this->jumpAnimFrameIndex << " happended!" << std::endl;
 	}
 
-	return false;
+	return true;
 }
 
 std::vector<sf::Texture>* PlayerJumpAnimation::animFrameImg;

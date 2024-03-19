@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerAbstractAnimation.h"
 
-int PlayerAbstractAnimation::GetAnimIndex()
+int PlayerAbstractAnimation::GetAnimSize()
 {
 	return 0;
 }

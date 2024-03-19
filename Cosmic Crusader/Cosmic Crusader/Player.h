@@ -38,7 +38,7 @@ private:
 	bool isJumping;
 	float jumpSpeed;
 	float yVelocity;
-	bool isStartsJumping;
+	bool isJumpStage;
 
 	std::map<std::string, bool> controls{ {"left", false}, {"right", false}, {"jump", false}};
 	//std::map<std::string, int> m{ {"CPU", 10}, {"GPU", 15}, {"RAM", 20} };
@@ -68,7 +68,7 @@ public:
 	//Modifiers
 	void SetPosition(const float x, const float y);
 	void resetControls();
-	bool isAnyControlActive();
+	bool isNoControlActive();
 
 	//Update functions
 	void update();
@@ -78,6 +78,7 @@ public:
 	void updateJump();
 	void setIsOnGround(bool isGround);
 	void InvertPlayerMovingSpriteScale(int direction);
+	void SwitchAnimation();
 
 	//Render
 	void render(sf::RenderTarget& target);
