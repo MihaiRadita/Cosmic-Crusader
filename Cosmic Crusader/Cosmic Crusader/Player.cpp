@@ -215,7 +215,7 @@ void Player::updateMovement()
 
 void Player::updateJump()
 {
-	if (this->isGround == true && (this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) >= 17)
+	if (this->isGround == true && (this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) > 17)
 	{
 		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 		this->isJumping = false;
@@ -244,9 +244,10 @@ void Player::updateJump()
 
 	//bool preparingJump = this->playerAnimator->CheckCurrentAnimIndex(this->playerAnimator->GetAbstractAnimation());
 
-	if ((this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) + 1 == 17)
+	if ((this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) == 17 && this->animationState == PLAYER_ANIMATION_STATES::JUMP)
 	{
 		this->isJumping = true;
+		
 	}
 
 	/*if (preparingJump != this->isJumpStage)
