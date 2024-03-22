@@ -36,6 +36,7 @@ private:
 	float gravity;
 	bool isGround;
 	bool isJumping;
+	bool isMoving;
 	float jumpSpeed;
 	float yVelocity;
 	bool isJumpStage;

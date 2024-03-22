@@ -28,6 +28,7 @@ void Player::initVariables()
 	this->gravity = 1.2f;
 	this->isGround = false;
 	this->isJumping = false;
+	this->isMoving = false;
 	this->isJumpStage = false;
 	this->yVelocity = 0.0f;
 	this->jumpSpeed = 28.7f;
