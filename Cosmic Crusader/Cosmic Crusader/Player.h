@@ -4,8 +4,9 @@
 #include "PlayerIdleAnimation.h"
 #include "PlayerRunningAnimation.h"
 #include "PlayerJumpAnimation.h"
+#include "PlayerJumpRunningAnimation.h"
 
-enum PLAYER_ANIMATION_STATES{IDLE =0, MOVING_LEFT, MOVING_RIGHT, JUMP};
+enum PLAYER_ANIMATION_STATES{IDLE =0, MOVING_LEFT, MOVING_RIGHT, JUMP, JUMP_RUNNING};
 
 class Player
 {
@@ -26,6 +27,7 @@ private:
 	PlayerIdleAnimation* playerIdleAnimation;
 	PlayerRunningAnimation* playerRunningAnimation;
 	PlayerJumpAnimation* playerJumpAnimation;
+	PlayerJumpRunningAnimation* playerJumpRunningAnimation;
 
 	//Animations Destroy
 	void DestroyPlayerAnimations();
@@ -36,10 +38,17 @@ private:
 	float gravity;
 	bool isGround;
 	bool isJumping;
+	bool isRunningJumping;
 	bool isMoving;
+	bool isMovingLeft;
+	bool isMovingRight;
 	float jumpSpeed;
 	float yVelocity;
 	bool isJumpStage;
+	bool isBlockingMovement;
+	bool isBlockingMovementLeft;
+	bool isBlockingMovementRight;
+	bool isBlockingAnimation;
 
 	std::map<std::string, bool> controls{ {"left", false}, {"right", false}, {"jump", false}};
 	//std::map<std::string, int> m{ {"CPU", 10}, {"GPU", 15}, {"RAM", 20} };
@@ -77,6 +86,7 @@ public:
 	void updateMovement();
 	void updatePhysics();
 	void updateJump();
+	void updateRunningJump();
 	void setIsOnGround(bool isGround);
 	void InvertPlayerMovingSpriteScale(int direction);
 	void SwitchAnimation();

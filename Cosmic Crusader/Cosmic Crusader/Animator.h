@@ -3,6 +3,7 @@
 #include "PlayerAbstractAnimation.h"
 #include "PlayerIdleAnimation.h"
 #include "PlayerRunningAnimation.h"
+#include "PlayerJumpRunningAnimation.h"
 
 class Animator
 {
