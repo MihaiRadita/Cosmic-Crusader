@@ -40,7 +40,7 @@ private:
 	bool isGround;
 	bool isJumping;
 	bool isMoving;
-	float jumpSpeed;
+	float jumpForce;
 	float yVelocity;
 	bool isJumpStage;
 

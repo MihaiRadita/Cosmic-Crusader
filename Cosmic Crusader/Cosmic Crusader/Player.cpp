@@ -27,12 +27,12 @@ void Player::initVariables()
 	this->playerAnimSwitch = -1;
 	this->moveSpeed = 2.3f;
 	this->gravity = 0.090f;
+	this->jumpForce = 9.f;
 	this->isGround = false;
 	this->isJumping = false;
 	this->isMoving = false;
 	this->isJumpStage = false;
 	this->yVelocity = 0.0f;
-	this->jumpSpeed = 27.7f;
 }
 
 void Player::initTexture()
@@ -262,7 +262,7 @@ void Player::updateJump()
 	{
 		
 		this->isMoving = true;
-		this->yVelocity = -jumpSpeed;
+		this->yVelocity = -jumpForce;
 		std::cout << "JUMP JUMP " << std::endl;
 		this->isGround = false;
 		
@@ -304,7 +304,7 @@ void Player::updateRunningJump()
 	if (this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING && this->isGround)
 	{
 			
-		this->yVelocity = -jumpSpeed;
+		this->yVelocity = -jumpForce;
 		std::cout << "JUMP JUMP " << std::endl;
 		this->isGround = false;
 	}
