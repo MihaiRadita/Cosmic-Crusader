@@ -32,26 +32,19 @@ private:
 	//Animations Destroy
 	void DestroyPlayerAnimations();
 
+	// Variables
 	short animationState;
 	float moveSpeed;
 	bool IsPLayerEvent;
 	float gravity;
 	bool isGround;
 	bool isJumping;
-	bool isRunningJumping;
 	bool isMoving;
-	bool isMovingLeft;
-	bool isMovingRight;
 	float jumpSpeed;
 	float yVelocity;
 	bool isJumpStage;
-	bool isBlockingMovement;
-	bool isBlockingMovementLeft;
-	bool isBlockingMovementRight;
-	bool isBlockingAnimation;
 
 	std::map<std::string, bool> controls{ {"left", false}, {"right", false}, {"jump", false}};
-	//std::map<std::string, int> m{ {"CPU", 10}, {"GPU", 15}, {"RAM", 20} };
 public:
 	
 	//Constructors
@@ -90,6 +83,7 @@ public:
 	void setIsOnGround(bool isGround);
 	void InvertPlayerMovingSpriteScale(int direction);
 	void SwitchAnimation();
+	bool IsJumping();
 
 	//Render
 	void render(sf::RenderTarget& target);

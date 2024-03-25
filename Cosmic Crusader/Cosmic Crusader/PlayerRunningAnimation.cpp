@@ -1,17 +1,16 @@
 #include "stdafx.h"
 #include "PlayerRunningAnimation.h"
 
+//Constructors
 PlayerRunningAnimation::PlayerRunningAnimation() : animTimeLimit(0.1f), currentFrameIndex(0), isAnimTransition(true)
 {
 	this->InitVariables();
 	this->AddAnimationFrames();
 }
 
-
+//Init Functions
 void PlayerRunningAnimation::InitVariables()
 {
-	//this->animationTimer.restart();
-
 	this->initialTexture = false;
 	this->animationTimer.restart();
 	this->animationSwitch = true;
@@ -23,13 +22,7 @@ void PlayerRunningAnimation::InitVariables()
 	}
 }
 
-
-//Geters
-int PlayerRunningAnimation::GetAnimSize()
-{
-	return this->PlayerRunningAnimation::animFrameImg->size();
-}
-
+//Add animation frames images
 void PlayerRunningAnimation::AddAnimationFrames()
 {
 	bool imageValid = false;
@@ -109,6 +102,7 @@ void PlayerRunningAnimation::DestroyTextureFrames()
 	delete this->animFrameImg;
 }
 
+//Other Functions
 void PlayerRunningAnimation::ResetCurrentAnimIndex()
 {
 	this->currentFrameIndex = 0;
@@ -125,6 +119,11 @@ void PlayerRunningAnimation::SetAnimationSwitch(bool animSwitch)
 	this->animationSwitch = animationSwitch;
 }
 
+//Getters Functions
+int PlayerRunningAnimation::GetAnimSize()
+{
+	return this->PlayerRunningAnimation::animFrameImg->size();
+}
 int PlayerRunningAnimation::GetCurrentAnimIndex()
 {
 	return this->currentFrameIndex;

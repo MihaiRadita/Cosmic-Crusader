@@ -26,17 +26,10 @@ void Player::initVariables()
 	this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 	this->playerAnimSwitch = -1;
 	this->moveSpeed = 2.3f;
-	this->gravity = 0.1f;
+	this->gravity = 0.090f;
 	this->isGround = false;
 	this->isJumping = false;
 	this->isMoving = false;
-	this->isMovingLeft = false;
-	this->isMovingRight = false;
-	this->isRunningJumping = false;
-	this->isBlockingMovement = false;
-	this->isBlockingMovementLeft = false;
-	this->isBlockingMovementRight = false;
-	this->isBlockingAnimation = false;
 	this->isJumpStage = false;
 	this->yVelocity = 0.0f;
 	this->jumpSpeed = 27.7f;
@@ -183,71 +176,53 @@ void Player::updateMovement()
 {
 	if (this->controls["left"] == true)
 	{
-		if (this->isBlockingMovementLeft == false)
+		if (this->isGround)
 		{
-			this->isMovingLeft = true;
-			
-		}
-		else if (this->isBlockingMovementLeft == true)
-		{
-			this->isMovingLeft = false;
-		}
+			if (this->animationState != PLAYER_ANIMATION_STATES::JUMP)
+			{
 
-		if (this->isGround && !this->isBlockingAnimation)
-		{
-			this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-			this->SwitchAnimation();
-
+				this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+				this->SwitchAnimation();
+				this->isMoving = true;
+			}
 		}
 
 		this->InvertPlayerMovingSpriteScale(-1);
-		if (this->isMovingLeft == true)
+		if (this->isMoving)
 		{
-			std::cout << "Is Moving " << isMoving << std::endl;
 			this->sprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
-			std::cout << "Moving Left" << std::endl;
-			std::cout << "veloctiy x to left = " << this->getPlayerPosition().x << std::endl;
+
 		}
+		std::cout << "Moving Left" << std::endl;
+		std::cout << "veloctiy x to left = " << this->getPlayerPosition().x << std::endl;
 	}
 	else if (this->controls["right"] == true)
 	{
-		if (this->isBlockingMovementRight == false)
+		if (this->isGround)
 		{
-			this->isMovingRight = true;
-		}
-		else if (this->isBlockingMovementRight == true)
-		{
-			this->isMovingRight = false;
-		}
-
-		if (this->isGround && !this->isBlockingAnimation)
-		{
-			this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-			this->SwitchAnimation();
-
+			if (this->animationState != PLAYER_ANIMATION_STATES::JUMP)
+			{
+				this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+				this->SwitchAnimation();
+				this->isMoving = true;
+			}
 		}
 
 		this->InvertPlayerMovingSpriteScale(1);
-
-		if (this->isMovingRight == true)
+		if (this->isMoving)
 		{
 			this->sprite.move(this->playerPosition.x * this->moveSpeed, 0.f);
 		}
 		std::cout << "Moving Right" << std::endl;
 		std::cout << "veloctiy x to right = " << this->getPlayerPosition().x << std::endl;
 	}
-	else if (this->controls["left"] == false && this->controls["right"] == false)
-	{
-		this->isMovingLeft = false;
-		this->isMovingRight - false;
-	}
-
 
 	if (this->isNoControlActive() && this->animationState != PLAYER_ANIMATION_STATES::JUMP && this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING)
 	{
 		std::cout << "Idle" << std::endl;
 		std::cout << this->animationState << std::endl;
 		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+		this->isMoving = false;
 		this->SwitchAnimation();
 	}
 
@@ -260,93 +235,39 @@ void Player::updateJump()
 	{
 		if (this->animationState == PLAYER_ANIMATION_STATES::JUMP)
 		{
-		
-			
-			if (this->isBlockingAnimation)
-			{
-				this->isBlockingAnimation = false;
-			}
-			std::cout <<"ISJUMPING " << isJumping << std::endl;
-			std::cout << "ISRUNNINGJUMPING " << isRunningJumping << std::endl;
-			if (!this->isMovingLeft && !this->isMovingRight)
-			{
-				if (this->animationState != PLAYER_ANIMATION_STATES::IDLE)
-				{
-					this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-				}
-			}
-			else
-			{
-				if (this->isMovingLeft)
-				{
-					if (this->animationState != PLAYER_ANIMATION_STATES::MOVING_LEFT)
-					{
-						this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-					}
-				}
-				else if (this->isMovingRight)
-				{
-					if (this->animationState != PLAYER_ANIMATION_STATES::MOVING_RIGHT)
-					{
-						this->animationState == PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-					}
-				}
-			}
-			
-		}
-		if (this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex() >= 25)
-		{
-			this->isJumping = false;
+			this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 		}
 		this->yVelocity = 0.f;
 	}
-	else if(!this->isGround)
+	else
 	{
 		this->yVelocity += this->gravity;	
 	}
 
-	if (this->controls["jump"] == true)
+	if (this->controls["jump"] == true && this->animationState != PLAYER_ANIMATION_STATES::JUMP && this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && this->isGround)
 	{
-		if (!this->isMovingLeft && !this->isMovingRight)
+		if (this->animationState == PLAYER_ANIMATION_STATES::IDLE)
 		{
-			if (this->animationState != PLAYER_ANIMATION_STATES::JUMP && this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING)
-			{
-				this->animationState = PLAYER_ANIMATION_STATES::JUMP;
-				this->SwitchAnimation();
-			}
-
+			this->animationState = PLAYER_ANIMATION_STATES::JUMP;
+			this->SwitchAnimation();
 		}
-
 	}
 
 	if ((this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) < 17 && this->animationState == PLAYER_ANIMATION_STATES::JUMP)
 	{
-		this->isBlockingMovementLeft = true;
-		this->isBlockingMovementRight = true;
-		this->isBlockingAnimation = true;
+		this->isMoving = false;
+		this->yVelocity = 0;
 	}
-	else if ((this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) == 17 && this->animationState == PLAYER_ANIMATION_STATES::JUMP)
+	else if ((this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) == 17 && this->animationState == PLAYER_ANIMATION_STATES::JUMP && this->isGround)
 	{
-		this->isJumping = true;
-		std::cout << "ISJUMPING " << isJumping << std::endl;
-		std::cout << "ISRUNNINGJUMPING " << isRunningJumping << std::endl;
-		this->isBlockingMovementLeft = false;
-		this->isBlockingMovementRight = false;
+		
+		this->isMoving = true;
+		this->yVelocity = -jumpSpeed;
+		std::cout << "JUMP JUMP " << std::endl;
+		this->isGround = false;
+		
 		
 	}
-
-	if (this->isJumping)
-	{
-		if (this->isGround)
-		{
-			this->yVelocity = -jumpSpeed;
-			std::cout << "JUMP JUMP " << std:: endl;
-			this->isGround = false;
-		}
-		std::cout << "ISJUMPING " << isJumping << std::endl;
-		std::cout << "ISRUNNINGJUMPING " << isRunningJumping << std::endl;
-	}
-
  	this->sprite.move(0.f, this->yVelocity);
 
 }
@@ -355,103 +276,41 @@ void Player::updateRunningJump()
 {
 	if (this->isGround == true && (this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) >= 16)
 	{
-		if (this->isBlockingAnimation)
-		{
-			this->isBlockingAnimation = false;
-		}
-		this->isRunningJumping = false;
 		if (this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
 		{
-			
-			this->isRunningJumping = false;
-			//this->isRunningJumping = false;
-			std::cout <<"ISRUNNINGJUMPING " << isRunningJumping << std::endl;
-			std::cout << "ISJUMPING " << isJumping << std::endl;
-			std::cout << this->isRunningJumping<<std::endl;
-			if (!this->isMovingLeft && !this->isMovingRight)
-			{
-				this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-			}
-			else
-			{
-				if (this->isMovingLeft)
-				{
-					if (this->animationState != PLAYER_ANIMATION_STATES::MOVING_LEFT)
-					{
-						this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-					}
-				}
-				else if (this->isMovingRight)
-				{
-					if (this->animationState != PLAYER_ANIMATION_STATES::MOVING_RIGHT)
-					{
-						this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-					}
-				}
-			}
+			this->animationState = PLAYER_ANIMATION_STATES::IDLE;
 	
 		}
 		this->yVelocity = 0.f;
 	}
-	else if(!this->isGround)
+	else
 	{
 		this->yVelocity += gravity;
 	}
 	
-	if ((this->isMovingLeft || this->isMovingRight) && this->isGround && (this->animationState == PLAYER_ANIMATION_STATES:: MOVING_LEFT || this->animationState == PLAYER_ANIMATION_STATES::MOVING_RIGHT))
+	
+	
+	if (this->controls["jump"] == true && this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && this->animationState != PLAYER_ANIMATION_STATES::JUMP && this->isGround)
 	{
-		if (this->controls["jump"] == true)
+		if (this->animationState == PLAYER_ANIMATION_STATES::MOVING_LEFT || this->animationState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
 		{
-			//if (this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING
-			if (this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && this->animationState != PLAYER_ANIMATION_STATES::JUMP)
-			{
-				this->animationState = PLAYER_ANIMATION_STATES::JUMP_RUNNING;
-				this->SwitchAnimation();
-				this->isRunningJumping = true;
-				this->isBlockingAnimation = true;
-
-			}
-			
+			this->animationState = PLAYER_ANIMATION_STATES::JUMP_RUNNING;
+			this->SwitchAnimation();
 		}
-	}
-
-	/*if (this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
-	{
-		this->isRunningJumping = true;
 		
-		this->isBlockingAnimation = true;
-	}*/
-
-	
-	
-
-	/*if (this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
-	{
-		this->isRunningJumping = true;
-		std::cout << "ISRUNNINGJUMPING " << isRunningJumping << std::endl;
-		std::cout << "ISJUMPING " << isJumping << std::endl;
-		this->isBlockingAnimation = true;
-	}*/
-
-	if (this->isRunningJumping)
-	{
-		if (this->isGround)
-		{
-			this->yVelocity = -jumpSpeed;
-			std::cout << "JUMP JUMP " << std::endl;
-			this->isGround = false;
-		}
-		else
-		{
-			if (this->yVelocity == -jumpSpeed)
-			{
-				this->yVelocity -= this->gravity;
-			}
-		}
+			
 	}
-		std::cout << "ISRUNNINGJUMPING " << isRunningJumping << std::endl;
-		std::cout << "ISJUMPING " << isJumping << std::endl;
-		this->sprite.move(0.f, this->yVelocity);
+	
+	if (this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING && this->isGround)
+	{
+			
+		this->yVelocity = -jumpSpeed;
+		std::cout << "JUMP JUMP " << std::endl;
+		this->isGround = false;
+	}
+
+	this->sprite.move(0.f, this->yVelocity);
+
 }
 
 
@@ -541,6 +400,16 @@ void Player::SwitchAnimation()
 		// salveaza stare curenta in stare anterioara
 		this->playerAnimSwitch = this->animationState;
 	}
+}
+
+bool Player::IsJumping()
+{
+	if (this->animationState == PLAYER_ANIMATION_STATES::JUMP || this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
+	{
+		return true;
+	}
+	
+	return false;
 }
 
 void Player::render(sf::RenderTarget& target)

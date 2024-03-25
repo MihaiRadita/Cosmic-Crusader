@@ -1,17 +1,16 @@
 #include "stdafx.h"
 #include "PlayerJumpRunningAnimation.h"
 
-PlayerJumpRunningAnimation::PlayerJumpRunningAnimation() : animTimeLimit(0.02f), currentFrameIndex(0), animTimeJumpLimit(0.3f), jumpAnimFrameIndex(1), isAnimTransition(true)
+//Construcotrs
+PlayerJumpRunningAnimation::PlayerJumpRunningAnimation() : animTimeLimit(0.02f), currentFrameIndex(0), animTimeJumpLimit(0.089f), jumpAnimFrameIndex(1), isAnimTransition(true)
 {
 	this->InitVariables();
 	this->AddAnimationFrames();
 }
 
-
+//Init functions
 void PlayerJumpRunningAnimation::InitVariables()
 {
-	//this->animationTimer.restart();
-
 	this->initialTexture = false;
 	this->animationTimer.restart();
 	this->animationSwitch = true;
@@ -24,13 +23,7 @@ void PlayerJumpRunningAnimation::InitVariables()
 	}
 }
 
-
-//Geters
-int PlayerJumpRunningAnimation::GetAnimSize()
-{
-	return this->PlayerJumpRunningAnimation::animFrameImg->size();
-}
-
+//Add animation frames images
 void PlayerJumpRunningAnimation::AddAnimationFrames()
 {
 	bool imageValid = false;
@@ -84,7 +77,6 @@ void PlayerJumpRunningAnimation::PlayAnimation(sf::Sprite& sprite)
 
 		if (this->currentFrameIndex >= this->GetAnimSize())
 		{
-			//this->currentFrameIndex = 0;
 			return;
 		}
 		if (this->isAnimTransition)
@@ -102,11 +94,6 @@ void PlayerJumpRunningAnimation::PlayAnimation(sf::Sprite& sprite)
 			{
 				this->currentJumpTimeLimit = this->animTimeJumpLimit;
 			}
-
-			/*if (this->currentFrameIndex >= this->GetAnimIndex())
-			{
-				this->currentFrameIndex = 0;
-			}*/
 			this->animationTimer.restart();
 		}
 	}
@@ -123,6 +110,7 @@ void PlayerJumpRunningAnimation::DestroyTextureFrames()
 	delete this->animFrameImg;
 }
 
+//Other functions
 void PlayerJumpRunningAnimation::ResetCurrentAnimIndex()
 {
 	this->currentFrameIndex = 0;
@@ -137,6 +125,12 @@ void PlayerJumpRunningAnimation::ResetPlayerAnimTimer()
 void PlayerJumpRunningAnimation::SetAnimationSwitch(bool animSwitch)
 {
 	this->animationSwitch = animationSwitch;
+}
+
+//Getters Functions
+int PlayerJumpRunningAnimation::GetAnimSize()
+{
+	return this->PlayerJumpRunningAnimation::animFrameImg->size();
 }
 
 int PlayerJumpRunningAnimation::GetCurrentAnimIndex()

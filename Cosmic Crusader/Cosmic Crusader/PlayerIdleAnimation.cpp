@@ -10,11 +10,8 @@ PlayerIdleAnimation::PlayerIdleAnimation() : animTimeLimit(0.5f), currentFrameIn
 	this->AddAnimationFrames();
 }
 
-
 void PlayerIdleAnimation::InitVariables()
 {
-	//this->animationTimer.restart();
-
 	this->initialTexture = false;
 	this->animationTimer.restart();
 	this->animationSwitch = true;
@@ -24,13 +21,6 @@ void PlayerIdleAnimation::InitVariables()
 		this->animFrameImg = new std::vector<sf::Texture>();
 		this->AddAnimationFrames();
 	}
-}
-
-
-//Geters
-int PlayerIdleAnimation::GetAnimSize() 
-{
-	return this->PlayerIdleAnimation::animFrameImg->size();
 }
 
 void PlayerIdleAnimation::AddAnimationFrames()
@@ -131,6 +121,12 @@ void PlayerIdleAnimation::ResetPlayerAnimTimer()
 void PlayerIdleAnimation::SetAnimationSwitch(bool animSwitch)
 {
 	this->animationSwitch = animSwitch;
+}
+
+//Getters Functions
+int PlayerIdleAnimation::GetAnimSize() 
+{
+	return this->PlayerIdleAnimation::animFrameImg->size();
 }
 
 int PlayerIdleAnimation::GetCurrentAnimIndex()

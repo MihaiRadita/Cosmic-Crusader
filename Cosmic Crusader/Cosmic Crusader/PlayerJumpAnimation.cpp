@@ -1,17 +1,16 @@
 #include "stdafx.h"
 #include "PlayerJumpAnimation.h"
 
+//Consturctors
 PlayerJumpAnimation::PlayerJumpAnimation() : animTimeLimit(0.028f), currentFrameIndex(0),animTimeJumpLimit(0.015f),jumpAnimFrameIndex(17), isAnimTransition(true)
 {
 	this->InitVariables();
 	this->AddAnimationFrames();
 }
 
-
+// Init Functions
 void PlayerJumpAnimation::InitVariables()
 {
-	//this->animationTimer.restart();
-
 	this->initialTexture = false;
 	this->animationTimer.restart();
 	this->animationSwitch = true;
@@ -23,7 +22,6 @@ void PlayerJumpAnimation::InitVariables()
 		this->AddAnimationFrames();
 	}
 }
-
 
 //Geters
 int PlayerJumpAnimation::GetAnimSize()
@@ -80,11 +78,8 @@ void PlayerJumpAnimation::PlayAnimation(sf::Sprite& sprite)
 	}
 	else if (this->currentFrameIndex > 0)
 	{
-
-
 		if (this->currentFrameIndex >= this->GetAnimSize())
 		{
-			//this->currentFrameIndex = 0;
 			return;
 		}
 		if (this->isAnimTransition)
@@ -102,11 +97,6 @@ void PlayerJumpAnimation::PlayAnimation(sf::Sprite& sprite)
 			{
 				this->currentJumpTimeLimit = this->animTimeJumpLimit;
 			}
-
-			/*if (this->currentFrameIndex >= this->GetAnimIndex())
-			{
-				this->currentFrameIndex = 0;
-			}*/
 			this->animationTimer.restart();
 		}
 	}
@@ -123,6 +113,7 @@ void PlayerJumpAnimation::DestroyTextureFrames()
 	delete this->animFrameImg;
 }
 
+//Other Functions
 void PlayerJumpAnimation::ResetCurrentAnimIndex()
 {
 	this->currentFrameIndex = 0;
