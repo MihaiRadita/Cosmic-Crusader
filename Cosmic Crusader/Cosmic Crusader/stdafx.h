@@ -14,3 +14,6 @@
 #include "SFML/Audio.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/Network.hpp"
+
+//Box2D
+#include "box2d/box2d.h"
