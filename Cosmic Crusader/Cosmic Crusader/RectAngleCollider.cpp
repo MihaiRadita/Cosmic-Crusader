@@ -1,15 +1,28 @@
 #include "stdafx.h"
 #include "RectAngleCollider.h"
 
-RectAngleCollider::RectAngleCollider(float& positionX, float& positionY,float& scaleX, float& scaleY)
+RectAngleCollider::RectAngleCollider(sf::Sprite& sprite)
 {
-	this->xPosition = positionX;
-	this->yPosition = positionY;
-	this->xScale = scaleX;
-	this->yScale = scaleY;
+	//Body Def Type
+	this->bodyDef.type = b2_dynamicBody;
+	this->bodyDef.position.Set(100.f, 100.f);
+	this->body= this->physicsWorld->CreateBody(&bodyDef);
 
-	this->rectAngleCollider.setPosition(this->xPosition, this->yPosition);
-	this->rectAngleCollider.setScale(this->xScale, this->yScale);
+	//Box Dimensions
+	this->boxShape.SetAsBox(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f, this->colliderOrigin, 0.0f);
+
+	//Box fixtures properties
+	this->fixtureDef.shape = &this->boxShape;
+	this->fixtureDef.density = 1.0f;
+	this->fixtureDef.friction = 0.3f;
+	this->fixtureDef.restitution = 0.5f;
+	body->CreateFixture(&this->fixtureDef);
+
+
+}
+
+void RectAngleCollider::InitVariables()
+{
 }
 
 RectAngleCollider::~RectAngleCollider()

@@ -1,5 +1,8 @@
 #pragma once
-class RectAngleCollider
+
+#include "Physics.h"
+
+class RectAngleCollider : public Physics
 {
 private:
 	sf::RectangleShape rectAngleCollider;
@@ -10,9 +13,17 @@ private:
 	float xScale;
 	float yScale;
 
+	//Physics
+	b2PolygonShape boxShape;
+	b2FixtureDef fixtureDef;
+	b2BodyDef bodyDef;
+	b2Body* body = nullptr;
+	b2Vec2 colliderOrigin;
+
 public:
 	//Constructors
-	RectAngleCollider(float& xPosition, float& yPosition,float& xScale, float& yScale);
+	RectAngleCollider(sf::Sprite& sprite);
+	void InitVariables();
 
 	//Destructors
 	~RectAngleCollider();
