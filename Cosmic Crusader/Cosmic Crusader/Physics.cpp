@@ -7,6 +7,9 @@ Physics::Physics()
 	{
 		Physics::physicsWorld = new b2World(b2Vec2(0.0f, 9.8f));
 	}
+	this->timeStep = 1.f / 60.f;
+	this->velocityIterations = 6;
+	this->positionIterations = 2;
 }
 
 Physics::~Physics()
@@ -19,4 +22,13 @@ b2World* Physics::GetPhysicsWorld()
 	return this->physicsWorld;
 }
 
+void Physics::SimulatePhysics()
+{
+	for (int i = 0; i < 60; i++)
+	{
+		this->physicsWorld->Step(this->timeStep, this->velocityIterations, this->positionIterations);
+	}
+}
+
 b2World* Physics::physicsWorld = nullptr;
+const float Physics::metersScale = 30.f;

@@ -18,7 +18,6 @@ RectAngleCollider::RectAngleCollider(sf::Sprite& sprite)
 	this->fixtureDef.restitution = 0.5f;
 	body->CreateFixture(&this->fixtureDef);
 
-
 }
 
 void RectAngleCollider::InitVariables()
