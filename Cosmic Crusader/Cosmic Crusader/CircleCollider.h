@@ -1,27 +1,37 @@
 #pragma once
-class CircleCollider
+
+#include "Physics.h"
+
+class CircleCollider: public Physics 
 {
 private:
-	sf::CircleShape circleCollider;
+	//Physics
 	float radius;
-	sf::Vector2f circlePosition;
-	sf::Vector2f circleScale;
+	b2FixtureDef fixtureDef;
+	b2BodyDef bodyDef;
+	b2CircleShape circleShape;
+	b2Body* body = nullptr;
+	b2Vec2 colliderOrigin;
+
 public:
 
 	//Constructors
-	CircleCollider(float& radius, float& xPosition, float& yPosition, float& xScale, float& yScale);
+	CircleCollider(sf::Sprite& sprite, float radius);
+	void InitVariables(sf::Sprite& sprite, float radius);
 
 	//Destructors
 	~CircleCollider();
 
 	//Getters
 	float GetRadius();
-	sf::CircleShape GetCircleCollider();
+	b2BodyDef GetBodyDef();
+	b2Body* GetBody();
+	b2CircleShape GetColliderShape();
+	b2FixtureDef GetFixtureDef();
 
 	//Setters
-	void SetCircleRadius(float& radius);
+	void SetColliderPosition(sf::Sprite& sprite);
 
 	//Checks
-	bool CheckCollsion(sf::CircleShape& colliderCheck);
 };
 

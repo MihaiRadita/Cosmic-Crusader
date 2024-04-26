@@ -5,13 +5,6 @@
 class RectAngleCollider : public Physics
 {
 private:
-	sf::RectangleShape rectAngleCollider;
-	sf::Vector2f colliderPosition;
-	sf::Vector2f colliderScale;
-	float xPosition;
-	float yPosition;
-	float xScale;
-	float yScale;
 
 	//Physics
 	b2PolygonShape boxShape;
@@ -23,22 +16,21 @@ private:
 public:
 	//Constructors
 	RectAngleCollider(sf::Sprite& sprite);
-	void InitVariables();
+	void InitVariables(sf::Sprite& sprite);
 
 	//Destructors
 	~RectAngleCollider();
 
 	//Getters
-	sf::RectangleShape GetColliderShape();
-	sf::Vector2f GetColliderPosition();
-	sf::Vector2f GetColliderScale();
+	b2BodyDef GetBodyDef();
+	b2Body* GetBody();
+	b2PolygonShape GetColliderShape();
+	b2FixtureDef GetFixtureDef();
 	
-	//Checks
-	bool CheckRectAngleCollision(sf::RectangleShape& coliderChecking);
-	bool CheckSegment1(sf::RectangleShape& colliderCheking);
-	bool CheckSegment2(sf::RectangleShape& coliderChecking);
-
-
 	//Setters
+	void SetColliderPosition(sf::Sprite& sprite);
+
+	//Checks
+	
 };
 

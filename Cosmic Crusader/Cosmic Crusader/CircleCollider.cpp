@@ -1,50 +1,58 @@
 #include "stdafx.h"
 #include "CircleCollider.h"
 
-CircleCollider::CircleCollider(float& radius, float& xPosition, float& yPostion, float& xScale, float& yScale)
+CircleCollider::CircleCollider(sf::Sprite& sprite, float radius)
+{
+	this->InitVariables(sprite, radius);
+}
+
+void CircleCollider::InitVariables(sf::Sprite& sprite, float radius)
 {
 	this->radius = radius;
-	this->SetCircleRadius(this->radius);
-	this->circlePosition.x = xPosition;
-	this->circlePosition.y = yPostion;
-	this->circleScale.x = this->circleCollider.getRadius() * 2;
-	this->circleScale.y = this->circleCollider.getRadius() * 2;
-	this->circleCollider.setPosition(this->circlePosition);
-	this->circleCollider.setScale(this->circleScale);
+
+	this->bodyDef.type = b2_dynamicBody;
+	this->bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / metersScale);
+	this->body = this->physicsWorld->CreateBody(&bodyDef);
+
+	//this->circleShape.m_p.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / metersScale);
+	this->circleShape.m_radius = this->radius / metersScale;
+
+	this->fixtureDef.shape = &this->circleShape;
+	this->fixtureDef.density = 1.0f;
+	this->fixtureDef.friction = 0.3f;
+	this->fixtureDef.restitution = 0.5f;
+	body->CreateFixture(&this->fixtureDef);
 }
 
 CircleCollider::~CircleCollider()
 {
+	this->body->GetWorld()->DestroyBody(body);
+	this->body = nullptr;
 }
 
-float CircleCollider::GetRadius()
+b2BodyDef CircleCollider::GetBodyDef()
 {
-	return this->circleCollider.getRadius();
+	return this->bodyDef;
 }
 
-sf::CircleShape CircleCollider::GetCircleCollider()
+b2Body* CircleCollider::GetBody()
 {
-	return this->circleCollider;
+	return this->body;
 }
 
-void CircleCollider::SetCircleRadius(float& radius)
+b2CircleShape CircleCollider::GetColliderShape()
 {
-	this->circleCollider.setRadius(radius);
+	return this->circleShape;
 }
 
-bool CircleCollider::CheckCollsion(sf::CircleShape& colliderCheck)
+b2FixtureDef CircleCollider::GetFixtureDef()
 {
-	/*float xDisance = this->circleCollider.getPosition().x - colliderCheck.getPosition().x;
-	float yDistance = this->circleCollider.getPosition().y - colliderCheck.getPosition().y;*/
-	
-	sf::Vector2f distance = this->circleCollider.getPosition() - colliderCheck.getPosition();
-	float radiusSum = this->circleCollider.getRadius() + colliderCheck.getRadius();
+	return this->fixtureDef;;
+}
 
-	if (distance.x <= radiusSum && distance.y <= radiusSum)
-	{
-		return true;
-	}
-	
 
-	return false;
+void CircleCollider::SetColliderPosition(sf::Sprite& sprite)
+{
+	this->body->SetTransform(b2Vec2((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / metersScale,
+		(sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / metersScale), body->GetAngle());
 }
