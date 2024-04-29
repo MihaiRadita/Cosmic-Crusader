@@ -4,13 +4,19 @@
 
 int main()
 {
-	Game game;
+	Game* game = new Game();
 
-	while (game.GetWindow().isOpen())
+	while (game->GetWindow().isOpen())
 	{
-		game.update();
-		game.render();
+		game->update();
+		game->render();
 	}
 
+	if (!game->GetWindow().isOpen())
+	{
+		delete game;
+	}
+
+	system("PAUSE");
 	return 0;
 }

@@ -14,8 +14,13 @@ Physics::Physics()
 
 Physics::~Physics()
 {
+	this->physicsWorld = nullptr;
 	delete this->physicsWorld;
 	std::cout << "Delete the physics world" << std::endl;
+	if (!this->physicsWorld)
+	{
+		std::cout << "Physics World no longer exists!" << std::endl;
+	}
 }
 
 b2World* Physics::GetPhysicsWorld()
