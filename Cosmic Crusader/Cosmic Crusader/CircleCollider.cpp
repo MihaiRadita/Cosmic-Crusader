@@ -24,11 +24,11 @@ void CircleCollider::InitVariables(sf::Sprite& sprite, float radius)
 	body->CreateFixture(&this->fixtureDef);
 }
 
-CircleCollider::~CircleCollider()
-{
-	this->body->GetWorld()->DestroyBody(body);
-	this->body = nullptr;
-}
+//CircleCollider::~CircleCollider()
+//{
+//	this->body->GetWorld()->DestroyBody(body);
+//	this->body = nullptr;
+//}
 
 b2BodyDef CircleCollider::GetBodyDef()
 {

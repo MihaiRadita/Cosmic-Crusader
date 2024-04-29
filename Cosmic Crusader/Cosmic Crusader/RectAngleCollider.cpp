@@ -1,15 +1,22 @@
 #include "stdafx.h"
 #include "RectAngleCollider.h"
 
-RectAngleCollider::RectAngleCollider(sf::Sprite& sprite)
+RectAngleCollider::RectAngleCollider(sf::Sprite& sprite, int bodyTypeState)
 {
-	this->InitVariables(sprite);
+	this->InitVariables(sprite, bodyTypeState);
 }
 
-void RectAngleCollider::InitVariables(sf::Sprite& sprite)
+void RectAngleCollider::InitVariables(sf::Sprite& sprite, int bodyTypeState)
 {
 	//Body Def Type
-	this->bodyDef.type = b2_dynamicBody;
+	if (bodyTypeState == DYNAMIC)
+	{
+		this->bodyDef.type = b2_dynamicBody;
+	}
+	else if (bodyTypeState == STATIC)
+	{
+		this->bodyDef.type = b2_staticBody;
+	}
 	this->bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / metersScale);
 	this->body = this->physicsWorld->CreateBody(&bodyDef);
 
@@ -21,13 +28,19 @@ void RectAngleCollider::InitVariables(sf::Sprite& sprite)
 	this->fixtureDef.density = 1.0f;
 	this->fixtureDef.friction = 0.3f;
 	this->fixtureDef.restitution = 0.5f;
-	body->CreateFixture(&this->fixtureDef);
+	this->body->CreateFixture(&this->fixtureDef);
 }
 
 RectAngleCollider::~RectAngleCollider()
 {
-	this->body->GetWorld()->DestroyBody(body);
-	this->body = nullptr;
+	if (this->physicsWorld)
+	{
+		if (this->body)
+		{
+			this->physicsWorld->DestroyBody(body);
+			this->body = nullptr;
+		}
+	}
 }
 
 b2BodyDef RectAngleCollider::GetBodyDef()

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Player.h"
-
 void Player::DestroyPlayerAnimations()
 {
 	delete this->playerAnimator;
@@ -10,12 +9,18 @@ void Player::DestroyPlayerAnimations()
 	delete this->playerJumpRunningAnimation;
 }
 
+void Player::DestroyPlayerPhysics()
+{
+	delete this->playerCollider;
+}
+
 Player::Player()
 {
 	this->initTexture();
 	this->initVariables();
 	this->initAnimations();
 	this->initSprite();
+	this->initPhysics();
 }
 
 void Player::initVariables()
@@ -45,8 +50,8 @@ void Player::initTexture()
 
 void Player::initSprite()
 {
-	this->sprite.setTexture(this->textureSheet);
-	this->sprite.setScale(this->playerSpriteScale);
+	this->playerSprite.setTexture(this->textureSheet);
+	this->playerSprite.setScale(this->playerSpriteScale);
 }
 
 void Player::initAnimations()
@@ -60,26 +65,27 @@ void Player::initAnimations()
 
 void Player::initPhysics()
 {
+	this->playerCollider = new RectAngleCollider(this->playerSprite, DYNAMIC);
 }
 
 const sf::FloatRect Player::getBounds() const
 {
-	return this->sprite.getGlobalBounds();
+	return this->playerSprite.getGlobalBounds();
 }
 
 sf::Sprite Player::GetPlayerSprite()
 {
-	return this->sprite;
+	return this->playerSprite;
 }
 
 const sf::Vector2f Player::getPlayerPosition() const
 {
-	return this->sprite.getPosition();
+	return this->playerSprite.getPosition();
 }
 
 sf::Vector2f Player::getPlayerScale()
 {
-	return this->sprite.getScale();
+	return this->playerSprite.getScale();
 }
 
 bool Player::CheckEvent()
@@ -139,7 +145,7 @@ void Player::handleEvent(const sf::Event& ev)
 
 void Player::SetPosition(const float x, const float y)
 {
-	this->sprite.setPosition(x, y);
+	this->playerSprite.setPosition(x, y);
 }
 
 void Player::resetControls()
@@ -190,7 +196,7 @@ void Player::updateMovement()
 		this->InvertPlayerMovingSpriteScale(-1);
 		if (this->isMoving)
 		{
-			this->sprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
+			this->playerSprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
 
 		}
 		std::cout << "Moving Left" << std::endl;
@@ -211,7 +217,7 @@ void Player::updateMovement()
 		this->InvertPlayerMovingSpriteScale(1);
 		if (this->isMoving)
 		{
-			this->sprite.move(this->playerPosition.x * this->moveSpeed, 0.f);
+			this->playerSprite.move(this->playerPosition.x * this->moveSpeed, 0.f);
 		}
 		std::cout << "Moving Right" << std::endl;
 		std::cout << "veloctiy x to right = " << this->getPlayerPosition().x << std::endl;
@@ -268,7 +274,7 @@ void Player::updateJump()
 		
 		
 	}
- 	this->sprite.move(0.f, this->yVelocity);
+ 	this->playerSprite.move(0.f, this->yVelocity);
 
 }
 
@@ -309,14 +315,14 @@ void Player::updateRunningJump()
 		this->isGround = false;
 	}
 
-	this->sprite.move(0.f, this->yVelocity);
+	this->playerSprite.move(0.f, this->yVelocity);
 
 }
 
 
 void Player::updateAnimations()
 {
-	this->playerAnimator->Play(this->playerAnimator->GetAbstractAnimation(), this->sprite);
+	this->playerAnimator->Play(this->playerAnimator->GetAbstractAnimation(), this->playerSprite);
 }
 
 void Player::updatePhysics()
@@ -331,14 +337,14 @@ void Player::setIsOnGround(bool isGround)
 
 void Player::InvertPlayerMovingSpriteScale(int direction)
 {
-	this->sprite.setScale(this->playerSpriteScale.x * (float)direction, this->playerSpriteScale.y);
+	this->playerSprite.setScale(this->playerSpriteScale.x * (float)direction, this->playerSpriteScale.y);
 	if (direction < 0)
 	{
-		this->sprite.setOrigin(this->getBounds().width / this->playerSpriteScale.x, 0.f);
+		this->playerSprite.setOrigin(this->getBounds().width / this->playerSpriteScale.x, 0.f);
 	}
 	else
 	{
-		this->sprite.setOrigin(0.f, 0.f);
+		this->playerSprite.setOrigin(0.f, 0.f);
 	}
 }
 
@@ -414,12 +420,13 @@ bool Player::IsJumping()
 
 void Player::render(sf::RenderTarget& target)
 {
-	target.draw(this->sprite);
+	target.draw(this->playerSprite);
 }
 
 Player::~Player()
 {
 	this->DestroyPlayerAnimations();
+	this->DestroyPlayerPhysics();
 }
 
 

@@ -5,6 +5,7 @@
 #include "PlayerRunningAnimation.h"
 #include "PlayerJumpAnimation.h"
 #include "PlayerJumpRunningAnimation.h"
+#include "RectAngleCollider.h"
 
 enum PLAYER_ANIMATION_STATES{IDLE =0, MOVING_LEFT, MOVING_RIGHT, JUMP, JUMP_RUNNING};
 
@@ -13,7 +14,7 @@ class Player
 private:
 
 	//Player variables
-	sf::Sprite sprite;
+	sf::Sprite playerSprite;
 	sf::Texture textureSheet;
 	sf::Clock animationTimer;
 	sf::Event playerInputEvent;
@@ -31,6 +32,12 @@ private:
 
 	//Animations Destroy
 	void DestroyPlayerAnimations();
+
+	//Player Collider
+	RectAngleCollider* playerCollider;
+
+	//Physics Destroy
+	void DestroyPlayerPhysics();
 
 	// Variables
 	short animationState;
@@ -56,6 +63,7 @@ public:
 	void initSprite();
 	void initAnimations();
 	void initPhysics();
+
 	//Geters
 	const sf::FloatRect getBounds() const;
 	sf::Sprite GetPlayerSprite();

@@ -1,4 +1,6 @@
 #pragma once
+
+enum BodyType{DYNAMIC =0, STATIC};
 class Physics
 {
 private:
@@ -12,6 +14,9 @@ public:
 
 	//Simulation Function
 	void SimulatePhysics();
+
+	//Update Function
+	void update();
 
 protected:
 	static b2World* physicsWorld;

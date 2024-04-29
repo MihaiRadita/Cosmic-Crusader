@@ -15,6 +15,7 @@ Physics::Physics()
 Physics::~Physics()
 {
 	delete this->physicsWorld;
+	std::cout << "Delete the physics world" << std::endl;
 }
 
 b2World* Physics::GetPhysicsWorld()
@@ -24,10 +25,15 @@ b2World* Physics::GetPhysicsWorld()
 
 void Physics::SimulatePhysics()
 {
-	for (int i = 0; i < 60; i++)
+	for (int i = 0; i < 60; ++i)
 	{
 		this->physicsWorld->Step(this->timeStep, this->velocityIterations, this->positionIterations);
 	}
+}
+
+void Physics::update()
+{
+	this->SimulatePhysics();
 }
 
 b2World* Physics::physicsWorld = nullptr;

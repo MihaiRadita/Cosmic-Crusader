@@ -2,6 +2,7 @@
 
 #include "Physics.h"
 
+
 class RectAngleCollider : public Physics
 {
 private:
@@ -12,11 +13,12 @@ private:
 	b2BodyDef bodyDef;
 	b2Body* body = nullptr;
 	b2Vec2 colliderOrigin;
+	int bodyTypeState;
 
 public:
 	//Constructors
-	RectAngleCollider(sf::Sprite& sprite);
-	void InitVariables(sf::Sprite& sprite);
+	RectAngleCollider(sf::Sprite& sprite, int bodyTypeState);
+	void InitVariables(sf::Sprite& sprite, int bodyTypeState);
 
 	//Destructors
 	~RectAngleCollider();

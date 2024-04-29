@@ -5,12 +5,14 @@ Game::Game()
 {
 	this->initWindow();
 	this->initPlayer();
+	this->initPhysics();
 	
 }
 
 Game::~Game()
 {
 	delete this->player;
+	delete this->physics;
 }
 
 void Game::initWindow()
@@ -22,6 +24,11 @@ void Game::initWindow()
 void Game::initPlayer()
 {
 	this->player = new Player();
+}
+
+void Game::initPhysics()
+{
+	this->physics = new Physics();
 }
 
 const sf::RenderWindow& Game::GetWindow() const
@@ -52,11 +59,17 @@ void Game::update()
 
 	this->updatePlayer();
 	this->updateCollision();
+	this->updatePhysics();
 }
 
 void Game::updatePlayer()
 {
 	this->player->update();
+}
+
+void Game::updatePhysics()
+{
+	this->physics->update();
 }
 
 void Game::updateCollision()

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Player.h"
+#include "Physics.h"
 
 class Game {
 
@@ -9,6 +10,8 @@ private:
 	sf::Event ev;
 
 	Player* player;
+	Physics* physics;
+
 
 public:
 	//Constructors
@@ -20,7 +23,7 @@ public:
 	//Init functions
 	void initWindow();
 	void initPlayer();
-
+	void initPhysics();
 	//Geters
 	const sf::RenderWindow& GetWindow() const;
 
@@ -29,6 +32,7 @@ public:
 	//Update functions
 	void update();
 	void updatePlayer();
+	void updatePhysics();
 	void updateCollision();
 	void updatePlayerCollision();
 
