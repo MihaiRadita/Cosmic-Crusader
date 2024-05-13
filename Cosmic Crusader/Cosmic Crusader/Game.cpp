@@ -4,6 +4,7 @@
 Game::Game()
 {
 	this->initWindow();
+	this->initMap();
 	this->initPlayer();
 	this->initPhysics();
 	
@@ -13,6 +14,7 @@ Game::~Game()
 {
 	delete this->player;
 	delete this->physics;
+	delete this->ground;
 }
 
 void Game::initWindow()
@@ -29,6 +31,13 @@ void Game::initPlayer()
 void Game::initPhysics()
 {
 	this->physics = new Physics();
+}
+
+void Game::initMap()
+{
+	this->ground = new Tile();
+	this->ground->SetScale(10.f, 0.2f);
+	this->ground->SetPosition(0.f, this->window.getSize().y - this->ground->GetTileSprite().getGlobalBounds().height);
 }
 
 const sf::RenderWindow& Game::GetWindow() const
@@ -106,6 +115,7 @@ void Game::render()
 	this->window.clear(sf::Color::Black);
 
 	this->renderPlayer();
+	this->renderTile();
 
 	this->window.display();
 }
@@ -113,4 +123,9 @@ void Game::render()
 void Game::renderPlayer()
 {
 	this->player->render(this->window);
+}
+
+void Game::renderTile()
+{
+	this->ground->render(this->window);
 }

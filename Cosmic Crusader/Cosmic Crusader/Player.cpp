@@ -11,6 +11,7 @@ void Player::DestroyPlayerAnimations()
 
 void Player::DestroyPlayerPhysics()
 {
+	this->playerCollider = nullptr;
 	delete this->playerCollider;
 }
 
@@ -143,6 +144,10 @@ void Player::handleEvent(const sf::Event& ev)
 	}
 }
 
+void Player::SetPlayerByColliderPos()
+{
+}
+
 void Player::SetPosition(const float x, const float y)
 {
 	this->playerSprite.setPosition(x, y);
@@ -175,7 +180,7 @@ void Player::update()
 	this->updateJump();
 	this->updateRunningJump();
 	this->updateAnimations();
-	this->updatePhysics();
+	//this->updatePhysics();
 }
 
 void Player::updateMovement()
@@ -327,6 +332,7 @@ void Player::updateAnimations()
 
 void Player::updatePhysics()
 {
+	this->playerPosition = sf::Vector2f(this->playerCollider->GetBody()->GetPosition().x, this->playerCollider->GetBody()->GetPosition().y);
 }
 
 

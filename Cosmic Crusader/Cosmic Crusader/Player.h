@@ -76,6 +76,8 @@ public:
 
 	void handleEvent(const sf::Event& event);
 
+	void SetPlayerByColliderPos();
+
 	//Modifiers
 	void SetPosition(const float x, const float y);
 	void resetControls();

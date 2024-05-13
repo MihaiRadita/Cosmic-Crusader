@@ -6,10 +6,12 @@ class Tile
 {
 private:
 	sf::Sprite tileSprite;
-	sf::Texture tileTextures;
+	sf::Texture textureSheet;
 
 	sf::Vector2f tilePosition;
 	sf::Vector2f tileScale;
+
+	RectAngleCollider* tileCollider;
 public:
 	
 	//Constructors
@@ -17,6 +19,7 @@ public:
 
 	//Destructors
 	~Tile();
+	void DestroyCollider();
 
 	//Init functions
 	void InitVariables();
@@ -28,10 +31,13 @@ public:
 	void update();
 
 	//Render
-	void render();
+	void render(sf::RenderTarget& target);
 
 	//Getters
+	sf::Sprite GetTileSprite();
 	
-
+	//Setters
+	void SetPosition(float x, float y);
+	void SetScale(float x, float y);
 };
 

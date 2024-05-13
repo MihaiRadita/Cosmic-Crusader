@@ -2,6 +2,7 @@
 
 #include "Player.h"
 #include "Physics.h"
+#include "Tile.h"
 
 class Game {
 
@@ -11,7 +12,7 @@ private:
 
 	Player* player;
 	Physics* physics;
-
+	Tile* ground;
 
 public:
 	//Constructors
@@ -24,6 +25,7 @@ public:
 	void initWindow();
 	void initPlayer();
 	void initPhysics();
+	void initMap();
 	//Geters
 	const sf::RenderWindow& GetWindow() const;
 
@@ -39,5 +41,6 @@ public:
 	//Render functions
 	void render();
 	void renderPlayer();
+	void renderTile();
 
 };
