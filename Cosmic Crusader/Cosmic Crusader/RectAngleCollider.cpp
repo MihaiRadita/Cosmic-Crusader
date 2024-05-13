@@ -21,13 +21,21 @@ void RectAngleCollider::InitVariables(sf::Sprite& sprite, int bodyTypeState)
 	this->body = this->physicsWorld->CreateBody(&bodyDef);
 
 	//Box Dimensions
-	this->boxShape.SetAsBox((sprite.getGlobalBounds().width / 2.0f) / metersScale, (sprite.getGlobalBounds().height / 2.0f) / metersScale, this->colliderOrigin, 0.0f);
-
+	this->boxShape.SetAsBox((sprite.getGlobalBounds().width / 2.0f) / metersScale, (sprite.getGlobalBounds().height / 2.0f) / metersScale);
 	//Box fixtures properties
 	this->fixtureDef.shape = &this->boxShape;
-	this->fixtureDef.density = 1.0f;
-	this->fixtureDef.friction = 0.3f;
-	this->fixtureDef.restitution = 0.5f;
+	if (bodyTypeState == DYNAMIC)
+	{
+		this->fixtureDef.density = 1.0f;
+		this->fixtureDef.friction = 0.3f;
+		this->fixtureDef.restitution = 0.5f;
+	}
+	else if (bodyTypeState == STATIC)
+	{
+		this->fixtureDef.density = 0.f;
+		this->fixtureDef.friction = 0.f;
+		this->fixtureDef.restitution = 0.f;
+	}
 	this->body->CreateFixture(&this->fixtureDef);
 }
 
