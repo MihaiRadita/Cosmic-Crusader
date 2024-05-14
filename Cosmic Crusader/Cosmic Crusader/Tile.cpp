@@ -3,10 +3,6 @@
 
 Tile::Tile()
 {
-	this->InitTextures();
-	//this->InitVariables();
-	this->InitSprite();
-	this->InitPhysics();
 }
 
 Tile::~Tile()
@@ -27,7 +23,7 @@ void Tile::InitVariables()
 
 void Tile::InitTextures()
 {
-	if (this->textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Tile4.png") == false)
+	if (this->textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Tile7.png") == false)
 	{
 		std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
 	}
@@ -42,6 +38,14 @@ void Tile::InitSprite()
 void Tile::InitPhysics()
 {
 	this->tileCollider = new RectAngleCollider(this->tileSprite, STATIC);
+
+	this->tileCollider->SetColliderPosition(this->tileSprite);
+}
+
+void Tile::Init()
+{
+	this->InitTextures();
+	this->InitSprite();
 }
 
 void Tile::update()
@@ -58,6 +62,11 @@ sf::Sprite Tile::GetTileSprite()
 	return this->tileSprite;
 }
 
+RectAngleCollider* Tile::GetTileCollider()
+{
+	return this->tileCollider;
+}
+
 void Tile::SetPosition(float x, float y)
 {
 	this->tileSprite.setPosition(x, y);
@@ -67,3 +76,4 @@ void Tile::SetScale(float x, float y)
 {
 	this->tileSprite.setScale(x, y);
 }
+

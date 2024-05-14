@@ -33,6 +33,9 @@ public:
 	void SetColliderPosition(sf::Sprite& sprite);
 
 	//Checks
+
+	void PrintBodyPositionRotation();
 	
+	void SetColliderBySprite(sf::Sprite& sprite);
 };
 

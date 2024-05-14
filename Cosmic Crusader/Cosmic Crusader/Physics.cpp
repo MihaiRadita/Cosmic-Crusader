@@ -5,9 +5,9 @@ Physics::Physics()
 {
 	if (!Physics::physicsWorld)
 	{
-		Physics::physicsWorld = new b2World(b2Vec2(0.0f, 9.8f));
+		Physics::physicsWorld = new b2World(b2Vec2(0.0f, -9.2f));
 	}
-	this->timeStep = 1.f / 60.f;
+	this->timeStep = 1.0f / 60.0f;
 	this->velocityIterations = 6;
 	this->positionIterations = 2;
 }
@@ -42,4 +42,4 @@ void Physics::update()
 }
 
 b2World* Physics::physicsWorld = nullptr;
-const float Physics::metersScale = 30.f;
+const float Physics::metersScale = 20.f;

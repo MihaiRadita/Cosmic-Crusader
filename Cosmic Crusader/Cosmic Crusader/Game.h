@@ -38,6 +38,7 @@ public:
 	void updateCollision();
 	void updatePlayerCollision();
 
+
 	//Render functions
 	void render();
 	void renderPlayer();

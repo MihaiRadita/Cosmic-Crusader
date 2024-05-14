@@ -17,11 +17,11 @@ void RectAngleCollider::InitVariables(sf::Sprite& sprite, int bodyTypeState)
 	{
 		this->bodyDef.type = b2_staticBody;
 	}
-	this->bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / metersScale);
+	this->bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)), (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)));
+	this->bodyDef.fixedRotation = true;
 	this->body = this->physicsWorld->CreateBody(&bodyDef);
-
 	//Box Dimensions
-	this->boxShape.SetAsBox((sprite.getGlobalBounds().width / 2.0f) / metersScale, (sprite.getGlobalBounds().height / 2.0f) / metersScale);
+	this->boxShape.SetAsBox((sprite.getGlobalBounds().width / 2.0f), (sprite.getGlobalBounds().height / 2.0f));
 	//Box fixtures properties
 	this->fixtureDef.shape = &this->boxShape;
 	if (bodyTypeState == DYNAMIC)
@@ -75,6 +75,17 @@ void RectAngleCollider::SetColliderPosition(sf::Sprite& sprite)
 {
 	this->body->SetTransform(b2Vec2((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / metersScale,
 		(sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / metersScale), body->GetAngle());
+}
+
+void RectAngleCollider::PrintBodyPositionRotation()
+{
+	std::cout << this->body->GetPosition().x << " x axis " << this->body->GetPosition().y<<" y axis " << std::endl;
+	std::cout << this->body->GetAngle()<<" degrees " << std::endl;
+}
+
+void RectAngleCollider::SetColliderBySprite(sf::Sprite& sprite)
+{
+	this->bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)), (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)));
 }
 
 

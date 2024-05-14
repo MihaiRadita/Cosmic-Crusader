@@ -21,6 +21,7 @@ private:
 	sf::Vector2f playerPosition;
 	int playerAnimSwitch;
 	sf::Vector2f playerSpriteScale;
+	float rotationAngle;
 
 	//Player Animation Instances
 	Animator* playerAnimator;
@@ -87,6 +88,7 @@ public:
 	void update();
 	void updateAnimations();
 	void updateMovement();
+	void updateRotation();
 	void updatePhysics();
 	void updateJump();
 	void updateRunningJump();

@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
+
+constexpr float M_PI = 22.0f / 7.0f;
+
 void Player::DestroyPlayerAnimations()
 {
 	delete this->playerAnimator;
@@ -39,6 +42,7 @@ void Player::initVariables()
 	this->isMoving = false;
 	this->isJumpStage = false;
 	this->yVelocity = 0.0f;
+	this->rotationAngle = 0.f;
 }
 
 void Player::initTexture()
@@ -53,6 +57,7 @@ void Player::initSprite()
 {
 	this->playerSprite.setTexture(this->textureSheet);
 	this->playerSprite.setScale(this->playerSpriteScale);
+	this->playerSprite.setRotation(this->rotationAngle);
 }
 
 void Player::initAnimations()
@@ -67,6 +72,7 @@ void Player::initAnimations()
 void Player::initPhysics()
 {
 	this->playerCollider = new RectAngleCollider(this->playerSprite, DYNAMIC);
+	this->playerCollider->PrintBodyPositionRotation();
 }
 
 const sf::FloatRect Player::getBounds() const
@@ -178,9 +184,10 @@ void Player::update()
 {
 	this->updateMovement();
 	this->updateJump();
+	this->updateRotation();
 	this->updateRunningJump();
 	this->updateAnimations();
-	//this->updatePhysics();
+	this->updatePhysics();
 }
 
 void Player::updateMovement()
@@ -237,6 +244,11 @@ void Player::updateMovement()
 		this->SwitchAnimation();
 	}
 
+}
+
+void Player::updateRotation()
+{
+	this->playerSprite.rotate(this->rotationAngle);
 }
 
 void Player::updateJump()
@@ -332,7 +344,11 @@ void Player::updateAnimations()
 
 void Player::updatePhysics()
 {
-	this->playerPosition = sf::Vector2f(this->playerCollider->GetBody()->GetPosition().x, this->playerCollider->GetBody()->GetPosition().y);
+	this->playerPosition = sf::Vector2f(this->playerCollider->GetBody()->GetPosition().x, this->playerCollider->GetBody()->GetPosition().y * -1.f);
+	this->playerSprite.setPosition(this->playerPosition);
+	this->rotationAngle = this->playerCollider->GetBody()->GetAngle() * (180.f / M_PI);
+	this->playerSprite.setRotation(this->rotationAngle);
+	this->playerCollider->PrintBodyPositionRotation();
 }
 
 

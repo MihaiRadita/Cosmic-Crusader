@@ -4,9 +4,9 @@
 Game::Game()
 {
 	this->initWindow();
-	this->initMap();
 	this->initPlayer();
 	this->initPhysics();
+	this->initMap();
 	
 }
 
@@ -36,8 +36,12 @@ void Game::initPhysics()
 void Game::initMap()
 {
 	this->ground = new Tile();
-	this->ground->SetScale(10.f, 0.2f);
-	this->ground->SetPosition(0.f, this->window.getSize().y - this->ground->GetTileSprite().getGlobalBounds().height);
+
+	this->ground->Init();
+	this->ground->SetScale(0.4,0.4f);
+	this->ground->SetPosition(180.f, this->window.getSize().y - this->ground->GetTileSprite().getGlobalBounds().height);
+	this->ground->InitPhysics();
+	
 }
 
 const sf::RenderWindow& Game::GetWindow() const
@@ -67,8 +71,8 @@ void Game::update()
 	this->handleEvents();
 
 	this->updatePlayer();
-	this->updateCollision();
 	this->updatePhysics();
+	this->updateCollision();
 }
 
 void Game::updatePlayer()
