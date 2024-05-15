@@ -102,5 +102,7 @@ public:
 
 	//Destructor
 	~Player();
+
+	void PrintSpriteColliderPositionPlayer();
 };
 

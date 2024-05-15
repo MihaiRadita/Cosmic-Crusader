@@ -13,7 +13,11 @@ private:
 	b2BodyDef bodyDef;
 	b2Body* body = nullptr;
 	b2Vec2 colliderOrigin;
+	b2Vec2 colliderSpritePosition;
 	int bodyTypeState;
+	b2Vec2 vs[4];
+	b2EdgeShape boxShape1;
+
 
 public:
 	//Constructors
@@ -37,5 +41,7 @@ public:
 	void PrintBodyPositionRotation();
 	
 	void SetColliderBySprite(sf::Sprite& sprite);
+
+	void PrintSpriteColliderPosition(sf::Sprite& sprite, int bodyState);
 };
 

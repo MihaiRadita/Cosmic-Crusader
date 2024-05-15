@@ -39,7 +39,7 @@ void Game::initMap()
 
 	this->ground->Init();
 	this->ground->SetScale(0.4,0.4f);
-	this->ground->SetPosition(180.f, this->window.getSize().y - this->ground->GetTileSprite().getGlobalBounds().height);
+	this->ground->SetPosition(145.f, this->window.getSize().y - this->ground->GetTileSprite().getGlobalBounds().height);
 	this->ground->InitPhysics();
 	
 }
@@ -72,7 +72,11 @@ void Game::update()
 
 	this->updatePlayer();
 	this->updatePhysics();
-	this->updateCollision();
+
+	//this->updateCollision();
+
+	this->ground->PrintSpriteColliderTilePosition();
+	this->player->PrintSpriteColliderPositionPlayer();
 }
 
 void Game::updatePlayer()
@@ -111,6 +115,11 @@ void Game::updatePlayerCollision()
 		this->player->setIsOnGround(true);
 		this->player->SetPosition(this->player->getBounds().left, this->window.getSize().y - this->player->getBounds().height);
 	}
+}
+
+void Game::updateTile()
+{
+	this->ground->update();
 }
 
 

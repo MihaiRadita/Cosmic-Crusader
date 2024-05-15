@@ -37,6 +37,7 @@ public:
 	void updatePhysics();
 	void updateCollision();
 	void updatePlayerCollision();
+	void updateTile();
 
 
 	//Render functions

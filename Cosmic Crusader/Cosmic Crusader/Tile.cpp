@@ -50,6 +50,8 @@ void Tile::Init()
 
 void Tile::update()
 {
+	std::cout << "Ground Sprite " << this->tileSprite.getPosition().x << " , " << this->tileSprite.getPosition().y << std::endl;
+	std::cout<<"Ground Collider " <<this->tileSprite.getPosition().y << " , "<< this->tileCollider->GetBody()->GetPosition().y<<std::endl;
 }
 
 void Tile::render(sf::RenderTarget& target)
@@ -75,5 +77,10 @@ void Tile::SetPosition(float x, float y)
 void Tile::SetScale(float x, float y)
 {
 	this->tileSprite.setScale(x, y);
+}
+
+void Tile::PrintSpriteColliderTilePosition()
+{
+	this->tileCollider->PrintSpriteColliderPosition(this->tileSprite, STATIC);
 }
 

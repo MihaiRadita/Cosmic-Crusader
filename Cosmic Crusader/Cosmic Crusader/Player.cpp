@@ -72,7 +72,8 @@ void Player::initAnimations()
 void Player::initPhysics()
 {
 	this->playerCollider = new RectAngleCollider(this->playerSprite, DYNAMIC);
-	this->playerCollider->PrintBodyPositionRotation();
+	this->playerCollider->SetColliderPosition(this->playerSprite);
+	//this->playerCollider->PrintBodyPositionRotation();
 }
 
 const sf::FloatRect Player::getBounds() const
@@ -344,11 +345,14 @@ void Player::updateAnimations()
 
 void Player::updatePhysics()
 {
-	this->playerPosition = sf::Vector2f(this->playerCollider->GetBody()->GetPosition().x, this->playerCollider->GetBody()->GetPosition().y * -1.f);
+
+	this->playerPosition = sf::Vector2f(this->playerCollider->GetBody()->GetPosition().x, this->playerCollider->GetBody()->GetPosition().y);
 	this->playerSprite.setPosition(this->playerPosition);
+
+	std::cout << this->playerSprite.getPosition().x << " , " << this->playerSprite.getPosition().y;
 	this->rotationAngle = this->playerCollider->GetBody()->GetAngle() * (180.f / M_PI);
 	this->playerSprite.setRotation(this->rotationAngle);
-	this->playerCollider->PrintBodyPositionRotation();
+	//this->playerCollider->PrintBodyPositionRotation();
 }
 
 
@@ -449,6 +453,11 @@ Player::~Player()
 {
 	this->DestroyPlayerAnimations();
 	this->DestroyPlayerPhysics();
+}
+
+void Player::PrintSpriteColliderPositionPlayer()
+{
+	this->playerCollider->PrintSpriteColliderPosition(this->playerSprite, DYNAMIC);
 }
 
 

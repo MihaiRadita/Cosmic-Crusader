@@ -11,6 +11,7 @@ private:
 	sf::Vector2f tilePosition;
 	sf::Vector2f tileScale;
 
+
 	RectAngleCollider* tileCollider;
 
 public:
@@ -43,5 +44,7 @@ public:
 	void SetPosition(float x, float y);
 	void SetScale(float x, float y);
 	void SetColliderPositionBySprite();
+
+	void PrintSpriteColliderTilePosition();
 };
 
