@@ -38,12 +38,13 @@ void Game::initMap()
 	this->ground = new Tile();
 
 	this->ground->Init();
+
 	this->ground->SetScale(0.4,0.4f);
 	this->ground->SetPosition(145.f, this->window.getSize().y - this->ground->GetTileSprite().getGlobalBounds().height);
-	this->ground->GetSpriteBackground().setFillColor(sf::Color::Green);
-	this->ground->GetSpriteBackground().setSize(sf::Vector2f(500.f, 500.f));
-	this->ground->GetSpriteBackground().setPosition(200.f, 200.f);
-	//this->ground->GetSpriteBackground().setOrigin(this->ground->GetTileSprite().getPosition());
+	this->ground->GetSpriteBackground()->setFillColor(sf::Color::Green);
+	this->ground->GetSpriteBackground()->setSize(sf::Vector2f(200.f, 200.f));
+	this->ground->GetSpriteBackground()->setPosition(sf::Vector2f(300.f, 300.f));
+	
 	this->ground->InitPhysics();
 	
 }

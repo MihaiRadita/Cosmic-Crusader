@@ -10,6 +10,8 @@ private:
 
 	sf::Vector2f tilePosition;
 	sf::Vector2f tileScale;
+	sf::Vector2f spriteBackgroundScale;
+	sf::Vector2f spriteBackGroundPosition;
 
 
 	RectAngleCollider* tileCollider;
@@ -42,13 +44,19 @@ public:
 
 	RectAngleCollider* GetTileCollider();
 	
-	sf::RectangleShape GetSpriteBackground();
+	sf::RectangleShape* GetSpriteBackground();
 
 	//Setters
 	void SetPosition(float x, float y);
 	void SetScale(float x, float y);
 	void SetColliderPositionBySprite();
 
+	void SetBackgroundPosition();
+	void SetBackGrounScale();
+	void SetBackGroundColor();
+
 	void PrintSpriteColliderTilePosition();
+
+	sf::Vector2f GetBackGroundScale();
 };
 

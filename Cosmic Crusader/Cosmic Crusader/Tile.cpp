@@ -72,9 +72,9 @@ RectAngleCollider* Tile::GetTileCollider()
 	return this->tileCollider;
 }
 
-sf::RectangleShape Tile::GetSpriteBackground()
+sf::RectangleShape* Tile::GetSpriteBackground()
 {
-	return this->tileSptiteBackground;
+	return &this->tileSptiteBackground;
 }
 
 void Tile::SetPosition(float x, float y)
@@ -87,8 +87,30 @@ void Tile::SetScale(float x, float y)
 	this->tileSprite.setScale(x, y);
 }
 
+void Tile::SetBackgroundPosition()
+{
+	this->tileSptiteBackground.setPosition(sf::Vector2f(400.f, 400.f));
+}
+
+void Tile::SetBackGrounScale()
+{
+	this->tileSptiteBackground.setSize(sf::Vector2f(200.f, 200.f));
+}
+
+void Tile::SetBackGroundColor()
+{
+	this->tileSptiteBackground.setFillColor(sf::Color::Green);
+}
+
 void Tile::PrintSpriteColliderTilePosition()
 {
 	this->tileCollider->PrintSpriteColliderPosition(this->tileSprite, STATIC);
 }
+
+sf::Vector2f Tile::GetBackGroundScale()
+{
+	return this->spriteBackgroundScale;
+}
+
+
 
