@@ -57,6 +57,7 @@ void Player::initSprite()
 {
 	this->playerSprite.setTexture(this->textureSheet);
 	this->playerSprite.setScale(this->playerSpriteScale);
+	this->playerSprite.setPosition(this->playerPosition);
 	this->playerSprite.setRotation(this->rotationAngle);
 }
 

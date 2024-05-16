@@ -19,6 +19,8 @@ void Tile::DestroyCollider()
 void Tile::InitVariables()
 {
 	this->tileScale = sf::Vector2f(1.f, 1.f);
+	this->tileSptiteBackground.setFillColor(sf::Color::Green);
+
 }
 
 void Tile::InitTextures()
@@ -57,6 +59,7 @@ void Tile::update()
 void Tile::render(sf::RenderTarget& target)
 {
 	target.draw(this->tileSprite);
+	target.draw(this->tileSptiteBackground);
 }
 
 sf::Sprite Tile::GetTileSprite()
@@ -67,6 +70,11 @@ sf::Sprite Tile::GetTileSprite()
 RectAngleCollider* Tile::GetTileCollider()
 {
 	return this->tileCollider;
+}
+
+sf::RectangleShape Tile::GetSpriteBackground()
+{
+	return this->tileSptiteBackground;
 }
 
 void Tile::SetPosition(float x, float y)
