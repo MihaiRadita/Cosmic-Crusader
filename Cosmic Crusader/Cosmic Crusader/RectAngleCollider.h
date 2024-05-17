@@ -14,6 +14,7 @@ private:
 	b2Body* body = nullptr;
 	b2Vec2 colliderOrigin;
 	b2Vec2 colliderSpritePosition;
+	b2Vec2 colliderSpriteScale;
 	int bodyTypeState;
 	b2Vec2 vs[4];
 	b2EdgeShape boxShape1;
@@ -33,6 +34,10 @@ public:
 	b2PolygonShape GetColliderShape();
 	b2FixtureDef GetFixtureDef();
 	
+	b2Vec2* GetColliderScale();
+	b2Vec2* GetColliderPosition();
+
+
 	//Setters
 	void SetColliderPosition(sf::Sprite& sprite);
 

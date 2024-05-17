@@ -25,7 +25,7 @@ void Tile::InitVariables()
 
 void Tile::InitTextures()
 {
-	if (this->textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Tile7.png") == false)
+	if (this->textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Platform.png") == false)
 	{
 		std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
 	}
@@ -58,8 +58,8 @@ void Tile::update()
 
 void Tile::render(sf::RenderTarget& target)
 {
-	target.draw(this->tileSprite);
 	target.draw(this->tileSptiteBackground);
+	target.draw(this->tileSprite);
 }
 
 sf::Sprite Tile::GetTileSprite()

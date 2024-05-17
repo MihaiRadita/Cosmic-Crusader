@@ -10,8 +10,10 @@ void RectAngleCollider::InitVariables(sf::Sprite& sprite, int bodyTypeState)
 {
 	//Body Def Type
 
-	this->colliderSpritePosition = b2Vec2((sprite.getLocalBounds().width / 2.0f), 
-										  ( sprite.getLocalBounds().height / 2.0f));
+	this->colliderSpritePosition = b2Vec2((sprite.getPosition().x + (sprite.getLocalBounds().width / (2.0f * 10))),
+		(sprite.getPosition().y + (sprite.getLocalBounds().height / (2.0f * 10))));
+
+	this->colliderSpriteScale = b2Vec2((sprite.getLocalBounds().width / 2.0f) , (sprite.getLocalBounds().height / 2.0f));
 
 	if (bodyTypeState == DYNAMIC)
 	{
@@ -27,7 +29,7 @@ void RectAngleCollider::InitVariables(sf::Sprite& sprite, int bodyTypeState)
 	this->body = this->physicsWorld->CreateBody(&bodyDef);
 
 	//Box Dimensions
-	this->boxShape.SetAsBox((sprite.getLocalBounds().width / 2.0f), (sprite.getLocalBounds().height / 2.0f));
+	this->boxShape.SetAsBox(this->colliderSpriteScale.x, this->colliderSpriteScale.y);
 	//Box fixtures properties
 	this->fixtureDef.shape = &this->boxShape;
 	if (bodyTypeState == DYNAMIC)
@@ -88,10 +90,20 @@ b2FixtureDef RectAngleCollider::GetFixtureDef()
 	return this->fixtureDef;;
 }
 
+b2Vec2* RectAngleCollider::GetColliderScale()
+{
+	return &this->colliderSpriteScale;
+}
+
+b2Vec2* RectAngleCollider::GetColliderPosition()
+{
+	return &this->colliderSpritePosition;
+}
+
 void RectAngleCollider::SetColliderPosition(sf::Sprite& sprite)
 {
-	this->body->SetTransform(b2Vec2((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)),
-		(sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f))), body->GetAngle());
+	this->body->SetTransform(b2Vec2((sprite.getPosition().x + (sprite.getLocalBounds().width / 2.f)) / 32.f,
+		(sprite.getPosition().y + (sprite.getLocalBounds().height / 2.f))), this->body->GetAngle());
 }
 
 void RectAngleCollider::PrintBodyPositionRotation()
