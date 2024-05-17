@@ -19,7 +19,6 @@ void Tile::DestroyCollider()
 void Tile::InitVariables()
 {
 	this->tileScale = sf::Vector2f(1.f, 1.f);
-	this->tileSptiteBackground.setFillColor(sf::Color::Green);
 
 }
 
@@ -42,6 +41,7 @@ void Tile::InitPhysics()
 	this->tileCollider = new RectAngleCollider(this->tileSprite, STATIC);
 
 	this->tileCollider->SetColliderPosition(this->tileSprite);
+
 }
 
 void Tile::Init()
@@ -58,7 +58,34 @@ void Tile::update()
 
 void Tile::render(sf::RenderTarget& target)
 {
-	target.draw(this->tileSptiteBackground);
+	// DEBUG START
+	// DRAW COLLIDER BEGIN AND END
+	auto colliderOutline = sf::RectangleShape(sf::Vector2f(
+		tileCollider->GetColliderScale()->x * 2.0f,
+		tileCollider->GetColliderScale()->y * 2.0f)
+	);
+	colliderOutline.setFillColor(sf::Color::Transparent);
+	colliderOutline.setOutlineColor(sf::Color::Blue);
+	colliderOutline.setOutlineThickness(3.0f);
+	colliderOutline.setPosition(
+		tileCollider->GetBody()->GetTransform().p.x,
+		tileCollider->GetBody()->GetTransform().p.y);
+	target.draw(colliderOutline);
+
+	// DRAW SPRITE BEGIN AND END
+	auto spriteOutline = sf::RectangleShape(sf::Vector2f(
+		tileSprite.getGlobalBounds().width,
+		tileSprite.getGlobalBounds().height)
+	);
+	spriteOutline.setFillColor(sf::Color::Transparent);
+	spriteOutline.setOutlineColor(sf::Color::Red);
+	spriteOutline.setOutlineThickness(1.0f);
+	spriteOutline.setPosition(
+		tileSprite.getPosition().x,
+		tileSprite.getPosition().y);
+	target.draw(spriteOutline);
+	// DEBUG END
+
 	target.draw(this->tileSprite);
 }
 
@@ -72,11 +99,6 @@ RectAngleCollider* Tile::GetTileCollider()
 	return this->tileCollider;
 }
 
-sf::RectangleShape* Tile::GetSpriteBackground()
-{
-	return &this->tileSptiteBackground;
-}
-
 void Tile::SetPosition(float x, float y)
 {
 	this->tileSprite.setPosition(x, y);
@@ -85,21 +107,6 @@ void Tile::SetPosition(float x, float y)
 void Tile::SetScale(float x, float y)
 {
 	this->tileSprite.setScale(x, y);
-}
-
-void Tile::SetBackgroundPosition()
-{
-	this->tileSptiteBackground.setPosition(sf::Vector2f(400.f, 400.f));
-}
-
-void Tile::SetBackGrounScale()
-{
-	this->tileSptiteBackground.setSize(sf::Vector2f(200.f, 200.f));
-}
-
-void Tile::SetBackGroundColor()
-{
-	this->tileSptiteBackground.setFillColor(sf::Color::Green);
 }
 
 void Tile::PrintSpriteColliderTilePosition()

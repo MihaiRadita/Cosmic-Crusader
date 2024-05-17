@@ -39,20 +39,9 @@ void Game::initMap()
 
 	this->ground->Init();
 
-	this->ground->SetScale(0.6f, 0.6f);
-	this->ground->SetPosition(2.f, 456.f);
+	this->ground->SetScale(1.0f, 1.0f);
+	this->ground->SetPosition(20.f, 150.f);
 	this->ground->InitPhysics();
-
-	/*this->ground->GetSpriteBackground()->setFillColor(sf::Color::Green);
-	this->ground->GetSpriteBackground()->setSize(sf::Vector2f(200.f, 200.f));
-	this->ground->GetSpriteBackground()->setPosition(sf::Vector2f(300.f, 300.f));*/
-
-	this->ground->GetSpriteBackground()->setFillColor(sf::Color::Green);
-	this->ground->GetSpriteBackground()->setSize(sf::Vector2f(this->ground->GetTileCollider()->GetColliderScale()->x , this->ground->GetTileCollider()->GetColliderScale()->y));
-	this->ground->GetSpriteBackground()->setPosition(sf::Vector2f(this->ground->GetTileCollider()->GetColliderPosition()->x, this->ground->GetTileCollider()->GetColliderPosition()->y));
-
-
-	
 }
 
 const sf::RenderWindow& Game::GetWindow() const

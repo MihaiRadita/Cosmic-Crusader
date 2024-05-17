@@ -29,7 +29,7 @@ Player::Player()
 
 void Player::initVariables()
 {
-	this->playerPosition = sf::Vector2f(20.f,90.f);
+	this->playerPosition = sf::Vector2f(350.f,150.f);
 	this->playerSpriteScale = sf::Vector2f(1.f, 1.f);
 	this->IsPLayerEvent = false;
 	this->animationState = PLAYER_ANIMATION_STATES::IDLE;
@@ -447,6 +447,34 @@ bool Player::IsJumping()
 
 void Player::render(sf::RenderTarget& target)
 {
+	// DEBUG
+	// DRAW COLLIDER BEGIN AND END
+	auto colliderOutline = sf::RectangleShape(sf::Vector2f(
+		playerCollider->GetColliderScale()->x * 2.0f,
+		playerCollider->GetColliderScale()->y * 2.0f)
+	);
+	colliderOutline.setFillColor(sf::Color::Transparent);
+	colliderOutline.setOutlineColor(sf::Color::Blue);
+	colliderOutline.setOutlineThickness(3.0f);
+	colliderOutline.setPosition(
+		playerCollider->GetBody()->GetTransform().p.x,
+		playerCollider->GetBody()->GetTransform().p.y);
+	target.draw(colliderOutline);
+
+	// DRAW SPRITE BEGIN AND END
+	auto spriteOutline = sf::RectangleShape(sf::Vector2f(
+		playerSprite.getGlobalBounds().width,
+		playerSprite.getGlobalBounds().height)
+	);
+	spriteOutline.setFillColor(sf::Color::Transparent);
+	spriteOutline.setOutlineColor(sf::Color::Red);
+	spriteOutline.setOutlineThickness(1.0f);
+	spriteOutline.setPosition(
+		playerSprite.getPosition().x,
+		playerSprite.getPosition().y);
+	target.draw(spriteOutline);
+	// DEBUG END
+
 	target.draw(this->playerSprite);
 }
 

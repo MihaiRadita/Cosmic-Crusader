@@ -10,8 +10,8 @@ void RectAngleCollider::InitVariables(sf::Sprite& sprite, int bodyTypeState)
 {
 	//Body Def Type
 
-	this->colliderSpritePosition = b2Vec2((sprite.getPosition().x + (sprite.getLocalBounds().width / (2.0f * 10))),
-		(sprite.getPosition().y + (sprite.getLocalBounds().height / (2.0f * 10))));
+	this->colliderSpritePosition = b2Vec2((sprite.getPosition().x + (sprite.getLocalBounds().width / (2.0f))),
+		(sprite.getPosition().y + (sprite.getLocalBounds().height / 2.0f)));
 
 	this->colliderSpriteScale = b2Vec2((sprite.getLocalBounds().width / 2.0f) , (sprite.getLocalBounds().height / 2.0f));
 
@@ -70,9 +70,9 @@ RectAngleCollider::~RectAngleCollider()
 	}
 }
 
-b2BodyDef RectAngleCollider::GetBodyDef()
+b2BodyDef* RectAngleCollider::GetBodyDef()
 {
-	return this->bodyDef;
+	return &this->bodyDef;
 }
 
 b2Body* RectAngleCollider::GetBody()
@@ -80,14 +80,14 @@ b2Body* RectAngleCollider::GetBody()
 	return this->body;
 }
 
-b2PolygonShape RectAngleCollider::GetColliderShape()
+b2PolygonShape* RectAngleCollider::GetColliderShape()
 {
-	return this->boxShape;
+	return &this->boxShape;
 }
 
-b2FixtureDef RectAngleCollider::GetFixtureDef()
+b2FixtureDef* RectAngleCollider::GetFixtureDef()
 {
-	return this->fixtureDef;;
+	return &this->fixtureDef;;
 }
 
 b2Vec2* RectAngleCollider::GetColliderScale()
@@ -102,8 +102,13 @@ b2Vec2* RectAngleCollider::GetColliderPosition()
 
 void RectAngleCollider::SetColliderPosition(sf::Sprite& sprite)
 {
-	this->body->SetTransform(b2Vec2((sprite.getPosition().x + (sprite.getLocalBounds().width / 2.f)) / 32.f,
-		(sprite.getPosition().y + (sprite.getLocalBounds().height / 2.f))), this->body->GetAngle());
+	this->body->SetTransform(
+		b2Vec2(
+			sprite.getPosition().x, 
+			sprite.getPosition().y
+		), 
+		this->body->GetAngle()
+	);
 }
 
 void RectAngleCollider::PrintBodyPositionRotation()

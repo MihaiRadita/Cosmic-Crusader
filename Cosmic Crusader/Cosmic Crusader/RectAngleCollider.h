@@ -29,14 +29,13 @@ public:
 	~RectAngleCollider();
 
 	//Getters
-	b2BodyDef GetBodyDef();
+	b2BodyDef* GetBodyDef();
 	b2Body* GetBody();
-	b2PolygonShape GetColliderShape();
-	b2FixtureDef GetFixtureDef();
+	b2PolygonShape* GetColliderShape();
+	b2FixtureDef* GetFixtureDef();
 	
 	b2Vec2* GetColliderScale();
 	b2Vec2* GetColliderPosition();
-
 
 	//Setters
 	void SetColliderPosition(sf::Sprite& sprite);

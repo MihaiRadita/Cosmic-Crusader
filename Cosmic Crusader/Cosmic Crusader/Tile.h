@@ -37,23 +37,15 @@ public:
 
 	//Render
 	void render(sf::RenderTarget& target);
-	void renderBacground(sf::RenderTarget& target);
+
 	//Getters
 	sf::Sprite GetTileSprite();
-	sf::RectangleShape tileSptiteBackground;
 
 	RectAngleCollider* GetTileCollider();
-	
-	sf::RectangleShape* GetSpriteBackground();
 
 	//Setters
 	void SetPosition(float x, float y);
 	void SetScale(float x, float y);
-	void SetColliderPositionBySprite();
-
-	void SetBackgroundPosition();
-	void SetBackGrounScale();
-	void SetBackGroundColor();
 
 	void PrintSpriteColliderTilePosition();
 
