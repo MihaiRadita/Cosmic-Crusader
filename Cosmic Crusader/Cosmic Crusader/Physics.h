@@ -10,20 +10,20 @@ public:
 	~Physics();
 
 	//Getters
-	b2World* GetPhysicsWorld();
+	b2World* getPhysicsWorld();
 
 	//Simulation Function
-	void SimulatePhysics();
+	void simulatePhysics();
 
 	//Update Function
 	void update();
 
 protected:
-	static b2World* physicsWorld;
-	float timeStep;
-	int32 velocityIterations;
-	int32 positionIterations;
-	static const float metersScale;
+	static b2World* s_physicsWorld;
+	float m_timeStep;
+	int32 m_velocityIterations;
+	int32 m_positionIterations;
+	static const float sc_metersScale;
 
 };
 

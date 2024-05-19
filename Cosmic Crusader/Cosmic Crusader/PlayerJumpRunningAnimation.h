@@ -5,19 +5,19 @@
 class PlayerJumpRunningAnimation : public PlayerAbstractAnimation
 {
 private:
-	const float animTimeLimit;
-	int currentFrameIndex;
-	const float animTimeJumpLimit;
-	const int jumpAnimFrameIndex;
-	bool isAnimTransition;
-	float currentJumpTimeLimit;
-	bool animationSwitch;
-	static std::vector<sf::Texture>* animFrameImg;
-	sf::Clock animationTimer;
-	bool initialTexture;
+	const float c_animTimeLimit;
+	int m_currentFrameIndex;
+	const float c_animTimeJumpLimit;
+	const int c_jumpAnimFrameIndex;
+	bool m_isAnimTransition;
+	float m_currentJumpTimeLimit;
+	bool m_animationSwitch;
+	static std::vector<sf::Texture>* s_animFrameImg;
+	sf::Clock m_animationTimer;
+	bool m_initialTexture;
 
 public:
-	void PlayAnimation(sf::Sprite& sprite) override;
+	void playAnimation(sf::Sprite& sprite) override;
 
 	//Constructors
 	PlayerJumpRunningAnimation();
@@ -26,21 +26,21 @@ public:
 	~PlayerJumpRunningAnimation();
 
 	//Init functions
-	void InitVariables();
+	void initVariables();
 
 	//Other functions
-	void AddAnimationFrames();
-	void DestroyTextureFrames();
-	void ResetCurrentAnimIndex() override;
-	void ResetPlayerAnimTimer() override;
-	void SetAnimationSwitch(bool animSwitch) override;
+	void addAnimationFrames();
+	void destroyTextureFrames();
+	void resetCurrentAnimIndex() override;
+	void resetPlayerAnimTimer() override;
+	void setAnimationSwitch(bool animSwitch) override;
 
 	//Geters Functions	
-	int GetAnimSize() override;
-	int GetCurrentAnimIndex() override;
+	int getAnimSize() override;
+	int getCurrentAnimIndex() override;
 
 	//Checking Conditions Functions
-	bool GetAnimationSwitch() override;
-	bool IsCurrentAnimationIndexValue() override;
+	bool getAnimationSwitch() override;
+	bool isCurrentAnimationIndexValue() override;
 };
 

@@ -8,8 +8,8 @@
 class Animator
 {
 private:
-	PlayerAbstractAnimation* abstractAnimation;
-	PlayerAbstractAnimation* animationTmp;
+	PlayerAbstractAnimation* m_abstractAnimation;
+	PlayerAbstractAnimation* m_animationTmp;
 
 public:
 	//Constructor
@@ -20,17 +20,17 @@ public:
 
 
 	//Geters
-	PlayerAbstractAnimation* GetAbstractAnimation();
+	PlayerAbstractAnimation* getAbstractAnimation();
 
 	//Setters
-	void SetAnimation(PlayerAbstractAnimation* anim);
+	void setAnimation(PlayerAbstractAnimation* anim);
 
 	//Play Animation
-	void Play(PlayerAbstractAnimation* playAnim, sf::Sprite& sprite);
+	void play(PlayerAbstractAnimation* playAnim, sf::Sprite& sprite);
 
 	//Other functions
-	void ResetAnimIndex(PlayerAbstractAnimation* anim);
-	void ResetAnimationTimer(PlayerAbstractAnimation* anim);
-	void TickAnimIndex(int& animationIndex);
-	bool CheckCurrentAnimIndex(PlayerAbstractAnimation* anim);
+	void resetAnimIndex(PlayerAbstractAnimation* anim);
+	void resetAnimationTimer(PlayerAbstractAnimation* anim);
+	void tickAnimIndex(int& animationIndex);
+	bool checkCurrentAnimIndex(PlayerAbstractAnimation* anim);
 };

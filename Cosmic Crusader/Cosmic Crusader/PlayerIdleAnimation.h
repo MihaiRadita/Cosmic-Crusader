@@ -5,16 +5,16 @@
 class PlayerIdleAnimation: public PlayerAbstractAnimation
 {
 private:
-	const float animTimeLimit;
-	int currentFrameIndex;
-	bool isAnimTransition;
-	bool animationSwitch;
-	static std::vector<sf::Texture>* animFrameImg;
-	sf::Clock animationTimer;
-	bool initialTexture;
+	const float c_animTimeLimit;
+	int m_currentFrameIndex;
+	bool m_isAnimTransition;
+	bool m_animationSwitch;
+	static std::vector<sf::Texture>* s_animFrameImg;
+	sf::Clock m_animationTimer;
+	bool m_initialTexture;
 
 public:
-	void PlayAnimation(sf::Sprite& sprite) override;
+	void playAnimation(sf::Sprite& sprite) override;
 
 	//Constructors
 	PlayerIdleAnimation();
@@ -23,20 +23,20 @@ public:
 	~PlayerIdleAnimation();
 
 	//Init functions
-	void InitVariables();
+	void initVariables();
 
 	//Other functions
-	void AddAnimationFrames();
-	void DestroyTextureFrames();
-	void ResetCurrentAnimIndex() override;
-	void ResetPlayerAnimTimer() override;
-	void SetAnimationSwitch(bool animSwitch) override;
+	void addAnimationFrames();
+	void destroyTextureFrames();
+	void resetCurrentAnimIndex() override;
+	void resetPlayerAnimTimer() override;
+	void setAnimationSwitch(bool animSwitch) override;
 
 	//Geters Functions	
-	int GetAnimSize() override;
-	int GetCurrentAnimIndex() override;
-	bool GetAnimationSwitch() override;
-	sf::Clock GetPlayerAnimTimer() override;
+	int getAnimSize() override;
+	int getCurrentAnimIndex() override;
+	bool getAnimationSwitch() override;
+	sf::Clock getPlayerAnimTimer() override;
 };
 
 

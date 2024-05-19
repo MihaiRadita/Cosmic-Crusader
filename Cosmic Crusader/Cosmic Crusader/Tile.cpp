@@ -7,116 +7,103 @@ Tile::Tile()
 
 Tile::~Tile()
 {
-	this->DestroyCollider();
+	destroyCollider();
 }
 
-void Tile::DestroyCollider()
+void Tile::destroyCollider()
 {
-	this->tileCollider = nullptr;
-	delete this->tileCollider;
+	m_collider = nullptr;
+	delete m_collider;
 }
 
-void Tile::InitVariables()
+void Tile::initVariables()
 {
-	this->tileScale = sf::Vector2f(1.f, 1.f);
+	m_tileScale = sf::Vector2f(1.f, 1.f);
 
 }
 
-void Tile::InitTextures()
+void Tile::initTextures()
 {
-	if (this->textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Platform.png") == false)
+	if (m_textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Platform.png") == false)
 	{
 		std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
 	}
 }
 
-void Tile::InitSprite()
+void Tile::initSprite()
 {
-	this->tileSprite.setTexture(this->textureSheet);
-	//this->tileSprite.setScale(this->tileScale);
+	m_tileSprite.setTexture(m_textureSheet);
+	//tileSprite.setScale(tileScale);
 }
 
-void Tile::InitPhysics()
+void Tile::initPhysics()
 {
-	this->tileCollider = new RectAngleCollider(this->tileSprite, STATIC);
-
-	this->tileCollider->SetColliderPosition(this->tileSprite);
-
+	m_collider = new RectAngleCollider(m_tileSprite, STATIC);
+	m_collider->setColliderPosition(m_tileSprite.getPosition().x, m_tileSprite.getPosition().y);
 }
 
-void Tile::Init()
+void Tile::init()
 {
-	this->InitTextures();
-	this->InitSprite();
+	initTextures();
+	initSprite();
 }
 
 void Tile::update()
 {
-	std::cout << "Ground Sprite " << this->tileSprite.getPosition().x << " , " << this->tileSprite.getPosition().y << std::endl;
-	std::cout<<"Ground Collider " <<this->tileSprite.getPosition().y << " , "<< this->tileCollider->GetBody()->GetPosition().y<<std::endl;
+	std::cout << "Ground Sprite " << m_tileSprite.getPosition().x << " , " << m_tileSprite.getPosition().y << std::endl;
+	std::cout << "Ground Collider " << m_collider->getBody()->GetPosition().x << " , "<< m_collider->getBody()->GetPosition().y <<std::endl;
 }
 
 void Tile::render(sf::RenderTarget& target)
 {
 	// DEBUG START
-	// DRAW COLLIDER BEGIN AND END
-	auto colliderOutline = sf::RectangleShape(sf::Vector2f(
-		tileCollider->GetColliderScale()->x * 2.0f,
-		tileCollider->GetColliderScale()->y * 2.0f)
-	);
-	colliderOutline.setFillColor(sf::Color::Transparent);
-	colliderOutline.setOutlineColor(sf::Color::Blue);
-	colliderOutline.setOutlineThickness(3.0f);
-	colliderOutline.setPosition(
-		tileCollider->GetBody()->GetTransform().p.x,
-		tileCollider->GetBody()->GetTransform().p.y);
-	target.draw(colliderOutline);
+	m_collider->debugRender(target);
 
 	// DRAW SPRITE BEGIN AND END
 	auto spriteOutline = sf::RectangleShape(sf::Vector2f(
-		tileSprite.getGlobalBounds().width,
-		tileSprite.getGlobalBounds().height)
+		m_tileSprite.getGlobalBounds().width,
+		m_tileSprite.getGlobalBounds().height)
 	);
 	spriteOutline.setFillColor(sf::Color::Transparent);
 	spriteOutline.setOutlineColor(sf::Color::Red);
 	spriteOutline.setOutlineThickness(1.0f);
 	spriteOutline.setPosition(
-		tileSprite.getPosition().x,
-		tileSprite.getPosition().y);
+		m_tileSprite.getPosition().x,
+		m_tileSprite.getPosition().y);
 	target.draw(spriteOutline);
 	// DEBUG END
 
-	target.draw(this->tileSprite);
+	target.draw(m_tileSprite);
 }
 
-sf::Sprite Tile::GetTileSprite()
+sf::Sprite Tile::getTileSprite()
 {
-	return this->tileSprite;
+	return m_tileSprite;
 }
 
-RectAngleCollider* Tile::GetTileCollider()
+RectAngleCollider* Tile::getTileCollider()
 {
-	return this->tileCollider;
+	return m_collider;
 }
 
-void Tile::SetPosition(float x, float y)
+void Tile::setPosition(float x, float y)
 {
-	this->tileSprite.setPosition(x, y);
+	m_tileSprite.setPosition(x, y);
 }
 
-void Tile::SetScale(float x, float y)
+void Tile::setScale(float x, float y)
 {
-	this->tileSprite.setScale(x, y);
+	m_tileSprite.setScale(x, y);
 }
 
-void Tile::PrintSpriteColliderTilePosition()
+void Tile::printSpriteColliderTilePosition()
 {
-	this->tileCollider->PrintSpriteColliderPosition(this->tileSprite, STATIC);
+	m_collider->printSpriteColliderPosition(m_tileSprite, STATIC);
 }
 
-sf::Vector2f Tile::GetBackGroundScale()
+sf::Vector2f Tile::getBackGroundScale()
 {
-	return this->spriteBackgroundScale;
+	return m_spriteBackgroundScale;
 }
 
 

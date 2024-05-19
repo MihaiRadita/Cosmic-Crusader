@@ -3,51 +3,49 @@
 
 constexpr float M_PI = 22.0f / 7.0f;
 
-void Player::DestroyPlayerAnimations()
+void Player::destroyPlayerAnimations()
 {
-	delete this->playerAnimator;
-	delete this->playerIdleAnimation;
-	delete this->playerRunningAnimation;
-	delete this->playerJumpAnimation;
-	delete this->playerJumpRunningAnimation;
+	delete m_playerAnimator;
+	delete m_playerIdleAnimation;
+	delete m_playerRunningAnimation;
+	delete m_playerJumpAnimation;
+	delete m_playerJumpRunningAnimation;
 }
 
-void Player::DestroyPlayerPhysics()
+void Player::destroyPlayerPhysics()
 {
-	this->playerCollider = nullptr;
-	delete this->playerCollider;
+	delete m_collider;
 }
 
 Player::Player()
 {
-	this->initTexture();
-	this->initVariables();
-	this->initAnimations();
-	this->initSprite();
-	this->initPhysics();
+	initTexture();
+	initVariables();
+	initAnimations();
+	initSprite();
+	initPhysics();
 }
 
 void Player::initVariables()
 {
-	this->playerPosition = sf::Vector2f(350.f,150.f);
-	this->playerSpriteScale = sf::Vector2f(1.f, 1.f);
-	this->IsPLayerEvent = false;
-	this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-	this->playerAnimSwitch = -1;
-	this->moveSpeed = 2.3f;
-	this->gravity = 0.090f;
-	this->jumpForce = 9.f;
-	this->isGround = false;
-	this->isJumping = false;
-	this->isMoving = false;
-	this->isJumpStage = false;
-	this->yVelocity = 0.0f;
-	this->rotationAngle = 0.f;
+	m_playerSpriteScale = sf::Vector2f(1.f, 1.f);
+	m_isPLayerEvent = false;
+	m_animationState = PLAYER_ANIMATION_STATES::IDLE;
+	m_playerAnimSwitch = -1;
+	m_moveSpeed = 2.3f;
+	m_gravity = 0.090f;
+	m_jumpForce = 9.f;
+	m_isGround = false;
+	m_isJumping = false;
+	m_isMoving = false;
+	m_isJumpStage = false;
+	m_yVelocity = 0.0f;
+	m_rotationAngle = 0.f;
 }
 
 void Player::initTexture()
 {
-	if (this->textureSheet.loadFromFile("Textures/PlayerTextures/Player1Textures/IdleTextures/Idle1.png") == false)
+	if (m_textureSheet.loadFromFile("Textures/PlayerTextures/Player1Textures/IdleTextures/Idle1.png") == false)
 	{
 		std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
 	}
@@ -55,56 +53,56 @@ void Player::initTexture()
 
 void Player::initSprite()
 {
-	this->playerSprite.setTexture(this->textureSheet);
-	this->playerSprite.setScale(this->playerSpriteScale);
-	this->playerSprite.setPosition(this->playerPosition);
-	this->playerSprite.setRotation(this->rotationAngle);
+	m_playerSprite.setTexture(m_textureSheet);
+	m_playerSprite.setScale(m_playerSpriteScale);
+	m_playerSprite.setPosition(0.0f, 150.0f);
+	m_playerSprite.setRotation(m_rotationAngle);
 }
 
 void Player::initAnimations()
 {
-	this->playerAnimator = new Animator();
-	this->playerIdleAnimation = new PlayerIdleAnimation();
-	this->playerRunningAnimation = new PlayerRunningAnimation();
-	this->playerJumpAnimation = new PlayerJumpAnimation();
-	this->playerJumpRunningAnimation = new PlayerJumpRunningAnimation();
+	m_playerAnimator = new Animator();
+	m_playerIdleAnimation = new PlayerIdleAnimation();
+	m_playerRunningAnimation = new PlayerRunningAnimation();
+	m_playerJumpAnimation = new PlayerJumpAnimation();
+	m_playerJumpRunningAnimation = new PlayerJumpRunningAnimation();
 }
 
 void Player::initPhysics()
 {
-	this->playerCollider = new RectAngleCollider(this->playerSprite, DYNAMIC);
-	this->playerCollider->SetColliderPosition(this->playerSprite);
-	//this->playerCollider->PrintBodyPositionRotation();
+	m_collider = new RectAngleCollider(m_playerSprite, DYNAMIC);
+	m_collider->setColliderPosition(m_playerSprite.getPosition().x, m_playerSprite.getPosition().y);
+	//playerCollider->PrintBodyPositionRotation();
 }
 
 const sf::FloatRect Player::getBounds() const
 {
-	return this->playerSprite.getGlobalBounds();
+	return m_playerSprite.getGlobalBounds();
 }
 
-sf::Sprite Player::GetPlayerSprite()
+sf::Sprite Player::getPlayerSprite()
 {
-	return this->playerSprite;
+	return m_playerSprite;
 }
 
 const sf::Vector2f Player::getPlayerPosition() const
 {
-	return this->playerSprite.getPosition();
+	return m_playerSprite.getPosition();
 }
 
 sf::Vector2f Player::getPlayerScale()
 {
-	return this->playerSprite.getScale();
+	return m_playerSprite.getScale();
 }
 
-bool Player::CheckEvent()
+bool Player::checkEvent()
 {
-	return this->IsPLayerEvent;
+	return m_isPLayerEvent;
 }
 
-void Player::SetBoolEvent(bool isEv)
+void Player::setBoolEvent(bool isEv)
 {
-	this->IsPLayerEvent = isEv;
+	m_isPLayerEvent = isEv;
 }
 
 void Player::handleEvent(const sf::Event& ev)
@@ -115,18 +113,18 @@ void Player::handleEvent(const sf::Event& ev)
 		if (ev.key.code == sf::Keyboard::A)
 		{
 			std::cout << "Press left" << std::endl;
-			controls["left"] = true;
+			m_controls["left"] = true;
 
 		}
 		else if (ev.key.code == sf::Keyboard::D)
 		{
-			controls["right"] = true;
+			m_controls["right"] = true;
 			std::cout << "Press right" << std::endl;
 		}
 
 		if (ev.key.code == sf::Keyboard::Space)
 		{
-			controls["jump"] = true;
+			m_controls["jump"] = true;
 			std::cout << "Press jump" << std::endl;
 		}
 	}
@@ -135,35 +133,35 @@ void Player::handleEvent(const sf::Event& ev)
 		if (ev.key.code == sf::Keyboard::A)
 		{
 			std::cout << "Release left" << std::endl;
-			controls["left"] = false;
+			m_controls["left"] = false;
 
 		}
 		else if (ev.key.code == sf::Keyboard::D)
 		{
-			controls["right"] = false;
+			m_controls["right"] = false;
 			std::cout << "Release right" << std::endl;
 		}
 
 		if (ev.key.code == sf::Keyboard::Space)
 		{
-			controls["jump"] = false;
+			m_controls["jump"] = false;
 			std::cout << "Release jump" << std::endl;
 		}
 	}
 }
 
-void Player::SetPlayerByColliderPos()
+void Player::setPlayerByColliderPos()
 {
 }
 
-void Player::SetPosition(const float x, const float y)
+void Player::setPosition(const float x, const float y)
 {
-	this->playerSprite.setPosition(x, y);
+	m_playerSprite.setPosition(x, y);
 }
 
 void Player::resetControls()
 {
-	for (auto& pair : this->controls)
+	for (auto& pair : m_controls)
 	{
 		pair.second = false;
 	}
@@ -171,7 +169,7 @@ void Player::resetControls()
 
 bool Player::isNoControlActive()
 {
-	for (auto& pair : this->controls)
+	for (auto& pair : m_controls)
 	{
 		if (pair.second == true)
 		{
@@ -184,260 +182,259 @@ bool Player::isNoControlActive()
 
 void Player::update()
 {
-	this->updateMovement();
-	this->updateJump();
-	this->updateRotation();
-	this->updateRunningJump();
-	this->updateAnimations();
-	this->updatePhysics();
+	updateMovement();
+	updateJump();
+	updateRotation();
+	updateRunningJump();
+	updateAnimations();
+	updatePhysics();
 }
 
 void Player::updateMovement()
 {
-	if (this->controls["left"] == true)
+	if (m_controls["left"] == true)
 	{
-		if (this->isGround)
+		if (m_isGround)
 		{
-			if (this->animationState != PLAYER_ANIMATION_STATES::JUMP)
+			if (m_animationState != PLAYER_ANIMATION_STATES::JUMP)
 			{
 
-				this->animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
-				this->SwitchAnimation();
-				this->isMoving = true;
+				m_animationState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+				switchAnimation();
+				m_isMoving = true;
 			}
 		}
 
-		this->InvertPlayerMovingSpriteScale(-1);
-		if (this->isMoving)
+		invertPlayerMovingSpriteScale(-1);
+		if (m_isMoving)
 		{
-			this->playerSprite.move(this->playerPosition.x * -1.f * this->moveSpeed, 0.f);
+			// m_playerSprite.move(m_playerPosition.x * -1.f * m_moveSpeed, 0.f);
 
 		}
 		std::cout << "Moving Left" << std::endl;
-		std::cout << "veloctiy x to left = " << this->getPlayerPosition().x << std::endl;
+		std::cout << "veloctiy x to left = " << getPlayerPosition().x << std::endl;
 	}
-	else if (this->controls["right"] == true)
+	else if (m_controls["right"] == true)
 	{
-		if (this->isGround)
+		if (m_isGround)
 		{
-			if (this->animationState != PLAYER_ANIMATION_STATES::JUMP)
+			if (m_animationState != PLAYER_ANIMATION_STATES::JUMP)
 			{
-				this->animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
-				this->SwitchAnimation();
-				this->isMoving = true;
+				m_animationState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+				switchAnimation();
+				m_isMoving = true;
 			}
 		}
 
-		this->InvertPlayerMovingSpriteScale(1);
-		if (this->isMoving)
+		invertPlayerMovingSpriteScale(1);
+		if (m_isMoving)
 		{
-			this->playerSprite.move(this->playerPosition.x * this->moveSpeed, 0.f);
+			// m_playerSprite.move(m_playerPosition.x * m_moveSpeed, 0.f);
 		}
 		std::cout << "Moving Right" << std::endl;
-		std::cout << "veloctiy x to right = " << this->getPlayerPosition().x << std::endl;
+		std::cout << "veloctiy x to right = " << getPlayerPosition().x << std::endl;
 	}
 
-	if (this->isNoControlActive() && this->animationState != PLAYER_ANIMATION_STATES::JUMP && this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING)
+	if (isNoControlActive() && m_animationState != PLAYER_ANIMATION_STATES::JUMP && m_animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING)
 	{
 		std::cout << "Idle" << std::endl;
-		std::cout << this->animationState << std::endl;
-		this->animationState = PLAYER_ANIMATION_STATES::IDLE;
-		this->isMoving = false;
-		this->SwitchAnimation();
+		std::cout << m_animationState << std::endl;
+		m_animationState = PLAYER_ANIMATION_STATES::IDLE;
+		m_isMoving = false;
+		switchAnimation();
 	}
 
 }
 
 void Player::updateRotation()
 {
-	this->playerSprite.rotate(this->rotationAngle);
+	m_playerSprite.rotate(m_rotationAngle);
 }
 
 void Player::updateJump()
 {
 
-	if (this->isGround == true && (this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) > 17)
+	if (m_isGround == true && (m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) > 17)
 	{
-		if (this->animationState == PLAYER_ANIMATION_STATES::JUMP)
+		if (m_animationState == PLAYER_ANIMATION_STATES::JUMP)
 		{
-			this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+			m_animationState = PLAYER_ANIMATION_STATES::IDLE;
 		}
-		this->yVelocity = 0.f;
+		m_yVelocity = 0.f;
 	}
 	else
 	{
-		this->yVelocity += this->gravity;	
+		m_yVelocity += m_gravity;	
 	}
 
-	if (this->controls["jump"] == true && this->animationState != PLAYER_ANIMATION_STATES::JUMP && this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && this->isGround)
+	if (m_controls["jump"] == true && m_animationState != PLAYER_ANIMATION_STATES::JUMP && m_animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && m_isGround)
 	{
-		if (this->animationState == PLAYER_ANIMATION_STATES::IDLE)
+		if (m_animationState == PLAYER_ANIMATION_STATES::IDLE)
 		{
-			this->animationState = PLAYER_ANIMATION_STATES::JUMP;
-			this->SwitchAnimation();
+			m_animationState = PLAYER_ANIMATION_STATES::JUMP;
+			switchAnimation();
 		}
 	}
 
-	if ((this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) < 17 && this->animationState == PLAYER_ANIMATION_STATES::JUMP)
+	if ((m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) < 17 && m_animationState == PLAYER_ANIMATION_STATES::JUMP)
 	{
-		this->isMoving = false;
-		this->yVelocity = 0;
+		m_isMoving = false;
+		m_yVelocity = 0;
 	}
-	else if ((this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) == 17 && this->animationState == PLAYER_ANIMATION_STATES::JUMP && this->isGround)
+	else if ((m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) == 17 && m_animationState == PLAYER_ANIMATION_STATES::JUMP && m_isGround)
 	{
 		
-		this->isMoving = true;
-		this->yVelocity = -jumpForce;
+		m_isMoving = true;
+		m_yVelocity = -m_jumpForce;
 		std::cout << "JUMP JUMP " << std::endl;
-		this->isGround = false;
+		m_isGround = false;
 		
 		
 	}
- 	this->playerSprite.move(0.f, this->yVelocity);
+ 	m_playerSprite.move(0.f, m_yVelocity);
 
 }
 
 void Player::updateRunningJump()
 {
-	if (this->isGround == true && (this->playerAnimator->GetAbstractAnimation()->GetCurrentAnimIndex()) >= 16)
+	if (m_isGround == true && (m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) >= 16)
 	{
-		if (this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
+		if (m_animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
 		{
-			this->animationState = PLAYER_ANIMATION_STATES::IDLE;
+			m_animationState = PLAYER_ANIMATION_STATES::IDLE;
 	
 		}
-		this->yVelocity = 0.f;
+		m_yVelocity = 0.f;
 	}
 	else
 	{
-		this->yVelocity += gravity;
+		m_yVelocity += m_gravity;
 	}
 	
 	
 	
-	if (this->controls["jump"] == true && this->animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && this->animationState != PLAYER_ANIMATION_STATES::JUMP && this->isGround)
+	if (m_controls["jump"] == true && m_animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && m_animationState != PLAYER_ANIMATION_STATES::JUMP && m_isGround)
 	{
-		if (this->animationState == PLAYER_ANIMATION_STATES::MOVING_LEFT || this->animationState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
+		if (m_animationState == PLAYER_ANIMATION_STATES::MOVING_LEFT || m_animationState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
 		{
-			this->animationState = PLAYER_ANIMATION_STATES::JUMP_RUNNING;
-			this->SwitchAnimation();
+			m_animationState = PLAYER_ANIMATION_STATES::JUMP_RUNNING;
+			switchAnimation();
 		}
 		
 			
 	}
 	
-	if (this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING && this->isGround)
+	if (m_animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING && m_isGround)
 	{
 			
-		this->yVelocity = -jumpForce;
+		m_yVelocity = -m_jumpForce;
 		std::cout << "JUMP JUMP " << std::endl;
-		this->isGround = false;
+		m_isGround = false;
 	}
 
-	this->playerSprite.move(0.f, this->yVelocity);
+	m_playerSprite.move(0.f, m_yVelocity);
 
 }
 
 
 void Player::updateAnimations()
 {
-	this->playerAnimator->Play(this->playerAnimator->GetAbstractAnimation(), this->playerSprite);
+	m_playerAnimator->play(m_playerAnimator->getAbstractAnimation(), m_playerSprite);
 }
 
 void Player::updatePhysics()
 {
 
-	this->playerPosition = sf::Vector2f(this->playerCollider->GetBody()->GetPosition().x, this->playerCollider->GetBody()->GetPosition().y);
-	this->playerSprite.setPosition(this->playerPosition);
+	auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+	m_playerSprite.setPosition(playerPosition);
 
-	std::cout << this->playerSprite.getPosition().x << " , " << this->playerSprite.getPosition().y;
-	this->rotationAngle = this->playerCollider->GetBody()->GetAngle() * (180.f / M_PI);
-	this->playerSprite.setRotation(this->rotationAngle);
-	//this->playerCollider->PrintBodyPositionRotation();
+	std::cout << m_playerSprite.getPosition().x << " , " << m_playerSprite.getPosition().y;
+	m_rotationAngle = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+	m_playerSprite.setRotation(m_rotationAngle);
 }
 
 
 void Player::setIsOnGround(bool isGround)
 {
-	this->isGround = isGround;
+	m_isGround = isGround;
 }
 
-void Player::InvertPlayerMovingSpriteScale(int direction)
+void Player::invertPlayerMovingSpriteScale(int direction)
 {
-	this->playerSprite.setScale(this->playerSpriteScale.x * (float)direction, this->playerSpriteScale.y);
+	m_playerSprite.setScale(m_playerSpriteScale.x * (float)direction, m_playerSpriteScale.y);
 	if (direction < 0)
 	{
-		this->playerSprite.setOrigin(this->getBounds().width / this->playerSpriteScale.x, 0.f);
+		m_playerSprite.setOrigin(getBounds().width / m_playerSpriteScale.x, 0.f);
 	}
 	else
 	{
-		this->playerSprite.setOrigin(0.f, 0.f);
+		m_playerSprite.setOrigin(0.f, 0.f);
 	}
 }
 
-void Player::SwitchAnimation()
+void Player::switchAnimation()
 {
-	if (this->animationState != this->playerAnimSwitch) {
+	if (m_animationState != m_playerAnimSwitch) {
 
 		//	aplica modificare
-		switch (this->animationState)
+		switch (m_animationState)
 		{
 		case PLAYER_ANIMATION_STATES::IDLE:
 
 			std::cout << "Player Runs idle Animation" << std::endl;
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->SetAnimation(this->playerIdleAnimation);
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->setAnimation(m_playerIdleAnimation);
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
 			break;
 
 
 		case PLAYER_ANIMATION_STATES::MOVING_LEFT:
 			std::cout << "Player Runs left Animation" << std::endl;
-			this->playerAnimator->ResetAnimationTimer(this->playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->SetAnimation(this->playerRunningAnimation);
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->setAnimation(m_playerRunningAnimation);
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
 			break;
 
 		case PLAYER_ANIMATION_STATES::MOVING_RIGHT:
 			std::cout << "Player Runs right Animation" << std::endl;
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->SetAnimation(this->playerRunningAnimation);
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->setAnimation(m_playerRunningAnimation);
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
 			break;
 		case PLAYER_ANIMATION_STATES::JUMP:
 			std::cout << "Player Jump Animation" << std::endl;
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->SetAnimation(this->playerJumpAnimation);
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->setAnimation(m_playerJumpAnimation);
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
 			break;
 		case PLAYER_ANIMATION_STATES::JUMP_RUNNING:
 			std::cout << "Player Jump Animation" << std::endl;
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->SetAnimation(this->playerJumpRunningAnimation);
-			this->playerAnimator->ResetAnimationTimer(playerAnimator->GetAbstractAnimation());
-			this->playerAnimator->ResetAnimIndex(this->playerAnimator->GetAbstractAnimation());
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->setAnimation(m_playerJumpRunningAnimation);
+			m_playerAnimator->resetAnimationTimer(m_playerAnimator->getAbstractAnimation());
+			m_playerAnimator->resetAnimIndex(m_playerAnimator->getAbstractAnimation());
 			break;
 
 		default:
 			break;
 		}
 		// salveaza stare curenta in stare anterioara
-		this->playerAnimSwitch = this->animationState;
+		m_playerAnimSwitch = m_animationState;
 	}
 }
 
-bool Player::IsJumping()
+bool Player::isJumping()
 {
-	if (this->animationState == PLAYER_ANIMATION_STATES::JUMP || this->animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
+	if (m_animationState == PLAYER_ANIMATION_STATES::JUMP || m_animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
 	{
 		return true;
 	}
@@ -448,45 +445,34 @@ bool Player::IsJumping()
 void Player::render(sf::RenderTarget& target)
 {
 	// DEBUG
-	// DRAW COLLIDER BEGIN AND END
-	auto colliderOutline = sf::RectangleShape(sf::Vector2f(
-		playerCollider->GetColliderScale()->x * 2.0f,
-		playerCollider->GetColliderScale()->y * 2.0f)
-	);
-	colliderOutline.setFillColor(sf::Color::Transparent);
-	colliderOutline.setOutlineColor(sf::Color::Blue);
-	colliderOutline.setOutlineThickness(3.0f);
-	colliderOutline.setPosition(
-		playerCollider->GetBody()->GetTransform().p.x,
-		playerCollider->GetBody()->GetTransform().p.y);
-	target.draw(colliderOutline);
+	m_collider->debugRender(target);
 
-	// DRAW SPRITE BEGIN AND END
+	// DRAW SPRITE BOUNDS
 	auto spriteOutline = sf::RectangleShape(sf::Vector2f(
-		playerSprite.getGlobalBounds().width,
-		playerSprite.getGlobalBounds().height)
+		m_playerSprite.getGlobalBounds().width,
+		m_playerSprite.getGlobalBounds().height)
 	);
 	spriteOutline.setFillColor(sf::Color::Transparent);
 	spriteOutline.setOutlineColor(sf::Color::Red);
 	spriteOutline.setOutlineThickness(1.0f);
 	spriteOutline.setPosition(
-		playerSprite.getPosition().x,
-		playerSprite.getPosition().y);
+		m_playerSprite.getPosition().x,
+		m_playerSprite.getPosition().y);
 	target.draw(spriteOutline);
 	// DEBUG END
 
-	target.draw(this->playerSprite);
+	target.draw(m_playerSprite);
 }
 
 Player::~Player()
 {
-	this->DestroyPlayerAnimations();
-	this->DestroyPlayerPhysics();
+	destroyPlayerAnimations();
+	destroyPlayerPhysics();
 }
 
-void Player::PrintSpriteColliderPositionPlayer()
+void Player::printSpriteColliderPositionPlayer()
 {
-	this->playerCollider->PrintSpriteColliderPosition(this->playerSprite, DYNAMIC);
+	m_collider->printSpriteColliderPosition(m_playerSprite, DYNAMIC);
 }
 
 

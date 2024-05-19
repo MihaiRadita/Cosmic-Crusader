@@ -1,47 +1,47 @@
 #include "stdafx.h"
 #include "PlayerAbstractAnimation.h"
 
-int PlayerAbstractAnimation::GetAnimSize()
+int PlayerAbstractAnimation::getAnimSize()
 {
 	return 0;
 }
 
-int PlayerAbstractAnimation::GetCurrentAnimIndex()
+int PlayerAbstractAnimation::getCurrentAnimIndex()
 {
 	return 0;
 }
 
-sf::Clock PlayerAbstractAnimation::GetPlayerAnimTimer()
+sf::Clock PlayerAbstractAnimation::getPlayerAnimTimer()
 {
 	return sf::Clock();
 }
 
-void PlayerAbstractAnimation::ResetCurrentAnimIndex()
+void PlayerAbstractAnimation::resetCurrentAnimIndex()
 {
 	std::cout << "No index to reset!" << std::endl;
 }
 
-void PlayerAbstractAnimation::ResetPlayerAnimTimer()
+void PlayerAbstractAnimation::resetPlayerAnimTimer()
 {
 	std::cout << "No animation timer to reset!" << std::endl;
 }
 
-bool PlayerAbstractAnimation::GetAnimationSwitch()
+bool PlayerAbstractAnimation::getAnimationSwitch()
 {
 	return false;
 }
 
-void PlayerAbstractAnimation::SetAnimationSwitch(bool animSwitch)
+void PlayerAbstractAnimation::setAnimationSwitch(bool animSwitch)
 {
 	std::cout << "No Animation Switch to change";
 }
 
-bool PlayerAbstractAnimation::IsCurrentAnimationIndexValue()
+bool PlayerAbstractAnimation::isCurrentAnimationIndexValue()
 {
 	return false;
 }
 
-void PlayerAbstractAnimation::PlayAnimation(sf::Sprite& sprite)
+void PlayerAbstractAnimation::playAnimation(sf::Sprite& sprite)
 {
 	std::cout << "Abstract Animation";
 }

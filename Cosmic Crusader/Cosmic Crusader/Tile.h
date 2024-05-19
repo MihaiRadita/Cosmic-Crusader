@@ -5,16 +5,15 @@
 class Tile
 {
 private:
-	sf::Sprite tileSprite;
-	sf::Texture textureSheet;
+	sf::Sprite m_tileSprite;
+	sf::Texture m_textureSheet;
 
-	sf::Vector2f tilePosition;
-	sf::Vector2f tileScale;
-	sf::Vector2f spriteBackgroundScale;
-	sf::Vector2f spriteBackGroundPosition;
+	sf::Vector2f m_tileScale;
+	sf::Vector2f m_spriteBackgroundScale;
+	sf::Vector2f m_spriteBackGroundPosition;
 
 
-	RectAngleCollider* tileCollider;
+	RectAngleCollider* m_collider;
 
 public:
 	
@@ -23,14 +22,14 @@ public:
 
 	//Destructors
 	~Tile();
-	void DestroyCollider();
+	void destroyCollider();
 
 	//Init functions
-	void InitVariables();
-	void InitTextures();
-	void InitSprite();
-	void InitPhysics();
-	void Init();
+	void initVariables();
+	void initTextures();
+	void initSprite();
+	void initPhysics();
+	void init();
 
 	//Update
 	void update();
@@ -39,16 +38,16 @@ public:
 	void render(sf::RenderTarget& target);
 
 	//Getters
-	sf::Sprite GetTileSprite();
+	sf::Sprite getTileSprite();
 
-	RectAngleCollider* GetTileCollider();
+	RectAngleCollider* getTileCollider();
 
 	//Setters
-	void SetPosition(float x, float y);
-	void SetScale(float x, float y);
+	void setPosition(float x, float y);
+	void setScale(float x, float y);
 
-	void PrintSpriteColliderTilePosition();
+	void printSpriteColliderTilePosition();
 
-	sf::Vector2f GetBackGroundScale();
+	sf::Vector2f getBackGroundScale();
 };
 

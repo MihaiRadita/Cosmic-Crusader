@@ -3,52 +3,52 @@
 
 Animator::Animator()
 {
-	this->abstractAnimation = new PlayerAbstractAnimation();
-	this->animationTmp = this->abstractAnimation;
+	this->m_abstractAnimation = new PlayerAbstractAnimation();
+	this->m_animationTmp = this->m_abstractAnimation;
 }
 
 Animator::~Animator()
 {
-	if (this->abstractAnimation)
+	if (this->m_abstractAnimation)
 	{
-		delete this->animationTmp;
+		delete this->m_animationTmp;
 		std::cout << "Pointer deleted" << std::endl;
 	}
 }
 
-PlayerAbstractAnimation* Animator::GetAbstractAnimation()
+PlayerAbstractAnimation* Animator::getAbstractAnimation()
 {
-	return this->abstractAnimation;
+	return this->m_abstractAnimation;
 }
 
-void Animator::SetAnimation(PlayerAbstractAnimation* anim)
+void Animator::setAnimation(PlayerAbstractAnimation* anim)
 {
-	this->abstractAnimation = anim;
+	this->m_abstractAnimation = anim;
 }
 
-void Animator::Play(PlayerAbstractAnimation* anim, sf::Sprite& sprite)
+void Animator::play(PlayerAbstractAnimation* anim, sf::Sprite& sprite)
 {
-	anim->PlayAnimation(sprite);
+	anim->playAnimation(sprite);
 }
 
 
 
-void Animator::ResetAnimIndex(PlayerAbstractAnimation* anim)
+void Animator::resetAnimIndex(PlayerAbstractAnimation* anim)
 {
-	anim->ResetCurrentAnimIndex();
+	anim->resetCurrentAnimIndex();
 }
 
-void Animator::TickAnimIndex(int& animtionIndex)
+void Animator::tickAnimIndex(int& animtionIndex)
 {
 	animtionIndex++;
 }
 
-bool Animator::CheckCurrentAnimIndex(PlayerAbstractAnimation* anim)
+bool Animator::checkCurrentAnimIndex(PlayerAbstractAnimation* anim)
 {
-	return anim->IsCurrentAnimationIndexValue();
+	return anim->isCurrentAnimationIndexValue();
 }
 
-void Animator::ResetAnimationTimer(PlayerAbstractAnimation* anim)
+void Animator::resetAnimationTimer(PlayerAbstractAnimation* anim)
 {
-	this->abstractAnimation->ResetPlayerAnimTimer();
+	this->m_abstractAnimation->resetPlayerAnimTimer();
 }

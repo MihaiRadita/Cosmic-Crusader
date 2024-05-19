@@ -14,45 +14,44 @@ class Player
 private:
 
 	//Player variables
-	sf::Sprite playerSprite;
-	sf::Texture textureSheet;
-	sf::Clock animationTimer;
-	sf::Event playerInputEvent;
-	sf::Vector2f playerPosition;
-	int playerAnimSwitch;
-	sf::Vector2f playerSpriteScale;
-	float rotationAngle;
+	sf::Sprite m_playerSprite;
+	sf::Texture m_textureSheet;
+	sf::Clock m_animationTimer;
+	sf::Event m_playerInputEvent;
+	int m_playerAnimSwitch;
+	sf::Vector2f m_playerSpriteScale;
+	float m_rotationAngle;
 
 	//Player Animation Instances
-	Animator* playerAnimator;
+	Animator* m_playerAnimator;
 
-	PlayerIdleAnimation* playerIdleAnimation;
-	PlayerRunningAnimation* playerRunningAnimation;
-	PlayerJumpAnimation* playerJumpAnimation;
-	PlayerJumpRunningAnimation* playerJumpRunningAnimation;
+	PlayerIdleAnimation* m_playerIdleAnimation;
+	PlayerRunningAnimation* m_playerRunningAnimation;
+	PlayerJumpAnimation* m_playerJumpAnimation;
+	PlayerJumpRunningAnimation* m_playerJumpRunningAnimation;
 
 	//Animations Destroy
-	void DestroyPlayerAnimations();
+	void destroyPlayerAnimations();
 
 	//Player Collider
-	RectAngleCollider* playerCollider;
+	RectAngleCollider* m_collider;
 
 	//Physics Destroy
-	void DestroyPlayerPhysics();
+	void destroyPlayerPhysics();
 
 	// Variables
-	short animationState;
-	float moveSpeed;
-	bool IsPLayerEvent;
-	float gravity;
-	bool isGround;
-	bool isJumping;
-	bool isMoving;
-	float jumpForce;
-	float yVelocity;
-	bool isJumpStage;
+	short m_animationState;
+	float m_moveSpeed;
+	bool m_isPLayerEvent;
+	float m_gravity;
+	bool m_isGround;
+	bool m_isJumping;
+	bool m_isMoving;
+	float m_jumpForce;
+	float m_yVelocity;
+	bool m_isJumpStage;
 
-	std::map<std::string, bool> controls{ {"left", false}, {"right", false}, {"jump", false}};
+	std::map<std::string, bool> m_controls{ {"left", false}, {"right", false}, {"jump", false}};
 public:
 	
 	//Constructors
@@ -67,20 +66,20 @@ public:
 
 	//Geters
 	const sf::FloatRect getBounds() const;
-	sf::Sprite GetPlayerSprite();
+	sf::Sprite getPlayerSprite();
 	const sf::Vector2f getPlayerPosition() const;
 	sf::Vector2f getPlayerScale();
-	bool CheckEvent();
+	bool checkEvent();
 	
 	//Setters
-	void SetBoolEvent(bool isEv);
+	void setBoolEvent(bool isEv);
 
 	void handleEvent(const sf::Event& event);
 
-	void SetPlayerByColliderPos();
+	void setPlayerByColliderPos();
 
 	//Modifiers
-	void SetPosition(const float x, const float y);
+	void setPosition(const float x, const float y);
 	void resetControls();
 	bool isNoControlActive();
 
@@ -93,9 +92,9 @@ public:
 	void updateJump();
 	void updateRunningJump();
 	void setIsOnGround(bool isGround);
-	void InvertPlayerMovingSpriteScale(int direction);
-	void SwitchAnimation();
-	bool IsJumping();
+	void invertPlayerMovingSpriteScale(int direction);
+	void switchAnimation();
+	bool isJumping();
 
 	//Render
 	void render(sf::RenderTarget& target);
@@ -103,6 +102,6 @@ public:
 	//Destructor
 	~Player();
 
-	void PrintSpriteColliderPositionPlayer();
+	void printSpriteColliderPositionPlayer();
 };
 

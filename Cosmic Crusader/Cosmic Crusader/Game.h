@@ -7,12 +7,12 @@
 class Game {
 
 private:
-	sf::RenderWindow window;
-	sf::Event ev;
+	sf::RenderWindow m_window;
+	sf::Event m_ev;
 
-	Player* player;
-	Physics* physics;
-	Tile* ground;
+	Player* m_player;
+	Physics* m_physics;
+	Tile* m_ground;
 
 public:
 	//Constructors
@@ -27,7 +27,7 @@ public:
 	void initPhysics();
 	void initMap();
 	//Geters
-	const sf::RenderWindow& GetWindow() const;
+	const sf::RenderWindow& getWindow() const;
 
 	void handleEvents();
 

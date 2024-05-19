@@ -6,13 +6,13 @@ int main()
 {
 	Game* game = new Game();
 
-	while (game->GetWindow().isOpen())
+	while (game->getWindow().isOpen())
 	{
 		game->update();
 		game->render();
 	}
 
-	if (!game->GetWindow().isOpen())
+	if (!game->getWindow().isOpen())
 	{
 		delete game;
 	}

@@ -4,31 +4,31 @@
 
 
 //Constructor functions
-PlayerIdleAnimation::PlayerIdleAnimation() : animTimeLimit(0.5f), currentFrameIndex(0), isAnimTransition(true)
+PlayerIdleAnimation::PlayerIdleAnimation() : c_animTimeLimit(0.5f), m_currentFrameIndex(0), m_isAnimTransition(true)
 {
-	this->InitVariables();
-	this->AddAnimationFrames();
+	this->initVariables();
+	this->addAnimationFrames();
 }
 
-void PlayerIdleAnimation::InitVariables()
+void PlayerIdleAnimation::initVariables()
 {
-	this->initialTexture = false;
-	this->animationTimer.restart();
-	this->animationSwitch = true;
+	this->m_initialTexture = false;
+	this->m_animationTimer.restart();
+	this->m_animationSwitch = true;
 
-	if (animFrameImg == nullptr)
+	if (s_animFrameImg == nullptr)
 	{
-		this->animFrameImg = new std::vector<sf::Texture>();
-		this->AddAnimationFrames();
+		this->s_animFrameImg = new std::vector<sf::Texture>();
+		this->addAnimationFrames();
 	}
 }
 
-void PlayerIdleAnimation::AddAnimationFrames()
+void PlayerIdleAnimation::addAnimationFrames()
 {
 	bool imageValid = false;
 	do
 	{
-		int imgIndex = PlayerIdleAnimation::animFrameImg->size();
+		int imgIndex = PlayerIdleAnimation::s_animFrameImg->size();
 		int strImgIndex = imgIndex + 1;
 
 		// Build string
@@ -45,53 +45,53 @@ void PlayerIdleAnimation::AddAnimationFrames()
 		imageValid = texture.loadFromFile(path);
 		if (imageValid)
 		{
-			PlayerIdleAnimation::animFrameImg->push_back(texture);
+			PlayerIdleAnimation::s_animFrameImg->push_back(texture);
 		}
 
 	} while (imageValid);
 }
 
 //Play player animation frames
-void PlayerIdleAnimation::PlayAnimation(sf::Sprite& sprite)
+void PlayerIdleAnimation::playAnimation(sf::Sprite& sprite)
 {
-	if (!this->initialTexture)
+	if (!this->m_initialTexture)
 	{
-		this->currentFrameIndex++;
-		this->initialTexture = true;
+		this->m_currentFrameIndex++;
+		this->m_initialTexture = true;
 	}
-	if (this->currentFrameIndex == 0)
+	if (this->m_currentFrameIndex == 0)
 	{
-		if (this->isAnimTransition)
+		if (this->m_isAnimTransition)
 		{
-			this->isAnimTransition = false;
-			sprite.setTexture((*this->animFrameImg)[currentFrameIndex]);
-			std::cout << "PLayer Idle image " << currentFrameIndex<<std::endl;
+			this->m_isAnimTransition = false;
+			sprite.setTexture((*this->s_animFrameImg)[m_currentFrameIndex]);
+			std::cout << "PLayer Idle image " << m_currentFrameIndex<<std::endl;
 
 		}
-		if (this->animationTimer.getElapsedTime().asSeconds() >= this->animTimeLimit || this->GetAnimationSwitch())
+		if (this->m_animationTimer.getElapsedTime().asSeconds() >= this->c_animTimeLimit || this->getAnimationSwitch())
 		{
-			this->isAnimTransition = true;
-			this->currentFrameIndex++;
-			this->animationTimer.restart();
+			this->m_isAnimTransition = true;
+			this->m_currentFrameIndex++;
+			this->m_animationTimer.restart();
 		}
 	}
-	else if (this->currentFrameIndex > 0)
+	else if (this->m_currentFrameIndex > 0)
 	{
-		if (this->isAnimTransition)
+		if (this->m_isAnimTransition)
 		{
-			this->isAnimTransition = false;
-			sprite.setTexture((*this->animFrameImg)[currentFrameIndex]);
-			std::cout << "PLayer Idle image " << currentFrameIndex << std::endl;
+			this->m_isAnimTransition = false;
+			sprite.setTexture((*this->s_animFrameImg)[m_currentFrameIndex]);
+			std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 		}
-		if (this->animationTimer.getElapsedTime().asSeconds() >= this->animTimeLimit || this->GetAnimationSwitch())
+		if (this->m_animationTimer.getElapsedTime().asSeconds() >= this->c_animTimeLimit || this->getAnimationSwitch())
 		{
-			this->isAnimTransition = true;
-			this->currentFrameIndex++;
-			if (this->currentFrameIndex >= this->GetAnimSize())
+			this->m_isAnimTransition = true;
+			this->m_currentFrameIndex++;
+			if (this->m_currentFrameIndex >= this->getAnimSize())
 			{
-				this->currentFrameIndex = 0;
+				this->m_currentFrameIndex = 0;
 			}
-			this->animationTimer.restart();
+			this->m_animationTimer.restart();
 		}
 	}
 }
@@ -99,56 +99,56 @@ void PlayerIdleAnimation::PlayAnimation(sf::Sprite& sprite)
 //Destroy functions
 PlayerIdleAnimation::~PlayerIdleAnimation()
 {
-	this->DestroyTextureFrames();
+	this->destroyTextureFrames();
 }
 
-void PlayerIdleAnimation::DestroyTextureFrames()
+void PlayerIdleAnimation::destroyTextureFrames()
 {
-	delete this->animFrameImg;
+	delete this->s_animFrameImg;
 }
 
-void PlayerIdleAnimation::ResetCurrentAnimIndex()
+void PlayerIdleAnimation::resetCurrentAnimIndex()
 {
-	this->currentFrameIndex = 0;
+	this->m_currentFrameIndex = 0;
 }
 
-void PlayerIdleAnimation::ResetPlayerAnimTimer()
+void PlayerIdleAnimation::resetPlayerAnimTimer()
 {
-	this->animationTimer.restart();
-	this->animationSwitch = true;
+	this->m_animationTimer.restart();
+	this->m_animationSwitch = true;
 }
 
-void PlayerIdleAnimation::SetAnimationSwitch(bool animSwitch)
+void PlayerIdleAnimation::setAnimationSwitch(bool animSwitch)
 {
-	this->animationSwitch = animSwitch;
+	this->m_animationSwitch = animSwitch;
 }
 
 //Getters Functions
-int PlayerIdleAnimation::GetAnimSize() 
+int PlayerIdleAnimation::getAnimSize() 
 {
-	return this->PlayerIdleAnimation::animFrameImg->size();
+	return this->PlayerIdleAnimation::s_animFrameImg->size();
 }
 
-int PlayerIdleAnimation::GetCurrentAnimIndex()
+int PlayerIdleAnimation::getCurrentAnimIndex()
 {
-	return this->currentFrameIndex;
+	return this->m_currentFrameIndex;
 }
 
-bool PlayerIdleAnimation::GetAnimationSwitch()
+bool PlayerIdleAnimation::getAnimationSwitch()
 {
-	bool anim_switch = this->animationSwitch;
+	bool anim_switch = this->m_animationSwitch;
 
-	if (this->animationSwitch)
+	if (this->m_animationSwitch)
 	{
-		this->animationSwitch = false;
+		this->m_animationSwitch = false;
 	}
 
 	return anim_switch;
 }
 
-sf::Clock PlayerIdleAnimation::GetPlayerAnimTimer()
+sf::Clock PlayerIdleAnimation::getPlayerAnimTimer()
 {
-	return this->animationTimer;
+	return this->m_animationTimer;
 }
 
-std::vector<sf::Texture>* PlayerIdleAnimation::animFrameImg;
+std::vector<sf::Texture>* PlayerIdleAnimation::s_animFrameImg;

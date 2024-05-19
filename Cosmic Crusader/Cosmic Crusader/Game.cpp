@@ -12,56 +12,56 @@ Game::Game()
 
 Game::~Game()
 {
-	delete this->player;
-	delete this->physics;
-	delete this->ground;
+	delete this->m_player;
+	delete this->m_physics;
+	delete this->m_ground;
 }
 
 void Game::initWindow()
 {
-	this->window.create(sf::VideoMode(800, 600), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
-	this->window.setFramerateLimit(144);
+	this->m_window.create(sf::VideoMode(800, 600), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+	this->m_window.setFramerateLimit(144);
 }
 
 void Game::initPlayer()
 {
-	this->player = new Player();
+	this->m_player = new Player();
 }
 
 void Game::initPhysics()
 {
-	this->physics = new Physics();
+	this->m_physics = new Physics();
 }
 
 void Game::initMap()
 {
-	this->ground = new Tile();
+	this->m_ground = new Tile();
 
-	this->ground->Init();
+	this->m_ground->init();
 
-	this->ground->SetScale(1.0f, 1.0f);
-	this->ground->SetPosition(20.f, 150.f);
-	this->ground->InitPhysics();
+	this->m_ground->setScale(1.0f, 1.0f);
+	this->m_ground->setPosition(450.f, 150.f);
+	this->m_ground->initPhysics();
 }
 
-const sf::RenderWindow& Game::GetWindow() const
+const sf::RenderWindow& Game::getWindow() const
 {
-	return this->window;
+	return this->m_window;
 }
 
 void Game::handleEvents()
 {
 	//this->player->resetControls();
-	while (this->window.pollEvent(this->ev))
+	while (this->m_window.pollEvent(this->m_ev))
 	{
-		this->player->handleEvent(this->ev);
-		if (this->ev.type == sf::Event::Closed)
+		this->m_player->handleEvent(this->m_ev);
+		if (this->m_ev.type == sf::Event::Closed)
 		{
-			this->window.close();
+			this->m_window.close();
 		}
-		if (this->ev.type == sf::Event::KeyPressed && this->ev.key.code == sf::Keyboard::Escape)
+		if (this->m_ev.type == sf::Event::KeyPressed && this->m_ev.key.code == sf::Keyboard::Escape)
 		{
-			this->window.close();
+			this->m_window.close();
 		}
 	}
 }
@@ -75,18 +75,18 @@ void Game::update()
 
 	//this->updateCollision();
 
-	this->ground->PrintSpriteColliderTilePosition();
-	this->player->PrintSpriteColliderPositionPlayer();
+	this->m_ground->printSpriteColliderTilePosition();
+	this->m_player->printSpriteColliderPositionPlayer();
 }
 
 void Game::updatePlayer()
 {
-	this->player->update();
+	this->m_player->update();
 }
 
 void Game::updatePhysics()
 {
-	this->physics->update();
+	this->m_physics->update();
 }
 
 void Game::updateCollision()
@@ -97,48 +97,48 @@ void Game::updateCollision()
 
 void Game::updatePlayerCollision()
 {
-	if (this->player->getBounds().left < 0.f)
+	if (this->m_player->getBounds().left < 0.f)
 	{
-		this->player->SetPosition(0.f, this->player->getBounds().top);
+		this->m_player->setPosition(0.f, this->m_player->getBounds().top);
 	}
-	else if (this->player->getBounds().left + this->player->getBounds().width > this->window.getSize().x)
+	else if (this->m_player->getBounds().left + this->m_player->getBounds().width > this->m_window.getSize().x)
 	{
-		this->player->SetPosition(this->window.getSize().x - this->player->getBounds().width, this->player->getBounds().top);
+		this->m_player->setPosition(this->m_window.getSize().x - this->m_player->getBounds().width, this->m_player->getBounds().top);
 	}
 
-	if (this->player->getBounds().top < 0.f)
+	if (this->m_player->getBounds().top < 0.f)
 	{
-		this->player->SetPosition(this->player->getBounds().left, 0.f);
+		this->m_player->setPosition(this->m_player->getBounds().left, 0.f);
 	}
-	else if (this->player->getBounds().top + this->player->getBounds().height > this->window.getSize().y)
+	else if (this->m_player->getBounds().top + this->m_player->getBounds().height > this->m_window.getSize().y)
 	{
-		this->player->setIsOnGround(true);
-		this->player->SetPosition(this->player->getBounds().left, this->window.getSize().y - this->player->getBounds().height);
+		this->m_player->setIsOnGround(true);
+		this->m_player->setPosition(this->m_player->getBounds().left, this->m_window.getSize().y - this->m_player->getBounds().height);
 	}
 }
 
 void Game::updateTile()
 {
-	this->ground->update();
+	this->m_ground->update();
 }
 
 
 void Game::render()
 {
-	this->window.clear(sf::Color::Black);
+	this->m_window.clear(sf::Color::Black);
 
 	this->renderPlayer();
 	this->renderTile();
 
-	this->window.display();
+	this->m_window.display();
 }
 
 void Game::renderPlayer()
 {
-	this->player->render(this->window);
+	this->m_player->render(this->m_window);
 }
 
 void Game::renderTile()
 {
-	this->ground->render(this->window);
+	this->m_ground->render(this->m_window);
 }

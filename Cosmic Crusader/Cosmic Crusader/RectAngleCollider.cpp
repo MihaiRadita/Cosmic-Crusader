@@ -3,137 +3,154 @@
 
 RectAngleCollider::RectAngleCollider(sf::Sprite& sprite, int bodyTypeState)
 {
-	this->InitVariables(sprite, bodyTypeState);
+	initVariables(sprite, bodyTypeState);
 }
 
-void RectAngleCollider::InitVariables(sf::Sprite& sprite, int bodyTypeState)
+void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 {
 	//Body Def Type
+	m_offset = b2Vec2(20.0f, 0.0f);
 
-	this->colliderSpritePosition = b2Vec2((sprite.getPosition().x + (sprite.getLocalBounds().width / (2.0f))),
-		(sprite.getPosition().y + (sprite.getLocalBounds().height / 2.0f)));
-
-	this->colliderSpriteScale = b2Vec2((sprite.getLocalBounds().width / 2.0f) , (sprite.getLocalBounds().height / 2.0f));
+	m_colliderSpriteScale = b2Vec2(
+		sprite.getGlobalBounds().width, 
+		sprite.getGlobalBounds().height
+	);
 
 	if (bodyTypeState == DYNAMIC)
 	{
-		this->bodyDef.type = b2_dynamicBody;
+		m_bodyDef.type = b2_dynamicBody;
+		m_bodyDef.bullet = true;
 	}
 	else if (bodyTypeState == STATIC)
 	{
-		this->bodyDef.type = b2_staticBody;
+		m_bodyDef.type = b2_staticBody;
+		//bodyDef.bullet = false;
 	}
-	//this->bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)), (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)));
-	this->bodyDef.position.Set(this->colliderSpritePosition.x, this->colliderSpritePosition.y);
-	this->bodyDef.fixedRotation = true;
-	this->body = this->physicsWorld->CreateBody(&bodyDef);
+
+	m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
+	m_bodyDef.fixedRotation = true;
+	m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 	//Box Dimensions
-	this->boxShape.SetAsBox(this->colliderSpriteScale.x, this->colliderSpriteScale.y);
+	m_boxShape.SetAsBox(m_colliderSpriteScale.x / 2.0f, m_colliderSpriteScale.y / 2.0f);
 	//Box fixtures properties
-	this->fixtureDef.shape = &this->boxShape;
+	m_fixtureDef.shape = &m_boxShape;
 	if (bodyTypeState == DYNAMIC)
 	{
-		this->fixtureDef.density = 1.0f;
-		this->fixtureDef.friction = 0.3f;
-		this->fixtureDef.restitution = 0.5f;
+		m_fixtureDef.density = 1.0f;
+		m_fixtureDef.friction = 0.3f;
+		m_fixtureDef.restitution = 0.5f;
 	}
 	else if (bodyTypeState == STATIC)
 	{
-		this->fixtureDef.density = 0.f;
-		this->fixtureDef.friction = 0.f;
-		this->fixtureDef.restitution = 0.f;
+		m_fixtureDef.density = 0.f;
+		m_fixtureDef.friction = 0.f;
+		m_fixtureDef.restitution = 0.f;
 	}
-	this->body->CreateFixture(&this->fixtureDef);
+	m_body->CreateFixture(&m_fixtureDef);
 
 	if (bodyTypeState == STATIC)
 	{
-		std::cout << "Static position is " << this->colliderSpritePosition.x << " , " << this->colliderSpritePosition.y << " VS Sprite position " <<
-											sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
+		std::cout << "Static position is " << sprite.getPosition().x << " , " << sprite.getPosition().y << " VS Sprite position " <<
+			sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
 	}
 	else if (bodyTypeState == DYNAMIC)
 	{
-		std::cout << "Dynamic position is " << this->colliderSpritePosition.x << " , " << this->colliderSpritePosition.y << " VS Sprite position " <<
+		std::cout << "Dynamic position is " << sprite.getPosition().x << " , " << sprite.getPosition().y << " VS Sprite position " <<
 											sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
 	}
 }
 
 RectAngleCollider::~RectAngleCollider()
 {
-	if (this->physicsWorld)
+	if (s_physicsWorld)
 	{
-		if (this->body)
+		if (m_body)
 		{
-			this->physicsWorld->DestroyBody(body);
-			this->body = nullptr;
+			s_physicsWorld->DestroyBody(m_body);
+			m_body = nullptr;
 		}
 	}
 }
 
-b2BodyDef* RectAngleCollider::GetBodyDef()
+b2BodyDef* RectAngleCollider::getBodyDef()
 {
-	return &this->bodyDef;
+	return &m_bodyDef;
 }
 
-b2Body* RectAngleCollider::GetBody()
+b2Body* RectAngleCollider::getBody()
 {
-	return this->body;
+	return m_body;
 }
 
-b2PolygonShape* RectAngleCollider::GetColliderShape()
+b2PolygonShape* RectAngleCollider::getColliderShape()
 {
-	return &this->boxShape;
+	return &m_boxShape;
 }
 
-b2FixtureDef* RectAngleCollider::GetFixtureDef()
+b2FixtureDef* RectAngleCollider::getFixtureDef()
 {
-	return &this->fixtureDef;;
+	return &m_fixtureDef;;
 }
 
-b2Vec2* RectAngleCollider::GetColliderScale()
+b2Vec2 RectAngleCollider::getOffset()
 {
-	return &this->colliderSpriteScale;
+	return m_offset;
 }
 
-b2Vec2* RectAngleCollider::GetColliderPosition()
+b2Vec2* RectAngleCollider::getColliderScale()
 {
-	return &this->colliderSpritePosition;
+	return &m_colliderSpriteScale;
 }
 
-void RectAngleCollider::SetColliderPosition(sf::Sprite& sprite)
+b2Vec2 RectAngleCollider::getColliderPosition()
 {
-	this->body->SetTransform(
-		b2Vec2(
-			sprite.getPosition().x, 
-			sprite.getPosition().y
-		), 
-		this->body->GetAngle()
-	);
+	return m_body->GetTransform().p + getOffset();
 }
 
-void RectAngleCollider::PrintBodyPositionRotation()
+void RectAngleCollider::setColliderPosition(float x, float y)
 {
-	std::cout << this->body->GetPosition().x << " x axis " << this->body->GetPosition().y<<" y axis " << std::endl;
-	std::cout << this->body->GetAngle()<<" degrees " << std::endl;
+	m_body->SetTransform(b2Vec2(x, y) + m_offset, m_body->GetAngle());
 }
 
-void RectAngleCollider::SetColliderBySprite(sf::Sprite& sprite)
+void RectAngleCollider::printBodyPositionRotation()
 {
-	this->bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)), (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)));
+	std::cout << getColliderPosition().x << " x axis " << getColliderPosition().y << " y axis " << std::endl;
+	std::cout << m_body->GetAngle()<<" degrees " << std::endl;
 }
 
-void RectAngleCollider::PrintSpriteColliderPosition(sf::Sprite& sprite, int bodyState)
+void RectAngleCollider::printSpriteColliderPosition(sf::Sprite& sprite, int bodyState)
 {
 	if (bodyState == STATIC)
 	{
-		std::cout << "Static position is " << this->colliderSpritePosition.x << " , " << this->colliderSpritePosition.y << " VS Sprite position " <<
+		std::cout << "Static position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
 			sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
 	}
 	else if (bodyState == DYNAMIC)
 	{
-		std::cout << "Dynamic position is " << this->colliderSpritePosition.x << " , " << this->colliderSpritePosition.y << " VS Sprite position " <<
+		std::cout << "Dynamic position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
 											sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
 	}
+}
+
+void RectAngleCollider::debugRender(sf::RenderTarget& target)
+{
+	// DRAW COLLIDER BEGIN AND END
+	auto outline = sf::RectangleShape(
+		sf::Vector2f(
+			getColliderScale()->x,
+			getColliderScale()->y
+		)
+	);
+	outline.setFillColor(sf::Color::Transparent);
+	outline.setOutlineColor(sf::Color::Blue);
+	outline.setOutlineThickness(3.0f);
+	outline.setPosition(
+		getColliderPosition().x,
+		getColliderPosition().y
+	);
+
+	target.draw(outline);
 }
 
 
