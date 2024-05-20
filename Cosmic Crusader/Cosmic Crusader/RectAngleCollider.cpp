@@ -10,10 +10,10 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 {
 	//Body Def Type
 	m_offset = b2Vec2(20.0f, 0.0f);
-
+	m_colliderOrigin = b2Vec2(sprite.getOrigin().x / 2.0f, sprite.getOrigin().y / 2.0f);
 	m_colliderSpriteScale = b2Vec2(
 		sprite.getGlobalBounds().width, 
-		sprite.getGlobalBounds().height
+		sprite.getLocalBounds().height
 	);
 
 	if (bodyTypeState == DYNAMIC)
@@ -27,12 +27,22 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 		//bodyDef.bullet = false;
 	}
 
-	m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
+	if (s_physicsWorld->GetGravity().x > 0.0f || s_physicsWorld->GetGravity().y > 0.0f)
+	{
+		m_scaleOffset = 1.2f;
+	}
+	else
+	{
+		m_scaleOffset = 1.2f;
+	}
+
+	m_bodyDef.position.Set(sprite.getPosition().x + this->m_colliderSpriteScale.x / 2.0f, sprite.getPosition().y + this->m_colliderSpriteScale.y / 2.0f);
 	m_bodyDef.fixedRotation = true;
 	m_body = s_physicsWorld->CreateBody(&m_bodyDef);
+	
 
 	//Box Dimensions
-	m_boxShape.SetAsBox(m_colliderSpriteScale.x / 2.0f, m_colliderSpriteScale.y / 2.0f);
+	m_boxShape.SetAsBox(m_colliderSpriteScale.x / 2.0f * m_scaleOffset, m_colliderSpriteScale.y / 2.0f * m_scaleOffset,m_colliderOrigin, this->m_body->GetAngle());
 	//Box fixtures properties
 	m_fixtureDef.shape = &m_boxShape;
 	if (bodyTypeState == DYNAMIC)
@@ -51,13 +61,36 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 
 	if (bodyTypeState == STATIC)
 	{
-		std::cout << "Static position is " << sprite.getPosition().x << " , " << sprite.getPosition().y << " VS Sprite position " <<
-			sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
+		std::cout << std::endl;
+		std::cout << "Static Sprite position is " << sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
+		std::cout << "Static Sprite scale is " << sprite.getScale().x << " , " << sprite.getScale().y << std::endl;
+
+		b2Vec2 origin = m_body->GetLocalCenter();
+		b2Vec2 position = m_body->GetTransform().p;
+		float rotaion = m_body->GetAngle();
+
+		std::cout << "Static Collider origin " << origin.x << " , " << origin.y << std::endl;
+		std::cout << "Static Collider position " << position.x << " , " << position.y << std::endl;
+		std::cout << "Static Collider roatation " << rotaion << std::endl;
+
+		std::cout << std::endl;
+
 	}
 	else if (bodyTypeState == DYNAMIC)
 	{
-		std::cout << "Dynamic position is " << sprite.getPosition().x << " , " << sprite.getPosition().y << " VS Sprite position " <<
-											sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
+		std::cout << std::endl;
+		std::cout << "Dynamic Sprite position is " << sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
+		std::cout << "Dynamic Sprite scale is " << sprite.getScale().x << " , " << sprite.getScale().y << std::endl;
+
+		b2Vec2 origin = m_body->GetLocalCenter();
+		b2Vec2 position = m_body->GetPosition();
+		float rotaion = m_body->GetAngle();
+
+		std::cout << "Dynamic Collider origin " << origin.x << " , " << origin.y << std::endl;
+		std::cout << "Dynamic Collider position " << position.x << " , " << position.y << std::endl;
+		std::cout << "Dynamic Collider roatation " << rotaion << std::endl;
+
+		std::cout << std::endl;
 	}
 }
 
@@ -105,12 +138,12 @@ b2Vec2* RectAngleCollider::getColliderScale()
 
 b2Vec2 RectAngleCollider::getColliderPosition()
 {
-	return m_body->GetTransform().p + getOffset();
+	return m_body->GetTransform().p;
 }
 
 void RectAngleCollider::setColliderPosition(float x, float y)
 {
-	m_body->SetTransform(b2Vec2(x, y) + m_offset, m_body->GetAngle());
+	m_body->SetTransform(b2Vec2(x, y), m_body->GetAngle());
 }
 
 void RectAngleCollider::printBodyPositionRotation()
