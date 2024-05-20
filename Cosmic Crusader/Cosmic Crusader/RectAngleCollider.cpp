@@ -27,22 +27,13 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 		//bodyDef.bullet = false;
 	}
 
-	if (s_physicsWorld->GetGravity().x > 0.0f || s_physicsWorld->GetGravity().y > 0.0f)
-	{
-		m_scaleOffset = 1.2f;
-	}
-	else
-	{
-		m_scaleOffset = 1.2f;
-	}
-
 	m_bodyDef.position.Set(sprite.getPosition().x + this->m_colliderSpriteScale.x / 2.0f, sprite.getPosition().y + this->m_colliderSpriteScale.y / 2.0f);
 	m_bodyDef.fixedRotation = true;
 	m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 	
 
 	//Box Dimensions
-	m_boxShape.SetAsBox(m_colliderSpriteScale.x / 2.0f * m_scaleOffset, m_colliderSpriteScale.y / 2.0f * m_scaleOffset,m_colliderOrigin, this->m_body->GetAngle());
+	m_boxShape.SetAsBox(m_colliderSpriteScale.x / 2.0f, m_colliderSpriteScale.y / 2.0f,m_colliderOrigin, this->m_body->GetAngle());
 	//Box fixtures properties
 	m_fixtureDef.shape = &m_boxShape;
 	if (bodyTypeState == DYNAMIC)
@@ -168,6 +159,24 @@ void RectAngleCollider::printSpriteColliderPosition(sf::Sprite& sprite, int body
 
 void RectAngleCollider::debugRender(sf::RenderTarget& target)
 {
+	auto* fixture = m_body->GetFixtureList();
+	while (fixture)
+	{
+		b2PolygonShape* poly = (b2PolygonShape*)fixture->GetShape();
+		int32 vertexCount = poly->m_count;
+		for (int32 i = 0; i < vertexCount; ++i) 
+		{
+			//they are polygen's vertices, you can use these to get the height / width
+			b2Vec2 vertex = b2Mul(m_body->GetTransform(), poly->m_vertices[i]);
+
+			sf::CircleShape circle(3.0f);
+			circle.setFillColor(sf::Color::Green);
+			circle.setPosition(vertex.x, vertex.y);
+			target.draw(circle);
+		}
+		fixture = fixture->GetNext();
+	}
+
 	// DRAW COLLIDER BEGIN AND END
 	auto outline = sf::RectangleShape(
 		sf::Vector2f(

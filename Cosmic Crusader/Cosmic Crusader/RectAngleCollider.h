@@ -18,7 +18,6 @@ private:
 	int m_bodyTypeState;
 	b2Vec2 m_vs[4];
 	b2EdgeShape m_boxShape1;
-	float m_scaleOffset;
 public:
 	//Constructors
 	RectAngleCollider(sf::Sprite& sprite, int bodyTypeState);
