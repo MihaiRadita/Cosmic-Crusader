@@ -12,7 +12,7 @@ public:
 	//Getters
 	b2World* getPhysicsWorld();
 
-	//Simulation Function
+	//Simulation Physics
 	void simulatePhysics();
 
 	//Update Function

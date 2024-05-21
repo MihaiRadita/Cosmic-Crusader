@@ -5,7 +5,7 @@ Physics::Physics()
 {
 	if (!Physics::s_physicsWorld)
 	{
-		Physics::s_physicsWorld = new b2World(b2Vec2(-0.96f, 0.0f));
+		Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 0.96f));
 	}
 	this->m_timeStep = 1.0f / 60.0f;
 	this->m_velocityIterations = 6;

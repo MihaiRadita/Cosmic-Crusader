@@ -55,7 +55,7 @@ void Player::initSprite()
 {
 	m_playerSprite.setTexture(m_textureSheet);
 	m_playerSprite.setScale(m_playerSpriteScale);
-	m_playerSprite.setPosition(800.f,150.f);
+	m_playerSprite.setPosition(40.f,90.f);
 	m_playerSprite.setRotation(m_rotationAngle);
 }
 
@@ -71,8 +71,7 @@ void Player::initAnimations()
 void Player::initPhysics()
 {
 	m_collider = new RectAngleCollider(m_playerSprite, DYNAMIC);
-	m_collider->setColliderPosition(m_playerSprite.getPosition().x, m_playerSprite.getPosition().y);
-	//playerCollider->PrintBodyPositionRotation();
+	m_collider->setColliderPosition(m_playerSprite.getPosition().x, m_playerSprite.getPosition().y);;
 }
 
 const sf::FloatRect Player::getBounds() const

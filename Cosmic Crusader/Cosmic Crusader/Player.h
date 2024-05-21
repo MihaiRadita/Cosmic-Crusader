@@ -69,7 +69,10 @@ public:
 	sf::Sprite getPlayerSprite();
 	const sf::Vector2f getPlayerPosition() const;
 	sf::Vector2f getPlayerScale();
+
+	//Checks
 	bool checkEvent();
+	void printSpriteColliderPositionPlayer();
 	
 	//Setters
 	void setBoolEvent(bool isEv);
@@ -102,6 +105,5 @@ public:
 	//Destructor
 	~Player();
 
-	void printSpriteColliderPositionPlayer();
 };
 

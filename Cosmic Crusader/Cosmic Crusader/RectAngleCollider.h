@@ -32,7 +32,6 @@ public:
 	b2PolygonShape* getColliderShape();
 	b2FixtureDef* getFixtureDef();
 	b2Vec2 getOffset();
-	
 	b2Vec2* getColliderScale();
 	b2Vec2 getColliderPosition();
 

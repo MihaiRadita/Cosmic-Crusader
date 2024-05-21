@@ -10,7 +10,8 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 {
 	//Body Def Type
 	m_offset = b2Vec2(20.0f, 0.0f);
-	m_colliderOrigin = b2Vec2(sprite.getOrigin().x / 2.0f, sprite.getOrigin().y / 2.0f);
+	//m_colliderOrigin = b2Vec2(sprite.getOrigin().x / 2.0f, sprite.getOrigin().y / 2.0f);
+	m_colliderOrigin = b2Vec2(sprite.getLocalBounds().width / 2.0f, sprite.getLocalBounds().height / 2.0f);
 	m_colliderSpriteScale = b2Vec2(
 		sprite.getGlobalBounds().width, 
 		sprite.getLocalBounds().height
@@ -24,8 +25,9 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 	else if (bodyTypeState == STATIC)
 	{
 		m_bodyDef.type = b2_staticBody;
-		//bodyDef.bullet = false;
+	
 	}
+
 
 	m_bodyDef.position.Set(sprite.getPosition().x + this->m_colliderSpriteScale.x / 2.0f, sprite.getPosition().y + this->m_colliderSpriteScale.y / 2.0f);
 	m_bodyDef.fixedRotation = true;
