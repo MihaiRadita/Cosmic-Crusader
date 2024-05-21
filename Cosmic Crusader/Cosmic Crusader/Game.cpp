@@ -40,7 +40,7 @@ void Game::initMap()
 	this->m_ground->init();
 
 	this->m_ground->setScale(1.0f, 1.0f);
-	this->m_ground->setPosition(30.f, 380.f);
+	this->m_ground->setPosition(20.f, 380.f);
 	this->m_ground->initPhysics();
 }
 
