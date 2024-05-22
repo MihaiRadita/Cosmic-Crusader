@@ -13,6 +13,7 @@ private:
 	Player* m_player;
 	Physics* m_physics;
 	Tile* m_ground;
+	Tile* m_Wall;
 
 public:
 	//Constructors

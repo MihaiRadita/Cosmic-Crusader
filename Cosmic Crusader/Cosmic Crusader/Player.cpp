@@ -193,7 +193,7 @@ void Player::updateMovement()
 {
 	if (m_controls["left"] == true)
 	{
-		if (m_isGround)
+		//if (m_isGround)
 		{
 			if (m_animationState != PLAYER_ANIMATION_STATES::JUMP)
 			{
@@ -207,15 +207,19 @@ void Player::updateMovement()
 		invertPlayerMovingSpriteScale(-1);
 		if (m_isMoving)
 		{
+			m_collider->applyMovement(m_moveSpeed, m_controls["left"], -1);
+			auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+			m_playerSprite.setPosition(playerPosition);
+
 			// m_playerSprite.move(m_playerPosition.x * -1.f * m_moveSpeed, 0.f);
 
+			std::cout << "Moving Left" << std::endl;
 		}
-		std::cout << "Moving Left" << std::endl;
 		std::cout << "veloctiy x to left = " << getPlayerPosition().x << std::endl;
 	}
 	else if (m_controls["right"] == true)
 	{
-		if (m_isGround)
+		//if (m_isGround)
 		{
 			if (m_animationState != PLAYER_ANIMATION_STATES::JUMP)
 			{
@@ -228,14 +232,18 @@ void Player::updateMovement()
 		invertPlayerMovingSpriteScale(1);
 		if (m_isMoving)
 		{
+			m_collider->applyMovement(m_moveSpeed , m_controls["right"], 1);
+			auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+			m_playerSprite.setPosition(playerPosition);
 			// m_playerSprite.move(m_playerPosition.x * m_moveSpeed, 0.f);
+			std::cout << "Moving Right" << std::endl;
 		}
-		std::cout << "Moving Right" << std::endl;
 		std::cout << "veloctiy x to right = " << getPlayerPosition().x << std::endl;
 	}
 
 	if (isNoControlActive() && m_animationState != PLAYER_ANIMATION_STATES::JUMP && m_animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING)
 	{
+
 		std::cout << "Idle" << std::endl;
 		std::cout << m_animationState << std::endl;
 		m_animationState = PLAYER_ANIMATION_STATES::IDLE;

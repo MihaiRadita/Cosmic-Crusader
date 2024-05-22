@@ -15,6 +15,7 @@ Game::~Game()
 	delete this->m_player;
 	delete this->m_physics;
 	delete this->m_ground;
+	delete this->m_Wall;
 }
 
 void Game::initWindow()
@@ -39,9 +40,16 @@ void Game::initMap()
 
 	this->m_ground->init();
 
-	this->m_ground->setScale(1.0f, 1.0f);
-	this->m_ground->setPosition(20.f, 380.f);
-	this->m_ground->initPhysics();
+	m_ground->setScale(1.0f, 1.0f);
+	m_ground->setPosition(20.f, 380.f);
+	m_ground->initPhysics();
+
+	this->m_Wall = new Tile();
+	this->m_Wall->init();
+
+	m_Wall->setScale(1.0f, 1.0f);
+	m_Wall->setPosition(250.f, 150.f);
+	m_Wall->initPhysics();
 }
 
 const sf::RenderWindow& Game::getWindow() const
@@ -141,4 +149,5 @@ void Game::renderPlayer()
 void Game::renderTile()
 {
 	this->m_ground->render(this->m_window);
+	this->m_Wall->render(this->m_window);
 }

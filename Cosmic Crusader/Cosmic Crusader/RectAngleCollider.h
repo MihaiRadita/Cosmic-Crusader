@@ -35,6 +35,7 @@ public:
 	b2Vec2* getColliderScale();
 	b2Vec2 getColliderPosition();
 
+
 	//Setters
 	void setColliderPosition(float x, float y);
 
@@ -42,5 +43,6 @@ public:
 	void printBodyPositionRotation();
 	void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState);
 	void debugRender(sf::RenderTarget& target);
+	void applyMovement(float& movementSpeed, bool& moving, int direction);
 };
 

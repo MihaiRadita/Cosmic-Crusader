@@ -47,7 +47,7 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 	else if (bodyTypeState == STATIC)
 	{
 		m_fixtureDef.density = 0.f;
-		m_fixtureDef.friction = 0.f;
+		m_fixtureDef.friction = 0.3f;
 		m_fixtureDef.restitution = 0.f;
 	}
 	m_body->CreateFixture(&m_fixtureDef);
@@ -195,6 +195,22 @@ void RectAngleCollider::debugRender(sf::RenderTarget& target)
 	);
 
 	target.draw(outline);
+}
+
+void RectAngleCollider::applyMovement(float& movevmentSpeed, bool& moving, int direction)
+{
+	float move = movevmentSpeed * direction;
+
+	b2Vec2 velocity = m_body->GetLinearVelocity();
+	velocity.x = 0.0f;
+
+	if (moving)
+	{
+		velocity.x += move;
+	}
+	
+	m_body->SetLinearVelocity(velocity);
+
 }
 
 
