@@ -2,6 +2,14 @@
 
 #include "Physics.h"
 
+enum EntityType {
+	PLAYER,
+	TILE
+};
+//
+struct UserData {
+	EntityType type;
+};
 
 class RectAngleCollider : public Physics
 {
@@ -18,7 +26,11 @@ private:
 	int m_bodyTypeState;
 	b2Vec2 m_vs[4];
 	b2EdgeShape m_boxShape1;
+
+
 public:
+	class GroundCheck;
+	GroundCheck* m_contactListener;
 	//Constructors
 	RectAngleCollider(sf::Sprite& sprite, int bodyTypeState);
 	void initVariables(sf::Sprite& sprite, int bodyTypeState);
@@ -44,5 +56,6 @@ public:
 	void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState);
 	void debugRender(sf::RenderTarget& target);
 	void applyMovement(float& movementSpeed, bool& moving, int direction);
+	void applyJump(float& jumpSpeed, bool& jumping);
 };
 

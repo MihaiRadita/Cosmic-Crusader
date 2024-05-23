@@ -4,8 +4,8 @@
 Game::Game()
 {
 	this->initWindow();
-	this->initPlayer();
 	this->initPhysics();
+	this->initPlayer();
 	this->initMap();
 	
 }
