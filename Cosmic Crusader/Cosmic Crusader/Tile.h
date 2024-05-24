@@ -12,8 +12,9 @@ private:
 	sf::Vector2f m_spriteBackgroundScale;
 	sf::Vector2f m_spriteBackGroundPosition;
 
-
 	RectAngleCollider* m_collider;
+
+	UserData* m_userData;
 
 public:
 	

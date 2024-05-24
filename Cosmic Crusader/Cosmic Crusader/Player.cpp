@@ -28,6 +28,8 @@ Player::Player()
 
 void Player::initVariables()
 {
+	m_userData = new UserData();
+	m_userData->type = PLAYER;
 	m_playerSpriteScale = sf::Vector2f(1.f, 1.f);
 	m_isPLayerEvent = false;
 	m_animationState = PLAYER_ANIMATION_STATES::IDLE;
@@ -260,6 +262,9 @@ void Player::updateRotation()
 
 void Player::updateJump()
 {
+	m_isGround = m_collider->m_contactListener->isPlayerOnGround;
+
+	std::cout << "IS GROUND GROUND " << m_isGround<<std::endl;
 
 	if (m_isGround == true && (m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) > 17)
 	{
@@ -267,11 +272,6 @@ void Player::updateJump()
 		{
 			m_animationState = PLAYER_ANIMATION_STATES::IDLE;
 		}
-		m_yVelocity = 0.f;
-	}
-	else
-	{
-		m_yVelocity += m_gravity;	
 	}
 
 	if (m_controls["jump"] == true && m_animationState != PLAYER_ANIMATION_STATES::JUMP && m_animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && m_isGround)
@@ -286,19 +286,18 @@ void Player::updateJump()
 	if ((m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) < 17 && m_animationState == PLAYER_ANIMATION_STATES::JUMP)
 	{
 		m_isMoving = false;
-		m_yVelocity = 0;
 	}
 	else if ((m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) == 17 && m_animationState == PLAYER_ANIMATION_STATES::JUMP && m_isGround)
 	{
 		
 		m_isMoving = true;
-		m_yVelocity = -m_jumpForce;
+		m_collider->applyJump(m_jumpForce, m_isGround);
 		std::cout << "JUMP JUMP " << std::endl;
 		m_isGround = false;
 		
 		
 	}
- 	m_playerSprite.move(0.f, m_yVelocity);
+ 	//m_playerSprite.move(0.f, m_yVelocity);
 
 }
 
@@ -475,6 +474,7 @@ Player::~Player()
 {
 	destroyPlayerAnimations();
 	destroyPlayerPhysics();
+	delete m_userData;
 }
 
 void Player::printSpriteColliderPositionPlayer()

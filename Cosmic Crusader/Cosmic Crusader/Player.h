@@ -51,6 +51,9 @@ private:
 	float m_yVelocity;
 	bool m_isJumpStage;
 
+	UserData* m_userData;
+
+
 	std::map<std::string, bool> m_controls{ {"left", false}, {"right", false}, {"jump", false}};
 public:
 	

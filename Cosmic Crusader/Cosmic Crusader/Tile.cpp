@@ -3,11 +3,15 @@
 
 Tile::Tile()
 {
+	m_userData = new UserData();
+	m_userData->type = TILE;
+
 }
 
 Tile::~Tile()
 {
 	destroyCollider();
+	delete m_userData;
 }
 
 void Tile::destroyCollider()

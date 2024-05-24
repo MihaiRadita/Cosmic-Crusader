@@ -2,64 +2,70 @@
 #include "RectAngleCollider.h"
 
 //Listeners
-class RectAngleCollider::GroundCheck : public b2ContactListener
+
+void GroundCheck::BeginContact(b2Contact* contact)
 {
-public:
-	bool isPlayerOnGround = false;
+	uintptr_t fixtureUserDataA = contact->GetFixtureA()->GetUserData().pointer;
+	uintptr_t fixtureUserDataB = contact->GetFixtureB()->GetUserData().pointer;
 
-	void BeginContact(b2Contact* contact) override {
-		uintptr_t fixtureUserDataA =  contact->GetFixtureA()->GetUserData().pointer;
-		uintptr_t fixtureUserDataB =  contact->GetFixtureB()->GetUserData().pointer;
+	if (fixtureUserDataA && fixtureUserDataB) {
+		UserData* dataA = reinterpret_cast<UserData*>(fixtureUserDataA);
+		UserData* dataB = reinterpret_cast<UserData*>(fixtureUserDataB);
 
-		if (fixtureUserDataA && fixtureUserDataB) {
-			UserData* dataA = reinterpret_cast<UserData*>(fixtureUserDataA);
-			UserData* dataB = reinterpret_cast<UserData*>(fixtureUserDataB);
+		if ((dataA->type == PLAYER && dataB->type == TILE) ||
+			(dataA->type == TILE && dataB->type == PLAYER)) {
 
-			if ((dataA->type == PLAYER && dataB->type == TILE) ||
-				(dataA->type == TILE && dataB->type == PLAYER)) {
+			b2WorldManifold worldManifold;
+			contact->GetWorldManifold(&worldManifold);
 
-				b2WorldManifold worldManifold;
-				contact->GetWorldManifold(&worldManifold);
+			for (int i = 0; i < contact->GetManifold()->pointCount; ++i) {
+				b2Vec2 point = worldManifold.points[i];
 
-				for (int i = 0; i < contact->GetManifold()->pointCount; ++i) {
-					b2Vec2 point = worldManifold.points[i];
-
-					if (dataA->type == PLAYER && dataB->type == TILE) {
-						float playerBottom = contact->GetFixtureA()->GetAABB(0).lowerBound.y;
-						float tileTop = contact->GetFixtureB()->GetAABB(0).upperBound.y;
-						if (point.y <= playerBottom && point.y >= tileTop) {
-							isPlayerOnGround = true;
-							return; // Opriti cautarea mai departe
-						}
+				if (dataA->type == PLAYER && dataB->type == TILE) {
+					float playerBottom = contact->GetFixtureA()->GetAABB(0).lowerBound.y;
+					float tileTop = contact->GetFixtureB()->GetAABB(0).upperBound.y;
+					if (point.y <= playerBottom && point.y >= tileTop) {
+						isPlayerOnGround = true;
+						std::cout << std::endl;
+						std::cout << std::endl;
+						std::cout << "Player ISGROUND = " << isPlayerOnGround << std::endl << std::endl;
+						return; // Opriti cautarea mai departe
 					}
-					else if (dataA->type == TILE && dataB->type == PLAYER) {
-						float playerBottom = contact->GetFixtureB()->GetAABB(0).lowerBound.y;
-						float tileTop = contact->GetFixtureA()->GetAABB(0).upperBound.y;
-						if (point.y <= playerBottom && point.y >= tileTop) {
-							isPlayerOnGround = true;
-							return; // Opriti cautarea mai departe
-						}
+				}
+				else if (dataA->type == TILE && dataB->type == PLAYER) {
+					float playerBottom = contact->GetFixtureB()->GetAABB(0).lowerBound.y;
+					float tileTop = contact->GetFixtureA()->GetAABB(0).upperBound.y;
+					if (point.y <= playerBottom && point.y >= tileTop) {
+						isPlayerOnGround = true;
+						std::cout << std::endl;
+						std::cout << std::endl;
+						std::cout << "Player ISGROUND = " << isPlayerOnGround << std::endl << std::endl;
+						return; // Opriti cautarea mai departe
 					}
 				}
 			}
 		}
 	}
+}
 
-	void EndContact(b2Contact* contact) override {
-		uintptr_t bodyUserDataA = contact->GetFixtureA()->GetUserData().pointer;
-		uintptr_t bodyUserDataB = contact->GetFixtureB()->GetUserData().pointer;
+void GroundCheck::EndContact(b2Contact* contact)
+{
+	uintptr_t bodyUserDataA = contact->GetFixtureA()->GetUserData().pointer;
+	uintptr_t bodyUserDataB = contact->GetFixtureB()->GetUserData().pointer;
 
-		if (bodyUserDataA && bodyUserDataB) {
-			UserData* dataA = reinterpret_cast<UserData*>(bodyUserDataA);
-			UserData* dataB = reinterpret_cast<UserData*>(bodyUserDataB);
+	if (bodyUserDataA && bodyUserDataB) {
+		UserData* dataA = reinterpret_cast<UserData*>(bodyUserDataA);
+		UserData* dataB = reinterpret_cast<UserData*>(bodyUserDataB);
 
-			if ((dataA->type == PLAYER && dataB->type == TILE) ||
-				(dataA->type == TILE && dataB->type == PLAYER)) {
-				isPlayerOnGround = false;
-			}
+		if ((dataA->type == PLAYER && dataB->type == TILE) ||
+			(dataA->type == TILE && dataB->type == PLAYER)) {
+			GroundCheck::isPlayerOnGround = false;
+			std::cout << std::endl;
+			std::cout << std::endl;
+			std::cout << "Player ISGROUND = " << isPlayerOnGround << std::endl << std::endl;
 		}
 	}
-};
+}
 
 RectAngleCollider::RectAngleCollider(sf::Sprite& sprite, int bodyTypeState)
 {
@@ -71,8 +77,11 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 	//Body Def Type
 	m_offset = b2Vec2(20.0f, 0.0f);
 
-	m_contactListener = new GroundCheck();
-	s_physicsWorld->SetContactListener(m_contactListener);
+	if (!m_contactListener)
+	{
+		m_contactListener = new GroundCheck();
+		s_physicsWorld->SetContactListener(m_contactListener);
+	}
 	//m_colliderOrigin = b2Vec2(sprite.getOrigin().x / 2.0f, sprite.getOrigin().y / 2.0f);
 	m_colliderOrigin = b2Vec2(sprite.getLocalBounds().width / 2.0f, sprite.getLocalBounds().height / 2.0f);
 	m_colliderSpriteScale = b2Vec2(
@@ -113,6 +122,8 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState)
 		m_fixtureDef.friction = 0.3f;
 		m_fixtureDef.restitution = 0.f;
 	}
+	m_fixtureDef.userData.pointer = (uintptr_t)this;
+
 	m_body->CreateFixture(&m_fixtureDef);
 
 	if (bodyTypeState == STATIC)
@@ -295,5 +306,9 @@ void RectAngleCollider::applyJump(float& jumpSpeed, bool& jumping)
 
 
 }
+
+
+ GroundCheck* RectAngleCollider::m_contactListener;
+ //std::vector<sf::Texture>* PlayerRunningAnimation::s_animFrameImg;
 
 

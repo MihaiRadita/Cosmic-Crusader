@@ -10,6 +10,15 @@ enum EntityType {
 struct UserData {
 	EntityType type;
 };
+class GroundCheck : public b2ContactListener
+{
+public:
+
+	bool isPlayerOnGround;
+
+	void BeginContact(b2Contact* contact) override;
+	void EndContact(b2Contact* contact) override;
+};
 
 class RectAngleCollider : public Physics
 {
@@ -26,11 +35,12 @@ private:
 	int m_bodyTypeState;
 	b2Vec2 m_vs[4];
 	b2EdgeShape m_boxShape1;
+	bool m_isGround = false;
 
 
 public:
-	class GroundCheck;
-	GroundCheck* m_contactListener;
+	//static std::vector<sf::Texture>* s_animFrameImg;
+	static GroundCheck* m_contactListener;
 	//Constructors
 	RectAngleCollider(sf::Sprite& sprite, int bodyTypeState);
 	void initVariables(sf::Sprite& sprite, int bodyTypeState);
