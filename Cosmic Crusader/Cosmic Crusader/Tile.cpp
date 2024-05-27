@@ -42,7 +42,7 @@ void Tile::initSprite()
 
 void Tile::initPhysics()
 {
-	m_collider = new RectAngleCollider(m_tileSprite, STATIC);
+	m_collider = new RectAngleCollider(m_tileSprite, STATIC, TILE);
 	m_collider->setColliderPosition(m_tileSprite.getPosition().x, m_tileSprite.getPosition().y);
 }
 

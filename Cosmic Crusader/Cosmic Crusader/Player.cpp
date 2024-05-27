@@ -36,7 +36,7 @@ void Player::initVariables()
 	m_playerAnimSwitch = -1;
 	m_moveSpeed = 2.3f;
 	m_gravity = 0.090f;
-	m_jumpForce = 9.f;
+	m_jumpForce =30.f;
 	m_isGround = false;
 	m_isJumping = false;
 	m_isMoving = false;
@@ -72,7 +72,7 @@ void Player::initAnimations()
 
 void Player::initPhysics()
 {
-	m_collider = new RectAngleCollider(m_playerSprite, DYNAMIC);
+	m_collider = new RectAngleCollider(m_playerSprite, DYNAMIC, PLAYER);
 	m_collider->setColliderPosition(m_playerSprite.getPosition().x, m_playerSprite.getPosition().y);;
 }
 
@@ -303,6 +303,7 @@ void Player::updateJump()
 
 void Player::updateRunningJump()
 {
+	m_isGround = m_collider->m_contactListener->isPlayerOnGround;
 	if (m_isGround == true && (m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) >= 16)
 	{
 		if (m_animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
@@ -333,12 +334,12 @@ void Player::updateRunningJump()
 	if (m_animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING && m_isGround)
 	{
 			
-		m_yVelocity = -m_jumpForce;
+		m_collider->applyJump(m_jumpForce, m_isGround);
 		std::cout << "JUMP JUMP " << std::endl;
 		m_isGround = false;
 	}
 
-	m_playerSprite.move(0.f, m_yVelocity);
+	//m_playerSprite.move(0.f, m_yVelocity);
 
 }
 

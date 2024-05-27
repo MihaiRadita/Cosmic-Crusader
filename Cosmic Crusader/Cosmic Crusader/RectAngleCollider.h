@@ -3,7 +3,7 @@
 #include "Physics.h"
 
 enum EntityType {
-	PLAYER,
+	PLAYER = 0,
 	TILE
 };
 //
@@ -18,6 +18,10 @@ public:
 
 	void BeginContact(b2Contact* contact) override;
 	void EndContact(b2Contact* contact) override;
+	int colliderTypeIndex;
+	std::stringstream ss;
+	std::string cooliderIndexText;
+	bool isIntersects = false;
 };
 
 class RectAngleCollider : public Physics
@@ -36,14 +40,15 @@ private:
 	b2Vec2 m_vs[4];
 	b2EdgeShape m_boxShape1;
 	bool m_isGround = false;
+	static int cooliderTypeIndexCount;
 
 
 public:
 	//static std::vector<sf::Texture>* s_animFrameImg;
 	static GroundCheck* m_contactListener;
 	//Constructors
-	RectAngleCollider(sf::Sprite& sprite, int bodyTypeState);
-	void initVariables(sf::Sprite& sprite, int bodyTypeState);
+	RectAngleCollider(sf::Sprite& sprite, int bodyTypeState, int entityType);
+	void initVariables(sf::Sprite& sprite, int bodyTypeState, int entityType);
 
 	//Destructors
 	~RectAngleCollider();
