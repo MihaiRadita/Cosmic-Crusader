@@ -22,6 +22,12 @@ public:
 	std::stringstream ss;
 	std::string cooliderIndexText;
 	bool isIntersects = false;
+	int groundContactCount = 0;
+	//bool bottomCollisionDetected = false;
+
+	std::string getCollisionSide(const b2Vec2& localPoint, const b2AABB& aabb);
+
+	bool CompareCharacters(std::string& name, std::string name2);
 };
 
 class RectAngleCollider : public Physics
@@ -61,7 +67,7 @@ public:
 	b2Vec2 getOffset();
 	b2Vec2* getColliderScale();
 	b2Vec2 getColliderPosition();
-
+	std::string* userDataName;
 
 	//Setters
 	void setColliderPosition(float x, float y);
