@@ -15,6 +15,7 @@ class GroundCheck : public b2ContactListener
 public:
 
 	bool isPlayerOnGround;
+	bool isJumping = false;
 
 	void BeginContact(b2Contact* contact) override;
 	void EndContact(b2Contact* contact) override;
