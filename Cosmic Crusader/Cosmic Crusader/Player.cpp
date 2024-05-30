@@ -36,7 +36,7 @@ void Player::initVariables()
 	m_playerAnimSwitch = -1;
 	m_moveSpeed = 2.3f;
 	m_gravity = 0.090f;
-	m_jumpForce =30.f;
+	m_jumpForce =10.f;
 	m_isGround = false;
 	m_isJumping = false;
 	m_isMoving = false;
@@ -292,6 +292,7 @@ void Player::updateJump()
 		
 		m_isMoving = true;
 		m_collider->applyJump(m_jumpForce, m_isGround);
+		m_collider->m_contactListener->isJumping = true;
 		std::cout << "JUMP JUMP " << std::endl;
 		m_isGround = false;
 		
@@ -320,7 +321,7 @@ void Player::updateRunningJump()
 	
 	
 	
-	if (m_controls["jump"] == true && m_animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && m_animationState != PLAYER_ANIMATION_STATES::JUMP && m_isGround)
+	if (m_controls["jump"] == true && m_animationState != PLAYER_ANIMATION_STATES::JUMP_RUNNING && m_animationState != PLAYER_ANIMATION_STATES::JUMP && m_isGround )
 	{
 		if (m_animationState == PLAYER_ANIMATION_STATES::MOVING_LEFT || m_animationState == PLAYER_ANIMATION_STATES::MOVING_RIGHT)
 		{
@@ -335,6 +336,7 @@ void Player::updateRunningJump()
 	{
 			
 		m_collider->applyJump(m_jumpForce, m_isGround);
+		m_collider->m_contactListener->isJumping = true;
 		std::cout << "JUMP JUMP " << std::endl;
 		m_isGround = false;
 	}

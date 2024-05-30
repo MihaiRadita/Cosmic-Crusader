@@ -206,6 +206,7 @@ void GroundCheck::BeginContact(b2Contact* contact)
 				std::string sideB = getCollisionSide(localPointB, contact->GetFixtureB()->GetAABB(0));
 
 				if ((sideA == "bottom" && sideB == "top") || (sideA == "top" && sideB == "bottom")) {
+					//isJumping = false;
 					isPlayerOnGround = true;
 					break;
 				}
@@ -390,7 +391,8 @@ void GroundCheck::EndContact(b2Contact* contact)
 			(*fixtureUserDataA == "Tile" && *fixtureUserDataB == "Player")) {
 
 			// Decrement ground contact count
-			if (groundContactCount > 0) {
+			if (groundContactCount > 0 ) {
+				//isJumping = false;
 				groundContactCount--;
 			}
 			if (groundContactCount == 0) {
