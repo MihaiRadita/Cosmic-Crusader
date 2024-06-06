@@ -180,39 +180,39 @@ void GroundCheck::BeginContact(b2Contact* contact)
 		}
 	}*/
 
-	const std::string* fixtureUserDataA = reinterpret_cast<const std::string*>(contact->GetFixtureA()->GetUserData().pointer);
-	const std::string* fixtureUserDataB = reinterpret_cast<const std::string*>(contact->GetFixtureB()->GetUserData().pointer);
+	//const std::string* fixtureUserDataA = reinterpret_cast<const std::string*>(contact->GetFixtureA()->GetUserData().pointer);
+	//const std::string* fixtureUserDataB = reinterpret_cast<const std::string*>(contact->GetFixtureB()->GetUserData().pointer);
 
-	if (fixtureUserDataA && fixtureUserDataB) {
-		if (((*fixtureUserDataA == "Player") && (*fixtureUserDataB == "Tile")) ||
-			((*fixtureUserDataA == "Tile") && (*fixtureUserDataB == "Player"))) {
+	//if (fixtureUserDataA && fixtureUserDataB) {
+	//	if (((*fixtureUserDataA == "Player") && (*fixtureUserDataB == "Tile")) ||
+	//		((*fixtureUserDataA == "Tile") && (*fixtureUserDataB == "Player"))) {
 
-			// Increment ground contact count
-			groundContactCount++;
-			isPlayerOnGround = true; // Player is on the ground if there is any contact
+	//		// Increment ground contact count
+	//		groundContactCount++;
+	//		isPlayerOnGround = true; // Player is on the ground if there is any contact
 
-			// Additional logic if you need to handle specific contact sides
-			const b2Manifold* manifold = contact->GetManifold();
-			int pointCount = manifold->pointCount;
-			b2WorldManifold worldManifold;
-			contact->GetWorldManifold(&worldManifold);
+	//		// Additional logic if you need to handle specific contact sides
+	//		const b2Manifold* manifold = contact->GetManifold();
+	//		int pointCount = manifold->pointCount;
+	//		b2WorldManifold worldManifold;
+	//		contact->GetWorldManifold(&worldManifold);
 
-			for (int i = 0; i < pointCount; ++i) {
-				b2Vec2 contactPoint = worldManifold.points[i];
-				b2Vec2 localPointA = contact->GetFixtureA()->GetBody()->GetLocalPoint(contactPoint);
-				b2Vec2 localPointB = contact->GetFixtureB()->GetBody()->GetLocalPoint(contactPoint);
+	//		for (int i = 0; i < pointCount; ++i) {
+	//			b2Vec2 contactPoint = worldManifold.points[i];
+	//			b2Vec2 localPointA = contact->GetFixtureA()->GetBody()->GetLocalPoint(contactPoint);
+	//			b2Vec2 localPointB = contact->GetFixtureB()->GetBody()->GetLocalPoint(contactPoint);
 
-				std::string sideA = getCollisionSide(localPointA, contact->GetFixtureA()->GetAABB(0));
-				std::string sideB = getCollisionSide(localPointB, contact->GetFixtureB()->GetAABB(0));
+	//			std::string sideA = getCollisionSide(localPointA, contact->GetFixtureA()->GetAABB(0));
+	//			std::string sideB = getCollisionSide(localPointB, contact->GetFixtureB()->GetAABB(0));
 
-				if ((sideA == "bottom" && sideB == "top") || (sideA == "top" && sideB == "bottom")) {
-					//isJumping = false;
-					isPlayerOnGround = true;
-					break;
-				}
-			}
-		}
-	}
+	//			if ((sideA == "bottom" && sideB == "top") || (sideA == "top" && sideB == "bottom")) {
+	//				//isJumping = false;
+	//				isPlayerOnGround = true;
+	//				break;
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 void GroundCheck::EndContact(b2Contact* contact)
@@ -383,46 +383,61 @@ void GroundCheck::EndContact(b2Contact* contact)
 	/*const std::string* fixtureUserDataA = reinterpret_cast<const std::string*>(contact->GetFixtureA()->GetUserData().pointer);
 	const std::string* fixtureUserDataB = reinterpret_cast<const std::string*>(contact->GetFixtureB()->GetUserData().pointer);*/
 
-	const std::string* fixtureUserDataA = reinterpret_cast<const std::string*>(contact->GetFixtureA()->GetUserData().pointer);
-	const std::string* fixtureUserDataB = reinterpret_cast<const std::string*>(contact->GetFixtureB()->GetUserData().pointer);
+	//const std::string* fixtureUserDataA = reinterpret_cast<const std::string*>(contact->GetFixtureA()->GetUserData().pointer);
+	//const std::string* fixtureUserDataB = reinterpret_cast<const std::string*>(contact->GetFixtureB()->GetUserData().pointer);
 
-	if (fixtureUserDataA && fixtureUserDataB) {
-		if ((*fixtureUserDataA == "Player" && *fixtureUserDataB == "Tile") ||
-			(*fixtureUserDataA == "Tile" && *fixtureUserDataB == "Player")) {
+	//if (fixtureUserDataA && fixtureUserDataB) {
+	//	if ((*fixtureUserDataA == "Player" && *fixtureUserDataB == "Tile") ||
+	//		(*fixtureUserDataA == "Tile" && *fixtureUserDataB == "Player")) {
 
-			// Decrement ground contact count
-			if (groundContactCount > 0 ) {
-				//isJumping = false;
-				groundContactCount--;
-			}
-			if (groundContactCount == 0) {
-				isPlayerOnGround = false; // Player is in the air if there are no contacts
-			}
+	//		// Decrement ground contact count
+	//		if (groundContactCount > 0 ) {
+	//			//isJumping = false;
+	//			groundContactCount--;
+	//		}
+	//		if (groundContactCount == 0) {
+	//			isPlayerOnGround = false; // Player is in the air if there are no contacts
+	//		}
 
-			// Additional logic if you need to handle specific contact sides
-			const b2Manifold* manifold = contact->GetManifold();
-			int pointCount = manifold->pointCount;
-			b2WorldManifold worldManifold;
-			contact->GetWorldManifold(&worldManifold);
+	//		// Additional logic if you need to handle specific contact sides
+	//		const b2Manifold* manifold = contact->GetManifold();
+	//		int pointCount = manifold->pointCount;
+	//		b2WorldManifold worldManifold;
+	//		contact->GetWorldManifold(&worldManifold);
 
-			for (int i = 0; i < pointCount; ++i) {
-				b2Vec2 contactPoint = worldManifold.points[i];
-				b2Vec2 localPointA = contact->GetFixtureA()->GetBody()->GetLocalPoint(contactPoint);
-				b2Vec2 localPointB = contact->GetFixtureB()->GetBody()->GetLocalPoint(contactPoint);
+	//		for (int i = 0; i < pointCount; ++i) {
+	//			b2Vec2 contactPoint = worldManifold.points[i];
+	//			b2Vec2 localPointA = contact->GetFixtureA()->GetBody()->GetLocalPoint(contactPoint);
+	//			b2Vec2 localPointB = contact->GetFixtureB()->GetBody()->GetLocalPoint(contactPoint);
 
-				std::string sideA = getCollisionSide(localPointA, contact->GetFixtureA()->GetAABB(0));
-				std::string sideB = getCollisionSide(localPointB, contact->GetFixtureB()->GetAABB(0));
+	//			std::string sideA = getCollisionSide(localPointA, contact->GetFixtureA()->GetAABB(0));
+	//			std::string sideB = getCollisionSide(localPointB, contact->GetFixtureB()->GetAABB(0));
 
-				if ((sideA == "bottom" && sideB == "top") || (sideA == "top" && sideB == "bottom")) {
-					isPlayerOnGround = true;
-					break;
-				}
-			}
-		}
-	}
+	//			if ((sideA == "bottom" && sideB == "top") || (sideA == "top" && sideB == "bottom")) {
+	//				isPlayerOnGround = true;
+	//				break;
+	//			}
+	//		}
+	//	}
+	//}
 }
 
+GroundRayCastCallBack::GroundRayCastCallBack()
+{
+	hit = false;
+}
 	
+float GroundRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
+{
+	uintptr_t userData = fixture->GetUserData().pointer;
+	if (userData && *reinterpret_cast<int*>(userData) == TILE) {
+		hit = true;
+		return fraction;
+	}
+	return -1.0f;
+	// Ignore this fixture
+}
+
 
 std::string GroundCheck:: getCollisionSide(const b2Vec2& localPoint, const b2AABB& aabb) {
 	/*float epsilon = 0.1f;
@@ -471,6 +486,10 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState , in
 		m_contactListener = new GroundCheck();
 		s_physicsWorld->SetContactListener(m_contactListener);
 	}
+	if (!s_groundRayCast)
+	{
+		s_groundRayCast = new GroundRayCastCallBack();
+	}
 	m_colliderOrigin = b2Vec2(sprite.getOrigin().x / 2.0f, sprite.getOrigin().y / 2.0f);
 	m_colliderOrigin = b2Vec2(sprite.getLocalBounds().width / 2.0f, sprite.getLocalBounds().height / 2.0f);
 	m_colliderSpriteScale = b2Vec2(
@@ -499,6 +518,7 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState , in
 	m_boxShape.SetAsBox(m_colliderSpriteScale.x / 2.0f, m_colliderSpriteScale.y / 2.0f,m_colliderOrigin, this->m_body->GetAngle());
 	//Box fixtures properties
 	m_fixtureDef.shape = &m_boxShape;
+
 	if (bodyTypeState == DYNAMIC)
 	{
 		m_fixtureDef.density = 1.0f;
@@ -569,6 +589,7 @@ RectAngleCollider::~RectAngleCollider()
 		}
 		delete userDataName;
 		delete m_contactListener;
+		delete s_groundRayCast;
 	}
 }
 
@@ -705,7 +726,52 @@ void RectAngleCollider::applyJump(float& jumpSpeed, bool& jumping)
 
 }
 
+bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)
+{
+	sf::FloatRect bounds = sprite.getLocalBounds();
+	float playerWidth = bounds.width;
+	float playerHeight = bounds.height;
+	b2Vec2 playerPosition = m_body->GetPosition();
+
+	std::vector<b2Vec2> rayStartPoints = {
+		b2Vec2(playerPosition.x - playerWidth / 2, playerPosition.y - playerHeight / 2),
+		//b2Vec2(playerPosition.x, playerPosition.y - playerHeight / 2),
+		b2Vec2(playerPosition.x + playerWidth / 2, playerPosition.y - playerHeight / 2)
+	};
+
+	b2Vec2 rayEndPoint = b2Vec2(playerPosition.x, playerPosition.y - playerHeight / 2);
+
+	s_groundRayCast->hit = false;
+	//for (const b2Vec2& startPoint : rayStartPoints) {
+	//	b2RayCastInput input;
+	//	input.p1 = startPoint;
+	//	input.p2 = rayEndPoint;
+	//	input.maxFraction = 1.0f;
+
+	//	b2Fixture* fixture = body->GetFixtureList();
+	//	while (fixture) {
+	//		b2RayCastOutput output;
+	//		if (fixture->RayCast(&output, input, 0)) {
+	//			intptr_t userData = reinterpret_cast<intptr_t>(fixture->GetUserData().pointer);
+	//			if (userData) {
+	//				int type = static_cast<int>(userData);
+	//				if (type == 1) { // 1 este tipul pentru Tile
+	//					s_groundRayCast->hit = true;
+	//					return true;
+	//				}
+	//			}
+	//		}
+	//		fixture = fixture->GetNext();
+	//	}
+	//}
+	return false;
+
+	std::cout << "HIT : " << s_groundRayCast->hit;
+}
+
  GroundCheck* RectAngleCollider::m_contactListener;
+
+ GroundRayCastCallBack* RectAngleCollider::s_groundRayCast;
 
 
 

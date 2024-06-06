@@ -31,6 +31,19 @@ public:
 	bool CompareCharacters(std::string& name, std::string name2);
 };
 
+class GroundRayCastCallBack : public b2RayCastCallback
+{
+
+public:
+	GroundRayCastCallBack();
+
+	float ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction) override;
+	
+
+	bool hit;
+
+};
+
 class RectAngleCollider : public Physics
 {
 private:
@@ -53,6 +66,8 @@ private:
 public:
 	//static std::vector<sf::Texture>* s_animFrameImg;
 	static GroundCheck* m_contactListener;
+	static GroundRayCastCallBack* s_groundRayCast;
+
 	//Constructors
 	RectAngleCollider(sf::Sprite& sprite, int bodyTypeState, int entityType);
 	void initVariables(sf::Sprite& sprite, int bodyTypeState, int entityType);
@@ -79,5 +94,8 @@ public:
 	void debugRender(sf::RenderTarget& target);
 	void applyMovement(float& movementSpeed, bool& moving, int direction);
 	void applyJump(float& jumpSpeed, bool& jumping);
+
+	//Checks
+	bool performGroundRayCast(sf::Sprite& sprite);
 };
 

@@ -262,7 +262,7 @@ void Player::updateRotation()
 
 void Player::updateJump()
 {
-	m_isGround = m_collider->m_contactListener->isPlayerOnGround;
+	m_isGround = m_collider->performGroundRayCast(m_playerSprite);
 
 	std::cout << "IS GROUND GROUND " << m_isGround<<std::endl;
 
@@ -292,9 +292,8 @@ void Player::updateJump()
 		
 		m_isMoving = true;
 		m_collider->applyJump(m_jumpForce, m_isGround);
-		m_collider->m_contactListener->isJumping = true;
 		std::cout << "JUMP JUMP " << std::endl;
-		m_isGround = false;
+		//m_isGround = false;
 		
 		
 	}
@@ -304,7 +303,8 @@ void Player::updateJump()
 
 void Player::updateRunningJump()
 {
-	m_isGround = m_collider->m_contactListener->isPlayerOnGround;
+	m_isGround = m_collider->performGroundRayCast(m_playerSprite);
+
 	if (m_isGround == true && (m_playerAnimator->getAbstractAnimation()->getCurrentAnimIndex()) >= 16)
 	{
 		if (m_animationState == PLAYER_ANIMATION_STATES::JUMP_RUNNING)
@@ -336,9 +336,8 @@ void Player::updateRunningJump()
 	{
 			
 		m_collider->applyJump(m_jumpForce, m_isGround);
-		m_collider->m_contactListener->isJumping = true;
 		std::cout << "JUMP JUMP " << std::endl;
-		m_isGround = false;
+		//m_isGround = false;
 	}
 
 	//m_playerSprite.move(0.f, m_yVelocity);
