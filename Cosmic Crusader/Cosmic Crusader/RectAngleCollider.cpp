@@ -422,20 +422,35 @@ void GroundCheck::EndContact(b2Contact* contact)
 	//}
 }
 
-GroundRayCastCallBack::GroundRayCastCallBack()
+GroundRayCastCallBack::GroundRayCastCallBack(b2Body* ignoredBody)
 {
-	hit = false;
+	m_hit = false;
+	m_fraction = 1.0f;
+
+	m_ignoredBody = ignoredBody;
 }
 	
 float GroundRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
 {
-	uintptr_t userData = fixture->GetUserData().pointer;
-	if (userData && *reinterpret_cast<int*>(userData) == TILE) {
-		hit = true;
-		return 0;
+	if (fixture)
+	{
+		b2Body* body = fixture->GetBody();
+		if (body == m_ignoredBody)
+		{
+			return -1.0f;
+		}
+		const std::string* fixtureUserData = reinterpret_cast<const std::string*>(fixture->GetUserData().pointer);
+		if (fixtureUserData && *fixtureUserData == "Tile") {
+			m_hit = true;
+			m_point = point;
+			m_normal = normal;
+			m_fraction = fraction;
+			return fraction;
+		}
 	}
-	return 1;
-	// Ignore this fixture
+
+	//m_hit = false;
+	return -1.0f;
 }
 
 
@@ -483,6 +498,8 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState , in
 
 	b2Vec2 tilePosition;
 
+	b2Vec2 playerPosition;
+
 	if (!m_contactListener)
 	{
 		m_contactListener = new GroundCheck();
@@ -490,7 +507,7 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState , in
 	}
 	if (!s_groundRayCast)
 	{
-		s_groundRayCast = new GroundRayCastCallBack();
+		s_groundRayCast = new GroundRayCastCallBack(m_body);
 	}
 	//m_colliderOrigin = b2Vec2(sprite.getOrigin().x / 2.0f, sprite.getOrigin().y / 2.0f);
 	m_colliderOrigin = b2Vec2(sprite.getLocalBounds().width / 2.0f, sprite.getLocalBounds().height / 2.0f);
@@ -537,6 +554,9 @@ void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState , in
 	{
 		userDataName = new std::string("Player");
 		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(userDataName);
+
+		playerPosition = m_body->GetPosition();
+
 	}
 	else if (entityType == TILE)
 	{
@@ -686,6 +706,7 @@ void RectAngleCollider::debugRender(sf::RenderTarget& target)
 			getColliderScale()->y
 		)
 	);
+
 	outline.setFillColor(sf::Color::Transparent);
 	outline.setOutlineColor(sf::Color::Blue);
 	outline.setOutlineThickness(3.0f);
@@ -694,7 +715,31 @@ void RectAngleCollider::debugRender(sf::RenderTarget& target)
 		getColliderPosition().y
 	);
 
+	auto bodyPosition = sf::CircleShape(3.f);
+	bodyPosition.setFillColor(sf::Color::Yellow);
+	bodyPosition.setPosition(m_body->GetPosition().x, m_body->GetPosition().y);
+
+	sf::Vertex line[] = { sf::Vertex(sf::Vector2f(500.f, 10.f), sf::Color::Green), sf::Vertex(sf::Vector2f(700.f, 10.f), sf::Color::Green) };
+
+
+	float playerWidth = m_colliderSpriteScale.x;
+	float playerHeight = m_colliderSpriteScale.y;
+	b2Vec2 playerPosition = m_body->GetPosition();
+
+	b2Vec2 startpoint = b2Vec2(playerPosition.x + (playerWidth / 2.f), playerPosition.y + (playerHeight / 2.f));
+	b2Vec2 endPoint = b2Vec2(startpoint.x, startpoint.y + ((playerHeight / 2.f) + 1.5f));
+
+	sf::Vertex rayCast[] = { sf::Vertex(sf::Vector2f(startpoint.x, startpoint.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
+
+	auto center = sf::CircleShape(3.0f);
+	center.setFillColor(sf::Color::Red);
+	center.setPosition(startpoint.x, startpoint.y);
+
 	target.draw(outline);
+	target.draw(bodyPosition);
+	target.draw(line, 2, sf::Lines);
+	target.draw(rayCast,2, sf::Lines);
+	target.draw(center);
 }
 
 void RectAngleCollider::applyMovement(float& movevmentSpeed, bool& moving, int direction)
@@ -733,91 +778,24 @@ void RectAngleCollider::applyJump(float& jumpSpeed, bool& jumping)
 
 bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)
 {
-	//sf::FloatRect bounds = sprite.getLocalBounds();
-	float playerWidth = m_colliderSpriteScale.x;
-	float playerHeight = m_colliderSpriteScale.y;
+	float playerWidth = sprite.getGlobalBounds().width;
+	float playerHeight = sprite.getGlobalBounds().height;
 	b2Vec2 playerPosition = m_body->GetPosition();
 
-	//std::vector<b2Vec2> rayStartPoints = {
-	//	b2Vec2(playerPosition.x + (playerWidth / 2.f), playerPosition.y),
-	//	//b2Vec2(playerPosition.x, playerPosition.y - playerHeight / 2),
-	//	//b2Vec2(playerPosition.x - (playerWidth / 2.f), playerPosition.y)
-	//};
+	b2Vec2 startPoint = b2Vec2(playerPosition.x +  (playerWidth / 2.f), playerPosition.y + (playerHeight / 2.f));
+	b2Vec2 endPoint = b2Vec2(startPoint.x, startPoint.y + ((playerHeight / 2.f)) + 1.5f);
 
-	b2Vec2 startpoint = b2Vec2(playerPosition.x, playerPosition.y);
-	b2Vec2 endPoint = b2Vec2(playerPosition.x, playerPosition.y + (playerHeight / 2.0f));
+	GroundRayCastCallBack callback(m_body);
+	s_physicsWorld->RayCast(&callback, startPoint, endPoint);
 
-	s_groundRayCast->hit = false;
-
-	b2Fixture* fixture = m_body->GetFixtureList();
-
-	while (fixture)
+	if (callback.m_fraction <= 1.0f && callback.m_hit)
 	{
-		/*int32 childCount = fixture->GetShape()->GetChildCount();
-
-		b2Shape* shape = fixture->GetShape();
-		
-
-		for (int32 childIndex = 0; childIndex < childCount; ++childIndex)
-		{
-			for (const b2Vec2& startPoint : rayStartPoints)
-			{
-				b2Vec2 rayEndPoint = b2Vec2(startPoint.x, startPoint.y + (playerHeight / 2.f));
-				b2RayCastInput input;
-				input.p1 = startPoint;
-				input.p2 = rayEndPoint;
-				input.maxFraction = 1.f;
-
-				b2RayCastOutput output;
-				output.normal.Set(0, 0);
-				output.fraction = 0;
-
-				b2Vec2 bodyPosition = m_body->GetPosition();
-				
-				if (fixture->RayCast(&output, input, childIndex))
-				{
-					if (output.fraction < 1)
-					{
-						b2Vec2 hitPoint = input.p1 + output.fraction * (input.p2 - input.p1);
-
-						s_groundRayCast->ReportFixture(fixture, hitPoint, output.normal, output.fraction);
-
-						if (s_groundRayCast->hit)
-						{
-							return true;
-						}
-					}
-				}
-			}
-		}*/
-
-		b2RayCastInput input;
-		input.p1 = startpoint;
-		input.p2 = endPoint;
-		input.maxFraction = 1.f;
-
-		b2RayCastOutput output;
-
-		if (fixture->RayCast(&output, input, 0))
-		{
-			if (output.fraction < 1)
-			{
-				b2Vec2 hitPoint = input.p1 + output.fraction * (input.p2 - input.p1);
-
-				s_groundRayCast->ReportFixture(fixture, hitPoint, output.normal, output.fraction);
-
-				if (s_groundRayCast->hit)
-				{
-					return true;
-				}
-			}
-		}
-
-		fixture = fixture->GetNext();
+			std::cout << "Victory " << std::endl;
+			return true;
 	}
-	std::cout << "HIT : " << s_groundRayCast->hit;
+		
+	std::cout << "HIT : " << callback.m_hit;
 	return false;
-
 }
 
  GroundCheck* RectAngleCollider::m_contactListener;

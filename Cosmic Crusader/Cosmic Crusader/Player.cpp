@@ -36,7 +36,7 @@ void Player::initVariables()
 	m_playerAnimSwitch = -1;
 	m_moveSpeed = 2.3f;
 	m_gravity = 0.090f;
-	m_jumpForce =10.f;
+	m_jumpForce =40.f;
 	m_isGround = false;
 	m_isJumping = false;
 	m_isMoving = false;
@@ -57,7 +57,7 @@ void Player::initSprite()
 {
 	m_playerSprite.setTexture(m_textureSheet);
 	m_playerSprite.setScale(m_playerSpriteScale);
-	m_playerSprite.setPosition(200.f,40.f);
+	m_playerSprite.setPosition(200.f,-100.f);
 	m_playerSprite.setRotation(m_rotationAngle);
 }
 
@@ -73,7 +73,10 @@ void Player::initAnimations()
 void Player::initPhysics()
 {
 	m_collider = new RectAngleCollider(m_playerSprite, DYNAMIC, PLAYER);
+
+	b2Vec2 playerBodyPosition = m_collider->getBody()->GetPosition();
 	m_collider->setColliderPosition(m_playerSprite.getPosition().x, m_playerSprite.getPosition().y);;
+	//playerBodyPosition = m_collider->getBody()->GetPosition();
 }
 
 const sf::FloatRect Player::getBounds() const
@@ -352,9 +355,14 @@ void Player::updateAnimations()
 
 void Player::updatePhysics()
 {
-
+	
 	auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 	m_playerSprite.setPosition(playerPosition);
+
+	b2Vec2 playerBoyPosition = m_collider->getBody()->GetPosition();
+
+	sf::Vector2f playerSpritePosition;
+	playerSpritePosition = m_playerSprite.getPosition();
 
 	std::cout << m_playerSprite.getPosition().x << " , " << m_playerSprite.getPosition().y;
 	m_rotationAngle = m_collider->getBody()->GetAngle() * (180.f / M_PI);
@@ -469,6 +477,11 @@ void Player::render(sf::RenderTarget& target)
 	target.draw(spriteOutline);
 	// DEBUG END
 
+	//auto spritePosition = sf::CircleShape(3.f);
+	//spritePosition.setFillColor(sf::Color::Blue);
+	//spritePosition.setPosition(m_playerSprite.getPosition());
+
+	//target.draw(spritePosition);
 	target.draw(m_playerSprite);
 }
 

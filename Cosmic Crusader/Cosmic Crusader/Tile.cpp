@@ -43,7 +43,9 @@ void Tile::initSprite()
 void Tile::initPhysics()
 {
 	m_collider = new RectAngleCollider(m_tileSprite, STATIC, TILE);
+	b2Vec2 tileBodyPosition = m_collider->getBody()->GetPosition();
 	m_collider->setColliderPosition(m_tileSprite.getPosition().x, m_tileSprite.getPosition().y);
+	//tileBodyPosition = m_collider->getBody()->GetPosition();
 }
 
 void Tile::init()
