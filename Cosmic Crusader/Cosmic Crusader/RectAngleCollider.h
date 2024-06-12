@@ -71,7 +71,6 @@ private:
 public:
 	//static std::vector<sf::Texture>* s_animFrameImg;
 	static GroundCheck* m_contactListener;
-	static GroundRayCastCallBack* s_groundRayCast;
 
 	//Constructors
 	RectAngleCollider(sf::Sprite& sprite, int bodyTypeState, int entityType);
