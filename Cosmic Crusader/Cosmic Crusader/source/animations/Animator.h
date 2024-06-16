@@ -1,0 +1,38 @@
+#pragma once
+
+#include "animations/AnimationBase.h"
+#include "animations/AnimationIdle.h"
+#include "animations/AnimationRun.h"
+#include "animations/AnimationJumpRun.h"
+
+namespace ratchet
+{
+	class Animator
+	{
+	private:
+		AnimationBase* m_abstractAnimation;
+		AnimationBase* m_animationTmp;
+
+	public:
+		//Constructor
+		Animator();
+
+		//Destructor
+		~Animator();
+
+		//Geters
+		AnimationBase* getAbstractAnimation();
+
+		//Setters
+		void setAnimation(AnimationBase* anim);
+
+		//Play Animation
+		void play(AnimationBase* playAnim, sf::Sprite& sprite);
+
+		//Other functions
+		void resetAnimIndex(AnimationBase* anim);
+		void resetAnimationTimer(AnimationBase* anim);
+		void tickAnimIndex(int& animationIndex);
+		bool checkCurrentAnimIndex(AnimationBase* anim);
+	};
+}

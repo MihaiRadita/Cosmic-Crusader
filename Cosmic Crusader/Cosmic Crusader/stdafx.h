@@ -18,3 +18,6 @@
 
 //Box2D
 #include "box2d/box2d.h"
+
+// Defines
+#define IS_RATCHET_DEBUG

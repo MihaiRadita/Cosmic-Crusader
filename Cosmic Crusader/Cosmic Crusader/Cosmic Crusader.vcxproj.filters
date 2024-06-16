@@ -5,98 +5,106 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{c2d91438-eb95-4739-a9ec-5a7b4eeb7811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\animations">
+      <UniqueIdentifier>{7a564c47-d351-4e8b-b0df-ee56c820af92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\physics">
+      <UniqueIdentifier>{8eb987a6-b32a-41d0-a334-134b9c0d228f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\game">
+      <UniqueIdentifier>{b3d28c58-d5e4-4ec2-b822-efd93dd2a528}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\animations\Animator.cpp">
+      <Filter>source\animations</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerIdleAnimation.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\animations\AnimationBase.cpp">
+      <Filter>source\animations</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAbstractAnimation.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\animations\AnimationIdle.cpp">
+      <Filter>source\animations</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerRunningAnimation.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\animations\AnimationJump.cpp">
+      <Filter>source\animations</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\animations\AnimationJumpRun.cpp">
+      <Filter>source\animations</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerJumpAnimation.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\animations\AnimationRun.cpp">
+      <Filter>source\animations</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerJumpRunningAnimation.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\game\Game.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="RectAngleCollider.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\game\Player.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="CircleCollider.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\game\Tile.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\physics\CircleCollider.cpp">
+      <Filter>source\physics</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\physics\Physics.cpp">
+      <Filter>source\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\physics\RectAngleCollider.cpp">
+      <Filter>source\physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\animations\Animator.h">
+      <Filter>source\animations</Filter>
     </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\animations\AnimationBase.h">
+      <Filter>source\animations</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerIdleAnimation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\animations\AnimationIdle.h">
+      <Filter>source\animations</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAbstractAnimation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\animations\AnimationJump.h">
+      <Filter>source\animations</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerRunningAnimation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\animations\AnimationJumpRun.h">
+      <Filter>source\animations</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerJumpAnimation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\animations\AnimationRun.h">
+      <Filter>source\animations</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerJumpRunningAnimation.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\game\Game.h">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="RectAngleCollider.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\game\Player.h">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="CircleCollider.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\game\Tile.h">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\physics\CircleCollider.h">
+      <Filter>source\physics</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="source\physics\Physics.h">
+      <Filter>source\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\RectAngleCollider.h">
+      <Filter>source\physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
