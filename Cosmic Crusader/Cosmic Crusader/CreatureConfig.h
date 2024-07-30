@@ -4,11 +4,9 @@ namespace ratchet
 {
 	struct CreatureConfig : public GameObjectConfig
 	{
-		Faction m_Faction;
-		MovementType m_movementType;
-		ColliderType m_colliderType;
-		ColliderShapeType m_colliderShapeType;
+		//Characters States
 
+		//Characters Features
 		float m_movingSpeed;
 		float m_fallingSpeed;
 		float m_jumpingSpeed;

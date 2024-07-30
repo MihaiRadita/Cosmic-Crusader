@@ -9,6 +9,12 @@ namespace ratchet
 {
 	struct GameObjectConfig
 	{
+		//States
+		Faction m_Faction;
+		MovementType m_movementType;
+		ColliderType m_colliderType;
+		ColliderShapeType m_colliderShapeType;
+
 		//Transforms
 		sf::Vector2f spawnPosition;
 		sf::Vector2f spawnRotation;
@@ -16,6 +22,8 @@ namespace ratchet
 
 		//Graphics
 		std::string spritePath;
+		sf::Sprite objSprite;
+		sf::Texture spriteTexture;
 
 		//Physics
 		sf::Vector2f colliderScaleMultiplier;
