@@ -19,6 +19,10 @@ namespace ratchet
 		sf::Vector2f spawnPosition;
 		sf::Vector2f spawnRotation;
 		sf::Vector2f spawnScale;
+		sf::Vector2f currentPosition;
+		sf::Vector2f currentRoatation;
+		sf::Vector2f currentScale;
+	
 
 		//Graphics
 		std::string spritePath;

@@ -18,6 +18,8 @@ namespace ratchet
 		sf::Vector2f m_spawnPosition;
 		sf::Vector2f m_spawnRotation;
 		sf::Vector2f m_spawnScale;
+		sf::Vector2f m_currentPosition;
+		sf::Vector2f m_currentLocation;
 		
 		//Graphics
 		std::string m_spritePath;
@@ -37,6 +39,12 @@ namespace ratchet
 		virtual void init();
 		virtual void update();
 		virtual void destroy();
+		virtual void updateInput();
+
+		struct Ipput
+		{
+
+		};
 
 
 

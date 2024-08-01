@@ -22,3 +22,7 @@ ratchet::Creature::~Creature()
 {
 
 }
+
+void ratchet::Creature::updateInput()
+{
+}

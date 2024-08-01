@@ -14,6 +14,8 @@ ratchet::GameObject::GameObject(const GameObjectConfig& config)
 	m_spawnRotation = config.spawnRotation;
 	m_spawnScale = config.spawnScale;
 
+	m_cu
+
 	//Graphics
 	m_spritePath = config.spritePath;
 	m_sprite = config.objSprite;
@@ -26,6 +28,7 @@ ratchet::GameObject::GameObject(const GameObjectConfig& config)
 	{
 		m_collider = new ratchet::RectAngleCollider(m_sprite, m_colliderType, m_faction);
 	}
+
 
 }
 
@@ -42,5 +45,9 @@ void ratchet::GameObject::update()
 }
 
 void ratchet::GameObject::destroy()
+{
+}
+
+void ratchet::GameObject::updateInput()
 {
 }

@@ -31,6 +31,9 @@ namespace ratchet
 
 		//Destructors
 		~Creature();
+
+		//Other functions
+		void updateInput() override;
 	};
 }
 
