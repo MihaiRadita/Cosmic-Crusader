@@ -40,14 +40,21 @@ namespace ratchet
 		virtual void update();
 		virtual void destroy();
 		virtual void updateInput();
-
+	protected:
 		struct Ipput
 		{
+			float x = 0;
+			float y = 0;
+			bool isJump = false;
 
-		};
+			void resetMovement();
+			
+			void resetJump();
+			
+			
+		} m_Input;
 
-
-
+		
 	};
 
 }

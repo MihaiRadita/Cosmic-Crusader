@@ -14,7 +14,6 @@ ratchet::GameObject::GameObject(const GameObjectConfig& config)
 	m_spawnRotation = config.spawnRotation;
 	m_spawnScale = config.spawnScale;
 
-	m_cu
 
 	//Graphics
 	m_spritePath = config.spritePath;
@@ -50,4 +49,16 @@ void ratchet::GameObject::destroy()
 
 void ratchet::GameObject::updateInput()
 {
+	
+}
+
+void ratchet::GameObject::Ipput::resetMovement()
+{
+	x = 0;
+	y = 0;
+}
+
+void ratchet::GameObject::Ipput::resetJump()
+{
+	isJump = false;
 }
