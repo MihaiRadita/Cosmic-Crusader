@@ -28,6 +28,8 @@ ratchet::GameObject::GameObject(const GameObjectConfig& config)
 		m_collider = new ratchet::RectAngleCollider(m_sprite, m_colliderType, m_faction);
 	}
 
+	m_sprite.setPosition(sf::Vector2f(config.spawnPosition.x, config.spawnPosition.y));
+	m_sprite.setRotation(config.spawnRotation);
 
 }
 
@@ -36,6 +38,16 @@ ratchet::GameObject::~GameObject()
 }
 
 void ratchet::GameObject::init()
+{
+	initGraphics();
+	initPhyics();
+}
+
+void ratchet::GameObject::initGraphics()
+{
+}
+
+void ratchet::GameObject::initPhyics()
 {
 }
 

@@ -13,7 +13,7 @@ namespace ratchet
 
 		//Transforms
 		spawnPosition = sf::Vector2f(0.f, 0.f);
-		spawnRotation = sf::Vector2f(0.f, 0.f);
+		spawnRotation = 0.f;
 		spawnScale = sf::Vector2f(0.f, 0.f);
 		
 		//Graphics

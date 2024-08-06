@@ -16,7 +16,7 @@ namespace ratchet
 
 		//Character Transform
 		sf::Vector2f m_spawnposition;
-		sf::Vector2f m_spawnRotation;
+		float m_spawnRotation;
 		sf::Vector2f m_spawnScale;
 
 		//Character Features

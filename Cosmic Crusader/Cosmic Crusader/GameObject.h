@@ -16,7 +16,7 @@ namespace ratchet
 
 		//Transforms
 		sf::Vector2f m_spawnPosition;
-		sf::Vector2f m_spawnRotation;
+		float m_spawnRotation;
 		sf::Vector2f m_spawnScale;
 		sf::Vector2f m_currentPosition;
 		sf::Vector2f m_currentLocation;
@@ -37,6 +37,9 @@ namespace ratchet
 		~GameObject();
 
 		virtual void init();
+		virtual void initGraphics();
+		virtual void initPhyics();
+
 		virtual void update();
 		virtual void destroy();
 		virtual void updateInput();

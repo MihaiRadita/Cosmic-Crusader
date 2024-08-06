@@ -1,6 +1,6 @@
 #pragma once
 
-enum Faction{FACTION_UNKNOWN = 0,ALIEN, ROBOT };
+enum Faction{FACTION_UNKNOWN = 0 ,PLAYER, ALIEN, ROBOT };
 enum MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, UNGROUND};
 enum ColliderType{COLLIDERTYPE_UNKNOWN = 0,STATIC, DYNAMIC};
 enum ColliderShapeType{COLLIDERSHAPETYPE_UNKNOWN =0,RECTANGLE, CIRCLE};
@@ -17,7 +17,7 @@ namespace ratchet
 
 		//Transforms
 		sf::Vector2f spawnPosition;
-		sf::Vector2f spawnRotation;
+		float spawnRotation;
 		sf::Vector2f spawnScale;
 		sf::Vector2f currentPosition;
 		sf::Vector2f currentRoatation;

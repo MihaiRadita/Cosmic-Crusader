@@ -26,3 +26,8 @@ sf::Texture ratchet::ResourceManager::findOrFetchTexture(std::string texturePath
         }
     }
 }
+
+sf::Texture ratchet::ResourceManager::FindTextureInList(std::string texturePath)
+{
+    return sf::Texture();
+}
