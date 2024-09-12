@@ -1,13 +1,15 @@
 #include "stdafx.h"
 #include "AnimationJump.h"
+#include "ResourceManager.h"
+
 
 namespace ratchet
 {
 	//Consturctors
-	AnimationJump::AnimationJump()
+	AnimationJump::AnimationJump(std::string& texturePath)
 	{
 		initVariables();
-		addAnimationFrames();
+		addAnimationFrames(texturePath);
 	}
 
 	// Init Functions
@@ -23,31 +25,26 @@ namespace ratchet
 		m_animationTimer.restart();
 		m_animationSwitch = true;
 		m_currentJumpTimeLimit = m_animTimeLimit;
-
-		if (s_animFrameImg == nullptr)
-		{
-			s_animFrameImg = new std::vector<sf::Texture>();
-			addAnimationFrames();
-		}
 	}
 
 	//Geters
 	int AnimationJump::getAnimSize()
 	{
-		return AnimationJump::s_animFrameImg->size();
+		return s_animFrameImg.size();
 	}
 
-	void AnimationJump::addAnimationFrames()
+	void AnimationJump::addAnimationFrames(std::string& texturePath)
 	{
 		bool imageValid = false;
 		do
 		{
-			int imgIndex = AnimationJump::s_animFrameImg->size();
+			int imgIndex = s_animFrameImg.size();
 			int strImgIndex = imgIndex + 1;
 
 			// Build string
 			std::stringstream ss;
-			ss << "Textures/PlayerTextures/Player1Textures/JumpTextures/";
+			ss << texturePath;
+			ss << "JumpTextures/";
 			ss << "Jump";
 			ss << strImgIndex;
 			ss << ".png";
@@ -55,17 +52,16 @@ namespace ratchet
 			ss.clear();
 
 			// Load Texture
-			sf::Texture texture;
-			imageValid = texture.loadFromFile(path);
+			const auto* texture = ResourceManager::getInstance()->findOrFetchTexture(path);
+			imageValid = texture != nullptr;
 			if (imageValid)
 			{
-				AnimationJump::s_animFrameImg->push_back(texture);
+				s_animFrameImg.push_back(*texture);
 			}
 
 		} while (imageValid);
 	}
 
-	//Play player animation frames
 	void AnimationJump::playAnimation(sf::Sprite& sprite)
 	{
 		if (m_currentFrameIndex == 0)
@@ -73,7 +69,7 @@ namespace ratchet
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture((*s_animFrameImg)[m_currentFrameIndex]);
+				sprite.setTexture((s_animFrameImg)[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
 				std::cout << "PLayer Jump image " << m_currentFrameIndex << std::endl;
 #endif
@@ -95,7 +91,7 @@ namespace ratchet
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture((*s_animFrameImg)[m_currentFrameIndex]);
+				sprite.setTexture((s_animFrameImg)[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
 				std::cout << "PLayer Jump image " << m_currentFrameIndex << std::endl;
 #endif
@@ -117,12 +113,7 @@ namespace ratchet
 	//Destroy functions
 	AnimationJump::~AnimationJump()
 	{
-		destroyTextureFrames();
-	}
-
-	void AnimationJump::destroyTextureFrames()
-	{
-		delete s_animFrameImg;
+		
 	}
 
 	//Other Functions
@@ -172,5 +163,4 @@ namespace ratchet
 		return true;
 	}
 
-	std::vector<sf::Texture>* AnimationJump::s_animFrameImg;
 }

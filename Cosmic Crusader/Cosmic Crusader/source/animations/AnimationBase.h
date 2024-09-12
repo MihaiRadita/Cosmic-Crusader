@@ -3,11 +3,12 @@
 namespace ratchet
 {
 	enum ANIMATION_STATE { 
-		IDLE = 0, 
+		IDLE= 0, 
+		MOVING,
 		MOVING_LEFT, 
 		MOVING_RIGHT, 
 		JUMP, 
-		JUMP_RUNNING 
+		JUMP_RUNNING
 	};
 
 	class AnimationBase
@@ -17,13 +18,11 @@ namespace ratchet
 		virtual void initVariables();
 
 		//Other functions
-		virtual void addAnimationFrames();
-		virtual void destroyTextureFrames();
+		virtual void addAnimationFrames(std::string& texturePath);
 
 		virtual void playAnimation(sf::Sprite& sprite);
 		virtual int getAnimSize();
 		virtual int getCurrentAnimIndex();
-		virtual sf::Clock getPlayerAnimTimer();
 		virtual void resetCurrentAnimIndex();
 		virtual void resetPlayerAnimTimer();
 		virtual bool getAnimationSwitch();

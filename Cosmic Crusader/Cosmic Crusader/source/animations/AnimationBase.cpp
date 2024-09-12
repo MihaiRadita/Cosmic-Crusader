@@ -7,11 +7,7 @@ namespace ratchet
 	{
 	}
 
-	void AnimationBase::addAnimationFrames()
-	{
-	}
-
-	void AnimationBase::destroyTextureFrames()
+	void AnimationBase::addAnimationFrames(std::string& texturePath)
 	{
 	}
 
@@ -23,11 +19,6 @@ namespace ratchet
 	int AnimationBase::getCurrentAnimIndex()
 	{
 		return 0;
-	}
-
-	sf::Clock AnimationBase::getPlayerAnimTimer()
-	{
-		return sf::Clock();
 	}
 
 	void AnimationBase::resetCurrentAnimIndex()

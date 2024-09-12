@@ -1,10 +1,17 @@
 #pragma once
 
-#include "physics/Physics.h"
+#include "ColliderBase.h"
 
 namespace ratchet
 {
-	class CircleCollider : public Physics
+	struct CircleColliderConfig : public BaseColliderConfig
+	{
+		float radiusOffset;
+
+		CircleColliderConfig();
+	};
+
+	class CircleCollider : public ColliderBase
 	{
 	private:
 		//Physics
@@ -18,8 +25,8 @@ namespace ratchet
 	public:
 
 		//Constructors
-		CircleCollider(sf::Sprite& sprite, float radius);
-		void initVariables(sf::Sprite& sprite, float radius);
+		CircleCollider(sf::Sprite& sprite, const CircleColliderConfig& config);
+		void initVariables(sf::Sprite& sprite, const CircleColliderConfig& config);
 
 		//Destructors
 		~CircleCollider();

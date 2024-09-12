@@ -4,9 +4,22 @@ namespace ratchet
 {
 	class ResourceManager
 	{
-		sf::Texture findOrFetchTexture(std::string texturePath);
+	public:
+		// TODO: Sa fie singleton acest ResourceManager
+		// ResourceManager* getInstance();
+		ResourceManager(const ResourceManager*) = delete;
+		ResourceManager& operator=(const ResourceManager&) = delete;
+
+		static ResourceManager* getInstance();
+		
+
+		const sf::Texture* findOrFetchTexture(std::string& texturePath);
 		std::map<std::string, sf::Texture> m_loadedTextures;
-		sf::Texture FindTextureInList(std::string texturePath);
+
+	private:
+		ResourceManager();
+		~ResourceManager();
+		static ResourceManager* m_resourceManager;
 	};
 
 

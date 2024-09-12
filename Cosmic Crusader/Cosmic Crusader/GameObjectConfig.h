@@ -1,12 +1,11 @@
 #pragma once
 
-enum Faction{FACTION_UNKNOWN = 0 ,PLAYER, ALIEN, ROBOT };
-enum MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, UNGROUND};
-enum ColliderType{COLLIDERTYPE_UNKNOWN = 0,STATIC, DYNAMIC};
-enum ColliderShapeType{COLLIDERSHAPETYPE_UNKNOWN =0,RECTANGLE, CIRCLE};
+#include "ColliderBase.h"
 
 namespace ratchet
 {
+	enum Faction{FACTION_UNKNOWN = 0 ,PLAYER, ALIEN, ROBOT };
+	enum MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, UNGROUND};
 	struct GameObjectConfig
 	{
 		//States
@@ -16,27 +15,25 @@ namespace ratchet
 		ColliderShapeType m_colliderShapeType;
 
 		//Transforms
-		sf::Vector2f spawnPosition;
-		float spawnRotation;
-		sf::Vector2f spawnScale;
-		sf::Vector2f currentPosition;
-		sf::Vector2f currentRoatation;
-		sf::Vector2f currentScale;
+		sf::Vector2f position;
+		float rotation;
+		sf::Vector2f scale;
 	
 
 		//Graphics
-		std::string spritePath;
-		sf::Sprite objSprite;
-		sf::Texture spriteTexture;
+		std::string startSpriteTexturePath;
+		std::string spriteTexturePath;
 
 		//Physics
-		sf::Vector2f colliderScaleMultiplier;
+		BaseColliderConfig* m_colliderConfig = nullptr;
 
 		//Constructor
 		GameObjectConfig();
 	
 		//Destructor
 		~GameObjectConfig();
+
+		
 
 	};
 

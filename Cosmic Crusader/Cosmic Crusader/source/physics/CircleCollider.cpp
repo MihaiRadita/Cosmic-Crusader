@@ -3,14 +3,14 @@
 
 namespace ratchet
 {
-	CircleCollider::CircleCollider(sf::Sprite& sprite, float radius)
+	CircleCollider::CircleCollider(sf::Sprite& sprite, const CircleColliderConfig& config) : ColliderBase(config)
 	{
-		initVariables(sprite, radius);
+		initVariables(sprite, config);
 	}
 
-	void CircleCollider::initVariables(sf::Sprite& sprite, float radius)
+	void CircleCollider::initVariables(sf::Sprite& sprite, const CircleColliderConfig& config)
 	{
-		m_radius = radius;
+		m_radius = config.radiusOffset;
 
 		m_bodyDef.type = b2_dynamicBody;
 		m_bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / sc_metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / sc_metersScale);
@@ -63,5 +63,8 @@ namespace ratchet
 	{
 		m_body->SetTransform(b2Vec2((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / sc_metersScale,
 			(sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / sc_metersScale), m_body->GetAngle());
+	}
+	CircleColliderConfig::CircleColliderConfig()
+	{
 	}
 }

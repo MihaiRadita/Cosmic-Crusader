@@ -62,9 +62,6 @@
     <ClCompile Include="source\physics\Physics.cpp">
       <Filter>source\physics</Filter>
     </ClCompile>
-    <ClCompile Include="source\physics\RectAngleCollider.cpp">
-      <Filter>source\physics</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjectConfig.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
@@ -79,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderBase.cpp">
+      <Filter>source\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\physics\RectAngleCollider.cpp">
+      <Filter>source\physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,9 +121,6 @@
     <ClInclude Include="source\physics\Physics.h">
       <Filter>source\physics</Filter>
     </ClInclude>
-    <ClInclude Include="source\physics\RectAngleCollider.h">
-      <Filter>source\physics</Filter>
-    </ClInclude>
     <ClInclude Include="GameObjectConfig.h">
       <Filter>source\game</Filter>
     </ClInclude>
@@ -135,6 +135,12 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderBase.h">
+      <Filter>source\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\RectAngleCollider.h">
+      <Filter>source\physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

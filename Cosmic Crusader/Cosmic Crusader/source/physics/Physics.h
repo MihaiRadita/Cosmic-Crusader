@@ -3,8 +3,8 @@
 namespace ratchet
 {
 	enum BodyType {
-		DYNAMIC = 0,
-		STATIC
+		//DYNAMIC = 0,
+		//STATIC
 	};
 
 	class Physics

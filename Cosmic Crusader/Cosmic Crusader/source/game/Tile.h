@@ -16,7 +16,7 @@ namespace ratchet
 
 		RectAngleCollider* m_collider;
 
-		UserData* m_userData;
+		//UserData* m_userData;
 
 	public:
 

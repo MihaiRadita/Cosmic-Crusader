@@ -12,17 +12,14 @@ namespace ratchet
 		m_colliderShapeType = ColliderShapeType::COLLIDERSHAPETYPE_UNKNOWN;
 
 		//Transforms
-		spawnPosition = sf::Vector2f(0.f, 0.f);
-		spawnRotation = 0.f;
-		spawnScale = sf::Vector2f(0.f, 0.f);
+		position = sf::Vector2f(0.f, 0.f);
+		rotation = 0.f;
+		scale = sf::Vector2f(0.f, 0.f);
 		
 		//Graphics
-		spritePath = "";
-		objSprite = sf::Sprite();
-		spriteTexture = sf::Texture();
+		spriteTexturePath = "";
+		startSpriteTexturePath = "";
 
-		//Physics
-		colliderScaleMultiplier = sf::Vector2f(0.f, 0.f);
 	}
 
 	GameObjectConfig::~GameObjectConfig()

@@ -20,29 +20,6 @@ namespace ratchet
 		m_ignoredBody = ignoredBody;
 	}
 
-	float GroundRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
-	{
-		if (fixture)
-		{
-			b2Body* body = fixture->GetBody();
-			if (body == m_ignoredBody)
-			{
-				return -1.0f;
-			}
-			const std::string* fixtureUserData = reinterpret_cast<const std::string*>(fixture->GetUserData().pointer);
-			if (fixtureUserData && *fixtureUserData == "Tile") {
-				m_hit = true;
-				m_point = point;
-				m_normal = normal;
-				m_fraction = fraction;
-				return fraction;
-			}
-		}
-
-		//m_hit = false;
-		return -1.0f;
-	}
-
 
 	std::string GroundCheck::getCollisionSide(const b2Vec2& localPoint, const b2AABB& aabb) {
 
@@ -72,19 +49,17 @@ namespace ratchet
 	}
 
 
-	RectAngleCollider::RectAngleCollider(sf::Sprite& sprite, int bodyTypeState, int entityType)
+	RectAngleCollider::RectAngleCollider(sf::Sprite& sprite, const RectAngleColliderConfig& config) : ColliderBase(config)
 	{
-		initVariables(sprite, bodyTypeState, entityType);
+		initVariables(sprite, config);
 	}
 
-	void RectAngleCollider::initVariables(sf::Sprite& sprite, int bodyTypeState, int entityType)
+	void RectAngleCollider::initVariables(sf::Sprite& sprite, const RectAngleColliderConfig& config)
 	{
-		//Body Def Type
+		m_bodyDef.type = config.m_bodyDef.type;
+		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
+
 		m_offset = b2Vec2(20.0f, 0.0f);
-
-		b2Vec2 tilePosition;
-
-		b2Vec2 playerPosition;
 
 		if (!m_contactListener)
 		{
@@ -92,66 +67,43 @@ namespace ratchet
 			s_physicsWorld->SetContactListener(m_contactListener);
 		}
 
-		//m_colliderOrigin = b2Vec2(sprite.getOrigin().x / 2.0f, sprite.getOrigin().y / 2.0f);
 		m_colliderOrigin = b2Vec2(sprite.getLocalBounds().width / 2.0f, sprite.getLocalBounds().height / 2.0f);
 		m_colliderSpriteScale = b2Vec2(
 			sprite.getLocalBounds().width,
 			sprite.getLocalBounds().height
 		);
 
-		if (bodyTypeState == DYNAMIC)
-		{
-			m_bodyDef.type = b2_dynamicBody;
-			m_bodyDef.bullet = true;
-		}
-		else if (bodyTypeState == STATIC)
-		{
-			m_bodyDef.type = b2_staticBody;
 
-		}
-
-
-		m_bodyDef.position.Set(sprite.getPosition().x + m_colliderSpriteScale.x / 2.0f, sprite.getPosition().y + m_colliderSpriteScale.y / 2.0f);
-		m_bodyDef.fixedRotation = true;
+		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 
 		//Box Dimensions
 		m_boxShape.SetAsBox(m_colliderSpriteScale.x / 2.0f, m_colliderSpriteScale.y / 2.0f, m_colliderOrigin, m_body->GetAngle());
+
+
 		//Box fixtures properties
 		m_fixtureDef.shape = &m_boxShape;
 
-		if (bodyTypeState == DYNAMIC)
-		{
-			m_fixtureDef.density = 1.0f;
-			m_fixtureDef.friction = 0.3f;
-			m_fixtureDef.restitution = 0.0f;
-		}
-		else if (bodyTypeState == STATIC)
-		{
-			m_fixtureDef.density = 0.f;
-			m_fixtureDef.friction = 0.3f;
-			m_fixtureDef.restitution = 0.f;
-		}
-		if (entityType == PLAYER)
-		{
-			userDataName = new std::string("Player");
-			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(userDataName);
+		m_fixtureDef.density = config.m_fixtureDef.density;
+		m_fixtureDef.friction = config.m_fixtureDef.friction;
+		m_fixtureDef.restitution = config.m_fixtureDef.restitution;
 
-			playerPosition = m_body->GetPosition();
+		if (config.m_layer == PhysiscsLayer::Player)
+		{
+			userDataName = static_cast<short>(config.m_layer);
+			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 
 		}
-		else if (entityType == TILE)
+		else if (config.m_layer == PhysiscsLayer::Platforms)
 		{
-			userDataName = new std::string("Tile");
-			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(userDataName);
-
-			tilePosition = m_body->GetPosition();
+			userDataName = static_cast<short>(config.m_layer);
+			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 		}
-
-
+		
 		m_body->CreateFixture(&m_fixtureDef);
-		if (bodyTypeState == STATIC)
+		
+		if (m_bodyDef.type == b2_staticBody)
 		{
 #ifdef IS_RATCHET_DEBUG
 			std::cout << std::endl;
@@ -170,7 +122,7 @@ namespace ratchet
 			std::cout << std::endl;
 #endif
 		}
-		else if (bodyTypeState == DYNAMIC)
+		else if (m_bodyDef.type == b2_dynamicBody)
 		{
 #ifdef IS_RATCHET_DEBUG
 			std::cout << std::endl;
@@ -200,7 +152,6 @@ namespace ratchet
 				s_physicsWorld->DestroyBody(m_body);
 				m_body = nullptr;
 			}
-			delete userDataName;
 			delete m_contactListener;
 		}
 	}
@@ -244,6 +195,10 @@ namespace ratchet
 	void RectAngleCollider::setColliderPosition(float x, float y)
 	{
 		m_body->SetTransform(b2Vec2(x, y), m_body->GetAngle());
+	}
+
+	void RectAngleCollider::setColliderRotation(float angle)
+	{
 	}
 
 #ifdef IS_RATCHET_DEBUG
@@ -353,7 +308,6 @@ namespace ratchet
 		{
 			velocity.x += move;
 		}
-
 		m_body->SetLinearVelocity(velocity);
 
 	}
@@ -409,4 +363,7 @@ namespace ratchet
 	}
 
 	GroundCheck* RectAngleCollider::m_contactListener;
+	RectAngleColliderConfig::RectAngleColliderConfig()
+	{
+	}
 }

@@ -3,6 +3,8 @@
 #include "game/Player.h"
 #include "game/Tile.h"
 
+#include "GameObject.h"
+
 #include "physics/Physics.h"
 
 namespace ratchet
@@ -12,10 +14,8 @@ namespace ratchet
 		sf::RenderWindow m_window;
 		sf::Event m_ev;
 
-		Player* m_player;
 		Physics* m_physics;
-		Tile* m_ground;
-		Tile* m_Wall;
+		std::vector<GameObject*> m_gameObjects;
 
 	public:
 		//Constructors
@@ -26,7 +26,6 @@ namespace ratchet
 
 		//Init functions
 		void initWindow();
-		void initPlayer();
 		void initPhysics();
 		void initMap();
 		//Geters
@@ -38,10 +37,12 @@ namespace ratchet
 		void update();
 		void updatePlayer();
 		void updatePhysics();
-		void updateCollision();
-		void updatePlayerCollision();
-		void updateTile();
+		
+		
 
+
+		//Spawners
+		void spawnObjects();
 
 		//Render functions
 		void render();

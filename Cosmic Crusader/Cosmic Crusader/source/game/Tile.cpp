@@ -6,15 +6,15 @@ namespace ratchet
 {
 	Tile::Tile()
 	{
-		m_userData = new UserData();
-		m_userData->type = TILE;
+		//m_userData = new UserData();
+		//m_userData->type = TILE;
 
 	}
 
 	Tile::~Tile()
 	{
 		destroyCollider();
-		delete m_userData;
+		//delete m_userData;
 	}
 
 	void Tile::destroyCollider()
@@ -47,7 +47,7 @@ namespace ratchet
 
 	void Tile::initPhysics()
 	{
-		m_collider = new RectAngleCollider(m_tileSprite, STATIC, TILE);
+		//m_collider = new RectAngleCollider(m_tileSprite, STATIC, TILE);
 		b2Vec2 tileBodyPosition = m_collider->getBody()->GetPosition();
 		m_collider->setColliderPosition(m_tileSprite.getPosition().x, m_tileSprite.getPosition().y);
 		//tileBodyPosition = m_collider->getBody()->GetPosition();

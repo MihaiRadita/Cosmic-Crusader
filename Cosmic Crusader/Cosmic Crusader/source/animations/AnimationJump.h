@@ -10,7 +10,7 @@ namespace ratchet
 		void playAnimation(sf::Sprite& sprite) override;
 
 		//Constructors
-		AnimationJump();
+		AnimationJump(std::string& texturePath);
 
 		//Destructor
 		~AnimationJump();
@@ -19,8 +19,7 @@ namespace ratchet
 		void initVariables() override;
 
 		//Other functions
-		void addAnimationFrames() override;
-		void destroyTextureFrames() override;
+		void addAnimationFrames(std::string& texturePath) override;
 		void resetCurrentAnimIndex() override;
 		void resetPlayerAnimTimer() override;
 		void setAnimationSwitch(bool animSwitch) override;
@@ -36,6 +35,6 @@ namespace ratchet
 		int m_jumpAnimFrameIndex;
 		float m_currentJumpTimeLimit;
 		// TODO: Foloseste ResourceManager asa cum am vorbit in loc de acest vector static.
-		static std::vector<sf::Texture>* s_animFrameImg;
+		std::vector<sf::Texture> s_animFrameImg;
 	};
 }

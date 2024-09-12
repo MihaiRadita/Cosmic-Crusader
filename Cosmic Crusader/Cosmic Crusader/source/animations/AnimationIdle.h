@@ -10,7 +10,7 @@ namespace ratchet
 		void playAnimation(sf::Sprite& sprite) override;
 
 		//Constructors
-		AnimationIdle();
+		AnimationIdle(std::string& texturePath);
 
 		//Destructors
 		~AnimationIdle();
@@ -19,8 +19,7 @@ namespace ratchet
 		void initVariables() override;
 
 		//Other functions
-		void addAnimationFrames() override;
-		void destroyTextureFrames() override;
+		void addAnimationFrames(std::string& texturePath) override;
 		void resetCurrentAnimIndex() override;
 		void resetPlayerAnimTimer() override;
 		void setAnimationSwitch(bool animSwitch) override;
@@ -29,10 +28,8 @@ namespace ratchet
 		int getAnimSize() override;
 		int getCurrentAnimIndex() override;
 		bool getAnimationSwitch() override;
-		sf::Clock getPlayerAnimTimer() override;
 
 	private:
-		// TODO: Foloseste ResourceManager asa cum am vorbit in loc de acest vector static.
-		static std::vector<sf::Texture>* s_animFrameImg;
+		std::vector<sf::Texture> m_animFrameImg;
 	};
 }

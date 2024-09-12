@@ -1,13 +1,15 @@
 #include "stdafx.h"
 #include "AnimationRun.h"
+#include "ResourceManager.h"
+
 
 namespace ratchet
 {
 	//Constructors
-	AnimationRun::AnimationRun()
+	AnimationRun::AnimationRun(std::string& texturePath)
 	{
 		initVariables();
-		addAnimationFrames();
+		addAnimationFrames(texturePath);
 	}
 
 	//Init Functions
@@ -20,26 +22,21 @@ namespace ratchet
 		m_initialTexture = false;
 		m_animationTimer.restart();
 		m_animationSwitch = true;
-
-		if (s_animFrameImg == nullptr)
-		{
-			s_animFrameImg = new std::vector<sf::Texture>();
-			addAnimationFrames();
-		}
 	}
 
 	//Add animation frames images
-	void AnimationRun::addAnimationFrames()
+	void AnimationRun::addAnimationFrames(std::string& texturePath)
 	{
 		bool imageValid = false;
 		do
 		{
-			int imgIndex = AnimationRun::s_animFrameImg->size();
+			int imgIndex = s_animFrameImg.size();
 			int strImgIndex = imgIndex + 1;
 
 			// Build string
 			std::stringstream ss;
-			ss << "Textures/PlayerTextures/Player1Textures/RunTextures/";
+			ss << texturePath;
+			ss << "RunTextures/";
 			ss << "Run";
 			ss << strImgIndex;
 			ss << ".png";
@@ -47,11 +44,11 @@ namespace ratchet
 			ss.clear();
 
 			// Load Texture
-			sf::Texture texture;
-			imageValid = texture.loadFromFile(path);
+			const auto* texture = ResourceManager::getInstance()->findOrFetchTexture(path);
+			imageValid = texture != nullptr;
 			if (imageValid)
 			{
-				AnimationRun::s_animFrameImg->push_back(texture);
+				s_animFrameImg.push_back(*texture);
 			}
 
 		} while (imageValid);
@@ -65,7 +62,7 @@ namespace ratchet
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture((*s_animFrameImg)[m_currentFrameIndex]);
+				sprite.setTexture((s_animFrameImg)[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
 				std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
@@ -83,7 +80,7 @@ namespace ratchet
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture((*s_animFrameImg)[m_currentFrameIndex]);
+				sprite.setTexture((s_animFrameImg)[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
 				std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
@@ -104,12 +101,6 @@ namespace ratchet
 	//Destroy functions
 	AnimationRun::~AnimationRun()
 	{
-		destroyTextureFrames();
-	}
-
-	void AnimationRun::destroyTextureFrames()
-	{
-		delete s_animFrameImg;
 	}
 
 	//Other Functions
@@ -132,7 +123,7 @@ namespace ratchet
 	//Getters Functions
 	int AnimationRun::getAnimSize()
 	{
-		return AnimationRun::s_animFrameImg->size();
+		return s_animFrameImg.size();
 	}
 	int AnimationRun::getCurrentAnimIndex()
 	{
@@ -151,5 +142,4 @@ namespace ratchet
 		return anim_switch;
 	}
 
-	std::vector<sf::Texture>* AnimationRun::s_animFrameImg;
 }
