@@ -19,5 +19,8 @@
 //Box2D
 #include "box2d/box2d.h"
 
+//Json
+#include "json.hpp"
+
 // Defines
 #define IS_RATCHET_DEBUG

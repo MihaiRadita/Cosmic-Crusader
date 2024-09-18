@@ -5,7 +5,8 @@ namespace ratchet
 {
 	void Game::spawnObjects()
 	{
-		{
+		{ 
+
 			auto config = GameObjectConfig();
 			config.m_Faction = FACTION_UNKNOWN;
 			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
@@ -111,7 +112,7 @@ namespace ratchet
 
 	void Game::initWindow()
 	{
-		m_window.create(sf::VideoMode(800, 600), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+		m_window.create(sf::VideoMode(800,600), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
 		m_window.setFramerateLimit(144);
 	}
 
