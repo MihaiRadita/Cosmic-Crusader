@@ -6,6 +6,7 @@ namespace ratchet
 	void Game::spawnObjects()
 	{
 		{ 
+		
 
 			auto config = GameObjectConfig();
 			config.m_Faction = FACTION_UNKNOWN;
