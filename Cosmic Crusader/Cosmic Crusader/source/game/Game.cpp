@@ -112,7 +112,7 @@ namespace ratchet
 
 	void Game::initWindow()
 	{
-		m_window.create(sf::VideoMode(800,600), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+		m_window.create(sf::VideoMode(960,640), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
 		m_window.setFramerateLimit(144);
 	}
 
