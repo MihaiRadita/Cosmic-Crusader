@@ -24,8 +24,8 @@ namespace ratchet
 			colliderConfig.m_bodyDef.type = b2_staticBody;
 			colliderConfig.m_bodyDef.fixedRotation = true;
 			colliderConfig.m_fixtureDef.density = 0.f;
-			colliderConfig.m_fixtureDef.friction = 0.3f;
-			colliderConfig.m_fixtureDef.restitution = 0.f;
+			colliderConfig.m_fixtureDef.friction = 0.2f;
+			colliderConfig.m_fixtureDef.restitution = 0.1f;
 
 
 			config.m_colliderConfig = &colliderConfig;
@@ -49,13 +49,64 @@ namespace ratchet
 			colliderConfig2.m_bodyDef.type = b2_staticBody;
 			colliderConfig2.m_bodyDef.fixedRotation = true;
 			colliderConfig2.m_fixtureDef.density = 0.f;
-			colliderConfig2.m_fixtureDef.friction = 0.3f;
-			colliderConfig2.m_fixtureDef.restitution = 0.f;
+			colliderConfig2.m_fixtureDef.friction = 0.2f;
+			colliderConfig2.m_fixtureDef.restitution = 0.1f;
 
 
 			config2.m_colliderConfig = &colliderConfig2;
 
 			m_gameObjects.push_back(new GameObject(config2));
+
+
+			auto config3 = GameObjectConfig();
+			config3.m_Faction = FACTION_UNKNOWN;
+			config3.m_colliderType = COLLIDERTYPE_UNKNOWN;
+			config3.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
+			config3.m_movementType = MOVEMENTTYPE_UNKNOWN;
+				  
+			config3.position = sf::Vector2f(450.f, 150.f);
+			config3.rotation = 0.0f;
+			config3.scale = sf::Vector2f(1.0f, 1.0f);
+			config3.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Tileset/Platform.png";;
+
+			auto colliderConfig3 = RectAngleColliderConfig();
+			colliderConfig3.m_layer = PhysiscsLayer::Platforms;
+			colliderConfig3.m_bodyDef.type = b2_staticBody;
+			colliderConfig3.m_bodyDef.fixedRotation = true;
+			colliderConfig3.m_fixtureDef.density = 0.f;
+			colliderConfig3.m_fixtureDef.friction = 0.2f;
+			colliderConfig3.m_fixtureDef.restitution = 0.1f;
+
+
+			config3.m_colliderConfig = &colliderConfig3;
+
+			m_gameObjects.push_back(new GameObject(config3));
+
+
+			auto config4 = GameObjectConfig();
+			config4.m_Faction = FACTION_UNKNOWN;
+			config4.m_colliderType = COLLIDERTYPE_UNKNOWN;
+			config4.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
+			config4.m_movementType = MOVEMENTTYPE_UNKNOWN;
+				  
+			config4.position = sf::Vector2f(650.f, 150.f);
+			config4.rotation = 0.0f;
+			config4.scale = sf::Vector2f(1.0f, 1.0f);
+			config4.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Tileset/Platform.png";;
+
+			auto colliderConfig4 = RectAngleColliderConfig();
+			colliderConfig4.m_layer = PhysiscsLayer::Platforms;
+			colliderConfig4.m_bodyDef.type = b2_staticBody;
+			colliderConfig4.m_bodyDef.fixedRotation = true;
+			colliderConfig4.m_fixtureDef.density = 0.f;
+			colliderConfig4.m_fixtureDef.friction = 0.2f;
+			colliderConfig4.m_fixtureDef.restitution = 0.1f;
+
+
+			config4.m_colliderConfig = &colliderConfig4;
+
+			m_gameObjects.push_back(new GameObject(config4));
+
 		}
 
 		{

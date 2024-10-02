@@ -287,13 +287,24 @@ namespace ratchet
 		pointRightStart.setFillColor(sf::Color::Red);
 		pointRightStart.setPosition(startPointRight.x, startPointRight.y);
 
+		b2Vec2 startPointMiddle = b2Vec2((playerPosition.x + (playerWidth / 2.f)), playerPosition.y + (playerHeight / 2.f));
+		b2Vec2 endPointMiddle = b2Vec2(startPointMiddle.x, startPointMiddle.y + ((playerHeight / 2.f)) + 1.5f);
+
+		sf::Vertex rayCastMiddle[] = { sf::Vertex(sf::Vector2f(startPointMiddle.x, startPointMiddle.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointMiddle.x, endPointMiddle.y), sf::Color::Green) };
+
+		auto pointMiddleStart = sf::CircleShape(3.0f);
+		pointMiddleStart.setFillColor(sf::Color::Red);
+		pointMiddleStart.setPosition(startPointRight.x, startPointRight.y);
+
 		target.draw(outline);
 		target.draw(bodyPosition);
 		target.draw(line, 2, sf::Lines);
 		target.draw(rayCastLeft, 2, sf::Lines);
 		target.draw(rayCastRight, 2, sf::Lines);
+		target.draw(rayCastMiddle, 2, sf::Lines);
 		target.draw(pointLeftStart);
 		target.draw(pointRightStart);
+		target.draw(pointMiddleStart);
 	}
 #endif
 
@@ -342,13 +353,19 @@ namespace ratchet
 		b2Vec2 startPointRight = b2Vec2((playerPosition.x + playerWidth) - 2.f, playerPosition.y + (playerHeight / 2.f));
 		b2Vec2 endPointRight = b2Vec2(startPointRight.x, startPointRight.y + ((playerHeight / 2.f)) + 1.5f);
 
+		b2Vec2 startPointMiddle = b2Vec2(playerPosition.x + (playerWidth / 2.f), playerPosition.y + (playerHeight / 2.f));
+		b2Vec2 endPointMiddle = b2Vec2(playerPosition.x + (playerWidth / 2.f), playerPosition.y + ((playerHeight / 2.f)) + 1.5f);
+
 		GroundRayCastCallBack callbackLeft(m_body);
 		s_physicsWorld->RayCast(&callbackLeft, startPointLeft, endPointLeft);
 
 		GroundRayCastCallBack callbackRight(m_body);
 		s_physicsWorld->RayCast(&callbackRight, startPointRight, endPointRight);
 
-		if ((callbackLeft.m_fraction <= 1.0f || callbackRight.m_fraction <= 1.0f) && (callbackLeft.m_hit || callbackRight.m_hit))
+		GroundRayCastCallBack callbackMiddle(m_body);
+		s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
+
+		if ((callbackLeft.m_fraction <= 1.0f || callbackRight.m_fraction <= 1.0f || callbackMiddle.m_fraction <= 1.0f) && (callbackLeft.m_hit || callbackRight.m_hit || callbackMiddle.m_hit))
 		{
 #ifdef IS_RATCHET_DEBUG
 			std::cout << "Victory " << std::endl;
