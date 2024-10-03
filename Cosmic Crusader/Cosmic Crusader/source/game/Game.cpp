@@ -7,8 +7,70 @@ namespace ratchet
 	{
 		{ 
 
+			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap..tmj");
 
-			auto config = GameObjectConfig();
+			if (!file.is_open())
+			{
+				std::cerr << "ERROR! The file could not be opened!" << std::endl;
+			}
+			
+			nlohmann::json j;
+
+			file >> j;
+			file.close();
+
+			nlohmann::json layer;
+
+			for (const auto& l : j["layers"])
+			{
+				if (l["name"] == "Tile Objects")
+				{
+					layer = l;
+					std::cout << "We have a match!" << std::endl;
+					break;
+				}
+			}
+
+
+			const auto& objects = layer["objects"];
+
+			int coolideNumber = 0;
+
+			for (const auto& obj : objects)
+			{
+				auto config = GameObjectConfig();
+				config.m_Faction = FACTION_UNKNOWN;
+				config.m_colliderType = COLLIDERTYPE_UNKNOWN;
+				config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
+				config.m_movementType = MOVEMENTTYPE_UNKNOWN;
+
+				config.positionXOffset = 0.f;
+				config.positionYOffset = -64.f;
+
+				config.position = sf::Vector2f(obj["x"].get<float>() + config.positionXOffset, obj["y"].get<float>() + config.positionYOffset);
+				config.rotation = obj["rotation"];
+				config.scale = sf::Vector2f(1.0f, 1.0f);
+				config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Tileset/";
+				config.startSpriteTexturePathAddition = obj["name"].get<std::string>();
+				config.startSpriteTexturePath = config.startSpriteTexturePath + config.startSpriteTexturePathAddition + ".png";
+
+				auto colliderConfig = RectAngleColliderConfig();
+				colliderConfig.m_layer = PhysiscsLayer::Platforms;
+				colliderConfig.m_bodyDef.type = b2_staticBody;
+				colliderConfig.m_bodyDef.fixedRotation = true;
+				colliderConfig.m_fixtureDef.density = 0.f;
+				colliderConfig.m_fixtureDef.friction = 0.2f;
+				colliderConfig.m_fixtureDef.restitution = 0.1f;
+
+
+				config.m_colliderConfig = &colliderConfig;
+
+				m_gameObjects.push_back(new GameObject(config));
+			}
+
+			
+
+			/*auto config = GameObjectConfig();
 			config.m_Faction = FACTION_UNKNOWN;
 			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
 			config.m_colliderShapeType= COLLIDERSHAPETYPE_UNKNOWN;
@@ -30,10 +92,10 @@ namespace ratchet
 
 			config.m_colliderConfig = &colliderConfig;
 
-			m_gameObjects.push_back(new GameObject(config));
+			m_gameObjects.push_back(new GameObject(config));*/
 
 
-			auto config2 = GameObjectConfig();
+		/*	auto config2 = GameObjectConfig();
 			config2.m_Faction = FACTION_UNKNOWN;
 			config2.m_colliderType = COLLIDERTYPE_UNKNOWN;
 			config2.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
@@ -105,7 +167,7 @@ namespace ratchet
 
 			config4.m_colliderConfig = &colliderConfig4;
 
-			m_gameObjects.push_back(new GameObject(config4));
+			m_gameObjects.push_back(new GameObject(config4));*/
 
 		}
 
@@ -116,13 +178,18 @@ namespace ratchet
 			config.m_colliderType = DYNAMIC;
 			config.m_colliderShapeType = RECTANGLE;
 
-			config.position = sf::Vector2f(3.0f, 100.f);
+			config.positionXOffset = 0.f;
+			config.positionYOffset = 0.f;
+
+			config.position = sf::Vector2f(500.0f, 100.f);
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.f, 1.f);
 
 			config.m_movingSpeed = 3.5f;
 			config.m_jumpingSpeed = 40.9f;
 			config.m_fallingSpeed = 12.4f;
+
+
 
 			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/Idle1.png";
 			config.spriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
@@ -165,7 +232,7 @@ namespace ratchet
 	void Game::initWindow()
 	{
 		m_window.create(sf::VideoMode(960,640), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
-		m_window.setFramerateLimit(144);
+		m_window.setFramerateLimit(200000);
 	}
 
 	void Game::initPhysics()

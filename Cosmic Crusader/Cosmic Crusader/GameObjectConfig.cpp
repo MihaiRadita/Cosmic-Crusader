@@ -19,6 +19,9 @@ namespace ratchet
 		//Graphics
 		spriteTexturePath = "";
 		startSpriteTexturePath = "";
+		startSpriteTexturePathAddition = "";
+		positionXOffset = 0.f;
+		positionYOffset = 0.f;
 
 	}
 

@@ -7,10 +7,10 @@ namespace ratchet
 	{
 		if (!Physics::s_physicsWorld)
 		{
-			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 0.96f));
+			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 9.81f));
 		}
 		m_timeStep = 1.0f / 60.0f;
-		m_velocityIterations = 6;
+		m_velocityIterations = 78000;
 		m_positionIterations = 2;
 	}
 

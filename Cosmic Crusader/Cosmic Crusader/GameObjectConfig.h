@@ -18,11 +18,14 @@ namespace ratchet
 		sf::Vector2f position;
 		float rotation;
 		sf::Vector2f scale;
+		float positionXOffset;
+		float positionYOffset;
 	
 
 		//Graphics
 		std::string startSpriteTexturePath;
 		std::string spriteTexturePath;
+		std::string startSpriteTexturePathAddition;
 
 		//Physics
 		BaseColliderConfig* m_colliderConfig = nullptr;
