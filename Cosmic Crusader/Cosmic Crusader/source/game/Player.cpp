@@ -387,7 +387,9 @@ namespace ratchet
 					{
 						m_Input.x = -1;
 					}
+#ifdef IS_RATCHET_DEBUG
 					std::cout << "Moving POSITION X :" << m_Input.x << std::endl;
+#endif
 				}
 				else if (ev.key.code == sf::Keyboard::D)
 				{
@@ -395,7 +397,9 @@ namespace ratchet
 					{
 						m_Input.x = 1;
 					}
+#ifdef IS_RATCHET_DEBUG
 					std::cout << "Moving POSITION X :" << m_Input.x << std::endl;
+#endif
 				}
 
 				if (ev.key.code == sf::Keyboard::Space)

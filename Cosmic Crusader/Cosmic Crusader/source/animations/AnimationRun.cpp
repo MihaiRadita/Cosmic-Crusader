@@ -15,7 +15,7 @@ namespace ratchet
 	//Init Functions
 	void AnimationRun::initVariables()
 	{
-		m_animTimeLimit = 0.1f;
+		m_animTimeLimit = 0.035f;
 		m_currentFrameIndex = 0;
 		m_isAnimTransition = true;
 

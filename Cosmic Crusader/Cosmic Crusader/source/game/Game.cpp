@@ -26,7 +26,9 @@ namespace ratchet
 				if (l["name"] == "Tile Objects")
 				{
 					layer = l;
+#ifdef IS_RATCHET_DEBUG
 					std::cout << "We have a match!" << std::endl;
+#endif
 					break;
 				}
 			}
@@ -185,9 +187,9 @@ namespace ratchet
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.f, 1.f);
 
-			config.m_movingSpeed = 3.5f;
-			config.m_jumpingSpeed = 40.9f;
-			config.m_fallingSpeed = 12.4f;
+			config.m_movingSpeed = 2.5f;
+			config.m_jumpingSpeed = 20.0f;
+			config.m_fallingSpeed = 10.0f;
 
 
 
@@ -270,8 +272,16 @@ namespace ratchet
 	{
 		handleEvents();
 
-		//updatePlayer();
+		// Box2D Time Calculation
+		// auto timePhysicsNow =
+		// auto fixedDeltaTime =
+		// timeBox2DLastFrame =
 		m_physics->update();
+
+		// SFML Time Calculation
+		auto timeNow = gameTime.getElapsedTime().asMilliseconds();
+		auto deltaTime = static_cast<double>(timeNow - timeLastFrame) / 1000.0;
+		timeLastFrame = timeNow;
 
 		for (auto& obj : m_gameObjects)
 		{
@@ -288,9 +298,10 @@ namespace ratchet
 
 		for (auto* obj : m_gameObjects)
 		{
-			std::cout << "Rendering object at position: " << obj->getSprite().getPosition().x
-				<< ", " << obj->getSprite().getPosition().y << std::endl;
+#ifdef IS_RATCHET_DEBUG
+			std::cout << "Rendering object at position: " << obj->getSprite().getPosition().x << ", " << obj->getSprite().getPosition().y << std::endl;
 			std::cout << "Texture pointer: " <<obj->getSprite().getTexture() << std::endl;
+#endif
 
 			obj->render(m_window);
 		}

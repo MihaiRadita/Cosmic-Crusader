@@ -23,5 +23,6 @@
 //Json
 #include "json.hpp"
 
-// Defines
-#define IS_RATCHET_DEBUG
+#ifdef IS_RATCHET_DEBUG
+#undef IS_RATCHET_DEBUG
+#endif

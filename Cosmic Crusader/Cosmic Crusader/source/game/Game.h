@@ -17,6 +17,9 @@ namespace ratchet
 		Physics* m_physics;
 		std::vector<GameObject*> m_gameObjects;
 
+		sf::Clock gameTime;
+		sf::Int32 timeLastFrame = 0;
+
 	public:
 		//Constructors
 		Game();
