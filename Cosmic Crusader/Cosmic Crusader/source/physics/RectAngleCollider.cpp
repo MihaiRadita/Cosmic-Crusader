@@ -313,6 +313,7 @@ namespace ratchet
 		float move = movevmentSpeed * direction;
 
 		b2Vec2 velocity = m_body->GetLinearVelocity();
+
 		velocity.x = 0.0f;
 
 		if (moving)

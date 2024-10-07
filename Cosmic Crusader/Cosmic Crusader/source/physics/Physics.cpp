@@ -3,15 +3,18 @@
 
 namespace ratchet
 {
+	const double Physics::sc_fixedDeltaTime = 1.0 / 60.0;
 	Physics::Physics()
 	{
 		if (!Physics::s_physicsWorld)
 		{
-			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 0.96f));
+			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 1000.5f));
 		}
-		m_timeStep = 1.0f / 60.0f;
+		m_timeStep = 1.0f / 190;
 		m_velocityIterations = 6;
 		m_positionIterations = 2;
+		m_accumulator = 0.f;
+		int32_t subSteps = 10;
 	}
 
 	Physics::~Physics()
@@ -32,17 +35,35 @@ namespace ratchet
 		return s_physicsWorld;
 	}
 
-	void Physics::simulatePhysics()
+	void Physics::simulatePhysics(float& deltaTime)
 	{
-		for (int i = 0; i < 60; ++i)
+		/*for (int i = 0; i < 60; ++i)
 		{
 			s_physicsWorld->Step(m_timeStep, m_velocityIterations, m_positionIterations);
+
+		}*/
+
+		if (deltaTime > sc_fixedDeltaTime) {
+			deltaTime = sc_fixedDeltaTime;
+		}
+
+		m_accumulator += deltaTime;
+
+		while (m_accumulator >= m_timeStep)
+		{
+			s_physicsWorld->Step(m_timeStep, m_velocityIterations, m_positionIterations);
+			m_accumulator -= m_timeStep;
+		}
+
+		if (m_accumulator < 0.f)
+		{
+			m_accumulator = 0.f;
 		}
 	}
 
-	void Physics::update()
+	void Physics::update(float& deltatime)
 	{
-		simulatePhysics();
+		simulatePhysics(deltatime);
 	}
 
 	b2World* Physics::s_physicsWorld = nullptr;

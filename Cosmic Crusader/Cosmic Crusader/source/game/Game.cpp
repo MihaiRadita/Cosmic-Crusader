@@ -61,7 +61,7 @@ namespace ratchet
 				colliderConfig.m_bodyDef.type = b2_staticBody;
 				colliderConfig.m_bodyDef.fixedRotation = true;
 				colliderConfig.m_fixtureDef.density = 0.f;
-				colliderConfig.m_fixtureDef.friction = 0.2f;
+				colliderConfig.m_fixtureDef.friction = 90.f;
 				colliderConfig.m_fixtureDef.restitution = 0.1f;
 
 
@@ -187,9 +187,9 @@ namespace ratchet
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.f, 1.f);
 
-			config.m_movingSpeed = 2.5f;
-			config.m_jumpingSpeed = 20.0f;
-			config.m_fallingSpeed = 10.0f;
+			config.m_movingSpeed =800.59f;
+			config.m_jumpingSpeed = 5000.0f;
+			config.m_fallingSpeed = 700.0f;
 
 
 
@@ -202,7 +202,7 @@ namespace ratchet
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;
 			colliderConfig.m_fixtureDef.density = 1.f;
-			colliderConfig.m_fixtureDef.friction = 0.3f;
+			colliderConfig.m_fixtureDef.friction = 80.f;
 			colliderConfig.m_fixtureDef.restitution = 0.f;
 
 			config.m_colliderConfig = &colliderConfig;
@@ -276,17 +276,23 @@ namespace ratchet
 		// auto timePhysicsNow =
 		// auto fixedDeltaTime =
 		// timeBox2DLastFrame =
-		m_physics->update();
 
 		// SFML Time Calculation
-		auto timeNow = gameTime.getElapsedTime().asMilliseconds();
-		auto deltaTime = static_cast<double>(timeNow - timeLastFrame) / 1000.0;
+		float timeNow = gameTime.getElapsedTime().asSeconds();
+		float deltaTime = (timeNow - timeLastFrame);
 		timeLastFrame = timeNow;
+
+		/*if (deltaTime > 1.0f / 2.0f) {
+			deltaTime = 1.0f / 2.0f;  
+		}*/
+
+		m_physics->update(deltaTime);
 
 		for (auto& obj : m_gameObjects)
 		{
 			obj->update();
 		}
+
 	}
 
 
