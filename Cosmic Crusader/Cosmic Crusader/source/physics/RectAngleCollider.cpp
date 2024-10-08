@@ -314,13 +314,24 @@ namespace ratchet
 
 		b2Vec2 velocity = m_body->GetLinearVelocity();
 
+		float fallingSpeed = 20.5f;
+
+		float x = m_body->GetLinearVelocity().x;
+		float y = m_body->GetLinearVelocity().y;
+
 		velocity.x = 0.0f;
 
 		if (moving)
 		{
+			
 			velocity.x += move;
+
 		}
 		m_body->SetLinearVelocity(velocity);
+
+		std::cout << " X: " << x  << " Y: ," << y<<std::endl;
+
+
 
 	}
 
@@ -330,16 +341,18 @@ namespace ratchet
 
 		b2Vec2 velocity = m_body->GetLinearVelocity();
 
-		velocity.y = 0.0f;
+		//velocity.y = 0.0f;
 
 		if (jumping)
 		{
 			velocity.y += jump;
 		}
 
+
+
 		m_body->SetLinearVelocity(velocity);
 
-
+		std::cout << "He JUMPED!!!!" << std::endl;
 	}
 
 	bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)

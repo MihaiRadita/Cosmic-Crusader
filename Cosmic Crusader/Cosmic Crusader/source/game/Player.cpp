@@ -316,6 +316,8 @@ namespace ratchet
 				m_collider->applyJump(m_jumpingSpeed, m_isGround);
 				m_isGround = false;
 			}
+
+			std::cout << m_isGround << std::endl;
 		}
 	}
 

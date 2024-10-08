@@ -6,6 +6,7 @@ namespace ratchet
 	const double Physics::sc_fixedDeltaTime = 1.0 / 60.0;
 	Physics::Physics()
 	{
+	
 		if (!Physics::s_physicsWorld)
 		{
 			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 1000.5f));
