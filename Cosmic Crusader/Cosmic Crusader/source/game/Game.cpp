@@ -202,7 +202,7 @@ namespace ratchet
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;
 			colliderConfig.m_fixtureDef.density = 1.f;
-			colliderConfig.m_fixtureDef.friction = 80.f;
+			colliderConfig.m_fixtureDef.friction = 1.f;
 			colliderConfig.m_fixtureDef.restitution = 0.f;
 
 			config.m_colliderConfig = &colliderConfig;

@@ -6,16 +6,14 @@ namespace ratchet
 	const double Physics::sc_fixedDeltaTime = 1.0 / 60.0;
 	Physics::Physics()
 	{
-	
 		if (!Physics::s_physicsWorld)
 		{
-			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 1000.5f));
+			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 1000.0f));
 		}
-		m_timeStep = 1.0f /190;
+		m_timeStep = 1.0 / 190.0;
 		m_velocityIterations = 6;
 		m_positionIterations = 2;
 		m_accumulator = 0.f;
-		int32_t subSteps = 10;
 	}
 
 	Physics::~Physics()

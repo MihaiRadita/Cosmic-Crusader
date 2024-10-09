@@ -5,7 +5,6 @@ namespace ratchet
 {
 	void GroundCheck::BeginContact(b2Contact* contact)
 	{
-
 	}
 
 	void GroundCheck::EndContact(b2Contact* contact)
@@ -316,17 +315,9 @@ namespace ratchet
 
 		float fallingSpeed = 1000.5f;
 
-		float currentY = velocity.y;
 
-		float x = m_body->GetLinearVelocity().x;
-		float y = m_body->GetLinearVelocity().y;
-
-
-
-		float gravityConstant =50.81f; 
+		float gravityConstant = 50000.81f; 
 		float maxFallSpeed = 500.0f;
-
-		//velocity.x = 0.0f;
 
 		if (moving)
 		{
@@ -347,23 +338,20 @@ namespace ratchet
 		if (!isGround)
 		{
 			velocity.y += gravityConstant;
-			if (velocity.y < maxFallSpeed)
+			if (velocity.y > maxFallSpeed)
 			{
 				velocity.y = maxFallSpeed;
 			}
 		}
 
 		m_body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
-
-		std::cout << " X: " << velocity.x << " Y: ," << velocity.y << std::endl;
-			
 	}
 	
 	
 
 	void RectAngleCollider::applyJump(float& jumpSpeed, bool& jumping)
 	{
-		float jump = jumpSpeed * -1;
+		float jump = jumpSpeed * -10000;
 
 		b2Vec2 velocity = m_body->GetLinearVelocity();
 
@@ -378,7 +366,7 @@ namespace ratchet
 
 		m_body->SetLinearVelocity(velocity);
 
-		std::cout << "He JUMPED!!!!" << std::endl;
+		DBOUT("He JUMPED!!!!");
 	}
 
 	bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)

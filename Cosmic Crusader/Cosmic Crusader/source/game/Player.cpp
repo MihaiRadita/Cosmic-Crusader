@@ -3,8 +3,6 @@
 
 namespace ratchet
 {
-	constexpr float M_PI = 22.0f / 7.0f;
-
 	void Player::destroyPlayerAnimations()
 	{
 
@@ -34,15 +32,6 @@ namespace ratchet
 	void Player::setPosition(const float x, const float y)
 	{
 		m_sprite.setPosition(x, y);
-	}
-	void Player::update()
-	{
-		updateInput();
-		updateMovement();
-		updateJump();
-		updateRunningJump();
-		updateAnimations();
-		updatePhysics();
 	}
 
 	//	void Player::updateMovement()
@@ -145,7 +134,6 @@ namespace ratchet
 					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_Input.x, m_isGround);
 					auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 					m_sprite.setPosition(playerPosition);
-
 				}
 			}
 		}
@@ -187,6 +175,8 @@ namespace ratchet
 				switchAnimation();
 				m_isMoving = false;
 			}
+
+		DBOUT("[PLAYER]" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
 	}
 
 	void Player::updateRotation()
@@ -317,7 +307,7 @@ namespace ratchet
 				m_isGround = false;
 			}
 
-			std::cout << m_isGround << std::endl;
+			// DBOUT("isGround = " << (m_isGround ? "TRUE" : "FALSE"));
 		}
 	}
 
@@ -350,24 +340,6 @@ namespace ratchet
 				m_isGround = false;
 			}
 		}
-	}
-
-	void Player::updatePhysics()
-	{
-
-		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-		m_sprite.setPosition(playerPosition);
-
-		b2Vec2 playerBoyPosition = m_collider->getBody()->GetPosition();
-
-		sf::Vector2f playerSpritePosition;
-		playerSpritePosition = m_sprite.getPosition();
-
-#ifdef IS_RATCHET_DEBUG
-		std::cout << m_sprite.getPosition().x << " , " << m_sprite.getPosition().y;
-#endif
-		m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-		m_sprite.setRotation(m_rotation);
 	}
 
 

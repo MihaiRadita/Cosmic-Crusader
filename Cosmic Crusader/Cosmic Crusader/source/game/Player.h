@@ -48,10 +48,8 @@ namespace ratchet
 		void setPosition(const float x, const float y);
 
 		//Update functions
-		void update() override;
 		void updateMovement() override;
 		void updateRotation() override;
-		void updatePhysics() override;
 		void updateJump() override;
 		void updateRunningJump() override;
 		void setIsOnGround(bool isGround);
