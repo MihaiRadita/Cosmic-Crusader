@@ -142,7 +142,7 @@ namespace ratchet
 
 				if (m_isMoving)
 				{
-					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_Input.x);
+					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_Input.x, m_isGround);
 					auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 					m_sprite.setPosition(playerPosition);
 
@@ -169,7 +169,7 @@ namespace ratchet
 				invertCharacterMovingSpriteScale(1);
 				if (m_isMoving)
 				{
-					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_Input.x);
+					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_Input.x, m_isGround);
 					auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 					m_sprite.setPosition(playerPosition);
 

@@ -55,7 +55,7 @@ namespace ratchet
 		void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState) override;
 		void debugRender(sf::RenderTarget& target) override;
 #endif
-		void applyMovement(float& movementSpeed, bool& moving, int direction) override;
+		void applyMovement(float& movementSpeed, bool& moving, int direction, bool& isGround) override;
 		void applyJump(float& jumpSpeed, bool& jumping) override;
 
 		//Checks

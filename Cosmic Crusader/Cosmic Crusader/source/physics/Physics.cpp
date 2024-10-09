@@ -11,7 +11,7 @@ namespace ratchet
 		{
 			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 1000.5f));
 		}
-		m_timeStep = 1.0f / 190;
+		m_timeStep = 1.0f /190;
 		m_velocityIterations = 6;
 		m_positionIterations = 2;
 		m_accumulator = 0.f;

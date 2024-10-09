@@ -308,32 +308,58 @@ namespace ratchet
 	}
 #endif
 
-	void RectAngleCollider::applyMovement(float& movevmentSpeed, bool& moving, int direction)
+	void RectAngleCollider::applyMovement(float& movevmentSpeed, bool& moving, int direction, bool& isGround)
 	{
 		float move = movevmentSpeed * direction;
 
 		b2Vec2 velocity = m_body->GetLinearVelocity();
 
-		float fallingSpeed = 20.5f;
+		float fallingSpeed = 1000.5f;
+
+		float currentY = velocity.y;
 
 		float x = m_body->GetLinearVelocity().x;
 		float y = m_body->GetLinearVelocity().y;
 
-		velocity.x = 0.0f;
+
+
+		float gravityConstant =50.81f; 
+		float maxFallSpeed = 500.0f;
+
+		//velocity.x = 0.0f;
 
 		if (moving)
 		{
-			
+
 			velocity.x += move;
 
 		}
-		m_body->SetLinearVelocity(velocity);
+		else
+		{
+			velocity.x = 0.0f;
+		}
 
-		std::cout << " X: " << x  << " Y: ," << y<<std::endl;
+		/*if (velocity.y > 0)
+		{
+			velocity.y = 1000.5f;
+		}*/
 
+		if (!isGround)
+		{
+			velocity.y += gravityConstant;
+			if (velocity.y < maxFallSpeed)
+			{
+				velocity.y = maxFallSpeed;
+			}
+		}
 
+		m_body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 
+		std::cout << " X: " << velocity.x << " Y: ," << velocity.y << std::endl;
+			
 	}
+	
+	
 
 	void RectAngleCollider::applyJump(float& jumpSpeed, bool& jumping)
 	{

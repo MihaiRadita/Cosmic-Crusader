@@ -9,7 +9,7 @@ namespace ratchet
 
 	}
 
-	void ColliderBase::applyMovement(float& movementSpeed, bool& moving, int direction)
+	void ColliderBase::applyMovement(float& movementSpeed, bool& moving, int direction, bool& isGround)
 	{
 	}
 
