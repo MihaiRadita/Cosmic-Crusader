@@ -26,9 +26,9 @@ namespace ratchet
 
 	protected:
 		static b2World* s_physicsWorld;
-		double m_timeStep;
-		double m_velocityIterations;
-		double m_positionIterations;
+		float m_timeStep;
+		int32 m_velocityIterations;
+		int32 m_positionIterations;
 		static const float sc_metersScale;
 
 		double m_accumulator;  // Acumulator pentru timpul scurs dintre pa?ii de simulare

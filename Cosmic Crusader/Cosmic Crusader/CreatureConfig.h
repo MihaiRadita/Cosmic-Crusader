@@ -10,6 +10,7 @@ namespace ratchet
 		float m_movingSpeed;
 		float m_fallingSpeed;
 		float m_jumpingSpeed;
+		float m_movingAirSpeed;
 
 		//Cosntructors
 		CreatureConfig();

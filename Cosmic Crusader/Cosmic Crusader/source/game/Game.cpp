@@ -60,9 +60,9 @@ namespace ratchet
 				colliderConfig.m_layer = PhysiscsLayer::Platforms;
 				colliderConfig.m_bodyDef.type = b2_staticBody;
 				colliderConfig.m_bodyDef.fixedRotation = true;
-				colliderConfig.m_fixtureDef.density = 0.f;
-				colliderConfig.m_fixtureDef.friction = 90.f;
-				colliderConfig.m_fixtureDef.restitution = 0.1f;
+				colliderConfig.m_fixtureDef.density = 0.0f;
+				colliderConfig.m_fixtureDef.friction = 80.1f;
+				colliderConfig.m_fixtureDef.restitution = 0.0f;
 
 
 				config.m_colliderConfig = &colliderConfig;
@@ -187,8 +187,8 @@ namespace ratchet
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.f, 1.f);
 
-			config.m_movingSpeed =800.59f;
-			config.m_jumpingSpeed = 5000.0f;
+			config.m_movingSpeed = 70.8f;
+			config.m_jumpingSpeed = 13.0f;
 			config.m_fallingSpeed = 700.0f;
 
 
@@ -201,8 +201,8 @@ namespace ratchet
 			colliderConfig.m_bodyDef.type = b2_dynamicBody;
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;
-			colliderConfig.m_fixtureDef.density = 1.f;
-			colliderConfig.m_fixtureDef.friction = 1.f;
+			colliderConfig.m_fixtureDef.density = 1.0f;
+			colliderConfig.m_fixtureDef.friction = 0.5f;
 			colliderConfig.m_fixtureDef.restitution = 0.f;
 
 			config.m_colliderConfig = &colliderConfig;
@@ -234,7 +234,7 @@ namespace ratchet
 	void Game::initWindow()
 	{
 		m_window.create(sf::VideoMode(960,640), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
-		m_window.setFramerateLimit(200000);
+		m_window.setFramerateLimit(60);
 	}
 
 	void Game::initPhysics()
@@ -282,11 +282,31 @@ namespace ratchet
 		float deltaTime = (timeNow - timeLastFrame);
 		timeLastFrame = timeNow;
 
-		/*if (deltaTime > 1.0f / 2.0f) {
-			deltaTime = 1.0f / 2.0f;  
-		}*/
+		if (deltaTime > 1.0f / 5.0f) {
+			deltaTime = 1.0f / 5.0f;  
+		}
 
-		m_physics->update(deltaTime);
+		float timeStep = 1.0f / 60.0f;  
+		float accumulatedTime = 0.0f;
+
+		accumulatedTime += deltaTime;
+
+
+		int maxSteps = 60;  
+		int steps = 0;
+
+		while (accumulatedTime > timeStep && steps < maxSteps)
+		{
+			m_physics->update(timeStep);
+			accumulatedTime -= timeStep;
+			steps++;
+		}
+
+		if (steps == maxSteps) {
+
+			accumulatedTime = 0.0f;
+		}
+
 
 		for (auto& obj : m_gameObjects)
 		{

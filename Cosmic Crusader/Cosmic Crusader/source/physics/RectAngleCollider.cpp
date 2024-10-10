@@ -99,9 +99,9 @@ namespace ratchet
 			userDataName = static_cast<short>(config.m_layer);
 			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 		}
-		
+
 		m_body->CreateFixture(&m_fixtureDef);
-		
+
 		if (m_bodyDef.type == b2_staticBody)
 		{
 #ifdef IS_RATCHET_DEBUG
@@ -313,11 +313,7 @@ namespace ratchet
 
 		b2Vec2 velocity = m_body->GetLinearVelocity();
 
-		float fallingSpeed = 1000.5f;
-
-
-		float gravityConstant = 50000.81f; 
-		float maxFallSpeed = 500.0f;
+		velocity.x = 0.0f;
 
 		if (moving)
 		{
@@ -325,46 +321,34 @@ namespace ratchet
 			velocity.x += move;
 
 		}
-		else
-		{
-			velocity.x = 0.0f;
-		}
 
-		/*if (velocity.y > 0)
-		{
-			velocity.y = 1000.5f;
-		}*/
-
-		if (!isGround)
-		{
-			velocity.y += gravityConstant;
-			if (velocity.y > maxFallSpeed)
-			{
-				velocity.y = maxFallSpeed;
-			}
-		}
-
-		m_body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
+		m_body->ApplyLinearImpulse(b2Vec2(move, 0.0f), m_body->GetWorldCenter(), true);
 	}
+
 	
 	
 
 	void RectAngleCollider::applyJump(float& jumpSpeed, bool& jumping)
 	{
-		float jump = jumpSpeed * -10000;
+		float jump = jumpSpeed * -1;
 
-		b2Vec2 velocity = m_body->GetLinearVelocity();
+		//b2Vec2 velocity = m_body->GetLinearVelocity();
 
-		//velocity.y = 0.0f;
+		////velocity.y = 0.0f;
+
+		//if (jumping)
+		//{
+		//	velocity.y += jump;
+		//}
+
+
+
+		//m_body->SetLinearVelocity(velocity);
 
 		if (jumping)
 		{
-			velocity.y += jump;
+			m_body->ApplyLinearImpulse(b2Vec2(0.0f, jump * 10), m_body->GetWorldPoint(b2Vec2(m_body->GetPosition().x, m_body->GetPosition().y)), true);
 		}
-
-
-
-		m_body->SetLinearVelocity(velocity);
 
 		DBOUT("He JUMPED!!!!");
 	}

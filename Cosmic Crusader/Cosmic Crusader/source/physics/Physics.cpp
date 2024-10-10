@@ -8,9 +8,10 @@ namespace ratchet
 	{
 		if (!Physics::s_physicsWorld)
 		{
-			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 1000.0f));
+			Physics::s_physicsWorld = new b2World(b2Vec2(0.0f, 500.8f));
 		}
-		m_timeStep = 1.0 / 190.0;
+		s_physicsWorld->SetAllowSleeping(true);
+		m_timeStep = 1.0 / 60.0;
 		m_velocityIterations = 6;
 		m_positionIterations = 2;
 		m_accumulator = 0.f;
@@ -42,7 +43,7 @@ namespace ratchet
 
 		}*/
 
-		if (deltaTime > sc_fixedDeltaTime) {
+		/*if (deltaTime > sc_fixedDeltaTime) {
 			deltaTime = sc_fixedDeltaTime;
 		}
 
@@ -50,14 +51,20 @@ namespace ratchet
 
 		while (m_accumulator >= m_timeStep)
 		{
-			s_physicsWorld->Step(m_timeStep, m_velocityIterations, m_positionIterations);
 			m_accumulator -= m_timeStep;
 		}
 
 		if (m_accumulator < 0.f)
 		{
 			m_accumulator = 0.f;
-		}
+		}*/
+
+		/*while (deltaTime > 0.0f)
+		{
+			float step = std::min(deltaTime, m_timeStep);
+			deltaTime -= step;
+		}*/
+			s_physicsWorld->Step(m_timeStep, m_velocityIterations, m_positionIterations);
 	}
 
 	void Physics::update(float& deltatime)
