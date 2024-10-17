@@ -36,7 +36,6 @@ namespace ratchet
 
 		//Getters
 		b2BodyDef* getBodyDef();
-		b2Body* getBody() override;
 		b2PolygonShape* getColliderShape();
 		b2FixtureDef* getFixtureDef();
 		b2Vec2 getOffset();
@@ -44,19 +43,12 @@ namespace ratchet
 		b2Vec2 getColliderPosition();
 		short userDataName;
 
-
-		//Setters
-		void setColliderPosition(float x, float y) override;
-		void setColliderRotation(float angle) override;
-
 		//Checks
 #ifdef IS_RATCHET_DEBUG
 		void printBodyPositionRotation() override;
 		void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState) override;
 		void debugRender(sf::RenderTarget& target) override;
 #endif
-		void applyMovement(float& movementSpeed, bool& moving, int direction, bool& isGround) override;
-		void applyJump(float& jumpSpeed, bool& jumping) override;
 
 		//Checks
 		bool performGroundRayCast(sf::Sprite& sprite) override;

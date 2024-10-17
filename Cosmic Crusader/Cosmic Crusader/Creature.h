@@ -20,8 +20,7 @@ namespace ratchet
 		//Character Features
 		float m_movementSpeed;
 		float m_fallingSpeed;
-		float m_jumpingSpeed;
-		bool m_isGround;
+		float m_jumpImpulse;
 		bool m_isMoving;
 
 		//Character Animations
@@ -58,6 +57,11 @@ namespace ratchet
 		//Animation functions
 		void switchAnimation();
 
+		// Physics
+		bool isGrounded() const { return m_isGround; };
+
+	private:
+		bool m_isGround;
 	};
 }
 

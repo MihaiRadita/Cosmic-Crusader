@@ -9,7 +9,7 @@ namespace ratchet
 		//Characters Features
 		float m_movingSpeed;
 		float m_fallingSpeed;
-		float m_jumpingSpeed;
+		float m_jumpImpulse;
 		float m_movingAirSpeed;
 
 		//Cosntructors

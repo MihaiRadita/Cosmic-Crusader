@@ -9,7 +9,7 @@ namespace ratchet
 		//Character Features
 		m_movementSpeed = config.m_movingSpeed;
 		m_fallingSpeed = config.m_fallingSpeed;
-		m_jumpingSpeed = config.m_jumpingSpeed;
+		m_jumpImpulse = config.m_jumpImpulse;
 
 		m_characterAnimator = nullptr;
 		m_spritePath = config.spriteTexturePath;
@@ -43,9 +43,9 @@ namespace ratchet
 	void Creature::update()
 	{
 		updateInput();
+		m_isGround = m_collider->performGroundRayCast(m_sprite);
 		updateMovement();
 		updateJump();
-		updateRunningJump();
 		updateAnimations();
 		updatePhysics();
 	}
@@ -78,9 +78,9 @@ namespace ratchet
 		m_sprite.setRotation(m_rotation);
 
 #ifdef IS_RATCHET_DEBUG
-		sf::Vector2f playerSpritePosition;
-		playerSpritePosition = m_sprite.getPosition();
-		std::cout << m_sprite.getPosition().x << " , " << m_sprite.getPosition().y;
+		//sf::Vector2f playerSpritePosition;
+		//playerSpritePosition = m_sprite.getPosition();
+		//std::cout << m_sprite.getPosition().x << " , " << m_sprite.getPosition().y;
 #endif
 	}
 	void Creature::updateJump()
@@ -103,7 +103,7 @@ namespace ratchet
 	}
 	bool Creature::isNoControlActive()
 	{
-		if (m_Input.x != 0 || m_Input.y != 0 || m_Input.isJump == true)
+		if (m_input.x != 0 || m_input.y != 0 || m_input.isJump == true)
 		{
 			return false;
 		}

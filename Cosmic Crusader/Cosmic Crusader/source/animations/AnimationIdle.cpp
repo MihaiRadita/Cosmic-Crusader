@@ -68,7 +68,7 @@ namespace ratchet
 				m_isAnimTransition = false;
 				sprite.setTexture((m_animFrameImg)[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
-				std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
+				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
 
 			}
@@ -86,7 +86,7 @@ namespace ratchet
 				m_isAnimTransition = false;
 				sprite.setTexture((m_animFrameImg)[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
-				std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
+				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
 			}
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())

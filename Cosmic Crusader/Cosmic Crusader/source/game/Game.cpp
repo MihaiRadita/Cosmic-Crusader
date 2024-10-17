@@ -27,7 +27,7 @@ namespace ratchet
 				{
 					layer = l;
 #ifdef IS_RATCHET_DEBUG
-					std::cout << "We have a match!" << std::endl;
+					//std::cout << "We have a match!" << std::endl;
 #endif
 					break;
 				}
@@ -46,12 +46,23 @@ namespace ratchet
 				config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
 				config.m_movementType = MOVEMENTTYPE_UNKNOWN;
 
-				config.positionXOffset = 0.f;
-				config.positionYOffset = -64.f;
+				config.scale = sf::Vector2f(0.7f, 0.7f);
 
-				config.position = sf::Vector2f(obj["x"].get<float>() + config.positionXOffset, obj["y"].get<float>() + config.positionYOffset);
+				float tileWidth = 64.0f;
+				float tileHeight = 64.0f;
+
+				config.positionXOffset = 0.f;
+				config.positionYOffset =  -tileHeight * config.scale.y;
+
+
+				float posX = obj["x"].get<float>() * config.scale.x;
+				float posY = obj["y"].get<float>() * config.scale.y;
+
+				posY += config.positionYOffset;
+
+
+				config.position = sf::Vector2f(posX, posY);
 				config.rotation = obj["rotation"];
-				config.scale = sf::Vector2f(1.0f, 1.0f);
 				config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Tileset/";
 				config.startSpriteTexturePathAddition = obj["name"].get<std::string>();
 				config.startSpriteTexturePath = config.startSpriteTexturePath + config.startSpriteTexturePathAddition + ".png";
@@ -67,7 +78,7 @@ namespace ratchet
 
 				config.m_colliderConfig = &colliderConfig;
 
-				m_gameObjects.push_back(new GameObject(config));
+				GameObject::s_gameObjects.push_back(new GameObject(config));
 			}
 
 			
@@ -183,13 +194,13 @@ namespace ratchet
 			config.positionXOffset = 0.f;
 			config.positionYOffset = 0.f;
 
-			config.position = sf::Vector2f(500.0f, 100.f);
+			config.position = sf::Vector2f(500.0f, 200.f);
 			config.rotation = 0.0f;
-			config.scale = sf::Vector2f(1.f, 1.f);
+			config.scale = sf::Vector2f(0.3f, 0.3f);
 
-			config.m_movingSpeed = 70.8f;
-			config.m_jumpingSpeed = 13.0f;
-			config.m_fallingSpeed = 700.0f;
+			config.m_movingSpeed = 1200.0f;
+			config.m_jumpImpulse = -16000.0f;
+			config.m_fallingSpeed = 7000.0f;
 
 
 
@@ -201,13 +212,13 @@ namespace ratchet
 			colliderConfig.m_bodyDef.type = b2_dynamicBody;
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;
-			colliderConfig.m_fixtureDef.density = 1.0f;
-			colliderConfig.m_fixtureDef.friction = 0.5f;
+			colliderConfig.m_fixtureDef.density = 4.f;
+			colliderConfig.m_fixtureDef.friction = 5.0f;
 			colliderConfig.m_fixtureDef.restitution = 0.f;
 
 			config.m_colliderConfig = &colliderConfig;
 
-			m_gameObjects.push_back(new Player(config));
+			GameObject::s_gameObjects.push_back(new Player(config));
 
 		}
 	}
@@ -223,18 +234,22 @@ namespace ratchet
 	{
 		delete m_physics;
 
-		for (auto& obj : m_gameObjects)
+		for (auto& obj : GameObject::s_gameObjects)
 		{
 			delete obj;
 		}
-		m_gameObjects.clear();
+		GameObject::s_gameObjects.clear();
 		
 	}
 
 	void Game::initWindow()
 	{
-		m_window.create(sf::VideoMode(960,640), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
-		m_window.setFramerateLimit(60);
+		m_window.create(sf::VideoMode(1280,720), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+		// m_window.setFramerateLimit(60);
+
+		sf::View view = m_window.getView();
+		view.zoom(1.0);
+		m_window.setView(view);
 	}
 
 	void Game::initPhysics()
@@ -250,19 +265,22 @@ namespace ratchet
 
 	void Game::handleEvents()
 	{
-		while (m_window.pollEvent(m_ev))
+		sf::Event sfEvent;
+		while (m_window.pollEvent(sfEvent))
 		{
-			if (m_ev.type == sf::Event::Closed)
+			if (sfEvent.type == sf::Event::Closed)
 			{
 				m_window.close();
 			}
-			if (m_ev.type == sf::Event::KeyPressed && m_ev.key.code == sf::Keyboard::Escape)
+			if (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::Escape)
 			{
 				m_window.close();
 			}
-			for (const auto& obj : m_gameObjects) {
-				if (auto player = dynamic_cast<Player*>(obj)) {
-					player->handleEvent(m_ev);
+			for (const auto& obj : GameObject::s_gameObjects) 
+			{
+				if (auto player = dynamic_cast<Player*>(obj)) 
+				{
+					player->handleEvent(sfEvent);
 				}
 			}
 
@@ -286,7 +304,7 @@ namespace ratchet
 			deltaTime = 1.0f / 5.0f;  
 		}
 
-		float timeStep = 1.0f / 60.0f;  
+		float timeStep = 1.0f / 120.0f;  
 		float accumulatedTime = 0.0f;
 
 		accumulatedTime += deltaTime;
@@ -295,12 +313,12 @@ namespace ratchet
 		int maxSteps = 60;  
 		int steps = 0;
 
-		while (accumulatedTime > timeStep && steps < maxSteps)
+		/*while (accumulatedTime > timeStep && steps < maxSteps)
 		{
-			m_physics->update(timeStep);
 			accumulatedTime -= timeStep;
 			steps++;
-		}
+		}*/
+			m_physics->update(timeStep);
 
 		if (steps == maxSteps) {
 
@@ -308,7 +326,7 @@ namespace ratchet
 		}
 
 
-		for (auto& obj : m_gameObjects)
+		for (auto& obj : GameObject::s_gameObjects)
 		{
 			obj->update();
 		}
@@ -322,12 +340,19 @@ namespace ratchet
 	{
 		m_window.clear(sf::Color::Black);
 
-		for (auto* obj : m_gameObjects)
+		for (auto* obj : GameObject::s_gameObjects)
 		{
 #ifdef IS_RATCHET_DEBUG
-			std::cout << "Rendering object at position: " << obj->getSprite().getPosition().x << ", " << obj->getSprite().getPosition().y << std::endl;
-			std::cout << "Texture pointer: " <<obj->getSprite().getTexture() << std::endl;
+			//std::cout << "Rendering object at position: " << obj->getSprite().getPosition().x << ", " << obj->getSprite().getPosition().y << std::endl;
+			//std::cout << "Texture pointer: " <<obj->getSprite().getTexture() << std::endl;
 #endif
+
+			if (auto player = dynamic_cast<Player*>(obj))
+			{
+				sf::View view = m_window.getView();
+				view.setCenter(player->getCollider()->getBody()->GetPosition().x, player->getCollider()->getBody()->GetPosition().y);
+				m_window.setView(view);
+			}
 
 			obj->render(m_window);
 		}

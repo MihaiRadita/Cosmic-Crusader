@@ -9,12 +9,19 @@ namespace ratchet
 
 	}
 
-	void ColliderBase::applyMovement(float& movementSpeed, bool& moving, int direction, bool& isGround)
+	void ColliderBase::applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity)
 	{
-	}
+		b2Vec2 velocity = m_body->GetLinearVelocity();
+		if (changeX)
+		{
+			velocity.x = xVelocity;
+		}
+		if (changeY)
+		{
+			velocity.y = yVelocity;
+		}
 
-	void ColliderBase::applyJump(float& jumpSpeed, bool& jumping)
-	{
+		m_body->SetLinearVelocity(velocity);
 	}
 
 	b2Body* ColliderBase::getBody()

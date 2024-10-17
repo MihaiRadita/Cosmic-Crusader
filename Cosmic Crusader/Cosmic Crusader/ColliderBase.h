@@ -40,8 +40,7 @@ namespace ratchet
 		//Constructors
 		ColliderBase(const BaseColliderConfig& config);
 
-		virtual void applyMovement(float& movementSpeed, bool& moving, int direction, bool& isGround);
-		virtual void applyJump(float& jumpSpeed, bool& jumping);
+		virtual void applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity);
 
 		//Getters
 		virtual b2Body* getBody();

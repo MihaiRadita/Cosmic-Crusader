@@ -34,7 +34,7 @@ namespace ratchet
 		if (m_textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Platform.png") == false)
 		{
 #ifdef IS_RATCHET_DEBUG
-			std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
+			//std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
 #endif
 		}
 	}
@@ -62,8 +62,8 @@ namespace ratchet
 	void Tile::update()
 	{
 #ifdef IS_RATCHET_DEBUG
-		std::cout << "Ground Sprite " << m_tileSprite.getPosition().x << " , " << m_tileSprite.getPosition().y << std::endl;
-		std::cout << "Ground Collider " << m_collider->getBody()->GetPosition().x << " , " << m_collider->getBody()->GetPosition().y << std::endl;
+		//std::cout << "Ground Sprite " << m_tileSprite.getPosition().x << " , " << m_tileSprite.getPosition().y << std::endl;
+		//std::cout << "Ground Collider " << m_collider->getBody()->GetPosition().x << " , " << m_collider->getBody()->GetPosition().y << std::endl;
 #endif
 	}
 

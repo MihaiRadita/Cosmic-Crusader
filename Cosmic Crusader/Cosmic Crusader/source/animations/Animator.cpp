@@ -15,7 +15,7 @@ namespace ratchet
 		{
 			delete m_animationTmp;
 #ifdef IS_RATCHET_DEBUG
-			std::cout << "Pointer deleted" << std::endl;
+			//std::cout << "Pointer deleted" << std::endl;
 #endif
 		}
 	}

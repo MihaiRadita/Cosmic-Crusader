@@ -66,7 +66,7 @@ namespace ratchet
 				m_isAnimTransition = false;
 				sprite.setTexture((s_animFrameImg)[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
-				std::cout << "PLayer Jump image " << m_currentFrameIndex << std::endl;
+				//std::cout << "PLayer Jump image " << m_currentFrameIndex << std::endl;
 #endif
 
 			}
@@ -90,7 +90,7 @@ namespace ratchet
 				m_isAnimTransition = false;
 				sprite.setTexture((s_animFrameImg)[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
-				std::cout << "PLayer Jump image " << m_currentFrameIndex << std::endl;
+				//std::cout << "PLayer Jump image " << m_currentFrameIndex << std::endl;
 #endif
 			}
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_currentJumpTimeLimit || getAnimationSwitch())
@@ -158,7 +158,7 @@ namespace ratchet
 		{
 			return  false;
 #ifdef IS_RATCHET_DEBUG
-			std::cout << "image number action " << m_jumpAnimFrameIndex << " happended!" << std::endl;
+			//std::cout << "image number action " << m_jumpAnimFrameIndex << " happended!" << std::endl;
 #endif
 		}
 

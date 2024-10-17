@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObjectConfig.h"
+#include "physics/Physics.h"
 #include "physics/RectAngleCollider.h"
+#include "ColliderBase.h"
 #include "ResourceManager.h"
 
 
@@ -40,6 +42,9 @@ namespace ratchet
 		sf::Vector2f m_colliderScaleMultipier;
 		ColliderBase* m_collider;
 
+
+		static std::vector<GameObject*> s_gameObjects;
+
 		//Constructor
 		GameObject(const GameObjectConfig& config);
 
@@ -66,6 +71,13 @@ namespace ratchet
 		//Render function
 		void render(sf::RenderTarget& target);
 
+		 static GameObject* findGameObjectByBody(const b2Body* body);
+
+		 //Transforrms setters
+		 virtual void setPosition(const sf::Vector2f position);
+		 virtual void setRotation(const float angle);
+
+
 		virtual void destroy();
 	protected:
 		struct Input
@@ -81,7 +93,7 @@ namespace ratchet
 			void resetControls();
 			
 			
-		} m_Input;
+		} m_input;
 
 	};
 

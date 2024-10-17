@@ -54,7 +54,7 @@ namespace ratchet
 		if (m_spriteTexture.loadFromFile(m_startSpritePath) == false)
 		{
 #ifdef IS_RATCHET_DEBUG
-			std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
+			//std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
 #endif
 		}
 
@@ -123,6 +123,31 @@ namespace ratchet
 		target.draw(m_sprite);
 	}
 
+	GameObject* GameObject::findGameObjectByBody(const b2Body* body)
+	{
+		for (auto* gameObject : s_gameObjects) 
+		{
+			if (gameObject != nullptr && gameObject->m_collider != nullptr && gameObject->m_collider->getBody() == body)
+			{
+				return gameObject;
+			}
+		}
+
+		return nullptr; 
+	}
+
+	void GameObject::setPosition(const sf::Vector2f position)
+	{
+		m_position = position;
+		m_sprite.setPosition(position);
+	}
+
+	void GameObject::setRotation(const float angle)
+	{
+		m_rotation = angle;
+		m_sprite.setRotation(m_rotation);
+	}
+
 	void ratchet::GameObject::destroy()
 	{
 	}
@@ -173,5 +198,7 @@ namespace ratchet
 		resetMovementControls();
 		resetJumpControls();
 	}
+
+	std::vector<GameObject*>GameObject ::s_gameObjects;
 
 }

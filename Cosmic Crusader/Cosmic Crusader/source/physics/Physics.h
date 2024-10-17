@@ -31,6 +31,7 @@ namespace ratchet
 		int32 m_positionIterations;
 		static const float sc_metersScale;
 
+
 		double m_accumulator;  // Acumulator pentru timpul scurs dintre pa?ii de simulare
 
 		static const double sc_fixedDeltaTime;

@@ -12,10 +12,8 @@ namespace ratchet
 	class Game {
 	private:
 		sf::RenderWindow m_window;
-		sf::Event m_ev;
 
 		Physics* m_physics;
-		std::vector<GameObject*> m_gameObjects;
 
 		sf::Clock gameTime;
 		float timeLastFrame = 0;

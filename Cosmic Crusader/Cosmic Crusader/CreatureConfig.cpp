@@ -8,7 +8,7 @@ namespace ratchet
 	{
 		m_movingSpeed = 0.f;
 		m_fallingSpeed = 0.f;
-		m_jumpingSpeed = 0.f;
+		m_jumpImpulse = 0.f;
 	}
 
 	ratchet::CreatureConfig::~CreatureConfig()
