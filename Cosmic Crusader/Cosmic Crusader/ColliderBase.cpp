@@ -12,6 +12,9 @@ namespace ratchet
 	void ColliderBase::applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity)
 	{
 		b2Vec2 velocity = m_body->GetLinearVelocity();
+
+		velocity.x = 0.0f;
+
 		if (changeX)
 		{
 			velocity.x = xVelocity;
@@ -20,6 +23,7 @@ namespace ratchet
 		{
 			velocity.y = yVelocity;
 		}
+		m_body->SetAwake(true);
 
 		m_body->SetLinearVelocity(velocity);
 	}
@@ -55,6 +59,30 @@ namespace ratchet
 		b2Vec2 currentPosition = m_body->GetPosition();
 
 		m_body->SetTransform(currentPosition, newAngle);
+	}
+
+	void ColliderBase::getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
+	{
+		xStart = 0.0f;
+		yStart = 0.0f;
+		xEnd = 0.0f;
+		yEnd = 0.0f;
+	}
+
+	void ColliderBase::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
+	{
+		xStart = 0.0f;
+		yStart = 0.0f;
+		xEnd = 0.0f;
+		yEnd = 0.0f;
+	}
+
+	void ColliderBase::getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
+	{
+		xStart = 0.0f;
+		yStart = 0.0f;
+		xEnd = 0.0f;
+		yEnd = 0.0f;
 	}
 
 	bool ColliderBase::performGroundRayCast(sf::Sprite& sprite)

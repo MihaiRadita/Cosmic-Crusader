@@ -68,7 +68,7 @@ namespace ratchet
 		float scaleX = sprite.getScale().x;
 		float scaleY = sprite.getScale().y;
 
-		m_colliderOrigin = b2Vec2((sprite.getLocalBounds().width * scaleX) / 2.0f, (sprite.getLocalBounds().height * scaleY) / 2.0f);
+		m_colliderOrigin = b2Vec2((sprite.getLocalBounds().width * scaleX) / 2.0, (sprite.getLocalBounds().height * scaleY) / 2.0f);
 
 
 		m_colliderSpriteScale = b2Vec2(
@@ -223,7 +223,7 @@ namespace ratchet
 				//they are polygen's vertices, you can use these to get the height / width
 				b2Vec2 vertex = b2Mul(m_body->GetTransform(), poly->m_vertices[i]);
 
-				sf::CircleShape circle(3.0f);
+				sf::CircleShape circle(0.01f);
 				circle.setFillColor(sf::Color::Green);
 				circle.setPosition(vertex.x, vertex.y);
 				target.draw(circle);
@@ -241,61 +241,101 @@ namespace ratchet
 
 		outline.setFillColor(sf::Color::Transparent);
 		outline.setOutlineColor(sf::Color::Blue);
-		outline.setOutlineThickness(3.0f);
+		outline.setOutlineThickness(0.01f);
 		outline.setPosition(
 			getColliderPosition().x,
 			getColliderPosition().y
 		);
 
-		auto bodyPosition = sf::CircleShape(3.f);
+		auto bodyPosition = sf::CircleShape(0.01f);
 		bodyPosition.setFillColor(sf::Color::Yellow);
 		bodyPosition.setPosition(m_body->GetPosition().x, m_body->GetPosition().y);
 
-		sf::Vertex line[] = { sf::Vertex(sf::Vector2f(500.f, 10.f), sf::Color::Green), sf::Vertex(sf::Vector2f(700.f, 10.f), sf::Color::Green) };
+		//sf::Vertex line[] = { sf::Vertex(sf::Vector2f(500.f, 10.f), sf::Color::Green), sf::Vertex(sf::Vector2f(700.f, 10.f), sf::Color::Green) };
 
+		if (m_body->GetType() == b2BodyType::b2_dynamicBody)
+		{
+			b2Vec2 startPointLeft = b2Vec2{};
+			b2Vec2 endPointLeft = b2Vec2{};
+			getLeftPointsForRaycast(startPointLeft.x, startPointLeft.y, endPointLeft.x, endPointLeft.y);
 
-		float playerWidth = m_colliderSpriteScale.x;
-		float playerHeight = m_colliderSpriteScale.y;
-		b2Vec2 playerPosition = m_body->GetPosition();
+			sf::Vertex rayCastLeft[] = { sf::Vertex(sf::Vector2f(startPointLeft.x, startPointLeft.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointLeft.x, endPointLeft.y), sf::Color::Green) };
 
-		b2Vec2 startPointLeft = b2Vec2(playerPosition.x + 2.f, playerPosition.y + (playerHeight / 2.f));
-		b2Vec2 endPointLeft = b2Vec2(startPointLeft.x, startPointLeft.y + ((playerHeight / 2.f)) + 1.5f);
+			auto pointLeftStart = sf::CircleShape(0.01f);
+			pointLeftStart.setFillColor(sf::Color::Red);
+			pointLeftStart.setPosition(startPointLeft.x, startPointLeft.y);
 
-		sf::Vertex rayCastLeft[] = { sf::Vertex(sf::Vector2f(startPointLeft.x, startPointLeft.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointLeft.x, endPointLeft.y), sf::Color::Green) };
+			b2Vec2 startPointRight = b2Vec2{};
+			b2Vec2 endPointRight = b2Vec2{};
+			getRightPointsForRaycast(startPointRight.x, startPointRight.y, endPointRight.x, endPointRight.y);
 
-		auto pointLeftStart = sf::CircleShape(3.0f);
-		pointLeftStart.setFillColor(sf::Color::Red);
-		pointLeftStart.setPosition(startPointLeft.x, startPointLeft.y);
+			sf::Vertex rayCastRight[] = { sf::Vertex(sf::Vector2f(startPointRight.x, startPointRight.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointRight.x, endPointRight.y), sf::Color::Green) };
 
-		b2Vec2 startPointRight = b2Vec2((playerPosition.x + playerWidth) - 2.f, playerPosition.y + (playerHeight / 2.f));
-		b2Vec2 endPointRight = b2Vec2(startPointRight.x, startPointRight.y + ((playerHeight / 2.f)) + 1.5f);
+			auto pointRightStart = sf::CircleShape(0.01f);
+			pointRightStart.setFillColor(sf::Color::Red);
+			pointRightStart.setPosition(startPointRight.x, startPointRight.y);
 
-		sf::Vertex rayCastRight[] = { sf::Vertex(sf::Vector2f(startPointRight.x, startPointRight.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointRight.x, endPointRight.y), sf::Color::Green) };
+			b2Vec2 startPointMiddle = b2Vec2{};
+			b2Vec2 endPointMiddle = b2Vec2{};
+			getMiddlePointsForRaycast(startPointMiddle.x, startPointMiddle.y, endPointMiddle.x, endPointMiddle.y);
 
-		auto pointRightStart = sf::CircleShape(3.0f);
-		pointRightStart.setFillColor(sf::Color::Red);
-		pointRightStart.setPosition(startPointRight.x, startPointRight.y);
+			sf::Vertex rayCastMiddle[] = { sf::Vertex(sf::Vector2f(startPointMiddle.x, startPointMiddle.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointMiddle.x, endPointMiddle.y), sf::Color::Green) };
 
-		b2Vec2 startPointMiddle = b2Vec2((playerPosition.x + (playerWidth / 2.f)), playerPosition.y + (playerHeight / 2.f));
-		b2Vec2 endPointMiddle = b2Vec2(startPointMiddle.x, startPointMiddle.y + ((playerHeight / 2.f)) + 1.5f);
+			auto pointMiddleStart = sf::CircleShape(0.01f);
+			pointMiddleStart.setFillColor(sf::Color::Red);
+			pointMiddleStart.setPosition(startPointRight.x, startPointRight.y);
 
-		sf::Vertex rayCastMiddle[] = { sf::Vertex(sf::Vector2f(startPointMiddle.x, startPointMiddle.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointMiddle.x, endPointMiddle.y), sf::Color::Green) };
-
-		auto pointMiddleStart = sf::CircleShape(3.0f);
-		pointMiddleStart.setFillColor(sf::Color::Red);
-		pointMiddleStart.setPosition(startPointRight.x, startPointRight.y);
+			target.draw(rayCastLeft, 2, sf::Lines);
+			target.draw(rayCastRight, 2, sf::Lines);
+			target.draw(rayCastMiddle, 2, sf::Lines);
+			target.draw(pointLeftStart);
+			target.draw(pointRightStart);
+			target.draw(pointMiddleStart);
+		}
 
 		target.draw(outline);
 		target.draw(bodyPosition);
-		target.draw(line, 2, sf::Lines);
-		target.draw(rayCastLeft, 2, sf::Lines);
-		target.draw(rayCastRight, 2, sf::Lines);
-		target.draw(rayCastMiddle, 2, sf::Lines);
-		target.draw(pointLeftStart);
-		target.draw(pointRightStart);
-		target.draw(pointMiddleStart);
 	}
 #endif
+
+	void RectAngleCollider::getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
+	{
+		ColliderBase::getLeftPointsForRaycast(xStart, yStart, xEnd, yEnd);
+
+		b2Vec2 playerPosition = m_body->GetPosition();
+
+		xStart = playerPosition.x;
+		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
+
+		xEnd = xStart;
+		yEnd = yEnd + m_colliderSpriteScale.y * 1.5f;
+	}
+
+	void RectAngleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
+	{
+		ColliderBase::getMiddlePointsForRaycast(xStart, yStart, xEnd, yEnd);
+
+		b2Vec2 playerPosition = m_body->GetPosition();
+
+		xStart = playerPosition.x + (m_colliderSpriteScale.x / 2.f);
+		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
+
+		xEnd = xStart;
+		yEnd = yEnd + m_colliderSpriteScale.y * 1.5f;
+	}
+
+	void RectAngleCollider::getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
+	{
+		ColliderBase::getRightPointsForRaycast(xStart, yStart, xEnd, yEnd);
+
+		b2Vec2 playerPosition = m_body->GetPosition();
+
+		xStart = playerPosition.x + m_colliderSpriteScale.x;
+		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
+
+		xEnd = xStart;
+		yEnd = yEnd + m_colliderSpriteScale.y * 1.5f;
+	}
 
 	bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)
 	{
@@ -303,14 +343,17 @@ namespace ratchet
 		float playerHeight = sprite.getGlobalBounds().height;
 		b2Vec2 playerPosition = m_body->GetPosition();
 
-		b2Vec2 startPointLeft = b2Vec2(playerPosition.x + 2.f, playerPosition.y + (playerHeight / 2.f));
-		b2Vec2 endPointLeft = b2Vec2(startPointLeft.x, startPointLeft.y + ((playerHeight / 2.f)) + 1.5f);
+		b2Vec2 startPointLeft = b2Vec2{};
+		b2Vec2 endPointLeft = b2Vec2{};
+		getLeftPointsForRaycast(startPointLeft.x, startPointLeft.y, endPointLeft.x, endPointLeft.y);
 
-		b2Vec2 startPointRight = b2Vec2((playerPosition.x + playerWidth) - 2.f, playerPosition.y + (playerHeight / 2.f));
-		b2Vec2 endPointRight = b2Vec2(startPointRight.x, startPointRight.y + ((playerHeight / 2.f)) + 1.5f);
+		b2Vec2 startPointMiddle = b2Vec2{};
+		b2Vec2 endPointMiddle = b2Vec2{};
+		getMiddlePointsForRaycast(startPointMiddle.x, startPointMiddle.y, endPointMiddle.x, endPointMiddle.y);
 
-		b2Vec2 startPointMiddle = b2Vec2(playerPosition.x + (playerWidth / 2.f), playerPosition.y + (playerHeight / 2.f));
-		b2Vec2 endPointMiddle = b2Vec2(playerPosition.x + (playerWidth / 2.f), playerPosition.y + ((playerHeight / 2.f)) + 1.5f);
+		b2Vec2 startPointRight = b2Vec2{};
+		b2Vec2 endPointRight = b2Vec2{};
+		getRightPointsForRaycast(startPointRight.x, startPointRight.y, endPointRight.x, endPointRight.y);
 
 		GroundRayCastCallBack callbackLeft(m_body);
 		s_physicsWorld->RayCast(&callbackLeft, startPointLeft, endPointLeft);
@@ -321,7 +364,7 @@ namespace ratchet
 		GroundRayCastCallBack callbackMiddle(m_body);
 		s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
 
-		if ((callbackLeft.m_fraction <= 1.0f || callbackRight.m_fraction <= 1.0f || callbackMiddle.m_fraction <= 1.0f) && (callbackLeft.m_hit || callbackRight.m_hit || callbackMiddle.m_hit))
+		if ((callbackLeft.m_fraction <= 2.0f || callbackRight.m_fraction <= 2.0f || callbackMiddle.m_fraction <= 2.0f) && (callbackLeft.m_hit || callbackRight.m_hit || callbackMiddle.m_hit))
 		{
 #ifdef IS_RATCHET_DEBUG
 			//std::cout << "Victory " << std::endl;

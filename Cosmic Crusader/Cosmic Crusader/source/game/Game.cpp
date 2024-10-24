@@ -3,8 +3,12 @@
 
 namespace ratchet
 {
+	static constexpr auto sc_tiledToGameScale = 0.01f;
+	static constexpr auto sc_defaultZoom = 2.0f * sc_tiledToGameScale;
+
 	void Game::spawnObjects()
 	{
+
 		{ 
 
 			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap..tmj");
@@ -46,7 +50,7 @@ namespace ratchet
 				config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
 				config.m_movementType = MOVEMENTTYPE_UNKNOWN;
 
-				config.scale = sf::Vector2f(0.7f, 0.7f);
+				config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
 				float tileWidth = 64.0f;
 				float tileHeight = 64.0f;
@@ -72,7 +76,7 @@ namespace ratchet
 				colliderConfig.m_bodyDef.type = b2_staticBody;
 				colliderConfig.m_bodyDef.fixedRotation = true;
 				colliderConfig.m_fixtureDef.density = 0.0f;
-				colliderConfig.m_fixtureDef.friction = 80.1f;
+				colliderConfig.m_fixtureDef.friction = 1.0f;
 				colliderConfig.m_fixtureDef.restitution = 0.0f;
 
 
@@ -194,12 +198,12 @@ namespace ratchet
 			config.positionXOffset = 0.f;
 			config.positionYOffset = 0.f;
 
-			config.position = sf::Vector2f(500.0f, 200.f);
+			config.position = sf::Vector2f(0.0f, 0.0f);
 			config.rotation = 0.0f;
-			config.scale = sf::Vector2f(0.3f, 0.3f);
+			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
-			config.m_movingSpeed = 1200.0f;
-			config.m_jumpImpulse = -16000.0f;
+			config.m_movingSpeed = 7.0f;
+			config.m_jumpImpulse = -10.0f;
 			config.m_fallingSpeed = 7000.0f;
 
 
@@ -212,8 +216,8 @@ namespace ratchet
 			colliderConfig.m_bodyDef.type = b2_dynamicBody;
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;
-			colliderConfig.m_fixtureDef.density = 4.f;
-			colliderConfig.m_fixtureDef.friction = 5.0f;
+			colliderConfig.m_fixtureDef.density = 1.f;
+			colliderConfig.m_fixtureDef.friction = 2.9f;
 			colliderConfig.m_fixtureDef.restitution = 0.f;
 
 			config.m_colliderConfig = &colliderConfig;
@@ -248,7 +252,7 @@ namespace ratchet
 		// m_window.setFramerateLimit(60);
 
 		sf::View view = m_window.getView();
-		view.zoom(1.0);
+		view.zoom(sc_defaultZoom);
 		m_window.setView(view);
 	}
 
@@ -283,7 +287,6 @@ namespace ratchet
 					player->handleEvent(sfEvent);
 				}
 			}
-
 		}
 	}
 	void Game::update()

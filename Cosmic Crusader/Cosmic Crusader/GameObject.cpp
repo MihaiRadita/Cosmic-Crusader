@@ -113,7 +113,7 @@ namespace ratchet
 		);
 		spriteOutline.setFillColor(sf::Color::Transparent);
 		spriteOutline.setOutlineColor(sf::Color::Red);
-		spriteOutline.setOutlineThickness(1.0f);
+		spriteOutline.setOutlineThickness(0.01f);
 		spriteOutline.setPosition(
 			m_sprite.getPosition().x,
 			m_sprite.getPosition().y);

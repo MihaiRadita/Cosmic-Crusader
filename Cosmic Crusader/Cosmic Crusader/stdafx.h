@@ -27,7 +27,7 @@
 //Windows
 #include <Windows.h>
 
-#undef IS_RATCHET_DEBUG
+// #undef IS_RATCHET_DEBUG
 
 #ifndef DBOUT
 #define DBOUT( s )            \

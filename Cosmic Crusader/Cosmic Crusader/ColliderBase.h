@@ -40,7 +40,7 @@ namespace ratchet
 		//Constructors
 		ColliderBase(const BaseColliderConfig& config);
 
-		virtual void applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity);
+		void applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity);
 
 		//Getters
 		virtual b2Body* getBody();
@@ -55,6 +55,9 @@ namespace ratchet
 		virtual void setColliderRotation(float angle);
 
 		//Checks
+		virtual void getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
+		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
+		virtual void getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual bool performGroundRayCast(sf::Sprite& sprite);
 
 	};

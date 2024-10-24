@@ -51,6 +51,9 @@ namespace ratchet
 #endif
 
 		//Checks
+		virtual void getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
+		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
+		virtual void getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
 		bool performGroundRayCast(sf::Sprite& sprite) override;
 	};
 }
