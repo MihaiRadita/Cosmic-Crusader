@@ -304,11 +304,11 @@ namespace ratchet
 
 		b2Vec2 playerPosition = m_body->GetPosition();
 
-		xStart = playerPosition.x;
+		xStart = playerPosition.x + 0.02f;
 		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
 
 		xEnd = xStart;
-		yEnd = yEnd + m_colliderSpriteScale.y * 1.5f;
+		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + 0.02f ;
 	}
 
 	void RectAngleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
@@ -321,7 +321,7 @@ namespace ratchet
 		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
 
 		xEnd = xStart;
-		yEnd = yEnd + m_colliderSpriteScale.y * 1.5f;
+		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + 0.02f;
 	}
 
 	void RectAngleCollider::getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
@@ -330,11 +330,11 @@ namespace ratchet
 
 		b2Vec2 playerPosition = m_body->GetPosition();
 
-		xStart = playerPosition.x + m_colliderSpriteScale.x;
+		xStart = (playerPosition.x + m_colliderSpriteScale.x) - 0.02f;
 		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
 
 		xEnd = xStart;
-		yEnd = yEnd + m_colliderSpriteScale.y * 1.5f;
+		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + 0.02f;
 	}
 
 	bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)
@@ -364,7 +364,7 @@ namespace ratchet
 		GroundRayCastCallBack callbackMiddle(m_body);
 		s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
 
-		if ((callbackLeft.m_fraction <= 2.0f || callbackRight.m_fraction <= 2.0f || callbackMiddle.m_fraction <= 2.0f) && (callbackLeft.m_hit || callbackRight.m_hit || callbackMiddle.m_hit))
+		if ((callbackLeft.m_fraction <= 1.0f || callbackRight.m_fraction <= 1.0f || callbackMiddle.m_fraction <= 1.0f) && (callbackLeft.m_hit || callbackRight.m_hit || callbackMiddle.m_hit))
 		{
 #ifdef IS_RATCHET_DEBUG
 			//std::cout << "Victory " << std::endl;

@@ -28,10 +28,10 @@ namespace ratchet
 			switch (event.key.code)
 			{
 			case sf::Keyboard::A:
-				if (m_input.x == 0) m_input.x = -1;
+				if (m_input.x >= 0) m_input.x = -1;
 				break;
 			case sf::Keyboard::D:
-				if (m_input.x == 0) m_input.x = +1;
+				if (m_input.x <= 0) m_input.x = +1;
 				break;
 			case sf::Keyboard::Space:
 				m_input.isJump = true;
