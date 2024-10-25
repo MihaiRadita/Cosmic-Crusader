@@ -304,11 +304,11 @@ namespace ratchet
 
 		b2Vec2 playerPosition = m_body->GetPosition();
 
-		xStart = playerPosition.x + 0.02f;
+		xStart = playerPosition.x + m_colliderSpriteScale.x * 0.018f;
 		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
 
 		xEnd = xStart;
-		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + 0.02f ;
+		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + m_colliderSpriteScale.y * 0.018f;
 	}
 
 	void RectAngleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
@@ -321,7 +321,7 @@ namespace ratchet
 		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
 
 		xEnd = xStart;
-		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + 0.02f;
+		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + m_colliderSpriteScale.y * 0.018f;
 	}
 
 	void RectAngleCollider::getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
@@ -330,11 +330,11 @@ namespace ratchet
 
 		b2Vec2 playerPosition = m_body->GetPosition();
 
-		xStart = (playerPosition.x + m_colliderSpriteScale.x) - 0.02f;
+		xStart = (playerPosition.x + m_colliderSpriteScale.x) - m_colliderSpriteScale.x * 0.018f;
 		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
 
 		xEnd = xStart;
-		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + 0.02f;
+		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + m_colliderSpriteScale.y * 0.018f;
 	}
 
 	bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)
