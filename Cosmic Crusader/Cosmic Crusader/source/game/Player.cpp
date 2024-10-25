@@ -174,71 +174,71 @@ namespace ratchet
 		m_sprite.setPosition(playerPosition);
 
 		DBOUT("[PLAYER] AFTER" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
-//		if (m_input.x < 0)
-//		{
-//			if (m_movementType == GROUND)
-//			{
-//				if (m_isGround)
-//				{
-//					if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
-//					{
-//						if (m_characterAnimationState != MOVING)
-//						{
-//							m_characterAnimationState = MOVING;
-//							switchAnimation();
-//						}
-//						m_isMoving = true;
-//					}
-//				}
-//
-//				invertCharacterMovingSpriteScale(-1);
-//
-//				if (m_isMoving)
-//				{
-//					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_input.x, m_isGround);
-//					auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-//					m_sprite.setPosition(playerPosition);
-//				}
-//			}
-//		}
-//		else if (m_input.x > 0)
-//		{
-//			m_isMoving = true;
-//			if (m_movementType == GROUND)
-//			{
-//				if (m_isGround)
-//				{
-//					if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
-//					{
-//						if (m_characterAnimationState != MOVING)
-//						{
-//							m_characterAnimationState = MOVING;
-//							switchAnimation();
-//						}
-//						m_isMoving = true;
-//					}
-//				}
-//				invertCharacterMovingSpriteScale(1);
-//				if (m_isMoving)
-//				{
-//					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_input.x, m_isGround);
-//					auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-//					m_sprite.setPosition(playerPosition);
-//
-//				}
-//			}
-//		}
-//
-//		if (isNoControlActive() && m_characterAnimationState != ANIMATION_STATE::JUMP && m_characterAnimationState != ANIMATION_STATE::JUMP_RUNNING)
-//		{
-//#ifdef IS_RATCHET_DEBUG
-//			std::cout << "Idle" << std::endl;
-//			std::cout << m_characterAnimationState << std::endl;
-//#endif
-//			m_characterAnimationState = ANIMATION_STATE::IDLE;
-//			switchAnimation();
-//			m_isMoving = false;
-//		}
+		/*if (m_input.x < 0)
+		{
+			if (m_movementType == GROUND)
+			{
+				if (m_isGround)
+				{
+					if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
+					{
+						if (m_characterAnimationState != MOVING)
+						{
+							m_characterAnimationState = MOVING;
+							switchAnimation();
+						}
+						m_isMoving = true;
+					}
+				}
+
+				invertCharacterMovingSpriteScale(-1);
+
+				if (m_isMoving)
+				{
+					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_input.x, m_isGround);
+					auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+					m_sprite.setPosition(playerPosition);
+				}
+			}
+		}
+		else if (m_input.x > 0)
+		{
+			m_isMoving = true;
+			if (m_movementType == GROUND)
+			{
+				if (m_isGround)
+				{
+					if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
+					{
+						if (m_characterAnimationState != MOVING)
+						{
+							m_characterAnimationState = MOVING;
+							switchAnimation();
+						}
+						m_isMoving = true;
+					}
+				}
+				invertCharacterMovingSpriteScale(1);
+				if (m_isMoving)
+				{
+					m_collider->applyMovement(m_movementSpeed, m_isMoving, m_input.x, m_isGround);
+					auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+					m_sprite.setPosition(playerPosition);
+
+				}
+			}
+		}
+
+		if (isNoControlActive() && m_characterAnimationState != ANIMATION_STATE::JUMP && m_characterAnimationState != ANIMATION_STATE::JUMP_RUNNING)
+		{
+#ifdef IS_RATCHET_DEBUG
+			std::cout << "Idle" << std::endl;
+			std::cout << m_characterAnimationState << std::endl;
+#endif
+			m_characterAnimationState = ANIMATION_STATE::IDLE;
+			switchAnimation();
+			m_isMoving = false;
+		}*/
 
 	}
 

@@ -56,7 +56,12 @@ namespace ratchet
 	}
 	void Creature::updateMovement()
 	{
+		auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+		m_sprite.setPosition(position);
 
+		// Sync sprite rotation with collider
+		m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+		m_sprite.setRotation(m_rotation);
 	}
 	void Creature::updateRotation()
 	{
@@ -67,22 +72,80 @@ namespace ratchet
 	void Creature::updateAnimations()
 	{
 		// Animator
-		m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite);
 
-		// Sync sprite position with collider
-		auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-		m_sprite.setPosition(position);
+		if (m_faction == Faction::PLAYER)
+		{
+			if (m_input.x < 0)
+			{
+				if (m_movementType == GROUND)
+				{
+					if (isGrounded())
+					{
+						if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
+						{
+							if (m_characterAnimationState != MOVING)
+							{
+								m_characterAnimationState = MOVING;
+								switchAnimation();
+							}
+						}
+					}
 
-		// Sync sprite rotation with collider
-		m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-		m_sprite.setRotation(m_rotation);
+					invertCharacterMovingSpriteScale(-1);
+				}
+			}
+			else if (m_input.x > 0)
+			{
+				m_isMoving = true;
+				if (m_movementType == GROUND)
+				{
+					if (isGrounded())
+					{
+						if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
+						{
+							if (m_characterAnimationState != MOVING)
+							{
+								m_characterAnimationState = MOVING;
+								switchAnimation();
+							}
+							m_isMoving = true;
+						}
+					}
+					invertCharacterMovingSpriteScale(1);
+				}
+			}
+
+			if (isNoControlActive() && m_characterAnimationState != ANIMATION_STATE::JUMP && m_characterAnimationState != ANIMATION_STATE::JUMP_RUNNING)
+			{
+#ifdef IS_RATCHET_DEBUG
+				std::cout << "Idle" << std::endl;
+				std::cout << m_characterAnimationState << std::endl;
+#endif
+				m_characterAnimationState = ANIMATION_STATE::IDLE;
+				switchAnimation();;
+			}
+
+		}
+
+			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite);
+
+			// Sync sprite position with collider
+			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+			m_sprite.setPosition(position);
+
+			// Sync sprite rotation with collider
+			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+			m_sprite.setRotation(m_rotation);
+
+	}
+
 
 #ifdef IS_RATCHET_DEBUG
 		//sf::Vector2f playerSpritePosition;
 		//playerSpritePosition = m_sprite.getPosition();
 		//std::cout << m_sprite.getPosition().x << " , " << m_sprite.getPosition().y;
 #endif
-	}
+	
 	void Creature::updateJump()
 	{
 	}
