@@ -71,8 +71,6 @@ namespace ratchet
 	}
 	void Creature::updateAnimations()
 	{
-		// Animator
-
 		if (m_faction == Faction::PLAYER)
 		{
 			if (m_input.x < 0)

@@ -12,8 +12,6 @@ namespace ratchet
 		{
 			s_physicsWorld = new b2World(b2Vec2(0.0f, 9.81f));
 		}
-		//s_physicsWorld->SetAutoClearForces(false);
-		//s_physicsWorld->SetAllowSleeping(false);
 		m_timeStep = 1.0f / 60.0f;
 		m_velocityIterations = 6;
 		m_positionIterations  = 2;
@@ -41,20 +39,6 @@ namespace ratchet
 	void Physics::simulatePhysics(float& deltaTime)
 	{
 		s_physicsWorld->Step(m_timeStep, m_velocityIterations, m_positionIterations);
-
-		//for (b2Body* b = s_physicsWorld->GetBodyList(); b != nullptr; b = b->GetNext())
-		//{
-		//	if (b->GetType() == b2_staticBody)
-		//	{
-		//		continue;
-		//	}
-
-		//	if (auto* gameObject = GameObject::findGameObjectByBody(b))
-		//	{
-		//		gameObject->setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y) + sf::Vector2f(b->GetLinearVelocity().x, b->GetLinearVelocity().y));
-		//		gameObject->setRotation(b->GetAngle() + b->GetAngularVelocity());
-		//	}
-		//}
 	}
 
 	void Physics::update(float& deltatime)

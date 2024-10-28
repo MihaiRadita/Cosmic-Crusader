@@ -76,7 +76,6 @@ namespace ratchet
 		std::string cooliderIndexText;
 		bool isIntersects = false;
 		int groundContactCount = 0;
-		//bool bottomCollisionDetected = false;
 
 		std::string getCollisionSide(const b2Vec2& localPoint, const b2AABB& aabb);
 
