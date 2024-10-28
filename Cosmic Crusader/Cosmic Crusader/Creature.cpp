@@ -81,7 +81,8 @@ namespace ratchet
 				{
 					if (isGrounded())
 					{
-						if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
+						m_isMoving = true;
+						if (m_isMoving)
 						{
 							if (m_characterAnimationState != MOVING)
 							{
@@ -91,36 +92,60 @@ namespace ratchet
 						}
 					}
 
-					invertCharacterMovingSpriteScale(-1);
 				}
+				invertCharacterMovingSpriteScale(-1);
 			}
 			else if (m_input.x > 0)
 			{
-				m_isMoving = true;
 				if (m_movementType == GROUND)
 				{
 					if (isGrounded())
 					{
-						if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
+						m_isMoving = true;
+						if (m_isMoving)
 						{
 							if (m_characterAnimationState != MOVING)
 							{
 								m_characterAnimationState = MOVING;
 								switchAnimation();
 							}
-							m_isMoving = true;
+							
 						}
 					}
-					invertCharacterMovingSpriteScale(1);
+				}
+				invertCharacterMovingSpriteScale(1);
+			}
+
+			if (m_input.isJump && isGrounded())
+			{
+				if (m_characterAnimationState != MOVING)
+				{
+					if (m_characterAnimationState != JUMP)
+					{
+						m_characterAnimationState = JUMP;
+						switchAnimation();
+					}
+				}
+			}
+			if (m_input.isJump && isGrounded() && m_isMoving == true)
+			{
+				if (m_characterAnimationState == MOVING)
+				{
+					if (m_characterAnimationState != JUMP_RUNNING)
+					{
+						m_characterAnimationState = JUMP_RUNNING;
+						switchAnimation();
+					}
 				}
 			}
 
-			if (isNoControlActive() && m_characterAnimationState != ANIMATION_STATE::JUMP && m_characterAnimationState != ANIMATION_STATE::JUMP_RUNNING)
+			if (isNoControlActive() && isGrounded() && m_isMoving == false)
 			{
 #ifdef IS_RATCHET_DEBUG
 				std::cout << "Idle" << std::endl;
 				std::cout << m_characterAnimationState << std::endl;
-#endif
+#endif			
+				m_isMoving = false;
 				m_characterAnimationState = ANIMATION_STATE::IDLE;
 				switchAnimation();;
 			}
