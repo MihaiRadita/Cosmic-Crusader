@@ -95,7 +95,7 @@ namespace ratchet
 			config.positionXOffset = 0.f;
 			config.positionYOffset = 0.f;
 
-			config.position = sf::Vector2f(0.0f, 0.0f);
+			config.position = sf::Vector2f(5.0f, 0.0f);
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
@@ -103,12 +103,10 @@ namespace ratchet
 			config.m_jumpImpulse = -10.0f;
 			config.m_fallingSpeed = 7000.0f;
 
-
-
 			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/Idle1.png";
 			config.spriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
 
-			auto colliderConfig = RectAngleColliderConfig();
+			auto colliderConfig = CapsuleColliderConfig();
 			colliderConfig.m_layer = PhysiscsLayer::Player;
 			colliderConfig.m_bodyDef.type = b2_dynamicBody;
 			colliderConfig.m_bodyDef.bullet = true;
@@ -116,7 +114,9 @@ namespace ratchet
 			colliderConfig.m_fixtureDef.density = 1.0f;
 			colliderConfig.m_fixtureDef.friction = 0.0f;
 			colliderConfig.m_fixtureDef.restitution = 0.f;
-
+			colliderConfig.m_height = 1.0f;
+			colliderConfig.m_radius = 0.25f;
+		
 			config.m_colliderConfig = &colliderConfig;
 
 			GameObject::s_gameObjects.push_back(new Player(config));

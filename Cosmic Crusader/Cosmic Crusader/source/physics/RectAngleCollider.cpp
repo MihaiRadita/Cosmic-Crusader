@@ -65,24 +65,36 @@ namespace ratchet
 			m_contactListener = new GroundCheck();
 			s_physicsWorld->SetContactListener(m_contactListener);
 		}
-		float scaleX = sprite.getScale().x;
-		float scaleY = sprite.getScale().y;
 
-		m_colliderOrigin = b2Vec2((sprite.getLocalBounds().width * scaleX) / 2.0, (sprite.getLocalBounds().height * scaleY) / 2.0f);
+		m_scaleX = sprite.getScale().x;
+		m_scaleY = sprite.getScale().y;
 
+		if (config.m_width.has_value() && config.m_height.has_value())
+		{
+			m_width = config.m_width.value();
+			m_height = config.m_height.value();
+		}
+		else
+		{
+			m_width = sprite.getLocalBounds().width;
+			m_height = sprite.getLocalBounds().height;
+		}
 
-		m_colliderSpriteScale = b2Vec2(
-			sprite.getLocalBounds().width * scaleX,
-			sprite.getLocalBounds().height * scaleY
-		);
-
+		if (config.m_origin.has_value())
+		{
+			m_origin = config.m_origin.value();
+		}
+		else
+		{
+			m_origin = b2Vec2(getGlobalWidth() / 2.0f, getGlobalHeight() / 2.0f);
+		}
 
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 
 		//Box Dimensions
-		m_boxShape.SetAsBox(m_colliderSpriteScale.x / 2.0f, m_colliderSpriteScale.y / 2.0f, m_colliderOrigin, m_body->GetAngle());
+		m_boxShape.SetAsBox(getGlobalWidth() / 2.0f, getGlobalHeight() / 2.0f, m_origin, m_body->GetAngle());
 
 
 		//Box fixtures properties
@@ -180,11 +192,6 @@ namespace ratchet
 		return m_offset;
 	}
 
-	b2Vec2* RectAngleCollider::getColliderScale()
-	{
-		return &m_colliderSpriteScale;
-	}
-
 	b2Vec2 RectAngleCollider::getColliderPosition()
 	{
 		return m_body->GetTransform().p;
@@ -234,14 +241,14 @@ namespace ratchet
 		// DRAW COLLIDER BEGIN AND END
 		auto outline = sf::RectangleShape(
 			sf::Vector2f(
-				getColliderScale()->x,
-				getColliderScale()->y
+				getGlobalWidth(),
+				getGlobalHeight()
 			)
 		);
 
 		outline.setFillColor(sf::Color::Transparent);
-		outline.setOutlineColor(sf::Color::Blue);
-		outline.setOutlineThickness(0.01f);
+		outline.setOutlineColor(sf::Color::Green);
+		outline.setOutlineThickness(0.025f);
 		outline.setPosition(
 			getColliderPosition().x,
 			getColliderPosition().y
@@ -304,11 +311,11 @@ namespace ratchet
 
 		b2Vec2 playerPosition = m_body->GetPosition();
 
-		xStart = playerPosition.x + m_colliderSpriteScale.x * 0.018f;
-		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
+		xStart = playerPosition.x + getGlobalWidth() * 0.018f;
+		yStart = playerPosition.y + (getGlobalHeight() / 2.f);
 
 		xEnd = xStart;
-		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + m_colliderSpriteScale.y * 0.018f;
+		yEnd = (yStart + (getGlobalHeight() / 2.f)) + getGlobalHeight() * 0.018f;
 	}
 
 	void RectAngleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
@@ -317,11 +324,11 @@ namespace ratchet
 
 		b2Vec2 playerPosition = m_body->GetPosition();
 
-		xStart = playerPosition.x + (m_colliderSpriteScale.x / 2.f);
-		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
+		xStart = playerPosition.x + (getGlobalWidth() / 2.f);
+		yStart = playerPosition.y + (getGlobalHeight() / 2.f);
 
 		xEnd = xStart;
-		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + m_colliderSpriteScale.y * 0.018f;
+		yEnd = (yStart + (getGlobalHeight() / 2.f)) + getGlobalHeight() * 0.018f;
 	}
 
 	void RectAngleCollider::getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
@@ -330,11 +337,11 @@ namespace ratchet
 
 		b2Vec2 playerPosition = m_body->GetPosition();
 
-		xStart = (playerPosition.x + m_colliderSpriteScale.x) - m_colliderSpriteScale.x * 0.018f;
-		yStart = playerPosition.y + (m_colliderSpriteScale.y / 2.f);
+		xStart = (playerPosition.x + getGlobalWidth()) - getGlobalWidth() * 0.018f;
+		yStart = playerPosition.y + (getGlobalHeight() / 2.f);
 
 		xEnd = xStart;
-		yEnd = (yStart + (m_colliderSpriteScale.y / 2.f)) + m_colliderSpriteScale.y * 0.018f;
+		yEnd = (yStart + (getGlobalHeight() / 2.f)) + getGlobalHeight() * 0.018f;
 	}
 
 	bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)

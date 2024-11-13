@@ -2,6 +2,7 @@
 #include "GameObjectConfig.h"
 #include "physics/Physics.h"
 #include "physics/RectAngleCollider.h"
+#include "CapsuleCollider.h"
 #include "ColliderBase.h"
 #include "ResourceManager.h"
 

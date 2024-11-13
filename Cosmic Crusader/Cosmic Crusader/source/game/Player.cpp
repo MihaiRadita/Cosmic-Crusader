@@ -83,12 +83,13 @@ namespace ratchet
 			xVelocity = m_movementSpeed * m_input.x;
 		}
 		
-		if (m_input.isJump && isGrounded())
+		if (m_input.isJump)
 		{
 			m_isMoving = true;
 			changeY = true;
 			yVelocity = m_jumpImpulse;
 		}
+
 
 		m_movementType = isGrounded() ? GROUND : UNGROUND;
 

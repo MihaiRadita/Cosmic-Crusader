@@ -17,14 +17,14 @@ namespace ratchet
 
 	struct BaseColliderConfig
 	{
+		BaseColliderConfig();
+
 		PhysiscsLayer m_layer;
 
 		b2FixtureDef m_fixtureDef;
 		b2BodyDef m_bodyDef;
 
-
-		BaseColliderConfig();
-
+		std::optional<b2Vec2> m_origin = std::nullopt;
 	};
 	class ColliderBase : public Physics
 	{
@@ -34,8 +34,6 @@ namespace ratchet
 		b2FixtureDef m_fixtureDef;
 		b2BodyDef m_bodyDef;
 		b2Body* m_body = nullptr;
-		b2Vec2 m_colliderOrigin;
-		b2Vec2 m_colliderSpriteScale;
 
 		//Constructors
 		ColliderBase(const BaseColliderConfig& config);
@@ -44,6 +42,7 @@ namespace ratchet
 
 		//Getters
 		virtual b2Body* getBody();
+		b2Vec2 getColliderOrigin() const;
 
 		//Prints
 		virtual void printBodyPositionRotation();
@@ -60,6 +59,10 @@ namespace ratchet
 		virtual void getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual bool performGroundRayCast(sf::Sprite& sprite);
 
+	protected:
+		b2Vec2 m_origin;
+		float m_scaleX = 1.0f;
+		float m_scaleY = 1.0f;
 	};
 
 	class GroundCheck : public b2ContactListener

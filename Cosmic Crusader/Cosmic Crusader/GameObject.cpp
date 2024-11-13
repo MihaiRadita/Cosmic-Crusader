@@ -64,18 +64,15 @@ namespace ratchet
 		m_sprite.setRotation(m_rotation);
 		m_sprite.setScale(m_scale.x, m_scale.y);
 
-
 		if (config.m_colliderConfig->m_layer == PhysiscsLayer::Player)
 		{
-			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
+			m_collider = new ratchet::CapsuleCollider(m_sprite, static_cast<const CapsuleColliderConfig&>(*config.m_colliderConfig));
 
 		}
 		else if (config.m_colliderConfig->m_layer == PhysiscsLayer::Platforms)
 		{
 			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
 		}
-
-
 	}
 
 	ratchet::GameObject::~GameObject()

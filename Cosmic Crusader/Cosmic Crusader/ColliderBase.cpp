@@ -33,6 +33,11 @@ namespace ratchet
 		return m_body;
 	}
 
+	inline b2Vec2 ColliderBase::getColliderOrigin() const 
+	{ 
+		return m_origin; 
+	}
+
 	void ColliderBase::printBodyPositionRotation()
 	{
 	}

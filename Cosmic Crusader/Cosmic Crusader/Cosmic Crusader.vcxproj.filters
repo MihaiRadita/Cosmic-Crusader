@@ -83,6 +83,9 @@
     <ClCompile Include="source\physics\RectAngleCollider.cpp">
       <Filter>source\physics</Filter>
     </ClCompile>
+    <ClCompile Include="CapsuleCollider.cpp">
+      <Filter>source\physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -140,6 +143,9 @@
       <Filter>source\physics</Filter>
     </ClInclude>
     <ClInclude Include="source\physics\RectAngleCollider.h">
+      <Filter>source\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CapsuleCollider.h">
       <Filter>source\physics</Filter>
     </ClInclude>
   </ItemGroup>

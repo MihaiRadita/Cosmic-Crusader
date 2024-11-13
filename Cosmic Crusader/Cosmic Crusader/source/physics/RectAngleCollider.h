@@ -6,23 +6,14 @@ namespace ratchet
 {
 	struct RectAngleColliderConfig : public BaseColliderConfig
 	{
-		b2Vec2 m_colliderOffset;
-
-
 		RectAngleColliderConfig();
+
+		std::optional<float> m_width = std::nullopt;
+		std::optional<float> m_height = std::nullopt;
 	};
 
 	class RectAngleCollider : public ColliderBase
 	{
-	private:
-
-		//Physics
-		b2PolygonShape m_boxShape;
-		b2Vec2 m_offset;
-		b2Vec2 m_vs[4];
-		static int cooliderTypeIndexCount;
-
-
 	public:
 
 		static GroundCheck* m_contactListener;
@@ -35,11 +26,14 @@ namespace ratchet
 		~RectAngleCollider();
 
 		//Getters
+		float getLocalWidth() const { return m_width; }
+		float getGlobalWidth() const { return m_width * m_scaleX; }
+		float getLocalHeight() const { return m_height; } 
+		float getGlobalHeight() const { return m_height * m_scaleY; } 
 		b2BodyDef* getBodyDef();
 		b2PolygonShape* getColliderShape();
 		b2FixtureDef* getFixtureDef();
 		b2Vec2 getOffset();
-		b2Vec2* getColliderScale();
 		b2Vec2 getColliderPosition();
 		short userDataName;
 
@@ -55,5 +49,17 @@ namespace ratchet
 		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
 		virtual void getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
 		bool performGroundRayCast(sf::Sprite& sprite) override;
+
+	private:
+
+		// General
+		float m_width;
+		float m_height;
+
+		//Physics
+		b2PolygonShape m_boxShape;
+		b2Vec2 m_offset;
+		b2Vec2 m_vs[4];
+		static int cooliderTypeIndexCount;
 	};
 }

@@ -1,15 +1,16 @@
+#include <algorithm>
+#include <corecrt_math_defines.h>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 #include <iostream>
+#include <map>
+#include <math.h>
+#include <optional>
+#include <sstream>
+#include <string>
 #include <time.h>
 #include <vector>
-#include <map>
-#include <string>
-#include <algorithm>
-#include <sstream>
-#include <fstream>
-#include <math.h>
-#include <corecrt_math_defines.h>
 
 //SFML
 #include "SFML/System.hpp"
@@ -27,7 +28,7 @@
 //Windows
 #include <Windows.h>
 
-#undef IS_RATCHET_DEBUG
+#define IS_RATCHET_DEBUG
 
 #ifndef DBOUT
 #define DBOUT( s )            \
