@@ -49,6 +49,9 @@ namespace ratchet
 		void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState) override;
 		void debugRender(sf::RenderTarget& target) override;
 #endif
+		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
+		bool performGroundRayCast(sf::Sprite& sprite) override;
+
 	private:
 
 		// General

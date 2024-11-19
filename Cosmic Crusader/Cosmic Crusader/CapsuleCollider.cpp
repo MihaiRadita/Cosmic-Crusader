@@ -5,7 +5,7 @@
 namespace ratchet
 {
 
-	CapsuleCollider::CapsuleCollider(sf::Sprite& sprite, const CapsuleColliderConfig& config): ColliderBase(config)
+	CapsuleCollider::CapsuleCollider(sf::Sprite& sprite, const CapsuleColliderConfig& config) : ColliderBase(config)
 	{
 		initVariables(sprite, config);
 	}
@@ -49,18 +49,18 @@ namespace ratchet
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 		userDataName = static_cast<short>(config.m_layer);
-       
+
 		// Bottom Circle
 		m_bottomCircleShape.m_radius = getGlobalRadius();
 		m_bottomCircleShape.m_p.Set(m_origin.x, m_origin.y - (getGlobalHeight() / 2.0f) + getGlobalRadius());
 		m_fixtureDef.shape = &m_bottomCircleShape;
-		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);  
+		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 		m_body->CreateFixture(&m_fixtureDef);
 		// Top Circle
 		m_topCircleShape.m_radius = getGlobalRadius();
 		m_topCircleShape.m_p.Set(m_origin.x, m_origin.y + (getGlobalHeight() / 2.0f) - getGlobalRadius());
 		m_fixtureDef.shape = &m_topCircleShape;
-		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);  
+		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 		m_body->CreateFixture(&m_fixtureDef);
 		// Center Box
 		const auto centerBoxHeight = std::abs(m_bottomCircleShape.m_p.y - m_topCircleShape.m_p.y);
@@ -70,7 +70,7 @@ namespace ratchet
 		m_fixtureDef.density = config.m_fixtureDef.density;
 		m_fixtureDef.friction = config.m_fixtureDef.friction;
 		m_fixtureDef.restitution = config.m_fixtureDef.restitution;
-		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);  
+		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 		m_body->CreateFixture(&m_fixtureDef);
 
 		if (m_bodyDef.type == b2_staticBody)
@@ -249,7 +249,48 @@ namespace ratchet
 			bodyCircle.setPosition(worldOrigin.x, worldOrigin.y);
 			target.draw(bodyCircle);
 		}
-	}
-#endif
 
+		b2Vec2 startPointMiddle = b2Vec2{};
+		b2Vec2 endPointMiddle = b2Vec2{};
+		getMiddlePointsForRaycast(startPointMiddle.x, startPointMiddle.y, endPointMiddle.x, endPointMiddle.y);
+
+		sf::Vertex rayCastMiddle[] = { sf::Vertex(sf::Vector2f(startPointMiddle.x, startPointMiddle.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointMiddle.x, endPointMiddle.y), sf::Color::Green) };
+		target.draw(rayCastMiddle, 2, sf::Lines);
+	}
 }
+#endif
+		void CapsuleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
+		{
+			ColliderBase::getMiddlePointsForRaycast(xStart, yStart, xEnd, yEnd);
+
+			b2Vec2 playerPosition = m_body->GetPosition();
+
+			float distanceCeneteX = std::abs(playerPosition.x - m_bottomCircleShape.m_p.x);
+			xStart = playerPosition.x + distanceCeneteX * 0.125f;
+			yStart = playerPosition.y + (m_bottomCircleShape.m_radius * 2.0f) + 0.1f;
+
+			xEnd = xStart;
+			yEnd = yStart + (m_bottomCircleShape.m_radius * 2.0f);
+		}
+		bool CapsuleCollider::performGroundRayCast(sf::Sprite& sprite)
+		{
+			b2Vec2 startPointMiddle = b2Vec2{};
+			b2Vec2 endPointMiddle = b2Vec2{};
+			getMiddlePointsForRaycast(startPointMiddle.x, startPointMiddle.y, endPointMiddle.x, endPointMiddle.y);
+
+			GroundRayCastCallBack callbackMiddle(m_body);
+			s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
+
+			if (callbackMiddle.m_fraction <= 1.0f && callbackMiddle.m_hit)
+			{
+
+				return true;
+			}
+
+	#ifdef IS_RATCHET_DEBUG
+			//std::cout << "HIT : " << callbackLeft.m_hit;
+	#endif
+			return false;
+		}
+}
+
