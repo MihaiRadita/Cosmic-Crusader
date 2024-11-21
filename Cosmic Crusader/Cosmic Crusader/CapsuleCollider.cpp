@@ -52,13 +52,13 @@ namespace ratchet
 
 		// Bottom Circle
 		m_bottomCircleShape.m_radius = getGlobalRadius();
-		m_bottomCircleShape.m_p.Set(m_origin.x, m_origin.y - (getGlobalHeight() / 2.0f) + getGlobalRadius());
+		m_bottomCircleShape.m_p.Set(m_origin.x, m_origin.y + (getGlobalHeight() / 2.0f) - getGlobalRadius());
 		m_fixtureDef.shape = &m_bottomCircleShape;
 		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 		m_body->CreateFixture(&m_fixtureDef);
 		// Top Circle
 		m_topCircleShape.m_radius = getGlobalRadius();
-		m_topCircleShape.m_p.Set(m_origin.x, m_origin.y + (getGlobalHeight() / 2.0f) - getGlobalRadius());
+		m_topCircleShape.m_p.Set(m_origin.x, m_origin.y - (getGlobalHeight() / 2.0f) + getGlobalRadius());
 		m_fixtureDef.shape = &m_topCircleShape;
 		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 		m_body->CreateFixture(&m_fixtureDef);
@@ -257,7 +257,6 @@ namespace ratchet
 		sf::Vertex rayCastMiddle[] = { sf::Vertex(sf::Vector2f(startPointMiddle.x, startPointMiddle.y), sf::Color::Green), sf::Vertex(sf::Vector2f(startPointMiddle.x, endPointMiddle.y), sf::Color::Green) };
 		target.draw(rayCastMiddle, 2, sf::Lines);
 	}
-}
 #endif
 		void CapsuleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
 		{
@@ -265,12 +264,15 @@ namespace ratchet
 
 			b2Vec2 playerPosition = m_body->GetPosition();
 
-			float distanceCeneteX = std::abs(playerPosition.x - m_bottomCircleShape.m_p.x);
-			xStart = playerPosition.x + distanceCeneteX * 0.125f;
-			yStart = playerPosition.y + (m_bottomCircleShape.m_radius * 2.0f) + 0.1f;
+			//float distanceCeneteX = std::abs(playerPosition.x - m_bottomCircleShape.m_p.x);
+			xStart =  playerPosition.x +  m_bottomCircleShape.m_p.x;
+
+
+
+			yStart = playerPosition.y + m_bottomCircleShape.m_p.y;
 
 			xEnd = xStart;
-			yEnd = yStart + (m_bottomCircleShape.m_radius * 2.0f);
+			yEnd = yStart + m_bottomCircleShape.m_radius + 0.02;
 		}
 		bool CapsuleCollider::performGroundRayCast(sf::Sprite& sprite)
 		{
