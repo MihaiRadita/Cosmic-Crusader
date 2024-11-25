@@ -75,7 +75,7 @@ namespace ratchet
 				colliderConfig.m_bodyDef.type = b2_staticBody;
 				colliderConfig.m_bodyDef.fixedRotation = true;
 				colliderConfig.m_fixtureDef.density = 0.0f;
-				colliderConfig.m_fixtureDef.friction = 0.1f;
+				colliderConfig.m_fixtureDef.friction = 76.f;
 				colliderConfig.m_fixtureDef.restitution = 0.01f;
 
 
