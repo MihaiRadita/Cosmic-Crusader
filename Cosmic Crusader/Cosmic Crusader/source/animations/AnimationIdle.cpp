@@ -84,7 +84,7 @@ namespace ratchet
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture((m_animFrameImg)[m_currentFrameIndex]);
+				sprite.setTexture(m_animFrameImg[m_currentFrameIndex]);
 #ifdef IS_RATCHET_DEBUG
 				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
