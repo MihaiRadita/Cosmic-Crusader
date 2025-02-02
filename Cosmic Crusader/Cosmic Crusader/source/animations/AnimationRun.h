@@ -7,10 +7,10 @@ namespace ratchet
 	class AnimationRun : public AnimationBase
 	{
 	public:
-		void playAnimation(sf::Sprite& sprite) override;
+		void playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state) override;
 
 		//Constructors
-		AnimationRun(std::string& texturePath);
+		AnimationRun(std::string& texturePath, std::vector<Weapon::TYPE>& usableWeaponTypeList);
 
 		//Destructor
 		~AnimationRun();
@@ -19,17 +19,19 @@ namespace ratchet
 		void initVariables() override;
 
 		//Other functions
-		void addAnimationFrames(std::string& texturePath) override;
+		std::vector<sf::Texture> addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state) override;
 		void resetCurrentAnimIndex() override;
 		void resetPlayerAnimTimer() override;
 		void setAnimationSwitch(bool animSwitch) override;
 		//Geters Functions	
-		int getAnimSize() override;
+		int getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state) override;
 		int getCurrentAnimIndex() override;
 		bool getAnimationSwitch() override;
 
 	private:
 		// TODO: Foloseste ResourceManager asa cum am vorbit in loc de acest vector static.
-		 std::vector<sf::Texture> s_animFrameImg;
+
+		std::map<Weapon::TYPE, std::map<WeaponAnimation::ANGLE, std::map<WeaponAnimation::STATE, std::vector<sf::Texture>>>> m_weaponAnimationFramesMap; // sa fie redenumit in m_weaponAnimationFramesMap
+		std::vector<sf::Texture> m_animationFrames;
 	};
 }

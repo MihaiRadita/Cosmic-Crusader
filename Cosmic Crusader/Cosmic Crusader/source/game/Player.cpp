@@ -97,7 +97,7 @@ namespace ratchet
 
 		m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
 
-		auto playerPosition = sf::Vector2f(getPosition().x, getPosition().y);
+		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 		m_sprite.setPosition(playerPosition);
 
 		DBOUT("[PLAYER] AFTER" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);

@@ -6,10 +6,39 @@
 namespace ratchet
 {
 	//Constructor functions
-	AnimationIdle::AnimationIdle(std::string& texturePath)
+	AnimationIdle::AnimationIdle(std::string& texturePath, std::vector<Weapon::TYPE>& usableWeaponTypeList)
 	{
 		initVariables();
-		addAnimationFrames(texturePath);
+
+		for (const auto weaponType : usableWeaponTypeList)
+		{
+			if (weaponType != Weapon::TYPE::None)
+			{
+				for (int weaponAnimationAngleIndex = 0; weaponAnimationAngleIndex < (int)WeaponAnimation::ANGLE::Count; weaponAnimationAngleIndex++)
+				{
+					auto animationAngle = (WeaponAnimation::ANGLE)weaponAnimationAngleIndex;
+					for (int weaponAnimationStateIndex = 0; weaponAnimationStateIndex < (int)WeaponAnimation::STATE::Count; weaponAnimationStateIndex++)
+					{
+						auto animationState = (WeaponAnimation::STATE)weaponAnimationStateIndex;
+
+						int currentSize = m_weaponAnimationFramesMap[weaponType][animationAngle][animationState].size();
+
+						m_weaponAnimationFramesMap[weaponType][animationAngle][animationState] = 
+							addAnimationFrames(
+								texturePath, 
+								weaponType, 
+								WeaponAnimation::getWeaponAngleString(animationAngle), 
+								WeaponAnimation::getWeaponStateString(animationState)
+								
+							);
+					}
+				}
+			}
+			else
+			{
+				m_animationFrames = addAnimationFrames(texturePath, weaponType, "", "");
+			}
+		}
 	}
 
 	void AnimationIdle::initVariables()
@@ -25,18 +54,28 @@ namespace ratchet
 		
 	}
 
-	void AnimationIdle::addAnimationFrames(std::string& texturePath)
+	std::vector<sf::Texture> AnimationIdle::addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state)
 	{
+		auto resultList = std::vector<sf::Texture>();
 		bool imageValid = false;
 		do
 		{
-			int imgIndex = m_animFrameImg.size();
+			int imgIndex = resultList.size();
 			int strImgIndex = imgIndex + 1;
 
 			// Build string
 			std::stringstream ss;
 			ss << texturePath;
 			ss << "IdleTextures/";
+			ss << Weapon::getWeaponTypeString(weaponType) << "/";
+			if (strlen(aimingAngle) > 0)
+			{
+				ss << aimingAngle << "/";
+			}
+			if (strlen(state) > 0)
+			{
+				ss << state << "/";
+			}
 			ss << "Idle";
 			ss << strImgIndex;
 			ss << ".png";
@@ -48,13 +87,15 @@ namespace ratchet
 			imageValid = texture != nullptr;
 			if (imageValid)
 			{
-				m_animFrameImg.push_back(*texture);
+				resultList.push_back(*texture);
 			}
 
 		} while (imageValid);
+
+		return resultList;
 	}
 
-	void AnimationIdle::playAnimation(sf::Sprite& sprite)
+	void AnimationIdle::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 		if (!m_initialTexture)
 		{
@@ -66,7 +107,15 @@ namespace ratchet
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture((m_animFrameImg)[m_currentFrameIndex]);
+				if (weaponUsed != Weapon::TYPE::None)
+				{
+					sprite.setTexture(m_weaponAnimationFramesMap[weaponUsed][angle][state][m_currentFrameIndex]);
+				}
+				else
+				{
+					sprite.setTexture(m_animationFrames[m_currentFrameIndex]);
+				}
+
 #ifdef IS_RATCHET_DEBUG
 				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
@@ -84,7 +133,16 @@ namespace ratchet
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture(m_animFrameImg[m_currentFrameIndex]);
+
+				if (weaponUsed != Weapon::TYPE::None)
+				{
+					sprite.setTexture(m_weaponAnimationFramesMap[weaponUsed][angle][state][m_currentFrameIndex]);
+			}
+				else
+				{
+					sprite.setTexture(m_animationFrames[m_currentFrameIndex]);
+				}
+
 #ifdef IS_RATCHET_DEBUG
 				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
@@ -93,7 +151,7 @@ namespace ratchet
 			{
 				m_isAnimTransition = true;
 				m_currentFrameIndex++;
-				if (m_currentFrameIndex >= getAnimSize())
+				if (m_currentFrameIndex >= getAnimSize(weaponUsed,angle,state))
 				{
 					m_currentFrameIndex = 0;
 				}
@@ -126,9 +184,13 @@ namespace ratchet
 	}
 
 	//Getters Functions
-	int AnimationIdle::getAnimSize()
+	int AnimationIdle::getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
-		return m_animFrameImg.size();
+		if (type == Weapon::TYPE::None)
+		{
+			return m_animationFrames.size();
+		}
+		return m_weaponAnimationFramesMap[type][angle][state].size();
 	}
 
 	int AnimationIdle::getCurrentAnimIndex()

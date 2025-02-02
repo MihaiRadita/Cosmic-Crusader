@@ -12,16 +12,51 @@ namespace ratchet
 		m_jumpImpulse = config.m_jumpImpulse;
 
 		m_characterAnimator = nullptr;
+
+		m_weaponConfigList = config.m_weaponConfigList;
+		m_usableWeaponTypeList = config.m_usableWeaponTypeList;
+
+		m_currentWeaponType = config.m_currentWeaponType;
+		m_currentCharacterAngle = config.m_currentAngle;
+		m_currentCharacterState = config.m_currentState;
+
+
 		m_spritePath = config.spriteTexturePath;
+
+		m_sprite.setTexture(m_spriteTexture);
+
+		if (m_sprite.getTexture())
+		{
+			std::cout << "Precior SUCCESS" << std::endl;
+		}
+
+		if (m_sprite.getTexture() != nullptr)
+		{
+			std::cout << "Character Success" << std::endl;
+		}
+		else
+		{
+			std::cout << "Character Failed" << std::endl;
+		}
+
+		for (const auto& weponType : m_usableWeaponTypeList)
+		{
+			Weapon::TYPE type = weponType.first;
+
+			m_usableWeaponTypes.push_back(type);
+		}
+
+
+		//m_usableWeaponTypeList = config.m_usableWeaponTypeList;
 
 		if (m_faction == Faction::PLAYER)
 		{
 			m_characterAnimationState = IDLE;
 			m_characterAnimator = new Animator();
-			m_animationList.emplace(ANIMATION_STATE::IDLE, new AnimationIdle(m_spritePath));
-			m_animationList.emplace(ANIMATION_STATE::JUMP, new AnimationJump(m_spritePath));
-			m_animationList.emplace(ANIMATION_STATE::MOVING, new AnimationRun(m_spritePath));
-			m_animationList.emplace(ANIMATION_STATE::JUMP_RUNNING, new AnimationJumpRun(m_spritePath));
+			m_animationList.emplace(ANIMATION_STATE::IDLE, new AnimationIdle(m_spritePath, m_usableWeaponTypes));
+			m_animationList.emplace(ANIMATION_STATE::JUMP, new AnimationJump(m_spritePath, m_usableWeaponTypes));
+			m_animationList.emplace(ANIMATION_STATE::MOVING, new AnimationRun(m_spritePath, m_usableWeaponTypes));
+			m_animationList.emplace(ANIMATION_STATE::JUMP_RUNNING, new AnimationJumpRun(m_spritePath, m_usableWeaponTypes));
 
 			m_characterAnimSwitch = -1;
 
@@ -150,11 +185,10 @@ namespace ratchet
 
 		}
 
-			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite);
+			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite,m_currentWeaponType, m_currentCharacterAngle,m_currentCharacterState);
 
 			// Sync sprite position with collider
 			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-			m_sprite.setPosition(position);
 
 			// Sync sprite rotation with collider
 			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
@@ -210,6 +244,33 @@ namespace ratchet
 
 			// salveaza stare curenta in stare anterioara	
 			m_characterAnimSwitch = m_characterAnimationState;
+		}
+	}
+
+	void Creature::addWeapon(Weapon::TYPE weaponType, std::optional<WeaponConfig> config)
+	{
+		if (weaponType != Weapon::TYPE::None)
+		{
+			auto newWeapon = new Weapon(*WeaponManager::instance()->getWeapon(weaponType));
+			if (config.has_value())
+			{
+				newWeapon->m_currentAmmo = config->m_currentAmmo;
+			}
+
+			m_ownedWeaponList.push_back(newWeapon);
+		}
+	}
+	void Creature::setWeapon(int weaponIndex)
+	{
+		if (0 <= weaponIndex && weaponIndex < m_ownedWeaponList.size())
+		{
+			m_equippedWeaponIndex = weaponIndex;
+			m_characterAnimator->setWeapon(m_ownedWeaponList[m_equippedWeaponIndex]->m_weaponType);
+		}
+		else
+		{
+			m_equippedWeaponIndex = -1;
+			m_characterAnimator->setWeapon(Weapon::TYPE::None);
 		}
 	}
 }

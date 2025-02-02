@@ -49,6 +49,7 @@ namespace ratchet
 
 		m_startSpritePath = config.startSpriteTexturePath;
 
+
 		//Sprites and Terxtures
 
 		if (m_spriteTexture.loadFromFile(m_startSpritePath) == false)

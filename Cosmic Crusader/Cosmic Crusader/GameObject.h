@@ -5,6 +5,8 @@
 #include "CapsuleCollider.h"
 #include "ColliderBase.h"
 #include "ResourceManager.h"
+#include "Weapon.h"
+
 
 
 

@@ -30,9 +30,9 @@ namespace ratchet
 		m_abstractAnimation = anim;
 	}
 
-	void Animator::play(AnimationBase* anim, sf::Sprite& sprite)
+	void Animator::play(AnimationBase* anim, sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
-		anim->playAnimation(sprite);
+		anim->playAnimation(sprite, weaponUsed, angle, state);
 	}
 
 	void Animator::resetAnimIndex(AnimationBase* anim)
@@ -50,8 +50,14 @@ namespace ratchet
 		return anim->isCurrentAnimationIndexValue();
 	}
 
+	void Animator::setWeapon(Weapon::TYPE weaponType)
+	{
+		m_weaponAnimation = weaponType;
+	}
+
 	void Animator::resetAnimationTimer(AnimationBase* anim)
 	{
 		m_abstractAnimation->resetPlayerAnimTimer();
 	}
+
 }

@@ -7,11 +7,12 @@ namespace ratchet
 	{
 	}
 
-	void AnimationBase::addAnimationFrames(std::string& texturePath)
+	std::vector<sf::Texture> AnimationBase::addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state)
 	{
+		return std::vector<sf::Texture>();
 	}
 
-	int AnimationBase::getAnimSize()
+	int AnimationBase::getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 		return 0;
 	}
@@ -52,7 +53,7 @@ namespace ratchet
 		return false;
 	}
 
-	void AnimationBase::playAnimation(sf::Sprite& sprite)
+	void AnimationBase::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 #ifdef IS_RATCHET_DEBUG
 		//std::cout << "Abstract Animation";

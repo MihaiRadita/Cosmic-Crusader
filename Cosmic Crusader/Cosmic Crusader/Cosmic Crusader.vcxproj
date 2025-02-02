@@ -171,6 +171,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponConfig.cpp" />
+    <ClCompile Include="WeaponManager.cpp" />
+    <ClCompile Include="WeaponPickup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapsuleCollider.h" />
@@ -193,6 +197,10 @@
     <ClInclude Include="source\physics\Physics.h" />
     <ClInclude Include="source\physics\RectAngleCollider.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponConfig.h" />
+    <ClInclude Include="WeaponManager.h" />
+    <ClInclude Include="WeaponPickup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

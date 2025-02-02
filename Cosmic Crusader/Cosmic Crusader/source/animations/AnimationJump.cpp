@@ -6,10 +6,39 @@
 namespace ratchet
 {
 	//Consturctors
-	AnimationJump::AnimationJump(std::string& texturePath)
+	AnimationJump::AnimationJump(std::string& texturePath, std::vector<Weapon::TYPE>& usableWeaponTypeList)
 	{
 		initVariables();
-		addAnimationFrames(texturePath);
+		for (const auto weaponType : usableWeaponTypeList)
+		{
+			if (weaponType != Weapon::TYPE::None)
+			{
+				for (int weaponAnimationAngleIndex = 0; weaponAnimationAngleIndex < (int)WeaponAnimation::ANGLE::Count; weaponAnimationAngleIndex++)
+				{
+					auto animationAngle = (WeaponAnimation::ANGLE)weaponAnimationAngleIndex;
+					for (int weaponAnimationStateIndex = 0; weaponAnimationStateIndex < (int)WeaponAnimation::STATE::Count; weaponAnimationStateIndex++)
+					{
+						auto animationState = (WeaponAnimation::STATE)weaponAnimationStateIndex;
+
+						int currentSize = m_weaponAnimationFramesMap[weaponType][animationAngle][animationState].size();
+
+						m_weaponAnimationFramesMap[weaponType][animationAngle][animationState] =
+							addAnimationFrames(
+								texturePath,
+								weaponType,
+								WeaponAnimation::getWeaponAngleString(animationAngle),
+								WeaponAnimation::getWeaponStateString(animationState)
+
+							);
+					}
+				}
+			}
+			else
+			{
+				int currentSize = m_animationFrames.size();
+				m_animationFrames = addAnimationFrames(texturePath, weaponType, "", "");
+			}
+		}
 	}
 
 	// Init Functions
@@ -28,23 +57,37 @@ namespace ratchet
 	}
 
 	//Geters
-	int AnimationJump::getAnimSize()
+	int AnimationJump::getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
-		return s_animFrameImg.size();
+		if (type == Weapon::TYPE::None)
+		{
+			return m_animationFrames.size();
+		}
+		return m_weaponAnimationFramesMap[type][angle][state].size();
 	}
 
-	void AnimationJump::addAnimationFrames(std::string& texturePath)
+	std::vector<sf::Texture> AnimationJump::addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state)
 	{
+		auto resultList = std::vector<sf::Texture>();
 		bool imageValid = false;
 		do
 		{
-			int imgIndex = s_animFrameImg.size();
+			int imgIndex = resultList.size();
 			int strImgIndex = imgIndex + 1;
 
 			// Build string
 			std::stringstream ss;
 			ss << texturePath;
 			ss << "JumpTextures/";
+			ss << Weapon::getWeaponTypeString(weaponType) << "/";
+			if (strlen(aimingAngle) > 0)
+			{
+				ss << aimingAngle << "/";
+			}
+			if (strlen(state) > 0)
+			{
+				ss << state << "/";
+			}
 			ss << "Jump";
 			ss << strImgIndex;
 			ss << ".png";
@@ -56,54 +99,73 @@ namespace ratchet
 			imageValid = texture != nullptr;
 			if (imageValid)
 			{
-				s_animFrameImg.push_back(*texture);
+				resultList.push_back(*texture);
 			}
 
 		} while (imageValid);
+
+		return resultList;
 	}
 
-	void AnimationJump::playAnimation(sf::Sprite& sprite)
+	void AnimationJump::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
+		if (!m_initialTexture)
+		{
+			m_currentFrameIndex++;
+			m_initialTexture = true;
+		}
 		if (m_currentFrameIndex == 0)
 		{
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture((s_animFrameImg)[m_currentFrameIndex]);
+				if (weaponUsed != Weapon::TYPE::None)
+				{
+					sprite.setTexture(m_weaponAnimationFramesMap[weaponUsed][angle][state][m_currentFrameIndex]);
+				}
+				else
+				{
+					sprite.setTexture(m_animationFrames[m_currentFrameIndex]);
+				}
+
 #ifdef IS_RATCHET_DEBUG
-				//std::cout << "PLayer Jump image " << m_currentFrameIndex << std::endl;
+				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
 
-			}
-			if (m_animationTimer.getElapsedTime().asSeconds() >= m_currentJumpTimeLimit || getAnimationSwitch())
+				}
+			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())
 			{
 				m_isAnimTransition = true;
 				m_currentFrameIndex++;
 				m_animationTimer.restart();
 			}
-		}
+			}
 		else if (m_currentFrameIndex > 0)
 		{
-			if (m_currentFrameIndex >= getAnimSize())
-			{
-				return;
-			}
 			if (m_isAnimTransition)
 			{
 				m_isAnimTransition = false;
-				sprite.setTexture((s_animFrameImg)[m_currentFrameIndex]);
+
+				if (weaponUsed != Weapon::TYPE::None)
+				{
+					sprite.setTexture(m_weaponAnimationFramesMap[weaponUsed][angle][state][m_currentFrameIndex]);
+				}
+				else
+				{
+					sprite.setTexture(m_animationFrames[m_currentFrameIndex]);
+				}
+
 #ifdef IS_RATCHET_DEBUG
-				//std::cout << "PLayer Jump image " << m_currentFrameIndex << std::endl;
+				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
 			}
-			if (m_animationTimer.getElapsedTime().asSeconds() >= m_currentJumpTimeLimit || getAnimationSwitch())
+			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())
 			{
 				m_isAnimTransition = true;
 				m_currentFrameIndex++;
-
-				if (m_currentFrameIndex == m_jumpAnimFrameIndex)
+				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state))
 				{
-					m_currentJumpTimeLimit = m_animTimeJumpLimit;
+					m_currentFrameIndex = 0;
 				}
 				m_animationTimer.restart();
 			}

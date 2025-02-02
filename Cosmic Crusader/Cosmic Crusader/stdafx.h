@@ -11,6 +11,7 @@
 #include <string>
 #include <time.h>
 #include <vector>
+#include <variant>
 
 //SFML
 #include "SFML/System.hpp"
@@ -28,7 +29,7 @@
 //Windows
 #include <Windows.h>
 
-#define IS_RATCHET_DEBUG
+#undef IS_RATCHET_DEBUG
 
 #ifndef DBOUT
 #define DBOUT( s )            \

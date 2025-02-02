@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ColliderBase.h"
+#include "WeaponConfig.h"
+#include "Weapon.h"
 
 namespace ratchet
 {

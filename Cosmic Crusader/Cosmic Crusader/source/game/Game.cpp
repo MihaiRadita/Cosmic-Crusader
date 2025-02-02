@@ -103,7 +103,7 @@ namespace ratchet
 			config.m_jumpImpulse = -10.0f;
 			config.m_fallingSpeed = 7000.0f;
 
-			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/Idle1.png";
+			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
 			config.spriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
 
 			auto colliderConfig = CapsuleColliderConfig();
@@ -119,6 +119,24 @@ namespace ratchet
 
 		
 			config.m_colliderConfig = &colliderConfig;
+
+			// fie este un std::vector<Weapon::TYPE>, fie este un std::map<Weapon::TYPE, bool>
+			config.m_usableWeaponTypeList = { {Weapon::TYPE::None, true}, {Weapon::TYPE::Blaster, true}, {Weapon::TYPE::FireLauncher, true}, {Weapon::TYPE::RocketLauncher, true} }; // ce arme POATE folosi
+
+			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
+			config.m_currentState = WeaponAnimation::STATE::Aim;
+			config.m_currentWeaponType = Weapon::TYPE::None;
+
+			// std::vector<std::pair<Weapon::Type, std::optional<WeaponConfig>>>
+			config.m_weaponConfigList = // reprezinta ce arme ai in inventar deja
+			{
+				std::make_pair(Weapon::TYPE::Blaster, WeaponConfig(51)),
+				std::make_pair(Weapon::TYPE::RocketLauncher, WeaponConfig(12)),
+				std::make_pair(Weapon::TYPE::Blaster, WeaponConfig(2401)),
+				std::make_pair(Weapon::TYPE::FireLauncher, std::nullopt),
+
+			};
+			config.m_currentlyEquippedWeaponIndex = 1;
 
 			GameObject::s_gameObjects.push_back(new Player(config));
 
@@ -238,12 +256,16 @@ namespace ratchet
 				sf::View view = m_window.getView();
 				view.setCenter(player->getCollider()->getBody()->GetPosition().x, player->getCollider()->getBody()->GetPosition().y);
 				m_window.setView(view);
+
+				sf::Sprite sprite = player->getSprite();
+
+				std::cout << "GAME PLAYER TEXTURE: " << player->getSprite().getTexture()->getSize().x << " , " << player->getSprite().getTexture()->getSize().y << std::endl;
 			}
 
 			obj->render(m_window);
 		}
-
 		m_window.display();
+
 	}
 
 }

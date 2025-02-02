@@ -9,6 +9,7 @@
 #include "animations/AnimationJump.h"
 #include "animations/AnimationJumpRun.h"
 #include "animations/Animator.h"
+#include "WeaponManager.h"
 
 namespace ratchet
 {
@@ -59,6 +60,26 @@ namespace ratchet
 
 		// Physics
 		bool isGrounded() const { return m_isGround; };
+
+
+		//Setters
+
+		void addWeapon(Weapon::TYPE weaponType, std::optional<WeaponConfig> config);
+		void setWeapon(int weaponIndex);
+
+		 int m_equippedWeaponIndex = -1;
+
+
+		 std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 
+		 std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_weaponConfigList; 
+		 std::vector<Weapon*> m_ownedWeaponList; 
+		 std::vector<Weapon::TYPE> m_usableWeaponTypes;
+
+
+
+		 WeaponAnimation::ANGLE m_currentCharacterAngle;
+		 WeaponAnimation::STATE m_currentCharacterState;
+		 Weapon::TYPE m_currentWeaponType;
 
 	private:
 		bool m_isGround;
