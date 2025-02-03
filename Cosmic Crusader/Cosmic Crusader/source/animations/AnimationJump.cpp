@@ -54,6 +54,7 @@ namespace ratchet
 		m_animationTimer.restart();
 		m_animationSwitch = true;
 		m_currentJumpTimeLimit = m_animTimeLimit;
+		m_repeatAnimation = false;
 	}
 
 	//Geters
@@ -165,7 +166,14 @@ namespace ratchet
 				m_currentFrameIndex++;
 				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state))
 				{
-					m_currentFrameIndex = 0;
+					if (m_repeatAnimation)
+					{
+						m_currentFrameIndex = 0;
+					}
+					else
+					{
+						m_currentFrameIndex--;
+					}
 				}
 				m_animationTimer.restart();
 			}

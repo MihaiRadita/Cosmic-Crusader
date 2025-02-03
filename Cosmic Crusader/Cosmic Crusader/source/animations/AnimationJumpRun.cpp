@@ -8,7 +8,7 @@ namespace ratchet
 	AnimationJumpRun::AnimationJumpRun(std::string& texturePath, std::vector<Weapon::TYPE>& usableWeaponTypeList)
 	{
 		initVariables();
-		
+
 		for (const auto weaponType : usableWeaponTypeList)
 		{
 			if (weaponType != Weapon::TYPE::None)
@@ -54,6 +54,7 @@ namespace ratchet
 		m_animationTimer.restart();
 		m_animationSwitch = true;
 		m_currentJumpTimeLimit = m_animTimeLimit;
+		m_repeatAnimation = false;
 	}
 
 	//Add animation frames images
@@ -157,7 +158,14 @@ namespace ratchet
 				m_currentFrameIndex++;
 				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state))
 				{
-					m_currentFrameIndex = 0;
+					if (m_repeatAnimation)
+					{
+						m_currentFrameIndex = 0;
+					}
+					else
+					{
+						m_currentFrameIndex--;
+					}
 				}
 				m_animationTimer.restart();
 			}

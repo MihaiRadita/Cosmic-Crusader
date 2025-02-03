@@ -51,6 +51,7 @@ namespace ratchet
 		m_initialTexture = false;
 		m_animationTimer.restart();
 		m_animationSwitch = true;
+		m_repeatAnimation = true;
 		
 	}
 
@@ -153,7 +154,14 @@ namespace ratchet
 				m_currentFrameIndex++;
 				if (m_currentFrameIndex >= getAnimSize(weaponUsed,angle,state))
 				{
-					m_currentFrameIndex = 0;
+					if (m_repeatAnimation)
+					{
+						m_currentFrameIndex = 0;
+					}
+					else
+					{
+						m_currentFrameIndex--;
+					}
 				}
 				m_animationTimer.restart();
 			}

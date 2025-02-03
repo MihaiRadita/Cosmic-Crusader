@@ -52,5 +52,6 @@ namespace ratchet
 		bool m_animationSwitch;
 		sf::Clock m_animationTimer;
 		bool m_initialTexture;
+		bool m_repeatAnimation;
 	};
 }
