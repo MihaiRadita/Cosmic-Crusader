@@ -258,8 +258,6 @@ namespace ratchet
 				m_window.setView(view);
 
 				sf::Sprite sprite = player->getSprite();
-
-				std::cout << "GAME PLAYER TEXTURE: " << player->getSprite().getTexture()->getSize().x << " , " << player->getSprite().getTexture()->getSize().y << std::endl;
 			}
 
 			obj->render(m_window);

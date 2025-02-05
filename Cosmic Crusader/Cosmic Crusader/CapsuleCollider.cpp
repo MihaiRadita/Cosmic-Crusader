@@ -285,7 +285,6 @@ namespace ratchet
 
 			if (callbackMiddle.m_fraction <= 1.0f && callbackMiddle.m_hit)
 			{
-
 				return true;
 			}
 
