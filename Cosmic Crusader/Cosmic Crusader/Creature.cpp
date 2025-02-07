@@ -16,10 +16,21 @@ namespace ratchet
 		m_weaponConfigList = config.m_weaponConfigList;
 		m_usableWeaponTypeList = config.m_usableWeaponTypeList;
 
+
+		creatureFallingTexturePath = config.fallingSpriteTexturePath;
+
 		m_currentWeaponType = config.m_currentWeaponType;
 		m_currentCharacterAngle = config.m_currentAngle;
 		m_currentCharacterState = config.m_currentState;
 
+		m_isFalling = false;
+
+		if (m_creatureFallingTexture.loadFromFile(creatureFallingTexturePath) == false)
+		{
+#ifdef IS_RATCHET_DEBUG
+			//std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
+#endif
+		}
 
 		m_spritePath = config.spriteTexturePath;
 
@@ -110,11 +121,12 @@ namespace ratchet
 		{
 			if (m_input.x < 0)
 			{
+				m_isMoving = true;
 				if (m_movementType == GROUND)
 				{
 					if (isGrounded())
 					{
-						m_isMoving = true;
+						m_isFalling = false;
 						if (m_isMoving)
 						{
 							if (m_characterAnimationState != MOVING)
@@ -124,17 +136,18 @@ namespace ratchet
 							}
 						}
 					}
-
 				}
 				invertCharacterMovingSpriteScale(-1);
 			}
 			else if (m_input.x > 0)
 			{
+				m_isMoving = true;
 				if (m_movementType == GROUND)
 				{
 					if (isGrounded())
 					{
-						m_isMoving = true;
+						m_isFalling = false;
+
 						if (m_isMoving)
 						{
 							if (m_characterAnimationState != MOVING)
@@ -148,6 +161,14 @@ namespace ratchet
 				}
 				invertCharacterMovingSpriteScale(1);
 			}
+			
+			if (!isGrounded())
+			{
+				if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
+				{
+					m_isFalling = true;
+				}
+			}
 
 			if (m_input.isJump && isGrounded())
 			{
@@ -156,6 +177,7 @@ namespace ratchet
 					if (m_characterAnimationState != JUMP)
 					{
 						m_characterAnimationState = JUMP;
+						m_isFalling = false;
 						switchAnimation();
 					}
 				}
@@ -167,6 +189,7 @@ namespace ratchet
 					if (m_characterAnimationState != JUMP_RUNNING)
 					{
 						m_characterAnimationState = JUMP_RUNNING;
+						m_isFalling = false;
 						switchAnimation();
 					}
 				}
@@ -180,12 +203,19 @@ namespace ratchet
 #endif			
 				m_isMoving = false;
 				m_characterAnimationState = ANIMATION_STATE::IDLE;
+				m_isFalling = false;
 				switchAnimation();;
 			}
 
 		}
-
+		if (!m_isFalling)
+		{
 			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite,m_currentWeaponType, m_currentCharacterAngle,m_currentCharacterState);
+		}
+		else
+		{
+			m_sprite.setTexture(m_creatureFallingTexture);
+		}
 
 			// Sync sprite position with collider
 			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);

@@ -20,6 +20,7 @@ namespace ratchet
 		spriteTexturePath = "";
 		startSpriteTexturePath = "";
 		startSpriteTexturePathAddition = "";
+		fallingSpriteTexturePath = "";
 		positionXOffset = 0.f;
 		positionYOffset = 0.f;
 

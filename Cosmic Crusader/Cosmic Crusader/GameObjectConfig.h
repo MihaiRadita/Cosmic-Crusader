@@ -28,6 +28,7 @@ namespace ratchet
 		std::string startSpriteTexturePath;
 		std::string spriteTexturePath;
 		std::string startSpriteTexturePathAddition;
+		std::string fallingSpriteTexturePath;
 
 		//Physics
 		BaseColliderConfig* m_colliderConfig = nullptr;

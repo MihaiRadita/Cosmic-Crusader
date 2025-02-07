@@ -29,7 +29,11 @@ namespace ratchet
 		int m_characterAnimSwitch;
 		ANIMATION_STATE m_characterAnimationState;
 		std::vector<std::string> animationsTexturesPath;
+		std::string creatureFallingTexturePath;
 		Animator* m_characterAnimator;
+		sf::Texture m_creatureFallingTexture;
+
+		bool m_isFalling;
 
 		//Constructors
 		Creature(const CreatureConfig& config);
