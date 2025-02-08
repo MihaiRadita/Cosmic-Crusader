@@ -23,7 +23,7 @@ namespace ratchet
 		m_currentCharacterAngle = config.m_currentAngle;
 		m_currentCharacterState = config.m_currentState;
 
-		m_isFalling = false;
+		m_isFallingWithoutJumping = false;
 
 		if (m_creatureFallingTexture.loadFromFile(creatureFallingTexturePath) == false)
 		{
@@ -68,6 +68,7 @@ namespace ratchet
 			m_animationList.emplace(ANIMATION_STATE::JUMP, new AnimationJump(m_spritePath, m_usableWeaponTypes));
 			m_animationList.emplace(ANIMATION_STATE::MOVING, new AnimationRun(m_spritePath, m_usableWeaponTypes));
 			m_animationList.emplace(ANIMATION_STATE::JUMP_RUNNING, new AnimationJumpRun(m_spritePath, m_usableWeaponTypes));
+			m_animationList.emplace(ANIMATION_STATE::FALL, new AnimationFall(m_spritePath, m_usableWeaponTypes));
 
 			m_characterAnimSwitch = -1;
 
@@ -126,7 +127,7 @@ namespace ratchet
 				{
 					if (isGrounded())
 					{
-						m_isFalling = false;
+						m_isFallingWithoutJumping = false;
 						if (m_isMoving)
 						{
 							if (m_characterAnimationState != MOVING)
@@ -146,7 +147,7 @@ namespace ratchet
 				{
 					if (isGrounded())
 					{
-						m_isFalling = false;
+						m_isFallingWithoutJumping = false;
 
 						if (m_isMoving)
 						{
@@ -166,7 +167,11 @@ namespace ratchet
 			{
 				if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
 				{
-					m_isFalling = true;
+					if (m_characterAnimationState != FALL)
+					{
+						m_characterAnimationState = FALL;
+						switchAnimation();
+					}
 				}
 			}
 
@@ -177,7 +182,7 @@ namespace ratchet
 					if (m_characterAnimationState != JUMP)
 					{
 						m_characterAnimationState = JUMP;
-						m_isFalling = false;
+						m_isFallingWithoutJumping = false;
 						switchAnimation();
 					}
 				}
@@ -189,7 +194,7 @@ namespace ratchet
 					if (m_characterAnimationState != JUMP_RUNNING)
 					{
 						m_characterAnimationState = JUMP_RUNNING;
-						m_isFalling = false;
+						m_isFallingWithoutJumping = false;
 						switchAnimation();
 					}
 				}
@@ -203,19 +208,16 @@ namespace ratchet
 #endif			
 				m_isMoving = false;
 				m_characterAnimationState = ANIMATION_STATE::IDLE;
-				m_isFalling = false;
-				switchAnimation();;
+				m_isFallingWithoutJumping = false;
+				switchAnimation();
 			}
 
 		}
-		if (!m_isFalling)
-		{
+		
+		
 			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite,m_currentWeaponType, m_currentCharacterAngle,m_currentCharacterState);
-		}
-		else
-		{
-			m_sprite.setTexture(m_creatureFallingTexture);
-		}
+		
+	
 
 			// Sync sprite position with collider
 			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);

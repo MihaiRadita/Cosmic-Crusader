@@ -98,6 +98,9 @@
     <ClCompile Include="WeaponPickup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\animations\AnimationFall.cpp">
+      <Filter>source\animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -164,5 +167,8 @@
     <ClInclude Include="WeaponManager.h" />
     <ClInclude Include="WeaponConfig.h" />
     <ClInclude Include="WeaponPickup.h" />
+    <ClInclude Include="source\animations\AnimationFall.h">
+      <Filter>source\animations</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

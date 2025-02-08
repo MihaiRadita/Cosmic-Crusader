@@ -153,6 +153,7 @@
     <ClCompile Include="GameObjectConfig.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="source\animations\AnimationFall.cpp" />
     <ClCompile Include="source\animations\Animator.cpp" />
     <ClCompile Include="source\animations\AnimationBase.cpp" />
     <ClCompile Include="source\animations\AnimationIdle.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectConfig.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="source\animations\AnimationFall.h" />
     <ClInclude Include="source\animations\Animator.h" />
     <ClInclude Include="source\animations\AnimationBase.h" />
     <ClInclude Include="source\animations\AnimationIdle.h" />

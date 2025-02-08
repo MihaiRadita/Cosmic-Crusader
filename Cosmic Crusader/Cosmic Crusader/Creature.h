@@ -7,7 +7,9 @@
 #include "animations/AnimationIdle.h"
 #include "animations/AnimationRun.h"
 #include "animations/AnimationJump.h"
+#include "animations/AnimationFall.h"
 #include "animations/AnimationJumpRun.h"
+
 #include "animations/Animator.h"
 #include "WeaponManager.h"
 
@@ -16,7 +18,6 @@ namespace ratchet
 	class Creature : public GameObject
 	{
 	public:
-
 
 		//Character Features
 		float m_movementSpeed;
@@ -33,7 +34,7 @@ namespace ratchet
 		Animator* m_characterAnimator;
 		sf::Texture m_creatureFallingTexture;
 
-		bool m_isFalling;
+		bool m_isFallingWithoutJumping;
 
 		//Constructors
 		Creature(const CreatureConfig& config);

@@ -1,14 +1,13 @@
 #include "stdafx.h"
-#include "AnimationRun.h"
+#include "AnimationFall.h"
 #include "ResourceManager.h"
-
 
 namespace ratchet
 {
-	//Constructors
-	AnimationRun::AnimationRun(std::string& texturePath, std::vector<Weapon::TYPE>& usableWeaponTypeList)
+	AnimationFall::AnimationFall(std::string& texturePath, std::vector<Weapon::TYPE>& usableWeaponTypeList)
 	{
 		initVariables();
+
 		for (const auto weaponType : usableWeaponTypeList)
 		{
 			if (weaponType != Weapon::TYPE::None)
@@ -35,16 +34,15 @@ namespace ratchet
 			}
 			else
 			{
-				int currentSize = m_animationFrames.size();
 				m_animationFrames = addAnimationFrames(texturePath, weaponType, "", "");
 			}
 		}
 	}
 
-	//Init Functions
-	void AnimationRun::initVariables()
+	void AnimationFall::initVariables()
 	{
-		m_animTimeLimit = 0.035f;
+		m_animTimeLimit = 0.5f;
+
 		m_currentFrameIndex = 0;
 		m_isAnimTransition = true;
 
@@ -54,8 +52,7 @@ namespace ratchet
 		m_repeatAnimation = true;
 	}
 
-	//Add animation frames images
-	std::vector<sf::Texture> AnimationRun::addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state)
+	std::vector<sf::Texture> AnimationFall::addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state)
 	{
 		auto resultList = std::vector<sf::Texture>();
 		bool imageValid = false;
@@ -67,7 +64,7 @@ namespace ratchet
 			// Build string
 			std::stringstream ss;
 			ss << texturePath;
-			ss << "RunTextures/";
+			ss << "FallingTextures/";
 			ss << Weapon::getWeaponTypeString(weaponType) << "/";
 			if (strlen(aimingAngle) > 0)
 			{
@@ -77,7 +74,7 @@ namespace ratchet
 			{
 				ss << state << "/";
 			}
-			ss << "Run";
+			ss << "Fall";
 			ss << strImgIndex;
 			ss << ".png";
 			std::string path = ss.str();
@@ -96,14 +93,9 @@ namespace ratchet
 		return resultList;
 	}
 
-	//Play player animation frames
-	void AnimationRun::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
+	void AnimationFall::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
-		if (!m_initialTexture)
-		{
-			m_currentFrameIndex++;
-			m_initialTexture = true;
-		}
+		
 		if (m_currentFrameIndex == 0)
 		{
 			if (m_isAnimTransition)
@@ -171,45 +163,38 @@ namespace ratchet
 				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state) - 1)
 				{
 					increaseFrameIndex = false;
+
 					if (m_repeatAnimation)
 					{
 						m_currentFrameIndex = 0;
 					}
 				}
+
 				if (increaseFrameIndex)
 				{
 					m_currentFrameIndex++;
 				}
-
 				m_animationTimer.restart();
 			}
 		}
 	}
-
-	//Destroy functions
-	AnimationRun::~AnimationRun()
+	AnimationFall::~AnimationFall()
 	{
 	}
-
-	//Other Functions
-	void AnimationRun::resetCurrentAnimIndex()
+	void AnimationFall::resetCurrentAnimIndex()
 	{
 		m_currentFrameIndex = 0;
 	}
-
-	void AnimationRun::resetPlayerAnimTimer()
+	void AnimationFall::resetPlayerAnimTimer()
 	{
 		m_animationTimer.restart();
 		m_animationSwitch = true;
 	}
-
-	void AnimationRun::setAnimationSwitch(bool animSwitch)
+	void AnimationFall::setAnimationSwitch(bool animSwitch)
 	{
-		m_animationSwitch = m_animationSwitch;
+		m_animationSwitch = animSwitch;
 	}
-
-	//Getters Functions
-	int AnimationRun::getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
+	int AnimationFall::getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 		if (type == Weapon::TYPE::None)
 		{
@@ -217,12 +202,11 @@ namespace ratchet
 		}
 		return m_weaponAnimationFramesMap[type][angle][state].size();
 	}
-	int AnimationRun::getCurrentAnimIndex()
+	int AnimationFall::getCurrentAnimIndex()
 	{
 		return m_currentFrameIndex;
 	}
-
-	bool AnimationRun::getAnimationSwitch()
+	bool AnimationFall::getAnimationSwitch()
 	{
 		bool anim_switch = m_animationSwitch;
 
@@ -233,5 +217,6 @@ namespace ratchet
 
 		return anim_switch;
 	}
-
 }
+
+

@@ -125,7 +125,21 @@ namespace ratchet
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())
 			{
 				m_isAnimTransition = true;
-				m_currentFrameIndex++;
+
+				bool increaseFrameIndex = true;
+				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state) - 1)
+				{
+					increaseFrameIndex = false;
+					if (m_repeatAnimation)
+					{
+						m_currentFrameIndex = 0;
+					}
+				}
+				if (increaseFrameIndex)
+				{
+					m_currentFrameIndex++;
+				}
+
 				m_animationTimer.restart();
 			}
 		}
@@ -151,17 +165,21 @@ namespace ratchet
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())
 			{
 				m_isAnimTransition = true;
-				m_currentFrameIndex++;
-				if (m_currentFrameIndex >= getAnimSize(weaponUsed,angle,state))
+
+				bool increaseFrameIndex = true;
+				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state) - 1)
 				{
+					increaseFrameIndex = false;
+
 					if (m_repeatAnimation)
 					{
 						m_currentFrameIndex = 0;
 					}
-					else
-					{
-						m_currentFrameIndex--;
-					}
+				}
+
+				if (increaseFrameIndex)
+				{
+					m_currentFrameIndex++;
 				}
 				m_animationTimer.restart();
 			}

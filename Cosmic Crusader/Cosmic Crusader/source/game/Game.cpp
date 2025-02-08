@@ -105,7 +105,7 @@ namespace ratchet
 
 			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
 			config.spriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
-			config.fallingSpriteTexturePath = "D:/Long gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/JumpTextures/None/Jump7.png";
+			//config.fallingSpriteTexturePath = "D:/Long gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/JumpTextures/None/Jump7.png";
 
 			auto colliderConfig = CapsuleColliderConfig();
 			colliderConfig.m_layer = PhysiscsLayer::Player;

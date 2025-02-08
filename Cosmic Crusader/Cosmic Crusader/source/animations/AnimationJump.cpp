@@ -132,15 +132,29 @@ namespace ratchet
 #ifdef IS_RATCHET_DEBUG
 				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
 #endif
+			}
 
-				}
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())
 			{
 				m_isAnimTransition = true;
-				m_currentFrameIndex++;
+
+				bool increaseFrameIndex = true;
+				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state) - 1)
+				{
+					increaseFrameIndex = false;
+					if (m_repeatAnimation)
+					{
+						m_currentFrameIndex = 0;
+					}
+				}
+				if (increaseFrameIndex)
+				{
+					m_currentFrameIndex++;
+				}
+
 				m_animationTimer.restart();
 			}
-			}
+		}
 		else if (m_currentFrameIndex > 0)
 		{
 			if (m_isAnimTransition)
@@ -163,18 +177,23 @@ namespace ratchet
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())
 			{
 				m_isAnimTransition = true;
-				m_currentFrameIndex++;
-				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state))
+
+				bool increaseFrameIndex = true;
+
+				if (m_currentFrameIndex >= getAnimSize(weaponUsed, angle, state) - 1)
 				{
+					increaseFrameIndex = false;
 					if (m_repeatAnimation)
 					{
 						m_currentFrameIndex = 0;
 					}
-					else
-					{
-						m_currentFrameIndex--;
-					}
 				}
+
+				if (increaseFrameIndex)
+				{
+					m_currentFrameIndex++;
+				}
+
 				m_animationTimer.restart();
 			}
 		}

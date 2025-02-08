@@ -10,7 +10,8 @@ namespace ratchet
 		MOVING_LEFT, 
 		MOVING_RIGHT, 
 		JUMP, 
-		JUMP_RUNNING
+		JUMP_RUNNING,
+		FALL
 	};
 
 	enum class AimingAngle {
