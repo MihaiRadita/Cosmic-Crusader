@@ -20,6 +20,8 @@ namespace ratchet
 			}
 		}
 
+		Weapon();
+
 		Weapon( const Weapon& weapon);
 
 		TYPE m_weaponType;

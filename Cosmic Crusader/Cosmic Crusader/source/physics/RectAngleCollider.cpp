@@ -103,6 +103,7 @@ namespace ratchet
 		m_fixtureDef.density = config.m_fixtureDef.density;
 		m_fixtureDef.friction = config.m_fixtureDef.friction;
 		m_fixtureDef.restitution = config.m_fixtureDef.restitution;
+		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 
 		if (config.m_layer == PhysiscsLayer::Player)
 		{

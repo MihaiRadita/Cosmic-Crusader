@@ -22,4 +22,24 @@ namespace ratchet
         return nullptr;
     }
 
+    WeaponManager::~WeaponManager()
+    {
+        for (auto weapon : m_weaponList)
+        {
+            delete weapon;
+        }
+        m_weaponList.clear();
+    }
+
+    void WeaponManager::addAllWeapons()
+    {
+        Weapon* playerNoneWeapon = new Weapon(); 
+        playerNoneWeapon->m_weaponType = Weapon::TYPE::None;
+        m_weaponList.push_back(playerNoneWeapon);
+
+        Weapon* playerBlaster1Weapon = new Weapon();
+        playerBlaster1Weapon->m_weaponType = Weapon::TYPE::Blaster;
+        m_weaponList.push_back(playerBlaster1Weapon);
+    }
+
 }

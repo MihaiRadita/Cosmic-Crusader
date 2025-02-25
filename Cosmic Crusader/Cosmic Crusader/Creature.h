@@ -24,6 +24,7 @@ namespace ratchet
 		float m_fallingSpeed;
 		float m_jumpImpulse;
 		bool m_isMoving;
+		int m_currentEcquipedWeaponIndex;
 
 		//Character Animations
 		std::map<ANIMATION_STATE, AnimationBase*> m_animationList;
@@ -70,13 +71,13 @@ namespace ratchet
 		//Setters
 
 		void addWeapon(Weapon::TYPE weaponType, std::optional<WeaponConfig> config);
-		void setWeapon(int weaponIndex);
+		void setWeapon(int& weaponIndex);
 
 		 int m_equippedWeaponIndex = -1;
 
 
 		 std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 
-		 std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_weaponConfigList; 
+		 std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList; 
 		 std::vector<Weapon*> m_ownedWeaponList; 
 		 std::vector<Weapon::TYPE> m_usableWeaponTypes;
 

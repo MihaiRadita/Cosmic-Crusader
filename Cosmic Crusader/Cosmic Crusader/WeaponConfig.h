@@ -1,14 +1,19 @@
 #pragma once
 
+#include "GameObjectConfig.h"
+
 namespace ratchet
 {
-	class WeaponConfig
+	struct WeaponConfig : public GameObjectConfig
 	{
 	public:
-		WeaponConfig(int ammo);
+		//WeaponConfig();
+		WeaponConfig(int ammo, int damage);
 
-
-		int m_currentAmmo;
+		//Weapon features
+		int m_damage;
+		int m_MaxAmmo;
+		Weapon::TYPE m_weaponType;
 	};
 
 }

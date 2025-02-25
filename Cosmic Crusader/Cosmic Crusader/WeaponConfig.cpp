@@ -3,8 +3,12 @@
 
 namespace ratchet 
 {
-	WeaponConfig::WeaponConfig(int ammo)
+	/*WeaponConfig::WeaponConfig()
 	{
-		m_currentAmmo = ammo;
+	}*/
+	WeaponConfig::WeaponConfig(int ammo, int damage) : GameObjectConfig()
+	{
+		m_MaxAmmo = ammo;
+		m_damage = damage;
 	}
 }

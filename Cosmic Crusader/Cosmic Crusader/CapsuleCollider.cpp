@@ -71,6 +71,7 @@ namespace ratchet
 		m_fixtureDef.friction = config.m_fixtureDef.friction;
 		m_fixtureDef.restitution = config.m_fixtureDef.restitution;
 		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
+		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 		m_body->CreateFixture(&m_fixtureDef);
 
 		if (m_bodyDef.type == b2_staticBody)

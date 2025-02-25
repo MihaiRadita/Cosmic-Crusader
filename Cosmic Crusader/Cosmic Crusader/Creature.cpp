@@ -11,9 +11,11 @@ namespace ratchet
 		m_fallingSpeed = config.m_fallingSpeed;
 		m_jumpImpulse = config.m_jumpImpulse;
 
+		m_currentEcquipedWeaponIndex = config.m_currentlyEquippedWeaponIndex;
+
 		m_characterAnimator = nullptr;
 
-		m_weaponConfigList = config.m_weaponConfigList;
+		m_initialWeaponConfigList = config.m_initialWeaponConfigList;
 		m_usableWeaponTypeList = config.m_usableWeaponTypeList;
 
 
@@ -57,6 +59,12 @@ namespace ratchet
 			m_usableWeaponTypes.push_back(type);
 		}
 
+		for (auto config : m_initialWeaponConfigList)
+		{
+			
+			addWeapon(config.first, config.second);
+		}
+
 
 		//m_usableWeaponTypeList = config.m_usableWeaponTypeList;
 
@@ -73,6 +81,7 @@ namespace ratchet
 			m_characterAnimSwitch = -1;
 
 		}
+		setWeapon(m_currentEcquipedWeaponIndex);
 	}
 
 	Creature::~Creature()
@@ -85,6 +94,11 @@ namespace ratchet
 
 		delete m_characterAnimator;
 		m_characterAnimator = nullptr;
+
+		for (auto& weapon : m_ownedWeaponList)
+		{
+			delete weapon;
+		}
 	}
 
 	void Creature::update()
@@ -281,23 +295,37 @@ namespace ratchet
 
 	void Creature::addWeapon(Weapon::TYPE weaponType, std::optional<WeaponConfig> config)
 	{
-		if (weaponType != Weapon::TYPE::None)
+		
+		auto newWeapon = new Weapon(*WeaponManager::instance()->getWeapon(weaponType));
+		if (config.has_value())
 		{
-			auto newWeapon = new Weapon(*WeaponManager::instance()->getWeapon(weaponType));
-			if (config.has_value())
-			{
-				newWeapon->m_currentAmmo = config->m_currentAmmo;
-			}
+			newWeapon->m_currentAmmo = config->m_MaxAmmo;
+		}
 
-			m_ownedWeaponList.push_back(newWeapon);
+		m_ownedWeaponList.push_back(newWeapon);
+
+		if (m_ownedWeaponList.empty()) {
+			std::cerr << "Error: m_ownedWeaponList is empty!\n";
+				return;
+		}
+
+		m_equippedWeaponIndex = 0;
+
+		if (!m_ownedWeaponList[m_equippedWeaponIndex]) {
+			std::cout << "Error: Weapon at index " << m_equippedWeaponIndex << " is nullptr!\n";
+			return;
 		}
 	}
-	void Creature::setWeapon(int weaponIndex)
+	void Creature::setWeapon(int& weaponIndex)
 	{
 		if (0 <= weaponIndex && weaponIndex < m_ownedWeaponList.size())
 		{
 			m_equippedWeaponIndex = weaponIndex;
-			m_characterAnimator->setWeapon(m_ownedWeaponList[m_equippedWeaponIndex]->m_weaponType);
+
+			Weapon* weapon = m_ownedWeaponList[m_currentEcquipedWeaponIndex];
+
+
+			m_characterAnimator->setWeapon(weapon->m_weaponType);
 		}
 		else
 		{

@@ -7,4 +7,14 @@ namespace ratchet
 	{
 		creatureThatPickedUpTheWeapon->addWeapon(m_weaponType, m_weaponConfig);
 	}
+	WeaponPickup::WeaponPickup(const WeaponConfig& config): GameObject(config)
+	{
+		m_weaponConfig = config;
+		
+		if (m_weaponConfig.has_value())
+		{
+			m_weaponType = m_weaponConfig->m_weaponType;
+		}
+
+	}
 }

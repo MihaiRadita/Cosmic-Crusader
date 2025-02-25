@@ -40,6 +40,6 @@ namespace ratchet
 		void setWeapon(Weapon::TYPE weaponType);
 
 
-		Weapon::TYPE m_weaponAnimation = Weapon::TYPE::None;
+		Weapon::TYPE m_weaponAnimation;
 	};
 }

@@ -5,6 +5,8 @@
 
 #include "GameObject.h"
 
+#include "WeaponPickup.h"
+
 #include "physics/Physics.h"
 
 namespace ratchet
@@ -29,6 +31,7 @@ namespace ratchet
 		void initWindow();
 		void initPhysics();
 		void initMap();
+		void initWeaponManager();
 		//Geters
 		const sf::RenderWindow& getWindow() const;
 

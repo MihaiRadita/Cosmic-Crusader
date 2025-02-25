@@ -11,6 +11,10 @@ namespace ratchet
 		static WeaponManager* instance();
 		const Weapon* getWeapon(Weapon::TYPE weaponType) const;
 
+		~WeaponManager();
+
+		void addAllWeapons();
+
 		std::vector<Weapon*> m_weaponList;
 	};
 

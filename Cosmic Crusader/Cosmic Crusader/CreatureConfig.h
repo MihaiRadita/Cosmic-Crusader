@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObjectConfig.h"
-
+#include "WeaponConfig.h"
 
 namespace ratchet
 {
@@ -17,7 +17,7 @@ namespace ratchet
 
 		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
 
-		std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_weaponConfigList;
+		std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList;
 
 		WeaponAnimation::ANGLE m_currentAngle;
 		WeaponAnimation::STATE m_currentState;

@@ -77,12 +77,51 @@ namespace ratchet
 				colliderConfig.m_fixtureDef.density = 0.0f;
 				colliderConfig.m_fixtureDef.friction = 76.f;
 				colliderConfig.m_fixtureDef.restitution = 0.01f;
+				colliderConfig.m_fixtureDef.isSensor = false;
 
 
 				config.m_colliderConfig = &colliderConfig;
 
 				GameObject::s_gameObjects.push_back(new GameObject(config));
 			}
+		}
+
+		{
+			auto config = WeaponConfig(51, 12);
+			config.m_movementType = MOVEMENTTYPE_UNKNOWN;
+			config.m_Faction = FACTION_UNKNOWN;
+			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
+			config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
+			config.m_weaponType = Weapon::TYPE::Blaster;
+
+			float tileWidth = 64.0f;
+			float tileHeight = 64.0f;
+
+			config.positionXOffset = 0.f;
+			config.positionYOffset = 0.f;
+
+			config.position = sf::Vector2f(18.0f, 4.8f);
+			config.rotation = 0.0f;
+			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+
+			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
+
+			auto colliderConfig = RectAngleColliderConfig();
+			colliderConfig.m_layer = PhysiscsLayer::Platforms;
+			colliderConfig.m_bodyDef.type = b2_staticBody;
+			colliderConfig.m_bodyDef.fixedRotation = true;
+			colliderConfig.m_fixtureDef.density = 0.0f;
+			colliderConfig.m_fixtureDef.friction = 0.0f;
+			colliderConfig.m_fixtureDef.restitution = 0.0f;
+			colliderConfig.m_fixtureDef.isSensor = true;
+
+
+			std::cout << "IS SENSOR : " << colliderConfig.m_fixtureDef.isSensor<<std::endl;
+
+			config.m_colliderConfig = &colliderConfig;
+
+			GameObject::s_gameObjects.push_back(new WeaponPickup(config));
+
 		}
 
 		{
@@ -105,7 +144,6 @@ namespace ratchet
 
 			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
 			config.spriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
-			//config.fallingSpriteTexturePath = "D:/Long gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/JumpTextures/None/Jump7.png";
 
 			auto colliderConfig = CapsuleColliderConfig();
 			colliderConfig.m_layer = PhysiscsLayer::Player;
@@ -117,6 +155,7 @@ namespace ratchet
 			colliderConfig.m_fixtureDef.restitution = 0.f;
 			colliderConfig.m_height = 1.13f;
 			colliderConfig.m_radius = 0.25f;
+			colliderConfig.m_fixtureDef.isSensor = false;
 
 		
 			config.m_colliderConfig = &colliderConfig;
@@ -126,18 +165,16 @@ namespace ratchet
 
 			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
 			config.m_currentState = WeaponAnimation::STATE::Aim;
-			config.m_currentWeaponType = Weapon::TYPE::None;
 
 			// std::vector<std::pair<Weapon::Type, std::optional<WeaponConfig>>>
-			config.m_weaponConfigList = // reprezinta ce arme ai in inventar deja
+			config.m_initialWeaponConfigList = // reprezinta ce arme ai in inventar deja
 			{
-				std::make_pair(Weapon::TYPE::Blaster, WeaponConfig(51)),
-				std::make_pair(Weapon::TYPE::RocketLauncher, WeaponConfig(12)),
-				std::make_pair(Weapon::TYPE::Blaster, WeaponConfig(2401)),
-				std::make_pair(Weapon::TYPE::FireLauncher, std::nullopt),
-
+				std::make_pair(Weapon::TYPE::None, std::nullopt)
 			};
-			config.m_currentlyEquippedWeaponIndex = 1;
+
+			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;
+
+			config.m_currentlyEquippedWeaponIndex = 0;
 
 			GameObject::s_gameObjects.push_back(new Player(config));
 
@@ -147,6 +184,7 @@ namespace ratchet
 	{
 		initWindow();
 		initPhysics();
+		initWeaponManager();
 		spawnObjects();
 
 	}
@@ -176,6 +214,11 @@ namespace ratchet
 	void Game::initPhysics()
 	{
 		m_physics = new Physics();
+	}
+
+	void Game::initWeaponManager()
+	{
+		WeaponManager::instance()->addAllWeapons();
 	}
 
 
