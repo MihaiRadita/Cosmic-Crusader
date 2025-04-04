@@ -1,12 +1,24 @@
 #include "stdafx.h"
 #include "ColliderBase.h"
 
+
 namespace ratchet
 {
 	ColliderBase::ColliderBase(const BaseColliderConfig& config)
 	{
 		m_body = nullptr;
+		if (!contactListener)
+		{
+			contactListener = new ContactListener();
+		}
+		s_physicsWorld->SetContactListener(contactListener);
 
+	}
+
+	ColliderBase::~ColliderBase()
+	{
+		delete contactListener;
+		contactListener = nullptr;
 	}
 
 	void ColliderBase::applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity)
@@ -121,6 +133,8 @@ namespace ratchet
 	BaseColliderConfig::BaseColliderConfig()
 	{
 	}
+
+	ContactListener* ColliderBase::contactListener;
 }
 
 

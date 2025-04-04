@@ -76,11 +76,11 @@ namespace ratchet
 		 int m_equippedWeaponIndex = -1;
 
 
-		 std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 
+		// std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 
 		 std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList; 
 		 std::vector<Weapon*> m_ownedWeaponList; 
-		 std::vector<Weapon::TYPE> m_usableWeaponTypes;
-
+		 std::vector <Weapon::TYPE> m_weaponTypeList;
+		 std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
 
 
 		 WeaponAnimation::ANGLE m_currentCharacterAngle;

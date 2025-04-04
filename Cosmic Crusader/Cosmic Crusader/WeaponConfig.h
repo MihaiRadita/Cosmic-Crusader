@@ -8,11 +8,12 @@ namespace ratchet
 	{
 	public:
 		//WeaponConfig();
-		WeaponConfig(int ammo, int damage);
+		WeaponConfig(int ammo, int damage, bool isWeaponAccesible);
 
 		//Weapon features
 		int m_damage;
 		int m_MaxAmmo;
+		bool m_isWeaponAccessible;
 		Weapon::TYPE m_weaponType;
 	};
 

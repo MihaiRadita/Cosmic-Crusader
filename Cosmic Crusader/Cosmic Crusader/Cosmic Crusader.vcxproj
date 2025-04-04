@@ -164,6 +164,7 @@
     <ClCompile Include="source\game\Player.cpp" />
     <ClCompile Include="source\game\Tile.cpp" />
     <ClCompile Include="source\physics\CircleCollider.cpp" />
+    <ClCompile Include="source\physics\ContactListener.cpp" />
     <ClCompile Include="source\physics\Physics.cpp" />
     <ClCompile Include="source\physics\RectAngleCollider.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -196,6 +197,7 @@
     <ClInclude Include="source\game\Player.h" />
     <ClInclude Include="source\game\Tile.h" />
     <ClInclude Include="source\physics\CircleCollider.h" />
+    <ClInclude Include="source\physics\ContactListener.h" />
     <ClInclude Include="source\physics\Physics.h" />
     <ClInclude Include="source\physics\RectAngleCollider.h" />
     <ClInclude Include="stdafx.h" />

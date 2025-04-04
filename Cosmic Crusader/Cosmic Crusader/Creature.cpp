@@ -12,10 +12,12 @@ namespace ratchet
 		m_jumpImpulse = config.m_jumpImpulse;
 
 		m_currentEcquipedWeaponIndex = config.m_currentlyEquippedWeaponIndex;
+		m_currentWeaponType = config.m_currentWeaponType;
 
 		m_characterAnimator = nullptr;
 
 		m_initialWeaponConfigList = config.m_initialWeaponConfigList;
+		m_weaponTypeList = config.m_weaponTypeList;
 		m_usableWeaponTypeList = config.m_usableWeaponTypeList;
 
 
@@ -52,13 +54,6 @@ namespace ratchet
 			std::cout << "Character Failed" << std::endl;
 		}
 
-		for (const auto& weponType : m_usableWeaponTypeList)
-		{
-			Weapon::TYPE type = weponType.first;
-
-			m_usableWeaponTypes.push_back(type);
-		}
-
 		for (auto config : m_initialWeaponConfigList)
 		{
 			
@@ -72,11 +67,11 @@ namespace ratchet
 		{
 			m_characterAnimationState = IDLE;
 			m_characterAnimator = new Animator();
-			m_animationList.emplace(ANIMATION_STATE::IDLE, new AnimationIdle(m_spritePath, m_usableWeaponTypes));
-			m_animationList.emplace(ANIMATION_STATE::JUMP, new AnimationJump(m_spritePath, m_usableWeaponTypes));
-			m_animationList.emplace(ANIMATION_STATE::MOVING, new AnimationRun(m_spritePath, m_usableWeaponTypes));
-			m_animationList.emplace(ANIMATION_STATE::JUMP_RUNNING, new AnimationJumpRun(m_spritePath, m_usableWeaponTypes));
-			m_animationList.emplace(ANIMATION_STATE::FALL, new AnimationFall(m_spritePath, m_usableWeaponTypes));
+			m_animationList.emplace(ANIMATION_STATE::IDLE, new AnimationIdle(m_spritePath, m_weaponTypeList));
+			m_animationList.emplace(ANIMATION_STATE::JUMP, new AnimationJump(m_spritePath, m_weaponTypeList));
+			m_animationList.emplace(ANIMATION_STATE::MOVING, new AnimationRun(m_spritePath, m_weaponTypeList));
+			m_animationList.emplace(ANIMATION_STATE::JUMP_RUNNING, new AnimationJumpRun(m_spritePath, m_weaponTypeList));
+			m_animationList.emplace(ANIMATION_STATE::FALL, new AnimationFall(m_spritePath, m_weaponTypeList));
 
 			m_characterAnimSwitch = -1;
 
@@ -320,16 +315,15 @@ namespace ratchet
 	{
 		if (0 <= weaponIndex && weaponIndex < m_ownedWeaponList.size())
 		{
-			m_equippedWeaponIndex = weaponIndex;
 
-			Weapon* weapon = m_ownedWeaponList[m_currentEcquipedWeaponIndex];
-
+			Weapon* weapon = m_ownedWeaponList[weaponIndex];
+			m_currentWeaponType = weapon->m_weaponType;
 
 			m_characterAnimator->setWeapon(weapon->m_weaponType);
 		}
 		else
 		{
-			m_equippedWeaponIndex = -1;
+			weaponIndex = -1;
 			m_characterAnimator->setWeapon(Weapon::TYPE::None);
 		}
 	}

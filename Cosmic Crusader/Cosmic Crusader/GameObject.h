@@ -48,6 +48,8 @@ namespace ratchet
 
 		static std::vector<GameObject*> s_gameObjects;
 
+		static GameObject* findGameObject(const b2Body* body);
+
 		//Constructor
 		GameObject(const GameObjectConfig& config);
 
@@ -68,6 +70,12 @@ namespace ratchet
 		virtual void updateJump();
 		virtual void updateRunningJump();
 
+		//Colision and Trigger interactions
+		virtual void OnCollisionEnter(GameObject* obj);
+		virtual void OnCollisionExit(GameObject* obj);
+		virtual void OnSensorEnter(GameObject* obj);
+		virtual void OnSensorExit(GameObject* obj);
+
 		//Getters
 		const sf::FloatRect getBounds() const;
 
@@ -79,6 +87,9 @@ namespace ratchet
 		 //Transforrms setters
 		 virtual void setPosition(const sf::Vector2f position);
 		 virtual void setRotation(const float angle);
+
+		 void DestroyGameObject();
+		 void RemoveGameObjectFromList();
 
 
 		virtual void destroy();

@@ -1,5 +1,7 @@
 #pragma once
 #include "physics/Physics.h"
+#include "physics/ContactListener.h"
+
 namespace ratchet
 {
 	enum class PhysiscsLayer
@@ -35,8 +37,11 @@ namespace ratchet
 		b2BodyDef m_bodyDef;
 		b2Body* m_body = nullptr;
 
+		static ContactListener* contactListener;
+
 		//Constructors
 		ColliderBase(const BaseColliderConfig& config);
+		~ColliderBase();
 
 		void applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity);
 
@@ -65,15 +70,16 @@ namespace ratchet
 		float m_scaleY = 1.0f;
 	};
 
-	class GroundCheck : public b2ContactListener
+	class GroundCheck
 	{
 	public:
 
 		bool isPlayerOnGround;
 		bool isJumping = false;
 
-		void BeginContact(b2Contact* contact) override;
-		void EndContact(b2Contact* contact) override;
+		/*void BeginContact(b2Contact* contact) override;
+		void EndContact(b2Contact* contact) override;*/
+
 		int colliderTypeIndex;
 		std::stringstream ss;
 		std::string cooliderIndexText;

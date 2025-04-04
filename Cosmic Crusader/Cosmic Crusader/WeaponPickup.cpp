@@ -17,4 +17,55 @@ namespace ratchet
 		}
 
 	}
+
+	WeaponPickup::~WeaponPickup()
+	{
+	}
+
+	void WeaponPickup::OnCollisionEnter(GameObject* obj)
+	{
+		Player* player = dynamic_cast<Player*>(obj);
+
+		if (player)
+		{
+			std::cout << "PLAYER HAS INTERACTING WITH WEAPON 1! " << std::endl;
+		}
+	}
+
+	void WeaponPickup::OnCollisionExit(GameObject* obj)
+	{
+		Player* player = dynamic_cast<Player*>(obj);
+
+		if (player)
+		{
+			std::cout << "PLAYER HAS EXIT WITH WEAPON 1! " << std::endl;
+		}
+	}
+
+	void WeaponPickup::OnSensorEnter(GameObject* obj)
+	{
+		Player* player = dynamic_cast<Player*>(obj);
+
+		if (player)
+		{
+			std::cout << "PLAYER HAS INTERACTING WITH WEAPON 1! " << std::endl;
+		}
+	}
+
+	void WeaponPickup::OnSensorExit(GameObject* obj)
+	{
+		Player* player = dynamic_cast<Player*>(obj);
+
+		if (player)
+		{
+			std::cout << "PLAYER HAS EXIT WITH WEAPON 1! " << std::endl;
+		}
+	}
+
+	/*
+	* isSensorEnter(GameObject* obj)
+	* {
+		}
+	*/
+
 }

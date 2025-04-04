@@ -16,6 +16,7 @@ namespace ratchet
 
 
 		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
+		std::vector <Weapon::TYPE> m_weaponTypeList;
 
 		std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList;
 

@@ -101,6 +101,9 @@
     <ClCompile Include="source\animations\AnimationFall.cpp">
       <Filter>source\animations</Filter>
     </ClCompile>
+    <ClCompile Include="source\physics\ContactListener.cpp">
+      <Filter>source\physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -169,6 +172,9 @@
     <ClInclude Include="WeaponPickup.h" />
     <ClInclude Include="source\animations\AnimationFall.h">
       <Filter>source\animations</Filter>
+    </ClInclude>
+    <ClInclude Include="source\physics\ContactListener.h">
+      <Filter>source\physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

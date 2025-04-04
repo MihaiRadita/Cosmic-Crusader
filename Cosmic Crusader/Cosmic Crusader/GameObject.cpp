@@ -34,6 +34,25 @@ namespace ratchet
 		return m_collider;
 	}
 
+	GameObject* GameObject::findGameObject(const b2Body* body)
+	{
+		for (auto* obj : s_gameObjects)
+		{
+			if (auto* collider = obj->getCollider())
+			{
+				if (auto* colliderBody = collider->getBody())
+				{
+					if (colliderBody == body)
+					{
+						return obj;
+					}
+
+				}
+			}
+		}
+		return nullptr;
+	}
+
 	ratchet::GameObject::GameObject(const GameObjectConfig& config)
 	{
 		//States
@@ -146,6 +165,24 @@ namespace ratchet
 		m_sprite.setRotation(m_rotation);
 	}
 
+	void GameObject::DestroyGameObject()
+	{
+		RemoveGameObjectFromList();
+		delete this;
+	}
+
+	void GameObject::RemoveGameObjectFromList()
+	{
+		for (auto it = s_gameObjects.begin(); it != s_gameObjects.end(); ++it)
+		{
+			if (*it == this)
+			{
+				s_gameObjects.erase(it);
+				break; 
+			}
+		}
+	}
+
 	void ratchet::GameObject::destroy()
 	{
 	}
@@ -172,6 +209,22 @@ namespace ratchet
 	}
 
 	void GameObject::updateRunningJump()
+	{
+	}
+
+	void GameObject::OnCollisionEnter(GameObject* obj)
+	{
+	}
+
+	void GameObject::OnCollisionExit(GameObject* obj)
+	{
+	}
+
+	void GameObject::OnSensorEnter(GameObject* obj)
+	{
+	}
+
+	void GameObject::OnSensorExit(GameObject* obj)
 	{
 	}
 

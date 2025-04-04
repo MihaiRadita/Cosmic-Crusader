@@ -3,13 +3,6 @@
 
 namespace ratchet
 {
-	void GroundCheck::BeginContact(b2Contact* contact)
-	{
-	}
-
-	void GroundCheck::EndContact(b2Contact* contact)
-	{
-	}
 
 	GroundRayCastCallBack::GroundRayCastCallBack(b2Body* ignoredBody)
 	{
@@ -20,32 +13,32 @@ namespace ratchet
 	}
 
 
-	std::string GroundCheck::getCollisionSide(const b2Vec2& localPoint, const b2AABB& aabb) {
-
-		float epsilon = 0.1f;
-		float top = aabb.upperBound.y;
-		float bottom = aabb.lowerBound.y;
-		float left = aabb.lowerBound.x;
-		float right = aabb.upperBound.x;
-
-#ifdef IS_RATCHET_DEBUG
-		//std::cout << std::endl;
-		//std::cout << "Local point: (" << localPoint.x << ", " << localPoint.y << ")" << std::endl;
-		//std::cout << "AABB: top = " << top << ", bottom = " << bottom << ", left = " << left << ", right = " << right << std::endl;
-#endif
-
-
-		if (localPoint.y >= bottom)
-			return "bottom";
-		if (localPoint.y <= top)
-			return "top";
-		if (localPoint.x <= left)
-			return "left";
-		if (localPoint.x >= right)
-			return "right";
-
-		return "unknown";
-	}
+//	std::string GroundCheck::getCollisionSide(const b2Vec2& localPoint, const b2AABB& aabb) {
+//
+//		float epsilon = 0.1f;
+//		float top = aabb.upperBound.y;
+//		float bottom = aabb.lowerBound.y;
+//		float left = aabb.lowerBound.x;
+//		float right = aabb.upperBound.x;
+//
+//#ifdef IS_RATCHET_DEBUG
+//		//std::cout << std::endl;
+//		//std::cout << "Local point: (" << localPoint.x << ", " << localPoint.y << ")" << std::endl;
+//		//std::cout << "AABB: top = " << top << ", bottom = " << bottom << ", left = " << left << ", right = " << right << std::endl;
+//#endif
+//
+//
+//		if (localPoint.y >= bottom)
+//			return "bottom";
+//		if (localPoint.y <= top)
+//			return "top";
+//		if (localPoint.x <= left)
+//			return "left";
+//		if (localPoint.x >= right)
+//			return "right";
+//
+//		return "unknown";
+//	}
 
 
 	RectAngleCollider::RectAngleCollider(sf::Sprite& sprite, const RectAngleColliderConfig& config) : ColliderBase(config)
@@ -59,12 +52,6 @@ namespace ratchet
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
 		m_offset = b2Vec2(20.0f, 0.0f);
-
-		if (!m_contactListener)
-		{
-			m_contactListener = new GroundCheck();
-			s_physicsWorld->SetContactListener(m_contactListener);
-		}
 
 		m_scaleX = sprite.getScale().x;
 		m_scaleY = sprite.getScale().y;
@@ -168,7 +155,6 @@ namespace ratchet
 				s_physicsWorld->DestroyBody(m_body);
 				m_body = nullptr;
 			}
-			delete m_contactListener;
 		}
 	}
 
@@ -386,7 +372,6 @@ namespace ratchet
 		return false;
 	}
 
-	GroundCheck* RectAngleCollider::m_contactListener;
 	RectAngleColliderConfig::RectAngleColliderConfig()
 	{
 	}

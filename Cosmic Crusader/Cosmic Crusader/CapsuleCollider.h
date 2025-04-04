@@ -17,7 +17,6 @@ namespace ratchet
 	{
 	public:
 
-		static GroundCheck* m_contactListener;
 
 		//Constructors
 		CapsuleCollider(sf::Sprite& sprite, const CapsuleColliderConfig& cofig);

@@ -87,7 +87,7 @@ namespace ratchet
 		}
 
 		{
-			auto config = WeaponConfig(51, 12);
+			auto config = WeaponConfig(51, 12, true);
 			config.m_movementType = MOVEMENTTYPE_UNKNOWN;
 			config.m_Faction = FACTION_UNKNOWN;
 			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
@@ -161,15 +161,18 @@ namespace ratchet
 			config.m_colliderConfig = &colliderConfig;
 
 			// fie este un std::vector<Weapon::TYPE>, fie este un std::map<Weapon::TYPE, bool>
-			config.m_usableWeaponTypeList = { {Weapon::TYPE::None, true}, {Weapon::TYPE::Blaster, true}, {Weapon::TYPE::FireLauncher, true}, {Weapon::TYPE::RocketLauncher, true} }; // ce arme POATE folosi
+			config.m_usableWeaponTypeList = { {Weapon::TYPE::None, true}, {Weapon::TYPE::Blaster, false}, {Weapon::TYPE::FireLauncher, false}, {Weapon::TYPE::RocketLauncher, false} }; // ce arme POATE folosi
 
 			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
 			config.m_currentState = WeaponAnimation::STATE::Aim;
 
+			config.m_weaponTypeList = { Weapon::TYPE::None, Weapon::TYPE::Blaster, Weapon::TYPE::FireLauncher, Weapon::TYPE::RocketLauncher };
+
 			// std::vector<std::pair<Weapon::Type, std::optional<WeaponConfig>>>
 			config.m_initialWeaponConfigList = // reprezinta ce arme ai in inventar deja
 			{
-				std::make_pair(Weapon::TYPE::None, std::nullopt)
+				std::make_pair(Weapon::TYPE::None, std::nullopt),
+				std::make_pair(Weapon::TYPE::Blaster,std::nullopt)
 			};
 
 			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;

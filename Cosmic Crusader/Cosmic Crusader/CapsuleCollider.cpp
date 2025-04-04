@@ -14,13 +14,7 @@ namespace ratchet
 	{
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
-
-		if (!m_contactListener)
-		{
-			m_contactListener = new GroundCheck();
-			s_physicsWorld->SetContactListener(m_contactListener);
-		}
-
+		
 		m_scaleX = 1.0f;
 		m_scaleY = 1.0f;
 
@@ -102,7 +96,7 @@ namespace ratchet
 				s_physicsWorld->DestroyBody(m_body);
 				m_body = nullptr;
 			}
-			delete m_contactListener;
+		
 		}
 	}
 
@@ -154,8 +148,6 @@ namespace ratchet
 	CapsuleColliderConfig::CapsuleColliderConfig()
 	{
 	}
-
-	GroundCheck* CapsuleCollider::m_contactListener;
 
 
 #ifdef IS_RATCHET_DEBUG

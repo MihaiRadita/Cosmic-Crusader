@@ -16,7 +16,6 @@ namespace ratchet
 	{
 	public:
 
-		static GroundCheck* m_contactListener;
 
 		//Constructors
 		RectAngleCollider(sf::Sprite& sprite, const RectAngleColliderConfig& congif);
