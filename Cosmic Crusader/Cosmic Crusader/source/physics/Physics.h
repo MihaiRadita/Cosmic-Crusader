@@ -2,10 +2,15 @@
 
 namespace ratchet
 {
+	class ContactListener; 
+	//class b2World;
+
 	enum BodyType {
 		//DYNAMIC = 0,
 		//STATIC
 	};
+
+	class GameObject;
 
 	class Physics
 	{
@@ -14,27 +19,36 @@ namespace ratchet
 	public:
 		Physics();
 		~Physics();
+		bool isSimulatingPhysics = false;
 
 		//Getters
-		b2World* getPhysicsWorld();
+		static b2World* getPhysicsWorld();
+
+		static void DestroyPhysicsInstance();
 
 		//Simulation Physics
-		void simulatePhysics(float& deltaTime);
+		static void simulatePhysics(float& deltaTime);
 
 		//Update Function
-		void update(float& deltaTime);
+		static void update(float& deltaTime);
 
+		//bool shouldSkipRaycastThisFrame(); 
+
+		bool m_skipRaycastThisFrame = false;
 	protected:
 		static b2World* s_physicsWorld;
-		float m_timeStep;
-		int32 m_velocityIterations;
-		int32 m_positionIterations;
+		static ContactListener* s_contactListener;
+
+		static const float sc_timeStep;
+		static const int32 sc_velocityIterations;
+		static const int32 sc_positionIterations;
 		static const float sc_metersScale;
 
 
 		double m_accumulator;  // Acumulator pentru timpul scurs dintre pa?ii de simulare
 
 		static const double sc_fixedDeltaTime;
+
 
 	};
 }

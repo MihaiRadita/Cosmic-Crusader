@@ -7,18 +7,10 @@ namespace ratchet
 	ColliderBase::ColliderBase(const BaseColliderConfig& config)
 	{
 		m_body = nullptr;
-		if (!contactListener)
-		{
-			contactListener = new ContactListener();
-		}
-		s_physicsWorld->SetContactListener(contactListener);
-
 	}
 
 	ColliderBase::~ColliderBase()
 	{
-		delete contactListener;
-		contactListener = nullptr;
 	}
 
 	void ColliderBase::applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity)
@@ -108,10 +100,16 @@ namespace ratchet
 	}
 
 	float GroundRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
-	{
+ 	{
 		if (fixture)
 		{
 			b2Body* body = fixture->GetBody();
+
+			if (!body || !body->IsEnabled())
+			{
+				return -1.0f;
+			}
+
 			if (body == m_ignoredBody)
 			{
 				return -1.0f;
@@ -133,8 +131,6 @@ namespace ratchet
 	BaseColliderConfig::BaseColliderConfig()
 	{
 	}
-
-	ContactListener* ColliderBase::contactListener;
 }
 
 

@@ -40,7 +40,7 @@ namespace ratchet
 		sf::Vector2f getScale();
 		sf::FloatRect getBounds();
 		ColliderBase* getCollider();
-
+		bool m_markedForDestruction = false;
 		//Physics
 		sf::Vector2f m_colliderScaleMultipier;
 		ColliderBase* m_collider;

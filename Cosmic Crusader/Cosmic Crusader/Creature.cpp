@@ -99,7 +99,16 @@ namespace ratchet
 	void Creature::update()
 	{
 		updateInput();
-		m_isGround = m_collider->performGroundRayCast(m_sprite);
+		if (m_collider && !m_collider->m_skipRaycastThisFrame)
+		{
+			m_isGround = m_collider->performGroundRayCast(m_sprite);
+		}
+		else
+		{
+			m_isGround = false; 
+			m_collider->m_skipRaycastThisFrame = false; 
+		}
+		//m_isGround = m_collider->performGroundRayCast(m_sprite);
 		updateMovement();
 		updateJump();
 		updateAnimations();

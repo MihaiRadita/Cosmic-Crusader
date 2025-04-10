@@ -6,7 +6,7 @@
 namespace ratchet
 {
 	void ratchet::ContactListener::BeginContact(b2Contact* contact)
-	{
+    	{
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
 
@@ -19,8 +19,16 @@ namespace ratchet
 			{
 				if (fixtureA->IsSensor() != fixtureB->IsSensor())
 				{
-					gameObjectA->OnSensorEnter(gameObjectB);
-					gameObjectB->OnSensorEnter(gameObjectA);
+					if (gameObjectB)
+					{
+
+						gameObjectA->OnSensorEnter(gameObjectB);
+					}
+					else if (gameObjectA)
+					{
+						gameObjectB->OnSensorEnter(gameObjectA);
+
+					}
 				}
 				else if (fixtureA->IsSensor() == false && fixtureB->IsSensor() == false)
 				{

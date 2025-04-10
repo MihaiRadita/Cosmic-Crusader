@@ -93,6 +93,10 @@ namespace ratchet
 		{
 			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
 		}
+		else if (config.m_colliderConfig->m_layer == PhysiscsLayer::Items)
+		{
+			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
+		}
 	}
 
 	ratchet::GameObject::~GameObject()
@@ -167,8 +171,22 @@ namespace ratchet
 
 	void GameObject::DestroyGameObject()
 	{
-		RemoveGameObjectFromList();
-		delete this;
+		if (this == nullptr) {
+			return;
+		}
+
+		if (m_collider) {
+			delete m_collider;  
+			m_collider = nullptr;
+		}
+
+		auto it = std::find(s_gameObjects.begin(), s_gameObjects.end(), this);
+		if (it != s_gameObjects.end()) {
+			s_gameObjects.erase(it);
+		}
+
+		delete this; 
+		std::cout << "The Object HAS BEEN DESTROYED!" << std::endl;
 	}
 
 	void GameObject::RemoveGameObjectFromList()

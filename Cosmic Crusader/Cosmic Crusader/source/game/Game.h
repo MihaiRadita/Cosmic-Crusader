@@ -15,8 +15,6 @@ namespace ratchet
 	private:
 		sf::RenderWindow m_window;
 
-		Physics* m_physics;
-
 		sf::Clock gameTime;
 		float timeLastFrame = 0;
 

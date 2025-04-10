@@ -45,10 +45,16 @@ namespace ratchet
 	void WeaponPickup::OnSensorEnter(GameObject* obj)
 	{
 		Player* player = dynamic_cast<Player*>(obj);
-
-		if (player)
+		if (player && m_isPickup == false)
 		{
+			m_isPickup = true;
+
 			std::cout << "PLAYER HAS INTERACTING WITH WEAPON 1! " << std::endl;
+			
+			//m_collider->getBody()->SetEnabled(false);
+			//Physics::addToDestroyList(this);
+			DestroyGameObject();
+			
 		}
 	}
 

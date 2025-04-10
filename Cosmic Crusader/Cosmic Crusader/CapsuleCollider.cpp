@@ -274,7 +274,12 @@ namespace ratchet
 			getMiddlePointsForRaycast(startPointMiddle.x, startPointMiddle.y, endPointMiddle.x, endPointMiddle.y);
 
 			GroundRayCastCallBack callbackMiddle(m_body);
+
+		
+			
 			s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
+			
+			
 
 			if (callbackMiddle.m_fraction <= 1.0f && callbackMiddle.m_hit)
 			{

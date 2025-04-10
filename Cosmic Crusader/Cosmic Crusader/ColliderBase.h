@@ -37,7 +37,8 @@ namespace ratchet
 		b2BodyDef m_bodyDef;
 		b2Body* m_body = nullptr;
 
-		static ContactListener* contactListener;
+		bool m_skipRaycastThisFrame = false;
+
 
 		//Constructors
 		ColliderBase(const BaseColliderConfig& config);

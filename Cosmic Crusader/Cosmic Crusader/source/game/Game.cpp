@@ -107,7 +107,7 @@ namespace ratchet
 			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
 
 			auto colliderConfig = RectAngleColliderConfig();
-			colliderConfig.m_layer = PhysiscsLayer::Platforms;
+			colliderConfig.m_layer = PhysiscsLayer::Items;
 			colliderConfig.m_bodyDef.type = b2_staticBody;
 			colliderConfig.m_bodyDef.fixedRotation = true;
 			colliderConfig.m_fixtureDef.density = 0.0f;
@@ -194,14 +194,13 @@ namespace ratchet
 
 	Game::~Game()
 	{
-		delete m_physics;
 
 		for (auto& obj : GameObject::s_gameObjects)
 		{
 			delete obj;
 		}
 		GameObject::s_gameObjects.clear();
-		
+		Physics::DestroyPhysicsInstance();
 	}
 
 	void Game::initWindow()
@@ -216,7 +215,7 @@ namespace ratchet
 
 	void Game::initPhysics()
 	{
-		m_physics = new Physics();
+		
 	}
 
 	void Game::initWeaponManager()
@@ -273,7 +272,7 @@ namespace ratchet
 		int maxSteps = 60;  
 		int steps = 0;
 
-		m_physics->update(timeStep);
+		Physics::update(timeStep);
 
 		if (steps == maxSteps) {
 
@@ -284,6 +283,7 @@ namespace ratchet
 		{
 			obj->update();
 		}
+
 
 	}
 
