@@ -172,7 +172,6 @@ namespace ratchet
 			config.m_initialWeaponConfigList = // reprezinta ce arme ai in inventar deja
 			{
 				std::make_pair(Weapon::TYPE::None, std::nullopt),
-				std::make_pair(Weapon::TYPE::Blaster,std::nullopt)
 			};
 
 			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;

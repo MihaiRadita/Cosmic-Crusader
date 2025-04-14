@@ -15,7 +15,7 @@ namespace ratchet
 		{
 			m_weaponType = m_weaponConfig->m_weaponType;
 		}
-
+		m_IsWeaponAccessible = config.m_isWeaponAccessible;
 	}
 
 	WeaponPickup::~WeaponPickup()
@@ -50,10 +50,20 @@ namespace ratchet
 			m_isPickup = true;
 
 			std::cout << "PLAYER HAS INTERACTING WITH WEAPON 1! " << std::endl;
+
+			bool m_isWeaponCharacterMathc = player->isWeaponMatchCharacter(m_weaponType);
+			if(m_isWeaponCharacterMathc)
+			{
+				player->setWeaponAccessible(m_weaponType, m_IsWeaponAccessible);
+				pickUp(player);
+				player->setWeaponIndex(player->getWeaponListSize() - 1);
+				player->setWeapon(player->m_currentEcquipedWeaponIndex);
+
+				DestroyGameObject();
+			}
 			
 			//m_collider->getBody()->SetEnabled(false);
 			//Physics::addToDestroyList(this);
-			DestroyGameObject();
 			
 		}
 	}

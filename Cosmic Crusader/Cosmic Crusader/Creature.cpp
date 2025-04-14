@@ -297,7 +297,12 @@ namespace ratchet
 		}
 	}
 
-	void Creature::addWeapon(Weapon::TYPE weaponType, std::optional<WeaponConfig> config)
+	int Creature::getWeaponListSize()
+	{
+		return m_ownedWeaponList.size();
+	}
+
+	void Creature::addWeapon(Weapon::TYPE &weaponType, std::optional<WeaponConfig> &config)
 	{
 		
 		auto newWeapon = new Weapon(*WeaponManager::instance()->getWeapon(weaponType));
@@ -306,12 +311,18 @@ namespace ratchet
 			newWeapon->m_currentAmmo = config->m_MaxAmmo;
 		}
 
+		newWeapon->m_weaponType = weaponType;
+
+
+
 		m_ownedWeaponList.push_back(newWeapon);
 
 		if (m_ownedWeaponList.empty()) {
 			std::cerr << "Error: m_ownedWeaponList is empty!\n";
 				return;
 		}
+
+		
 
 		m_equippedWeaponIndex = 0;
 
@@ -324,17 +335,66 @@ namespace ratchet
 	{
 		if (0 <= weaponIndex && weaponIndex < m_ownedWeaponList.size())
 		{
-
+			
 			Weapon* weapon = m_ownedWeaponList[weaponIndex];
-			m_currentWeaponType = weapon->m_weaponType;
 
-			m_characterAnimator->setWeapon(weapon->m_weaponType);
+			if (isWeaponAccessible(weapon->m_weaponType))
+			{
+				m_currentWeaponType = weapon->m_weaponType;
+				m_characterAnimator->setWeapon(m_currentWeaponType);
+			}
+
+
 		}
 		else
 		{
 			weaponIndex = -1;
 			m_characterAnimator->setWeapon(Weapon::TYPE::None);
 		}
+	}
+	void Creature::setWeaponAccessible(Weapon::TYPE& weaponType, bool isAccessible)
+	{
+		for (auto& weapon : m_usableWeaponTypeList)
+		{
+			if (weapon.first == weaponType)
+			{
+				weapon.second = isAccessible;
+				break;
+			}
+		}
+	}
+	void Creature::setWeaponIndex(int index)
+	{
+		m_currentEcquipedWeaponIndex = index;
+	}
+	bool Creature::isWeaponMatchCharacter(Weapon::TYPE& weaponType)
+	{
+		for (auto& weapon : m_weaponTypeList)
+		{
+			if(weapon == weaponType)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	bool Creature::isWeaponAccessible(Weapon::TYPE& weaponType)
+	{
+		for (auto& weapon : m_usableWeaponTypeList)
+		{
+			if (weapon.first == weaponType)
+			{
+				if (weapon.second)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+		return false;
 	}
 }
 

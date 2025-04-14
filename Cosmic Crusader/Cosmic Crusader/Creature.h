@@ -70,8 +70,17 @@ namespace ratchet
 
 		//Setters
 
-		void addWeapon(Weapon::TYPE weaponType, std::optional<WeaponConfig> config);
+		//Getters
+		int getWeaponListSize();
+
+		void addWeapon(Weapon::TYPE &weaponType, std::optional<WeaponConfig> &config);
 		void setWeapon(int& weaponIndex);
+		void setWeaponAccessible(Weapon::TYPE& weaponType, bool isAccessible);
+		void setWeaponIndex(int index);
+
+		//Checks
+		bool isWeaponMatchCharacter(Weapon::TYPE& weaponType);
+		bool isWeaponAccessible(Weapon::TYPE& weaponType);
 
 		 int m_equippedWeaponIndex = -1;
 

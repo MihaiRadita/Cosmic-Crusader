@@ -15,6 +15,7 @@ namespace ratchet
 		~WeaponPickup() override;
 
 		bool m_isPickup = false;
+		bool m_IsWeaponAccessible = false;
 
 		Weapon::TYPE m_weaponType;
 		std::optional<WeaponConfig> m_weaponConfig;
