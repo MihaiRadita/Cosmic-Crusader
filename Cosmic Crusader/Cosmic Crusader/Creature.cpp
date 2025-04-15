@@ -109,6 +109,9 @@ namespace ratchet
 			m_collider->m_skipRaycastThisFrame = false; 
 		}
 		//m_isGround = m_collider->performGroundRayCast(m_sprite);
+
+		updateWeaponSelection();
+
 		updateMovement();
 		updateJump();
 		updateAnimations();
@@ -259,6 +262,16 @@ namespace ratchet
 	void Creature::updateRunningJump()
 	{
 	}
+
+	void Creature::updateWeaponSelection()
+	{
+		if (m_currentEcquipedWeaponIndex != m_input.weaponInputIndex)
+		{
+			m_currentEcquipedWeaponIndex = m_input.weaponInputIndex;
+			setWeapon(m_currentEcquipedWeaponIndex);
+		}
+	}
+
 	void Creature::invertCharacterMovingSpriteScale(int direction)
 	{
 		m_sprite.setScale(m_scale.x * (float)direction, m_scale.y);
@@ -322,11 +335,8 @@ namespace ratchet
 				return;
 		}
 
-		
 
-		m_equippedWeaponIndex = 0;
-
-		if (!m_ownedWeaponList[m_equippedWeaponIndex]) {
+		if (!m_ownedWeaponList[m_currentEcquipedWeaponIndex]) {
 			std::cout << "Error: Weapon at index " << m_equippedWeaponIndex << " is nullptr!\n";
 			return;
 		}
@@ -348,7 +358,7 @@ namespace ratchet
 		}
 		else
 		{
-			weaponIndex = -1;
+			weaponIndex = 0;
 			m_characterAnimator->setWeapon(Weapon::TYPE::None);
 		}
 	}
@@ -365,7 +375,9 @@ namespace ratchet
 	}
 	void Creature::setWeaponIndex(int index)
 	{
-		m_currentEcquipedWeaponIndex = index;
+		m_input.weaponInputIndex = index;
+		m_currentEcquipedWeaponIndex = m_input.weaponInputIndex;
+		
 	}
 	bool Creature::isWeaponMatchCharacter(Weapon::TYPE& weaponType)
 	{

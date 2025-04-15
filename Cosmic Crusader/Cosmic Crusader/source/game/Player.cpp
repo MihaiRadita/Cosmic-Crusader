@@ -25,7 +25,9 @@ namespace ratchet
 		{
 		case sf::Event::KeyPressed:
 		{
-			switch (event.key.code)
+			sf::Keyboard::Key key = event.key.code;
+
+			switch (key)
 			{
 			case sf::Keyboard::A:
 				if (m_input.x >= 0) m_input.x = -1;
@@ -36,12 +38,72 @@ namespace ratchet
 			case sf::Keyboard::Space:
 				m_input.isJump = true;
 				break;
+			default:
+				break;
 			}
+			if (key >= sf::Keyboard::Num0 && key <= sf::Keyboard::Num9)
+			{
+				if (!m_ownedWeaponList.empty())
+				{
+					int requestedIndex = key - sf::Keyboard::Num0;
+
+					if (requestedIndex < m_ownedWeaponList.size())
+					{
+						Weapon::TYPE type = m_ownedWeaponList[requestedIndex]->m_weaponType;
+						if (isWeaponAccessible(type))
+						{
+							m_input.weaponInputIndex = requestedIndex;
+						}
+						else
+						{
+							bool found = false;
+							for (int i = requestedIndex + 1; i < m_ownedWeaponList.size(); ++i)
+							{
+								Weapon::TYPE t = m_ownedWeaponList[i]->m_weaponType;
+								if (isWeaponAccessible(t))
+								{
+									m_input.weaponInputIndex = i;
+									found = true;
+									break;
+								}
+							}
+
+							if (!found)
+							{
+								for (int i = 0; i < requestedIndex; ++i)
+								{
+									Weapon::TYPE t = m_ownedWeaponList[i]->m_weaponType;
+									if (isWeaponAccessible(t))
+									{
+										m_input.weaponInputIndex = i;
+										break;
+									}
+								}
+							}
+						}
+					}
+					else
+					{
+						for (int i = 0; i < m_ownedWeaponList.size(); ++i)
+						{
+							Weapon::TYPE t = m_ownedWeaponList[i]->m_weaponType;
+							if (isWeaponAccessible(t))
+							{
+								m_input.weaponInputIndex = i;
+								break;
+							}
+						}
+					}
+				}
+			}
+
 			break;
 		}
+
 		case sf::Event::KeyReleased:
 		{
-			switch (event.key.code)
+			sf::Keyboard::Key key = event.key.code;
+			switch (key)
 			{
 			case sf::Keyboard::A:
 				if (m_input.x < 0) m_input.x = 0;
@@ -52,9 +114,38 @@ namespace ratchet
 			case sf::Keyboard::Space:
 				m_input.isJump = false;
 				break;
+			default:
+				break;
+			}
+
+			break;
+		}
+
+		case sf::Event::MouseWheelScrolled:
+		{
+			if (!m_ownedWeaponList.empty())
+			{
+				int& index = m_input.weaponInputIndex;
+				int weaponCount = m_ownedWeaponList.size();
+				int direction = (event.mouseWheelScroll.delta > 0) ? 1 : -1;
+
+				for (int i = 1; i <= weaponCount; ++i) 
+				{
+					int nextIndex = (index + direction * i + weaponCount) % weaponCount;
+
+					Weapon::TYPE type = m_ownedWeaponList[nextIndex]->m_weaponType;
+					if (isWeaponAccessible(type))
+					{
+						index = nextIndex;
+						break;
+					}
+				}
 			}
 			break;
 		}
+
+		default:
+			break;
 		}
 	}
 

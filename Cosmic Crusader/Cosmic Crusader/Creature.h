@@ -52,6 +52,7 @@ namespace ratchet
 		void updateAnimations();
 		void updateJump() override;
 		void updateRunningJump() override;
+		void updateWeaponSelection() override;
 
 		//Render functions
 
@@ -82,7 +83,7 @@ namespace ratchet
 		bool isWeaponMatchCharacter(Weapon::TYPE& weaponType);
 		bool isWeaponAccessible(Weapon::TYPE& weaponType);
 
-		 int m_equippedWeaponIndex = -1;
+		 int m_equippedWeaponIndex = 0;
 
 
 		// std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 

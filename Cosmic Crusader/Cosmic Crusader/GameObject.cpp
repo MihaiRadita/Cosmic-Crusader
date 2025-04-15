@@ -230,6 +230,10 @@ namespace ratchet
 	{
 	}
 
+	void GameObject::updateWeaponSelection()
+	{
+	}
+
 	void GameObject::OnCollisionEnter(GameObject* obj)
 	{
 	}

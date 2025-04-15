@@ -5,7 +5,10 @@ namespace ratchet
 {
 	void WeaponPickup::pickUp(Creature* creatureThatPickedUpTheWeapon)
 	{
+		creatureThatPickedUpTheWeapon->setWeaponAccessible(m_weaponType, m_IsWeaponAccessible);
 		creatureThatPickedUpTheWeapon->addWeapon(m_weaponType, m_weaponConfig);
+		creatureThatPickedUpTheWeapon->setWeaponIndex(creatureThatPickedUpTheWeapon->getWeaponListSize() - 1);
+		creatureThatPickedUpTheWeapon->setWeapon(creatureThatPickedUpTheWeapon->m_currentEcquipedWeaponIndex);
 	}
 	WeaponPickup::WeaponPickup(const WeaponConfig& config): GameObject(config)
 	{
@@ -54,10 +57,8 @@ namespace ratchet
 			bool m_isWeaponCharacterMathc = player->isWeaponMatchCharacter(m_weaponType);
 			if(m_isWeaponCharacterMathc)
 			{
-				player->setWeaponAccessible(m_weaponType, m_IsWeaponAccessible);
+				
 				pickUp(player);
-				player->setWeaponIndex(player->getWeaponListSize() - 1);
-				player->setWeapon(player->m_currentEcquipedWeaponIndex);
 
 				DestroyGameObject();
 			}

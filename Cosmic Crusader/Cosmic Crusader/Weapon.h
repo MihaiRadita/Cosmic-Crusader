@@ -6,7 +6,7 @@ namespace ratchet
 	class Weapon
 	{
 	public:
-		enum class TYPE { None = 0, Blaster, FireLauncher, RocketLauncher, Count };
+		enum class TYPE { None = 0, Blaster, FireLauncher, RocketLauncher,Enemy1Blaster, Count };
 
 		static const char*  getWeaponTypeString(TYPE type)
 		{

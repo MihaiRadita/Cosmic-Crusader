@@ -69,6 +69,7 @@ namespace ratchet
 		virtual void updateMovement();
 		virtual void updateJump();
 		virtual void updateRunningJump();
+		virtual void updateWeaponSelection();
 
 		//Colision and Trigger interactions
 		virtual void OnCollisionEnter(GameObject* obj);
@@ -99,6 +100,7 @@ namespace ratchet
 			float x = 0;
 			float y = 0;
 			bool isJump = false;
+			int weaponInputIndex = -1;
 
 			void resetMovementControls();
 			
