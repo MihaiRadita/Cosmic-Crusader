@@ -158,6 +158,11 @@ namespace ratchet
 		m_sprite.setPosition(x, y);
 	}
 
+	void Player::computeAimAngleState(sf::Vector2f playerCenter, sf::Vector2i mousePostion)
+	{
+
+	}
+
 	void Player::updateMovement()
 	{
 		m_movementType = MOVEMENTTYPE_UNKNOWN;

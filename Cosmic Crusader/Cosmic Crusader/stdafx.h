@@ -13,12 +13,17 @@
 #include <vector>
 #include <variant>
 
+//Math C++
+#define _USE_MATH_DEFINES 
+#include <cmath>
+
 //SFML
 #include "SFML/System.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/Network.hpp"
+#include "SFML/Window/Mouse.hpp"
 
 //Box2D
 #include "box2d/box2d.h"

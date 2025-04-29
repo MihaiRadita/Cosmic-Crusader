@@ -47,6 +47,9 @@ namespace ratchet
 		//Modifiers
 		void setPosition(const float x, const float y);
 
+		//Anlle Functions
+		void computeAimAngleState(sf::Vector2f playerCenter, sf::Vector2i mousePostion) override;
+
 		//Update functions
 		void updateMovement() override;
 		void updateRotation() override;

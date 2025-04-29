@@ -104,6 +104,9 @@
     <ClCompile Include="source\physics\ContactListener.cpp">
       <Filter>source\physics</Filter>
     </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -176,5 +179,6 @@
     <ClInclude Include="source\physics\ContactListener.h">
       <Filter>source\physics</Filter>
     </ClInclude>
+    <ClInclude Include="WindowManager.h" />
   </ItemGroup>
 </Project>

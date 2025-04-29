@@ -9,6 +9,8 @@
 
 #include "physics/Physics.h"
 
+#include "WindowManager.h"
+
 namespace ratchet
 {
 	class Game {
@@ -17,6 +19,8 @@ namespace ratchet
 
 		sf::Clock gameTime;
 		float timeLastFrame = 0;
+
+		sf::Vector2i currenmousePosition = sf::Vector2i(0,0);
 
 	public:
 		//Constructors

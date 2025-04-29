@@ -29,6 +29,11 @@ namespace ratchet
 		return m_sprite.getGlobalBounds();
 	}
 
+	sf::FloatRect GameObject::getLocalBounds()
+	{
+		return m_sprite.getLocalBounds();
+	}
+
 	ColliderBase* GameObject::getCollider()
 	{
 		return m_collider;

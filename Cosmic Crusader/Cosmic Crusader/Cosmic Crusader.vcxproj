@@ -177,6 +177,7 @@
     <ClCompile Include="WeaponConfig.cpp" />
     <ClCompile Include="WeaponManager.cpp" />
     <ClCompile Include="WeaponPickup.cpp" />
+    <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapsuleCollider.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="WeaponConfig.h" />
     <ClInclude Include="WeaponManager.h" />
     <ClInclude Include="WeaponPickup.h" />
+    <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

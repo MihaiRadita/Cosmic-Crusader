@@ -13,6 +13,8 @@
 #include "animations/Animator.h"
 #include "WeaponManager.h"
 
+#include "WindowManager.h"
+
 namespace ratchet
 {
 	class Creature : public GameObject
@@ -25,6 +27,19 @@ namespace ratchet
 		float m_jumpImpulse;
 		bool m_isMoving;
 		int m_currentEcquipedWeaponIndex;
+
+		//Angles
+		float m_baseAngle;
+		float m_HalfBaseAngle;
+		float m_DEG_TO_RAD;
+		float m_tangentHalfBase;
+		float m_tangentx3HalfBase; 
+
+		//Charater boby areas points
+		sf::Vector2f m_bodyShoulderPosition;
+		float m_bodShoulderOffset;
+		sf::CircleShape m_shape;
+
 
 		//Character Animations
 		std::map<ANIMATION_STATE, AnimationBase*> m_animationList;
@@ -83,6 +98,10 @@ namespace ratchet
 		bool isWeaponMatchCharacter(Weapon::TYPE& weaponType);
 		bool isWeaponAccessible(Weapon::TYPE& weaponType);
 
+
+		//Angles Functions
+		virtual void computeAimAngleState(sf::Vector2f playerCenter, sf::Vector2i /*notused*/);
+
 		 int m_equippedWeaponIndex = 0;
 
 
@@ -95,6 +114,8 @@ namespace ratchet
 
 		 WeaponAnimation::ANGLE m_currentCharacterAngle;
 		 WeaponAnimation::STATE m_currentCharacterState;
+		 std::vector<WeaponAnimation::ANGLE> m_characterAngles;
+
 		 Weapon::TYPE m_currentWeaponType;
 
 	private:

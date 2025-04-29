@@ -39,6 +39,7 @@ namespace ratchet
 		float getRotation();
 		sf::Vector2f getScale();
 		sf::FloatRect getBounds();
+		sf::FloatRect getLocalBounds();
 		ColliderBase* getCollider();
 		bool m_markedForDestruction = false;
 		//Physics

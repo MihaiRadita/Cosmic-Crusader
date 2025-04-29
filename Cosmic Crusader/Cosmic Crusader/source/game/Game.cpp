@@ -141,6 +141,7 @@ namespace ratchet
 			config.m_movingSpeed = 7.0f;
 			config.m_jumpImpulse = -10.0f;
 			config.m_fallingSpeed = 7000.0f;
+			config.m_AngleBase = 45.f;
 
 			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
 			config.spriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
@@ -166,7 +167,11 @@ namespace ratchet
 			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
 			config.m_currentState = WeaponAnimation::STATE::Aim;
 
+			config.m_characterAngles = { WeaponAnimation::ANGLE::Angle0,WeaponAnimation::ANGLE::Angle45, WeaponAnimation::ANGLE::Angle90,WeaponAnimation::ANGLE::AngleMinus45 };
+
 			config.m_weaponTypeList = { Weapon::TYPE::None, Weapon::TYPE::Blaster, Weapon::TYPE::FireLauncher, Weapon::TYPE::RocketLauncher };
+
+			config.m_bodShoulderOffset = 0.4f;
 
 			// std::vector<std::pair<Weapon::Type, std::optional<WeaponConfig>>>
 			config.m_initialWeaponConfigList = // reprezinta ce arme ai in inventar deja
@@ -193,6 +198,7 @@ namespace ratchet
 
 	Game::~Game()
 	{
+		WindowManager::clear();
 
 		for (auto& obj : GameObject::s_gameObjects)
 		{
@@ -200,11 +206,14 @@ namespace ratchet
 		}
 		GameObject::s_gameObjects.clear();
 		Physics::DestroyPhysicsInstance();
+
 	}
 
 	void Game::initWindow()
 	{
 		m_window.create(sf::VideoMode(1280,720), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+
+		WindowManager::create(&m_window);
 		// m_window.setFramerateLimit(60);
 
 		sf::View view = m_window.getView();
@@ -259,6 +268,18 @@ namespace ratchet
 		float deltaTime = (timeNow - timeLastFrame);
 		timeLastFrame = timeNow;
 
+		sf::Vector2i newMousePos = sf::Mouse::getPosition(m_window);
+
+		if (currenmousePosition != newMousePos)
+		{
+			currenmousePosition = newMousePos;
+			std::cout << "Mouse Position: " << currenmousePosition.x << ", " << currenmousePosition.y << " !" << std::endl;
+
+			sf::Vector2f newMouseWorld = m_window.mapPixelToCoords(currenmousePosition);
+
+			std::cout << "Mouse Position in Wolrd: " << newMouseWorld.x << ", " << newMouseWorld.y << "!" << std::endl;
+		}
+
 		if (deltaTime > 1.0f / 5.0f) {
 			deltaTime = 1.0f / 5.0f;  
 		}
@@ -283,6 +304,7 @@ namespace ratchet
 			obj->update();
 		}
 
+		//sf::Mouse::setPosition(sf::Vector2i(20, 20), m_window);
 
 	}
 
