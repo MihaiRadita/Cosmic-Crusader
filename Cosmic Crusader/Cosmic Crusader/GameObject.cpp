@@ -60,6 +60,10 @@ namespace ratchet
 
 	ratchet::GameObject::GameObject(const GameObjectConfig& config)
 	{
+#ifdef IS_RATCHET_DEBUG
+		m_debugDraw = config.m_debugDraw;
+#endif
+
 		//States
 		m_faction = config.m_Faction;
 		m_colliderType = config.m_colliderType;
@@ -79,7 +83,7 @@ namespace ratchet
 		if (m_spriteTexture.loadFromFile(m_startSpritePath) == false)
 		{
 #ifdef IS_RATCHET_DEBUG
-			//std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
+			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
 #endif
 		}
 
@@ -132,18 +136,34 @@ namespace ratchet
 #ifdef IS_RATCHET_DEBUG
 		m_collider->debugRender(target);
 
-		// DRAW SPRITE BOUNDS
-		auto spriteOutline = sf::RectangleShape(sf::Vector2f(
-			m_sprite.getGlobalBounds().width,
-			m_sprite.getGlobalBounds().height)
-		);
-		spriteOutline.setFillColor(sf::Color::Transparent);
-		spriteOutline.setOutlineColor(sf::Color::Red);
-		spriteOutline.setOutlineThickness(0.01f);
-		spriteOutline.setPosition(
-			m_sprite.getPosition().x,
-			m_sprite.getPosition().y);
-		target.draw(spriteOutline);
+		if (m_debugDraw)
+		{
+			// DRAW CIRCLE AT POSITION
+			{
+				auto circleShape = sf::CircleShape(0.05f);
+				circleShape.setFillColor(sf::Color::Transparent);
+				circleShape.setOutlineColor(sf::Color::Cyan);
+				circleShape.setOutlineThickness(0.03f);
+				const auto position = getPosition();
+				circleShape.setPosition(position.x - circleShape.getRadius(), position.y - circleShape.getRadius());
+				target.draw(circleShape);
+			}
+
+			// DRAW SPRITE BOUNDS
+			{
+				auto spriteOutline = sf::RectangleShape(sf::Vector2f(
+					m_sprite.getGlobalBounds().width,
+					m_sprite.getGlobalBounds().height)
+				);
+				spriteOutline.setFillColor(sf::Color::Transparent);
+				spriteOutline.setOutlineColor(sf::Color::Red);
+				spriteOutline.setOutlineThickness(0.01f);
+				spriteOutline.setPosition(
+					m_sprite.getPosition().x,
+					m_sprite.getPosition().y);
+				target.draw(spriteOutline);
+			}
+		}
 #endif
 
 		target.draw(m_sprite);
@@ -164,7 +184,7 @@ namespace ratchet
 
 	void GameObject::setPosition(const sf::Vector2f position)
 	{
-		m_position = position;
+		m_position = position + sf::Vector2f(m_collider->getColliderOrigin().x, m_collider->getColliderOrigin().y);
 		m_sprite.setPosition(position);
 	}
 
@@ -191,7 +211,7 @@ namespace ratchet
 		}
 
 		delete this; 
-		std::cout << "The Object HAS BEEN DESTROYED!" << std::endl;
+		TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "The Object HAS BEEN DESTROYED!");
 	}
 
 	void GameObject::RemoveGameObjectFromList()

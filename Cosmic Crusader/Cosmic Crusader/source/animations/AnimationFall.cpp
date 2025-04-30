@@ -95,7 +95,6 @@ namespace ratchet
 
 	void AnimationFall::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
-		
 		if (m_currentFrameIndex == 0)
 		{
 			if (m_isAnimTransition)
@@ -111,7 +110,7 @@ namespace ratchet
 				}
 
 #ifdef IS_RATCHET_DEBUG
-				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
+				TRACE_CHANNEL(TR_ANIMATION, "PLayer Idle image " << m_currentFrameIndex);
 #endif
 
 			}
@@ -152,7 +151,7 @@ namespace ratchet
 				}
 
 #ifdef IS_RATCHET_DEBUG
-				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
+				TRACE_CHANNEL(TR_ANIMATION, "PLayer Idle image " << m_currentFrameIndex);
 #endif
 			}
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())

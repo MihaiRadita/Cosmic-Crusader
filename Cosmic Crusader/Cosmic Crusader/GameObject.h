@@ -82,7 +82,7 @@ namespace ratchet
 		const sf::FloatRect getBounds() const;
 
 		//Render function
-		void render(sf::RenderTarget& target);
+		virtual void render(sf::RenderTarget& target);
 
 		 static GameObject* findGameObjectByBody(const b2Body* body);
 
@@ -112,6 +112,9 @@ namespace ratchet
 			
 		} m_input;
 
+#ifdef IS_RATCHET_DEBUG
+		bool m_debugDraw = false;
+#endif
 	};
 
 }

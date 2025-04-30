@@ -29,9 +29,7 @@ namespace ratchet
 				if (l["name"] == "Tile Objects")
 				{
 					layer = l;
-#ifdef IS_RATCHET_DEBUG
-					//std::cout << "We have a match!" << std::endl;
-#endif
+					TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "We have a match!");
 					break;
 				}
 			}
@@ -55,7 +53,7 @@ namespace ratchet
 				float tileHeight = 64.0f;
 
 				config.positionXOffset = 0.f;
-				config.positionYOffset =  -tileHeight * config.scale.y;
+				config.positionYOffset = -tileHeight * config.scale.y;
 
 
 				float posX = obj["x"].get<float>() * config.scale.x;
@@ -116,7 +114,7 @@ namespace ratchet
 			colliderConfig.m_fixtureDef.isSensor = true;
 
 
-			std::cout << "IS SENSOR : " << colliderConfig.m_fixtureDef.isSensor<<std::endl;
+			TRACE_CHANNEL(TR_COLLISION, "IS SENSOR : " << colliderConfig.m_fixtureDef.isSensor);
 
 			config.m_colliderConfig = &colliderConfig;
 
@@ -126,6 +124,10 @@ namespace ratchet
 
 		{
 			auto config = CreatureConfig();
+#ifdef IS_RATCHET_DEBUG
+			config.m_debugDraw = true;
+#endif
+
 			config.m_Faction = PLAYER;
 			config.m_movementType = GROUND;
 			config.m_colliderType = DYNAMIC;
@@ -157,8 +159,11 @@ namespace ratchet
 			colliderConfig.m_height = 1.13f;
 			colliderConfig.m_radius = 0.25f;
 			colliderConfig.m_fixtureDef.isSensor = false;
+#ifdef IS_RATCHET_DEBUG
+			colliderConfig.m_debugDraw = true;
+#endif
 
-		
+
 			config.m_colliderConfig = &colliderConfig;
 
 			// fie este un std::vector<Weapon::TYPE>, fie este un std::map<Weapon::TYPE, bool>
@@ -211,7 +216,7 @@ namespace ratchet
 
 	void Game::initWindow()
 	{
-		m_window.create(sf::VideoMode(1280,720), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+		m_window.create(sf::VideoMode(1280, 720), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
 
 		WindowManager::create(&m_window);
 		// m_window.setFramerateLimit(60);
@@ -223,7 +228,7 @@ namespace ratchet
 
 	void Game::initPhysics()
 	{
-		
+
 	}
 
 	void Game::initWeaponManager()
@@ -250,9 +255,9 @@ namespace ratchet
 			{
 				m_window.close();
 			}
-			for (const auto& obj : GameObject::s_gameObjects) 
+			for (const auto& obj : GameObject::s_gameObjects)
 			{
-				if (auto player = dynamic_cast<Player*>(obj)) 
+				if (auto player = dynamic_cast<Player*>(obj))
 				{
 					player->handleEvent(sfEvent);
 				}
@@ -273,23 +278,23 @@ namespace ratchet
 		if (currenmousePosition != newMousePos)
 		{
 			currenmousePosition = newMousePos;
-			std::cout << "Mouse Position: " << currenmousePosition.x << ", " << currenmousePosition.y << " !" << std::endl;
+			TRACE_CHANNEL(TR_MOUSE, "Mouse Position: " << currenmousePosition.x << ", " << currenmousePosition.y << " !");
 
 			sf::Vector2f newMouseWorld = m_window.mapPixelToCoords(currenmousePosition);
 
-			std::cout << "Mouse Position in Wolrd: " << newMouseWorld.x << ", " << newMouseWorld.y << "!" << std::endl;
+			TRACE_CHANNEL(TR_MOUSE, "Mouse Position in Wolrd: " << newMouseWorld.x << ", " << newMouseWorld.y << "!");
 		}
 
 		if (deltaTime > 1.0f / 5.0f) {
-			deltaTime = 1.0f / 5.0f;  
+			deltaTime = 1.0f / 5.0f;
 		}
 
-		float timeStep = 1.0f / 120.0f;  
+		float timeStep = 1.0f / 120.0f;
 		float accumulatedTime = 0.0f;
 
 		accumulatedTime += deltaTime;
 
-		int maxSteps = 60;  
+		int maxSteps = 60;
 		int steps = 0;
 
 		Physics::update(timeStep);
@@ -314,10 +319,8 @@ namespace ratchet
 
 		for (auto* obj : GameObject::s_gameObjects)
 		{
-#ifdef IS_RATCHET_DEBUG
-			//std::cout << "Rendering object at position: " << obj->getSprite().getPosition().x << ", " << obj->getSprite().getPosition().y << std::endl;
-			//std::cout << "Texture pointer: " <<obj->getSprite().getTexture() << std::endl;
-#endif
+			TRACE_CHANNEL(TR_RENDERING, "Rendering object at position: " << obj->getSprite().getPosition().x << ", " << obj->getSprite().getPosition().y << std::endl);
+			TRACE_CHANNEL(TR_RENDERING, "Texture pointer: " <<obj->getSprite().getTexture() << std::endl);
 
 			if (auto player = dynamic_cast<Player*>(obj))
 			{

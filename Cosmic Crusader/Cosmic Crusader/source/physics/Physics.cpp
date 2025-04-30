@@ -29,15 +29,11 @@ namespace ratchet
 
 	Physics::~Physics()
 	{
-
-
-#ifdef IS_RATCHET_DEBUG
-		//std::cout << "Delete the physics world" << std::endl;
-		//if (!s_physicsWorld)
-		//{
-		//	std::cout << "Physics World no longer exists!" << std::endl;
-		//}
-#endif
+		TRACE_CHANNEL(TR_PHYSICS, "Delete the physics world");
+		if (!s_physicsWorld)
+		{
+			TRACE_CHANNEL(TR_PHYSICS, "Physics World no longer exists!");
+		}
 	}
 
 	b2World* Physics::getPhysicsWorld()

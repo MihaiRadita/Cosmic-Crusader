@@ -31,7 +31,7 @@ namespace ratchet
 
 		if (player)
 		{
-			std::cout << "PLAYER HAS INTERACTING WITH WEAPON 1! " << std::endl;
+			TRACE_CHANNEL(TR_WEAPON_PICKUP, "PLAYER HAS INTERACTING WITH WEAPON 1! ");
 		}
 	}
 
@@ -41,7 +41,7 @@ namespace ratchet
 
 		if (player)
 		{
-			std::cout << "PLAYER HAS EXIT WITH WEAPON 1! " << std::endl;
+			TRACE_CHANNEL(TR_WEAPON_PICKUP, "PLAYER HAS EXIT WITH WEAPON 1! ");
 		}
 	}
 
@@ -52,20 +52,20 @@ namespace ratchet
 		{
 			m_isPickup = true;
 
-			std::cout << "PLAYER HAS INTERACTING WITH WEAPON 1! " << std::endl;
+			TRACE_CHANNEL(TR_WEAPON_PICKUP, "PLAYER HAS INTERACTING WITH WEAPON 1! ");
 
 			bool m_isWeaponCharacterMathc = player->isWeaponMatchCharacter(m_weaponType);
-			if(m_isWeaponCharacterMathc)
+			if (m_isWeaponCharacterMathc)
 			{
-				
+
 				pickUp(player);
 
 				DestroyGameObject();
 			}
-			
+
 			//m_collider->getBody()->SetEnabled(false);
 			//Physics::addToDestroyList(this);
-			
+
 		}
 	}
 
@@ -75,7 +75,7 @@ namespace ratchet
 
 		if (player)
 		{
-			std::cout << "PLAYER HAS EXIT WITH WEAPON 1! " << std::endl;
+			TRACE_CHANNEL(TR_WEAPON_PICKUP, "PLAYER HAS EXIT WITH WEAPON 1! ");
 		}
 	}
 

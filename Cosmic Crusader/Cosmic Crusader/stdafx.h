@@ -34,14 +34,28 @@
 //Windows
 #include <Windows.h>
 
-#undef IS_RATCHET_DEBUG
+#ifndef TRACE_CHANNEL
 
-#ifndef DBOUT
-#define DBOUT( s )            \
+#define TR_ENABLED IS_RATCHET_DEBUG
+
+#define TR_RENDERING		TR_ENABLED && false
+#define TR_COLLISION		TR_ENABLED && false
+#define TR_MOUSE			TR_ENABLED && true
+#define TR_GAMEOBJECT_INIT	TR_ENABLED && false
+#define TR_ANIMATION		TR_ENABLED && false
+#define TR_WEAPON			TR_ENABLED && false
+#define TR_RESOURCE_MANAGER TR_ENABLED && false
+#define TR_PHYSICS			TR_ENABLED && false
+#define TR_WEAPON_PICKUP	TR_ENABLED && false
+
+#define TRACE_CHANNEL( show, s )            \
 {                             \
-	std::wostringstream os_;    \
-	os_ << s;                   \
-	OutputDebugStringW(os_.str().c_str());  \
-	OutputDebugStringW(L"\n");  \
+	if(show)					\
+	{								\
+		std::wostringstream os_;    \
+		os_ << s;                   \
+		OutputDebugStringW(os_.str().c_str());  \
+		OutputDebugStringW(L"\n");  \
+	}					\
 }
 #endif

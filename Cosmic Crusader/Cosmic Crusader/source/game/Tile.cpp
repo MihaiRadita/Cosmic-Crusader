@@ -33,9 +33,7 @@ namespace ratchet
 	{
 		if (m_textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Platform.png") == false)
 		{
-#ifdef IS_RATCHET_DEBUG
-			//std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
-#endif
+			TRACE_CHANNEL(TR_RESOURCE_MANAGER, "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
 		}
 	}
 
@@ -61,29 +59,14 @@ namespace ratchet
 
 	void Tile::update()
 	{
-#ifdef IS_RATCHET_DEBUG
-		//std::cout << "Ground Sprite " << m_tileSprite.getPosition().x << " , " << m_tileSprite.getPosition().y << std::endl;
-		//std::cout << "Ground Collider " << m_collider->getBody()->GetPosition().x << " , " << m_collider->getBody()->GetPosition().y << std::endl;
-#endif
+		TRACE_CHANNEL(TR_RESOURCE_MANAGER, "Ground Sprite " << m_tileSprite.getPosition().x << " , " << m_tileSprite.getPosition().y);
+		TRACE_CHANNEL(TR_RESOURCE_MANAGER, "Ground Collider " << m_collider->getBody()->GetPosition().x << " , " << m_collider->getBody()->GetPosition().y);
 	}
 
 	void Tile::render(sf::RenderTarget& target)
 	{
 #ifdef IS_RATCHET_DEBUG
 		m_collider->debugRender(target);
-
-		// DRAW SPRITE BEGIN AND END
-		auto spriteOutline = sf::RectangleShape(sf::Vector2f(
-			m_tileSprite.getGlobalBounds().width,
-			m_tileSprite.getGlobalBounds().height)
-		);
-		spriteOutline.setFillColor(sf::Color::Transparent);
-		spriteOutline.setOutlineColor(sf::Color::Red);
-		spriteOutline.setOutlineThickness(0.01f);
-		spriteOutline.setPosition(
-			m_tileSprite.getPosition().x,
-			m_tileSprite.getPosition().y);
-		target.draw(spriteOutline);
 #endif
 
 		target.draw(m_tileSprite);

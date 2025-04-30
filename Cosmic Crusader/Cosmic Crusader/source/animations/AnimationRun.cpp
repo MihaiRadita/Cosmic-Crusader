@@ -119,7 +119,7 @@ namespace ratchet
 				}
 
 #ifdef IS_RATCHET_DEBUG
-				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
+				TRACE_CHANNEL(TR_ANIMATION, "PLayer Idle image " << m_currentFrameIndex);
 #endif
 
 			}
@@ -160,7 +160,7 @@ namespace ratchet
 				}
 
 #ifdef IS_RATCHET_DEBUG
-				//std::cout << "PLayer Idle image " << m_currentFrameIndex << std::endl;
+				TRACE_CHANNEL(TR_ANIMATION, "PLayer Idle image " << m_currentFrameIndex);
 #endif
 			}
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())

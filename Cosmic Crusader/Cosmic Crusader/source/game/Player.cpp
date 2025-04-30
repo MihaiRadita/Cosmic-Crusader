@@ -153,14 +153,72 @@ namespace ratchet
 	{
 	}
 
-	void Player::setPosition(const float x, const float y)
+	void Player::computeAimAngleState()
 	{
-		m_sprite.setPosition(x, y);
-	}
+		if (m_currentWeaponType != Weapon::TYPE::None)
+		{
+			WeaponAnimation::ANGLE weaponAnimationAngle;
+			
+			m_bodyShoulderPosition = getPosition();
+			auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
+			auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
 
-	void Player::computeAimAngleState(sf::Vector2f playerCenter, sf::Vector2i mousePostion)
-	{
 
+			auto shoulderToMouseVector = mouseWorldPosition - m_bodyShoulderPosition;
+			auto facingRight = shoulderToMouseVector.x >= 0;
+			// Normalize Begin
+			auto shoulderToMouseLength = std::sqrt(std::pow(shoulderToMouseVector.x, 2) + std::pow(shoulderToMouseVector.y, 2));
+			auto directionVector = 
+				shoulderToMouseLength != 0 ? 
+				sf::Vector2f(shoulderToMouseVector.x / shoulderToMouseLength, shoulderToMouseVector.y / shoulderToMouseLength) \
+				: (facingRight ? sf::Vector2f(1, 0) : sf::Vector2f(-1, 0));
+			// Normalize End
+			
+			// Calculate Angle Begin
+			auto vectorToCalculateAngleAgainst = facingRight ? sf::Vector2f(1, 0) : sf::Vector2f(-1, 0);
+			auto dotProduct = directionVector.x * vectorToCalculateAngleAgainst.x + directionVector.y * vectorToCalculateAngleAgainst.y;
+			auto determinant = directionVector.x * vectorToCalculateAngleAgainst.y - directionVector.y * vectorToCalculateAngleAgainst.x;
+			float angleRad = (facingRight ? 1 : -1) * atan2(determinant, dotProduct);
+			float angleDeg = angleRad * (180.f / M_PI); 
+				
+			TRACE_CHANNEL(TR_MOUSE, "Pos Vect: " << getPosition().x << ", " << getPosition().y);
+			TRACE_CHANNEL(TR_MOUSE, "Dir Vect: " << directionVector.x << ", " << directionVector.y);
+			TRACE_CHANNEL(TR_MOUSE, "Angle: " << angleDeg);
+
+			const float minus45 = -m_HalfBaseAngle;        // -22.5
+			const float minus135 = -m_HalfBaseAngle * 3.f; // -67.5
+			const float plus45 = m_HalfBaseAngle;          // 22.5
+			const float plus135 = m_HalfBaseAngle * 3.f;   // 67.5
+
+			if (minus135 <= angleDeg && angleDeg <= minus45)
+			{
+				weaponAnimationAngle = WeaponAnimation::ANGLE::AngleMinus45; // Dreapta sus
+			}
+			else if (minus45 <= angleDeg && angleDeg <= plus45)
+			{
+				weaponAnimationAngle = WeaponAnimation::ANGLE::Angle0; // Dreapta
+			}
+			else if (plus45 <= angleDeg && angleDeg <= plus135)
+			{
+				weaponAnimationAngle = WeaponAnimation::ANGLE::Angle45; // Dreapta jos
+			}
+			else if(plus135 <= angleDeg) // Cazul pentru SUS extrem (sub -67.5 sau peste 67.5)
+			{
+				weaponAnimationAngle = WeaponAnimation::ANGLE::Angle90;
+			}
+			// Calculate Angle End
+
+			if (std::find(m_characterAngles.begin(), m_characterAngles.end(), weaponAnimationAngle) != m_characterAngles.end())
+			{
+				m_currentCharacterAngle = weaponAnimationAngle;
+			}
+			else
+			{
+				m_currentCharacterAngle = WeaponAnimation::ANGLE::Angle0;
+			}
+
+			invertCharacterMovingSpriteScale(facingRight ? 1 : -1);
+		}
 	}
 
 	void Player::updateMovement()
@@ -189,14 +247,14 @@ namespace ratchet
 
 		m_movementType = isGrounded() ? GROUND : UNGROUND;
 
-		DBOUT("[PLAYER] BEFORE" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
+		TRACE_CHANNEL(TR_PHYSICS, "[PLAYER] BEFORE" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
 
 		m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
 
 		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-		m_sprite.setPosition(playerPosition);
+		setPosition(playerPosition);
 
-		DBOUT("[PLAYER] AFTER" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
+		TRACE_CHANNEL(TR_PHYSICS, "[PLAYER] AFTER" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
 	}
 
 	void Player::updateRotation()
@@ -226,10 +284,38 @@ namespace ratchet
 	{
 	}
 
+	void Player::render(sf::RenderTarget& target)
+	{
+#ifdef IS_RATCHET_DEBUG
+		if (m_debugDraw)
+		{
+			// DRAW LOOK DIRECTION (between shoulder and mouse)
+			{
+				if (const auto* window = WindowManager::Get())
+				{
+					sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+					sf::Vector2f mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
+
+					auto mouseCircleShape = sf::CircleShape(0.05f);
+					mouseCircleShape.setFillColor(sf::Color::Transparent);
+					mouseCircleShape.setOutlineColor(sf::Color::Yellow);
+					mouseCircleShape.setOutlineThickness(0.03f);
+					const auto position = mouseWorldPosition;
+					mouseCircleShape.setPosition(position.x - mouseCircleShape.getRadius(), position.y - mouseCircleShape.getRadius());
+					target.draw(mouseCircleShape);
+				}
+			}
+		}
+#endif
+
+		GameObject::render(target);
+	}
+
 #ifdef IS_RATCHET_DEBUG
 	void Player::printSpriteColliderPositionPlayer()
 	{
-		//m_collider->printSpriteColliderPosition(m_sprite, DYNAMIC);
+		m_collider->printSpriteColliderPosition(m_sprite, DYNAMIC);
 	}
 #endif
+
 }

@@ -100,9 +100,9 @@ namespace ratchet
 
 
 		//Angles Functions
-		virtual void computeAimAngleState(sf::Vector2f playerCenter, sf::Vector2i /*notused*/);
+		virtual void computeAimAngleState();
 
-		 int m_equippedWeaponIndex = 0;
+		int m_equippedWeaponIndex = 0;
 
 
 		// std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 

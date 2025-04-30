@@ -25,14 +25,14 @@ namespace ratchet
 	void AnimationBase::resetCurrentAnimIndex()
 	{
 #ifdef IS_RATCHET_DEBUG
-		//std::cout << "No index to reset!" << std::endl;
+		TRACE_CHANNEL(TR_ANIMATION, "No index to reset!");
 #endif
 	}
 
 	void AnimationBase::resetPlayerAnimTimer()
 	{
 #ifdef IS_RATCHET_DEBUG
-		//std::cout << "No animation timer to reset!" << std::endl;
+		TRACE_CHANNEL(TR_ANIMATION, "No animation timer to reset!");
 #endif
 	}
 
@@ -44,7 +44,7 @@ namespace ratchet
 	void AnimationBase::setAnimationSwitch(bool animSwitch)
 	{
 #ifdef IS_RATCHET_DEBUG
-		//std::cout << "No Animation Switch to change";
+		TRACE_CHANNEL(TR_ANIMATION, "No Animation Switch to change");
 #endif
 	}
 
@@ -56,7 +56,7 @@ namespace ratchet
 	void AnimationBase::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 #ifdef IS_RATCHET_DEBUG
-		//std::cout << "Abstract Animation";
+		TRACE_CHANNEL(TR_ANIMATION, "Abstract Animation");
 #endif
 	}
 }

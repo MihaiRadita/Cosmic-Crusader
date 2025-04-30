@@ -9,6 +9,10 @@ namespace ratchet
 	enum MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, UNGROUND};
 	struct GameObjectConfig
 	{
+#ifdef IS_RATCHET_DEBUG
+		bool m_debugDraw = false;
+#endif
+
 		//States
 		Faction m_Faction;
 		MovementType m_movementType;

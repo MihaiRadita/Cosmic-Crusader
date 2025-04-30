@@ -7,6 +7,10 @@ namespace ratchet
 	ColliderBase::ColliderBase(const BaseColliderConfig& config)
 	{
 		m_body = nullptr;
+
+#ifdef IS_RATCHET_DEBUG
+		m_debugDraw = config.m_debugDraw;
+#endif
 	}
 
 	ColliderBase::~ColliderBase()
@@ -37,7 +41,7 @@ namespace ratchet
 		return m_body;
 	}
 
-	inline b2Vec2 ColliderBase::getColliderOrigin() const 
+	b2Vec2 ColliderBase::getColliderOrigin() const 
 	{ 
 		return m_origin; 
 	}
@@ -52,6 +56,9 @@ namespace ratchet
 
 	void ColliderBase::debugRender(sf::RenderTarget& target)
 	{
+#ifdef IS_RATCHET_DEBUG
+		if (!m_debugDraw) return;
+#endif
 	}
 
 	void ColliderBase::setColliderPosition(float x, float y)

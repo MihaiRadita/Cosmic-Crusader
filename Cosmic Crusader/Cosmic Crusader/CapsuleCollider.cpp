@@ -153,26 +153,30 @@ namespace ratchet
 #ifdef IS_RATCHET_DEBUG
 	void CapsuleCollider::printBodyPositionRotation()
 	{
-		//std::cout << getColliderPosition().x << " x axis " << getColliderPosition().y << " y axis " << std::endl;
-		//std::cout << m_body->GetAngle() << " degrees " << std::endl;
+		TRACE_CHANNEL(TR_COLLISION, getColliderPosition().x << " x axis " << getColliderPosition().y << " y axis ");
+		TRACE_CHANNEL(TR_COLLISION, m_body->GetAngle() << " degrees ");
 	}
 
 	void CapsuleCollider::printSpriteColliderPosition(sf::Sprite& sprite, int bodyState)
 	{
-		//if (bodyState == STATIC)
-		//{
-		//	std::cout << "Static position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
-		//		sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
-		//}
-		//else if (bodyState == DYNAMIC)
-		//{
-		//	std::cout << "Dynamic position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
-		//		sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
-		//}
+		if (bodyState == STATIC)
+		{
+			TRACE_CHANNEL(TR_COLLISION, "Static position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
+				sprite.getPosition().x << " , " << sprite.getPosition().y);
+		}
+		else if (bodyState == DYNAMIC)
+		{
+			TRACE_CHANNEL(TR_COLLISION, "Dynamic position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
+				sprite.getPosition().x << " , " << sprite.getPosition().y);
+		}
 	}
 
 	void CapsuleCollider::debugRender(sf::RenderTarget& target)
 	{
+#ifdef IS_RATCHET_DEBUG
+		if (!m_debugDraw) return;
+#endif
+
 		const auto worldOrigin = getColliderPosition() + m_origin;
 
 		// Origin
@@ -286,9 +290,6 @@ namespace ratchet
 				return true;
 			}
 
-	#ifdef IS_RATCHET_DEBUG
-			//std::cout << "HIT : " << callbackLeft.m_hit;
-	#endif
 			return false;
 		}
 }

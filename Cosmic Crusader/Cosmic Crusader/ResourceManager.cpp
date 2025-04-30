@@ -27,7 +27,7 @@ namespace ratchet {
             if (!texture.loadFromFile(texturePath))
             {
     #ifdef IS_RATCHET_DEBUG
-                //std::cout << "The Texture path was not found";
+                TRACE_CHANNEL(TR_RESOURCE_MANAGER, "The Texture path was not found");
     #endif
                 return nullptr;
             }

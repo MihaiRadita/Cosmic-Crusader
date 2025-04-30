@@ -15,11 +15,11 @@ namespace ratchet
 		//Angles
 		m_baseAngle = config.m_AngleBase;
 		m_HalfBaseAngle = m_baseAngle / 2.0f;
-		std::cout << m_baseAngle / 2.0f << " " << std::endl;
+		TRACE_CHANNEL(TR_GAMEOBJECT_INIT, m_baseAngle / 2.0f << " ");
 
 		m_DEG_TO_RAD = M_PI / 180.0f;
 		m_tangentHalfBase = tan((m_baseAngle / 2.0f) * m_DEG_TO_RAD);
-		m_tangentx3HalfBase = tan((3.0f * m_baseAngle / 2.0f ) * m_DEG_TO_RAD);
+		m_tangentx3HalfBase = tan((3.0f * m_baseAngle / 2.0f) * m_DEG_TO_RAD);
 
 		m_currentEcquipedWeaponIndex = config.m_currentlyEquippedWeaponIndex;
 		m_currentWeaponType = config.m_currentWeaponType;
@@ -43,7 +43,7 @@ namespace ratchet
 		if (m_creatureFallingTexture.loadFromFile(creatureFallingTexturePath) == false)
 		{
 #ifdef IS_RATCHET_DEBUG
-			//std::cout << "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET" << std::endl;
+			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
 #endif
 		}
 
@@ -53,21 +53,21 @@ namespace ratchet
 
 		if (m_sprite.getTexture())
 		{
-			std::cout << "Precior SUCCESS" << std::endl;
+			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "Precior SUCCESS");
 		}
 
 		if (m_sprite.getTexture() != nullptr)
 		{
-			std::cout << "Character Success" << std::endl;
+			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "Character Success");
 		}
 		else
 		{
-			std::cout << "Character Failed" << std::endl;
+			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "Character Failed");
 		}
 
 		for (auto config : m_initialWeaponConfigList)
 		{
-			
+
 			addWeapon(config.first, config.second);
 		}
 
@@ -118,15 +118,15 @@ namespace ratchet
 		}
 		else
 		{
-			m_isGround = false; 
-			m_collider->m_skipRaycastThisFrame = false; 
+			m_isGround = false;
+			m_collider->m_skipRaycastThisFrame = false;
 		}
 		//m_isGround = m_collider->performGroundRayCast(m_sprite);
 
 		updateWeaponSelection();
-
 		updateMovement();
 		updateJump();
+		computeAimAngleState();
 		updateAnimations();
 		updatePhysics();
 	}
@@ -190,13 +190,13 @@ namespace ratchet
 								m_characterAnimationState = MOVING;
 								switchAnimation();
 							}
-							
+
 						}
 					}
 				}
 				invertCharacterMovingSpriteScale(1);
 			}
-			
+
 			if (!isGrounded())
 			{
 				if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
@@ -237,8 +237,8 @@ namespace ratchet
 			if (isNoControlActive() && isGrounded() && m_isMoving == false)
 			{
 #ifdef IS_RATCHET_DEBUG
-				std::cout << "Idle" << std::endl;
-				std::cout << m_characterAnimationState << std::endl;
+				TRACE_CHANNEL(TR_ANIMATION, "Idle");
+				TRACE_CHANNEL(TR_ANIMATION, m_characterAnimationState);
 #endif			
 				m_isMoving = false;
 				m_characterAnimationState = ANIMATION_STATE::IDLE;
@@ -247,28 +247,21 @@ namespace ratchet
 			}
 
 		}
-		
-		
-			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite,m_currentWeaponType, m_currentCharacterAngle,m_currentCharacterState);
-		
-	
 
-			// Sync sprite position with collider
-			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
-			// Sync sprite rotation with collider
-			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-			m_sprite.setRotation(m_rotation);
+		m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
+
+
+
+		// Sync sprite position with collider
+		auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+
+		// Sync sprite rotation with collider
+		m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+		m_sprite.setRotation(m_rotation);
 
 	}
 
-
-#ifdef IS_RATCHET_DEBUG
-		//sf::Vector2f playerSpritePosition;
-		//playerSpritePosition = m_sprite.getPosition();
-		//std::cout << m_sprite.getPosition().x << " , " << m_sprite.getPosition().y;
-#endif
-	
 	void Creature::updateJump()
 	{
 	}
@@ -305,7 +298,7 @@ namespace ratchet
 		}
 		return true;
 	}
-	
+
 	void Creature::switchAnimation()
 	{
 		if (m_characterAnimationState != m_characterAnimSwitch) {
@@ -328,9 +321,9 @@ namespace ratchet
 		return m_ownedWeaponList.size();
 	}
 
-	void Creature::addWeapon(Weapon::TYPE &weaponType, std::optional<WeaponConfig> &config)
+	void Creature::addWeapon(Weapon::TYPE& weaponType, std::optional<WeaponConfig>& config)
 	{
-		
+
 		auto newWeapon = new Weapon(*WeaponManager::instance()->getWeapon(weaponType));
 		if (config.has_value())
 		{
@@ -345,12 +338,12 @@ namespace ratchet
 
 		if (m_ownedWeaponList.empty()) {
 			std::cerr << "Error: m_ownedWeaponList is empty!\n";
-				return;
+			return;
 		}
 
 
 		if (!m_ownedWeaponList[m_currentEcquipedWeaponIndex]) {
-			std::cout << "Error: Weapon at index " << m_equippedWeaponIndex << " is nullptr!\n";
+			TRACE_CHANNEL(TR_WEAPON, "Error: Weapon at index " << m_equippedWeaponIndex << " is nullptr!");
 			return;
 		}
 	}
@@ -421,74 +414,8 @@ namespace ratchet
 		}
 		return false;
 	}
-	void Creature::computeAimAngleState(sf::Vector2f playerCenter, sf::Vector2i)
+	void Creature::computeAimAngleState()
 	{
-
-		if (m_currentWeaponType != Weapon::TYPE::None)
-		{
-			WeaponAnimation::ANGLE theAngle;
-
-			m_bodyShoulderPosition = sf::Vector2f(m_sprite.getGlobalBounds().left + (m_sprite.getGlobalBounds().width / 2.0f),
-				m_sprite.getGlobalBounds().top + (m_sprite.getGlobalBounds().height / 2.0f) + m_bodShoulderOffset);
-
-			sf::Vector2i mousePosition = sf::Mouse::getPosition();
-			sf::Vector2f mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
-		
-
-
-			sf::Vector2f directionVector = mouseWorldPosition - m_bodyShoulderPosition;
-
-			if (directionVector.x == 0.0f)
-			{
-				if (directionVector.y < -m_tangentx3HalfBase)
-				{
-					theAngle = WeaponAnimation::ANGLE::Angle90;
-				}
-				else if (directionVector.y >= -m_tangentx3HalfBase && directionVector.y < -m_tangentHalfBase)
-				{
-					theAngle = WeaponAnimation::ANGLE::Angle45;
-				}
-				else if (directionVector.y<= m_tangentx3HalfBase  && directionVector.y > m_tangentHalfBase)
-				{
-					theAngle = WeaponAnimation::ANGLE::AngleMinus45;
-				}
-				else
-				{
-					theAngle = WeaponAnimation::ANGLE::Angle0;
-				}
-			}
-			else
-			{
-				float angleRad = atan2(directionVector.x, directionVector.y);
-				float angleDeg = angleRad * (180 / M_PI);
-
-				if (angleDeg >= -m_HalfBaseAngle && angleDeg <= m_HalfBaseAngle)
-				{
-					theAngle = WeaponAnimation::ANGLE::Angle0;
-				}
-				else if (angleDeg > m_HalfBaseAngle && angleDeg <= m_HalfBaseAngle * 3.f)
-				{
-					theAngle = WeaponAnimation::ANGLE::AngleMinus45;
-				}
-				else if (angleDeg > m_HalfBaseAngle * 3.f || angleDeg < -m_HalfBaseAngle * 3.f)
-				{
-					theAngle = WeaponAnimation::ANGLE::Angle90;
-				}
-				else
-				{
-					theAngle = WeaponAnimation::ANGLE::Angle45;
-				}
-			}
-
-			if (std::find(m_characterAngles.begin(), m_characterAngles.end(), theAngle) != m_characterAngles.end())
-			{
-				m_currentCharacterAngle = theAngle;
-			}
-			else
-			{
-				m_currentCharacterAngle = WeaponAnimation::ANGLE::Angle0;
-			}
-		}
 	}
 }
 

@@ -12,35 +12,6 @@ namespace ratchet
 		m_ignoredBody = ignoredBody;
 	}
 
-
-//	std::string GroundCheck::getCollisionSide(const b2Vec2& localPoint, const b2AABB& aabb) {
-//
-//		float epsilon = 0.1f;
-//		float top = aabb.upperBound.y;
-//		float bottom = aabb.lowerBound.y;
-//		float left = aabb.lowerBound.x;
-//		float right = aabb.upperBound.x;
-//
-//#ifdef IS_RATCHET_DEBUG
-//		//std::cout << std::endl;
-//		//std::cout << "Local point: (" << localPoint.x << ", " << localPoint.y << ")" << std::endl;
-//		//std::cout << "AABB: top = " << top << ", bottom = " << bottom << ", left = " << left << ", right = " << right << std::endl;
-//#endif
-//
-//
-//		if (localPoint.y >= bottom)
-//			return "bottom";
-//		if (localPoint.y <= top)
-//			return "top";
-//		if (localPoint.x <= left)
-//			return "left";
-//		if (localPoint.x >= right)
-//			return "right";
-//
-//		return "unknown";
-//	}
-
-
 	RectAngleCollider::RectAngleCollider(sf::Sprite& sprite, const RectAngleColliderConfig& config) : ColliderBase(config)
 	{
 		initVariables(sprite, config);
@@ -113,41 +84,29 @@ namespace ratchet
 
 		if (m_bodyDef.type == b2_staticBody)
 		{
-#ifdef IS_RATCHET_DEBUG
-			//std::cout << std::endl;
-			//std::cout << "Static Sprite position is " << sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
-			//std::cout << "Static Sprite scale is " << sprite.getScale().x << " , " << sprite.getScale().y << std::endl;
-#endif
+			TRACE_CHANNEL(TR_COLLISION, "Static Sprite position is " << sprite.getPosition().x << " , " << sprite.getPosition().y);
+			TRACE_CHANNEL(TR_COLLISION, "Static Sprite scale is " << sprite.getScale().x << " , " << sprite.getScale().y);
 
 			b2Vec2 origin = m_body->GetLocalCenter();
 			b2Vec2 position = m_body->GetTransform().p;
 			float rotaion = m_body->GetAngle();
 
-#ifdef IS_RATCHET_DEBUG
-			//std::cout << "Static Collider origin " << origin.x << " , " << origin.y << std::endl;
-			//std::cout << "Static Collider position " << position.x << " , " << position.y << std::endl;
-			//std::cout << "Static Collider roatation " << rotaion << std::endl;
-			//std::cout << std::endl;
-#endif
+			TRACE_CHANNEL(TR_COLLISION, "Static Collider origin " << origin.x << " , " << origin.y);
+			TRACE_CHANNEL(TR_COLLISION, "Static Collider position " << position.x << " , " << position.y);
+			TRACE_CHANNEL(TR_COLLISION, "Static Collider roatation " << rotaion);
 		}
 		else if (m_bodyDef.type == b2_dynamicBody)
 		{
-#ifdef IS_RATCHET_DEBUG
-			//std::cout << std::endl;
-			//std::cout << "Dynamic Sprite position is " << sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
-			//std::cout << "Dynamic Sprite scale is " << sprite.getScale().x << " , " << sprite.getScale().y << std::endl;
-#endif
+			TRACE_CHANNEL(TR_COLLISION, "Dynamic Sprite position is " << sprite.getPosition().x << " , " << sprite.getPosition().y);
+			TRACE_CHANNEL(TR_COLLISION, "Dynamic Sprite scale is " << sprite.getScale().x << " , " << sprite.getScale().y);
 
 			b2Vec2 origin = m_body->GetLocalCenter();
 			b2Vec2 position = m_body->GetPosition();
 			float rotaion = m_body->GetAngle();
 
-#ifdef IS_RATCHET_DEBUG
-			//std::cout << "Dynamic Collider origin " << origin.x << " , " << origin.y << std::endl;
-			//std::cout << "Dynamic Collider position " << position.x << " , " << position.y << std::endl;
-			//std::cout << "Dynamic Collider roatation " << rotaion << std::endl;
-			//std::cout << std::endl;
-#endif
+			TRACE_CHANNEL(TR_COLLISION, "Dynamic Collider origin " << origin.x << " , " << origin.y);
+			TRACE_CHANNEL(TR_COLLISION, "Dynamic Collider position " << position.x << " , " << position.y);
+			TRACE_CHANNEL(TR_COLLISION, "Dynamic Collider roatation " << rotaion);
 		}
 	}
 
@@ -192,26 +151,30 @@ namespace ratchet
 #ifdef IS_RATCHET_DEBUG
 	void RectAngleCollider::printBodyPositionRotation()
 	{
-		//std::cout << getColliderPosition().x << " x axis " << getColliderPosition().y << " y axis " << std::endl;
-		//std::cout << m_body->GetAngle() << " degrees " << std::endl;
+		TRACE_CHANNEL(TR_PHYSICS, getColliderPosition().x << " x axis " << getColliderPosition().y << " y axis ");
+		TRACE_CHANNEL(TR_PHYSICS, m_body->GetAngle() << " degrees ");
 	}
 
 	void RectAngleCollider::printSpriteColliderPosition(sf::Sprite& sprite, int bodyState)
 	{
-		//if (bodyState == STATIC)
-		//{
-		//	std::cout << "Static position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
-		//		sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
-		//}
-		//else if (bodyState == DYNAMIC)
-		//{
-		//	std::cout << "Dynamic position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
-		//		sprite.getPosition().x << " , " << sprite.getPosition().y << std::endl;
-		//}
+		if (bodyState == STATIC)
+		{
+			TRACE_CHANNEL(TR_PHYSICS, "Static position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
+				sprite.getPosition().x << " , " << sprite.getPosition().y);
+		}
+		else if (bodyState == DYNAMIC)
+		{
+			TRACE_CHANNEL(TR_PHYSICS, "Dynamic position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
+				sprite.getPosition().x << " , " << sprite.getPosition().y);
+		}
 	}
 
 	void RectAngleCollider::debugRender(sf::RenderTarget& target)
 	{
+#ifdef IS_RATCHET_DEBUG
+		if (!m_debugDraw) return;
+#endif
+
 		auto* fixture = m_body->GetFixtureList();
 		while (fixture)
 		{
@@ -365,15 +328,11 @@ namespace ratchet
 
 		if ((callbackLeft.m_fraction <= 1.0f || callbackRight.m_fraction <= 1.0f || callbackMiddle.m_fraction <= 1.0f) && (callbackLeft.m_hit || callbackRight.m_hit || callbackMiddle.m_hit))
 		{
-#ifdef IS_RATCHET_DEBUG
-			//std::cout << "Victory " << std::endl;
-#endif
+			TRACE_CHANNEL(TR_COLLISION, "Is grounded");
 			return true;
 		}
 
-#ifdef IS_RATCHET_DEBUG
-		//std::cout << "HIT : " << callbackLeft.m_hit;
-#endif
+		TRACE_CHANNEL(TR_COLLISION, "HIT : " << callbackLeft.m_hit);
 		return false;
 	}
 

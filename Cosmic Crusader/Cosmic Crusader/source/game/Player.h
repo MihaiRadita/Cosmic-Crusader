@@ -19,11 +19,13 @@ namespace ratchet
 		//Animations Destroy
 		void destroyPlayerAnimations();
 
+
 		// Variables
 		float m_gravity;
 
 		std::vector<sf::Event> m_playerEvents;
 	public:
+		float m_curreNAgleDeg = 0.0f;
 
 		//Constructors
 		Player(const CreatureConfig& config);
@@ -33,6 +35,7 @@ namespace ratchet
 	
 
 		//Prints
+		virtual void render(sf::RenderTarget& target) override;
 #ifdef IS_RATCHET_DEBUG
 		void printSpriteColliderPositionPlayer();
 #endif
@@ -44,11 +47,8 @@ namespace ratchet
 
 		void setPlayerByColliderPos();
 
-		//Modifiers
-		void setPosition(const float x, const float y);
-
 		//Anlle Functions
-		void computeAimAngleState(sf::Vector2f playerCenter, sf::Vector2i mousePostion) override;
+		void computeAimAngleState() override;
 
 		//Update functions
 		void updateMovement() override;

@@ -27,6 +27,10 @@ namespace ratchet
 		b2BodyDef m_bodyDef;
 
 		std::optional<b2Vec2> m_origin = std::nullopt;
+
+#ifdef IS_RATCHET_DEBUG
+		bool m_debugDraw = false;
+#endif
 	};
 	class ColliderBase : public Physics
 	{
@@ -51,9 +55,11 @@ namespace ratchet
 		b2Vec2 getColliderOrigin() const;
 
 		//Prints
+#ifdef IS_RATCHET_DEBUG
 		virtual void printBodyPositionRotation();
 		virtual void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState);
 		virtual void debugRender(sf::RenderTarget& target);
+#endif
 
 		//Setters
 		virtual void setColliderPosition(float x, float y);
@@ -69,6 +75,10 @@ namespace ratchet
 		b2Vec2 m_origin;
 		float m_scaleX = 1.0f;
 		float m_scaleY = 1.0f;
+
+#ifdef IS_RATCHET_DEBUG
+		bool m_debugDraw = false;
+#endif
 	};
 
 	class GroundCheck
