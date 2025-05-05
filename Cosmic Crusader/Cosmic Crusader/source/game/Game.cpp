@@ -125,7 +125,7 @@ namespace ratchet
 		{
 			auto config = CreatureConfig();
 #ifdef IS_RATCHET_DEBUG
-			config.m_debugDraw = true;
+			config.m_debugDraw = false;
 #endif
 
 			config.m_Faction = PLAYER;
@@ -160,7 +160,7 @@ namespace ratchet
 			colliderConfig.m_radius = 0.25f;
 			colliderConfig.m_fixtureDef.isSensor = false;
 #ifdef IS_RATCHET_DEBUG
-			colliderConfig.m_debugDraw = true;
+			colliderConfig.m_debugDraw = false;
 #endif
 
 

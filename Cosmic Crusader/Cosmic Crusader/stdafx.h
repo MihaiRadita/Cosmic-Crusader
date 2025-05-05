@@ -34,6 +34,7 @@
 //Windows
 #include <Windows.h>
 
+
 #ifndef TRACE_CHANNEL
 
 #define TR_ENABLED IS_RATCHET_DEBUG
