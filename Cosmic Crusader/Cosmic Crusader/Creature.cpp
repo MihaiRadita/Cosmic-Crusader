@@ -157,6 +157,7 @@ namespace ratchet
 			if (m_input.x < 0)
 			{
 				m_isMoving = true;
+				m_animDirectionReverse = true;
 				if (m_movementType == GROUND)
 				{
 					if (isGrounded())
@@ -172,6 +173,7 @@ namespace ratchet
 						}
 					}
 				}
+
 				invertCharacterMovingSpriteScale(-1);
 			}
 			else if (m_input.x > 0)
@@ -194,7 +196,20 @@ namespace ratchet
 						}
 					}
 				}
-				invertCharacterMovingSpriteScale(1);
+				if (m_currentWeaponType != Weapon::TYPE::None)
+				{
+					m_animDirectionReverse = true;
+					
+				}
+				else
+				{
+					invertCharacterMovingSpriteScale(1);
+				}
+
+				if (m_animDirectionReverse == true)
+				{
+
+				}
 			}
 
 			if (!isGrounded())
