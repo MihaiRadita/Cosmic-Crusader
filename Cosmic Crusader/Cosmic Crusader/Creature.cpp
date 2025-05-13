@@ -154,10 +154,11 @@ namespace ratchet
 	{
 		if (m_faction == Faction::PLAYER)
 		{
-			if (m_input.x < 0)
+			if (m_input.x != 0.0f)
 			{
+				const auto isMovingRight = m_input.x > 0.0f ? true : false;
 				m_isMoving = true;
-				if (m_movementType == GROUND)
+				if (m_movementType == MovementType::GROUND)
 				{
 					if (isGrounded())
 					{
@@ -177,56 +178,7 @@ namespace ratchet
 				{
 					if (isGrounded())
 					{
-						if (m_facingRight == true)
-						{
-							if (!m_isAnimationInverted)
-							{
-
-								m_characterAnimator->invertAnimation(m_characterAnimator->getAbstractAnimation(), m_currentWeaponType);
-								m_isAnimationInverted = true;
-							}
-
-						}
-						else
-						{
-							if (m_isAnimationInverted)
-							{
-
-								m_characterAnimator->invertAnimation(m_characterAnimator->getAbstractAnimation(), m_currentWeaponType);
-								m_isAnimationInverted = false;
-							}
-						}
-					}
-				}
-				else
-				{
-					invertCharacterMovingSpriteScale(-1);
-				}
-
-			}
-			else if (m_input.x > 0)
-			{
-				m_isMoving = true;
-				if (m_movementType == GROUND)
-				{
-					if (isGrounded())
-					{
-						if (m_isMoving)
-						{
-							if (m_characterAnimationState != MOVING)
-							{
-								m_characterAnimationState = MOVING;
-								switchAnimation();
-							}
-
-						}
-					}
-				}
-				if (m_currentWeaponType != Weapon::TYPE::None)
-				{
-					if (isGrounded())
-					{
-						if (m_facingRight == false)
+						if (isMovingRight != m_facingRight)
 						{
 							if (!m_isAnimationInverted)
 							{
@@ -244,14 +196,11 @@ namespace ratchet
 							}
 						}
 					}
-
 				}
 				else
 				{
-					invertCharacterMovingSpriteScale(1);
+					invertCharacterMovingSpriteScale(isMovingRight ? 1 : -1);
 				}
-
-
 			}
 
 			if (!isGrounded())

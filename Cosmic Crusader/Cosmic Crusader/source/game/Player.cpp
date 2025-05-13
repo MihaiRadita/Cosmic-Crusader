@@ -225,7 +225,7 @@ namespace ratchet
 
 	void Player::updateMovement()
 	{
-		m_movementType = MOVEMENTTYPE_UNKNOWN;
+		m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 		m_isMoving = false;
 		bool changeX = false;
 		float xVelocity = 0.0f;
@@ -247,7 +247,7 @@ namespace ratchet
 		}
 
 
-		m_movementType = isGrounded() ? GROUND : UNGROUND;
+		m_movementType = isGrounded() ? MovementType::GROUND : MovementType::AIR;
 
 		TRACE_CHANNEL(TR_PHYSICS, "[PLAYER] BEFORE" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
 

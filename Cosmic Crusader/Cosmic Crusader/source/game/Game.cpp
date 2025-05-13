@@ -42,10 +42,10 @@ namespace ratchet
 			for (const auto& obj : objects)
 			{
 				auto config = GameObjectConfig();
-				config.m_Faction = FACTION_UNKNOWN;
+				config.m_Faction = Faction::FACTION_UNKNOWN;
 				config.m_colliderType = COLLIDERTYPE_UNKNOWN;
 				config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
-				config.m_movementType = MOVEMENTTYPE_UNKNOWN;
+				config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 
 				config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
@@ -86,8 +86,8 @@ namespace ratchet
 
 		{
 			auto config = WeaponConfig(51, 12, true);
-			config.m_movementType = MOVEMENTTYPE_UNKNOWN;
-			config.m_Faction = FACTION_UNKNOWN;
+			config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
+			config.m_Faction = Faction::FACTION_UNKNOWN;
 			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
 			config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
 			config.m_weaponType = Weapon::TYPE::Blaster;
@@ -128,8 +128,8 @@ namespace ratchet
 			config.m_debugDraw = false;
 #endif
 
-			config.m_Faction = PLAYER;
-			config.m_movementType = GROUND;
+			config.m_Faction = Faction::PLAYER;
+			config.m_movementType = MovementType::GROUND;
 			config.m_colliderType = DYNAMIC;
 			config.m_colliderShapeType = RECTANGLE;
 
