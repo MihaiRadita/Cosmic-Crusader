@@ -222,6 +222,30 @@ namespace ratchet
 		m_animationSwitch = m_animationSwitch;
 	}
 
+	void AnimationJump::invertAnimationFramesList(Weapon::TYPE& weaponused)
+	{
+		if (m_repeatAnimation)
+		{
+			if (weaponused != Weapon::TYPE::None)
+			{
+				for (auto& [weaponType, angleMap] : m_weaponAnimationFramesMap)
+				{
+					for (auto& [angle, stateMap] : angleMap)
+					{
+						for (auto& [state, textureVector] : stateMap)
+						{
+							std::reverse(textureVector.begin(), textureVector.end());
+						}
+					}
+				}
+			}
+			else
+			{
+				std::reverse(m_animationFrames.begin(), m_animationFrames.end());
+			}
+		}
+	}
+
 	int AnimationJump::getCurrentAnimIndex()
 	{
 		return m_currentFrameIndex;

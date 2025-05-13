@@ -24,6 +24,7 @@ namespace ratchet
 		void resetCurrentAnimIndex() override;
 		void resetPlayerAnimTimer() override;
 		void setAnimationSwitch(bool animSwitch) override;
+		void invertAnimationFramesList(Weapon::TYPE& weaponused) override;
 
 		//Geters Functions	
 		int getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state) override;

@@ -35,6 +35,11 @@ namespace ratchet
 		anim->playAnimation(sprite, weaponUsed, angle, state);
 	}
 
+	void Animator::invertAnimation(AnimationBase* anim, Weapon::TYPE& weaponUsed)
+	{
+		anim->invertAnimationFramesList(weaponUsed);
+	}
+
 	void Animator::resetAnimIndex(AnimationBase* anim)
 	{
 		anim->resetCurrentAnimIndex();

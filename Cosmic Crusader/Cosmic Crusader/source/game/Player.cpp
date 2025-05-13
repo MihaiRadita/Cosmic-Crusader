@@ -218,6 +218,8 @@ namespace ratchet
 			}
 
 			invertCharacterMovingSpriteScale(facingRight ? 1 : -1);
+
+			m_facingRight = facingRight;
 		}
 	}
 

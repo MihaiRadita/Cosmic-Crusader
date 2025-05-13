@@ -27,7 +27,10 @@ namespace ratchet
 		float m_jumpImpulse;
 		bool m_isMoving;
 		int m_currentEcquipedWeaponIndex;
-		bool m_animDirectionReverse = false;
+		bool m_facingRight = false;
+		bool m_previusFacingRight = false;
+		bool m_isAnimationInverted = false;
+
 
 		//Angles
 		float m_baseAngle;

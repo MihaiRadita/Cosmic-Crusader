@@ -157,7 +157,6 @@ namespace ratchet
 			if (m_input.x < 0)
 			{
 				m_isMoving = true;
-				m_animDirectionReverse = true;
 				if (m_movementType == GROUND)
 				{
 					if (isGrounded())
@@ -174,7 +173,36 @@ namespace ratchet
 					}
 				}
 
-				invertCharacterMovingSpriteScale(-1);
+				if (m_currentWeaponType != Weapon::TYPE::None)
+				{
+					if (isGrounded())
+					{
+						if (m_facingRight == true)
+						{
+							if (!m_isAnimationInverted)
+							{
+
+								m_characterAnimator->invertAnimation(m_characterAnimator->getAbstractAnimation(), m_currentWeaponType);
+								m_isAnimationInverted = true;
+							}
+
+						}
+						else
+						{
+							if (m_isAnimationInverted)
+							{
+
+								m_characterAnimator->invertAnimation(m_characterAnimator->getAbstractAnimation(), m_currentWeaponType);
+								m_isAnimationInverted = false;
+							}
+						}
+					}
+				}
+				else
+				{
+					invertCharacterMovingSpriteScale(-1);
+				}
+
 			}
 			else if (m_input.x > 0)
 			{
@@ -183,8 +211,6 @@ namespace ratchet
 				{
 					if (isGrounded())
 					{
-						m_isFallingWithoutJumping = false;
-
 						if (m_isMoving)
 						{
 							if (m_characterAnimationState != MOVING)
@@ -198,18 +224,34 @@ namespace ratchet
 				}
 				if (m_currentWeaponType != Weapon::TYPE::None)
 				{
-					m_animDirectionReverse = true;
-					
+					if (isGrounded())
+					{
+						if (m_facingRight == false)
+						{
+							if (!m_isAnimationInverted)
+							{
+								m_characterAnimator->invertAnimation(m_characterAnimator->getAbstractAnimation(), m_currentWeaponType);
+								m_isAnimationInverted = true;
+							}
+
+						}
+						else
+						{
+							if (m_isAnimationInverted)
+							{
+								m_characterAnimator->invertAnimation(m_characterAnimator->getAbstractAnimation(), m_currentWeaponType);
+								m_isAnimationInverted = false;
+							}
+						}
+					}
+
 				}
 				else
 				{
 					invertCharacterMovingSpriteScale(1);
 				}
 
-				if (m_animDirectionReverse == true)
-				{
 
-				}
 			}
 
 			if (!isGrounded())
@@ -243,7 +285,6 @@ namespace ratchet
 					if (m_characterAnimationState != JUMP_RUNNING)
 					{
 						m_characterAnimationState = JUMP_RUNNING;
-						m_isFallingWithoutJumping = false;
 						switchAnimation();
 					}
 				}
@@ -252,31 +293,27 @@ namespace ratchet
 			if (isNoControlActive() && isGrounded() && m_isMoving == false)
 			{
 #ifdef IS_RATCHET_DEBUG
-				TRACE_CHANNEL(TR_ANIMATION, "Idle");
-				TRACE_CHANNEL(TR_ANIMATION, m_characterAnimationState);
+			TRACE_CHANNEL(TR_ANIMATION, "Idle");
+			TRACE_CHANNEL(TR_ANIMATION, m_characterAnimationState);
 #endif			
 				m_isMoving = false;
 				m_characterAnimationState = ANIMATION_STATE::IDLE;
-				m_isFallingWithoutJumping = false;
 				switchAnimation();
 			}
 
+			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
+
+
+
+			// Sync sprite position with collider
+			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+
+			// Sync sprite rotation with collider
+			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+			m_sprite.setRotation(m_rotation);
+
 		}
-
-
-		m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
-
-
-
-		// Sync sprite position with collider
-		auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-
-		// Sync sprite rotation with collider
-		m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-		m_sprite.setRotation(m_rotation);
-
 	}
-
 	void Creature::updateJump()
 	{
 	}

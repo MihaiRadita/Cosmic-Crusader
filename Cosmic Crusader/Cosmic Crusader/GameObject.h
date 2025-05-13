@@ -110,7 +110,7 @@ namespace ratchet
 			void resetControls();
 			
 			
-		} m_input;
+		} m_input, m_previousInput;
 
 #ifdef IS_RATCHET_DEBUG
 		bool m_debugDraw = false;

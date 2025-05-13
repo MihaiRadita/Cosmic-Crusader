@@ -53,6 +53,13 @@ namespace ratchet
 		return false;
 	}
 
+	void AnimationBase::invertAnimationFramesList(Weapon::TYPE& weaponused)
+	{
+#ifdef IS_RATCHET_DEBUG
+		TRACE_CHANNEL(TR_ANIMATION, "No animation frmae list to reverse");
+#endif
+	}
+
 	void AnimationBase::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 #ifdef IS_RATCHET_DEBUG
