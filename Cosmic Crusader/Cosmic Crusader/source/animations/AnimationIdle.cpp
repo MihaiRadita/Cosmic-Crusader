@@ -43,7 +43,7 @@ namespace ratchet
 
 	void AnimationIdle::initVariables()
 	{
-		m_animTimeLimit = 0.5f;
+		m_animTimeLimit = 0.035f;
 
 		m_currentFrameIndex = 0;
 		m_isAnimTransition = true;

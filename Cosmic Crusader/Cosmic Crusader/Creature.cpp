@@ -21,7 +21,7 @@ namespace ratchet
 		m_tangentHalfBase = tan((m_baseAngle / 2.0f) * m_DEG_TO_RAD);
 		m_tangentx3HalfBase = tan((3.0f * m_baseAngle / 2.0f) * m_DEG_TO_RAD);
 
-		m_currentEcquipedWeaponIndex = config.m_currentlyEquippedWeaponIndex;
+		m_currentEquippedWeaponIndex = config.m_currentlyEquippedWeaponIndex;
 		m_currentWeaponType = config.m_currentWeaponType;
 
 		m_characterAnimator = nullptr;
@@ -87,9 +87,7 @@ namespace ratchet
 			m_characterAnimSwitch = -1;
 
 		}
-		setWeapon(m_currentEcquipedWeaponIndex);
-
-
+		setWeapon(m_currentEquippedWeaponIndex);
 	}
 
 	Creature::~Creature()
@@ -250,8 +248,35 @@ namespace ratchet
 				switchAnimation();
 			}
 
-			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
+			if (m_currentWeaponType != Weapon::TYPE::None)
+			{
+				bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
+				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.getElapsedTime().asSeconds() >= m_recoilTime;
 
+				if (justPassedRecoilTime)
+				{
+					m_currentCharacterState = WeaponAnimation::STATE::Aim;
+					isOnRecoil = false;
+				}
+
+				if (m_input.m_isFiring)
+				{
+					if (isOnRecoil == false)
+					{
+						const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
+						const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.getElapsedTime().asSeconds() >= m_fireRate;
+						if (isReadyToFire)
+						{
+							m_fireCooldown.restart();
+							m_currentCharacterState = WeaponAnimation::STATE::Recoil;
+
+							m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
+						}
+					}
+				}
+			}
+
+			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
 
 
 			// Sync sprite position with collider
@@ -272,10 +297,10 @@ namespace ratchet
 
 	void Creature::updateWeaponSelection()
 	{
-		if (m_currentEcquipedWeaponIndex != m_input.weaponInputIndex)
+		if (m_currentEquippedWeaponIndex != m_input.weaponInputIndex)
 		{
-			m_currentEcquipedWeaponIndex = m_input.weaponInputIndex;
-			setWeapon(m_currentEcquipedWeaponIndex);
+			m_currentEquippedWeaponIndex = m_input.weaponInputIndex;
+			setWeapon(m_currentEquippedWeaponIndex);
 		}
 	}
 
@@ -343,7 +368,7 @@ namespace ratchet
 		}
 
 
-		if (!m_ownedWeaponList[m_currentEcquipedWeaponIndex]) {
+		if (!m_ownedWeaponList[m_currentEquippedWeaponIndex]) {
 			TRACE_CHANNEL(TR_WEAPON, "Error: Weapon at index " << m_equippedWeaponIndex << " is nullptr!");
 			return;
 		}
@@ -383,7 +408,7 @@ namespace ratchet
 	void Creature::setWeaponIndex(int index)
 	{
 		m_input.weaponInputIndex = index;
-		m_currentEcquipedWeaponIndex = m_input.weaponInputIndex;
+		m_currentEquippedWeaponIndex = m_input.weaponInputIndex;
 		
 	}
 	bool Creature::isWeaponMatchCharacter(Weapon::TYPE& weaponType)

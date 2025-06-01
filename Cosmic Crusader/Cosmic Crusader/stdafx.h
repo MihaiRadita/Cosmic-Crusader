@@ -41,13 +41,14 @@
 
 #define TR_RENDERING		TR_ENABLED && false
 #define TR_COLLISION		TR_ENABLED && false
-#define TR_MOUSE			TR_ENABLED && true
+#define TR_MOUSE			TR_ENABLED && false
 #define TR_GAMEOBJECT_INIT	TR_ENABLED && false
 #define TR_ANIMATION		TR_ENABLED && false
 #define TR_WEAPON			TR_ENABLED && false
 #define TR_RESOURCE_MANAGER TR_ENABLED && false
 #define TR_PHYSICS			TR_ENABLED && false
 #define TR_WEAPON_PICKUP	TR_ENABLED && false
+#define TR_ANIMATION_SPAM   TR_ENABLED && true
 
 #define TRACE_CHANNEL( show, s )            \
 {                             \

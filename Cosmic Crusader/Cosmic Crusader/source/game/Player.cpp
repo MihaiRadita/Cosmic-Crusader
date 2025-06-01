@@ -144,6 +144,26 @@ namespace ratchet
 			break;
 		}
 
+		case sf::Event::MouseButtonPressed:
+		{
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (!m_input.m_isFiring)
+					m_input.m_isFiring = true;
+			}
+			break;
+		}
+
+		case sf::Event::MouseButtonReleased:
+		{
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (m_input.m_isFiring)
+					m_input.m_isFiring = false;
+			}
+			break;
+		}
+
 		default:
 			break;
 		}

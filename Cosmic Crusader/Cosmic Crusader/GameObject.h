@@ -102,6 +102,7 @@ namespace ratchet
 			float y = 0;
 			bool isJump = false;
 			int weaponInputIndex = -1;
+			bool m_isFiring = false;
 
 			void resetMovementControls();
 			

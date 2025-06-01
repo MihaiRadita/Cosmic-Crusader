@@ -8,7 +8,7 @@ namespace ratchet
 		creatureThatPickedUpTheWeapon->setWeaponAccessible(m_weaponType, m_IsWeaponAccessible);
 		creatureThatPickedUpTheWeapon->addWeapon(m_weaponType, m_weaponConfig);
 		creatureThatPickedUpTheWeapon->setWeaponIndex(creatureThatPickedUpTheWeapon->getWeaponListSize() - 1);
-		creatureThatPickedUpTheWeapon->setWeapon(creatureThatPickedUpTheWeapon->m_currentEcquipedWeaponIndex);
+		creatureThatPickedUpTheWeapon->setWeapon(creatureThatPickedUpTheWeapon->m_currentEquippedWeaponIndex);
 	}
 	WeaponPickup::WeaponPickup(const WeaponConfig& config): GameObject(config)
 	{

@@ -26,10 +26,19 @@ namespace ratchet
 		float m_fallingSpeed;
 		float m_jumpImpulse;
 		bool m_isMoving;
-		int m_currentEcquipedWeaponIndex;
+		int m_currentEquippedWeaponIndex;
 		bool m_facingRight = false;
 		bool m_previusFacingRight = false;
 		bool m_isAnimationInverted = false;
+		sf::Clock m_fireCooldown;
+		float m_fireRate = 0.2f; // Fires every m_fireRate seconds
+		float m_recoilTime = 0.1f; // Recoil animation duration
+		int m_lastFiredWeaponIndex = -1;
+
+		bool m_hasRecoilToShow = false;
+		bool m_recoilDisplayed = false;
+
+
 
 
 		//Angles
