@@ -41,7 +41,7 @@
 
 #define TR_RENDERING		TR_ENABLED && false
 #define TR_COLLISION		TR_ENABLED && false
-#define TR_MOUSE			TR_ENABLED && false
+#define TR_MOUSE			TR_ENABLED && true
 #define TR_GAMEOBJECT_INIT	TR_ENABLED && false
 #define TR_ANIMATION		TR_ENABLED && false
 #define TR_WEAPON			TR_ENABLED && false

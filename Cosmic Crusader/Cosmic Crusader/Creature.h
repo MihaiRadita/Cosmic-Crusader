@@ -38,6 +38,8 @@ namespace ratchet
 		bool m_hasRecoilToShow = false;
 		bool m_recoilDisplayed = false;
 
+		sf::Vector2f currentMousePositiion = sf::Vector2f(0.0f,0.0f);
+
 
 
 
@@ -82,6 +84,8 @@ namespace ratchet
 		void updateRunningJump() override;
 		void updateWeaponSelection() override;
 
+		void updateShootPoint();
+
 		//Render functions
 
 		//Sprite functions
@@ -115,8 +119,14 @@ namespace ratchet
 		//Angles Functions
 		virtual void computeAimAngleState();
 
+		//Shooting Points Function
+		void computeShootingPoint();
+
 		int m_equippedWeaponIndex = 0;
 
+
+		//Shootings
+		sf::Vector2f m_currentFirePoint;
 
 		// std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 
 		 std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList; 
@@ -128,8 +138,15 @@ namespace ratchet
 		 WeaponAnimation::ANGLE m_currentCharacterAngle;
 		 WeaponAnimation::STATE m_currentCharacterState;
 		 std::vector<WeaponAnimation::ANGLE> m_characterAngles;
+		 std::map<Weapon::TYPE, sf::Vector2f> m_shootingPointsOffsets;
 
 		 Weapon::TYPE m_currentWeaponType;
+
+		 bool m_isRightNoWeapon;
+
+
+		 sf::CircleShape m_characterShootingPosition;
+		 sf::CircleShape m_shootingPointDynamic;
 
 	private:
 		bool m_isGround;

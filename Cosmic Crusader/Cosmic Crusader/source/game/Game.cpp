@@ -85,7 +85,7 @@ namespace ratchet
 		}
 
 		{
-			auto config = WeaponConfig(51, 12, true);
+			auto config = WeaponConfig(51, 12, true, 0.5f, 0.4f);
 			config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 			config.m_Faction = Faction::FACTION_UNKNOWN;
 			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
@@ -125,7 +125,7 @@ namespace ratchet
 		{
 			auto config = CreatureConfig();
 #ifdef IS_RATCHET_DEBUG
-			config.m_debugDraw = false;
+			config.m_debugDraw = true;
 #endif
 
 			config.m_Faction = Faction::PLAYER;

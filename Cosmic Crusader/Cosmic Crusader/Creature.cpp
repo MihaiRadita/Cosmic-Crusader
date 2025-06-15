@@ -88,6 +88,16 @@ namespace ratchet
 
 		}
 		setWeapon(m_currentEquippedWeaponIndex);
+
+		m_characterShootingPosition = sf::CircleShape(0.05);
+		m_characterShootingPosition.setFillColor(sf::Color::Yellow);
+		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
+
+		m_shootingPointDynamic = sf::CircleShape(0.05);
+		m_shootingPointDynamic.setFillColor(sf::Color::Blue);
+		m_shootingPointDynamic.setPosition(getPosition().x, getPosition().y);
+
+		m_isRightNoWeapon = true;
 	}
 
 	Creature::~Creature()
@@ -109,6 +119,17 @@ namespace ratchet
 
 	void Creature::update()
 	{
+
+		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
+		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
+		
+		if (currentMousePositiion != mouseWorldPosition)
+		{
+			currentMousePositiion = mouseWorldPosition;
+
+			std::cout << "CURRENT MOUSE POSITION <" << currentMousePositiion.x << " , " << currentMousePositiion.y << std::endl;
+		}
+
 		updateInput();
 		if (m_collider && !m_collider->m_skipRaycastThisFrame)
 		{
@@ -125,8 +146,11 @@ namespace ratchet
 		updateMovement();
 		updateJump();
 		computeAimAngleState();
+		computeShootingPoint();
 		updateAnimations();
 		updatePhysics();
+
+		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
 	}
 
 	void Creature::updateInput()
@@ -147,6 +171,7 @@ namespace ratchet
 	}
 	void Creature::updatePhysics()
 	{
+
 	}
 	void Creature::updateAnimations()
 	{
@@ -198,6 +223,7 @@ namespace ratchet
 				else
 				{
 					invertCharacterMovingSpriteScale(isMovingRight ? 1 : -1);
+					m_isRightNoWeapon = isMovingRight;
 				}
 			}
 
@@ -304,6 +330,11 @@ namespace ratchet
 		}
 	}
 
+	void Creature::updateShootPoint()
+	{
+		
+	}
+
 	void Creature::invertCharacterMovingSpriteScale(int direction)
 	{
 		m_sprite.setScale(m_scale.x * (float)direction, m_scale.y);
@@ -351,14 +382,24 @@ namespace ratchet
 	{
 
 		auto newWeapon = new Weapon(*WeaponManager::instance()->getWeapon(weaponType));
+		auto shootingPointXOffset = 0.0f;
+		auto shootingPointYOffset = 0.0f;
+
+		std::vector<WeaponAnimation::ANGLE> angles = m_characterAngles;
+
 		if (config.has_value())
 		{
 			newWeapon->m_currentAmmo = config->m_MaxAmmo;
+			shootingPointXOffset = config->m_weaponShootPointOffsetX;
+			shootingPointYOffset = config->m_weaponShootPointOffsetY;
 		}
+
+		
+		m_shootingPointsOffsets[weaponType] = sf::Vector2f(shootingPointXOffset, shootingPointYOffset);
 
 		newWeapon->m_weaponType = weaponType;
 
-
+	
 
 		m_ownedWeaponList.push_back(newWeapon);
 
@@ -442,6 +483,71 @@ namespace ratchet
 	}
 	void Creature::computeAimAngleState()
 	{
+	}
+	void Creature::computeShootingPoint()
+	{
+		if (m_currentWeaponType != Weapon::TYPE::None)
+		{
+			sf::Vector2f offset = m_shootingPointsOffsets[m_currentWeaponType];
+
+			sf::Vector2f characterPointPositiion;
+			float dir = m_facingRight ? 1.f : -1.f;
+
+
+			if (dir < 0.f)
+			{
+				characterPointPositiion = sf::Vector2f(getPosition().x, getPosition().y - 0.1f);
+			}
+			else
+			{
+				characterPointPositiion = sf::Vector2f(getPosition().x - 0.1f, getPosition().y - 0.1f);
+			}
+	
+
+			sf::Vector2f shootingPoint;
+	
+
+			switch (m_currentCharacterAngle) {
+			case WeaponAnimation::ANGLE::Angle0:
+				shootingPoint = {  characterPointPositiion.x + dir * 0.7f, characterPointPositiion.y };
+				break;
+			case WeaponAnimation::ANGLE::Angle45:
+				shootingPoint = { characterPointPositiion.x + dir * 0.68f, characterPointPositiion.y - 0.25f };
+				break;
+
+			case WeaponAnimation::ANGLE::Angle90:
+
+
+				shootingPoint = { characterPointPositiion.x, characterPointPositiion.y - 0.7f };
+				break;
+			case WeaponAnimation::ANGLE::AngleMinus45:
+
+				shootingPoint = { characterPointPositiion.x +  dir* 0.6f, characterPointPositiion.y + 0.3f };
+				break;
+			}
+
+			if (m_currentFirePoint != shootingPoint) {
+				m_currentFirePoint = shootingPoint;
+			}
+		}
+		else
+		{
+			sf::Vector2f characterPointPositiion;
+			float dir = m_isRightNoWeapon ? 1.f : -1.f;
+			if (dir < 0.f)
+			{
+				characterPointPositiion = sf::Vector2f(getPosition().x, getPosition().y);
+			}
+			else
+			{
+				characterPointPositiion = sf::Vector2f(getPosition().x - 0.1f, getPosition().y);
+			}
+
+			if (m_currentFirePoint != characterPointPositiion) {
+				m_currentFirePoint = characterPointPositiion;
+			}
+		}
+		m_shootingPointDynamic.setPosition(m_currentFirePoint);
 	}
 }
 
