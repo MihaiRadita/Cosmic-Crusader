@@ -6,12 +6,24 @@ namespace ratchet
 	/*WeaponConfig::WeaponConfig()
 	{
 	}*/
-	WeaponConfig::WeaponConfig(int ammo, int damage, bool isWeaponAccessible , float weapobnShootPointX, float weaponShootPointY) : GameObjectConfig()
+	WeaponConfig::WeaponConfig(int ammo, int damage, bool isWeaponAccessible) : GameObjectConfig()
 	{
 		m_MaxAmmo = ammo;
 		m_damage = damage;
 		m_isWeaponAccessible = isWeaponAccessible;
-		m_weaponShootPointOffsetX = weapobnShootPointX;
-		m_weaponShootPointOffsetY = weaponShootPointY;
+
+
+		//Weapon Shooting Points Offsets
+		
+		//Start
+		m_characterStartPointShootingOffset = sf::Vector2f(0.0f, 0.0f);
+
+		//Angles
+		m_shootingOffsetAngle0 = sf::Vector2f(0.0f, 0.0f);
+		m_shootingOffsetAngle45 = sf::Vector2f(0.0f, 0.0f);
+		m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.0f);
+		m_shootingOffsetAngleMinus45 = sf::Vector2f(0.0f, 0.0f);
+
+
 	}
 }

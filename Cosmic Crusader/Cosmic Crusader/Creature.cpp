@@ -385,7 +385,6 @@ namespace ratchet
 		auto shootingPointXOffset = 0.0f;
 		auto shootingPointYOffset = 0.0f;
 
-		std::vector<WeaponAnimation::ANGLE> angles = m_characterAngles;
 
 		if (config.has_value())
 		{
@@ -393,9 +392,6 @@ namespace ratchet
 			shootingPointXOffset = config->m_weaponShootPointOffsetX;
 			shootingPointYOffset = config->m_weaponShootPointOffsetY;
 		}
-
-		
-		m_shootingPointsOffsets[weaponType] = sf::Vector2f(shootingPointXOffset, shootingPointYOffset);
 
 		newWeapon->m_weaponType = weaponType;
 
@@ -488,7 +484,6 @@ namespace ratchet
 	{
 		if (m_currentWeaponType != Weapon::TYPE::None)
 		{
-			sf::Vector2f offset = m_shootingPointsOffsets[m_currentWeaponType];
 
 			sf::Vector2f characterPointPositiion;
 			float dir = m_facingRight ? 1.f : -1.f;
@@ -496,11 +491,12 @@ namespace ratchet
 
 			if (dir < 0.f)
 			{
-				characterPointPositiion = sf::Vector2f(getPosition().x, getPosition().y - 0.1f);
+				characterPointPositiion = sf::Vector2f(getPosition().x, getPosition().y - m_weaponsStartShootingPoint[m_currentWeaponType].y);
 			}
 			else
 			{
-				characterPointPositiion = sf::Vector2f(getPosition().x - 0.1f, getPosition().y - 0.1f);
+				characterPointPositiion = sf::Vector2f(getPosition().x - m_weaponsStartShootingPoint[m_currentWeaponType].x, 
+										  getPosition().y - m_weaponsStartShootingPoint[m_currentWeaponType].y);
 			}
 	
 
@@ -509,20 +505,22 @@ namespace ratchet
 
 			switch (m_currentCharacterAngle) {
 			case WeaponAnimation::ANGLE::Angle0:
-				shootingPoint = {  characterPointPositiion.x + dir * 0.7f, characterPointPositiion.y };
+				shootingPoint = {  characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, characterPointPositiion.y};
 				break;
 			case WeaponAnimation::ANGLE::Angle45:
-				shootingPoint = { characterPointPositiion.x + dir * 0.68f, characterPointPositiion.y - 0.25f };
+				shootingPoint = { characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, 
+								characterPointPositiion.y - m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y};
 				break;
 
 			case WeaponAnimation::ANGLE::Angle90:
 
 
-				shootingPoint = { characterPointPositiion.x, characterPointPositiion.y - 0.7f };
+				shootingPoint = { characterPointPositiion.x, characterPointPositiion.y - m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y};
 				break;
 			case WeaponAnimation::ANGLE::AngleMinus45:
 
-				shootingPoint = { characterPointPositiion.x +  dir* 0.6f, characterPointPositiion.y + 0.3f };
+				shootingPoint = { characterPointPositiion.x +  dir* m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, 
+								characterPointPositiion.y + m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y};
 				break;
 			}
 
@@ -540,7 +538,7 @@ namespace ratchet
 			}
 			else
 			{
-				characterPointPositiion = sf::Vector2f(getPosition().x - 0.1f, getPosition().y);
+				characterPointPositiion = sf::Vector2f(getPosition().x - m_weaponsStartShootingPoint[m_currentWeaponType].x, getPosition().y);
 			}
 
 			if (m_currentFirePoint != characterPointPositiion) {

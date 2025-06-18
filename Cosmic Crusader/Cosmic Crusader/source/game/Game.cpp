@@ -85,7 +85,7 @@ namespace ratchet
 		}
 
 		{
-			auto config = WeaponConfig(51, 12, true, 0.5f, 0.4f);
+			auto config = WeaponConfig(51, 12, true);
 			config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 			config.m_Faction = Faction::FACTION_UNKNOWN;
 			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
@@ -103,6 +103,16 @@ namespace ratchet
 			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
 			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
+
+			// Weapon Start Shooting Config Points
+			config.m_characterStartPointShootingOffset = sf::Vector2f(0.1f, 0.1f);
+
+			//Weapon Shooting Config Points Angles
+			config.m_shootingOffsetAngle0 = sf::Vector2f(0.7f, 0.0f);
+			config.m_shootingOffsetAngle45 = sf::Vector2f(0.68f, 0.25f);
+			config.m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.7f);
+			config.m_shootingOffsetAngleMinus45 = sf::Vector2f(0.6f, 0.3f);
+
 
 			auto colliderConfig = RectAngleColliderConfig();
 			colliderConfig.m_layer = PhysiscsLayer::Items;

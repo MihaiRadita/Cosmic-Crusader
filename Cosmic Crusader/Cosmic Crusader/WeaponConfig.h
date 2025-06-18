@@ -8,7 +8,7 @@ namespace ratchet
 	{
 	public:
 		//WeaponConfig();
-		WeaponConfig(int ammo, int damage, bool isWeaponAccesible, float weapobnShootPointX, float weaponShootPointY);
+		WeaponConfig(int ammo, int damage, bool isWeaponAccesible);
 
 		//Weapon features
 		int m_damage;
@@ -17,6 +17,15 @@ namespace ratchet
 		Weapon::TYPE m_weaponType;
 		float m_weaponShootPointOffsetX;
 		float m_weaponShootPointOffsetY;
+
+		//Weapon Shooting Points Offsets
+		sf::Vector2f m_shootingOffsetAngle0;
+		sf::Vector2f m_shootingOffsetAngle45;
+		sf::Vector2f m_shootingOffsetAngle90;
+		sf::Vector2f m_shootingOffsetAngleMinus45;
+		
+		sf::Vector2f m_characterStartPointShootingOffset;
+
 
 	};
 

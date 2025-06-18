@@ -20,6 +20,13 @@ namespace ratchet
 		Weapon::TYPE m_weaponType;
 		std::optional<WeaponConfig> m_weaponConfig;
 
+		sf::Vector2f m_StartPointShootingOffset;
+
+		sf::Vector2f m_shootingOffsetAngle0;
+		sf::Vector2f m_shootingOffsetAngle45;
+		sf::Vector2f m_shootingOffsetAngle90;
+		sf::Vector2f m_shootingOffsetAngleMinus45;
+
 		void OnCollisionEnter(GameObject* obj) override;
 		void OnCollisionExit(GameObject* obj) override;
 		virtual void OnSensorEnter(GameObject* obj) override;

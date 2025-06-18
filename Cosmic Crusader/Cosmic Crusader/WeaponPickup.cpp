@@ -5,6 +5,35 @@ namespace ratchet
 {
 	void WeaponPickup::pickUp(Creature* creatureThatPickedUpTheWeapon)
 	{
+		creatureThatPickedUpTheWeapon->m_weaponsStartShootingPoint[m_weaponType] = m_StartPointShootingOffset;
+
+		std::map<WeaponAnimation::ANGLE, sf::Vector2f> angleOffsets;
+
+		for (auto& angle : creatureThatPickedUpTheWeapon->m_characterAngles)
+		{
+			if (angle == WeaponAnimation::ANGLE::Angle0)
+			{
+				angleOffsets[angle] = m_shootingOffsetAngle0;
+			}
+			else if (angle == WeaponAnimation::ANGLE::Angle45)
+			{
+				angleOffsets[angle] = m_shootingOffsetAngle45;
+			}
+			else if (angle == WeaponAnimation::ANGLE::Angle90)
+			{
+				angleOffsets[angle] = m_shootingOffsetAngle90;
+			}
+			else if (angle == WeaponAnimation::ANGLE::AngleMinus45)
+			{
+				angleOffsets[angle] = m_shootingOffsetAngleMinus45;
+			}
+		}
+
+		for (const auto& [angle, offset] : angleOffsets)
+		{
+			creatureThatPickedUpTheWeapon->m_shootingPointsOffsets[m_weaponType][angle] = offset;
+		}
+
 		creatureThatPickedUpTheWeapon->setWeaponAccessible(m_weaponType, m_IsWeaponAccessible);
 		creatureThatPickedUpTheWeapon->addWeapon(m_weaponType, m_weaponConfig);
 		creatureThatPickedUpTheWeapon->setWeaponIndex(creatureThatPickedUpTheWeapon->getWeaponListSize() - 1);
@@ -17,6 +46,14 @@ namespace ratchet
 		if (m_weaponConfig.has_value())
 		{
 			m_weaponType = m_weaponConfig->m_weaponType;
+
+			m_StartPointShootingOffset = m_weaponConfig->m_characterStartPointShootingOffset;
+
+			m_shootingOffsetAngle0 = m_weaponConfig->m_shootingOffsetAngle0;
+			m_shootingOffsetAngle45 = m_weaponConfig->m_shootingOffsetAngle45;
+			m_shootingOffsetAngle90 = m_weaponConfig->m_shootingOffsetAngle90;
+			m_shootingOffsetAngleMinus45 = m_weaponConfig->m_shootingOffsetAngleMinus45;
+
 		}
 		m_IsWeaponAccessible = config.m_isWeaponAccessible;
 	}

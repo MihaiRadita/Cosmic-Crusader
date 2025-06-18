@@ -138,12 +138,16 @@ namespace ratchet
 		 WeaponAnimation::ANGLE m_currentCharacterAngle;
 		 WeaponAnimation::STATE m_currentCharacterState;
 		 std::vector<WeaponAnimation::ANGLE> m_characterAngles;
-		 std::map<Weapon::TYPE, sf::Vector2f> m_shootingPointsOffsets;
+
+		 std::map<Weapon::TYPE, std::map< WeaponAnimation::ANGLE,sf::Vector2f>> m_shootingPointsOffsets;
+		 std::map<Weapon::TYPE, sf::Vector2f> m_weaponsStartShootingPoint;
 
 		 Weapon::TYPE m_currentWeaponType;
 
 		 bool m_isRightNoWeapon;
 
+		 float m_startShootingoffsetPointX;
+		 float m_StartShootingOffsetPointY;
 
 		 sf::CircleShape m_characterShootingPosition;
 		 sf::CircleShape m_shootingPointDynamic;
