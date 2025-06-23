@@ -1,9 +1,11 @@
 #pragma once
 
+#include "GameObject.h"
+
 namespace ratchet
 {
 
-	class Weapon
+	class Weapon 
 	{
 	public:
 		enum class TYPE { None = 0, Blaster, FireLauncher, RocketLauncher,Enemy1Blaster, Count };
@@ -21,7 +23,6 @@ namespace ratchet
 		}
 
 		Weapon();
-
 		Weapon( const Weapon& weapon);
 
 		TYPE m_weaponType;

@@ -8,7 +8,6 @@ namespace ratchet
 
 	void Game::spawnObjects()
 	{
-
 		{ 
 			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap..tmj");
 

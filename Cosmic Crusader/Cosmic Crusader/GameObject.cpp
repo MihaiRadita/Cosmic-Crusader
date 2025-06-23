@@ -1,3 +1,4 @@
+
 #include "stdafx.h"
 #include "GameObject.h"
 
@@ -56,6 +57,11 @@ namespace ratchet
 			}
 		}
 		return nullptr;
+	}
+
+
+	GameObject::GameObject()
+	{
 	}
 
 	ratchet::GameObject::GameObject(const GameObjectConfig& config)

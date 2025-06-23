@@ -5,8 +5,6 @@
 #include "CapsuleCollider.h"
 #include "ColliderBase.h"
 #include "ResourceManager.h"
-#include "Weapon.h"
-
 
 
 
@@ -52,6 +50,7 @@ namespace ratchet
 		static GameObject* findGameObject(const b2Body* body);
 
 		//Constructor
+		GameObject();
 		GameObject(const GameObjectConfig& config);
 
 		//Destructor

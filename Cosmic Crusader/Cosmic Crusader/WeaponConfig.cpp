@@ -6,6 +6,8 @@ namespace ratchet
 	/*WeaponConfig::WeaponConfig()
 	{
 	}*/
+
+
 	WeaponConfig::WeaponConfig(int ammo, int damage, bool isWeaponAccessible) : GameObjectConfig()
 	{
 		m_MaxAmmo = ammo;

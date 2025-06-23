@@ -382,6 +382,7 @@ namespace ratchet
 	{
 
 		auto newWeapon = new Weapon(*WeaponManager::instance()->getWeapon(weaponType));
+
 		auto shootingPointXOffset = 0.0f;
 		auto shootingPointYOffset = 0.0f;
 

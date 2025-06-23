@@ -2,6 +2,8 @@
 
 #include "GameObjectConfig.h"
 
+#include "Weapon.h"
+
 namespace ratchet
 {
 	struct WeaponConfig : public GameObjectConfig
