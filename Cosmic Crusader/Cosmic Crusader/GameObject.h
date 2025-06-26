@@ -1,18 +1,20 @@
 #pragma once
-#include "GameObjectConfig.h"
 #include "physics/Physics.h"
 #include "physics/RectAngleCollider.h"
 #include "CapsuleCollider.h"
 #include "ColliderBase.h"
 #include "ResourceManager.h"
+#include "PrefabAssets.h"
 
 
 
 namespace ratchet
 {
+
 	class GameObject
 	{
 	public:
+
 
 		//States
 		Faction m_faction;
@@ -89,8 +91,15 @@ namespace ratchet
 		 virtual void setPosition(const sf::Vector2f position);
 		 virtual void setRotation(const float angle);
 
+		 //Destory functions
 		 void DestroyGameObject();
 		 void RemoveGameObjectFromList();
+
+		 //Instatiate functions
+		template<typename GamObjectChildType>
+		GameObject* Instantiate(const GamObjectChildType* gameObject);
+			
+		
 
 
 		virtual void destroy();
@@ -116,6 +125,15 @@ namespace ratchet
 		bool m_debugDraw = false;
 #endif
 	};
+
+	template<typename GameObjectChildType>
+	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildType* gameObjectToCopy)
+	{
+		auto* newGameObject = new GameObjectChildType(*gameObjectToCopy);
+		ratchet::GameObject::s_gameObjects.emplace_back(newGameObject);
+		return newGameObject;
+	}
+
 
 }
 

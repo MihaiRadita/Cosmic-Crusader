@@ -107,6 +107,15 @@
     <ClCompile Include="WindowManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PrefabAssets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -180,5 +189,8 @@
       <Filter>source\physics</Filter>
     </ClInclude>
     <ClInclude Include="WindowManager.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletConfig.h" />
+    <ClInclude Include="PrefabAssets.h" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "CreatureConfig.h"
+
 
 
 #include "animations/Animator.h"
@@ -14,6 +14,8 @@
 #include "WeaponManager.h"
 
 #include "WindowManager.h"
+
+#include "Bullet.h"
 
 namespace ratchet
 {

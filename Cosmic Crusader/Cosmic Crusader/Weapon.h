@@ -1,6 +1,7 @@
 #pragma once
 
-#include "GameObject.h"
+//#include "GameObject.h"
+
 
 namespace ratchet
 {
@@ -27,6 +28,7 @@ namespace ratchet
 
 		TYPE m_weaponType;
 		int m_currentAmmo;
+
 	};
 
 	class WeaponAnimation

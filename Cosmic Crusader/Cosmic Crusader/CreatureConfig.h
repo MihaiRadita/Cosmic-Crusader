@@ -1,6 +1,7 @@
 #pragma once
-#include "GameObjectConfig.h"
 #include "WeaponConfig.h"
+#include "Weapon.h"
+
 
 namespace ratchet
 {

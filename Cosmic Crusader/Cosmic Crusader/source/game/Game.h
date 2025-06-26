@@ -11,6 +11,8 @@
 
 #include "WindowManager.h"
 
+#include "PrefabAssets.h"
+
 namespace ratchet
 {
 	class Game {

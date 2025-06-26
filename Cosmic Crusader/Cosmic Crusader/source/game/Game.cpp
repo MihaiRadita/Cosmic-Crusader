@@ -90,6 +90,7 @@ namespace ratchet
 			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
 			config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
 			config.m_weaponType = Weapon::TYPE::Blaster;
+			config.m_configLayer = "Super Launcher";
 
 			float tileWidth = 64.0f;
 			float tileHeight = 64.0f;
@@ -128,6 +129,8 @@ namespace ratchet
 			config.m_colliderConfig = &colliderConfig;
 
 			GameObject::s_gameObjects.push_back(new WeaponPickup(config));
+
+			PrefabAssets::Get().RegisterWeaponConfig(config.m_configLayer, config);
 
 		}
 

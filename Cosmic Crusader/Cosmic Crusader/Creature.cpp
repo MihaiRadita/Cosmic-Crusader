@@ -396,6 +396,8 @@ namespace ratchet
 
 		newWeapon->m_weaponType = weaponType;
 
+		//newWeapon->m_curreW
+
 	
 
 		m_ownedWeaponList.push_back(newWeapon);

@@ -36,6 +36,9 @@ namespace ratchet
 		//Physics
 		BaseColliderConfig* m_colliderConfig = nullptr;
 
+		//Layers/Ids
+		std::string m_configLayer;
+
 		//Constructor
 		GameObjectConfig();
 	
