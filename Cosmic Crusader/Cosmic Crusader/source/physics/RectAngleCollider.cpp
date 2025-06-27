@@ -79,6 +79,11 @@ namespace ratchet
 			userDataName = static_cast<short>(config.m_layer);
 			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
 		}
+		else if (config.m_layer == PhysiscsLayer::Projectiles)
+		{
+			userDataName = static_cast<short>(config.m_layer);
+			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
+		}
 
 		m_body->CreateFixture(&m_fixtureDef);
 

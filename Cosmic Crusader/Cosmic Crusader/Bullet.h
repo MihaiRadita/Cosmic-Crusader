@@ -10,9 +10,12 @@ namespace ratchet
 	{
 	public:
 		Bullet();
-		Bullet(const Weapon& originWeapon);
+		Bullet(const BulletConfig& config);
 		~Bullet();
 		
+		float m_damage;
+		float m_ammo;
+
 	private:
 
 	};

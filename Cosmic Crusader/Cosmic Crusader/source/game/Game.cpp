@@ -123,14 +123,47 @@ namespace ratchet
 			colliderConfig.m_fixtureDef.restitution = 0.0f;
 			colliderConfig.m_fixtureDef.isSensor = true;
 
+			BulletConfig bulletConfig = BulletConfig();
+			bulletConfig.m_damage = 5.0f;
+			bulletConfig.m_ammo = 10.f;
+			bulletConfig.m_ID = config.m_configLayer;
+			config.m_Faction = Faction::FACTION_UNKNOWN;
+			config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
+			config.m_colliderType = DYNAMIC;
+			config.m_colliderShapeType = RECTANGLE;
+
+			bulletConfig.positionXOffset = 0.f;
+			bulletConfig.positionYOffset = 0.f;
+
+			bulletConfig.position = sf::Vector2f(0.0f, 0.0f);
+			bulletConfig.rotation = 0.0f;
+			bulletConfig.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+
+			bulletConfig.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
+
+
+			auto colliderBulletConfig = RectAngleColliderConfig();
+			colliderBulletConfig.m_layer = PhysiscsLayer::Projectiles;
+			colliderBulletConfig.m_bodyDef.type = b2_dynamicBody;
+			colliderBulletConfig.m_fixtureDef.density = 0.0f;
+			colliderBulletConfig.m_bodyDef.fixedRotation = false;
+			colliderBulletConfig.m_fixtureDef.friction = 0.0f;
+			colliderBulletConfig.m_fixtureDef.restitution = 0.0f;
+			colliderBulletConfig.m_fixtureDef.isSensor = true;
+
+
 
 			TRACE_CHANNEL(TR_COLLISION, "IS SENSOR : " << colliderConfig.m_fixtureDef.isSensor);
 
 			config.m_colliderConfig = &colliderConfig;
+			bulletConfig.m_colliderConfig = &colliderBulletConfig;
+
 
 			GameObject::s_gameObjects.push_back(new WeaponPickup(config));
 
 			PrefabAssets::Get().RegisterWeaponConfig(config.m_configLayer, config);
+			PrefabAssets::Get().RegisterBulletConfig(bulletConfig.m_ID, bulletConfig);
+
 
 		}
 
@@ -165,9 +198,9 @@ namespace ratchet
 			colliderConfig.m_bodyDef.type = b2_dynamicBody;
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;
-			colliderConfig.m_fixtureDef.density = 1.0f;
 			colliderConfig.m_fixtureDef.friction = 0.0f;
 			colliderConfig.m_fixtureDef.restitution = 0.f;
+			colliderConfig.m_fixtureDef.density = 1.0f;
 			colliderConfig.m_height = 1.13f;
 			colliderConfig.m_radius = 0.25f;
 			colliderConfig.m_fixtureDef.isSensor = false;

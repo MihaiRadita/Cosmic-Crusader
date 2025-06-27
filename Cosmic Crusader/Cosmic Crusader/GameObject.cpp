@@ -40,6 +40,7 @@ namespace ratchet
 		return m_collider;
 	}
 
+
 	GameObject* GameObject::findGameObject(const b2Body* body)
 	{
 		for (auto* obj : s_gameObjects)
@@ -109,6 +110,10 @@ namespace ratchet
 			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
 		}
 		else if (config.m_colliderConfig->m_layer == PhysiscsLayer::Items)
+		{
+			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
+		}
+		else if (config.m_colliderConfig->m_layer == PhysiscsLayer::Projectiles)
 		{
 			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
 		}
@@ -198,6 +203,20 @@ namespace ratchet
 	{
 		m_rotation = angle;
 		m_sprite.setRotation(m_rotation);
+	}
+
+	void GameObject::SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees)
+	{
+		float angleRad = rotationDegrees * b2_pi / 180.f;
+
+		if (m_collider)
+		{
+			m_collider->getBody()->SetTransform(b2Vec2(position.x, position.y), angleRad);
+		}
+
+		setPosition(position);
+		setRotation(rotationDegrees);
+
 	}
 
 	void GameObject::DestroyGameObject()

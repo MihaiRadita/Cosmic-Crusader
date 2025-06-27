@@ -5,7 +5,7 @@ ratchet::Bullet::Bullet()
 {
 }
 
-ratchet::Bullet::Bullet(const Weapon& originWeapon)
+ratchet::Bullet::Bullet(const BulletConfig& config) : GameObject(config)
 {
 
 }

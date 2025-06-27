@@ -42,6 +42,10 @@ namespace ratchet
 		sf::FloatRect getLocalBounds();
 		ColliderBase* getCollider();
 		bool m_markedForDestruction = false;
+
+		//Setters
+		void SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees);
+
 		//Physics
 		sf::Vector2f m_colliderScaleMultipier;
 		ColliderBase* m_collider;
