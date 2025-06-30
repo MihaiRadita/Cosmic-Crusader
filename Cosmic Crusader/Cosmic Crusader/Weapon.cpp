@@ -16,5 +16,5 @@ ratchet::Weapon::Weapon(const Weapon& weapon)
 
 void ratchet::Weapon::Fire(const sf::Vector2f& positon, const float& rotation, const float& direction)
 {
-	auto* newBullet = GameObject::Instantiate(new Bullet(*PrefabAssets::Get().GetBulletConfig(m_WeaponID)), positon, rotation);
+	auto* newBullet = GameObject::Instantiate(Bullet(*PrefabAssets::Get().GetBulletConfig(m_WeaponID)), positon, rotation);
 }

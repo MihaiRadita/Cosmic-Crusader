@@ -367,6 +367,8 @@ namespace ratchet
 			obj->update();
 		}
 
+		//CleanDestroyedGameObjects();
+
 		//sf::Mouse::setPosition(sf::Vector2i(20, 20), m_window);
 
 	}
