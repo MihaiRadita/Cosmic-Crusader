@@ -26,6 +26,10 @@ namespace ratchet
 		b2FixtureDef m_fixtureDef;
 		b2BodyDef m_bodyDef;
 
+		float m_gravityScale;
+		float m_linearDamping;
+		float m_angularDamping;
+
 		std::optional<b2Vec2> m_origin = std::nullopt;
 
 #ifdef IS_RATCHET_DEBUG

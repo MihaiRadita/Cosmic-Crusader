@@ -150,7 +150,14 @@ namespace ratchet
 			colliderBulletConfig.m_fixtureDef.friction = 0.0f;
 			colliderBulletConfig.m_fixtureDef.restitution = 0.0f;
 			colliderBulletConfig.m_fixtureDef.isSensor = true;
-
+			
+			
+			if (colliderBulletConfig.m_bodyDef.type == b2_dynamicBody)
+			{
+				colliderBulletConfig.m_gravityScale = 0.0f;
+				colliderBulletConfig.m_linearDamping = 0.0f;
+				colliderBulletConfig.m_angularDamping = 0.0f;
+			}
 
 
 			TRACE_CHANNEL(TR_COLLISION, "IS SENSOR : " << colliderConfig.m_fixtureDef.isSensor);
@@ -208,6 +215,12 @@ namespace ratchet
 			colliderConfig.m_debugDraw = false;
 #endif
 
+			if (colliderConfig.m_bodyDef.type == b2_dynamicBody)
+			{
+				colliderConfig.m_gravityScale = 1.0f;
+				colliderConfig.m_linearDamping = 0.0f;
+				colliderConfig.m_angularDamping = 0.0f;
+			}
 
 			config.m_colliderConfig = &colliderConfig;
 

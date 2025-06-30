@@ -50,6 +50,9 @@ namespace ratchet
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
+		m_body->SetGravityScale(config.m_gravityScale);
+		m_body->SetLinearDamping(config.m_linearDamping);
+		m_body->SetAngularDamping(config.m_angularDamping);
 
 		//Box Dimensions
 		m_boxShape.SetAsBox(getGlobalWidth() / 2.0f, getGlobalHeight() / 2.0f, m_origin, m_body->GetAngle());

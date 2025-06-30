@@ -16,6 +16,10 @@ namespace ratchet
 		m_bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / sc_metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / sc_metersScale);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
+		m_body->SetGravityScale(config.m_gravityScale);
+		m_body->SetLinearDamping(config.m_linearDamping);
+		m_body->SetAngularDamping(config.m_angularDamping);
+
 		//circleShape.m_p.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / metersScale);
 		m_circleShape.m_radius = m_radius / sc_metersScale;
 

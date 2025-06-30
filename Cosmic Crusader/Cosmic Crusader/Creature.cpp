@@ -392,6 +392,7 @@ namespace ratchet
 			newWeapon->m_currentAmmo = config->m_MaxAmmo;
 			shootingPointXOffset = config->m_weaponShootPointOffsetX;
 			shootingPointYOffset = config->m_weaponShootPointOffsetY;
+			newWeapon->m_WeaponID = config->m_configLayer;
 		}
 
 		newWeapon->m_weaponType = weaponType;

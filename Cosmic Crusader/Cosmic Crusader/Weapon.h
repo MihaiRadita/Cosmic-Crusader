@@ -26,8 +26,12 @@ namespace ratchet
 		Weapon();
 		Weapon( const Weapon& weapon);
 
+
 		TYPE m_weaponType;
 		int m_currentAmmo;
+		std::string m_WeaponID;
+
+		void Fire(const sf::Vector2f &positon,const float& rotation, const float& direction);
 
 	};
 

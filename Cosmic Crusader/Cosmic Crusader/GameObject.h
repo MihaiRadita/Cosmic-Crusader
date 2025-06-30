@@ -101,7 +101,7 @@ namespace ratchet
 
 		 //Instatiate functions
 		template<typename GamObjectChildType>
-		GameObject* Instantiate(const GamObjectChildType* gameObject);
+		static GameObject* Instantiate(const GamObjectChildType* gameObject, const sf::Vector2f& position, const float& rotation);
 			
 		
 
@@ -131,10 +131,28 @@ namespace ratchet
 	};
 
 	template<typename GameObjectChildType>
-	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildType* gameObjectToCopy)
+	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildType* gameObjectToCopy,const sf::Vector2f& position,const float& rotationDegrees)
 	{
 		auto* newGameObject = new GameObjectChildType(*gameObjectToCopy);
+
+		auto* basePtr = static_cast<GameObject*>(newGameObject);
+
+
+		if (basePtr->m_collider)
+		{
+			b2Vec2	colliderPosition = b2Vec2(position.x, position.y);
+			float rotationRadians = rotationDegrees * b2_pi / 180.f;
+
+			basePtr->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
+		}
+		
+		auto objectPosition = sf::Vector2f(basePtr->m_collider->getBody()->GetPosition().x, basePtr->m_collider->getBody()->GetPosition().y);
+		basePtr->setPosition(objectPosition);
+		basePtr->setRotation(rotationDegrees);
+
 		ratchet::GameObject::s_gameObjects.emplace_back(newGameObject);
+		delete gameObjectToCopy;
+		gameObjectToCopy = nullptr;
 		return newGameObject;
 	}
 
