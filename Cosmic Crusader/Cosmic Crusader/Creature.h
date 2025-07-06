@@ -39,6 +39,7 @@ namespace ratchet
 
 		bool m_hasRecoilToShow = false;
 		bool m_recoilDisplayed = false;
+		bool m_mustSpawnBullet = false;
 
 		sf::Vector2f currentMousePositiion = sf::Vector2f(0.0f,0.0f);
 
@@ -87,6 +88,7 @@ namespace ratchet
 		void updateWeaponSelection() override;
 
 		void updateShootPoint();
+		void updateShooting();
 
 		//Render functions
 

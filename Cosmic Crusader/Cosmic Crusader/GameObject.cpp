@@ -145,7 +145,10 @@ namespace ratchet
 	void ratchet::GameObject::render(sf::RenderTarget& target)
 	{
 #ifdef IS_RATCHET_DEBUG
-		m_collider->debugRender(target);
+		if (m_collider)
+		{
+			m_collider->debugRender(target);
+		}
 
 		if (m_debugDraw)
 		{
@@ -191,6 +194,14 @@ namespace ratchet
 		}
 
 		return nullptr; 
+	}
+
+	void GameObject::addGameObjectoDestory(GameObject* object)
+	{
+		if (object != nullptr)
+		{
+			s_gameObjectsToDestroy.push(object);
+		}
 	}
 
 	void GameObject::setPosition(const sf::Vector2f position)
@@ -248,6 +259,20 @@ namespace ratchet
 				s_gameObjects.erase(it);
 				break; 
 			}
+		}
+	}
+
+	void GameObject::clearQueuedObjectsToDestroy()
+	{
+		while (s_gameObjectsToDestroy.empty() == false)
+		{
+			auto* nextGameObject = s_gameObjectsToDestroy.front();
+			if (nextGameObject)
+			{
+				nextGameObject->DestroyGameObject();
+			}
+			nextGameObject = nullptr;
+			s_gameObjectsToDestroy.pop();
 		}
 	}
 
@@ -323,5 +348,6 @@ namespace ratchet
 	}
 
 	std::vector<GameObject*>GameObject ::s_gameObjects;
+	std::queue<GameObject*>GameObject::s_gameObjectsToDestroy;
 
 }

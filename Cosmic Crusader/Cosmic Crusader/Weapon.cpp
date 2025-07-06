@@ -16,5 +16,8 @@ ratchet::Weapon::Weapon(const Weapon& weapon)
 
 void ratchet::Weapon::Fire(const sf::Vector2f& positon, const float& rotation, const float& direction)
 {
-	auto* newBullet = GameObject::Instantiate(Bullet(*PrefabAssets::Get().GetBulletConfig(m_WeaponID)), positon, rotation);
+#ifdef IS_RATCHET_DEBUG
+	TRACE_CHANNEL(TR_WEAPON_FIRE, "Spawning bullet");
+#endif	
+	GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_WeaponID), positon, rotation);
 }

@@ -8,6 +8,14 @@ namespace ratchet
 	{
 		RectAngleColliderConfig();
 
+		RectAngleColliderConfig(const RectAngleColliderConfig& other)
+			: BaseColliderConfig(other), 
+			m_width(other.m_width),
+			m_height(other.m_height)
+		{
+
+		}
+
 		std::optional<float> m_width = std::nullopt;
 		std::optional<float> m_height = std::nullopt;
 	};

@@ -148,6 +148,7 @@ namespace ratchet
 		computeAimAngleState();
 		computeShootingPoint();
 		updateAnimations();
+		updateShooting();
 		updatePhysics();
 
 		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
@@ -295,6 +296,10 @@ namespace ratchet
 						{
 							m_fireCooldown.restart();
 							m_currentCharacterState = WeaponAnimation::STATE::Recoil;
+#ifdef IS_RATCHET_DEBUG
+							TRACE_CHANNEL(TR_WEAPON_FIRE, "Must Spawn Bullet = true");
+#endif	
+							m_mustSpawnBullet = true;
 
 							m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
 						}
@@ -333,6 +338,19 @@ namespace ratchet
 	void Creature::updateShootPoint()
 	{
 		
+	}
+
+	void Creature::updateShooting()
+	{
+		if (m_mustSpawnBullet)
+		{
+			m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, 0.0f, 0.0f);
+#ifdef IS_RATCHET_DEBUG
+			TRACE_CHANNEL(TR_WEAPON_FIRE, "Must Spawn Bullet = false");
+#endif	
+			m_mustSpawnBullet = false;
+
+		}
 	}
 
 	void Creature::invertCharacterMovingSpriteScale(int direction)

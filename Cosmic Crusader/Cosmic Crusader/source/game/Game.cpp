@@ -84,92 +84,92 @@ namespace ratchet
 		}
 
 		{
-			auto config = WeaponConfig(51, 12, true);
-			config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
-			config.m_Faction = Faction::FACTION_UNKNOWN;
-			config.m_colliderType = COLLIDERTYPE_UNKNOWN;
-			config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
-			config.m_weaponType = Weapon::TYPE::Blaster;
-			config.m_configLayer = "Super Launcher";
+			auto* config = new WeaponConfig(51, 12, true);
+			config->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
+			config->m_Faction = Faction::FACTION_UNKNOWN;
+			config->m_colliderType = COLLIDERTYPE_UNKNOWN;
+			config->m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
+			config->m_weaponType = Weapon::TYPE::Blaster;
+			config->m_configLayer = "Super Launcher";
 
 			float tileWidth = 64.0f;
 			float tileHeight = 64.0f;
 
-			config.positionXOffset = 0.f;
-			config.positionYOffset = 0.f;
+			config->positionXOffset = 0.f;
+			config->positionYOffset = 0.f;
 
-			config.position = sf::Vector2f(18.0f, 4.8f);
-			config.rotation = 0.0f;
-			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+			config->position = sf::Vector2f(18.0f, 4.8f);
+			config->rotation = 0.0f;
+			config->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
-			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
+			config->startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
 
 			// Weapon Start Shooting Config Points
-			config.m_characterStartPointShootingOffset = sf::Vector2f(0.1f, 0.1f);
+			config->m_characterStartPointShootingOffset = sf::Vector2f(0.1f, 0.1f);
 
 			//Weapon Shooting Config Points Angles
-			config.m_shootingOffsetAngle0 = sf::Vector2f(0.7f, 0.0f);
-			config.m_shootingOffsetAngle45 = sf::Vector2f(0.68f, 0.25f);
-			config.m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.7f);
-			config.m_shootingOffsetAngleMinus45 = sf::Vector2f(0.6f, 0.3f);
+			config->m_shootingOffsetAngle0 = sf::Vector2f(0.7f, 0.0f);
+			config->m_shootingOffsetAngle45 = sf::Vector2f(0.68f, 0.25f);
+			config->m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.7f);
+			config->m_shootingOffsetAngleMinus45 = sf::Vector2f(0.6f, 0.3f);
 
 
-			auto colliderConfig = RectAngleColliderConfig();
-			colliderConfig.m_layer = PhysiscsLayer::Items;
-			colliderConfig.m_bodyDef.type = b2_staticBody;
-			colliderConfig.m_bodyDef.fixedRotation = true;
-			colliderConfig.m_fixtureDef.density = 0.0f;
-			colliderConfig.m_fixtureDef.friction = 0.0f;
-			colliderConfig.m_fixtureDef.restitution = 0.0f;
-			colliderConfig.m_fixtureDef.isSensor = true;
+			auto* colliderConfig = new RectAngleColliderConfig();
+			colliderConfig->m_layer = PhysiscsLayer::Items;
+			colliderConfig->m_bodyDef.type = b2_staticBody;
+			colliderConfig->m_bodyDef.fixedRotation = true;
+			colliderConfig->m_fixtureDef.density = 0.0f;
+			colliderConfig->m_fixtureDef.friction = 0.0f;
+			colliderConfig->m_fixtureDef.restitution = 0.0f;
+			colliderConfig->m_fixtureDef.isSensor = true;
 
-			BulletConfig bulletConfig = BulletConfig();
-			bulletConfig.m_damage = 5.0f;
-			bulletConfig.m_ammo = 10.f;
-			bulletConfig.m_ID = config.m_configLayer;
-			config.m_Faction = Faction::FACTION_UNKNOWN;
-			config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
-			config.m_colliderType = DYNAMIC;
-			config.m_colliderShapeType = RECTANGLE;
+			BulletConfig* bulletConfig = new BulletConfig();
+			bulletConfig->m_damage = 5.0f;
+			bulletConfig->m_ammo = 10.f;
+			bulletConfig->m_ID = config->m_configLayer;
+			bulletConfig->m_Faction = Faction::FACTION_UNKNOWN;
+			bulletConfig->m_movementType = MovementType::AIR;
+			bulletConfig->m_colliderType = DYNAMIC;
+			bulletConfig->m_colliderShapeType = RECTANGLE;
 
-			bulletConfig.positionXOffset = 0.f;
-			bulletConfig.positionYOffset = 0.f;
+			bulletConfig->positionXOffset = 0.f;
+			bulletConfig->positionYOffset = 0.f;
 
-			bulletConfig.position = sf::Vector2f(0.0f, 0.0f);
-			bulletConfig.rotation = 0.0f;
-			bulletConfig.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+			bulletConfig->position = sf::Vector2f(0.0f, 0.0f);
+			bulletConfig->rotation = 0.0f;
+			bulletConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
-			bulletConfig.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
+			bulletConfig->startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
 
 
-			auto colliderBulletConfig = RectAngleColliderConfig();
-			colliderBulletConfig.m_layer = PhysiscsLayer::Projectiles;
-			colliderBulletConfig.m_bodyDef.type = b2_dynamicBody;
-			colliderBulletConfig.m_fixtureDef.density = 0.0f;
-			colliderBulletConfig.m_bodyDef.fixedRotation = false;
-			colliderBulletConfig.m_fixtureDef.friction = 0.0f;
-			colliderBulletConfig.m_fixtureDef.restitution = 0.0f;
-			colliderBulletConfig.m_fixtureDef.isSensor = true;
+			auto* colliderBulletConfig = new RectAngleColliderConfig();
+			colliderBulletConfig->m_layer = PhysiscsLayer::Projectiles;
+			colliderBulletConfig->m_bodyDef.type = b2_dynamicBody;
+			colliderBulletConfig->m_fixtureDef.density = 0.0f;
+			colliderBulletConfig->m_bodyDef.fixedRotation = true;
+			colliderBulletConfig->m_fixtureDef.friction = 0.0f;
+			colliderBulletConfig->m_fixtureDef.restitution = 0.0f;
+			colliderBulletConfig->m_fixtureDef.isSensor = true;
 			
 			
-			if (colliderBulletConfig.m_bodyDef.type == b2_dynamicBody)
+			if (colliderBulletConfig->m_bodyDef.type == b2_dynamicBody)
 			{
-				colliderBulletConfig.m_gravityScale = 0.0f;
-				colliderBulletConfig.m_linearDamping = 0.0f;
-				colliderBulletConfig.m_angularDamping = 0.0f;
+				colliderBulletConfig->m_gravityScale = 0.0f;
+				colliderBulletConfig->m_linearDamping = 0.0f;
+				colliderBulletConfig->m_angularDamping = 0.0f;
 			}
 
 
-			TRACE_CHANNEL(TR_COLLISION, "IS SENSOR : " << colliderConfig.m_fixtureDef.isSensor);
+			TRACE_CHANNEL(TR_COLLISION, "IS SENSOR : " << colliderConfig->m_fixtureDef.isSensor);
 
-			config.m_colliderConfig = &colliderConfig;
-			bulletConfig.m_colliderConfig = &colliderBulletConfig;
+			config->m_colliderConfig = colliderConfig;
+			bulletConfig->m_colliderConfig = colliderBulletConfig;
 
 
-			GameObject::s_gameObjects.push_back(new WeaponPickup(config));
+			GameObject::s_gameObjects.push_back(new WeaponPickup(*config));
 
-			PrefabAssets::Get().RegisterWeaponConfig(config.m_configLayer, config);
-			PrefabAssets::Get().RegisterBulletConfig(bulletConfig.m_ID, bulletConfig);
+			PrefabAssets::Get().RegisterWeaponConfig(config->m_configLayer, config);
+			PrefabAssets::Get().RegisterBulletConfig(bulletConfig->m_ID, bulletConfig);
 
 
 		}
@@ -366,6 +366,8 @@ namespace ratchet
 		{
 			obj->update();
 		}
+
+		GameObject::clearQueuedObjectsToDestroy();
 
 		//CleanDestroyedGameObjects();
 

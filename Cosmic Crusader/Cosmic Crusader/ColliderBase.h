@@ -20,6 +20,7 @@ namespace ratchet
 	struct BaseColliderConfig
 	{
 		BaseColliderConfig();
+		virtual ~BaseColliderConfig() = default;
 
 		PhysiscsLayer m_layer;
 

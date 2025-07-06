@@ -48,10 +48,11 @@ namespace ratchet
 
 		//Physics
 		sf::Vector2f m_colliderScaleMultipier;
-		ColliderBase* m_collider;
+		ColliderBase* m_collider = nullptr;
 
 
 		static std::vector<GameObject*> s_gameObjects;
+		static std::queue<GameObject*> s_gameObjectsToDestroy;
 
 		static GameObject* findGameObject(const b2Body* body);
 
@@ -91,6 +92,8 @@ namespace ratchet
 
 		 static GameObject* findGameObjectByBody(const b2Body* body);
 
+		 static void addGameObjectoDestory(GameObject* object);
+
 		 //Transforrms setters
 		 virtual void setPosition(const sf::Vector2f position);
 		 virtual void setRotation(const float angle);
@@ -98,10 +101,13 @@ namespace ratchet
 		 //Destory functions
 		 void DestroyGameObject();
 		 void RemoveGameObjectFromList();
+		 static void clearQueuedObjectsToDestroy();
 
 		 //Instatiate functions
-		template<typename GameObjectChildType>
-		static GameObject* Instantiate(const GameObjectChildType gameObject, const sf::Vector2f& position, const float& rotation);
+		/*template<typename GameObjectChildType>
+		static GameObject* Instantiate(const GameObjectChildType gameObject, const sf::Vector2f& position, const float& rotationDegrees);*/
+		template<typename GameObjectChildType, typename GameObjectChildConfig>
+		static GameObject* Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees);
 			
 		
 
@@ -130,10 +136,16 @@ namespace ratchet
 #endif
 	};
 
-	template<typename GameObjectChildType>
+	/*template<typename GameObjectChildType>
 	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildType gameObjectToCopy,const sf::Vector2f& position,const float& rotationDegrees)
 	{
-		auto* newGameObject = new GameObjectChildType(gameObjectToCopy);
+		return Instantiate<GameObjectChildType>(gameObjectToCopy.extractConfig(), position, rotationDegrees);
+	}*/
+
+	template<typename GameObjectChildType, typename GameObjectChildConfig>
+	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees)
+	{
+		auto* newGameObject = new GameObjectChildType(gameObjectConfig);
 
 		if (newGameObject->m_collider)
 		{
@@ -142,7 +154,7 @@ namespace ratchet
 
 			newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
 		}
-		
+
 		auto objectPosition = sf::Vector2f(newGameObject->m_collider->getBody()->GetPosition().x, newGameObject->m_collider->getBody()->GetPosition().y);
 		newGameObject->setPosition(objectPosition);
 		newGameObject->setRotation(rotationDegrees);

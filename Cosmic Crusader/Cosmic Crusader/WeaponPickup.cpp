@@ -98,7 +98,7 @@ namespace ratchet
 
 				pickUp(player);
 
-				DestroyGameObject();
+				GameObject::addGameObjectoDestory(this);
 			}
 
 			//m_collider->getBody()->SetEnabled(false);

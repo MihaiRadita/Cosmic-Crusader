@@ -19,14 +19,21 @@ namespace ratchet
 		m_creatureConfigs[id] = new CreatureConfig(config);
 	}
 
-	void PrefabAssets::RegisterWeaponConfig(std::string& id,WeaponConfig& config)
+	void PrefabAssets::RegisterWeaponConfig(std::string& id,WeaponConfig* config)
 	{
-		m_weaponConfigs[id] = new WeaponConfig(config);
+		m_weaponConfigs[id] = new WeaponConfig(*config);
 	}
 
-	void PrefabAssets::RegisterBulletConfig(std::string& id,BulletConfig& config)
+	void PrefabAssets::RegisterBulletConfig(std::string& id,BulletConfig* config)
 	{
-		m_bulletConfigs[id] = new BulletConfig(config);
+
+		BulletConfig* copy = new BulletConfig(*config);
+
+		m_recangleCollderConfigs[id] = dynamic_cast<RectAngleColliderConfig*>(config->m_colliderConfig);
+
+		copy->m_colliderConfig = m_recangleCollderConfigs[id];
+
+		m_bulletConfigs[id] = copy;
 	}
 
 	GameObjectConfig* PrefabAssets::GetGameObjectConfig(std::string& id)
@@ -98,7 +105,15 @@ namespace ratchet
 		{
 			delete ptr;
 		}
+
 		m_bulletConfigs.clear();
+
+		for (auto& [id, ptr] : m_recangleCollderConfigs)
+		{
+			delete ptr;
+		}
+
+		m_recangleCollderConfigs.clear();
 	}
 
 

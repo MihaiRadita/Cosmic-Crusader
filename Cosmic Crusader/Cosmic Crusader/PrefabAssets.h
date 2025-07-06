@@ -4,6 +4,8 @@
 #include "CreatureConfig.h"
 #include "WeaponConfig.h"
 #include "BulletConfig.h"
+#include "physics/RectAngleCollider.h"
+
 
 namespace ratchet
 {
@@ -11,7 +13,7 @@ namespace ratchet
 	{
 	public:
 
-
+		
 		static PrefabAssets& Get();
 
 		//List of prefab configs
@@ -20,11 +22,14 @@ namespace ratchet
 		std::map<std::string, WeaponConfig*> m_weaponConfigs;
 		std::map<std::string, BulletConfig*> m_bulletConfigs;
 
+		//List of collder prefab configs
+		std::map<std::string, RectAngleColliderConfig*> m_recangleCollderConfigs;
+
 		//Registers Config
 		void RegisterGameObjectConfig(std::string& id,GameObjectConfig& config);
 		void RegisterCreatureConfig(std::string &id,CreatureConfig& config);
-		void RegisterWeaponConfig(std::string& id,WeaponConfig& config);
-		void RegisterBulletConfig(std::string& id,BulletConfig& config);
+		void RegisterWeaponConfig(std::string& id,WeaponConfig* config);
+		void RegisterBulletConfig(std::string& id,BulletConfig* config);
 
 		//Getters Configs
 		GameObjectConfig* GetGameObjectConfig(std::string& id);
