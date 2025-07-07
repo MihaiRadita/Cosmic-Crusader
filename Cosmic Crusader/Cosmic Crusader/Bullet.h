@@ -12,6 +12,8 @@ namespace ratchet
 		Bullet();
 		Bullet(const BulletConfig& config);
 		~Bullet();
+
+		void update() override;
 		
 		float m_damage;
 		float m_ammo;

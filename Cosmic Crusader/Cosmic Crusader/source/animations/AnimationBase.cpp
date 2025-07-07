@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "AnimationBase.h"
 
+
+
 namespace ratchet
 {
 	void AnimationBase::initVariables()
@@ -25,14 +27,14 @@ namespace ratchet
 	void AnimationBase::resetCurrentAnimIndex()
 	{
 #ifdef IS_RATCHET_DEBUG
-		TRACE_CHANNEL(TR_ANIMATION, "No index to reset!");
+		TRACE_CHANNEL("ANIMATION", "No index to reset!");
 #endif
 	}
 
 	void AnimationBase::resetPlayerAnimTimer()
 	{
 #ifdef IS_RATCHET_DEBUG
-		TRACE_CHANNEL(TR_ANIMATION, "No animation timer to reset!");
+		TRACE_CHANNEL("ANIMATION", "No animation timer to reset!");
 #endif
 	}
 
@@ -44,7 +46,7 @@ namespace ratchet
 	void AnimationBase::setAnimationSwitch(bool animSwitch)
 	{
 #ifdef IS_RATCHET_DEBUG
-		TRACE_CHANNEL(TR_ANIMATION, "No Animation Switch to change");
+		TRACE_CHANNEL("ANIMATION", "No Animation Switch to change");
 #endif
 	}
 
@@ -56,14 +58,14 @@ namespace ratchet
 	void AnimationBase::invertAnimationFramesList(Weapon::TYPE& weaponused)
 	{
 #ifdef IS_RATCHET_DEBUG
-		TRACE_CHANNEL(TR_ANIMATION, "No animation frmae list to reverse");
+		TRACE_CHANNEL("ANIMATION", "No animation frmae list to reverse");
 #endif
 	}
 
 	void AnimationBase::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 #ifdef IS_RATCHET_DEBUG
-		TRACE_CHANNEL(TR_ANIMATION, "Abstract Animation");
+		TRACE_CHANNEL("ANIMATION", "Abstract Animation");
 #endif
 	}
 }

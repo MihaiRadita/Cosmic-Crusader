@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 
+
+
 namespace ratchet
 {
 	void Player::destroyPlayerAnimations()
@@ -201,9 +203,9 @@ namespace ratchet
 			float angleRad = (facingRight ? 1 : -1) * atan2(determinant, dotProduct);
 			float angleDeg = angleRad * (180.f / M_PI); 
 				
-			TRACE_CHANNEL(TR_MOUSE, "Pos Vect: " << getPosition().x << ", " << getPosition().y);
-			TRACE_CHANNEL(TR_MOUSE, "Dir Vect: " << directionVector.x << ", " << directionVector.y);
-			TRACE_CHANNEL(TR_MOUSE, "Angle: " << angleDeg);
+			TRACE_CHANNEL("MOUSE", "Pos Vect: ", getPosition().x, ", ", getPosition().y);
+			TRACE_CHANNEL("MOUSE", "Dir Vect: ", directionVector.x, ", ", directionVector.y);
+			TRACE_CHANNEL("MOUSE", "Angle: ", angleDeg);
 
 			const float minus45 = -m_HalfBaseAngle;        // -22.5
 			const float minus135 = -m_HalfBaseAngle * 3.f; // -67.5
@@ -269,14 +271,14 @@ namespace ratchet
 
 		m_movementType = isGrounded() ? MovementType::GROUND : MovementType::AIR;
 
-		TRACE_CHANNEL(TR_PHYSICS, "[PLAYER] BEFORE" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
+		TRACE_CHANNEL("PHYSICS", "[PLAYER] BEFORE", " Velocity ", " X: ", m_collider->m_body->GetLinearVelocity().x, ", Y: ", m_collider->m_body->GetLinearVelocity().y);
 
 		m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
 
 		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 		setPosition(playerPosition);
 
-		TRACE_CHANNEL(TR_PHYSICS, "[PLAYER] AFTER" << " Velocity " << " X: " << m_collider->m_body->GetLinearVelocity().x << ", Y: " << m_collider->m_body->GetLinearVelocity().y);
+		TRACE_CHANNEL("PHYSICS", "[PLAYER] AFTER", " Velocity ", " X: ", m_collider->m_body->GetLinearVelocity().x, ", Y: ", m_collider->m_body->GetLinearVelocity().y);
 	}
 
 	void Player::updateRotation()

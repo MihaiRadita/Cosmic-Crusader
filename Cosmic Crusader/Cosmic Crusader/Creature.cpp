@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Creature.h"
 
+
+
 namespace ratchet
 {
 
@@ -15,7 +17,7 @@ namespace ratchet
 		//Angles
 		m_baseAngle = config.m_AngleBase;
 		m_HalfBaseAngle = m_baseAngle / 2.0f;
-		TRACE_CHANNEL(TR_GAMEOBJECT_INIT, m_baseAngle / 2.0f << " ");
+		TRACE_CHANNEL("GAMEOBJECT_INIT", m_baseAngle / 2.0f, " ");
 
 		m_DEG_TO_RAD = M_PI / 180.0f;
 		m_tangentHalfBase = tan((m_baseAngle / 2.0f) * m_DEG_TO_RAD);
@@ -43,7 +45,7 @@ namespace ratchet
 		if (m_creatureFallingTexture.loadFromFile(creatureFallingTexturePath) == false)
 		{
 #ifdef IS_RATCHET_DEBUG
-			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
+			TRACE_CHANNEL("GAMEOBJECT_INIT", "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
 #endif
 		}
 
@@ -53,16 +55,16 @@ namespace ratchet
 
 		if (m_sprite.getTexture())
 		{
-			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "Precior SUCCESS");
+			TRACE_CHANNEL("GAMEOBJECT_INIT", "Precior SUCCESS");
 		}
 
 		if (m_sprite.getTexture() != nullptr)
 		{
-			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "Character Success");
+			TRACE_CHANNEL("GAMEOBJECT_INIT", "Character Success");
 		}
 		else
 		{
-			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "Character Failed");
+			TRACE_CHANNEL("GAMEOBJECT_INIT", "Character Failed");
 		}
 
 		for (auto config : m_initialWeaponConfigList)
@@ -127,7 +129,7 @@ namespace ratchet
 		{
 			currentMousePositiion = mouseWorldPosition;
 
-			std::cout << "CURRENT MOUSE POSITION <" << currentMousePositiion.x << " , " << currentMousePositiion.y << std::endl;
+			TRACE_CHANNEL("MOUSE_POSITION", "CURRENT MOUSE POSITION = ", currentMousePositiion.x, " , ", currentMousePositiion.y);
 		}
 
 		updateInput();
@@ -267,8 +269,8 @@ namespace ratchet
 			if (isNoControlActive() && isGrounded() && m_isMoving == false)
 			{
 #ifdef IS_RATCHET_DEBUG
-			TRACE_CHANNEL(TR_ANIMATION, "Idle");
-			TRACE_CHANNEL(TR_ANIMATION, m_characterAnimationState);
+			TRACE_CHANNEL("ANIMATION", "Idle");
+			TRACE_CHANNEL("ANIMATION", m_characterAnimationState);
 #endif			
 				m_isMoving = false;
 				m_characterAnimationState = ANIMATION_STATE::IDLE;
@@ -297,7 +299,7 @@ namespace ratchet
 							m_fireCooldown.restart();
 							m_currentCharacterState = WeaponAnimation::STATE::Recoil;
 #ifdef IS_RATCHET_DEBUG
-							TRACE_CHANNEL(TR_WEAPON_FIRE, "Must Spawn Bullet = true");
+							TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");
 #endif	
 							m_mustSpawnBullet = true;
 
@@ -346,7 +348,7 @@ namespace ratchet
 		{
 			m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, 0.0f, 0.0f);
 #ifdef IS_RATCHET_DEBUG
-			TRACE_CHANNEL(TR_WEAPON_FIRE, "Must Spawn Bullet = false");
+			TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
 #endif	
 			m_mustSpawnBullet = false;
 
@@ -422,13 +424,13 @@ namespace ratchet
 		m_ownedWeaponList.push_back(newWeapon);
 
 		if (m_ownedWeaponList.empty()) {
-			std::cerr << "Error: m_ownedWeaponList is empty!\n";
+			TRACE_CHANNEL("WEAPON", "Error: m_ownedWeaponList is empty!\n");
 			return;
 		}
 
 
 		if (!m_ownedWeaponList[m_currentEquippedWeaponIndex]) {
-			TRACE_CHANNEL(TR_WEAPON, "Error: Weapon at index " << m_equippedWeaponIndex << " is nullptr!");
+			TRACE_CHANNEL("WEAPON", "Error: Weapon at index ", m_equippedWeaponIndex, " is nullptr!");
 			return;
 		}
 	}

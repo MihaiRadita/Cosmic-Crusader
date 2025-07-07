@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "RectAngleCollider.h"
 
+
+
 namespace ratchet
 {
 
@@ -92,29 +94,29 @@ namespace ratchet
 
 		if (m_bodyDef.type == b2_staticBody)
 		{
-			TRACE_CHANNEL(TR_COLLISION, "Static Sprite position is " << sprite.getPosition().x << " , " << sprite.getPosition().y);
-			TRACE_CHANNEL(TR_COLLISION, "Static Sprite scale is " << sprite.getScale().x << " , " << sprite.getScale().y);
+			TRACE_CHANNEL("COLLISION", "Static Sprite position is ", sprite.getPosition().x, " , ", sprite.getPosition().y);
+			TRACE_CHANNEL("COLLISION", "Static Sprite scale is ", sprite.getScale().x, " , ", sprite.getScale().y);
 
 			b2Vec2 origin = m_body->GetLocalCenter();
 			b2Vec2 position = m_body->GetTransform().p;
 			float rotaion = m_body->GetAngle();
 
-			TRACE_CHANNEL(TR_COLLISION, "Static Collider origin " << origin.x << " , " << origin.y);
-			TRACE_CHANNEL(TR_COLLISION, "Static Collider position " << position.x << " , " << position.y);
-			TRACE_CHANNEL(TR_COLLISION, "Static Collider roatation " << rotaion);
+			TRACE_CHANNEL("COLLISION", "Static Collider origin ", origin.x, " , ", origin.y);
+			TRACE_CHANNEL("COLLISION", "Static Collider position ", position.x, " , ", position.y);
+			TRACE_CHANNEL("COLLISION", "Static Collider roatation ", rotaion);
 		}
 		else if (m_bodyDef.type == b2_dynamicBody)
 		{
-			TRACE_CHANNEL(TR_COLLISION, "Dynamic Sprite position is " << sprite.getPosition().x << " , " << sprite.getPosition().y);
-			TRACE_CHANNEL(TR_COLLISION, "Dynamic Sprite scale is " << sprite.getScale().x << " , " << sprite.getScale().y);
+			TRACE_CHANNEL("COLLISION", "Dynamic Sprite position is ", sprite.getPosition().x, " , ", sprite.getPosition().y);
+			TRACE_CHANNEL("COLLISION", "Dynamic Sprite scale is ", sprite.getScale().x, " , ", sprite.getScale().y);
 
 			b2Vec2 origin = m_body->GetLocalCenter();
 			b2Vec2 position = m_body->GetPosition();
 			float rotaion = m_body->GetAngle();
 
-			TRACE_CHANNEL(TR_COLLISION, "Dynamic Collider origin " << origin.x << " , " << origin.y);
-			TRACE_CHANNEL(TR_COLLISION, "Dynamic Collider position " << position.x << " , " << position.y);
-			TRACE_CHANNEL(TR_COLLISION, "Dynamic Collider roatation " << rotaion);
+			TRACE_CHANNEL("COLLISION", "Dynamic Collider origin ", origin.x, " , ", origin.y);
+			TRACE_CHANNEL("COLLISION", "Dynamic Collider position ", position.x, " , ", position.y);
+			TRACE_CHANNEL("COLLISION", "Dynamic Collider roatation ", rotaion);
 		}
 	}
 
@@ -159,21 +161,21 @@ namespace ratchet
 #ifdef IS_RATCHET_DEBUG
 	void RectAngleCollider::printBodyPositionRotation()
 	{
-		TRACE_CHANNEL(TR_PHYSICS, getColliderPosition().x << " x axis " << getColliderPosition().y << " y axis ");
-		TRACE_CHANNEL(TR_PHYSICS, m_body->GetAngle() << " degrees ");
+		TRACE_CHANNEL("PHYSICS", getColliderPosition().x, " x axis ", getColliderPosition().y, " y axis ");
+		TRACE_CHANNEL("PHYSICS", m_body->GetAngle(), " degrees ");
 	}
 
 	void RectAngleCollider::printSpriteColliderPosition(sf::Sprite& sprite, int bodyState)
 	{
 		if (bodyState == STATIC)
 		{
-			TRACE_CHANNEL(TR_PHYSICS, "Static position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
-				sprite.getPosition().x << " , " << sprite.getPosition().y);
+			TRACE_CHANNEL("PHYSICS", "Static position is ", m_body->GetTransform().p.x, " , ", m_body->GetTransform().p.y, " VS Sprite position ",
+				sprite.getPosition().x, " , ", sprite.getPosition().y);
 		}
 		else if (bodyState == DYNAMIC)
 		{
-			TRACE_CHANNEL(TR_PHYSICS, "Dynamic position is " << m_body->GetTransform().p.x << " , " << m_body->GetTransform().p.y << " VS Sprite position " <<
-				sprite.getPosition().x << " , " << sprite.getPosition().y);
+			TRACE_CHANNEL("PHYSICS", "Dynamic position is ", m_body->GetTransform().p.x, " , ", m_body->GetTransform().p.y, " VS Sprite position ",
+				sprite.getPosition().x, " , ", sprite.getPosition().y);
 		}
 	}
 
@@ -336,11 +338,11 @@ namespace ratchet
 
 		if ((callbackLeft.m_fraction <= 1.0f || callbackRight.m_fraction <= 1.0f || callbackMiddle.m_fraction <= 1.0f) && (callbackLeft.m_hit || callbackRight.m_hit || callbackMiddle.m_hit))
 		{
-			TRACE_CHANNEL(TR_COLLISION, "Is grounded");
+			TRACE_CHANNEL("COLLISION", "Is grounded");
 			return true;
 		}
 
-		TRACE_CHANNEL(TR_COLLISION, "HIT : " << callbackLeft.m_hit);
+		TRACE_CHANNEL("COLLISION", "HIT : ", callbackLeft.m_hit);
 		return false;
 	}
 

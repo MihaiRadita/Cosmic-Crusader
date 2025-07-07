@@ -2,6 +2,8 @@
 #include "AnimationJumpRun.h"
 #include "ResourceManager.h"
 
+
+
 namespace ratchet
 {
 	//Construcotrs
@@ -122,7 +124,7 @@ namespace ratchet
 				}
 
 #ifdef IS_RATCHET_DEBUG
-				TRACE_CHANNEL(TR_ANIMATION, "PLayer Idle image " << m_currentFrameIndex);
+				TRACE_CHANNEL("ANIMATION", "PLayer Idle image ", m_currentFrameIndex);
 #endif
 
 			}
@@ -162,7 +164,7 @@ namespace ratchet
 				}
 
 #ifdef IS_RATCHET_DEBUG
-				TRACE_CHANNEL(TR_ANIMATION, "PLayer Idle image " << m_currentFrameIndex);
+				TRACE_CHANNEL("ANIMATION", "PLayer Idle image ", m_currentFrameIndex);
 #endif
 			}
 			if (m_animationTimer.getElapsedTime().asSeconds() >= m_animTimeLimit || getAnimationSwitch())
@@ -268,7 +270,7 @@ namespace ratchet
 		{
 			return  false;
 #ifdef IS_RATCHET_DEBUG
-			TRACE_CHANNEL(TR_ANIMATION, "image number action " << m_jumpAnimFrameIndex << " happended!");
+			TRACE_CHANNEL("ANIMATION", "image number action ", m_jumpAnimFrameIndex, " happended!");
 #endif
 		}
 

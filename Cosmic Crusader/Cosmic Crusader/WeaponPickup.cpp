@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "WeaponPickup.h"
 
+
+
 namespace ratchet
 {
 	void WeaponPickup::pickUp(Creature* creatureThatPickedUpTheWeapon)
@@ -69,7 +71,7 @@ namespace ratchet
 
 		if (player)
 		{
-			TRACE_CHANNEL(TR_WEAPON_PICKUP, "PLAYER HAS INTERACTING WITH WEAPON 1! ");
+			TRACE_CHANNEL("WEAPON_PICKUP", "PLAYER HAS INTERACTING WITH WEAPON 1! ");
 		}
 	}
 
@@ -79,7 +81,7 @@ namespace ratchet
 
 		if (player)
 		{
-			TRACE_CHANNEL(TR_WEAPON_PICKUP, "PLAYER HAS EXIT WITH WEAPON 1! ");
+			TRACE_CHANNEL("WEAPON_PICKUP", "PLAYER HAS EXIT WITH WEAPON 1! ");
 		}
 	}
 
@@ -90,7 +92,7 @@ namespace ratchet
 		{
 			m_isPickup = true;
 
-			TRACE_CHANNEL(TR_WEAPON_PICKUP, "PLAYER HAS INTERACTING WITH WEAPON 1! ");
+			TRACE_CHANNEL("WEAPON_PICKUP", "PLAYER HAS INTERACTING WITH WEAPON 1! ");
 
 			bool m_isWeaponCharacterMathc = player->isWeaponMatchCharacter(m_weaponType);
 			if (m_isWeaponCharacterMathc)
@@ -113,7 +115,7 @@ namespace ratchet
 
 		if (player)
 		{
-			TRACE_CHANNEL(TR_WEAPON_PICKUP, "PLAYER HAS EXIT WITH WEAPON 1! ");
+			TRACE_CHANNEL("WEAPON_PICKUP", "PLAYER HAS EXIT WITH WEAPON 1! ");
 		}
 	}
 

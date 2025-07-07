@@ -2,6 +2,7 @@
 #include "CreatureConfig.h"
 
 
+
 namespace ratchet
 {
 	ratchet::CreatureConfig::CreatureConfig() : GameObjectConfig()

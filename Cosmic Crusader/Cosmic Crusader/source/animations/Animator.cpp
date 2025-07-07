@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Animator.h"
 
+
+
 namespace ratchet
 {
 	Animator::Animator()
@@ -15,7 +17,7 @@ namespace ratchet
 		{
 			delete m_animationTmp;
 #ifdef IS_RATCHET_DEBUG
-			TRACE_CHANNEL(TR_ANIMATION, "Pointer deleted");
+			TRACE_CHANNEL("ANIMATION", "Pointer deleted");
 #endif
 		}
 	}
@@ -33,7 +35,7 @@ namespace ratchet
 	void Animator::play(AnimationBase* anim, sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 #ifdef IS_RATCHET_DEBUG
-		TRACE_CHANNEL(TR_ANIMATION_SPAM, (std::string("Animation | ") + std::string("Angle: '") + std::to_string(static_cast<int>(angle)) + std::string("', State: '") + std::to_string(static_cast<int>(state)) + std::string("'")).c_str());
+		TRACE_CHANNEL("ANIMATION_SPAM", (std::string("Animation | ") + std::string("Angle: '") + std::to_string(static_cast<int>(angle)) + std::string("', State: '") + std::to_string(static_cast<int>(state)) + std::string("'")).c_str());
 #endif
 		anim->playAnimation(sprite, weaponUsed, angle, state);
 	}

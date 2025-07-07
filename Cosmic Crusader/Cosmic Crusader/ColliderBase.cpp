@@ -2,6 +2,7 @@
 #include "ColliderBase.h"
 
 
+
 namespace ratchet
 {
 	ColliderBase::ColliderBase(const BaseColliderConfig& config)

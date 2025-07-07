@@ -6,6 +6,7 @@
 #include "ContactListener.h"
 
 
+
 namespace ratchet
 {
 	const double Physics::sc_fixedDeltaTime = 1.0 / 60.0;
@@ -29,10 +30,10 @@ namespace ratchet
 
 	Physics::~Physics()
 	{
-		TRACE_CHANNEL(TR_PHYSICS, "Delete the physics world");
+		TRACE_CHANNEL("PHYSICS", "Delete the physics world");
 		if (!s_physicsWorld)
 		{
-			TRACE_CHANNEL(TR_PHYSICS, "Physics World no longer exists!");
+			TRACE_CHANNEL("PHYSICS", "Physics World no longer exists!");
 		}
 	}
 

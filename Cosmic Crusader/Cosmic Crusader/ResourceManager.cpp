@@ -2,7 +2,9 @@
 #include "ResourceManager.h"
 
 
-namespace ratchet {
+
+namespace ratchet 
+{
     ResourceManager* ResourceManager::getInstance()
     {
         if (!m_resourceManager)
@@ -27,7 +29,7 @@ namespace ratchet {
             if (!texture.loadFromFile(texturePath))
             {
     #ifdef IS_RATCHET_DEBUG
-                TRACE_CHANNEL(TR_RESOURCE_MANAGER, "The Texture path was not found");
+                TRACE_CHANNEL("RESOURCE_MANAGER", "The Texture path was not found");
     #endif
                 return nullptr;
             }

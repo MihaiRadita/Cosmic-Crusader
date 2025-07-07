@@ -2,6 +2,8 @@
 
 #include "Tile.h"
 
+
+
 namespace ratchet
 {
 	Tile::Tile()
@@ -33,7 +35,7 @@ namespace ratchet
 	{
 		if (m_textureSheet.loadFromFile("Textures/Levels/Level1/Tileset/Platform.png") == false)
 		{
-			TRACE_CHANNEL(TR_RESOURCE_MANAGER, "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
+			TRACE_CHANNEL("RESOURCE_MANAGER", "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
 		}
 	}
 
@@ -59,8 +61,8 @@ namespace ratchet
 
 	void Tile::update()
 	{
-		TRACE_CHANNEL(TR_RESOURCE_MANAGER, "Ground Sprite " << m_tileSprite.getPosition().x << " , " << m_tileSprite.getPosition().y);
-		TRACE_CHANNEL(TR_RESOURCE_MANAGER, "Ground Collider " << m_collider->getBody()->GetPosition().x << " , " << m_collider->getBody()->GetPosition().y);
+		TRACE_CHANNEL("RESOURCE_MANAGER", "Ground Sprite ", m_tileSprite.getPosition().x, " , ", m_tileSprite.getPosition().y);
+		TRACE_CHANNEL("RESOURCE_MANAGER", "Ground Collider ", m_collider->getBody()->GetPosition().x, " , ", m_collider->getBody()->GetPosition().y);
 	}
 
 	void Tile::render(sf::RenderTarget& target)

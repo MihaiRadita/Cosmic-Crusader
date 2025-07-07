@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "GameObjectConfig.h"
 
+
+
 namespace ratchet
 {
 	GameObjectConfig::GameObjectConfig()

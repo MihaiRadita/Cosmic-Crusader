@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Game.h"
 
+
+
 namespace ratchet
 {
 	static constexpr auto sc_tiledToGameScale = 0.01f;
@@ -13,7 +15,7 @@ namespace ratchet
 
 			if (!file.is_open())
 			{
-				std::cerr << "ERROR! The file could not be opened!" << std::endl;
+				TRACE_CHANNEL("WARNING", "ERROR! The file could not be opened!");
 			}
 			
 			nlohmann::json j;
@@ -28,7 +30,7 @@ namespace ratchet
 				if (l["name"] == "Tile Objects")
 				{
 					layer = l;
-					TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "We have a match!");
+					TRACE_CHANNEL("GAMEOBJECT_INIT", "We have a match!");
 					break;
 				}
 			}
@@ -160,7 +162,7 @@ namespace ratchet
 			}
 
 
-			TRACE_CHANNEL(TR_COLLISION, "IS SENSOR : " << colliderConfig->m_fixtureDef.isSensor);
+			TRACE_CHANNEL("COLLISION", "IS SENSOR : ", colliderConfig->m_fixtureDef.isSensor);
 
 			config->m_colliderConfig = colliderConfig;
 			bulletConfig->m_colliderConfig = colliderBulletConfig;
@@ -336,11 +338,11 @@ namespace ratchet
 		if (currenmousePosition != newMousePos)
 		{
 			currenmousePosition = newMousePos;
-			TRACE_CHANNEL(TR_MOUSE, "Mouse Position: " << currenmousePosition.x << ", " << currenmousePosition.y << " !");
+			TRACE_CHANNEL("MOUSE", "Mouse Position: ", currenmousePosition.x, ", ", currenmousePosition.y, " !");
 
 			sf::Vector2f newMouseWorld = m_window.mapPixelToCoords(currenmousePosition);
 
-			TRACE_CHANNEL(TR_MOUSE, "Mouse Position in Wolrd: " << newMouseWorld.x << ", " << newMouseWorld.y << "!");
+			TRACE_CHANNEL("MOUSE", "Mouse Position in Wolrd: ", newMouseWorld.x, ", ", newMouseWorld.y, "!");
 		}
 
 		if (deltaTime > 1.0f / 5.0f) {
@@ -362,12 +364,20 @@ namespace ratchet
 			accumulatedTime = 0.0f;
 		}
 
-		for (auto& obj : GameObject::s_gameObjects)
+		for (auto i = 0u; i < GameObject::s_gameObjects.size(); i++)
 		{
-			obj->update();
+			if (auto* obj = GameObject::s_gameObjects[i])
+			{
+				obj->update();
+			}
+			else
+			{
+				TRACE_CHANNEL("GAME_OBJECT", "Cannot update null game object of index [", i, "].");
+			}
 		}
 
 		GameObject::clearQueuedObjectsToDestroy();
+
 
 		//CleanDestroyedGameObjects();
 
@@ -381,8 +391,8 @@ namespace ratchet
 
 		for (auto* obj : GameObject::s_gameObjects)
 		{
-			TRACE_CHANNEL(TR_RENDERING, "Rendering object at position: " << obj->getSprite().getPosition().x << ", " << obj->getSprite().getPosition().y << std::endl);
-			TRACE_CHANNEL(TR_RENDERING, "Texture pointer: " <<obj->getSprite().getTexture() << std::endl);
+			TRACE_CHANNEL("RENDERING", "Rendering object at position: ", obj->getSprite().getPosition().x, ", ", obj->getSprite().getPosition().y);
+			TRACE_CHANNEL("RENDERING", "Texture pointer: ", obj->getSprite().getTexture());
 
 			if (auto player = dynamic_cast<Player*>(obj))
 			{

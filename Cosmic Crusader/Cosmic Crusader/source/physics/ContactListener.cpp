@@ -3,6 +3,7 @@
 #include "GameObject.h"
 
 
+
 namespace ratchet
 {
 	void ratchet::ContactListener::BeginContact(b2Contact* contact)

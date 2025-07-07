@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "PrefabAssets.h"
 
+
+
 namespace ratchet
 {
 	PrefabAssets& ratchet::PrefabAssets::Get()

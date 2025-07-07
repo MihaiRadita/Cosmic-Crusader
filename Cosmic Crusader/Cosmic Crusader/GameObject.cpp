@@ -1,6 +1,6 @@
-
 #include "stdafx.h"
 #include "GameObject.h"
+
 
 
 namespace ratchet
@@ -90,7 +90,7 @@ namespace ratchet
 		if (m_spriteTexture.loadFromFile(m_startSpritePath) == false)
 		{
 #ifdef IS_RATCHET_DEBUG
-			TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
+			TRACE_CHANNEL("GAMEOBJECT_INIT", "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
 #endif
 		}
 
@@ -247,7 +247,7 @@ namespace ratchet
 		}
 
 		delete this; 
-		TRACE_CHANNEL(TR_GAMEOBJECT_INIT, "The Object HAS BEEN DESTROYED!");
+		TRACE_CHANNEL("GAMEOBJECT_INIT", "The Object HAS BEEN DESTROYED!");
 	}
 
 	void GameObject::RemoveGameObjectFromList()

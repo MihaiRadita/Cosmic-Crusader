@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CircleCollider.h"
 
+
+
 namespace ratchet
 {
 	CircleCollider::CircleCollider(sf::Sprite& sprite, const CircleColliderConfig& config) : ColliderBase(config)
