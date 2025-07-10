@@ -93,7 +93,7 @@ namespace ratchet
 		//Render functions
 
 		//Sprite functions
-		void invertCharacterMovingSpriteScale(int direction);
+		void invertCharacterMovingSpriteScale(int direction) override;
 		bool isNoControlActive();
 
 		//Input functions
@@ -155,6 +155,7 @@ namespace ratchet
 
 		 sf::CircleShape m_characterShootingPosition;
 		 sf::CircleShape m_shootingPointDynamic;
+		 sf::CircleShape m_shooitngPointCenter;
 
 	private:
 		bool m_isGround;

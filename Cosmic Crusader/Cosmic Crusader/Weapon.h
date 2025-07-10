@@ -31,7 +31,9 @@ namespace ratchet
 		int m_currentAmmo;
 		std::string m_WeaponID;
 
-		void Fire(const sf::Vector2f &positon,const float& rotation, const float& direction);
+		bool m_facigRight = true;
+
+		void Fire(const sf::Vector2f &positon,const float& rotation, const float& direction, bool& m_facingRight);
 
 	};
 

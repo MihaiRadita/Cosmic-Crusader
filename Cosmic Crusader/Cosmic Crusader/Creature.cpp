@@ -97,7 +97,14 @@ namespace ratchet
 
 		m_shootingPointDynamic = sf::CircleShape(0.05);
 		m_shootingPointDynamic.setFillColor(sf::Color::Blue);
+		m_shootingPointDynamic.setOrigin(m_shootingPointDynamic.getRadius(), m_shootingPointDynamic.getRadius());
 		m_shootingPointDynamic.setPosition(getPosition().x, getPosition().y);
+
+		m_shooitngPointCenter = sf::CircleShape(0.02f);
+		m_shooitngPointCenter.setFillColor(sf::Color::Red);
+		m_shooitngPointCenter.setOrigin(m_shooitngPointCenter.getRadius(), m_shooitngPointCenter.getRadius());
+		m_shooitngPointCenter.setPosition(m_shootingPointDynamic.getPosition().x, m_shootingPointDynamic.getPosition().y);
+
 
 		m_isRightNoWeapon = true;
 	}
@@ -346,7 +353,7 @@ namespace ratchet
 	{
 		if (m_mustSpawnBullet)
 		{
-			m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, 0.0f, 0.0f);
+			m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, 0.0f, 0.0f, m_facingRight);
 #ifdef IS_RATCHET_DEBUG
 			TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
 #endif	
@@ -515,7 +522,7 @@ namespace ratchet
 
 			if (dir < 0.f)
 			{
-				characterPointPositiion = sf::Vector2f(getPosition().x, getPosition().y - m_weaponsStartShootingPoint[m_currentWeaponType].y);
+				characterPointPositiion = sf::Vector2f(getPosition().x +  m_weaponsStartShootingPoint[m_currentWeaponType].x, getPosition().y - m_weaponsStartShootingPoint[m_currentWeaponType].y);
 			}
 			else
 			{
@@ -529,7 +536,8 @@ namespace ratchet
 
 			switch (m_currentCharacterAngle) {
 			case WeaponAnimation::ANGLE::Angle0:
-				shootingPoint = {  characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, characterPointPositiion.y};
+				shootingPoint = {  characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, 
+									characterPointPositiion.y + m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y };
 				break;
 			case WeaponAnimation::ANGLE::Angle45:
 				shootingPoint = { characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, 
@@ -570,6 +578,7 @@ namespace ratchet
 			}
 		}
 		m_shootingPointDynamic.setPosition(m_currentFirePoint);
+		m_shooitngPointCenter.setPosition(m_shootingPointDynamic.getPosition().x, m_shootingPointDynamic.getPosition().y);
 	}
 }
 

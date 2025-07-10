@@ -329,13 +329,14 @@ namespace ratchet
 					target.draw(mouseCircleShape);
 				}
 			}
-			target.draw(m_characterShootingPosition);
-			target.draw(m_shootingPointDynamic);
 		}
 #endif
 
 
 		GameObject::render(target);
+		target.draw(m_characterShootingPosition);
+		target.draw(m_shootingPointDynamic);
+		target.draw(m_shooitngPointCenter);
 	}
 
 #ifdef IS_RATCHET_DEBUG

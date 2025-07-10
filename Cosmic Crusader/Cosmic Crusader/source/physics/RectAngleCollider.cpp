@@ -266,7 +266,7 @@ namespace ratchet
 		}
 
 		target.draw(outline);
-		target.draw(bodyPosition);
+		//target.draw(bodyPosition);
 	}
 #endif
 

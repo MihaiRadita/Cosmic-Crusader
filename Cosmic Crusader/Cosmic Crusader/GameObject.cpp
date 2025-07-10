@@ -230,6 +230,10 @@ namespace ratchet
 
 	}
 
+	void GameObject::invertCharacterMovingSpriteScale(int direction)
+	{
+	}
+
 	void GameObject::DestroyGameObject()
 	{
 		if (this == nullptr) {

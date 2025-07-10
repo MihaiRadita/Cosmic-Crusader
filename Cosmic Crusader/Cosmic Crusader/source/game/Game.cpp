@@ -107,13 +107,13 @@ namespace ratchet
 			config->startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
 
 			// Weapon Start Shooting Config Points
-			config->m_characterStartPointShootingOffset = sf::Vector2f(0.1f, 0.1f);
+			config->m_characterStartPointShootingOffset = sf::Vector2f(0.08f, 0.1f);
 
 			//Weapon Shooting Config Points Angles
-			config->m_shootingOffsetAngle0 = sf::Vector2f(0.7f, 0.0f);
-			config->m_shootingOffsetAngle45 = sf::Vector2f(0.68f, 0.25f);
-			config->m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.7f);
-			config->m_shootingOffsetAngleMinus45 = sf::Vector2f(0.6f, 0.3f);
+			config->m_shootingOffsetAngle0 = sf::Vector2f(0.75f, 0.05f);
+			config->m_shootingOffsetAngle45 = sf::Vector2f(0.69f, 0.22f);
+			config->m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.62f);
+			config->m_shootingOffsetAngleMinus45 = sf::Vector2f(0.66f, 0.34f);
 
 
 			auto* colliderConfig = new RectAngleColliderConfig();

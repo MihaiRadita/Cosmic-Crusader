@@ -46,6 +46,8 @@ namespace ratchet
 		//Setters
 		void SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees);
 
+		virtual void invertCharacterMovingSpriteScale(int direction);
+
 		//Physics
 		sf::Vector2f m_colliderScaleMultipier;
 		ColliderBase* m_collider = nullptr;
@@ -107,7 +109,7 @@ namespace ratchet
 		/*template<typename GameObjectChildType>
 		static GameObject* Instantiate(const GameObjectChildType gameObject, const sf::Vector2f& position, const float& rotationDegrees);*/
 		template<typename GameObjectChildType, typename GameObjectChildConfig>
-		static GameObject* Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees);
+		static GameObject* Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees, bool& orientation);
 			
 		
 
@@ -143,7 +145,7 @@ namespace ratchet
 	}*/
 
 	template<typename GameObjectChildType, typename GameObjectChildConfig>
-	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees)
+	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees, bool& orientation)
 	{
 		auto* newGameObject = new GameObjectChildType(gameObjectConfig);
 
@@ -155,9 +157,19 @@ namespace ratchet
 			newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
 		}
 
+		newGameObject->invertCharacterMovingSpriteScale(orientation ? 1 : -1);
+
 		auto objectPosition = sf::Vector2f(newGameObject->m_collider->getBody()->GetPosition().x, newGameObject->m_collider->getBody()->GetPosition().y);
+
+		if (!orientation) 
+		{
+			float scaledWidth = newGameObject->getSprite().getGlobalBounds().width;
+			objectPosition.x -= scaledWidth; 
+		}
+
 		newGameObject->setPosition(objectPosition);
 		newGameObject->setRotation(rotationDegrees);
+
 
 		ratchet::GameObject::s_gameObjects.emplace_back(newGameObject);
 		return newGameObject;
