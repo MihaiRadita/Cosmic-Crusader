@@ -24,13 +24,16 @@ namespace ratchet
 		TRACE_CHANNEL("WEAPON_FIRE", "Spawning bullet");
 	#endif	
 
-		GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_WeaponID), positon, rotation, m_facingRight);
+		auto* bullet = GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_WeaponID), positon, rotation, m_facingRight);
 
-		//sf::Vector2f positiontoModify = positon;
-		//if (auto* bulletObj = dynamic_cast<Bullet*>(bullet))
-		//{
-		//	bulletObj->setBulletPositionCenter(positiontoModify, 1);
-		//}
+		sf::Vector2f positiontoModify = positon;
+
+		int directionx = m_facingRight ? 1 : -1;
+
+		if (auto* bulletObj = dynamic_cast<Bullet*>(bullet))
+		{
+			bulletObj->setBulletPositionCenter(positiontoModify, -1, directionx);
+		}
 
 		m_weaponType;
 	}

@@ -14,7 +14,7 @@ namespace ratchet
 		~Bullet();
 
 		void update() override;
-		void setBulletPositionCenter(sf::Vector2f& poisition, int yDirection);
+		void setBulletPositionCenter(sf::Vector2f& poisition, int yDirection, int& xDirection);
 		void invertCharacterMovingSpriteScale(int direction) override;
 
 		void render(sf::RenderTarget& target) override;

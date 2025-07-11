@@ -149,25 +149,36 @@ namespace ratchet
 	{
 		auto* newGameObject = new GameObjectChildType(gameObjectConfig);
 
-		if (newGameObject->m_collider)
-		{
-			b2Vec2	colliderPosition = b2Vec2(position.x, position.y);
-			float rotationRadians = rotationDegrees * b2_pi / 180.f;
+		b2Vec2	colliderPosition = b2Vec2(position.x, position.y);
+		float rotationRadians = rotationDegrees * b2_pi / 180.f;
 
-			newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
-		}
 
-		newGameObject->invertCharacterMovingSpriteScale(orientation ? 1 : -1);
 
-		auto objectPosition = sf::Vector2f(newGameObject->m_collider->getBody()->GetPosition().x, newGameObject->m_collider->getBody()->GetPosition().y);
 
 		if (!orientation) 
 		{
 			float scaledWidth = newGameObject->getSprite().getGlobalBounds().width;
-			objectPosition.x -= scaledWidth; 
-		}
+			//objectPosition.x -= scaledWidth;
 
-		newGameObject->setPosition(objectPosition);
+			if (newGameObject->m_collider)
+			{
+				colliderPosition.x -= scaledWidth;
+				newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
+			}
+		}
+		else
+		{
+			if (newGameObject->m_collider)
+			{
+
+				newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
+			}
+			//newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
+		}
+		newGameObject->invertCharacterMovingSpriteScale(orientation ? 1 : -1);
+		auto objectPosition = sf::Vector2f(newGameObject->m_collider->getBody()->GetPosition().x, newGameObject->m_collider->getBody()->GetPosition().y);
+
+		newGameObject->getSprite().setPosition(objectPosition);
 		newGameObject->setRotation(rotationDegrees);
 
 

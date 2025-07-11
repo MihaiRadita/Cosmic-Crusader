@@ -26,22 +26,34 @@ namespace ratchet
 
 
 
-	void Bullet::setBulletPositionCenter(sf::Vector2f& poisition, int yDirection)
+	void Bullet::setBulletPositionCenter(sf::Vector2f& poisition, int yDirection, int& xDirection)
 	{
 		float boundeHeight = m_sprite.getGlobalBounds().height;
-		float hlfPosiiton = m_sprite.getGlobalBounds().top + (boundeHeight / 2.0f) * yDirection;
-		poisition.y = hlfPosiiton;
+		float boundWidth = m_sprite.getGlobalBounds().width;
+		float halfPosiitonY = m_sprite.getPosition().y + (boundeHeight / 2.0f) * yDirection;
+		float halfPositionX = m_sprite.getPosition().x + (boundWidth / 2.0f) * xDirection;
+
+		poisition.y += halfPosiitonY;
+		if (xDirection < 0)
+		{
+			poisition.x += halfPositionX;
+		}
+		else
+		{
+			poisition.x -= halfPositionX;
+		}
 
 		if (this->m_collider)
 		{
 			b2Vec2	colliderPosition = b2Vec2(poisition.x, poisition.y);
+			//colliderPosition.x -= m_sprite.getGlobalBounds().width;
 			float rotationRadians = this->m_collider->getBody()->GetAngle();
 
-			this->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
+			m_collider->getBody()->SetTransform(b2Vec2(colliderPosition.x, colliderPosition.y), rotationRadians);
 		}
 
-		auto objectPosition = sf::Vector2f(this->m_collider->getBody()->GetPosition().x, this->m_collider->getBody()->GetPosition().y);
-		this->setPosition(objectPosition);
+		auto objectPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, this->m_collider->getBody()->GetPosition().y);
+		m_sprite.setPosition(objectPosition);
 	}
 	void Bullet::invertCharacterMovingSpriteScale(int direction)
 	{
@@ -70,9 +82,9 @@ namespace ratchet
 			m_sprite.getPosition().y);
 		target.draw(spriteOutline);
 		
-		if (auto* bulletCollder = dynamic_cast<RectAngleCollider*>(m_collider))
+		/*if (auto* bulletCollder = dynamic_cast<RectAngleCollider*>(m_collider))
 		{
-			/*auto spriteOutline = sf::RectangleShape(sf::Vector2f(
+			auto spriteOutline = sf::RectangleShape(sf::Vector2f(
 				bulletCollder->getGlobalWidth(),
 				bulletCollder->getGlobalHeight())
 			);
@@ -82,9 +94,9 @@ namespace ratchet
 			spriteOutline.setPosition(
 				bulletCollder->getBody()->GetPosition().x,
 				bulletCollder->getBody()->GetPosition().y);
-			target.draw(spriteOutline);*/
+			target.draw(spriteOutline);
 
-		}
+		}*/
 		/*auto spriteCollderPos = sf::CircleShape(0.01f);
 		spriteCollderPos.setFillColor(sf::Color::Green);
 		spriteCollderPos.setOutlineColor(sf::Color::Green);
