@@ -33,3 +33,4 @@
 
 // Our game
 #include "TraceChannels.h"
+#include "RatchetMaths.h"

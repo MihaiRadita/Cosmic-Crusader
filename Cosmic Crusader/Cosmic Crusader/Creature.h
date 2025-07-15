@@ -122,6 +122,7 @@ namespace ratchet
 
 		//Angles Functions
 		virtual void computeAimAngleState();
+		virtual void computeAimBulletRotation();
 
 		//Shooting Points Function
 		void computeShootingPoint();
@@ -131,6 +132,9 @@ namespace ratchet
 
 		//Shootings
 		sf::Vector2f m_currentFirePoint;
+		float m_currentFireRotationRadians;
+		float m_currentFireRoationDegrees;
+		sf::Vector2f m_currenFireDirectionNorm;
 
 		// std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 
 		 std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList; 

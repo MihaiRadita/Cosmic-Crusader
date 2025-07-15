@@ -45,7 +45,6 @@ namespace ratchet
 				auto config = GameObjectConfig();
 				config.m_Faction = Faction::FACTION_UNKNOWN;
 				config.m_colliderType = COLLIDERTYPE_UNKNOWN;
-				config.m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
 				config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 
 				config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
@@ -70,7 +69,7 @@ namespace ratchet
 				config.startSpriteTexturePath = config.startSpriteTexturePath + config.startSpriteTexturePathAddition + ".png";
 
 				auto colliderConfig = RectAngleColliderConfig();
-				colliderConfig.m_layer = PhysiscsLayer::Platforms;
+				colliderConfig.m_layer = PhysicsLayer::Platforms;
 				colliderConfig.m_bodyDef.type = b2_staticBody;
 				colliderConfig.m_bodyDef.fixedRotation = true;
 				colliderConfig.m_fixtureDef.density = 0.0f;
@@ -90,7 +89,6 @@ namespace ratchet
 			config->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 			config->m_Faction = Faction::FACTION_UNKNOWN;
 			config->m_colliderType = COLLIDERTYPE_UNKNOWN;
-			config->m_colliderShapeType = COLLIDERSHAPETYPE_UNKNOWN;
 			config->m_weaponType = Weapon::TYPE::Blaster;
 			config->m_configLayer = "Super Launcher";
 
@@ -117,7 +115,7 @@ namespace ratchet
 
 
 			auto* colliderConfig = new RectAngleColliderConfig();
-			colliderConfig->m_layer = PhysiscsLayer::Items;
+			colliderConfig->m_layer = PhysicsLayer::Items;
 			colliderConfig->m_bodyDef.type = b2_staticBody;
 			colliderConfig->m_bodyDef.fixedRotation = true;
 			colliderConfig->m_fixtureDef.density = 0.0f;
@@ -132,7 +130,6 @@ namespace ratchet
 			bulletConfig->m_Faction = Faction::FACTION_UNKNOWN;
 			bulletConfig->m_movementType = MovementType::AIR;
 			bulletConfig->m_colliderType = DYNAMIC;
-			bulletConfig->m_colliderShapeType = RECTANGLE;
 
 			bulletConfig->positionXOffset = 0.f;
 			bulletConfig->positionYOffset = 0.f;
@@ -144,15 +141,24 @@ namespace ratchet
 			bulletConfig->startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
 
 
-			auto* colliderBulletConfig = new RectAngleColliderConfig();
-			colliderBulletConfig->m_layer = PhysiscsLayer::Projectiles;
+			//// Rectangle Collider
+			//auto* colliderBulletConfig = new RectAngleColliderConfig();
+			//colliderBulletConfig->m_layer = PhysicsLayer::Projectiles;
+			//colliderBulletConfig->m_bodyDef.type = b2_dynamicBody;
+			//colliderBulletConfig->m_fixtureDef.density = 0.0f;
+			//colliderBulletConfig->m_bodyDef.fixedRotation = false;
+			//colliderBulletConfig->m_fixtureDef.friction = 0.0f;
+			//colliderBulletConfig->m_fixtureDef.restitution = 0.0f;
+			//colliderBulletConfig->m_fixtureDef.isSensor = true;
+			// Circle Collider
+			auto* colliderBulletConfig = new CircleColliderConfig();
+			colliderBulletConfig->m_layer = PhysicsLayer::Projectiles;
 			colliderBulletConfig->m_bodyDef.type = b2_dynamicBody;
 			colliderBulletConfig->m_fixtureDef.density = 0.0f;
-			colliderBulletConfig->m_bodyDef.fixedRotation = true;
+			colliderBulletConfig->m_bodyDef.fixedRotation = false;
 			colliderBulletConfig->m_fixtureDef.friction = 0.0f;
 			colliderBulletConfig->m_fixtureDef.restitution = 0.0f;
 			colliderBulletConfig->m_fixtureDef.isSensor = true;
-			
 			
 			if (colliderBulletConfig->m_bodyDef.type == b2_dynamicBody)
 			{
@@ -172,8 +178,6 @@ namespace ratchet
 
 			PrefabAssets::Get().RegisterWeaponConfig(config->m_configLayer, config);
 			PrefabAssets::Get().RegisterBulletConfig(bulletConfig->m_ID, bulletConfig);
-
-
 		}
 
 		{
@@ -185,7 +189,6 @@ namespace ratchet
 			config.m_Faction = Faction::PLAYER;
 			config.m_movementType = MovementType::GROUND;
 			config.m_colliderType = DYNAMIC;
-			config.m_colliderShapeType = RECTANGLE;
 
 			config.positionXOffset = 0.f;
 			config.positionYOffset = 0.f;
@@ -203,7 +206,7 @@ namespace ratchet
 			config.spriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
 
 			auto colliderConfig = CapsuleColliderConfig();
-			colliderConfig.m_layer = PhysiscsLayer::Player;
+			colliderConfig.m_layer = PhysicsLayer::Player;
 			colliderConfig.m_bodyDef.type = b2_dynamicBody;
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;

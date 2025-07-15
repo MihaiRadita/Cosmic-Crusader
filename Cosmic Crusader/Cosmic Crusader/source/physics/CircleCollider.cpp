@@ -12,24 +12,65 @@ namespace ratchet
 
 	void CircleCollider::initVariables(sf::Sprite& sprite, const CircleColliderConfig& config)
 	{
-		m_radius = config.radiusOffset;
+		m_bodyDef.type = config.m_bodyDef.type;
+		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
-		m_bodyDef.type = b2_dynamicBody;
-		m_bodyDef.position.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / sc_metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / sc_metersScale);
+		m_scaleX = 1.0f;
+		m_scaleY = 1.0f;
+
+		if (config.m_radius.has_value())
+		{
+			m_radius = config.m_radius.value();
+		}
+		else
+		{
+			m_radius = std::max(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height) / 2.0f;
+		}
+
+
+		if (config.m_origin.has_value())
+		{
+			m_origin = config.m_origin.value();
+		}
+		else
+		{
+			m_origin = b2Vec2(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f);
+		}
+
+		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 		m_body->SetGravityScale(config.m_gravityScale);
 		m_body->SetLinearDamping(config.m_linearDamping);
 		m_body->SetAngularDamping(config.m_angularDamping);
 
-		//circleShape.m_p.Set((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / metersScale, (sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / metersScale);
-		m_circleShape.m_radius = m_radius / sc_metersScale;
+		m_userDataName = static_cast<short>(config.m_layer);
 
-		m_fixtureDef.shape = &m_circleShape;
-		m_fixtureDef.density = 1.0f;
-		m_fixtureDef.friction = 0.3f;
-		m_fixtureDef.restitution = 0.5f;
+		// Circle Shape
+		m_shape.m_radius = getGlobalRadius();
+		m_shape.m_p.Set(m_origin.x, m_origin.y);
+		m_fixtureDef.shape = &m_shape;
+		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
+		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 		m_body->CreateFixture(&m_fixtureDef);
+
+		if (m_bodyDef.type == b2_staticBody)
+		{
+#ifdef IS_RATCHET_DEBUG
+			b2Vec2 origin = m_body->GetLocalCenter();
+			b2Vec2 position = m_body->GetTransform().p;
+			float rotation = m_body->GetAngle();
+#endif
+		}
+		else if (m_bodyDef.type == b2_dynamicBody)
+		{
+#ifdef IS_RATCHET_DEBUG
+			b2Vec2 origin = m_body->GetLocalCenter();
+			b2Vec2 position = m_body->GetPosition();
+			float rotation = m_body->GetAngle();
+#endif
+		}
+
 	}
 
 	CircleCollider::~CircleCollider()

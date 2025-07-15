@@ -4,9 +4,9 @@
 
 namespace ratchet
 {
-	struct CircleColliderConfig : public BaseColliderConfig
+	struct CircleColliderConfig : public ColliderBaseConfig
 	{
-		float radiusOffset;
+		std::optional<float> m_radius = std::nullopt;
 
 		CircleColliderConfig();
 	};
@@ -22,6 +22,9 @@ namespace ratchet
 		b2Body* m_body = nullptr;
 		b2Vec2 m_origin;
 
+		short m_userDataName;
+		b2CircleShape m_shape;
+
 	public:
 
 		//Constructors
@@ -36,6 +39,8 @@ namespace ratchet
 		b2Body* getBody();
 		b2CircleShape getColliderShape();
 		b2FixtureDef getFixtureDef();
+		float getLocalRadius() const { return m_radius; }
+		float getGlobalRadius() const { return m_radius * m_scaleX; }
 
 		//Setters
 		void setColliderPosition(sf::Sprite& sprite);

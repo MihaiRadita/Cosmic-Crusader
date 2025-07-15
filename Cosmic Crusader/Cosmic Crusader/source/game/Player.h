@@ -49,6 +49,7 @@ namespace ratchet
 
 		//Anlle Functions
 		void computeAimAngleState() override;
+		void computeAimBulletRotation() override;
 
 		//Update functions
 		void updateMovement() override;

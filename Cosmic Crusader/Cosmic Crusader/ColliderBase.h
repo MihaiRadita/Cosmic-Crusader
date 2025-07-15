@@ -4,7 +4,7 @@
 
 namespace ratchet
 {
-	enum class PhysiscsLayer
+	enum class PhysicsLayer
 	{
 		None = 0,
 		Platforms,
@@ -15,14 +15,13 @@ namespace ratchet
 	};
 
 	enum ColliderType { COLLIDERTYPE_UNKNOWN = 0, STATIC, DYNAMIC };
-	enum ColliderShapeType { COLLIDERSHAPETYPE_UNKNOWN = 0, RECTANGLE, CIRCLE };
 
-	struct BaseColliderConfig
+	struct ColliderBaseConfig
 	{
-		BaseColliderConfig();
-		virtual ~BaseColliderConfig() = default;
+		ColliderBaseConfig();
+		virtual ~ColliderBaseConfig() = default;
 
-		PhysiscsLayer m_layer;
+		PhysicsLayer m_layer;
 
 		b2FixtureDef m_fixtureDef;
 		b2BodyDef m_bodyDef;
@@ -50,7 +49,7 @@ namespace ratchet
 
 
 		//Constructors
-		ColliderBase(const BaseColliderConfig& config);
+		ColliderBase(const ColliderBaseConfig& config);
 		~ColliderBase();
 
 		void applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity);
@@ -69,6 +68,7 @@ namespace ratchet
 		//Setters
 		virtual void setColliderPosition(float x, float y);
 		virtual void setColliderRotation(float angle);
+		virtual void setColliderOrigin(b2Vec2 origin) { m_origin = origin; }
 
 		//Checks
 		virtual void getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;

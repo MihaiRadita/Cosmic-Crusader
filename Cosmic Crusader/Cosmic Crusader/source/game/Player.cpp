@@ -245,6 +245,24 @@ namespace ratchet
 		}
 	}
 
+	void Player::computeAimBulletRotation()
+	{
+		sf::Vector2f firePoint = m_currentFirePoint;
+		sf::Vector2i mousePos = sf::Mouse::getPosition(*WindowManager::Get());
+		sf::Vector2f mouseWorldPos = WindowManager::Get()->mapPixelToCoords(mousePos);
+
+		sf::Vector2f direction = mouseWorldPos - firePoint;
+		sf::Vector2f directionNormalised = sf::Vector2f(0.0f, 0.0f);
+		calculateNormalised(direction.x, direction.y, directionNormalised.x, directionNormalised.y);
+
+		float angleRad = std::atan2(directionNormalised.y, directionNormalised.x);
+		float angleDeg = angleRad * 180.f / M_PI;
+
+		m_currentFireRotationRadians = angleRad;
+		m_currentFireRoationDegrees = angleDeg;
+		m_currenFireDirectionNorm = directionNormalised;
+	}
+
 	void Player::updateMovement()
 	{
 		m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;

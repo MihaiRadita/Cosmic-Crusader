@@ -33,7 +33,7 @@ namespace ratchet
 
 		bool m_facigRight = true;
 
-		void Fire(const sf::Vector2f &positon,const float& rotation, const float& direction, bool& m_facingRight);
+		void Fire(const sf::Vector2f &positon,const float& rotation, const sf::Vector2f& direction, bool& m_facingRight);
 
 	};
 

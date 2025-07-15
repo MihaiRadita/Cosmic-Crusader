@@ -154,6 +154,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectConfig.cpp" />
     <ClCompile Include="PrefabAssets.cpp" />
+    <ClCompile Include="RatchetMaths.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="source\animations\AnimationFall.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectConfig.h" />
     <ClInclude Include="PrefabAssets.h" />
+    <ClInclude Include="RatchetMaths.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="source\animations\AnimationFall.h" />
     <ClInclude Include="source\animations\Animator.h" />
@@ -208,6 +210,7 @@
     <ClInclude Include="source\physics\Physics.h" />
     <ClInclude Include="source\physics\RectAngleCollider.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TraceChannels.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponConfig.h" />
     <ClInclude Include="WeaponManager.h" />

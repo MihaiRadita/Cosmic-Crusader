@@ -47,19 +47,21 @@ namespace ratchet
 		m_body->SetLinearDamping(config.m_linearDamping);
 		m_body->SetAngularDamping(config.m_angularDamping);
 
-		userDataName = static_cast<short>(config.m_layer);
+		m_userDataName = static_cast<short>(config.m_layer);
 
 		// Bottom Circle
 		m_bottomCircleShape.m_radius = getGlobalRadius();
 		m_bottomCircleShape.m_p.Set(m_origin.x, m_origin.y + (getGlobalHeight() / 2.0f) - getGlobalRadius());
 		m_fixtureDef.shape = &m_bottomCircleShape;
-		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
+		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
+		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 		m_body->CreateFixture(&m_fixtureDef);
 		// Top Circle
 		m_topCircleShape.m_radius = getGlobalRadius();
 		m_topCircleShape.m_p.Set(m_origin.x, m_origin.y - (getGlobalHeight() / 2.0f) + getGlobalRadius());
 		m_fixtureDef.shape = &m_topCircleShape;
-		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
+		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
+		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 		m_body->CreateFixture(&m_fixtureDef);
 		// Center Box
 		const auto centerBoxHeight = std::abs(m_bottomCircleShape.m_p.y - m_topCircleShape.m_p.y);
@@ -69,7 +71,7 @@ namespace ratchet
 		m_fixtureDef.density = config.m_fixtureDef.density;
 		m_fixtureDef.friction = config.m_fixtureDef.friction;
 		m_fixtureDef.restitution = config.m_fixtureDef.restitution;
-		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
+		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
 		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 		m_body->CreateFixture(&m_fixtureDef);
 

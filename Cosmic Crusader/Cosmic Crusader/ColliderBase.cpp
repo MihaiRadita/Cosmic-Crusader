@@ -5,7 +5,7 @@
 
 namespace ratchet
 {
-	ColliderBase::ColliderBase(const BaseColliderConfig& config)
+	ColliderBase::ColliderBase(const ColliderBaseConfig& config)
 	{
 		m_body = nullptr;
 
@@ -123,7 +123,7 @@ namespace ratchet
 				return -1.0f;
 			}
 			const short* fixtureUserData = reinterpret_cast<const short*>(fixture->GetUserData().pointer);
-			if (fixtureUserData && *fixtureUserData == static_cast<short>(PhysiscsLayer::Platforms))
+			if (fixtureUserData && *fixtureUserData == static_cast<short>(PhysicsLayer::Platforms))
 			{
 				m_hit = true;
 				m_point = point;
@@ -136,7 +136,7 @@ namespace ratchet
 		m_hit = false;
 		return -1.0f;
 	}
-	BaseColliderConfig::BaseColliderConfig()
+	ColliderBaseConfig::ColliderBaseConfig()
 	{
 	}
 }

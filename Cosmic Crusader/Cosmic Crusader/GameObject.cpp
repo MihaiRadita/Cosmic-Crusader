@@ -74,7 +74,6 @@ namespace ratchet
 		//States
 		m_faction = config.m_Faction;
 		m_colliderType = config.m_colliderType;
-		m_colliderShapeType = config.m_colliderShapeType;
 		m_movementType = config.m_movementType;
 
 		//Transforms
@@ -100,22 +99,17 @@ namespace ratchet
 		m_sprite.setRotation(m_rotation);
 		m_sprite.setScale(m_scale.x, m_scale.y);
 
-		if (config.m_colliderConfig->m_layer == PhysiscsLayer::Player)
+		if (const auto* capsuleConfig = dynamic_cast<CapsuleColliderConfig*>(config.m_colliderConfig))
 		{
-			m_collider = new ratchet::CapsuleCollider(m_sprite, static_cast<const CapsuleColliderConfig&>(*config.m_colliderConfig));
-
+			m_collider = new ratchet::CapsuleCollider(m_sprite, *capsuleConfig);
 		}
-		else if (config.m_colliderConfig->m_layer == PhysiscsLayer::Platforms)
+		else if (const auto* circleConfig = dynamic_cast<CircleColliderConfig*>(config.m_colliderConfig))
 		{
-			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
-		}
-		else if (config.m_colliderConfig->m_layer == PhysiscsLayer::Items)
+			m_collider = new ratchet::CircleCollider(m_sprite, *circleConfig);
+		}		
+		else if (const auto* rectangleConfig = dynamic_cast<RectAngleColliderConfig*>(config.m_colliderConfig))
 		{
-			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
-		}
-		else if (config.m_colliderConfig->m_layer == PhysiscsLayer::Projectiles)
-		{
-			m_collider = new ratchet::RectAngleCollider(m_sprite, static_cast<const RectAngleColliderConfig&>(*config.m_colliderConfig));
+			m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
 		}
 	}
 

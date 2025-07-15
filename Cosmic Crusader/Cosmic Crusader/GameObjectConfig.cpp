@@ -11,7 +11,6 @@ namespace ratchet
 		m_Faction = Faction::FACTION_UNKNOWN;
 		m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 		m_colliderType = ColliderType::COLLIDERTYPE_UNKNOWN;
-		m_colliderShapeType = ColliderShapeType::COLLIDERSHAPETYPE_UNKNOWN;
 
 		//Transforms
 		position = sf::Vector2f(0.f, 0.f);

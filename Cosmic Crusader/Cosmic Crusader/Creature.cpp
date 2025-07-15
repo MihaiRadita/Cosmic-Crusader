@@ -155,6 +155,7 @@ namespace ratchet
 		updateMovement();
 		updateJump();
 		computeAimAngleState();
+		computeAimBulletRotation();
 		computeShootingPoint();
 		updateAnimations();
 		updateShooting();
@@ -353,7 +354,7 @@ namespace ratchet
 	{
 		if (m_mustSpawnBullet)
 		{
-			m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, 0.0f, 0.0f, m_facingRight);
+			m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
 #ifdef IS_RATCHET_DEBUG
 			TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
 #endif	
@@ -509,6 +510,9 @@ namespace ratchet
 		return false;
 	}
 	void Creature::computeAimAngleState()
+	{
+	}
+	void Creature::computeAimBulletRotation()
 	{
 	}
 	void Creature::computeShootingPoint()

@@ -5,7 +5,7 @@
 
 namespace ratchet
 {
-	struct CapsuleColliderConfig : public BaseColliderConfig
+	struct CapsuleColliderConfig : public ColliderBaseConfig
 	{
 		CapsuleColliderConfig();
 
@@ -41,7 +41,7 @@ namespace ratchet
 		float getTopCircleRadius();
 		float getBottomCircleRadius();
 
-		short userDataName;
+		short m_userDataName;
 
 #ifdef IS_RATCHET_DEBUG
 		void printBodyPositionRotation() override;

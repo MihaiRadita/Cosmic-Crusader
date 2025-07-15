@@ -17,7 +17,6 @@ namespace ratchet
 		Faction m_Faction;
 		MovementType m_movementType;
 		ColliderType m_colliderType;
-		ColliderShapeType m_colliderShapeType;
 
 		//Transforms
 		sf::Vector2f position;
@@ -34,7 +33,7 @@ namespace ratchet
 		std::string fallingSpriteTexturePath;
 
 		//Physics
-		BaseColliderConfig* m_colliderConfig = nullptr;
+		ColliderBaseConfig* m_colliderConfig = nullptr;
 
 		//Layers/Ids
 		std::string m_configLayer;

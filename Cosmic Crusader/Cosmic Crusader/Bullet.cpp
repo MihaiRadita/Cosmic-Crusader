@@ -26,95 +26,149 @@ namespace ratchet
 
 
 
-	void Bullet::setBulletPositionCenter(sf::Vector2f& poisition, int yDirection, int& xDirection)
+	void Bullet::setBulletPositionCenter(const sf::Vector2f& position, const sf::Vector2f& direction, const bool& facingRight)
 	{
-		float boundeHeight = m_sprite.getGlobalBounds().height;
-		float boundWidth = m_sprite.getGlobalBounds().width;
-		float halfPosiitonY = m_sprite.getPosition().y + (boundeHeight / 2.0f) * yDirection;
-		float halfPositionX = m_sprite.getPosition().x + (boundWidth / 2.0f) * xDirection;
-
-		poisition.y += halfPosiitonY;
-		if (xDirection < 0)
+		// Collider position
+		float colliderWidth = 0.0f;
+		float colliderHeight = 0.0f;
+		sf::Vector2f colliderOffset = sf::Vector2f(0.0f, 0.0f);
+		if (auto* rectangleCollider = dynamic_cast<RectAngleCollider*>(m_collider))
 		{
-			poisition.x += halfPositionX;
+			colliderWidth = rectangleCollider->getGlobalWidth();
+			colliderHeight = rectangleCollider->getGlobalHeight();	
+			colliderOffset = sf::Vector2f(
+				(colliderWidth / 2.f) * (facingRight ? 1.0f : -1.0f),
+				(colliderHeight / 2.f)
+			);
+		}
+		else if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
+		{
+			colliderWidth = circleCollider->getGlobalRadius() * 2.0f;
+			colliderHeight = circleCollider->getGlobalRadius() * 2.0f;
+		}
+		
+		sf::Vector2f colliderPos = position;
+		colliderPos.x -= colliderOffset.x;
+		
+		if (facingRight == false)
+		{
+			colliderPos.y += colliderOffset.y;
 		}
 		else
 		{
-			poisition.x -= halfPositionX;
+			colliderPos.y -= colliderOffset.y;
 		}
-
-		if (this->m_collider)
+		
+		float rotationRadians = this->m_collider->getBody()->GetAngle();
+		m_collider->getBody()->SetTransform(b2Vec2(colliderPos.x, colliderPos.y), rotationRadians);
+		
+		// Sprite Position
+		const auto& bodyPos = m_collider->getBody()->GetPosition();
+		float spriteOffsetYRight = 0.0f;
+		float spriteOffsetYLeft = -m_sprite.getGlobalBounds().height;
+		
+		sf::Vector2f spritePos;
+		if (facingRight)
 		{
-			b2Vec2	colliderPosition = b2Vec2(poisition.x, poisition.y);
-			//colliderPosition.x -= m_sprite.getGlobalBounds().width;
-			float rotationRadians = this->m_collider->getBody()->GetAngle();
-
-			m_collider->getBody()->SetTransform(b2Vec2(colliderPosition.x, colliderPosition.y), rotationRadians);
+			spritePos = sf::Vector2f(bodyPos.x, bodyPos.y + spriteOffsetYRight);
 		}
+		else
+		{
+			spritePos = sf::Vector2f(bodyPos.x, bodyPos.y + spriteOffsetYLeft);
+		}
+		m_sprite.setPosition(spritePos);
 
-		auto objectPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, this->m_collider->getBody()->GetPosition().y);
-		m_sprite.setPosition(objectPosition);
+		// Sprite Rotation
+		float angleDeg = (std::atan2(direction.y, direction.x) / M_PI) * 180.0f;
+		if (direction.x < 0.0f)
+		{
+			angleDeg = -180.0f + angleDeg;
+		}
+		m_sprite.setRotation(angleDeg);
 	}
+
 	void Bullet::invertCharacterMovingSpriteScale(int direction)
 	{
 		m_sprite.setScale(m_scale.x * (float)direction, m_scale.y);
-		if (direction < 0)
-		{
-			m_sprite.setOrigin(getBounds().width / m_scale.x, 0.f);
-		}
-		else
-		{
-			m_sprite.setOrigin(0.f, 0.f);
-		}
+
+		auto bounds = m_sprite.getLocalBounds();  
+		m_sprite.setOrigin( bounds.width / 2.f,
+			 bounds.height / 2.f);
+
+		sf::Vector2f origin = sf::Vector2f(m_sprite.getOrigin().x, m_sprite.getOrigin().y);
+
+
+
 	}
 	void Bullet::render(sf::RenderTarget& target)
 	{
 
-		auto spriteOutline = sf::RectangleShape(sf::Vector2f(
-			m_sprite.getGlobalBounds().width,
-			m_sprite.getGlobalBounds().height)
-		);
-		spriteOutline.setFillColor(sf::Color::Transparent);
-		spriteOutline.setOutlineColor(sf::Color::Red);
-		spriteOutline.setOutlineThickness(0.01f);
-		spriteOutline.setPosition(
-			m_sprite.getPosition().x,
-			m_sprite.getPosition().y);
-		target.draw(spriteOutline);
-		
-		/*if (auto* bulletCollder = dynamic_cast<RectAngleCollider*>(m_collider))
+
+
+		/*if (auto* rectangleCollider = dynamic_cast<RectAngleCollider*>(m_collider))
 		{
-			auto spriteOutline = sf::RectangleShape(sf::Vector2f(
-				bulletCollder->getGlobalWidth(),
-				bulletCollder->getGlobalHeight())
+			auto colliderOutline = sf::RectangleShape(sf::Vector2f(
+				rectangleCollider->getGlobalWidth(),
+				rectangleCollider->getGlobalHeight())
 			);
-			spriteOutline.setFillColor(sf::Color::Transparent);
-			spriteOutline.setOutlineColor(sf::Color::Green);
-			spriteOutline.setOutlineThickness(0.01f);
-			spriteOutline.setPosition(
-				bulletCollder->getBody()->GetPosition().x,
-				bulletCollder->getBody()->GetPosition().y);
-			target.draw(spriteOutline);
+			colliderOutline.setFillColor(sf::Color::Transparent);
+			colliderOutline.setOutlineColor(sf::Color::Green);
+			colliderOutline.setOutlineThickness(0.01f);
+			colliderOutline.setPosition(
+				rectangleCollider->getBody()->GetPosition().x,
+				rectangleCollider->getBody()->GetPosition().y);
+			colliderOutline.setRotation(rectangleCollider->getBody()->GetAngle() * (180.f / M_PI));
+			target.draw(colliderOutline);
+		}
+		else if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
+		{
+			auto colliderOutline = sf::CircleShape(circleCollider->getGlobalRadius());
+			colliderOutline.setFillColor(sf::Color::Transparent);
+			colliderOutline.setOutlineColor(sf::Color::Green);
+			colliderOutline.setOutlineThickness(0.01f);
+			colliderOutline.setOrigin(colliderOutline.getRadius(), colliderOutline.getRadius());
 
+			colliderOutline.setPosition(
+				circleCollider->getBody()->GetPosition().x,
+				circleCollider->getBody()->GetPosition().y);
+			colliderOutline.setRotation(circleCollider->getBody()->GetAngle() * (180.f / M_PI));
+			target.draw(colliderOutline);
 		}*/
-		/*auto spriteCollderPos = sf::CircleShape(0.01f);
-		spriteCollderPos.setFillColor(sf::Color::Green);
-		spriteCollderPos.setOutlineColor(sf::Color::Green);
-		spriteCollderPos.setOutlineThickness(0.01f);
-		spriteCollderPos.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y);
-		target.draw(spriteCollderPos);*/
 
-
-		auto spriteOriginWorldPos = m_sprite.getTransform().transformPoint(m_sprite.getOrigin());
-		sf::CircleShape spriteCollderPos2(0.01f);
-		spriteCollderPos2.setFillColor(sf::Color::White);
-		spriteCollderPos2.setOutlineColor(sf::Color::White);
-		spriteCollderPos2.setOutlineThickness(0.01f);
-		spriteCollderPos2.setPosition(spriteOriginWorldPos);
-		target.draw(spriteCollderPos2);
-
+	
 
 		GameObject::render(target);
+
+
+		/*sf::FloatRect bounds = m_sprite.getLocalBounds();
+
+		sf::RectangleShape spriteOutline(sf::Vector2f(bounds.width, bounds.height));
+		spriteOutline.setFillColor(sf::Color::Transparent);
+		spriteOutline.setOutlineColor(sf::Color::Red);
+		spriteOutline.setOutlineThickness(0.6f);
+
+		spriteOutline.setOrigin(m_sprite.getOrigin());
+		spriteOutline.setPosition(m_sprite.getPosition());
+		spriteOutline.setRotation(m_sprite.getRotation());
+		spriteOutline.setScale(m_sprite.getScale()); 
+
+
+		target.draw(spriteOutline);
+
+		sf::Vector2f centerLocal(m_sprite.getLocalBounds().left + m_sprite.getLocalBounds().width / 2.f,
+			m_sprite.getLocalBounds().top + m_sprite.getLocalBounds().height / 2.f);
+
+		sf::Vector2f worldCenter = m_sprite.getTransform().transformPoint(m_sprite.getOrigin());
+		sf::Vector2f worldPosition = m_sprite.getPosition();
+		sf::CircleShape spriteOriginCircle(0.04f);
+		spriteOriginCircle.setFillColor(sf::Color::Blue);
+		spriteOriginCircle.setOutlineColor(sf::Color::White);
+		spriteOriginCircle.setOutlineThickness(0.01f);
+		spriteOriginCircle.setOrigin(spriteOriginCircle.getRadius(), spriteOriginCircle.getRadius());
+		sf::Vector2f circleOrigin = spriteOriginCircle.getOrigin();
+		spriteOriginCircle.setPosition(worldCenter);
+
+		target.draw(spriteOriginCircle);*/
 	}
 }
 

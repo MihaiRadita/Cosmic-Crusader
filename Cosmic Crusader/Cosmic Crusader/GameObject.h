@@ -1,5 +1,6 @@
 #pragma once
 #include "physics/Physics.h"
+#include "physics/CircleCollider.h"
 #include "physics/RectAngleCollider.h"
 #include "CapsuleCollider.h"
 #include "ColliderBase.h"
@@ -20,7 +21,6 @@ namespace ratchet
 		Faction m_faction;
 		MovementType m_movementType;
 		ColliderType m_colliderType;
-		ColliderShapeType m_colliderShapeType;
 
 		//Transforms
 		sf::Vector2f m_position;
@@ -149,39 +149,30 @@ namespace ratchet
 	{
 		auto* newGameObject = new GameObjectChildType(gameObjectConfig);
 
-		b2Vec2	colliderPosition = b2Vec2(position.x, position.y);
-		float rotationRadians = rotationDegrees * b2_pi / 180.f;
+		b2Vec2 colliderPosition = b2Vec2(position.x, position.y);
+		float rotationRadians = rotationDegrees * M_PI / 180.f;
 
-
-
-
-		if (!orientation) 
+		if (newGameObject->m_collider)
 		{
-			float scaledWidth = newGameObject->getSprite().getGlobalBounds().width;
-			//objectPosition.x -= scaledWidth;
-
-			if (newGameObject->m_collider)
-			{
-				colliderPosition.x -= scaledWidth;
-				newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
-			}
+			newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
 		}
-		else
-		{
-			if (newGameObject->m_collider)
-			{
 
-				newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
-			}
-			//newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
-		}
+	
 		newGameObject->invertCharacterMovingSpriteScale(orientation ? 1 : -1);
-		auto objectPosition = sf::Vector2f(newGameObject->m_collider->getBody()->GetPosition().x, newGameObject->m_collider->getBody()->GetPosition().y);
 
-		newGameObject->getSprite().setPosition(objectPosition);
-		newGameObject->setRotation(rotationDegrees);
+		/*newGameObject->getSprite().setOrigin(
+			newGameObject->getSprite().getLocalBounds().width / 2.f,
+			newGameObject->getSprite().getLocalBounds().height / 2.f
+		);*/
 
 
+		auto bodyPos = newGameObject->m_collider->getBody()->GetPosition();
+		newGameObject->getSprite().setPosition(bodyPos.x, bodyPos.y);
+
+	
+		//newGameObject->getSprite().setRotation(newGameObject);
+
+	
 		ratchet::GameObject::s_gameObjects.emplace_back(newGameObject);
 		return newGameObject;
 	}

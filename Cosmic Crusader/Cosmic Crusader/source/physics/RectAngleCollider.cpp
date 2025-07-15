@@ -68,27 +68,8 @@ namespace ratchet
 		m_fixtureDef.restitution = config.m_fixtureDef.restitution;
 		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 
-		if (config.m_layer == PhysiscsLayer::Player)
-		{
-			userDataName = static_cast<short>(config.m_layer);
-			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
-
-		}
-		else if (config.m_layer == PhysiscsLayer::Platforms)
-		{
-			userDataName = static_cast<short>(config.m_layer);
-			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
-		}
-		else if (config.m_layer == PhysiscsLayer::Items)
-		{
-			userDataName = static_cast<short>(config.m_layer);
-			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
-		}
-		else if (config.m_layer == PhysiscsLayer::Projectiles)
-		{
-			userDataName = static_cast<short>(config.m_layer);
-			m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&userDataName);
-		}
+		m_userDataName = static_cast<short>(config.m_layer);
+		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
 
 		m_body->CreateFixture(&m_fixtureDef);
 

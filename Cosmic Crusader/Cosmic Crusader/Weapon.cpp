@@ -18,24 +18,18 @@ namespace ratchet
 		m_currentAmmo = weapon.m_currentAmmo;
 	}
 
-	void Weapon::Fire(const sf::Vector2f& positon, const float& rotation, const float& direction, bool& m_facingRight)
+	void Weapon::Fire(const sf::Vector2f& position, const float& rotation, const sf::Vector2f& direction, bool& m_facingRight)
 	{
 	#ifdef IS_RATCHET_DEBUG
 		TRACE_CHANNEL("WEAPON_FIRE", "Spawning bullet");
 	#endif	
 
-		auto* bullet = GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_WeaponID), positon, rotation, m_facingRight);
-
-		sf::Vector2f positiontoModify = positon;
-
-		int directionx = m_facingRight ? 1 : -1;
+		auto* bullet = GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_WeaponID), position, rotation, m_facingRight);
 
 		if (auto* bulletObj = dynamic_cast<Bullet*>(bullet))
 		{
-			bulletObj->setBulletPositionCenter(positiontoModify, -1, directionx);
+			bulletObj->setBulletPositionCenter(position, direction, m_facingRight);
 		}
-
-		m_weaponType;
 	}
 }
 

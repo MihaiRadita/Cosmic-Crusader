@@ -23,7 +23,7 @@ namespace ratchet
 		std::map<std::string, BulletConfig*> m_bulletConfigs;
 
 		//List of collder prefab configs
-		std::map<std::string, RectAngleColliderConfig*> m_recangleCollderConfigs;
+		std::map<std::string, ColliderBaseConfig*> m_colliderConfigs;
 
 		//Registers Config
 		void RegisterGameObjectConfig(std::string& id,GameObjectConfig& config);

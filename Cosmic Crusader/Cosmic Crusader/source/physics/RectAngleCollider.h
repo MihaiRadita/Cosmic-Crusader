@@ -4,12 +4,12 @@
 
 namespace ratchet
 {
-	struct RectAngleColliderConfig : public BaseColliderConfig
+	struct RectAngleColliderConfig : public ColliderBaseConfig
 	{
 		RectAngleColliderConfig();
 
 		RectAngleColliderConfig(const RectAngleColliderConfig& other)
-			: BaseColliderConfig(other), 
+			: ColliderBaseConfig(other), 
 			m_width(other.m_width),
 			m_height(other.m_height)
 		{
@@ -42,7 +42,7 @@ namespace ratchet
 		b2FixtureDef* getFixtureDef();
 		b2Vec2 getOffset();
 		b2Vec2 getColliderPosition();
-		short userDataName;
+		short m_userDataName;
 
 		//Checks
 #ifdef IS_RATCHET_DEBUG
