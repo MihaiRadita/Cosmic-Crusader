@@ -28,63 +28,74 @@ namespace ratchet
 
 	void Bullet::setBulletPositionCenter(const sf::Vector2f& position, const sf::Vector2f& direction, const bool& facingRight)
 	{
-		// Collider position
-		float colliderWidth = 0.0f;
-		float colliderHeight = 0.0f;
-		sf::Vector2f colliderOffset = sf::Vector2f(0.0f, 0.0f);
+
 		if (auto* rectangleCollider = dynamic_cast<RectAngleCollider*>(m_collider))
 		{
+			float colliderWidth = 0.0f;
+			float colliderHeight = 0.0f;
+			sf::Vector2f colliderOffset = sf::Vector2f(0.0f, 0.0f);
+			
 			colliderWidth = rectangleCollider->getGlobalWidth();
 			colliderHeight = rectangleCollider->getGlobalHeight();	
 			colliderOffset = sf::Vector2f(
 				(colliderWidth / 2.f) * (facingRight ? 1.0f : -1.0f),
 				(colliderHeight / 2.f)
 			);
+
+			// Collider position and rotation
+			sf::Vector2f colliderPos = position;
+			float rotationRadians = this->m_collider->getBody()->GetAngle();
+			m_collider->getBody()->SetTransform(b2Vec2(colliderPos.x, colliderPos.y), rotationRadians);
+			const auto& bodyPos = m_collider->getBody()->GetPosition();
+
+			float spriteOffsetYRight = m_sprite.getGlobalBounds().height / 2.0f;
+			float spriteOffsetYLeft = m_sprite.getGlobalBounds().height / 2.0f;
+
+			float spriteOffsetXRight = m_sprite.getGlobalBounds().width / 2.0f;
+			float spriteOffsetXLeft = m_sprite.getGlobalBounds().width / 2.0f;
+			
+			//Sprite position
+			sf::Vector2f spritePos;
+			spritePos = sf::Vector2f(bodyPos.x, bodyPos.y );
+			m_sprite.setPosition(spritePos);
+
+			// Sprite Rotation
+			float angleDeg = (std::atan2(direction.y, direction.x) / M_PI) * 180.0f;
+			if (direction.x < 0.0f)
+			{
+				angleDeg = -180.0f + angleDeg;
+			}
+			m_sprite.setRotation(angleDeg);
 		}
 		else if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
 		{
+			float colliderWidth = 0.0f;
+			float colliderHeight = 0.0f;
 			colliderWidth = circleCollider->getGlobalRadius() * 2.0f;
 			colliderHeight = circleCollider->getGlobalRadius() * 2.0f;
-		}
-		
-		sf::Vector2f colliderPos = position;
-		colliderPos.x -= colliderOffset.x;
-		
-		if (facingRight == false)
-		{
-			colliderPos.y += colliderOffset.y;
-		}
-		else
-		{
-			colliderPos.y -= colliderOffset.y;
-		}
-		
-		float rotationRadians = this->m_collider->getBody()->GetAngle();
-		m_collider->getBody()->SetTransform(b2Vec2(colliderPos.x, colliderPos.y), rotationRadians);
-		
-		// Sprite Position
-		const auto& bodyPos = m_collider->getBody()->GetPosition();
-		float spriteOffsetYRight = 0.0f;
-		float spriteOffsetYLeft = -m_sprite.getGlobalBounds().height;
-		
-		sf::Vector2f spritePos;
-		if (facingRight)
-		{
-			spritePos = sf::Vector2f(bodyPos.x, bodyPos.y + spriteOffsetYRight);
-		}
-		else
-		{
-			spritePos = sf::Vector2f(bodyPos.x, bodyPos.y + spriteOffsetYLeft);
-		}
-		m_sprite.setPosition(spritePos);
 
-		// Sprite Rotation
-		float angleDeg = (std::atan2(direction.y, direction.x) / M_PI) * 180.0f;
-		if (direction.x < 0.0f)
-		{
-			angleDeg = -180.0f + angleDeg;
+			// Collider position and rotation
+			sf::Vector2f colliderPos = position;
+			float rotationRadians = this->m_collider->getBody()->GetAngle();
+			m_collider->getBody()->SetTransform(b2Vec2(colliderPos.x, colliderPos.y), rotationRadians);
+			const auto& bodyPos = m_collider->getBody()->GetPosition();
+
+			//Sprite position
+			sf::Vector2f spritePos;
+			spritePos = sf::Vector2f(bodyPos.x, bodyPos.y);
+
+			m_sprite.setPosition(spritePos);
+
+			// Sprite Rotation
+			float angleDeg = (std::atan2(direction.y, direction.x) / M_PI) * 180.0f;
+			if (direction.x < 0.0f)
+			{
+				angleDeg = -180.0f + angleDeg;
+			}
+			m_sprite.setRotation(angleDeg);
+
 		}
-		m_sprite.setRotation(angleDeg);
+		
 	}
 
 	void Bullet::invertCharacterMovingSpriteScale(int direction)
@@ -105,12 +116,18 @@ namespace ratchet
 
 
 
-		/*if (auto* rectangleCollider = dynamic_cast<RectAngleCollider*>(m_collider))
+		if (auto* rectangleCollider = dynamic_cast<RectAngleCollider*>(m_collider))
 		{
 			auto colliderOutline = sf::RectangleShape(sf::Vector2f(
 				rectangleCollider->getGlobalWidth(),
 				rectangleCollider->getGlobalHeight())
 			);
+
+			colliderOutline.setOrigin(
+				colliderOutline.getSize().x / 2.f,
+				colliderOutline.getSize().y / 2.f
+			);
+
 			colliderOutline.setFillColor(sf::Color::Transparent);
 			colliderOutline.setOutlineColor(sf::Color::Green);
 			colliderOutline.setOutlineThickness(0.01f);
@@ -133,7 +150,7 @@ namespace ratchet
 				circleCollider->getBody()->GetPosition().y);
 			colliderOutline.setRotation(circleCollider->getBody()->GetAngle() * (180.f / M_PI));
 			target.draw(colliderOutline);
-		}*/
+		}
 
 	
 
@@ -153,9 +170,9 @@ namespace ratchet
 		spriteOutline.setScale(m_sprite.getScale()); 
 
 
-		target.draw(spriteOutline);
+		target.draw(spriteOutline);*/
 
-		sf::Vector2f centerLocal(m_sprite.getLocalBounds().left + m_sprite.getLocalBounds().width / 2.f,
+		/*sf::Vector2f centerLocal(m_sprite.getLocalBounds().left + m_sprite.getLocalBounds().width / 2.f,
 			m_sprite.getLocalBounds().top + m_sprite.getLocalBounds().height / 2.f);
 
 		sf::Vector2f worldCenter = m_sprite.getTransform().transformPoint(m_sprite.getOrigin());
