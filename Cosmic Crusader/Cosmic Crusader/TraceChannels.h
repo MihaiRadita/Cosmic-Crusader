@@ -3,7 +3,9 @@
 #include <map>
 #include "Windows.h"
 
+#ifdef IS_RATCHET_DEBUG
 #define TR_ENABLED IS_RATCHET_DEBUG
+#endif
 
 namespace hidden
 {
@@ -27,7 +29,9 @@ namespace hidden
 
 	inline bool isTraceChannelEnabled(const char* channel)
 	{
+#ifdef TR_ENABLED
 		if (!TR_ENABLED) return false;
+#endif
 
 		const auto it = sc_traceChannelMap.find(channel);
 		if (it != sc_traceChannelMap.end())

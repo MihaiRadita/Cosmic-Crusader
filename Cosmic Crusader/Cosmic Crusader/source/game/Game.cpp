@@ -64,7 +64,7 @@ namespace ratchet
 
 				config.position = sf::Vector2f(posX, posY);
 				config.rotation = obj["rotation"];
-				config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Tileset/";
+				config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Tileset/";
 				config.startSpriteTexturePathAddition = obj["name"].get<std::string>();
 				config.startSpriteTexturePath = config.startSpriteTexturePath + config.startSpriteTexturePathAddition + ".png";
 
@@ -102,7 +102,7 @@ namespace ratchet
 			config->rotation = 0.0f;
 			config->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
-			config->startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
+			config->startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
 
 			// Weapon Start Shooting Config Points
 			config->m_characterStartPointShootingOffset = sf::Vector2f(0.08f, 0.1f);
@@ -138,7 +138,7 @@ namespace ratchet
 			bulletConfig->rotation = 0.0f;
 			bulletConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
-			bulletConfig->startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
+			bulletConfig->startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
 
 
 			//// Rectangle Collider
@@ -202,8 +202,8 @@ namespace ratchet
 			config.m_fallingSpeed = 7000.0f;
 			config.m_AngleBase = 45.f;
 
-			config.startSpriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
-			config.spriteTexturePath = "D:/Long Gits/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
+			config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
+			config.spriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
 
 			auto colliderConfig = CapsuleColliderConfig();
 			colliderConfig.m_layer = PhysicsLayer::Player;
