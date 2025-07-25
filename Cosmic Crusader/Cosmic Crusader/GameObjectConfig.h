@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ColliderBase.h"
-//#include "Weapon.h"
 
 namespace ratchet
 {
@@ -43,8 +42,6 @@ namespace ratchet
 	
 		//Destructor
 		~GameObjectConfig();
-
-		
 
 	};
 

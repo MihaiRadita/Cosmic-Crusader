@@ -9,7 +9,6 @@ namespace ratchet
 	struct WeaponConfig : public GameObjectConfig
 	{
 	public:
-		//WeaponConfig();
 		WeaponConfig(int ammo, int damage, bool isWeaponAccesible);
 
 		//Weapon features
@@ -27,8 +26,6 @@ namespace ratchet
 		sf::Vector2f m_shootingOffsetAngleMinus45;
 		
 		sf::Vector2f m_characterStartPointShootingOffset;
-
-
 	};
 
 }

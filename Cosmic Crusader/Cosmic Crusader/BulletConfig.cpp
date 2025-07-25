@@ -2,7 +2,6 @@
 #include "BulletConfig.h"
 
 
-
 namespace ratchet
 {
 	BulletConfig::BulletConfig()

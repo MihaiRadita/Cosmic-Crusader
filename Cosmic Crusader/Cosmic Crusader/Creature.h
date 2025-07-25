@@ -36,15 +36,9 @@ namespace ratchet
 		float m_fireRate = 0.2f; // Fires every m_fireRate seconds
 		float m_recoilTime = 0.1f; // Recoil animation duration
 		int m_lastFiredWeaponIndex = -1;
-
-		bool m_hasRecoilToShow = false;
-		bool m_recoilDisplayed = false;
 		bool m_mustSpawnBullet = false;
 
 		sf::Vector2f currentMousePositiion = sf::Vector2f(0.0f,0.0f);
-
-
-
 
 		//Angles
 		float m_baseAngle;
@@ -86,8 +80,6 @@ namespace ratchet
 		void updateJump() override;
 		void updateRunningJump() override;
 		void updateWeaponSelection() override;
-
-		void updateShootPoint();
 		void updateShooting();
 
 		//Render functions
@@ -105,11 +97,11 @@ namespace ratchet
 		bool isGrounded() const { return m_isGround; };
 
 
-		//Setters
 
 		//Getters
 		int getWeaponListSize();
 
+		//Setters
 		void addWeapon(Weapon::TYPE &weaponType, std::optional<WeaponConfig> &config);
 		void setWeapon(int& weaponIndex);
 		void setWeaponAccessible(Weapon::TYPE& weaponType, bool isAccessible);
@@ -135,12 +127,11 @@ namespace ratchet
 		float m_currentFireRotationRadians;
 		float m_currentFireRoationDegrees;
 		sf::Vector2f m_currenFireDirectionNorm;
-
-		// std::map<Weapon::TYPE, bool> m_usableWeaponTypeList; 
-		 std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList; 
-		 std::vector<Weapon*> m_ownedWeaponList; 
-		 std::vector <Weapon::TYPE> m_weaponTypeList;
-		 std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
+ 
+		std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList; 
+		std::vector<Weapon*> m_ownedWeaponList; 
+		std::vector <Weapon::TYPE> m_weaponTypeList;
+		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
 
 
 		 WeaponAnimation::ANGLE m_currentCharacterAngle;

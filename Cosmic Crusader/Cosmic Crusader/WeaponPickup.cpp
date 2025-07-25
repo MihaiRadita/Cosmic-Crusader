@@ -102,10 +102,6 @@ namespace ratchet
 
 				GameObject::addGameObjectoDestory(this);
 			}
-
-			//m_collider->getBody()->SetEnabled(false);
-			//Physics::addToDestroyList(this);
-
 		}
 	}
 
@@ -118,11 +114,4 @@ namespace ratchet
 			TRACE_CHANNEL("WEAPON_PICKUP", "PLAYER HAS EXIT WITH WEAPON 1! ");
 		}
 	}
-
-	/*
-	* isSensorEnter(GameObject* obj)
-	* {
-		}
-	*/
-
 }

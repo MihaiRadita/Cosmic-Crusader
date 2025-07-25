@@ -105,9 +105,6 @@ namespace ratchet
 		 void RemoveGameObjectFromList();
 		 static void clearQueuedObjectsToDestroy();
 
-		 //Instatiate functions
-		/*template<typename GameObjectChildType>
-		static GameObject* Instantiate(const GameObjectChildType gameObject, const sf::Vector2f& position, const float& rotationDegrees);*/
 		template<typename GameObjectChildType, typename GameObjectChildConfig>
 		static GameObject* Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees, bool& orientation);
 			
@@ -138,12 +135,6 @@ namespace ratchet
 #endif
 	};
 
-	/*template<typename GameObjectChildType>
-	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildType gameObjectToCopy,const sf::Vector2f& position,const float& rotationDegrees)
-	{
-		return Instantiate<GameObjectChildType>(gameObjectToCopy.extractConfig(), position, rotationDegrees);
-	}*/
-
 	template<typename GameObjectChildType, typename GameObjectChildConfig>
 	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees, bool& orientation)
 	{
@@ -159,11 +150,6 @@ namespace ratchet
 
 	
 		newGameObject->invertCharacterMovingSpriteScale(orientation ? 1 : -1);
-
-		/*newGameObject->getSprite().setOrigin(
-			newGameObject->getSprite().getLocalBounds().width / 2.f,
-			newGameObject->getSprite().getLocalBounds().height / 2.f
-		);*/
 
 
 		auto bodyPos = newGameObject->m_collider->getBody()->GetPosition();

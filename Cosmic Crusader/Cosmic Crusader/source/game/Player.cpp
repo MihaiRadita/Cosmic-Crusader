@@ -286,7 +286,6 @@ namespace ratchet
 			yVelocity = m_jumpImpulse;
 		}
 
-
 		m_movementType = isGrounded() ? MovementType::GROUND : MovementType::AIR;
 
 		TRACE_CHANNEL("PHYSICS", "[PLAYER] BEFORE", " Velocity ", " X: ", m_collider->m_body->GetLinearVelocity().x, ", Y: ", m_collider->m_body->GetLinearVelocity().y);

@@ -19,7 +19,6 @@ namespace ratchet
 		//Animations Destroy
 		void destroyPlayerAnimations();
 
-
 		// Variables
 		float m_gravity;
 

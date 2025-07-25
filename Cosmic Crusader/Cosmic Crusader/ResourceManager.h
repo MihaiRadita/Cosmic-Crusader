@@ -5,8 +5,6 @@ namespace ratchet
 	class ResourceManager
 	{
 	public:
-		// TODO: Sa fie singleton acest ResourceManager
-		// ResourceManager* getInstance();
 		ResourceManager(const ResourceManager*) = delete;
 		ResourceManager& operator=(const ResourceManager&) = delete;
 

@@ -24,35 +24,17 @@ namespace ratchet
 
 	}
 
-
-
 	void Bullet::setBulletPositionCenter(const sf::Vector2f& position, const sf::Vector2f& direction, const bool& facingRight)
 	{
 
 		if (auto* rectangleCollider = dynamic_cast<RectAngleCollider*>(m_collider))
 		{
-			float colliderWidth = 0.0f;
-			float colliderHeight = 0.0f;
-			sf::Vector2f colliderOffset = sf::Vector2f(0.0f, 0.0f);
-			
-			colliderWidth = rectangleCollider->getGlobalWidth();
-			colliderHeight = rectangleCollider->getGlobalHeight();	
-			colliderOffset = sf::Vector2f(
-				(colliderWidth / 2.f) * (facingRight ? 1.0f : -1.0f),
-				(colliderHeight / 2.f)
-			);
 
 			// Collider position and rotation
 			sf::Vector2f colliderPos = position;
 			float rotationRadians = this->m_collider->getBody()->GetAngle();
 			m_collider->getBody()->SetTransform(b2Vec2(colliderPos.x, colliderPos.y), rotationRadians);
 			const auto& bodyPos = m_collider->getBody()->GetPosition();
-
-			float spriteOffsetYRight = m_sprite.getGlobalBounds().height / 2.0f;
-			float spriteOffsetYLeft = m_sprite.getGlobalBounds().height / 2.0f;
-
-			float spriteOffsetXRight = m_sprite.getGlobalBounds().width / 2.0f;
-			float spriteOffsetXLeft = m_sprite.getGlobalBounds().width / 2.0f;
 			
 			//Sprite position
 			sf::Vector2f spritePos;
@@ -69,10 +51,6 @@ namespace ratchet
 		}
 		else if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
 		{
-			float colliderWidth = 0.0f;
-			float colliderHeight = 0.0f;
-			colliderWidth = circleCollider->getGlobalRadius() * 2.0f;
-			colliderHeight = circleCollider->getGlobalRadius() * 2.0f;
 
 			// Collider position and rotation
 			sf::Vector2f colliderPos = position;
@@ -83,7 +61,6 @@ namespace ratchet
 			//Sprite position
 			sf::Vector2f spritePos;
 			spritePos = sf::Vector2f(bodyPos.x, bodyPos.y);
-
 			m_sprite.setPosition(spritePos);
 
 			// Sprite Rotation
@@ -93,7 +70,6 @@ namespace ratchet
 				angleDeg = -180.0f + angleDeg;
 			}
 			m_sprite.setRotation(angleDeg);
-
 		}
 		
 	}
@@ -152,40 +128,8 @@ namespace ratchet
 			target.draw(colliderOutline);
 		}
 
-	
-
 		GameObject::render(target);
 
-
-		/*sf::FloatRect bounds = m_sprite.getLocalBounds();
-
-		sf::RectangleShape spriteOutline(sf::Vector2f(bounds.width, bounds.height));
-		spriteOutline.setFillColor(sf::Color::Transparent);
-		spriteOutline.setOutlineColor(sf::Color::Red);
-		spriteOutline.setOutlineThickness(0.6f);
-
-		spriteOutline.setOrigin(m_sprite.getOrigin());
-		spriteOutline.setPosition(m_sprite.getPosition());
-		spriteOutline.setRotation(m_sprite.getRotation());
-		spriteOutline.setScale(m_sprite.getScale()); 
-
-
-		target.draw(spriteOutline);*/
-
-		/*sf::Vector2f centerLocal(m_sprite.getLocalBounds().left + m_sprite.getLocalBounds().width / 2.f,
-			m_sprite.getLocalBounds().top + m_sprite.getLocalBounds().height / 2.f);
-
-		sf::Vector2f worldCenter = m_sprite.getTransform().transformPoint(m_sprite.getOrigin());
-		sf::Vector2f worldPosition = m_sprite.getPosition();
-		sf::CircleShape spriteOriginCircle(0.04f);
-		spriteOriginCircle.setFillColor(sf::Color::Blue);
-		spriteOriginCircle.setOutlineColor(sf::Color::White);
-		spriteOriginCircle.setOutlineThickness(0.01f);
-		spriteOriginCircle.setOrigin(spriteOriginCircle.getRadius(), spriteOriginCircle.getRadius());
-		sf::Vector2f circleOrigin = spriteOriginCircle.getOrigin();
-		spriteOriginCircle.setPosition(worldCenter);
-
-		target.draw(spriteOriginCircle);*/
 	}
 }
 

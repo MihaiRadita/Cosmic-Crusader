@@ -1,14 +1,12 @@
 #pragma once
 
 #include "GameObjectConfig.h"
-//#include "WeaponConfig.h"
 
 namespace ratchet
 {
 	class BulletConfig : public GameObjectConfig
 	{
 	public:
-
 
 		BulletConfig(); 
 

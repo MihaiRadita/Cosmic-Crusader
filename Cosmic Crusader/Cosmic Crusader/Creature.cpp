@@ -69,12 +69,8 @@ namespace ratchet
 
 		for (auto config : m_initialWeaponConfigList)
 		{
-
 			addWeapon(config.first, config.second);
 		}
-
-
-		//m_usableWeaponTypeList = config.m_usableWeaponTypeList;
 
 		if (m_faction == Faction::PLAYER)
 		{
@@ -104,7 +100,6 @@ namespace ratchet
 		m_shooitngPointCenter.setFillColor(sf::Color::Red);
 		m_shooitngPointCenter.setOrigin(m_shooitngPointCenter.getRadius(), m_shooitngPointCenter.getRadius());
 		m_shooitngPointCenter.setPosition(m_shootingPointDynamic.getPosition().x, m_shootingPointDynamic.getPosition().y);
-
 
 		m_isRightNoWeapon = true;
 	}
@@ -149,7 +144,6 @@ namespace ratchet
 			m_isGround = false;
 			m_collider->m_skipRaycastThisFrame = false;
 		}
-		//m_isGround = m_collider->performGroundRayCast(m_sprite);
 
 		updateWeaponSelection();
 		updateMovement();
@@ -345,11 +339,6 @@ namespace ratchet
 		}
 	}
 
-	void Creature::updateShootPoint()
-	{
-		
-	}
-
 	void Creature::updateShooting()
 	{
 		if (m_mustSpawnBullet)
@@ -424,10 +413,6 @@ namespace ratchet
 		}
 
 		newWeapon->m_weaponType = weaponType;
-
-		//newWeapon->m_curreW
-
-	
 
 		m_ownedWeaponList.push_back(newWeapon);
 

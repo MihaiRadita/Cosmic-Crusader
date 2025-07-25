@@ -140,17 +140,6 @@ namespace ratchet
 
 			bulletConfig->startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
 
-
-			//// Rectangle Collider
-			//auto* colliderBulletConfig = new RectAngleColliderConfig();
-			//colliderBulletConfig->m_layer = PhysicsLayer::Projectiles;
-			//colliderBulletConfig->m_bodyDef.type = b2_dynamicBody;
-			//colliderBulletConfig->m_fixtureDef.density = 0.0f;
-			//colliderBulletConfig->m_bodyDef.fixedRotation = false;
-			//colliderBulletConfig->m_fixtureDef.friction = 0.0f;
-			//colliderBulletConfig->m_fixtureDef.restitution = 0.0f;
-			//colliderBulletConfig->m_fixtureDef.isSensor = true;
-			// Circle Collider
 			auto* colliderBulletConfig = new CircleColliderConfig();
 			colliderBulletConfig->m_layer = PhysicsLayer::Projectiles;
 			colliderBulletConfig->m_bodyDef.type = b2_dynamicBody;
@@ -229,7 +218,6 @@ namespace ratchet
 
 			config.m_colliderConfig = &colliderConfig;
 
-			// fie este un std::vector<Weapon::TYPE>, fie este un std::map<Weapon::TYPE, bool>
 			config.m_usableWeaponTypeList = { {Weapon::TYPE::None, true}, {Weapon::TYPE::Blaster, false}, {Weapon::TYPE::FireLauncher, false}, {Weapon::TYPE::RocketLauncher, false} }; // ce arme POATE folosi
 
 			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
@@ -241,7 +229,6 @@ namespace ratchet
 
 			config.m_bodShoulderOffset = 0.4f;
 
-			// std::vector<std::pair<Weapon::Type, std::optional<WeaponConfig>>>
 			config.m_initialWeaponConfigList = // reprezinta ce arme ai in inventar deja
 			{
 				std::make_pair(Weapon::TYPE::None, std::nullopt),
@@ -332,10 +319,6 @@ namespace ratchet
 		handleEvents();
 
 		// SFML Time Calculation
-		float timeNow = gameTime.getElapsedTime().asSeconds();
-		float deltaTime = (timeNow - timeLastFrame);
-		timeLastFrame = timeNow;
-
 		sf::Vector2i newMousePos = sf::Mouse::getPosition(m_window);
 
 		if (currenmousePosition != newMousePos)
@@ -348,24 +331,9 @@ namespace ratchet
 			TRACE_CHANNEL("MOUSE", "Mouse Position in Wolrd: ", newMouseWorld.x, ", ", newMouseWorld.y, "!");
 		}
 
-		if (deltaTime > 1.0f / 5.0f) {
-			deltaTime = 1.0f / 5.0f;
-		}
-
 		float timeStep = 1.0f / 120.0f;
-		float accumulatedTime = 0.0f;
-
-		accumulatedTime += deltaTime;
-
-		int maxSteps = 60;
-		int steps = 0;
 
 		Physics::update(timeStep);
-
-		if (steps == maxSteps) {
-
-			accumulatedTime = 0.0f;
-		}
 
 		for (auto i = 0u; i < GameObject::s_gameObjects.size(); i++)
 		{
@@ -380,11 +348,6 @@ namespace ratchet
 		}
 
 		GameObject::clearQueuedObjectsToDestroy();
-
-
-		//CleanDestroyedGameObjects();
-
-		//sf::Mouse::setPosition(sf::Vector2i(20, 20), m_window);
 
 	}
 
