@@ -62,6 +62,10 @@ namespace ratchet
 #endif
 	}
 
+	void ColliderBase::drawColliderCenterBased(sf::RenderTarget& target)
+	{
+	}
+
 	void ColliderBase::setColliderPosition(float x, float y)
 	{
 		float currentAngle = m_body->GetAngle();

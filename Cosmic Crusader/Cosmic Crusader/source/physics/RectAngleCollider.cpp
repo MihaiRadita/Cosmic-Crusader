@@ -251,6 +251,28 @@ namespace ratchet
 	}
 #endif
 
+	void RectAngleCollider::drawColliderCenterBased(sf::RenderTarget& target)
+	{
+		auto colliderOutline = sf::RectangleShape(sf::Vector2f(
+			getGlobalWidth(),
+			getGlobalHeight())
+		);
+
+		colliderOutline.setOrigin(
+			colliderOutline.getSize().x / 2.f,
+			colliderOutline.getSize().y / 2.f
+		);
+
+		colliderOutline.setFillColor(sf::Color::Transparent);
+		colliderOutline.setOutlineColor(sf::Color::Green);
+		colliderOutline.setOutlineThickness(0.01f);
+		colliderOutline.setPosition(
+			getBody()->GetPosition().x,
+			getBody()->GetPosition().y);
+		colliderOutline.setRotation(getBody()->GetAngle() * (180.f / M_PI));
+		target.draw(colliderOutline);
+	}
+
 	void RectAngleCollider::getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
 	{
 		ColliderBase::getLeftPointsForRaycast(xStart, yStart, xEnd, yEnd);

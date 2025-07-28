@@ -13,6 +13,7 @@ namespace ratchet
 	{
 		m_damage = config.m_damage;
 		m_ammo = config.m_ammo;
+		m_bulletSpeed = config.m_BulletSpeed;
 	}
 
 	Bullet::~Bullet()
@@ -21,7 +22,9 @@ namespace ratchet
 
 	void Bullet::update()
 	{
+		auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
+		m_sprite.setPosition(spritePosition);
 	}
 
 	void Bullet::setBulletPositionCenter(const sf::Vector2f& position, const sf::Vector2f& direction, const bool& facingRight)
@@ -87,46 +90,16 @@ namespace ratchet
 
 
 	}
+	void Bullet::launchBullet(const sf::Vector2f& direction, const float& speed)
+	{
+		b2Vec2 velocity(direction.x * speed, direction.y * speed);
+
+		m_collider->getBody()->SetLinearVelocity(velocity);
+	}
 	void Bullet::render(sf::RenderTarget& target)
 	{
 
-
-
-		if (auto* rectangleCollider = dynamic_cast<RectAngleCollider*>(m_collider))
-		{
-			auto colliderOutline = sf::RectangleShape(sf::Vector2f(
-				rectangleCollider->getGlobalWidth(),
-				rectangleCollider->getGlobalHeight())
-			);
-
-			colliderOutline.setOrigin(
-				colliderOutline.getSize().x / 2.f,
-				colliderOutline.getSize().y / 2.f
-			);
-
-			colliderOutline.setFillColor(sf::Color::Transparent);
-			colliderOutline.setOutlineColor(sf::Color::Green);
-			colliderOutline.setOutlineThickness(0.01f);
-			colliderOutline.setPosition(
-				rectangleCollider->getBody()->GetPosition().x,
-				rectangleCollider->getBody()->GetPosition().y);
-			colliderOutline.setRotation(rectangleCollider->getBody()->GetAngle() * (180.f / M_PI));
-			target.draw(colliderOutline);
-		}
-		else if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
-		{
-			auto colliderOutline = sf::CircleShape(circleCollider->getGlobalRadius());
-			colliderOutline.setFillColor(sf::Color::Transparent);
-			colliderOutline.setOutlineColor(sf::Color::Green);
-			colliderOutline.setOutlineThickness(0.01f);
-			colliderOutline.setOrigin(colliderOutline.getRadius(), colliderOutline.getRadius());
-
-			colliderOutline.setPosition(
-				circleCollider->getBody()->GetPosition().x,
-				circleCollider->getBody()->GetPosition().y);
-			colliderOutline.setRotation(circleCollider->getBody()->GetAngle() * (180.f / M_PI));
-			target.draw(colliderOutline);
-		}
+		m_collider->drawColliderCenterBased(target);
 
 		GameObject::render(target);
 

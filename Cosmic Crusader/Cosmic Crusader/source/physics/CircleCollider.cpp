@@ -73,6 +73,21 @@ namespace ratchet
 
 	}
 
+	void CircleCollider::drawColliderCenterBased(sf::RenderTarget& target)
+	{
+		auto colliderOutline = sf::CircleShape(getGlobalRadius());
+		colliderOutline.setFillColor(sf::Color::Transparent);
+		colliderOutline.setOutlineColor(sf::Color::Green);
+		colliderOutline.setOutlineThickness(0.01f);
+		colliderOutline.setOrigin(colliderOutline.getRadius(), colliderOutline.getRadius());
+
+		colliderOutline.setPosition(
+			getBody()->GetPosition().x,
+			getBody()->GetPosition().y);
+		colliderOutline.setRotation(getBody()->GetAngle() * (180.f / M_PI));
+		target.draw(colliderOutline);
+	}
+
 	CircleCollider::~CircleCollider()
 	{
 		if (s_physicsWorld)

@@ -64,6 +64,7 @@ namespace ratchet
 		virtual void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState);
 		virtual void debugRender(sf::RenderTarget& target);
 #endif
+		virtual void drawColliderCenterBased(sf::RenderTarget& target);
 
 		//Setters
 		virtual void setColliderPosition(float x, float y);

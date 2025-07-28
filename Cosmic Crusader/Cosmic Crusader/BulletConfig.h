@@ -13,6 +13,8 @@ namespace ratchet
 		float m_damage;
 		float m_ammo;
 
+		float m_BulletSpeed;
+
 		std::string m_ID;
 
 	private:

@@ -51,6 +51,8 @@ namespace ratchet
 		void debugRender(sf::RenderTarget& target) override;
 #endif
 
+		void drawColliderCenterBased(sf::RenderTarget& target) override;
+
 		//Checks
 		virtual void getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
 		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;

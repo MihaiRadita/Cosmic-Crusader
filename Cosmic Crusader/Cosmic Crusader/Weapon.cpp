@@ -29,6 +29,8 @@ namespace ratchet
 		if (auto* bulletObj = dynamic_cast<Bullet*>(bullet))
 		{
 			bulletObj->setBulletPositionCenter(position, direction, m_facingRight);
+
+			bulletObj->launchBullet(direction, bulletObj->m_bulletSpeed);
 		}
 	}
 }

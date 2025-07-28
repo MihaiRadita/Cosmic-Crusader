@@ -17,10 +17,13 @@ namespace ratchet
 		void setBulletPositionCenter(const sf::Vector2f& poisition, const sf::Vector2f& direction, const bool& facingRight);
 		void invertCharacterMovingSpriteScale(int direction) override;
 
+		void launchBullet(const sf::Vector2f& direction, const float& speed);
+
 		void render(sf::RenderTarget& target) override;
 		
 		float m_damage;
 		float m_ammo;
+		float m_bulletSpeed;
 
 	private:
 

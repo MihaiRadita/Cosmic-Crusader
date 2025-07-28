@@ -31,6 +31,8 @@ namespace ratchet
 		CircleCollider(sf::Sprite& sprite, const CircleColliderConfig& config);
 		void initVariables(sf::Sprite& sprite, const CircleColliderConfig& config);
 
+		void drawColliderCenterBased(sf::RenderTarget& target) override;
+
 		//Destructors
 		~CircleCollider();
 
