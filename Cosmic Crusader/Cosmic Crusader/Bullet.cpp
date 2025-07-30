@@ -104,5 +104,17 @@ namespace ratchet
 		GameObject::render(target);
 
 	}
+	void Bullet::OnSensorEnter(GameObject* obj)
+	{
+		short* layerPTr = reinterpret_cast<short*> (obj->m_collider->m_fixtureDef.userData.pointer);
+
+		if (layerPTr && *layerPTr == static_cast<short>(PhysicsLayer::Platforms))
+		{
+			GameObject::addGameObjectoDestory(this);
+		}
+	}
+	void Bullet::OnSensorExit(GameObject* obj)
+	{
+	}
 }
 

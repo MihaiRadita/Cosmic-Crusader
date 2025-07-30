@@ -20,6 +20,11 @@ namespace ratchet
 		void launchBullet(const sf::Vector2f& direction, const float& speed);
 
 		void render(sf::RenderTarget& target) override;
+
+
+		// Bullet Collision 
+		virtual void OnSensorEnter(GameObject* obj) override;
+		virtual void OnSensorExit(GameObject* obj) override;
 		
 		float m_damage;
 		float m_ammo;

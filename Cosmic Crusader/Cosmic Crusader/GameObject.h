@@ -55,6 +55,7 @@ namespace ratchet
 
 		static std::vector<GameObject*> s_gameObjects;
 		static std::queue<GameObject*> s_gameObjectsToDestroy;
+		static std::unordered_set<GameObject*> s_destroyQueuedSet;
 
 		static GameObject* findGameObject(const b2Body* body);
 

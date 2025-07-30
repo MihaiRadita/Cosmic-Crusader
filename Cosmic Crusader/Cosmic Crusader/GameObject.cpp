@@ -190,13 +190,6 @@ namespace ratchet
 		return nullptr; 
 	}
 
-	void GameObject::addGameObjectoDestory(GameObject* object)
-	{
-		if (object != nullptr)
-		{
-			s_gameObjectsToDestroy.push(object);
-		}
-	}
 
 	void GameObject::setPosition(const sf::Vector2f position)
 	{
@@ -233,7 +226,6 @@ namespace ratchet
 		if (this == nullptr) {
 			return;
 		}
-
 		if (m_collider) {
 			delete m_collider;  
 			m_collider = nullptr;
@@ -262,15 +254,24 @@ namespace ratchet
 
 	void GameObject::clearQueuedObjectsToDestroy()
 	{
-		while (s_gameObjectsToDestroy.empty() == false)
+		while (!s_gameObjectsToDestroy.empty())
 		{
 			auto* nextGameObject = s_gameObjectsToDestroy.front();
+			s_gameObjectsToDestroy.pop();
+
 			if (nextGameObject)
 			{
+				s_destroyQueuedSet.erase(nextGameObject);
 				nextGameObject->DestroyGameObject();
 			}
-			nextGameObject = nullptr;
-			s_gameObjectsToDestroy.pop();
+		}
+	}
+
+	void GameObject::addGameObjectoDestory(GameObject* object)
+	{
+		if (object && s_destroyQueuedSet.insert(object).second) 
+		{
+			s_gameObjectsToDestroy.push(object);
 		}
 	}
 
@@ -347,5 +348,6 @@ namespace ratchet
 
 	std::vector<GameObject*>GameObject ::s_gameObjects;
 	std::queue<GameObject*>GameObject::s_gameObjectsToDestroy;
+	std::unordered_set<GameObject*>GameObject::s_destroyQueuedSet;
 
 }

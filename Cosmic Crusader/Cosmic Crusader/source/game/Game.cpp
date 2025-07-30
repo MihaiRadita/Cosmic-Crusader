@@ -126,7 +126,7 @@ namespace ratchet
 			BulletConfig* bulletConfig = new BulletConfig();
 			bulletConfig->m_damage = 5.0f;
 			bulletConfig->m_ammo = 10.f;
-			bulletConfig->m_BulletSpeed = 4.f;
+			bulletConfig->m_BulletSpeed = 8.f;
 			bulletConfig->m_ID = config->m_configLayer;
 			bulletConfig->m_Faction = Faction::FACTION_UNKNOWN;
 			bulletConfig->m_movementType = MovementType::AIR;

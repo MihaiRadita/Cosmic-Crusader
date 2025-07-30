@@ -12,6 +12,7 @@
 #include <vector>
 #include <variant>
 #include <queue>
+#include <unordered_set>
 
 //Math C++
 #define _USE_MATH_DEFINES 
