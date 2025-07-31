@@ -14,6 +14,9 @@ namespace ratchet
 		m_damage = config.m_damage;
 		m_ammo = config.m_ammo;
 		m_bulletSpeed = config.m_BulletSpeed;
+		m_bulletLifeLimit = config.m_bulletLifeLimit;
+
+		m_bulletTimer.restart();
 	}
 
 	Bullet::~Bullet()
@@ -25,6 +28,13 @@ namespace ratchet
 		auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
 		m_sprite.setPosition(spritePosition);
+
+		if (m_bulletTimer.getElapsedTime().asSeconds() >= m_bulletLifeLimit)
+		{
+			m_bulletTimer.restart();
+			GameObject::addGameObjectoDestory(this);
+		}
+
 	}
 
 	void Bullet::setBulletPositionCenter(const sf::Vector2f& position, const sf::Vector2f& direction, const bool& facingRight)

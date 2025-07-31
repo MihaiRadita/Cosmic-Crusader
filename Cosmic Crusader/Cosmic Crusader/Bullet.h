@@ -29,6 +29,9 @@ namespace ratchet
 		float m_damage;
 		float m_ammo;
 		float m_bulletSpeed;
+		float m_bulletLifeLimit;
+
+		sf::Clock m_bulletTimer;
 
 	private:
 

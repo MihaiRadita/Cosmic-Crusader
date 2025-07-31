@@ -68,6 +68,8 @@ namespace ratchet
 				config.startSpriteTexturePathAddition = obj["name"].get<std::string>();
 				config.startSpriteTexturePath = config.startSpriteTexturePath + config.startSpriteTexturePathAddition + ".png";
 
+				config.m_activeRenderer = true;
+
 				auto colliderConfig = RectAngleColliderConfig();
 				colliderConfig.m_layer = PhysicsLayer::Platforms;
 				colliderConfig.m_bodyDef.type = b2_staticBody;
@@ -91,6 +93,7 @@ namespace ratchet
 			config->m_colliderType = COLLIDERTYPE_UNKNOWN;
 			config->m_weaponType = Weapon::TYPE::Blaster;
 			config->m_configLayer = "Super Launcher";
+			config->m_activeRenderer = true;
 
 			float tileWidth = 64.0f;
 			float tileHeight = 64.0f;
@@ -126,6 +129,7 @@ namespace ratchet
 			BulletConfig* bulletConfig = new BulletConfig();
 			bulletConfig->m_damage = 5.0f;
 			bulletConfig->m_ammo = 10.f;
+			bulletConfig->m_bulletLifeLimit = 1.f;
 			bulletConfig->m_BulletSpeed = 8.f;
 			bulletConfig->m_ID = config->m_configLayer;
 			bulletConfig->m_Faction = Faction::FACTION_UNKNOWN;
@@ -134,6 +138,8 @@ namespace ratchet
 
 			bulletConfig->positionXOffset = 0.f;
 			bulletConfig->positionYOffset = 0.f;
+
+			bulletConfig->m_activeRenderer = true;
 
 			bulletConfig->position = sf::Vector2f(0.0f, 0.0f);
 			bulletConfig->rotation = 0.0f;
@@ -194,6 +200,8 @@ namespace ratchet
 
 			config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
 			config.spriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
+
+			config.m_activeRenderer = true;
 
 			auto colliderConfig = CapsuleColliderConfig();
 			colliderConfig.m_layer = PhysicsLayer::Player;

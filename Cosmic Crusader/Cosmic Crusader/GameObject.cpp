@@ -81,7 +81,9 @@ namespace ratchet
 		m_rotation = config.rotation;
 		m_scale = config.scale;
 
+		m_activeRenderer = config.m_activeRenderer;
 		m_startSpritePath = config.startSpriteTexturePath;
+
 
 
 		//Sprites and Terxtures
@@ -173,8 +175,10 @@ namespace ratchet
 			}
 		}
 #endif
-
-		target.draw(m_sprite);
+		if (m_activeRenderer)
+		{
+			target.draw(m_sprite);
+		}
 	}
 
 	GameObject* GameObject::findGameObjectByBody(const b2Body* body)
@@ -215,6 +219,11 @@ namespace ratchet
 		setPosition(position);
 		setRotation(rotationDegrees);
 
+	}
+
+	void GameObject::SetActiveRenderer(bool active)
+	{
+		m_activeRenderer = active;
 	}
 
 	void GameObject::invertCharacterMovingSpriteScale(int direction)

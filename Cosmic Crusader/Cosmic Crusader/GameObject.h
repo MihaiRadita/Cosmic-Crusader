@@ -32,6 +32,7 @@ namespace ratchet
 		std::string m_startSpritePath;
 		sf::Sprite m_sprite;
 		sf::Texture m_spriteTexture;
+		bool m_activeRenderer;
 
 		//Getters
 		sf::Sprite getSprite();
@@ -45,6 +46,7 @@ namespace ratchet
 
 		//Setters
 		void SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees);
+		void SetActiveRenderer(bool active);
 
 		virtual void invertCharacterMovingSpriteScale(int direction);
 
