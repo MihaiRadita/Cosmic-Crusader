@@ -17,7 +17,7 @@ namespace ratchet
 
 		float m_BulletSpeed;
 
-		std::string m_ID;
+		std::string m_configLayer;
 
 	private:
 	};

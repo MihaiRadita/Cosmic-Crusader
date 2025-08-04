@@ -8,29 +8,96 @@
 
 namespace ratchet
 {
+	std::map<Weapon::TYPE, std::queue<Bullet*>> Weapon::s_availableBulletList;
+	std::map<Weapon::TYPE, std::list<Bullet*>> Weapon::s_inUseBulletList;
+
 	Weapon::Weapon()
 	{
+		if (s_availableBulletList.empty())
+		{
+			for (int weaponTypeIndex = 0; weaponTypeIndex < static_cast<int>(Weapon::TYPE::Count); weaponTypeIndex++)
+			{
+				auto weaponType = static_cast<Weapon::TYPE>(weaponTypeIndex);
+				s_availableBulletList.emplace(weaponType, std::queue<Bullet*>());
+			}
+		}
+
+		if (s_inUseBulletList.empty())
+		{
+			for (int weaponTypeIndex = 0; weaponTypeIndex < static_cast<int>(Weapon::TYPE::Count); weaponTypeIndex++)
+			{
+				auto weaponType = static_cast<Weapon::TYPE>(weaponTypeIndex);
+				s_inUseBulletList.emplace(weaponType, std::list<Bullet*>());
+			}
+		}
 	}
 
-	Weapon::Weapon(const Weapon& weapon)
+	Weapon::Weapon(const Weapon& weapon) : Weapon()
 	{
 		m_weaponType = weapon.m_weaponType;
 		m_currentAmmo = weapon.m_currentAmmo;
 	}
 
-	void Weapon::Fire(const sf::Vector2f& position, const float& rotation, const sf::Vector2f& direction, bool& m_facingRight)
+	void Weapon::Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight)
 	{
 	#ifdef IS_RATCHET_DEBUG
 		TRACE_CHANNEL("WEAPON_FIRE", "Spawning bullet");
 	#endif	
-
-		auto* bullet = GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_WeaponID), position, rotation, m_facingRight);
-
+		auto* bullet = findOrCreateBulletFromPool(position, rotation, facingRight);
+		bullet->setPositionRotationOrientation(position, rotation, facingRight);
+		bullet->setActive(true);
 		if (auto* bulletObj = dynamic_cast<Bullet*>(bullet))
 		{
-			bulletObj->setBulletPositionCenter(position, direction, m_facingRight);
+			bulletObj->setBulletPositionCenter(position, direction, facingRight);
 
 			bulletObj->launchBullet(direction, bulletObj->m_bulletSpeed);
+			s_inUseBulletList[m_weaponType].push_back(bulletObj);
+		}
+	}
+
+	void Weapon::releaseBullet(Bullet* bulletToRelease)
+	{
+		for (int weaponTypeIndex = 0; weaponTypeIndex < static_cast<int>(Weapon::TYPE::Count); weaponTypeIndex++)
+		{
+			auto weaponType = static_cast<Weapon::TYPE>(weaponTypeIndex);
+			for (auto inUseIt = s_inUseBulletList[weaponType].begin(); inUseIt != s_inUseBulletList[weaponType].end(); inUseIt++)
+			{
+				if (*inUseIt == bulletToRelease)
+				{
+					inUseIt = s_inUseBulletList[weaponType].erase(inUseIt);
+
+					bulletToRelease->setActive(false);
+					s_availableBulletList[weaponType].push(bulletToRelease);
+					return;
+				}
+			}
+		}
+	}
+
+	Bullet* Weapon::findOrCreateBulletFromPool(const sf::Vector2f position, const float rotationDegrees, const bool orientation)
+	{
+		if (s_availableBulletList[m_weaponType].empty() == false)
+		{
+			auto* availableBullet = s_availableBulletList[m_weaponType].front();
+			availableBullet->setPositionRotationOrientation(position, rotationDegrees, orientation);
+			s_availableBulletList[m_weaponType].pop();
+
+			return availableBullet;
+		}
+		else
+		{
+			// Create new inactive bullets in the pool.
+			for (int i = 0; i < m_bulletPoolIncrementation; i++)
+			{
+				auto* obj = GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_WeaponID), position, rotationDegrees, orientation);
+				obj->setActive(false);
+				if (auto* bullet = dynamic_cast<Bullet*>(obj))
+				{
+					s_availableBulletList[m_weaponType].push(bullet);
+				}
+			}
+
+			return findOrCreateBulletFromPool(position, rotationDegrees, orientation);
 		}
 	}
 }

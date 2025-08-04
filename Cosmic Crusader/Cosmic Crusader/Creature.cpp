@@ -123,6 +123,7 @@ namespace ratchet
 
 	void Creature::update()
 	{
+		if (!m_activeGameObject) return;
 
 		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
 		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
@@ -410,6 +411,8 @@ namespace ratchet
 			shootingPointXOffset = config->m_weaponShootPointOffsetX;
 			shootingPointYOffset = config->m_weaponShootPointOffsetY;
 			newWeapon->m_WeaponID = config->m_configLayer;
+			newWeapon->m_bulletPoolIncrementation = config->m_bulletPoolIncrementation;
+
 		}
 
 		newWeapon->m_weaponType = weaponType;

@@ -113,6 +113,8 @@ namespace ratchet
 		{
 			m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
 		}
+
+		m_activeGameObject = true;
 	}
 
 	ratchet::GameObject::~GameObject()
@@ -136,10 +138,14 @@ namespace ratchet
 
 	void ratchet::GameObject::update()
 	{
+		if (!m_activeGameObject) return;
 	}
 
 	void ratchet::GameObject::render(sf::RenderTarget& target)
 	{
+		if (!m_activeGameObject) return;
+		if (!m_activeRenderer) return;
+
 #ifdef IS_RATCHET_DEBUG
 		if (m_collider)
 		{
@@ -175,10 +181,8 @@ namespace ratchet
 			}
 		}
 #endif
-		if (m_activeRenderer)
-		{
-			target.draw(m_sprite);
-		}
+
+		target.draw(m_sprite);
 	}
 
 	GameObject* GameObject::findGameObjectByBody(const b2Body* body)
@@ -205,6 +209,26 @@ namespace ratchet
 	{
 		m_rotation = angle;
 		m_sprite.setRotation(m_rotation);
+	}
+
+	void GameObject::setPositionRotationOrientation(const sf::Vector2f position, const float rotationDegrees, const bool orientation)
+	{
+		b2Vec2 colliderPosition = b2Vec2(position.x, position.y);
+		float rotationRadians = rotationDegrees * M_PI / 180.f;
+
+		if (m_collider)
+		{
+			m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
+		}
+
+		invertCharacterMovingSpriteScale(orientation ? 1 : -1);
+
+
+		auto bodyPos = m_collider->getBody()->GetPosition();
+		getSprite().setPosition(bodyPos.x, bodyPos.y);
+
+
+		getSprite().setRotation(rotationDegrees);
 	}
 
 	void GameObject::SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees)
@@ -282,6 +306,26 @@ namespace ratchet
 		{
 			s_gameObjectsToDestroy.push(object);
 		}
+	}
+
+	bool GameObject::isActive() const
+	{
+		return m_activeGameObject;
+	}
+
+	void GameObject::setActive(bool active)
+	{
+		if (m_collider)
+		{
+			if (auto* body = m_collider->getBody())
+			{
+				body->SetAwake(active);
+			}
+		}
+
+		SetActiveRenderer(active);
+
+		m_activeGameObject = active;
 	}
 
 	void ratchet::GameObject::destroy()

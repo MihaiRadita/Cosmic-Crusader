@@ -9,6 +9,6 @@ namespace ratchet
 		m_ammo = 0.0f;
 		m_damage = 0.0f;
 
-		m_ID = "";
+		m_configLayer = "";
 	}
 }

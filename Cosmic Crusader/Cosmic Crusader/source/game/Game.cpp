@@ -87,34 +87,35 @@ namespace ratchet
 		}
 
 		{
-			auto* config = new WeaponConfig(51, 12, true);
-			config->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
-			config->m_Faction = Faction::FACTION_UNKNOWN;
-			config->m_colliderType = COLLIDERTYPE_UNKNOWN;
-			config->m_weaponType = Weapon::TYPE::Blaster;
-			config->m_configLayer = "Super Launcher";
-			config->m_activeRenderer = true;
+			auto* weaponConfig = new WeaponConfig(51, 12, true);
+			weaponConfig->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
+			weaponConfig->m_Faction = Faction::FACTION_UNKNOWN;
+			weaponConfig->m_colliderType = COLLIDERTYPE_UNKNOWN;
+			weaponConfig->m_weaponType = Weapon::TYPE::Blaster;
+			weaponConfig->m_configLayer = "Super Launcher";
+			weaponConfig->m_activeRenderer = true;
+			weaponConfig->m_bulletPoolIncrementation = 5;
 
 			float tileWidth = 64.0f;
 			float tileHeight = 64.0f;
 
-			config->positionXOffset = 0.f;
-			config->positionYOffset = 0.f;
+			weaponConfig->positionXOffset = 0.f;
+			weaponConfig->positionYOffset = 0.f;
 
-			config->position = sf::Vector2f(18.0f, 4.8f);
-			config->rotation = 0.0f;
-			config->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+			weaponConfig->position = sf::Vector2f(18.0f, 4.8f);
+			weaponConfig->rotation = 0.0f;
+			weaponConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
-			config->startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
+			weaponConfig->startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
 
 			// Weapon Start Shooting Config Points
-			config->m_characterStartPointShootingOffset = sf::Vector2f(0.08f, 0.1f);
+			weaponConfig->m_characterStartPointShootingOffset = sf::Vector2f(0.08f, 0.1f);
 
 			//Weapon Shooting Config Points Angles
-			config->m_shootingOffsetAngle0 = sf::Vector2f(0.75f, 0.05f);
-			config->m_shootingOffsetAngle45 = sf::Vector2f(0.69f, 0.22f);
-			config->m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.62f);
-			config->m_shootingOffsetAngleMinus45 = sf::Vector2f(0.66f, 0.34f);
+			weaponConfig->m_shootingOffsetAngle0 = sf::Vector2f(0.75f, 0.05f);
+			weaponConfig->m_shootingOffsetAngle45 = sf::Vector2f(0.69f, 0.22f);
+			weaponConfig->m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.62f);
+			weaponConfig->m_shootingOffsetAngleMinus45 = sf::Vector2f(0.66f, 0.34f);
 
 
 			auto* colliderConfig = new RectAngleColliderConfig();
@@ -131,10 +132,12 @@ namespace ratchet
 			bulletConfig->m_ammo = 10.f;
 			bulletConfig->m_bulletLifeLimit = 1.f;
 			bulletConfig->m_BulletSpeed = 8.f;
-			bulletConfig->m_ID = config->m_configLayer;
+			bulletConfig->m_configLayer = weaponConfig->m_configLayer;
 			bulletConfig->m_Faction = Faction::FACTION_UNKNOWN;
 			bulletConfig->m_movementType = MovementType::AIR;
 			bulletConfig->m_colliderType = DYNAMIC;
+
+			bulletConfig->position = sf::Vector2f(6.7, 8.9f);
 
 			bulletConfig->positionXOffset = 0.f;
 			bulletConfig->positionYOffset = 0.f;
@@ -166,14 +169,15 @@ namespace ratchet
 
 			TRACE_CHANNEL("COLLISION", "IS SENSOR : ", colliderConfig->m_fixtureDef.isSensor);
 
-			config->m_colliderConfig = colliderConfig;
+			weaponConfig->m_colliderConfig = colliderConfig;
 			bulletConfig->m_colliderConfig = colliderBulletConfig;
 
 
-			GameObject::s_gameObjects.push_back(new WeaponPickup(*config));
 
-			PrefabAssets::Get().RegisterWeaponConfig(config->m_configLayer, config);
-			PrefabAssets::Get().RegisterBulletConfig(bulletConfig->m_ID, bulletConfig);
+			PrefabAssets::Get().RegisterWeaponConfig(weaponConfig->m_configLayer, weaponConfig);
+			PrefabAssets::Get().RegisterBulletConfig(bulletConfig->m_configLayer, bulletConfig);
+
+			GameObject::s_gameObjects.push_back(new WeaponPickup(*weaponConfig));
 		}
 
 		{

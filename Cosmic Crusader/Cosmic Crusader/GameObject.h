@@ -99,9 +99,16 @@ namespace ratchet
 
 		 static void addGameObjectoDestory(GameObject* object);
 
+		 virtual bool isActive() const;
+		 virtual void setActive(bool active);
+
 		 //Transforrms setters
 		 virtual void setPosition(const sf::Vector2f position);
 		 virtual void setRotation(const float angle);
+		 virtual void setPositionRotationOrientation(
+			 const sf::Vector2f position,
+			 const float rotationDegrees,
+			 const bool orientation);
 
 		 //Destory functions
 		 void DestroyGameObject();
@@ -109,13 +116,20 @@ namespace ratchet
 		 static void clearQueuedObjectsToDestroy();
 
 		template<typename GameObjectChildType, typename GameObjectChildConfig>
-		static GameObject* Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees, bool& orientation);
+		static GameObject* Instantiate(
+			const GameObjectChildConfig& gameObjectConfig, 
+			const sf::Vector2f position = sf::Vector2f(0.0f, 0.0f),
+			const float rotationDegrees = 0.0f, 
+			const bool orientation = false
+		);
 			
 		
 
 
 		virtual void destroy();
 	protected:
+		bool m_activeGameObject;
+
 		struct Input
 		{
 			float x = 0;
@@ -139,28 +153,15 @@ namespace ratchet
 	};
 
 	template<typename GameObjectChildType, typename GameObjectChildConfig>
-	ratchet::GameObject* ratchet::GameObject::Instantiate(const GameObjectChildConfig gameObjectConfig, const sf::Vector2f& position, const float& rotationDegrees, bool& orientation)
+	ratchet::GameObject* ratchet::GameObject::Instantiate(
+		const GameObjectChildConfig& gameObjectConfig, 
+		const sf::Vector2f position, 
+		const float rotationDegrees, 
+		const bool orientation
+	)
 	{
 		auto* newGameObject = new GameObjectChildType(gameObjectConfig);
-
-		b2Vec2 colliderPosition = b2Vec2(position.x, position.y);
-		float rotationRadians = rotationDegrees * M_PI / 180.f;
-
-		if (newGameObject->m_collider)
-		{
-			newGameObject->m_collider->getBody()->SetTransform(colliderPosition, rotationRadians);
-		}
-
-	
-		newGameObject->invertCharacterMovingSpriteScale(orientation ? 1 : -1);
-
-
-		auto bodyPos = newGameObject->m_collider->getBody()->GetPosition();
-		newGameObject->getSprite().setPosition(bodyPos.x, bodyPos.y);
-
-	
-		//newGameObject->getSprite().setRotation(newGameObject);
-
+		newGameObject->setPositionRotationOrientation(position, rotationDegrees, orientation);
 	
 		ratchet::GameObject::s_gameObjects.emplace_back(newGameObject);
 		return newGameObject;

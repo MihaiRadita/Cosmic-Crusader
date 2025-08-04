@@ -13,6 +13,8 @@
 #include <variant>
 #include <queue>
 #include <unordered_set>
+#include <list>
+#include <map>
 
 //Math C++
 #define _USE_MATH_DEFINES 

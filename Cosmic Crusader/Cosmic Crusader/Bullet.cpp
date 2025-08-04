@@ -17,14 +17,25 @@ namespace ratchet
 		m_bulletLifeLimit = config.m_bulletLifeLimit;
 
 		m_bulletTimer.restart();
+
+		setOrignAtCenter();
 	}
 
 	Bullet::~Bullet()
 	{
 	}
 
+	void Bullet::setActive(bool active)
+	{
+		GameObject::setActive(active);
+
+		m_bulletTimer.restart();
+	}
+
 	void Bullet::update()
 	{
+		if (!m_activeGameObject) return;
+
 		auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
 		m_sprite.setPosition(spritePosition);
@@ -32,7 +43,7 @@ namespace ratchet
 		if (m_bulletTimer.getElapsedTime().asSeconds() >= m_bulletLifeLimit)
 		{
 			m_bulletTimer.restart();
-			GameObject::addGameObjectoDestory(this);
+			Weapon::releaseBullet(this);
 		}
 
 	}
@@ -90,21 +101,18 @@ namespace ratchet
 	void Bullet::invertCharacterMovingSpriteScale(int direction)
 	{
 		m_sprite.setScale(m_scale.x * (float)direction, m_scale.y);
-
-		auto bounds = m_sprite.getLocalBounds();  
-		m_sprite.setOrigin( bounds.width / 2.f,
-			 bounds.height / 2.f);
-
-		sf::Vector2f origin = sf::Vector2f(m_sprite.getOrigin().x, m_sprite.getOrigin().y);
-
-
-
 	}
 	void Bullet::launchBullet(const sf::Vector2f& direction, const float& speed)
 	{
 		b2Vec2 velocity(direction.x * speed, direction.y * speed);
 
 		m_collider->getBody()->SetLinearVelocity(velocity);
+	}
+	void Bullet::setOrignAtCenter()
+	{
+		auto bounds = m_sprite.getLocalBounds();
+		m_sprite.setOrigin(bounds.width / 2.f,
+			bounds.height / 2.f);
 	}
 	void Bullet::render(sf::RenderTarget& target)
 	{
@@ -116,15 +124,19 @@ namespace ratchet
 	}
 	void Bullet::OnSensorEnter(GameObject* obj)
 	{
+		if (isActive() == false) return;
+
 		short* layerPTr = reinterpret_cast<short*> (obj->m_collider->m_fixtureDef.userData.pointer);
 
 		if (layerPTr && *layerPTr == static_cast<short>(PhysicsLayer::Platforms))
 		{
-			GameObject::addGameObjectoDestory(this);
+			Weapon::releaseBullet(this);
 		}
 	}
+
 	void Bullet::OnSensorExit(GameObject* obj)
 	{
+		if (isActive() == false) return;
 	}
 }
 

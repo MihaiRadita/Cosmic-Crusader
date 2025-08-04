@@ -18,6 +18,7 @@ namespace ratchet
 		Weapon::TYPE m_weaponType;
 		float m_weaponShootPointOffsetX;
 		float m_weaponShootPointOffsetY;
+		int m_bulletPoolIncrementation;
 
 		//Weapon Shooting Points Offsets
 		sf::Vector2f m_shootingOffsetAngle0;
@@ -26,6 +27,7 @@ namespace ratchet
 		sf::Vector2f m_shootingOffsetAngleMinus45;
 		
 		sf::Vector2f m_characterStartPointShootingOffset;
+
 	};
 
 }

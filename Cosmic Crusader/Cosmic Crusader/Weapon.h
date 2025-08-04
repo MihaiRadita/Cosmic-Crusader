@@ -1,7 +1,9 @@
 #pragma once
 
+
 namespace ratchet
 {
+	class Bullet;
 
 	class Weapon 
 	{
@@ -29,9 +31,17 @@ namespace ratchet
 		std::string m_WeaponID;
 
 		bool m_facigRight = true;
+		int m_bulletPoolIncrementation;
 
-		void Fire(const sf::Vector2f &positon,const float& rotation, const sf::Vector2f& direction, bool& m_facingRight);
+		
+		void Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight);
+		static void releaseBullet(Bullet* bulletToRelease);
 
+	private:
+		Bullet* findOrCreateBulletFromPool(const sf::Vector2f position, const float rotationDegrees, const bool orientation);
+
+		static std::map<Weapon::TYPE, std::queue<Bullet*>> s_availableBulletList;
+		static std::map<Weapon::TYPE, std::list<Bullet*>> s_inUseBulletList;
 	};
 
 	class WeaponAnimation

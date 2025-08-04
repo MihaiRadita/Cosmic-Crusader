@@ -56,6 +56,7 @@ namespace ratchet
 			m_shootingOffsetAngle90 = m_weaponConfig->m_shootingOffsetAngle90;
 			m_shootingOffsetAngleMinus45 = m_weaponConfig->m_shootingOffsetAngleMinus45;
 			m_weaponConfig->m_configLayer = config.m_configLayer;
+			m_weaponConfig->m_bulletPoolIncrementation = config.m_bulletPoolIncrementation;
 
 		}
 		m_IsWeaponAccessible = config.m_isWeaponAccessible;
