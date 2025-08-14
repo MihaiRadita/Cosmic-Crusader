@@ -52,6 +52,7 @@ namespace ratchet
 
 			bulletObj->launchBullet(direction, bulletObj->m_bulletSpeed);
 			s_inUseBulletList[m_weaponType].push_back(bulletObj);
+
 		}
 	}
 
