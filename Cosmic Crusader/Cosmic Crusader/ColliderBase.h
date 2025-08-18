@@ -25,6 +25,9 @@ namespace ratchet
 
 		b2FixtureDef m_fixtureDef;
 		b2BodyDef m_bodyDef;
+		b2MassData m_massData;
+
+		float m_massValue = 0.f;
 
 		float m_gravityScale;
 		float m_linearDamping;
@@ -44,6 +47,9 @@ namespace ratchet
 		b2FixtureDef m_fixtureDef;
 		b2BodyDef m_bodyDef;
 		b2Body* m_body = nullptr;
+		b2MassData m_massData;
+
+		float m_massValue = 0.f;
 
 		bool m_skipRaycastThisFrame = false;
 

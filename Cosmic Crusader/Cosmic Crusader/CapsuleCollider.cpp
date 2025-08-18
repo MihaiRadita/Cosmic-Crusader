@@ -15,6 +15,9 @@ namespace ratchet
 	{
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
+
+		m_massValue = config.m_massValue;
+		
 		
 		m_scaleX = 1.0f;
 		m_scaleY = 1.0f;
@@ -42,6 +45,13 @@ namespace ratchet
 
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
+
+		if (m_massValue != 0.0f)
+		{
+			m_massData.mass = m_massValue;
+
+			m_body->SetMassData(&m_massData);
+		}
 
 		m_body->SetGravityScale(config.m_gravityScale);
 		m_body->SetLinearDamping(config.m_linearDamping);

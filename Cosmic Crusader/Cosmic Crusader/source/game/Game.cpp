@@ -193,7 +193,7 @@ namespace ratchet
 			config.positionXOffset = 0.f;
 			config.positionYOffset = 0.f;
 
-			config.position = sf::Vector2f(5.0f, 0.0f);
+			config.position = sf::Vector2f(24.0f, 0.0f);
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
@@ -212,9 +212,10 @@ namespace ratchet
 			colliderConfig.m_bodyDef.type = b2_dynamicBody;
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;
+			colliderConfig.m_massValue = 100.0f;
 			colliderConfig.m_fixtureDef.friction = 0.0f;
 			colliderConfig.m_fixtureDef.restitution = 0.f;
-			colliderConfig.m_fixtureDef.density = 1.0f;
+			colliderConfig.m_fixtureDef.density = 0.0f;
 			colliderConfig.m_height = 1.13f;
 			colliderConfig.m_radius = 0.25f;
 			colliderConfig.m_fixtureDef.isSensor = false;
@@ -253,6 +254,82 @@ namespace ratchet
 
 			GameObject::s_gameObjects.push_back(new Player(config));
 
+		}
+
+		{
+			auto config = CreatureConfig();
+#ifdef IS_RATCHET_DEBUG
+			config.m_debugDraw = true;
+#endif
+
+			config.m_Faction = Faction::ENEMY;
+			config.m_movementType = MovementType::GROUND;
+			config.m_colliderType = DYNAMIC;
+
+			config.positionXOffset = 0.f;
+			config.positionYOffset = 0.f;
+
+			config.position = sf::Vector2f(30.0f, 0.0f);
+			config.rotation = 0.0f;
+			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+
+			config.m_movingSpeed = 7.0f;
+			config.m_jumpImpulse = -10.0f;
+			config.m_fallingSpeed = 7000.0f;
+			config.m_AngleBase = 45.f;
+
+			config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Blaster/Angle0/Aim/Idle1.png";
+			config.spriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/";
+
+			config.m_activeRenderer = true;
+
+			auto colliderConfig = CapsuleColliderConfig();
+			colliderConfig.m_layer = PhysicsLayer::Creature;
+			colliderConfig.m_bodyDef.type = b2_dynamicBody;
+			colliderConfig.m_bodyDef.bullet = true;
+			colliderConfig.m_bodyDef.fixedRotation = true;
+			colliderConfig.m_fixtureDef.friction = 0.0f;
+			colliderConfig.m_fixtureDef.restitution = 0.f;
+			colliderConfig.m_fixtureDef.density = 0.0f;
+			colliderConfig.m_height = 1.13f;
+			colliderConfig.m_radius = 0.25f;
+			colliderConfig.m_massValue = 1500.f;
+			colliderConfig.m_fixtureDef.isSensor = false;
+
+#ifdef IS_RATCHET_DEBUG
+			colliderConfig.m_debugDraw = true;
+#endif
+
+			if (colliderConfig.m_bodyDef.type == b2_dynamicBody)
+			{
+				colliderConfig.m_gravityScale = 1.0f;
+				colliderConfig.m_linearDamping = 0.0f;
+				colliderConfig.m_angularDamping = 0.0f;
+			}
+
+			config.m_colliderConfig = &colliderConfig;
+
+			config.m_usableWeaponTypeList = { {Weapon::TYPE::Blaster, true} };
+
+			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
+			config.m_currentState = WeaponAnimation::STATE::Aim;
+
+			config.m_characterAngles = { WeaponAnimation::ANGLE::Angle0 };
+
+			config.m_weaponTypeList = { Weapon::TYPE::Blaster };
+
+			config.m_bodShoulderOffset = 0.4f;
+
+			config.m_initialWeaponConfigList =
+			{
+				std::make_pair(Weapon::TYPE::Blaster, WeaponConfig(2, 3, true)),
+			};
+
+			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;
+
+			config.m_currentlyEquippedWeaponIndex = 0;
+
+			GameObject::s_gameObjects.push_back(new Creature(config));
 		}
 	}
 	Game::Game()

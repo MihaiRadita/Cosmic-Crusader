@@ -4,7 +4,7 @@
 
 namespace ratchet
 {
-	enum class Faction{FACTION_UNKNOWN = 0 ,PLAYER, ALIEN, ROBOT };
+	enum class Faction{FACTION_UNKNOWN = 0 ,PLAYER,ENEMY, ALIEN, ROBOT };
 	enum class MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, AIR};
 	struct GameObjectConfig
 	{

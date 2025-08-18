@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Creature.h"
 
+//#include "game/Player.h"
 
 
 namespace ratchet
@@ -85,6 +86,14 @@ namespace ratchet
 			m_characterAnimSwitch = -1;
 
 		}
+		else if (m_faction == Faction::ENEMY)
+		{
+			m_characterAnimationState = IDLE;
+			m_characterAnimator = new Animator();
+			m_animationList.emplace(ANIMATION_STATE::IDLE, new AnimationIdle(m_spritePath, m_weaponTypeList));
+
+			m_characterAnimSwitch = -1;
+		}
 		setWeapon(m_currentEquippedWeaponIndex);
 
 		m_characterShootingPosition = sf::CircleShape(0.05);
@@ -123,40 +132,62 @@ namespace ratchet
 
 	void Creature::update()
 	{
-		if (!m_activeGameObject) return;
 
-		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
-		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
+		if (m_faction == Faction::PLAYER)
+		{
+			if (!m_activeGameObject) return;
+
+			auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
+			auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
 		
-		if (currentMousePositiion != mouseWorldPosition)
-		{
-			currentMousePositiion = mouseWorldPosition;
+			if (currentMousePositiion != mouseWorldPosition)
+			{
+				currentMousePositiion = mouseWorldPosition;
 
-			TRACE_CHANNEL("MOUSE_POSITION", "CURRENT MOUSE POSITION = ", currentMousePositiion.x, " , ", currentMousePositiion.y);
+				TRACE_CHANNEL("MOUSE_POSITION", "CURRENT MOUSE POSITION = ", currentMousePositiion.x, " , ", currentMousePositiion.y);
+			}
+
+			updateInput();
+			if (m_collider && !m_collider->m_skipRaycastThisFrame)
+			{
+				m_isGround = m_collider->performGroundRayCast(m_sprite);
+			}
+			else
+			{
+				m_isGround = false;
+				m_collider->m_skipRaycastThisFrame = false;
+			}
+
+			updateWeaponSelection();
+			updateMovement();
+			updateJump();
+			computeAimAngleState();
+			computeAimBulletRotation();
+			computeShootingPoint();
+			updateAnimations();
+			updateShooting();
+			updatePhysics();
+
+			m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
 		}
-
-		updateInput();
-		if (m_collider && !m_collider->m_skipRaycastThisFrame)
+		else if (m_faction == Faction::ENEMY)
 		{
-			m_isGround = m_collider->performGroundRayCast(m_sprite);
-		}
-		else
-		{
-			m_isGround = false;
-			m_collider->m_skipRaycastThisFrame = false;
-		}
+			if(!m_activeGameObject) return;
 
-		updateWeaponSelection();
-		updateMovement();
-		updateJump();
-		computeAimAngleState();
-		computeAimBulletRotation();
-		computeShootingPoint();
-		updateAnimations();
-		updateShooting();
-		updatePhysics();
+			if (m_collider && !m_collider->m_skipRaycastThisFrame)
+			{
+				m_isGround = m_collider->performGroundRayCast(m_sprite);
+			}
+			else
+			{
+				m_isGround = false;
+				m_collider->m_skipRaycastThisFrame = false;
+			}
 
-		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
+			updateMovement();
+
+			updateAnimations();
+		}
 	}
 
 	void Creature::updateInput()
@@ -322,6 +353,29 @@ namespace ratchet
 			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
 			m_sprite.setRotation(m_rotation);
 
+		}
+		else if (m_faction == Faction::ENEMY)
+		{
+			//if (m_currentWeaponType != Weapon::TYPE::None)
+			//{
+			//	//m_currentCharacterState = WeaponAnimation::STATE::Aim;
+
+			//}
+
+			if (m_characterAnimationState == ANIMATION_STATE::IDLE)
+			{
+				switchAnimation();
+				m_characterAnimationState = ANIMATION_STATE::FALL;
+			}
+
+
+			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
+
+			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+
+			// Sync sprite rotation with collider
+			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+			m_sprite.setRotation(m_rotation);
 		}
 	}
 	void Creature::updateJump()
