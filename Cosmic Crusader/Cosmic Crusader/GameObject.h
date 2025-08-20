@@ -21,6 +21,7 @@ namespace ratchet
 		Faction m_faction;
 		MovementType m_movementType;
 		ColliderType m_colliderType;
+		TargetType m_targetType;
 
 		//Transforms
 		sf::Vector2f m_position;
@@ -43,10 +44,15 @@ namespace ratchet
 		sf::FloatRect getLocalBounds();
 		ColliderBase* getCollider();
 		bool m_markedForDestruction = false;
+		
+		GameObject* m_target;
+	
 
 		//Setters
 		void SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees);
 		void SetActiveRenderer(bool active);
+		void SetTarget(TargetType& targettype);
+		
 
 		virtual void invertCharacterMovingSpriteScale(int direction);
 

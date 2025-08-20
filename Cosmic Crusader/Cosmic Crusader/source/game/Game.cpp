@@ -44,6 +44,7 @@ namespace ratchet
 			{
 				auto config = GameObjectConfig();
 				config.m_Faction = Faction::FACTION_UNKNOWN;
+				config.m_targetType = TargetType::TARGET_UNKNOWN;
 				config.m_colliderType = COLLIDERTYPE_UNKNOWN;
 				config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 
@@ -89,6 +90,7 @@ namespace ratchet
 		{
 			auto* weaponConfig = new WeaponConfig(51, 12, true);
 			weaponConfig->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
+			weaponConfig->m_targetType = TargetType::TARGET_UNKNOWN;
 			weaponConfig->m_Faction = Faction::FACTION_UNKNOWN;
 			weaponConfig->m_colliderType = COLLIDERTYPE_UNKNOWN;
 			weaponConfig->m_weaponType = Weapon::TYPE::Blaster;
@@ -188,6 +190,8 @@ namespace ratchet
 
 			config.m_Faction = Faction::PLAYER;
 			config.m_movementType = MovementType::GROUND;
+			config.m_targetType = TargetType::PLAYER;
+			
 			config.m_colliderType = DYNAMIC;
 
 			config.positionXOffset = 0.f;
@@ -263,6 +267,7 @@ namespace ratchet
 #endif
 
 			config.m_Faction = Faction::ENEMY;
+			config.m_targetType = TargetType::PLAYER;
 			config.m_movementType = MovementType::GROUND;
 			config.m_colliderType = DYNAMIC;
 

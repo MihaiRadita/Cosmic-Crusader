@@ -6,6 +6,7 @@ namespace ratchet
 {
 	enum class Faction{FACTION_UNKNOWN = 0 ,PLAYER,ENEMY, ALIEN, ROBOT };
 	enum class MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, AIR};
+	enum class TargetType{TARGET_UNKNOWN = 0, PLAYER, ENEMY, PET};
 	struct GameObjectConfig
 	{
 #ifdef IS_RATCHET_DEBUG
@@ -16,6 +17,7 @@ namespace ratchet
 		Faction m_Faction;
 		MovementType m_movementType;
 		ColliderType m_colliderType;
+		TargetType m_targetType;
 
 		//Transforms
 		sf::Vector2f position;

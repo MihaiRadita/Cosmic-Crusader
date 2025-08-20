@@ -169,6 +169,7 @@ namespace ratchet
 			updatePhysics();
 
 			m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
+
 		}
 		else if (m_faction == Faction::ENEMY)
 		{
@@ -187,6 +188,8 @@ namespace ratchet
 			updateMovement();
 
 			updateAnimations();
+
+			m_target;
 		}
 	}
 
