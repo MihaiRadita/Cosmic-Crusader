@@ -25,6 +25,7 @@ namespace hidden
 		{ "WEAPON",				false	},
 		{ "WEAPON_FIRE",		false	},
 		{ "WEAPON_PICKUP",		false	},
+		{"AI_TARGETING",			true} 
 	};
 
 	inline bool isTraceChannelEnabled(const char* channel)

@@ -38,6 +38,17 @@ namespace ratchet
 		int m_lastFiredWeaponIndex = -1;
 		bool m_mustSpawnBullet = false;
 
+		//target detect distance 
+		float m_targetMaxDistanceDetectionX;
+		float m_targetMaxDistanceDetectionY;
+
+		bool m_isTargetDetected = false;
+		bool m_isTagetBehindCharacter = false;
+
+		//target lose distance
+		float m_targetMaxDistanceLoseX;
+		float m_targetMaxDistanceLoseY;
+
 		sf::Vector2f currentMousePositiion = sf::Vector2f(0.0f,0.0f);
 
 		//Angles
@@ -96,6 +107,8 @@ namespace ratchet
 		// Physics
 		bool isGrounded() const { return m_isGround; };
 
+		//Detections
+		void detectTarget(GameObject* target);
 
 
 		//Getters

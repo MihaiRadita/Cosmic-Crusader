@@ -20,6 +20,11 @@ namespace ratchet
 		m_HalfBaseAngle = m_baseAngle / 2.0f;
 		TRACE_CHANNEL("GAMEOBJECT_INIT", m_baseAngle / 2.0f, " ");
 
+		m_targetMaxDistanceDetectionX = config.m_targetMaxDistanceDetectionX;
+		m_targetMaxDistanceDetectionY = config.m_targetMaxDistanceDetectionY;
+		m_targetMaxDistanceLoseX = config.m_targetMaxDistanceLoseX;
+		m_targetMaxDistanceLoseY = config.m_targetMaxDistanceLoseY;
+
 		m_DEG_TO_RAD = M_PI / 180.0f;
 		m_tangentHalfBase = tan((m_baseAngle / 2.0f) * m_DEG_TO_RAD);
 		m_tangentx3HalfBase = tan((3.0f * m_baseAngle / 2.0f) * m_DEG_TO_RAD);
@@ -111,6 +116,8 @@ namespace ratchet
 		m_shooitngPointCenter.setPosition(m_shootingPointDynamic.getPosition().x, m_shootingPointDynamic.getPosition().y);
 
 		m_isRightNoWeapon = true;
+
+		m_target;
 	}
 
 	Creature::~Creature()
@@ -189,6 +196,28 @@ namespace ratchet
 
 			updateAnimations();
 
+			detectTarget(m_target);
+
+			if (m_isTargetDetected)
+			{
+				TRACE_CHANNEL("AI_TARGETING", "Enemy detects target(PLAYER)!");
+				if (m_isTagetBehindCharacter == false)
+				{
+					m_facingRight = true;
+				
+				}
+				else if(m_isTagetBehindCharacter ==  true)
+				{
+					m_facingRight = false;
+				}
+
+				invertCharacterMovingSpriteScale(m_facingRight ? 1.0f : -1.0f);
+			}
+			else
+			{
+
+			}
+
 			m_target;
 		}
 	}
@@ -205,6 +234,9 @@ namespace ratchet
 		// Sync sprite rotation with collider
 		m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
 		m_sprite.setRotation(m_rotation);
+
+		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+		setPosition(playerPosition);
 	}
 	void Creature::updateRotation()
 	{
@@ -445,6 +477,39 @@ namespace ratchet
 
 			// salveaza stare curenta in stare anterioara	
 			m_characterAnimSwitch = m_characterAnimationState;
+		}
+	}
+
+	void Creature::detectTarget(GameObject* target)
+	{
+
+
+		sf::Vector2f targetdistancevector = this->getPosition() - target->getPosition();
+
+		if (targetdistancevector.x > 0.0f)
+		{
+			m_isTagetBehindCharacter = true;
+		}
+		else if(targetdistancevector.x < 0.0f)
+		{
+			m_isTagetBehindCharacter = false;
+			targetdistancevector.x *= -1.f;
+		}
+
+		if (targetdistancevector.y < 0.0f)
+		{
+			//targetdistancevector.y *= -1.f;
+		}
+
+		if (targetdistancevector.x <= m_targetMaxDistanceDetectionX)
+		{
+			m_isTargetDetected = true;
+			
+		}
+		else if (targetdistancevector.x >= m_targetMaxDistanceLoseX)
+		{
+			m_isTargetDetected = false;
+			
 		}
 	}
 

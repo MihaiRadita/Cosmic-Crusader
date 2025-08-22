@@ -283,6 +283,11 @@ namespace ratchet
 			config.m_fallingSpeed = 7000.0f;
 			config.m_AngleBase = 45.f;
 
+			config.m_targetMaxDistanceDetectionX = 2.5f;
+			config.m_targetMaxDistanceDetectionY = 0.01f;
+			config.m_targetMaxDistanceLoseX = 0.5f;
+			config.m_targetMaxDistanceLoseY = 0.3f;
+
 			config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Blaster/Angle0/Aim/Idle1.png";
 			config.spriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/";
 

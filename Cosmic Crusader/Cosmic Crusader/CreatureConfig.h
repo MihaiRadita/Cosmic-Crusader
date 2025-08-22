@@ -14,6 +14,14 @@ namespace ratchet
 		float m_fallingSpeed;
 		float m_jumpImpulse;
 		float m_movingAirSpeed;
+
+		//target detect distance 
+		float m_targetMaxDistanceDetectionX;
+		float m_targetMaxDistanceDetectionY;
+
+		//target lose distance
+		float m_targetMaxDistanceLoseX;
+		float m_targetMaxDistanceLoseY;
 	
 		//Anlges
 		float m_AngleBase;
