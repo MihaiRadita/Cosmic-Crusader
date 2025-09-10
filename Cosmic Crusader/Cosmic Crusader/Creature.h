@@ -83,7 +83,6 @@ namespace ratchet
 
 		//Update Function
 		void update() override;
-		void updateInput() override;
 		void updateMovement() override;
 		void updateRotation() override;
 		void updatePhysics() override;
@@ -165,8 +164,9 @@ namespace ratchet
 		 sf::CircleShape m_shootingPointDynamic;
 		 sf::CircleShape m_shooitngPointCenter;
 
+		 bool m_isGround;
+
 	private:
-		bool m_isGround;
 	};
 }
 

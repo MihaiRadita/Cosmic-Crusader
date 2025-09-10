@@ -75,7 +75,6 @@ namespace ratchet
 		m_faction = config.m_Faction;
 		m_colliderType = config.m_colliderType;
 		m_movementType = config.m_movementType;
-		m_targetType = config.m_targetType;
 
 		//Transforms
 		m_position = config.position;
@@ -84,7 +83,8 @@ namespace ratchet
 
 		m_activeRenderer = config.m_activeRenderer;
 		m_startSpritePath = config.startSpriteTexturePath;
-
+		
+		m_targetType = config.m_targetType;
 
 
 		//Sprites and Terxtures
@@ -115,11 +115,7 @@ namespace ratchet
 			m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
 		}
 
-		SetTarget(m_targetType);
-
 		m_activeGameObject = true;
-
-
 	}
 
 	ratchet::GameObject::~GameObject()
@@ -255,7 +251,7 @@ namespace ratchet
 		m_activeRenderer = active;
 	}
 
-	void GameObject::SetTarget(TargetType& targettype)
+	/*void GameObject::SetTarget(TargetType& targettype)
 	{
 		for (auto* obj : s_gameObjects)
 		{
@@ -271,7 +267,7 @@ namespace ratchet
 				}
 			}
 		}
-	}
+	}*/
 
 	void GameObject::invertCharacterMovingSpriteScale(int direction)
 	{

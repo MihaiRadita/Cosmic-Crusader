@@ -119,6 +119,9 @@
     <ClCompile Include="RatchetMaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SelfControlledCreature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -197,5 +200,6 @@
     <ClInclude Include="PrefabAssets.h" />
     <ClInclude Include="RatchetMaths.h" />
     <ClInclude Include="TraceChannels.h" />
+    <ClInclude Include="SelfControlledCreature.h" />
   </ItemGroup>
 </Project>

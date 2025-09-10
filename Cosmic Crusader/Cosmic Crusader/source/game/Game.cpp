@@ -188,9 +188,8 @@ namespace ratchet
 			config.m_debugDraw = true;
 #endif
 
-			config.m_Faction = Faction::PLAYER;
+			config.m_Faction = Faction::TEAM_0;
 			config.m_movementType = MovementType::GROUND;
-			config.m_targetType = TargetType::PLAYER;
 			
 			config.m_colliderType = DYNAMIC;
 
@@ -266,7 +265,7 @@ namespace ratchet
 			config.m_debugDraw = true;
 #endif
 
-			config.m_Faction = Faction::ENEMY;
+			config.m_Faction = Faction::TEAM_1;
 			config.m_targetType = TargetType::PLAYER;
 			config.m_movementType = MovementType::GROUND;
 			config.m_colliderType = DYNAMIC;
@@ -307,7 +306,7 @@ namespace ratchet
 			colliderConfig.m_fixtureDef.isSensor = false;
 
 #ifdef IS_RATCHET_DEBUG
-			colliderConfig.m_debugDraw = true;
+			colliderConfig.m_debugDraw = false;
 #endif
 
 			if (colliderConfig.m_bodyDef.type == b2_dynamicBody)
@@ -339,7 +338,7 @@ namespace ratchet
 
 			config.m_currentlyEquippedWeaponIndex = 0;
 
-			GameObject::s_gameObjects.push_back(new Creature(config));
+			GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
 		}
 	}
 	Game::Game()

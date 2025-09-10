@@ -45,13 +45,13 @@ namespace ratchet
 		ColliderBase* getCollider();
 		bool m_markedForDestruction = false;
 		
-		GameObject* m_target;
+		//GameObject* m_target;
 	
 
 		//Setters
 		void SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees);
 		void SetActiveRenderer(bool active);
-		void SetTarget(TargetType& targettype);
+		//void SetTarget(TargetType& targettype);
 		
 
 		virtual void invertCharacterMovingSpriteScale(int direction);

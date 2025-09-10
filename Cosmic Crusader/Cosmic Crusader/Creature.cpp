@@ -78,7 +78,7 @@ namespace ratchet
 			addWeapon(config.first, config.second);
 		}
 
-		if (m_faction == Faction::PLAYER)
+		if (m_faction == Faction::TEAM_0)
 		{
 			m_characterAnimationState = IDLE;
 			m_characterAnimator = new Animator();
@@ -91,7 +91,7 @@ namespace ratchet
 			m_characterAnimSwitch = -1;
 
 		}
-		else if (m_faction == Faction::ENEMY)
+		else if (m_faction == Faction::TEAM_1)
 		{
 			m_characterAnimationState = IDLE;
 			m_characterAnimator = new Animator();
@@ -116,8 +116,6 @@ namespace ratchet
 		m_shooitngPointCenter.setPosition(m_shootingPointDynamic.getPosition().x, m_shootingPointDynamic.getPosition().y);
 
 		m_isRightNoWeapon = true;
-
-		m_target;
 	}
 
 	Creature::~Creature()
@@ -139,104 +137,21 @@ namespace ratchet
 
 	void Creature::update()
 	{
-
-		if (m_faction == Faction::PLAYER)
-		{
-			if (!m_activeGameObject) return;
-
-			auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
-			auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
+		updateWeaponSelection();
+		updateMovement();
+		updateJump();
+		computeAimAngleState();
+		computeAimBulletRotation();
+		computeShootingPoint();
+		updateAnimations();
+		updateShooting();
+		updatePhysics();
 		
-			if (currentMousePositiion != mouseWorldPosition)
-			{
-				currentMousePositiion = mouseWorldPosition;
-
-				TRACE_CHANNEL("MOUSE_POSITION", "CURRENT MOUSE POSITION = ", currentMousePositiion.x, " , ", currentMousePositiion.y);
-			}
-
-			updateInput();
-			if (m_collider && !m_collider->m_skipRaycastThisFrame)
-			{
-				m_isGround = m_collider->performGroundRayCast(m_sprite);
-			}
-			else
-			{
-				m_isGround = false;
-				m_collider->m_skipRaycastThisFrame = false;
-			}
-
-			updateWeaponSelection();
-			updateMovement();
-			updateJump();
-			computeAimAngleState();
-			computeAimBulletRotation();
-			computeShootingPoint();
-			updateAnimations();
-			updateShooting();
-			updatePhysics();
-
-			m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
-
-		}
-		else if (m_faction == Faction::ENEMY)
-		{
-			if(!m_activeGameObject) return;
-
-			if (m_collider && !m_collider->m_skipRaycastThisFrame)
-			{
-				m_isGround = m_collider->performGroundRayCast(m_sprite);
-			}
-			else
-			{
-				m_isGround = false;
-				m_collider->m_skipRaycastThisFrame = false;
-			}
-
-			updateMovement();
-
-			updateAnimations();
-
-			detectTarget(m_target);
-
-			if (m_isTargetDetected)
-			{
-				TRACE_CHANNEL("AI_TARGETING", "Enemy detects target(PLAYER)!");
-				if (m_isTagetBehindCharacter == false)
-				{
-					m_facingRight = true;
-				
-				}
-				else if(m_isTagetBehindCharacter ==  true)
-				{
-					m_facingRight = false;
-				}
-
-				invertCharacterMovingSpriteScale(m_facingRight ? 1.0f : -1.0f);
-			}
-			else
-			{
-
-			}
-
-			m_target;
-		}
 	}
 
-	void Creature::updateInput()
-	{
-
-	}
 	void Creature::updateMovement()
 	{
-		auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-		m_sprite.setPosition(position);
-
-		// Sync sprite rotation with collider
-		m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-		m_sprite.setRotation(m_rotation);
-
-		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-		setPosition(playerPosition);
+		
 	}
 	void Creature::updateRotation()
 	{
@@ -247,7 +162,7 @@ namespace ratchet
 	}
 	void Creature::updateAnimations()
 	{
-		if (m_faction == Faction::PLAYER)
+		if (m_faction == Faction::TEAM_0)
 		{
 			if (m_input.x != 0.0f)
 			{
@@ -389,7 +304,7 @@ namespace ratchet
 			m_sprite.setRotation(m_rotation);
 
 		}
-		else if (m_faction == Faction::ENEMY)
+		else if (m_faction == Faction::TEAM_1)
 		{
 			//if (m_currentWeaponType != Weapon::TYPE::None)
 			//{

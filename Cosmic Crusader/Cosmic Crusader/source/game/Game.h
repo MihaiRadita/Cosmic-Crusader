@@ -13,6 +13,8 @@
 
 #include "PrefabAssets.h"
 
+#include "SelfControlledCreature.h"
+
 namespace ratchet
 {
 	class Game {

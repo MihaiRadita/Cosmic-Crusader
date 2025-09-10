@@ -263,6 +263,34 @@ namespace ratchet
 		m_currenFireDirectionNorm = directionNormalised;
 	}
 
+	void Player::update()
+	{
+		if (!m_activeGameObject) return;
+
+		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
+		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
+
+		if (currentMousePositiion != mouseWorldPosition)
+		{
+			currentMousePositiion = mouseWorldPosition;
+			TRACE_CHANNEL("MOUSE_POSITION", "CURRENT MOUSE POSITION = ", currentMousePositiion.x, " , ", currentMousePositiion.y);
+		}
+
+		if (m_collider && !m_collider->m_skipRaycastThisFrame)
+		{
+			m_isGround = m_collider->performGroundRayCast(m_sprite);
+		}
+		else
+		{
+			m_isGround = false;
+			m_collider->m_skipRaycastThisFrame = false;
+		}
+
+		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
+
+		Creature::update();
+	}
+
 	void Player::updateMovement()
 	{
 		m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
@@ -317,9 +345,6 @@ namespace ratchet
 		// m_isGround = isGround;
 	}
 
-	void Player::updateInput()
-	{
-	}
 
 	Player::~Player() 
 	{

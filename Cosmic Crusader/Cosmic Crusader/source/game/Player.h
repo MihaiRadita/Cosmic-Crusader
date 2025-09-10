@@ -51,12 +51,12 @@ namespace ratchet
 		void computeAimBulletRotation() override;
 
 		//Update functions
+		void update() override;
 		void updateMovement() override;
 		void updateRotation() override;
 		void updateJump() override;
 		void updateRunningJump() override;
 		void setIsOnGround(bool isGround);
-		void updateInput() override;
 
 		//Render
 
