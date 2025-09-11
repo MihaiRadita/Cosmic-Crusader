@@ -65,9 +65,10 @@ namespace ratchet
 
 
 		//Character Animations
+		std::vector<ANIMATION_STATE> m_animationStates;
 		std::map<ANIMATION_STATE, AnimationBase*> m_animationList;
 		int m_characterAnimSwitch;
-		ANIMATION_STATE m_characterAnimationState;
+		ANIMATION_STATE m_currentAnimationState;
 		std::vector<std::string> animationsTexturesPath;
 		std::string creatureFallingTexturePath;
 		Animator* m_characterAnimator;

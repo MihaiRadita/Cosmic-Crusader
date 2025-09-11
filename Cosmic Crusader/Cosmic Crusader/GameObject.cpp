@@ -83,8 +83,6 @@ namespace ratchet
 
 		m_activeRenderer = config.m_activeRenderer;
 		m_startSpritePath = config.startSpriteTexturePath;
-		
-		m_targetType = config.m_targetType;
 
 
 		//Sprites and Terxtures

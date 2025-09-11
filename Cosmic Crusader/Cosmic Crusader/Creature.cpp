@@ -78,27 +78,36 @@ namespace ratchet
 			addWeapon(config.first, config.second);
 		}
 
-		if (m_faction == Faction::TEAM_0)
+		m_animationStates = config.m_animationStates;
+		m_currentAnimationState = config.m_currentAnimationState;
+		m_characterAnimator = new Animator();
+
+		for (auto& animationState : m_animationStates)
 		{
-			m_characterAnimationState = IDLE;
-			m_characterAnimator = new Animator();
-			m_animationList.emplace(ANIMATION_STATE::IDLE, new AnimationIdle(m_spritePath, m_weaponTypeList));
-			m_animationList.emplace(ANIMATION_STATE::JUMP, new AnimationJump(m_spritePath, m_weaponTypeList));
-			m_animationList.emplace(ANIMATION_STATE::MOVING, new AnimationRun(m_spritePath, m_weaponTypeList));
-			m_animationList.emplace(ANIMATION_STATE::JUMP_RUNNING, new AnimationJumpRun(m_spritePath, m_weaponTypeList));
-			m_animationList.emplace(ANIMATION_STATE::FALL, new AnimationFall(m_spritePath, m_weaponTypeList));
-
-			m_characterAnimSwitch = -1;
-
+			switch (animationState)
+			{
+			case ANIMATION_STATE::IDLE:
+				m_animationList.emplace(ANIMATION_STATE::IDLE, new AnimationIdle(m_spritePath, m_weaponTypeList));
+				break;
+			case ANIMATION_STATE::MOVING:
+				m_animationList.emplace(ANIMATION_STATE::MOVING, new AnimationRun(m_spritePath, m_weaponTypeList));
+				break;
+			case ANIMATION_STATE::JUMP:
+				m_animationList.emplace(ANIMATION_STATE::JUMP, new AnimationJump(m_spritePath, m_weaponTypeList));
+				break;
+			case ANIMATION_STATE::JUMP_RUNNING:
+				m_animationList.emplace(ANIMATION_STATE::JUMP_RUNNING, new AnimationJumpRun(m_spritePath, m_weaponTypeList));
+				break;
+			case ANIMATION_STATE::FALL:
+				m_animationList.emplace(ANIMATION_STATE::FALL, new AnimationFall(m_spritePath, m_weaponTypeList));
+				break;
+			}
 		}
-		else if (m_faction == Faction::TEAM_1)
-		{
-			m_characterAnimationState = IDLE;
-			m_characterAnimator = new Animator();
-			m_animationList.emplace(ANIMATION_STATE::IDLE, new AnimationIdle(m_spritePath, m_weaponTypeList));
 
-			m_characterAnimSwitch = -1;
-		}
+		m_characterAnimSwitch = -1;
+
+		
+		m_characterAnimSwitch = -1;
 		setWeapon(m_currentEquippedWeaponIndex);
 
 		m_characterShootingPosition = sf::CircleShape(0.05);
@@ -175,9 +184,9 @@ namespace ratchet
 						m_isFallingWithoutJumping = false;
 						if (m_isMoving)
 						{
-							if (m_characterAnimationState != MOVING)
+							if (m_currentAnimationState != MOVING)
 							{
-								m_characterAnimationState = MOVING;
+								m_currentAnimationState = MOVING;
 								switchAnimation();
 							}
 						}
@@ -216,11 +225,11 @@ namespace ratchet
 
 			if (!isGrounded())
 			{
-				if (m_characterAnimationState != JUMP && m_characterAnimationState != JUMP_RUNNING)
+				if (m_currentAnimationState != JUMP && m_currentAnimationState != JUMP_RUNNING)
 				{
-					if (m_characterAnimationState != FALL)
+					if (m_currentAnimationState != FALL)
 					{
-						m_characterAnimationState = FALL;
+						m_currentAnimationState = FALL;
 						switchAnimation();
 					}
 				}
@@ -228,11 +237,11 @@ namespace ratchet
 
 			if (m_input.isJump && isGrounded())
 			{
-				if (m_characterAnimationState != MOVING)
+				if (m_currentAnimationState != MOVING)
 				{
-					if (m_characterAnimationState != JUMP)
+					if (m_currentAnimationState != JUMP)
 					{
-						m_characterAnimationState = JUMP;
+						m_currentAnimationState = JUMP;
 						m_isFallingWithoutJumping = false;
 						switchAnimation();
 					}
@@ -240,11 +249,11 @@ namespace ratchet
 			}
 			if (m_input.isJump && isGrounded() && m_isMoving == true)
 			{
-				if (m_characterAnimationState == MOVING)
+				if (m_currentAnimationState == MOVING)
 				{
-					if (m_characterAnimationState != JUMP_RUNNING)
+					if (m_currentAnimationState != JUMP_RUNNING)
 					{
-						m_characterAnimationState = JUMP_RUNNING;
+						m_currentAnimationState = JUMP_RUNNING;
 						switchAnimation();
 					}
 				}
@@ -254,10 +263,10 @@ namespace ratchet
 			{
 #ifdef IS_RATCHET_DEBUG
 			TRACE_CHANNEL("ANIMATION", "Idle");
-			TRACE_CHANNEL("ANIMATION", m_characterAnimationState);
+			TRACE_CHANNEL("ANIMATION", m_currentAnimationState);
 #endif			
 				m_isMoving = false;
-				m_characterAnimationState = ANIMATION_STATE::IDLE;
+				m_currentAnimationState = ANIMATION_STATE::IDLE;
 				switchAnimation();
 			}
 
@@ -306,16 +315,10 @@ namespace ratchet
 		}
 		else if (m_faction == Faction::TEAM_1)
 		{
-			//if (m_currentWeaponType != Weapon::TYPE::None)
-			//{
-			//	//m_currentCharacterState = WeaponAnimation::STATE::Aim;
-
-			//}
-
-			if (m_characterAnimationState == ANIMATION_STATE::IDLE)
+			if (m_currentAnimationState == ANIMATION_STATE::IDLE)
 			{
 				switchAnimation();
-				m_characterAnimationState = ANIMATION_STATE::FALL;
+				m_currentAnimationState = ANIMATION_STATE::FALL;
 			}
 
 
@@ -380,18 +383,18 @@ namespace ratchet
 
 	void Creature::switchAnimation()
 	{
-		if (m_characterAnimationState != m_characterAnimSwitch) {
+		if (m_currentAnimationState != m_characterAnimSwitch) {
 
 
 			m_characterAnimator->resetAnimationTimer(m_characterAnimator->getAbstractAnimation());
 			m_characterAnimator->resetAnimIndex(m_characterAnimator->getAbstractAnimation());
-			m_characterAnimator->setAnimation(m_animationList[m_characterAnimationState]);
+			m_characterAnimator->setAnimation(m_animationList[m_currentAnimationState]);
 			m_characterAnimator->resetAnimationTimer(m_characterAnimator->getAbstractAnimation());
 			m_characterAnimator->resetAnimIndex(m_characterAnimator->getAbstractAnimation());
 
 
 			// salveaza stare curenta in stare anterioara	
-			m_characterAnimSwitch = m_characterAnimationState;
+			m_characterAnimSwitch = m_currentAnimationState;
 		}
 	}
 

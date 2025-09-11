@@ -2,6 +2,8 @@
 #include "WeaponConfig.h"
 #include "Weapon.h"
 
+#include "animations/AnimationBase.h"
+
 
 namespace ratchet
 {
@@ -40,6 +42,10 @@ namespace ratchet
 		WeaponAnimation::ANGLE m_currentAngle;
 		WeaponAnimation::STATE m_currentState;
 		Weapon::TYPE m_currentWeaponType;
+
+		std::vector<ANIMATION_STATE> m_animationStates;
+
+		ANIMATION_STATE m_currentAnimationState;
 
 		int m_currentlyEquippedWeaponIndex = 0;
 
