@@ -100,18 +100,24 @@ namespace ratchet
 
 		if (targetdistancevector.y < 0.0f)
 		{
-			//targetdistancevector.y *= -1.f;
+			targetdistancevector.y *= -1.f;
 		}
 
-		if (targetdistancevector.x <= m_targetMaxDistanceDetectionX)
+		if (targetdistancevector.y <= m_targetMaxDistanceDetectionY)
 		{
-			m_isTargetDetected = true;
-
+			
+			if (targetdistancevector.x <= m_targetMaxDistanceDetectionX)
+			{
+				m_isTargetDetected = true;
+			}
+			else if (targetdistancevector.x > m_targetMaxDistanceDetectionX)
+			{
+				m_isTargetDetected = false;
+			}
 		}
-		else if (targetdistancevector.x >= m_targetMaxDistanceLoseX)
+		else if (targetdistancevector.y > m_targetMaxDistanceDetectionY)
 		{
 			m_isTargetDetected = false;
-
 		}
 	}
 }
