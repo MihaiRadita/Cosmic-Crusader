@@ -5,14 +5,36 @@
 namespace ratchet
 {
 
-	ratchet::SelfControlledCreature::SelfControlledCreature(const CreatureConfig& config) : Creature(config)
+	ratchet::SelfControlledCreature::SelfControlledCreature(const SelfControlledCreatureConfig& config) : Creature(config)
 	{
 		m_targetMaxDistanceDetectionX = config.m_targetMaxDistanceDetectionX;
 		m_targetMaxDistanceDetectionY = config.m_targetMaxDistanceDetectionY;
 		m_targetMaxDistanceLoseX = config.m_targetMaxDistanceLoseX;
 		m_targetMaxDistanceLoseY = config.m_targetMaxDistanceLoseY;
+		m_targetMaxDistanceAttackX = config.m_targetMaxDistanceAttackX;
+		m_targetMaxDistanceAttackY = config.m_targetMaxDistanceAttackY;
 
 		SetTarget(m_faction);
+	}
+	void SelfControlledCreature::checkTargetToAttack(Creature* target)
+	{
+		sf::Vector2f m_targetAttackDistanceVector = this->getPosition() - target->getPosition();
+
+		if (m_targetAttackDistanceVector.x < 0.0f)
+		{
+			m_targetAttackDistanceVector.x *= -1.f;
+		}
+
+		if (m_targetAttackDistanceVector.x <= m_targetMaxDistanceAttackX)
+		{
+			m_isAttacking = true;
+		}
+		else if (m_targetAttackDistanceVector.x > m_targetMaxDistanceAttackX)
+		{
+			m_isAttacking = false;
+		}
+
+
 	}
 	void SelfControlledCreature::SetTarget(Faction& faction)
 	{
@@ -33,6 +55,8 @@ namespace ratchet
 	}
 	void SelfControlledCreature::handleEvent()
 	{
+		detectTarget(m_target);
+
 		if (m_isTargetDetected)
 		{
 			TRACE_CHANNEL("AI_TARGETING", "Enemy detects target(PLAYER)!");
@@ -47,10 +71,29 @@ namespace ratchet
 			}
 
 			invertCharacterMovingSpriteScale(m_facingRight ? 1.0f : -1.0f);
+
+			checkTargetToAttack(m_target);
+
+			if (m_isAttacking)
+			{
+				m_input.x = 0.f;
+			}
+			else
+			{
+				if (m_facingRight)
+				{
+					m_input.x = 1.f;
+				}
+				else
+				{
+					m_input.x = -1.f;
+				}
+			}
+
 		}
 		else
 		{
-
+			m_input.x = 0;
 		}
 	}
 	void SelfControlledCreature::update()
@@ -67,13 +110,29 @@ namespace ratchet
 			m_collider->m_skipRaycastThisFrame = false;
 		}
 
-		detectTarget(m_target);
 		handleEvent();
 
 		Creature::update();
 	}
 	void SelfControlledCreature::updateMovement()
 	{
+
+		m_isMoving = false;
+		bool changeX = false;
+		float xVelocity = 0.0f;
+		bool changeY = false;
+		float yVelocity = 0.0f;
+
+		if (m_input.x != 0)
+		{
+			m_isMoving = true;
+			changeX = true;
+			xVelocity = m_movementSpeed * m_input.x;
+		}
+
+
+		m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
+
 		auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 		m_sprite.setPosition(position);
 

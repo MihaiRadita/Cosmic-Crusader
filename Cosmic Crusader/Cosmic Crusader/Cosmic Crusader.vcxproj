@@ -157,6 +157,7 @@
     <ClCompile Include="RatchetMaths.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SelfControlledCreature.cpp" />
+    <ClCompile Include="SelfControlledCreatureConfig.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="source\animations\AnimationFall.cpp" />
     <ClCompile Include="source\animations\Animator.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="RatchetMaths.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SelfControlledCreature.h" />
+    <ClInclude Include="SelfControlledCreatureConfig.h" />
     <ClInclude Include="source\animations\AnimationFall.h" />
     <ClInclude Include="source\animations\Animator.h" />
     <ClInclude Include="source\animations\AnimationBase.h" />

@@ -263,7 +263,7 @@ namespace ratchet
 		}
 
 		{
-			auto config = CreatureConfig();
+			auto config = SelfControlledCreatureConfig();
 #ifdef IS_RATCHET_DEBUG
 			config.m_debugDraw = true;
 #endif
@@ -283,15 +283,17 @@ namespace ratchet
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
-			config.m_movingSpeed = 7.0f;
+			config.m_movingSpeed = 5.0f;
 			config.m_jumpImpulse = -10.0f;
 			config.m_fallingSpeed = 7000.0f;
 			config.m_AngleBase = 45.f;
 
-			config.m_targetMaxDistanceDetectionX = 2.5f;
+			config.m_targetMaxDistanceDetectionX = 3.5f;
 			config.m_targetMaxDistanceDetectionY = 1.5f;
 			config.m_targetMaxDistanceLoseX = 3.5f;
 			config.m_targetMaxDistanceLoseY = 3.5f;
+			config.m_targetMaxDistanceAttackX = 2.0f;
+			config.m_targetMaxDistanceAttackY = 1.5f;
 
 			config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Blaster/Angle0/Aim/Idle1.png";
 			config.spriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/";

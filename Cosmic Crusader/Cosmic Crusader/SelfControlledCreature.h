@@ -8,7 +8,7 @@ namespace ratchet
 	{
 	public: 
 
-		SelfControlledCreature(const CreatureConfig& config);
+		SelfControlledCreature(const SelfControlledCreatureConfig& config);
 
 		//The creature target our AI creature will detect and chase
 		Creature* m_target;
@@ -20,6 +20,16 @@ namespace ratchet
 		//target lose distance
 		float m_targetMaxDistanceLoseX;
 		float m_targetMaxDistanceLoseY;
+
+		//target attack distance
+		float m_targetMaxDistanceAttackX;
+		float m_targetMaxDistanceAttackY;
+
+		//AI Checks
+		bool m_isAttacking = false;
+
+		//Check Attack Target Function
+		void checkTargetToAttack(Creature* target);
 
 		bool m_isTargetDetected = false;
 		bool m_isTagetBehindCharacter = false;

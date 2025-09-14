@@ -2,6 +2,7 @@
 
 #include "GameObjectConfig.h"
 #include "CreatureConfig.h"
+#include "SelfControlledCreatureConfig.h"
 #include "WeaponConfig.h"
 #include "BulletConfig.h"
 #include "physics/RectAngleCollider.h"
