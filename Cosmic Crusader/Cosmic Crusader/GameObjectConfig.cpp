@@ -16,6 +16,8 @@ namespace ratchet
 		position = sf::Vector2f(0.f, 0.f);
 		rotation = 0.f;
 		scale = sf::Vector2f(0.f, 0.f);
+
+		m_canJumpOver = false;
 		
 		//Graphics
 		spriteTexturePath = "";

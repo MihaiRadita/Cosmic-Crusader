@@ -43,6 +43,7 @@ namespace ratchet
 		sf::FloatRect getLocalBounds();
 		ColliderBase* getCollider();
 		bool m_markedForDestruction = false;
+		bool m_canJumpOver = false;
 		
 		//GameObject* m_target;
 	

@@ -315,11 +315,55 @@ namespace ratchet
 		}
 		else if (m_faction == Faction::TEAM_1)
 		{
-			if (m_currentAnimationState == ANIMATION_STATE::IDLE)
+
+			if (m_input.x != 0.0f)
+			{
+				m_isMoving = true;
+				if (m_movementType == MovementType::GROUND)
+				{
+					if (isGrounded())
+					{
+						m_isFallingWithoutJumping = false;
+						if (m_isMoving)
+						{
+							if (m_currentAnimationState != MOVING)
+							{
+								m_currentAnimationState = MOVING;
+								switchAnimation();
+							}
+						}
+					}
+				}
+			}
+
+			if (!isGrounded())
+			{
+				if (m_currentAnimationState != JUMP && m_currentAnimationState != JUMP_RUNNING)
+				{
+					if (m_currentAnimationState != FALL)
+					{
+						m_currentAnimationState = FALL;
+						switchAnimation();
+					}
+				}
+			}
+
+			if (isNoControlActive() && isGrounded() && m_isMoving == false)
+			{
+#ifdef IS_RATCHET_DEBUG
+				TRACE_CHANNEL("ANIMATION", "Idle");
+				TRACE_CHANNEL("ANIMATION", m_currentAnimationState);
+#endif			
+				m_isMoving = false;
+				m_currentAnimationState = ANIMATION_STATE::IDLE;
+				switchAnimation();
+			}
+
+			/*if (m_currentAnimationState == ANIMATION_STATE::IDLE)
 			{
 				switchAnimation();
 				m_currentAnimationState = ANIMATION_STATE::FALL;
-			}
+			}*/
 
 
 			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);

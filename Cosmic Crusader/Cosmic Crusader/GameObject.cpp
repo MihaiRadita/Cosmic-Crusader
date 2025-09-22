@@ -84,6 +84,7 @@ namespace ratchet
 		m_activeRenderer = config.m_activeRenderer;
 		m_startSpritePath = config.startSpriteTexturePath;
 
+		m_canJumpOver = config.m_canJumpOver;
 
 		//Sprites and Terxtures
 

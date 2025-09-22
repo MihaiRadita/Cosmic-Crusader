@@ -61,6 +61,17 @@ namespace ratchet
 
 				posY += config.positionYOffset;
 
+				if (obj.contains("properties"))
+				{
+					for (const auto& prop : obj["properties"])
+					{
+						if (prop["name"] == "canJumpOver")
+						{
+							config.m_canJumpOver = prop["value"].get<bool>();
+							break;
+						}
+					}
+				}
 
 				config.position = sf::Vector2f(posX, posY);
 				config.rotation = obj["rotation"];
@@ -271,7 +282,7 @@ namespace ratchet
 			config.m_Faction = Faction::TEAM_1;
 			config.m_movementType = MovementType::GROUND;
 
-			config.m_animationStates = { ANIMATION_STATE::IDLE };
+			config.m_animationStates = { ANIMATION_STATE::IDLE, ANIMATION_STATE::MOVING, ANIMATION_STATE::JUMP, ANIMATION_STATE::FALL };
 			config.m_currentAnimationState = ANIMATION_STATE::IDLE;
 
 			config.m_colliderType = DYNAMIC;

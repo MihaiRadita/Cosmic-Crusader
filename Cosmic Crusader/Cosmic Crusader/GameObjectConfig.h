@@ -32,6 +32,7 @@ namespace ratchet
 		std::string startSpriteTexturePathAddition;
 		std::string fallingSpriteTexturePath;
 		bool m_activeRenderer;
+		bool m_canJumpOver;
 
 		//Physics
 		ColliderBaseConfig* m_colliderConfig = nullptr;
