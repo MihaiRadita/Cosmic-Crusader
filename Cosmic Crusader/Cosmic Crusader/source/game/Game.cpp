@@ -325,7 +325,7 @@ namespace ratchet
 			colliderConfig.m_fixtureDef.isSensor = false;
 
 #ifdef IS_RATCHET_DEBUG
-			colliderConfig.m_debugDraw = false;
+			colliderConfig.m_debugDraw = true;
 #endif
 
 			if (colliderConfig.m_bodyDef.type == b2_dynamicBody)

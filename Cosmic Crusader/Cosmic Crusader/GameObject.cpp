@@ -147,9 +147,14 @@ namespace ratchet
 		if (!m_activeRenderer) return;
 
 #ifdef IS_RATCHET_DEBUG
-		if (m_collider)
+
+
+		if (m_debugDraw)
 		{
-			m_collider->debugRender(target);
+			if (m_collider)
+			{
+				m_collider->debugRender(target);
+			}
 		}
 
 		if (m_debugDraw)

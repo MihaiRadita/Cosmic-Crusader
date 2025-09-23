@@ -36,6 +36,19 @@ namespace ratchet
 
 
 	}
+	void SelfControlledCreature::canJumpOver()
+	{
+		if (m_collider && !m_collider->m_skipRaycastThisFrame)
+		{
+			m_collider->m_facingDirectionX = m_facingRight ? 1.0f : -1.0f;
+			m_canJumpOver = m_collider->performJumpOverPlatformsRaycast(m_sprite, m_collider->m_facingDirectionX);
+		}
+		else
+		{
+			m_canJumpOver = false;
+			m_collider->m_skipRaycastThisFrame = false;
+		}
+	}
 	void SelfControlledCreature::SetTarget(Faction& faction)
 	{
 		for (auto* obj : s_gameObjects)
@@ -94,6 +107,17 @@ namespace ratchet
 		else
 		{
 			m_input.x = 0;
+		}
+
+		canJumpOver();
+
+		if (m_canJumpOver == true)
+		{
+			TRACE_CHANNEL("AI_JUMP_OVER_PLATFORMS", "ENEMY CAN JUMP OVER PLATFORMS!");
+		}
+		else
+		{
+			TRACE_CHANNEL("AI_JUMP_OVER_PLATFORMS", "ENEMY CAN NOT JUMP OVER PLATFORMS!");
 		}
 	}
 	void SelfControlledCreature::update()

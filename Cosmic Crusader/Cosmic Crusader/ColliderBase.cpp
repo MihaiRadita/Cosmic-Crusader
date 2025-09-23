@@ -111,6 +111,20 @@ namespace ratchet
 		return false;
 	}
 
+	void ColliderBase::getBottomPointsForRayCast(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
+	{
+		xStart = 0.0f;
+		yStart = 0.0f;
+		xEnd = 0.0f;
+		yEnd = 0.0f;
+		direction = 0.0f;
+	}
+
+	bool ColliderBase::performJumpOverPlatformsRaycast(sf::Sprite& sprite, float& direction)
+	{
+		return false;
+	}
+
 	float GroundRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
  	{
 		if (fixture)
@@ -142,6 +156,35 @@ namespace ratchet
 	}
 	ColliderBaseConfig::ColliderBaseConfig()
 	{
+	}
+	float JumpOverPlatformsRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
+	{
+		if (fixture)
+		{
+			b2Body* body = fixture->GetBody();
+
+			if (!body || !body->IsEnabled())
+			{
+				return -1.0f;
+			}
+
+			if (body == m_ignoredBody)
+			{
+				return -1.0f;
+			}
+			const short* fixtureUserData = reinterpret_cast<const short*>(fixture->GetUserData().pointer);
+			if (fixtureUserData && *fixtureUserData == static_cast<short>(PhysicsLayer::Platforms))
+			{
+				m_hit = true;
+				m_point = point;
+				m_normal = normal;
+				m_fraction = fraction;
+				return fraction;
+			}
+		}
+
+		m_hit = false;
+		return -1.0f;
 	}
 }
 

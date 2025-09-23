@@ -29,7 +29,7 @@ namespace ratchet
 		float m_jumpImpulse;
 		bool m_isMoving;
 		int m_currentEquippedWeaponIndex;
-		bool m_facingRight = false;
+		bool m_facingRight = true;
 		bool m_previusFacingRight = false;
 		bool m_isAnimationInverted = false;
 		sf::Clock m_fireCooldown;

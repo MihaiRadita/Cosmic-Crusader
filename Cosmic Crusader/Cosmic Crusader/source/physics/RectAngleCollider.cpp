@@ -14,6 +14,14 @@ namespace ratchet
 		m_ignoredBody = ignoredBody;
 	}
 
+	JumpOverPlatformsRayCastCallBack::JumpOverPlatformsRayCastCallBack(b2Body* ingnoreddBoy)
+	{
+		m_hit = false;
+		m_fraction = 1.0f;
+
+		m_ignoredBody = ingnoreddBoy;
+	}
+
 	RectAngleCollider::RectAngleCollider(sf::Sprite& sprite, const RectAngleColliderConfig& config) : ColliderBase(config)
 	{
 		initVariables(sprite, config);

@@ -53,6 +53,9 @@ namespace ratchet
 
 		bool m_skipRaycastThisFrame = false;
 
+		float m_facingDirectionX;
+		float m_facingDirectionY;
+
 
 		//Constructors
 		ColliderBase(const ColliderBaseConfig& config);
@@ -77,11 +80,15 @@ namespace ratchet
 		virtual void setColliderRotation(float angle);
 		virtual void setColliderOrigin(b2Vec2 origin) { m_origin = origin; }
 
-		//Checks
+		//Checks for Ground
 		virtual void getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual void getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual bool performGroundRayCast(sf::Sprite& sprite);
+
+		//Checks for Jump Over Platforms
+		virtual void getBottomPointsForRayCast(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
+		virtual bool performJumpOverPlatformsRaycast(sf::Sprite& sprite, float& direction);
 
 	protected:
 		b2Vec2 m_origin;
@@ -128,6 +135,21 @@ namespace ratchet
 		float m_fraction;
 		b2Body* m_ignoredBody;
 
+	};
+
+	class JumpOverPlatformsRayCastCallBack : public b2RayCastCallback
+	{
+	public:
+
+		JumpOverPlatformsRayCastCallBack(b2Body* ingonerdBody);
+
+		float ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction) override;
+
+		bool m_hit;
+		b2Vec2 m_point;
+		b2Vec2 m_normal;
+		float m_fraction;
+		b2Body* m_ignoredBody;
 	};
 
 }
