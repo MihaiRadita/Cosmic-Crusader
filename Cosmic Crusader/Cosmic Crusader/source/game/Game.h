@@ -48,7 +48,7 @@ namespace ratchet
 		void updatePlayer();
 		void updatePhysics();
 		
-		
+		void start();
 
 
 		//Spawners

@@ -10,6 +10,8 @@ namespace ratchet
 
 		SelfControlledCreature(const SelfControlledCreatureConfig& config);
 
+		~SelfControlledCreature() override;
+
 		//The creature target our AI creature will detect and chase
 		Creature* m_target;
 
@@ -39,6 +41,10 @@ namespace ratchet
 
 		//Setter
 		void SetTarget(Faction& faction);
+
+		void PostCosntructFixup() override;
+
+		void Start() override;
 
 		//update functions
 		void handleEvent();

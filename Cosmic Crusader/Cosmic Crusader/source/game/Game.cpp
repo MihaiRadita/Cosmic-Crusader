@@ -469,6 +469,14 @@ namespace ratchet
 
 	}
 
+	void Game::start()
+	{
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			obj->Start();
+		}
+	}
+
 	void Game::render()
 	{
 		m_window.clear(sf::Color::Black);

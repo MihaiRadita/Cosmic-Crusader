@@ -27,6 +27,10 @@ namespace ratchet
 		sf::Vector2f m_shootingOffsetAngle90;
 		sf::Vector2f m_shootingOffsetAngleMinus45;
 
+
+		void PostCosntructFixup() override;
+		void Start() override;
+
 		std::string m_weaponPickupID;
 
 		void OnCollisionEnter(GameObject* obj) override;

@@ -101,9 +101,23 @@ namespace ratchet
 		m_sprite.setRotation(m_rotation);
 		m_sprite.setScale(m_scale.x, m_scale.y);
 
+		m_activeGameObject = true;
+
 		if (const auto* capsuleConfig = dynamic_cast<CapsuleColliderConfig*>(config.m_colliderConfig))
 		{
 			m_collider = new ratchet::CapsuleCollider(m_sprite, *capsuleConfig);
+
+			std::cout << "Runtime type: " << typeid(*m_collider).name() << std::endl;
+
+			if (CapsuleCollider* pd = dynamic_cast<CapsuleCollider*>(m_collider))
+			{
+				std::cout << "Runtime type: " << typeid(*pd).name() << std::endl;
+
+				float height = pd->getGlobalHeight();
+
+				std::cout << height << std::endl;
+			}
+
 		}
 		else if (const auto* circleConfig = dynamic_cast<CircleColliderConfig*>(config.m_colliderConfig))
 		{
@@ -113,8 +127,6 @@ namespace ratchet
 		{
 			m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
 		}
-
-		m_activeGameObject = true;
 	}
 
 	ratchet::GameObject::~GameObject()
@@ -253,6 +265,19 @@ namespace ratchet
 	void GameObject::SetActiveRenderer(bool active)
 	{
 		m_activeRenderer = active;
+	}
+
+	void GameObject::PostCosntructFixup()
+	{
+		if (m_collider)
+		{
+			m_collider->SetOwner(this);
+		}
+	}
+
+	void GameObject::Start()
+	{
+		PostCosntructFixup();
 	}
 
 	/*void GameObject::SetTarget(TargetType& targettype)

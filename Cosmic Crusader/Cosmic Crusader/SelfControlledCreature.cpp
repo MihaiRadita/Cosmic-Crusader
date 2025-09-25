@@ -7,6 +7,7 @@ namespace ratchet
 
 	ratchet::SelfControlledCreature::SelfControlledCreature(const SelfControlledCreatureConfig& config) : Creature(config)
 	{
+
 		m_targetMaxDistanceDetectionX = config.m_targetMaxDistanceDetectionX;
 		m_targetMaxDistanceDetectionY = config.m_targetMaxDistanceDetectionY;
 		m_targetMaxDistanceLoseX = config.m_targetMaxDistanceLoseX;
@@ -15,6 +16,10 @@ namespace ratchet
 		m_targetMaxDistanceAttackY = config.m_targetMaxDistanceAttackY;
 
 		SetTarget(m_faction);
+	}
+	SelfControlledCreature::~SelfControlledCreature()
+	{
+
 	}
 	void SelfControlledCreature::checkTargetToAttack(Creature* target)
 	{
@@ -66,6 +71,18 @@ namespace ratchet
 			}
 		}
 	}
+	void SelfControlledCreature::PostCosntructFixup()
+	{
+		if (m_collider)
+		{
+			m_collider->SetOwner(this);
+		}
+	}
+	void SelfControlledCreature::Start()
+	{
+		PostCosntructFixup();
+	}
+
 	void SelfControlledCreature::handleEvent()
 	{
 		detectTarget(m_target);

@@ -1,13 +1,17 @@
 #include "stdafx.h"
 #include "ColliderBase.h"
 
-
+#include "game/Player.h"
+#include "SelfControlledCreature.h"
 
 namespace ratchet
 {
 	ColliderBase::ColliderBase(const ColliderBaseConfig& config)
 	{
 		m_body = nullptr;
+
+		m_obj = nullptr;
+		
 
 #ifdef IS_RATCHET_DEBUG
 		m_debugDraw = config.m_debugDraw;
@@ -35,6 +39,11 @@ namespace ratchet
 		m_body->SetAwake(true);
 
 		m_body->SetLinearVelocity(velocity);
+	}
+
+	void ColliderBase::SetOwner(GameObject* obj)
+	{
+		m_obj = obj;
 	}
 
 	b2Body* ColliderBase::getBody()

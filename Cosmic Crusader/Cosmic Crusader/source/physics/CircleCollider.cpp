@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "CircleCollider.h"
 
-
+#include "game/Player.h"
+#include "SelfControlledCreature.h"
 
 namespace ratchet
 {
@@ -12,6 +13,7 @@ namespace ratchet
 
 	void CircleCollider::initVariables(sf::Sprite& sprite, const CircleColliderConfig& config)
 	{
+
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 

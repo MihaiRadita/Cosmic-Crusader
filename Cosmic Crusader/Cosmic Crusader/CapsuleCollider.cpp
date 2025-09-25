@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "CapsuleCollider.h"
 
-
+#include "game/Player.h"
+#include "SelfControlledCreature.h"
 
 namespace ratchet
 {
@@ -13,6 +14,7 @@ namespace ratchet
 
 	void CapsuleCollider::initVariables(sf::Sprite& sprite, const CapsuleColliderConfig& config)
 	{
+
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
@@ -319,6 +321,16 @@ namespace ratchet
 			GroundRayCastCallBack callbackMiddle(m_body);
 
 			s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
+
+			if (SelfControlledCreature* self = dynamic_cast<SelfControlledCreature*>(m_obj))
+			{
+				float speed = self->m_movementSpeed;
+				bool canJumpOver = self->m_canJumpOver;
+			}
+			else if (Player* pl = dynamic_cast<Player*>(m_obj))
+			{
+				float  angledeg = pl->m_movementSpeed;
+			}
 			
 			if (callbackMiddle.m_fraction <= 1.0f && callbackMiddle.m_hit)
 			{
@@ -338,6 +350,12 @@ namespace ratchet
 			JumpOverPlatformsRayCastCallBack callBackMiddleJumpOver(m_body);
 
 			s_physicsWorld->RayCast(&callBackMiddleJumpOver, sartPointMiddleJump, endPointMiddleJump);
+
+			if (SelfControlledCreature* self = dynamic_cast<SelfControlledCreature*>(m_obj))
+			{
+				float speed = self->m_movementSpeed;
+				bool canJumpOver = self->m_canJumpOver;
+			}
 
 			if (callBackMiddleJumpOver.m_hit)
 			{

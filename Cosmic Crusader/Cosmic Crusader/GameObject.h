@@ -46,11 +46,16 @@ namespace ratchet
 		bool m_canJumpOver = false;
 		
 		//GameObject* m_target;
-	
 
 		//Setters
 		void SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees);
 		void SetActiveRenderer(bool active);
+
+		virtual void PostCosntructFixup();
+
+		virtual void Start();
+
+
 		//void SetTarget(TargetType& targettype);
 		
 

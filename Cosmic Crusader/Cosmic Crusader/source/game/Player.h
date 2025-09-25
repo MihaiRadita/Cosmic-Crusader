@@ -31,10 +31,14 @@ namespace ratchet
 
 		//Init functions
 		void initVariables();
+
+		void PostCosntructFixup() override;
+
+		void Start() override;
 	
 
 		//Prints
-		virtual void render(sf::RenderTarget& target) override;
+		void render(sf::RenderTarget& target) override;
 #ifdef IS_RATCHET_DEBUG
 		void printSpriteColliderPositionPlayer();
 #endif

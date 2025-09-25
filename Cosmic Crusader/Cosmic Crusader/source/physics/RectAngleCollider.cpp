@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "RectAngleCollider.h"
 
+#include "game/Player.h"
+#include "SelfControlledCreature.h"
 
 
 namespace ratchet
@@ -29,6 +31,7 @@ namespace ratchet
 
 	void RectAngleCollider::initVariables(sf::Sprite& sprite, const RectAngleColliderConfig& config)
 	{
+
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 

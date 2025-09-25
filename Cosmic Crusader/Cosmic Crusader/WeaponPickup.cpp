@@ -66,6 +66,20 @@ namespace ratchet
 	{
 	}
 
+	void WeaponPickup::PostCosntructFixup()
+	{
+
+		if (m_collider)
+		{
+			m_collider->SetOwner(this);
+		}
+	}
+
+	void WeaponPickup::Start()
+	{
+		PostCosntructFixup();
+	}
+
 	void WeaponPickup::OnCollisionEnter(GameObject* obj)
 	{
 		Player* player = dynamic_cast<Player*>(obj);

@@ -21,6 +21,19 @@ namespace ratchet
 		m_isMoving = false;
 	}
 
+	void Player::PostCosntructFixup()
+	{
+		if (m_collider)
+		{
+			m_collider->SetOwner(this);
+		}
+	}
+
+	void Player::Start()
+	{
+		PostCosntructFixup();
+	}
+
 	void Player::handleEvent(sf::Event& event)
 	{
 		switch (event.type)

@@ -9,6 +9,8 @@ namespace ratchet
 
 	Creature::Creature(const CreatureConfig& config) : GameObject(config)
 	{
+		
+
 		//Character Features
 		m_movementSpeed = config.m_movingSpeed;
 		m_fallingSpeed = config.m_fallingSpeed;
@@ -125,6 +127,8 @@ namespace ratchet
 		m_shooitngPointCenter.setPosition(m_shootingPointDynamic.getPosition().x, m_shootingPointDynamic.getPosition().y);
 
 		m_isRightNoWeapon = true;
+
+		PostCosntructFixup();
 	}
 
 	Creature::~Creature()
@@ -423,6 +427,18 @@ namespace ratchet
 			return false;
 		}
 		return true;
+	}
+
+	void Creature::PostCosntructFixup()
+	{
+		if (m_collider) {
+			m_collider->SetOwner(this); // now it's really Creature*
+		}
+	}
+
+	void Creature::Start()
+	{
+		PostCosntructFixup();
 	}
 
 	void Creature::switchAnimation()

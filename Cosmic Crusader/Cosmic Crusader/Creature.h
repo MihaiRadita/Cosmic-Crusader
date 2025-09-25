@@ -99,6 +99,11 @@ namespace ratchet
 		void invertCharacterMovingSpriteScale(int direction) override;
 		bool isNoControlActive();
 
+
+		void PostCosntructFixup() override;
+
+		void Start() override;
+
 		//Input functions
 
 		//Animation functions

@@ -39,6 +39,9 @@ namespace ratchet
 		bool m_debugDraw = false;
 #endif
 	};
+
+	class GameObject;
+
 	class ColliderBase : public Physics
 	{
 	public:
@@ -56,12 +59,16 @@ namespace ratchet
 		float m_facingDirectionX;
 		float m_facingDirectionY;
 
+		GameObject* m_obj;
+
 
 		//Constructors
 		ColliderBase(const ColliderBaseConfig& config);
 		~ColliderBase();
 
 		void applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity);
+
+		void SetOwner(GameObject* obj);
 
 		//Getters
 		virtual b2Body* getBody();
