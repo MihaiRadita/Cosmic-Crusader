@@ -16,6 +16,8 @@ namespace ratchet
 #ifdef IS_RATCHET_DEBUG
 		m_debugDraw = config.m_debugDraw;
 #endif
+
+		m_checkTopPlatformsDirectionX = 1.f;
 	}
 
 	ColliderBase::~ColliderBase()
@@ -120,7 +122,16 @@ namespace ratchet
 		return false;
 	}
 
-	void ColliderBase::getBottomPointsForRayCast(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
+	void ColliderBase::getJumpOverPlatformsBottomRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
+	{
+		xStart = 0.0f;
+		yStart = 0.0f;
+		xEnd = 0.0f;
+		yEnd = 0.0f;
+		direction = 0.0f;
+	}
+
+	void ColliderBase::getJumpOverPlatformsTopRaycastPoints( float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
 	{
 		xStart = 0.0f;
 		yStart = 0.0f;

@@ -51,7 +51,9 @@ namespace ratchet
 		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
 		bool performGroundRayCast(sf::Sprite& sprite) override;
 
-		virtual void getBottomPointsForRayCast(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const override;
+		virtual void getJumpOverPlatformsBottomRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const override;
+		virtual void getJumpOverPlatformsTopRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const override;
+
 		bool performJumpOverPlatformsRaycast(sf::Sprite& sprite, float& direction) override;
 
 	private:

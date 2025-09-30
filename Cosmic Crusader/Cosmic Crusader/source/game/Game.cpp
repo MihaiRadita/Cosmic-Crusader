@@ -236,6 +236,8 @@ namespace ratchet
 			colliderConfig.m_height = 1.13f;
 			colliderConfig.m_radius = 0.25f;
 			colliderConfig.m_fixtureDef.isSensor = false;
+			colliderConfig.m_isGroundRaycastOffset = 0.02f;
+
 #ifdef IS_RATCHET_DEBUG
 			colliderConfig.m_debugDraw = false;
 #endif
@@ -323,6 +325,11 @@ namespace ratchet
 			colliderConfig.m_radius = 0.25f;
 			colliderConfig.m_massValue = 1500.f;
 			colliderConfig.m_fixtureDef.isSensor = false;
+			colliderConfig.m_isGroundRaycastOffset = 0.02f;
+			colliderConfig.m_JumpOverBottomRaycastOffsetX = 0.8f;
+			colliderConfig.m_JumpOverBottomRaycastOffsetY = 0.05f;
+			colliderConfig.m_JumpOverTopRaycastOffsetX = 0.8f;
+			colliderConfig.m_JumpOverTopRaycastOffsetY = 0.05f;
 
 #ifdef IS_RATCHET_DEBUG
 			colliderConfig.m_debugDraw = true;
@@ -360,6 +367,7 @@ namespace ratchet
 			GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
 		}
 	}
+
 	Game::Game()
 	{
 		initWindow();

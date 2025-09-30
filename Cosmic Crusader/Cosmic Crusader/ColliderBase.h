@@ -33,6 +33,17 @@ namespace ratchet
 		float m_linearDamping;
 		float m_angularDamping;
 
+		float m_collierFacingDirectionX;
+		float m_colliderFacingDirectionY;
+
+		float m_JumpOverBottomRaycastOffsetX;
+		float m_JumpOverBottomRaycastOffsetY;
+
+		float m_JumpOverTopRaycastOffsetX;
+		float m_JumpOverTopRaycastOffsetY;
+
+		float m_isGroundRaycastOffset;
+
 		std::optional<b2Vec2> m_origin = std::nullopt;
 
 #ifdef IS_RATCHET_DEBUG
@@ -56,8 +67,20 @@ namespace ratchet
 
 		bool m_skipRaycastThisFrame = false;
 
-		float m_facingDirectionX;
-		float m_facingDirectionY;
+		float m_collierFacingDirectionX;
+		float m_colliderFacingDirectionY;
+
+		float m_JumpOverBottomRaycastOffsetX;
+		float m_JumpOverBottomRaycastOffsetY;
+
+		float m_JumpOverTopRaycastOffsetX;
+		float m_JumpOverTopRaycastOffsetY;
+
+		float m_isGroundRaycastOffset;
+
+
+		float m_checkTopPlatformsDirectionX;
+
 
 		GameObject* m_obj;
 
@@ -94,7 +117,8 @@ namespace ratchet
 		virtual bool performGroundRayCast(sf::Sprite& sprite);
 
 		//Checks for Jump Over Platforms
-		virtual void getBottomPointsForRayCast(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
+		virtual void getJumpOverPlatformsBottomRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
+		virtual void getJumpOverPlatformsTopRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
 		virtual bool performJumpOverPlatformsRaycast(sf::Sprite& sprite, float& direction);
 
 	protected:

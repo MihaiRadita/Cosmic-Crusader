@@ -45,8 +45,8 @@ namespace ratchet
 	{
 		if (m_collider && !m_collider->m_skipRaycastThisFrame)
 		{
-			m_collider->m_facingDirectionX = m_facingRight ? 1.0f : -1.0f;
-			m_canJumpOver = m_collider->performJumpOverPlatformsRaycast(m_sprite, m_collider->m_facingDirectionX);
+			m_collider->m_collierFacingDirectionX = m_facingRight ? 1.0f : -1.0f;
+			m_canJumpOver = m_collider->performJumpOverPlatformsRaycast(m_sprite, m_collider->m_collierFacingDirectionX);
 		}
 		else
 		{

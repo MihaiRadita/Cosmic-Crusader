@@ -15,6 +15,15 @@ namespace ratchet
 	void CapsuleCollider::initVariables(sf::Sprite& sprite, const CapsuleColliderConfig& config)
 	{
 
+
+		m_JumpOverBottomRaycastOffsetX = config.m_JumpOverBottomRaycastOffsetX;
+		m_JumpOverBottomRaycastOffsetY = config.m_JumpOverBottomRaycastOffsetY;
+
+		m_JumpOverTopRaycastOffsetX = config.m_JumpOverTopRaycastOffsetX;
+		m_JumpOverTopRaycastOffsetY = config.m_JumpOverTopRaycastOffsetY;
+
+		m_isGroundRaycastOffset = config.m_isGroundRaycastOffset;
+
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
@@ -166,6 +175,12 @@ namespace ratchet
 
 	CapsuleColliderConfig::CapsuleColliderConfig()
 	{
+		m_collierFacingDirectionX = 0.0f;
+		m_colliderFacingDirectionY = 0.0f;
+		m_JumpOverBottomRaycastOffsetX = 0.0f;
+		m_JumpOverBottomRaycastOffsetY = 0.0f;
+		m_JumpOverTopRaycastOffsetX = 0.0f;
+		m_JumpOverTopRaycastOffsetY = 0.0f;
 	}
 
 
@@ -276,10 +291,17 @@ namespace ratchet
 		b2Vec2 startPointMiddleJump = b2Vec2{};
 		b2Vec2 endPointMiddleJump = b2Vec2{};
 		//float direction = 1.0f;
-		getBottomPointsForRayCast(startPointMiddleJump.x, startPointMiddleJump.y, endPointMiddleJump.x, endPointMiddleJump.y, m_facingDirectionX);
+		getJumpOverPlatformsBottomRaycastPoints(startPointMiddleJump.x, startPointMiddleJump.y, endPointMiddleJump.x, endPointMiddleJump.y, m_collierFacingDirectionX);
 
 		sf::Vertex raycasMiddelJumpOver[] = { sf::Vertex(sf::Vector2f(startPointMiddleJump.x, startPointMiddleJump.y), sf::Color::Red), sf::Vertex(sf::Vector2f(endPointMiddleJump.x, startPointMiddleJump.y), sf::Color::Red) };
 		target.draw(raycasMiddelJumpOver, 2, sf::Lines);
+
+		b2Vec2 startPointCheckMiddleJump = b2Vec2{};
+		b2Vec2 endPointCheckMiddleJump = b2Vec2{};
+
+		getJumpOverPlatformsTopRaycastPoints(startPointCheckMiddleJump.x, startPointCheckMiddleJump.y, endPointCheckMiddleJump.x, endPointCheckMiddleJump.y, m_collierFacingDirectionX);
+		sf::Vertex raycasMiddelJumpOverCheck[] = { sf::Vertex(sf::Vector2f(startPointCheckMiddleJump.x, startPointCheckMiddleJump.y), sf::Color::Yellow), sf::Vertex(sf::Vector2f(endPointCheckMiddleJump.x, startPointCheckMiddleJump.y), sf::Color::Yellow) };
+		target.draw(raycasMiddelJumpOverCheck, 2, sf::Lines);
 	}
 #endif
 		void CapsuleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
@@ -288,28 +310,44 @@ namespace ratchet
 
 			b2Vec2 playerPosition = m_body->GetPosition();
 
-			//float distanceCeneteX = std::abs(playerPosition.x - m_bottomCircleShape.m_p.x);
 			xStart =  playerPosition.x +  m_bottomCircleShape.m_p.x;
 			yStart = playerPosition.y + m_bottomCircleShape.m_p.y;
 
 			xEnd = xStart;
-			yEnd = yStart + m_bottomCircleShape.m_radius + 0.02;
+			yEnd = yStart + m_bottomCircleShape.m_radius + m_isGroundRaycastOffset;
 		}
 
 
-		void CapsuleCollider::getBottomPointsForRayCast(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
+		void CapsuleCollider::getJumpOverPlatformsBottomRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
 		{
-			ColliderBase::getBottomPointsForRayCast(xStart, yStart, xEnd, yEnd, direction);
+			ColliderBase::getJumpOverPlatformsBottomRaycastPoints(xStart, yStart, xEnd, yEnd, direction);
 
 			b2Vec2 playerPosition = m_body->GetPosition();
 
 			xStart = playerPosition.x + m_bottomCircleShape.m_p.x;
 
-			yStart = playerPosition.y + m_bottomCircleShape.m_p.y + 0.05f;
+			yStart = playerPosition.y + m_bottomCircleShape.m_p.y + m_JumpOverBottomRaycastOffsetY;
 
-			xEnd = xStart + (m_bottomCircleShape.m_radius + 0.8f) * direction;
+			xEnd = xStart + (m_bottomCircleShape.m_radius + m_JumpOverBottomRaycastOffsetX) * direction;
 
 			yEnd = yStart;
+		}
+
+		void CapsuleCollider::getJumpOverPlatformsTopRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
+		{
+
+			ColliderBase::getJumpOverPlatformsTopRaycastPoints( xStart, yStart, xEnd, yEnd, direction);
+
+			b2Vec2 playerPosition = m_body->GetPosition();
+
+			xStart = playerPosition.x + m_bottomCircleShape.m_p.x;
+
+			yStart = playerPosition.y + m_topCircleShape.m_p.y - m_JumpOverTopRaycastOffsetY;
+
+			xEnd = xStart + (m_bottomCircleShape.m_radius + m_JumpOverTopRaycastOffsetX) * direction;
+
+			yEnd = yStart;
+
 		}
 
 		bool CapsuleCollider::performGroundRayCast(sf::Sprite& sprite)
@@ -345,7 +383,8 @@ namespace ratchet
 
 			b2Vec2 sartPointMiddleJump = b2Vec2{};
 			b2Vec2 endPointMiddleJump = b2Vec2{};
-			getBottomPointsForRayCast(sartPointMiddleJump.x, sartPointMiddleJump.y, endPointMiddleJump.x, endPointMiddleJump.y, direction);
+
+			getJumpOverPlatformsBottomRaycastPoints(sartPointMiddleJump.x, sartPointMiddleJump.y, endPointMiddleJump.x, endPointMiddleJump.y, direction);
 
 			JumpOverPlatformsRayCastCallBack callBackMiddleJumpOver(m_body);
 
@@ -361,7 +400,24 @@ namespace ratchet
 			{
 				if (callBackMiddleJumpOver.m_fraction <= 1.0f)
 				{
-					return true;
+
+					b2Vec2 sartPointMiddleJumpCheck = b2Vec2{};
+					b2Vec2 endPointMiddleJumpCheck = b2Vec2{};
+
+					JumpOverPlatformsRayCastCallBack callBackMiddleJumpOver2(m_body);
+
+					getJumpOverPlatformsTopRaycastPoints(sartPointMiddleJumpCheck.x, sartPointMiddleJumpCheck.y, endPointMiddleJumpCheck.x, endPointMiddleJumpCheck.y ,direction);
+					
+					s_physicsWorld->RayCast(&callBackMiddleJumpOver2, sartPointMiddleJumpCheck, endPointMiddleJumpCheck);
+
+					callBackMiddleJumpOver2.m_fraction;
+
+					if (callBackMiddleJumpOver2.m_hit == false)
+					{
+						return true;
+					}
+
+					return false;
 				}
 			}
 
