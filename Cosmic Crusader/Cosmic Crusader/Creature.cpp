@@ -352,6 +352,18 @@ namespace ratchet
 				}
 			}
 
+			if (m_input.isJump && isGrounded() && m_isMoving == true)
+			{
+				if (m_currentAnimationState == MOVING)
+				{
+					if (m_currentAnimationState != JUMP)
+					{
+						m_currentAnimationState = JUMP;
+						switchAnimation();
+					}
+				}
+			}
+
 			if (isNoControlActive() && isGrounded() && m_isMoving == false)
 			{
 #ifdef IS_RATCHET_DEBUG

@@ -120,13 +120,40 @@ namespace ratchet
 				}
 			}
 
+			canJumpOver();
+
+			if (m_canJumpOver)
+			{
+				if (m_isGround)
+				{
+					if (m_isAttacking)
+					{
+						m_input.isJump = false;
+					}
+					else
+					{
+						m_input.isJump = true;
+					}
+				}
+				else
+				{
+					m_input.isJump = false;
+				}
+			}
+			else
+			{
+				m_input.isJump = false;
+			}
+
 		}
 		else
 		{
 			m_input.x = 0;
+
+			m_input.isJump = false;
+
 		}
 
-		canJumpOver();
 
 		if (m_canJumpOver == true)
 		{
@@ -171,6 +198,12 @@ namespace ratchet
 			xVelocity = m_movementSpeed * m_input.x;
 		}
 
+		if (m_input.isJump && isGrounded())
+		{
+			m_isMoving = true;
+			changeY = true;
+			yVelocity = m_jumpImpulse;
+		}
 
 		m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
 

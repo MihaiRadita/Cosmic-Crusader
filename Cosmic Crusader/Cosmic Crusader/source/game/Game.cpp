@@ -297,7 +297,7 @@ namespace ratchet
 			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
 			config.m_movingSpeed = 5.0f;
-			config.m_jumpImpulse = -10.0f;
+			config.m_jumpImpulse = -5.0f;
 			config.m_fallingSpeed = 7000.0f;
 			config.m_AngleBase = 45.f;
 
@@ -326,9 +326,9 @@ namespace ratchet
 			colliderConfig.m_massValue = 1500.f;
 			colliderConfig.m_fixtureDef.isSensor = false;
 			colliderConfig.m_isGroundRaycastOffset = 0.02f;
-			colliderConfig.m_JumpOverBottomRaycastOffsetX = 0.8f;
+			colliderConfig.m_JumpOverBottomRaycastOffsetX = 1.1f;
 			colliderConfig.m_JumpOverBottomRaycastOffsetY = 0.05f;
-			colliderConfig.m_JumpOverTopRaycastOffsetX = 0.8f;
+			colliderConfig.m_JumpOverTopRaycastOffsetX = 1.1f;
 			colliderConfig.m_JumpOverTopRaycastOffsetY = 0.05f;
 
 #ifdef IS_RATCHET_DEBUG
