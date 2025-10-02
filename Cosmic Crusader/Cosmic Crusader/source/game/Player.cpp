@@ -313,6 +313,8 @@ namespace ratchet
 		bool changeY = false;
 		float yVelocity = 0.0f;
 
+		TRACE_CHANNEL("Player Position", "X: ", getPosition().x, " Y: ", getPosition().y);
+
 		if (m_input.x != 0)
 		{
 			m_isMoving = true;

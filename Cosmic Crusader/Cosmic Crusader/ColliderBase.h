@@ -44,6 +44,9 @@ namespace ratchet
 
 		float m_isGroundRaycastOffset;
 
+		float m_checkFallingRiskRaycastOffsetX;
+		float m_checkFallingRiskRaycastOffsetY;
+
 		std::optional<b2Vec2> m_origin = std::nullopt;
 
 #ifdef IS_RATCHET_DEBUG
@@ -77,6 +80,9 @@ namespace ratchet
 		float m_JumpOverTopRaycastOffsetY;
 
 		float m_isGroundRaycastOffset;
+
+		float m_checkFallingRiskRaycastOffsetX;
+		float m_checkFallingRiskRaycastOffsetY;
 
 
 		float m_checkTopPlatformsDirectionX;
@@ -120,6 +126,10 @@ namespace ratchet
 		virtual void getJumpOverPlatformsBottomRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
 		virtual void getJumpOverPlatformsTopRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
 		virtual bool performJumpOverPlatformsRaycast(sf::Sprite& sprite, float& direction);
+
+		//Check Falling Risk
+		virtual void getCheckFallingRiscRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
+		virtual bool performCheckFallingRiskRaycast(sf::Sprite& sprite, float& direction);
 
 	protected:
 		b2Vec2 m_origin;
@@ -173,6 +183,21 @@ namespace ratchet
 	public:
 
 		JumpOverPlatformsRayCastCallBack(b2Body* ingonerdBody);
+
+		float ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction) override;
+
+		bool m_hit;
+		b2Vec2 m_point;
+		b2Vec2 m_normal;
+		float m_fraction;
+		b2Body* m_ignoredBody;
+	};
+
+	class CheckFallingRiskRaycastCallBack : public b2RayCastCallback
+	{
+	public:
+
+		CheckFallingRiskRaycastCallBack(b2Body* ignoredBody);
 
 		float ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction) override;
 

@@ -30,6 +30,7 @@ namespace ratchet
 		//AI Checks
 		bool m_isAttacking = false;
 		bool m_canJumpOver = false;
+		bool m_isFallingRisk = false;
 
 		//Check Attack Target Function
 		void checkTargetToAttack(Creature* target);

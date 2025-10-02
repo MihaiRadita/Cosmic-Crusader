@@ -104,19 +104,29 @@ namespace ratchet
 
 			checkTargetToAttack(m_target);
 
+			m_collider->m_collierFacingDirectionX = m_facingRight ? 1.0f : -1.0f;
+			m_isFallingRisk = m_collider->performCheckFallingRiskRaycast(m_sprite, m_collider->m_collierFacingDirectionX);
+
 			if (m_isAttacking)
 			{
 				m_input.x = 0.f;
 			}
 			else
 			{
-				if (m_facingRight)
+				if (m_isFallingRisk)
 				{
-					m_input.x = 1.f;
+					if (m_facingRight)
+					{
+						m_input.x = 1.f;
+					}
+					else
+					{
+						m_input.x = -1.f;
+					}
 				}
 				else
 				{
-					m_input.x = -1.f;
+					m_input.x = 0.0f;
 				}
 			}
 

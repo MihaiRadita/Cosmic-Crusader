@@ -210,7 +210,7 @@ namespace ratchet
 			config.positionXOffset = 0.f;
 			config.positionYOffset = 0.f;
 
-			config.position = sf::Vector2f(24.0f, 0.0f);
+			config.position = sf::Vector2f(173.0f, -6.97f);
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
@@ -292,7 +292,7 @@ namespace ratchet
 			config.positionYOffset = 0.f;
 			
 
-			config.position = sf::Vector2f(30.0f, 0.0f);
+			config.position = sf::Vector2f(180.0f, -6.0f);
 			config.rotation = 0.0f;
 			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
@@ -330,6 +330,8 @@ namespace ratchet
 			colliderConfig.m_JumpOverBottomRaycastOffsetY = 0.05f;
 			colliderConfig.m_JumpOverTopRaycastOffsetX = 1.1f;
 			colliderConfig.m_JumpOverTopRaycastOffsetY = 0.05f;
+			colliderConfig.m_checkFallingRiskRaycastOffsetX = 0.9f;
+			colliderConfig.m_checkFallingRiskRaycastOffsetY = 1.8f;
 
 #ifdef IS_RATCHET_DEBUG
 			colliderConfig.m_debugDraw = true;

@@ -24,6 +24,9 @@ namespace ratchet
 
 		m_isGroundRaycastOffset = config.m_isGroundRaycastOffset;
 
+		m_checkFallingRiskRaycastOffsetX = config.m_checkFallingRiskRaycastOffsetX;
+		m_checkFallingRiskRaycastOffsetY = config.m_checkFallingRiskRaycastOffsetY;
+
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
@@ -302,6 +305,13 @@ namespace ratchet
 		getJumpOverPlatformsTopRaycastPoints(startPointCheckMiddleJump.x, startPointCheckMiddleJump.y, endPointCheckMiddleJump.x, endPointCheckMiddleJump.y, m_collierFacingDirectionX);
 		sf::Vertex raycasMiddelJumpOverCheck[] = { sf::Vertex(sf::Vector2f(startPointCheckMiddleJump.x, startPointCheckMiddleJump.y), sf::Color::Yellow), sf::Vertex(sf::Vector2f(endPointCheckMiddleJump.x, startPointCheckMiddleJump.y), sf::Color::Yellow) };
 		target.draw(raycasMiddelJumpOverCheck, 2, sf::Lines);
+
+		b2Vec2 sartPointCheckFallingRisk = b2Vec2{};
+		b2Vec2 endPointCheckFallingRisk = b2Vec2{};
+
+		getCheckFallingRiscRaycastPoints(sartPointCheckFallingRisk.x, sartPointCheckFallingRisk.y, endPointCheckFallingRisk.x, endPointCheckFallingRisk.y, m_collierFacingDirectionX);
+		sf::Vertex raycastCheckFallingRisk[] = { sf::Vertex(sf::Vector2f(sartPointCheckFallingRisk.x,sartPointCheckFallingRisk.y), sf::Color::Blue) , sf::Vertex(sf::Vector2f(sartPointCheckFallingRisk.x,endPointCheckFallingRisk.y), sf::Color::Blue) };
+		target.draw(raycastCheckFallingRisk, 2, sf::Lines);
 	}
 #endif
 		void CapsuleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
@@ -422,6 +432,39 @@ namespace ratchet
 			}
 
 			return false;
+		}
+
+		void CapsuleCollider::getCheckFallingRiscRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
+		{
+			ColliderBase::getCheckFallingRiscRaycastPoints(xStart, yStart, xEnd, yEnd, direction);
+
+			b2Vec2 characterPosition = m_body->GetPosition();
+
+			xStart = characterPosition.x + m_bottomCircleShape.m_p.x + m_checkFallingRiskRaycastOffsetX * direction;
+			yStart = characterPosition.y + m_bottomCircleShape.m_p.y + 0.05f;
+
+			xEnd = xStart;
+			yEnd = yStart + m_checkFallingRiskRaycastOffsetY;
+		}
+
+		bool CapsuleCollider::performCheckFallingRiskRaycast(sf::Sprite& sprite, float& direction)
+		{
+			b2Vec2 startCheckFallingRisk = b2Vec2{};
+			b2Vec2 endCheckFallingRisk = b2Vec2{};
+
+			getCheckFallingRiscRaycastPoints(startCheckFallingRisk.x, startCheckFallingRisk.y, endCheckFallingRisk.x, endCheckFallingRisk.y, direction);
+
+			CheckFallingRiskRaycastCallBack callbackCheckFallingRisk(m_body);
+
+			s_physicsWorld->RayCast(&callbackCheckFallingRisk, startCheckFallingRisk, endCheckFallingRisk);
+
+			if (callbackCheckFallingRisk.m_fraction < 1.0f && callbackCheckFallingRisk.m_hit)
+			{
+				return true;
+			}
+
+			return false;
+
 		}
 }
 
