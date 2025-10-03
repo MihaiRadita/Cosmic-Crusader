@@ -39,6 +39,7 @@ namespace ratchet
 		bool m_isTagetBehindCharacter = false;
 
 		void canJumpOver();
+		void isFallingRisk();
 
 		//Setter
 		void SetTarget(Faction& faction);

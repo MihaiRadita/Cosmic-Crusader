@@ -330,8 +330,10 @@ namespace ratchet
 			colliderConfig.m_JumpOverBottomRaycastOffsetY = 0.05f;
 			colliderConfig.m_JumpOverTopRaycastOffsetX = 1.1f;
 			colliderConfig.m_JumpOverTopRaycastOffsetY = 0.05f;
-			colliderConfig.m_checkFallingRiskRaycastOffsetX = 0.9f;
-			colliderConfig.m_checkFallingRiskRaycastOffsetY = 1.8f;
+			colliderConfig.m_checkFallingRiskRaycastStartOffsetX = 0.9f;
+			colliderConfig.m_checkFallingRiskRaycastStartOffsetY = 0.05f;
+			colliderConfig.m_checkFallingRiskRaycastEndOffsetY = 1.8f;
+
 
 #ifdef IS_RATCHET_DEBUG
 			colliderConfig.m_debugDraw = true;

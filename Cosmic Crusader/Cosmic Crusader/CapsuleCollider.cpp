@@ -24,8 +24,11 @@ namespace ratchet
 
 		m_isGroundRaycastOffset = config.m_isGroundRaycastOffset;
 
-		m_checkFallingRiskRaycastOffsetX = config.m_checkFallingRiskRaycastOffsetX;
-		m_checkFallingRiskRaycastOffsetY = config.m_checkFallingRiskRaycastOffsetY;
+		m_checkFallingRiskRaycastStartOffsetX = config.m_checkFallingRiskRaycastStartOffsetX;
+		m_checkFallingRiskRaycastStartOffsetY = config.m_checkFallingRiskRaycastStartOffsetY;
+
+		m_checkFallingRiskRaycastEndOffsetX = config.m_checkFallingRiskRaycastEndOffsetX;
+		m_checkFallingRiskRaycastEndOffsetY = config.m_checkFallingRiskRaycastEndOffsetY;
 
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
@@ -440,11 +443,11 @@ namespace ratchet
 
 			b2Vec2 characterPosition = m_body->GetPosition();
 
-			xStart = characterPosition.x + m_bottomCircleShape.m_p.x + m_checkFallingRiskRaycastOffsetX * direction;
-			yStart = characterPosition.y + m_bottomCircleShape.m_p.y + 0.05f;
+			xStart = characterPosition.x + m_bottomCircleShape.m_p.x + m_checkFallingRiskRaycastStartOffsetX * direction;
+			yStart = characterPosition.y + m_bottomCircleShape.m_p.y + m_checkFallingRiskRaycastStartOffsetY;
 
 			xEnd = xStart;
-			yEnd = yStart + m_checkFallingRiskRaycastOffsetY;
+			yEnd = yStart + m_checkFallingRiskRaycastEndOffsetY;
 		}
 
 		bool CapsuleCollider::performCheckFallingRiskRaycast(sf::Sprite& sprite, float& direction)

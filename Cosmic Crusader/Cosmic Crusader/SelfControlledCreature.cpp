@@ -54,6 +54,19 @@ namespace ratchet
 			m_collider->m_skipRaycastThisFrame = false;
 		}
 	}
+	void SelfControlledCreature::isFallingRisk()
+	{
+		if (m_collider && !m_collider->m_skipRaycastThisFrame)
+		{
+			m_collider->m_collierFacingDirectionX = m_facingRight ? 1.0f : -1.0f;
+			m_isFallingRisk = m_collider->performCheckFallingRiskRaycast(m_sprite, m_collider->m_collierFacingDirectionX);
+		}
+		else
+		{
+			m_isFallingRisk = false;
+			m_collider->m_skipRaycastThisFrame = false;
+		}
+	}
 	void SelfControlledCreature::SetTarget(Faction& faction)
 	{
 		for (auto* obj : s_gameObjects)
@@ -104,15 +117,33 @@ namespace ratchet
 
 			checkTargetToAttack(m_target);
 
-			m_collider->m_collierFacingDirectionX = m_facingRight ? 1.0f : -1.0f;
-			m_isFallingRisk = m_collider->performCheckFallingRiskRaycast(m_sprite, m_collider->m_collierFacingDirectionX);
+			isFallingRisk();
+
+			canJumpOver();
 
 			if (m_isAttacking)
 			{
 				m_input.x = 0.f;
+				m_input.isJump = false;
 			}
 			else
 			{
+				if (m_canJumpOver)
+				{
+					if (m_isGround)
+					{
+						m_input.isJump = true;
+					}
+					else
+					{
+						m_input.isJump = false;
+					}
+				}
+				else
+				{
+					m_input.isJump = false;
+				}
+
 				if (m_isFallingRisk)
 				{
 					if (m_facingRight)
@@ -129,32 +160,6 @@ namespace ratchet
 					m_input.x = 0.0f;
 				}
 			}
-
-			canJumpOver();
-
-			if (m_canJumpOver)
-			{
-				if (m_isGround)
-				{
-					if (m_isAttacking)
-					{
-						m_input.isJump = false;
-					}
-					else
-					{
-						m_input.isJump = true;
-					}
-				}
-				else
-				{
-					m_input.isJump = false;
-				}
-			}
-			else
-			{
-				m_input.isJump = false;
-			}
-
 		}
 		else
 		{

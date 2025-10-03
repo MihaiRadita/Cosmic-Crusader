@@ -44,8 +44,11 @@ namespace ratchet
 
 		float m_isGroundRaycastOffset;
 
-		float m_checkFallingRiskRaycastOffsetX;
-		float m_checkFallingRiskRaycastOffsetY;
+		float m_checkFallingRiskRaycastStartOffsetX;
+		float m_checkFallingRiskRaycastStartOffsetY;
+
+		float m_checkFallingRiskRaycastEndOffsetX;
+		float m_checkFallingRiskRaycastEndOffsetY;
 
 		std::optional<b2Vec2> m_origin = std::nullopt;
 
@@ -81,8 +84,11 @@ namespace ratchet
 
 		float m_isGroundRaycastOffset;
 
-		float m_checkFallingRiskRaycastOffsetX;
-		float m_checkFallingRiskRaycastOffsetY;
+		float m_checkFallingRiskRaycastStartOffsetX;
+		float m_checkFallingRiskRaycastStartOffsetY;
+
+		float m_checkFallingRiskRaycastEndOffsetX;
+		float m_checkFallingRiskRaycastEndOffsetY;
 
 
 		float m_checkTopPlatformsDirectionX;
