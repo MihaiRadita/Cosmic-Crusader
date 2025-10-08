@@ -193,6 +193,8 @@ namespace ratchet
 			m_collider->m_skipRaycastThisFrame = false;
 		}
 
+		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
+
 		handleEvent();
 
 		Creature::update();
@@ -267,5 +269,13 @@ namespace ratchet
 		{
 			m_isTargetDetected = false;
 		}
+	}
+
+	void SelfControlledCreature::render(sf::RenderTarget& target)
+	{
+		GameObject::render(target);
+		target.draw(m_characterShootingPosition);
+		target.draw(m_shootingPointDynamic);
+		target.draw(m_shooitngPointCenter);
 	}
 }

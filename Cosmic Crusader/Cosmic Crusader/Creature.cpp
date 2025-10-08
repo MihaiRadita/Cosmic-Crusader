@@ -17,6 +17,9 @@ namespace ratchet
 		m_jumpImpulse = config.m_jumpImpulse;
 		m_bodShoulderOffset = config.m_bodShoulderOffset;
 
+		m_fireRate = config.m_fireRate;
+		m_recoilTime = config.m_recoilTime;
+
 		//Angles
 		m_baseAngle = config.m_AngleBase;
 		m_HalfBaseAngle = m_baseAngle / 2.0f;
@@ -77,7 +80,45 @@ namespace ratchet
 
 		for (auto config : m_initialWeaponConfigList)
 		{
-			addWeapon(config.first, config.second);
+
+			if (config.second.has_value())
+			{
+				m_weaponsStartShootingPoint[config.first] = config.second->m_characterStartPointShootingOffset;
+
+				std::map<WeaponAnimation::ANGLE, sf::Vector2f> angleOffsets;
+
+				for (auto& angle : m_characterAngles)
+				{
+					if (angle == WeaponAnimation::ANGLE::Angle0)
+					{
+						angleOffsets[angle] = config.second->m_shootingOffsetAngle0;
+					}
+					else if (angle == WeaponAnimation::ANGLE::Angle45)
+					{
+						angleOffsets[angle] = config.second->m_shootingOffsetAngle45;
+					}
+					else if (angle == WeaponAnimation::ANGLE::Angle90)
+					{
+						angleOffsets[angle] = config.second->m_shootingOffsetAngle90;
+					}
+					else if (angle == WeaponAnimation::ANGLE::AngleMinus45)
+					{
+						angleOffsets[angle] = config.second->m_shootingOffsetAngleMinus45;
+					}
+				}
+
+				for (const auto& [angle, offset] : angleOffsets)
+				{
+					m_shootingPointsOffsets[config.first][angle] = offset;
+				}
+
+				addWeapon(config.first, config.second);
+			}
+			else
+			{
+				addWeapon(config.first, config.second);
+			}
+
 		}
 
 		m_animationStates = config.m_animationStates;
@@ -108,8 +149,6 @@ namespace ratchet
 
 		m_characterAnimSwitch = -1;
 
-		
-		m_characterAnimSwitch = -1;
 		setWeapon(m_currentEquippedWeaponIndex);
 
 		m_characterShootingPosition = sf::CircleShape(0.05);
@@ -374,13 +413,6 @@ namespace ratchet
 				m_currentAnimationState = ANIMATION_STATE::IDLE;
 				switchAnimation();
 			}
-
-			/*if (m_currentAnimationState == ANIMATION_STATE::IDLE)
-			{
-				switchAnimation();
-				m_currentAnimationState = ANIMATION_STATE::FALL;
-			}*/
-
 
 			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
 

@@ -113,7 +113,7 @@ namespace ratchet
 			weaponConfig->positionXOffset = 0.f;
 			weaponConfig->positionYOffset = 0.f;
 
-			weaponConfig->position = sf::Vector2f(18.0f, 4.8f);
+			weaponConfig->position = sf::Vector2f(169.862f, -3.4f);
 			weaponConfig->rotation = 0.0f;
 			weaponConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
 
@@ -218,6 +218,10 @@ namespace ratchet
 			config.m_jumpImpulse = -10.0f;
 			config.m_fallingSpeed = 7000.0f;
 			config.m_AngleBase = 45.f;
+			
+
+			config.m_recoilTime = 0.1f;
+			config.m_fireRate = 0.2f;
 
 			config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
 			config.spriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
@@ -301,6 +305,9 @@ namespace ratchet
 			config.m_fallingSpeed = 7000.0f;
 			config.m_AngleBase = 45.f;
 
+			config.m_recoilTime = 0.1f;
+			config.m_fireRate = 0.7f;
+
 			config.m_targetMaxDistanceDetectionX = 3.5f;
 			config.m_targetMaxDistanceDetectionY = 1.5f;
 			config.m_targetMaxDistanceLoseX = 3.5f;
@@ -359,9 +366,81 @@ namespace ratchet
 
 			config.m_bodShoulderOffset = 0.4f;
 
+
+			auto* weaponConfig = new WeaponConfig(51, 12, true);
+			weaponConfig->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
+			weaponConfig->m_Faction = Faction::FACTION_UNKNOWN;
+			weaponConfig->m_colliderType = COLLIDERTYPE_UNKNOWN;
+			weaponConfig->m_weaponType = Weapon::TYPE::Blaster;
+			weaponConfig->m_configLayer = "Super Launcher";
+			weaponConfig->m_activeRenderer = true;
+			weaponConfig->m_bulletPoolIncrementation = 5;
+
+			float tileWidth = 64.0f;
+			float tileHeight = 64.0f;
+
+			weaponConfig->positionXOffset = 0.f;
+			weaponConfig->positionYOffset = 0.f;
+
+			weaponConfig->position = sf::Vector2f(169.862f, -3.4f);
+			weaponConfig->rotation = 0.0f;
+			weaponConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+
+			weaponConfig->startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
+
+
+			// Weapon Start Shooting Config Points
+			weaponConfig->m_characterStartPointShootingOffset = sf::Vector2f(0.08f, 0.1f);
+
+			//Weapon Shooting Config Points Angles
+			weaponConfig->m_shootingOffsetAngle0 = sf::Vector2f(0.75f, 0.05f);
+
+			BulletConfig* bulletConfig = new BulletConfig();
+			bulletConfig->m_damage = 5.0f;
+			bulletConfig->m_ammo = 10.f;
+			bulletConfig->m_bulletLifeLimit = 1.f;
+			bulletConfig->m_BulletSpeed = 8.f;
+			bulletConfig->m_configLayer = weaponConfig->m_configLayer;
+			bulletConfig->m_Faction = Faction::FACTION_UNKNOWN;
+			bulletConfig->m_movementType = MovementType::AIR;
+			bulletConfig->m_colliderType = DYNAMIC;
+
+			bulletConfig->position = sf::Vector2f(6.7, 8.9f);
+
+			bulletConfig->positionXOffset = 0.f;
+			bulletConfig->positionYOffset = 0.f;
+
+			bulletConfig->m_activeRenderer = true;
+
+			bulletConfig->position = sf::Vector2f(0.0f, 0.0f);
+			bulletConfig->rotation = 0.0f;
+			bulletConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+
+			bulletConfig->startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
+
+			auto* colliderBulletConfig = new CircleColliderConfig();
+			colliderBulletConfig->m_layer = PhysicsLayer::Projectiles;
+			colliderBulletConfig->m_bodyDef.type = b2_dynamicBody;
+			colliderBulletConfig->m_fixtureDef.density = 0.0f;
+			colliderBulletConfig->m_bodyDef.fixedRotation = false;
+			colliderBulletConfig->m_fixtureDef.friction = 0.0f;
+			colliderBulletConfig->m_fixtureDef.restitution = 0.0f;
+			colliderBulletConfig->m_fixtureDef.isSensor = true;
+
+			if (colliderBulletConfig->m_bodyDef.type == b2_dynamicBody)
+			{
+				colliderBulletConfig->m_gravityScale = 0.0f;
+				colliderBulletConfig->m_linearDamping = 0.0f;
+				colliderBulletConfig->m_angularDamping = 0.0f;
+			}
+
+			bulletConfig->m_colliderConfig = colliderBulletConfig;
+
+
+
 			config.m_initialWeaponConfigList =
 			{
-				std::make_pair(Weapon::TYPE::Blaster, WeaponConfig(2, 3, true)),
+				std::make_pair(Weapon::TYPE::Blaster, *weaponConfig),
 			};
 
 			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;

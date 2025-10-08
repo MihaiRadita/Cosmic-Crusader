@@ -24,6 +24,9 @@ namespace ratchet
 		//target lose distance
 		float m_targetMaxDistanceLoseX;
 		float m_targetMaxDistanceLoseY;
+
+		float m_fireRate;
+		float m_recoilTime;
 	
 		//Anlges
 		float m_AngleBase;

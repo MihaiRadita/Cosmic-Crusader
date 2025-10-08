@@ -53,6 +53,8 @@ namespace ratchet
 		void update() override;
 		void updateMovement() override;
 
+		void render(sf::RenderTarget& target) override;
+
 		//Detect target function
 		void detectTarget(Creature* target);
 

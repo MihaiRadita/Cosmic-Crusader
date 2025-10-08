@@ -33,8 +33,8 @@ namespace ratchet
 		bool m_previusFacingRight = false;
 		bool m_isAnimationInverted = false;
 		sf::Clock m_fireCooldown;
-		float m_fireRate = 0.2f; // Fires every m_fireRate seconds
-		float m_recoilTime = 0.1f; // Recoil animation duration
+		float m_fireRate; // Fires every m_fireRate seconds
+		float m_recoilTime; // Recoil animation duration
 		int m_lastFiredWeaponIndex = -1;
 		bool m_mustSpawnBullet = false;
 
