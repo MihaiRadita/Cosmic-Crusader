@@ -132,6 +132,13 @@ namespace ratchet
 		{
 			Weapon::releaseBullet(this);
 		}
+		else if (layerPTr && *layerPTr == static_cast<short>(PhysicsLayer::Creature))
+		{
+			if (obj->m_faction != this->m_faction)
+			{
+				Weapon::releaseBullet(this);
+			}
+		}
 	}
 
 	void Bullet::OnSensorExit(GameObject* obj)

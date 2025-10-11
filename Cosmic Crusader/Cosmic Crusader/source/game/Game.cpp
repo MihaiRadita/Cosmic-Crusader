@@ -144,7 +144,7 @@ namespace ratchet
 			bulletConfig->m_bulletLifeLimit = 1.f;
 			bulletConfig->m_BulletSpeed = 8.f;
 			bulletConfig->m_configLayer = weaponConfig->m_configLayer;
-			bulletConfig->m_Faction = Faction::FACTION_UNKNOWN;
+			bulletConfig->m_Faction = Faction::TEAM_0;
 			bulletConfig->m_movementType = MovementType::AIR;
 			bulletConfig->m_colliderType = DYNAMIC;
 
@@ -401,7 +401,7 @@ namespace ratchet
 			bulletConfig->m_bulletLifeLimit = 1.f;
 			bulletConfig->m_BulletSpeed = 8.f;
 			bulletConfig->m_configLayer = weaponConfig->m_configLayer;
-			bulletConfig->m_Faction = Faction::FACTION_UNKNOWN;
+			bulletConfig->m_Faction = Faction::TEAM_1;
 			bulletConfig->m_movementType = MovementType::AIR;
 			bulletConfig->m_colliderType = DYNAMIC;
 
