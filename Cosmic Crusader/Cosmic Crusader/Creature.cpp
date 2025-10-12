@@ -414,6 +414,40 @@ namespace ratchet
 				switchAnimation();
 			}
 
+			if (m_currentWeaponType != Weapon::TYPE::None)
+			{
+				bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
+				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.getElapsedTime().asSeconds() >= m_recoilTime;
+
+				m_currenFireDirectionNorm = sf::Vector2f(m_facingRight ? 1.f : -1.f, 0.f);
+
+				if (justPassedRecoilTime)
+				{
+					m_currentCharacterState = WeaponAnimation::STATE::Aim;
+					isOnRecoil = false;
+				}
+
+				if (m_input.m_isFiring)
+				{
+					if (isOnRecoil == false)
+					{
+						const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
+						const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.getElapsedTime().asSeconds() >= m_fireRate;
+						if (isReadyToFire)
+						{
+							m_fireCooldown.restart();
+							m_currentCharacterState = WeaponAnimation::STATE::Recoil;
+#ifdef IS_RATCHET_DEBUG
+							TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");
+#endif	
+							m_mustSpawnBullet = true;
+
+							m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
+						}
+					}
+				}
+			}
+
 			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
 
 			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);

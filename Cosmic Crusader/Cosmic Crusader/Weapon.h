@@ -19,6 +19,7 @@ namespace ratchet
 			case TYPE::FireLauncher: return "FireLauncher";
 			case TYPE::RocketLauncher: return "RocketLauncher";
 			case TYPE::Count: return "";
+			case TYPE::Enemy1Blaster: return "Enemy1Blaster";
 			}
 		}
 

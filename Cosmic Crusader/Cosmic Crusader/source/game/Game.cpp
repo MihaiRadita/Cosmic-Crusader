@@ -229,7 +229,7 @@ namespace ratchet
 			config.m_activeRenderer = true;
 
 			auto colliderConfig = CapsuleColliderConfig();
-			colliderConfig.m_layer = PhysicsLayer::Player;
+			colliderConfig.m_layer = PhysicsLayer::Creature;
 			colliderConfig.m_bodyDef.type = b2_dynamicBody;
 			colliderConfig.m_bodyDef.bullet = true;
 			colliderConfig.m_bodyDef.fixedRotation = true;
@@ -315,7 +315,7 @@ namespace ratchet
 			config.m_targetMaxDistanceAttackX = 2.0f;
 			config.m_targetMaxDistanceAttackY = 1.5f;
 
-			config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Blaster/Angle0/Aim/Idle1.png";
+			config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Enemy1Blaster/Angle0/Aim/Idle1.png";
 			config.spriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/";
 
 			config.m_activeRenderer = true;
@@ -355,14 +355,14 @@ namespace ratchet
 
 			config.m_colliderConfig = &colliderConfig;
 
-			config.m_usableWeaponTypeList = { {Weapon::TYPE::Blaster, true} };
+			config.m_usableWeaponTypeList = { {Weapon::TYPE::Enemy1Blaster, true} };
 
 			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
 			config.m_currentState = WeaponAnimation::STATE::Aim;
 
 			config.m_characterAngles = { WeaponAnimation::ANGLE::Angle0 };
 
-			config.m_weaponTypeList = { Weapon::TYPE::Blaster };
+			config.m_weaponTypeList = { Weapon::TYPE::Enemy1Blaster };
 
 			config.m_bodShoulderOffset = 0.4f;
 
@@ -371,8 +371,8 @@ namespace ratchet
 			weaponConfig->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 			weaponConfig->m_Faction = Faction::FACTION_UNKNOWN;
 			weaponConfig->m_colliderType = COLLIDERTYPE_UNKNOWN;
-			weaponConfig->m_weaponType = Weapon::TYPE::Blaster;
-			weaponConfig->m_configLayer = "Super Launcher";
+			weaponConfig->m_weaponType = Weapon::TYPE::Enemy1Blaster;
+			weaponConfig->m_configLayer = "Super Launcher Enemy";
 			weaponConfig->m_activeRenderer = true;
 			weaponConfig->m_bulletPoolIncrementation = 5;
 
@@ -437,15 +437,18 @@ namespace ratchet
 			bulletConfig->m_colliderConfig = colliderBulletConfig;
 
 
-
+			 
 			config.m_initialWeaponConfigList =
 			{
-				std::make_pair(Weapon::TYPE::Blaster, *weaponConfig),
+				std::make_pair(Weapon::TYPE::Enemy1Blaster, *weaponConfig),
 			};
 
 			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;
 
 			config.m_currentlyEquippedWeaponIndex = 0;
+
+			PrefabAssets::Get().RegisterWeaponConfig(weaponConfig->m_configLayer, weaponConfig);
+			PrefabAssets::Get().RegisterBulletConfig(bulletConfig->m_configLayer, bulletConfig);
 
 			GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
 		}

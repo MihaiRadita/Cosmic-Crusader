@@ -125,9 +125,24 @@ namespace ratchet
 			{
 				m_input.x = 0.f;
 				m_input.isJump = false;
+
+				if (m_isGround)
+				{
+					m_input.m_isFiring = true;
+				}
 			}
 			else
 			{
+				if (m_input.m_isFiring == true)
+				{
+					m_fireCooldown.restart();
+					if (m_currentCharacterState == WeaponAnimation::STATE::Recoil)
+					{
+						m_currentCharacterState = WeaponAnimation::STATE::Aim;
+					}
+					m_input.m_isFiring = false;
+				}
+
 				if (m_canJumpOver)
 				{
 					if (m_isGround)
@@ -166,6 +181,16 @@ namespace ratchet
 			m_input.x = 0;
 
 			m_input.isJump = false;
+
+			if (m_input.m_isFiring == true)
+			{
+				m_fireCooldown.restart();
+				if (m_currentCharacterState == WeaponAnimation::STATE::Recoil)
+				{
+					m_currentCharacterState = WeaponAnimation::STATE::Aim;
+				}
+				m_input.m_isFiring = false;
+			}
 
 		}
 
