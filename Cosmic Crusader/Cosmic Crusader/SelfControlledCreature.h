@@ -38,6 +38,8 @@ namespace ratchet
 		bool m_isTargetDetected = false;
 		bool m_isTagetBehindCharacter = false;
 
+		bool m_waitTostartAttack = false;
+
 		void canJumpOver();
 		void isFallingRisk();
 
@@ -45,6 +47,9 @@ namespace ratchet
 		void SetTarget(Faction& faction);
 
 		void PostCosntructFixup() override;
+
+
+		void computeAimBulletRotation() override;
 
 		void Start() override;
 

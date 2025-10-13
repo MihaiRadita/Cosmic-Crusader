@@ -399,7 +399,7 @@ namespace ratchet
 			bulletConfig->m_damage = 5.0f;
 			bulletConfig->m_ammo = 10.f;
 			bulletConfig->m_bulletLifeLimit = 1.f;
-			bulletConfig->m_BulletSpeed = 8.f;
+			bulletConfig->m_BulletSpeed = 5.f;
 			bulletConfig->m_configLayer = weaponConfig->m_configLayer;
 			bulletConfig->m_Faction = Faction::TEAM_1;
 			bulletConfig->m_movementType = MovementType::AIR;

@@ -419,8 +419,6 @@ namespace ratchet
 				bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
 				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.getElapsedTime().asSeconds() >= m_recoilTime;
 
-				m_currenFireDirectionNorm = sf::Vector2f(m_facingRight ? 1.f : -1.f, 0.f);
-
 				if (justPassedRecoilTime)
 				{
 					m_currentCharacterState = WeaponAnimation::STATE::Aim;

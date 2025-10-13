@@ -91,6 +91,22 @@ namespace ratchet
 			m_collider->SetOwner(this);
 		}
 	}
+	void SelfControlledCreature::computeAimBulletRotation()
+	{
+		sf::Vector2f firePoint = m_currentFirePoint;
+		sf::Vector2f targetPos = m_target->getPosition();
+
+		sf::Vector2f direction = targetPos - firePoint;
+		sf::Vector2f directionNormalised = sf::Vector2f(0.0f, 0.0f);
+		calculateNormalised(direction.x, direction.y, directionNormalised.x, directionNormalised.y);
+
+		float angleRad = std::atan2(directionNormalised.y, directionNormalised.x);
+		float angleDeg = angleRad * 180.f / M_PI;
+
+		m_currentFireRotationRadians = angleRad;
+		m_currentFireRoationDegrees = angleDeg;
+		m_currenFireDirectionNorm = directionNormalised;
+	}
 	void SelfControlledCreature::Start()
 	{
 		PostCosntructFixup();
@@ -128,20 +144,38 @@ namespace ratchet
 
 				if (m_isGround)
 				{
-					m_input.m_isFiring = true;
+					if (!m_waitTostartAttack)
+					{
+						m_fireCooldown.restart();
+						m_waitTostartAttack = true;
+						m_input.m_isFiring = false;
+
+					}
+					else
+					{
+						if (m_fireCooldown.getElapsedTime().asSeconds() >= m_fireRate)
+						{
+							m_input.m_isFiring = true;
+						
+						}		
+					}
+					
 				}
 			}
 			else
 			{
 				if (m_input.m_isFiring == true)
 				{
-					m_fireCooldown.restart();
+
 					if (m_currentCharacterState == WeaponAnimation::STATE::Recoil)
 					{
 						m_currentCharacterState = WeaponAnimation::STATE::Aim;
 					}
 					m_input.m_isFiring = false;
 				}
+				m_waitTostartAttack = false;
+
+				m_fireCooldown.restart();
 
 				if (m_canJumpOver)
 				{
@@ -184,16 +218,16 @@ namespace ratchet
 
 			if (m_input.m_isFiring == true)
 			{
-				m_fireCooldown.restart();
 				if (m_currentCharacterState == WeaponAnimation::STATE::Recoil)
 				{
 					m_currentCharacterState = WeaponAnimation::STATE::Aim;
 				}
 				m_input.m_isFiring = false;
 			}
+			m_waitTostartAttack = false;
+			m_fireCooldown.restart();
 
 		}
-
 
 		if (m_canJumpOver == true)
 		{
