@@ -36,7 +36,6 @@ namespace ratchet
 		//Init functions
 		void initWindow();
 		void initPhysics();
-		void initMap();
 		void initWeaponManager();
 		//Geters
 		const sf::RenderWindow& getWindow() const;
@@ -58,5 +57,8 @@ namespace ratchet
 		void render();
 		void renderPlayer();
 		void renderTile();
+
+		static const float sc_tiledToGameScale;
+		static const float sc_defaultZoom;
 	};
 }

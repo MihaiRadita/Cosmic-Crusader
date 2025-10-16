@@ -156,6 +156,7 @@
     <ClCompile Include="PrefabAssets.cpp" />
     <ClCompile Include="RatchetMaths.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SelfControlledCreature.cpp" />
     <ClCompile Include="SelfControlledCreatureConfig.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -173,12 +174,14 @@
     <ClCompile Include="source\physics\ContactListener.cpp" />
     <ClCompile Include="source\physics\Physics.cpp" />
     <ClCompile Include="source\physics\RectAngleCollider.cpp" />
+    <ClCompile Include="source\serialisation\ISerialisableItem.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TileConfig.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponConfig.cpp" />
     <ClCompile Include="WeaponManager.cpp" />
@@ -208,12 +211,15 @@
     <ClInclude Include="source\animations\AnimationRun.h" />
     <ClInclude Include="source\game\Game.h" />
     <ClInclude Include="source\game\Player.h" />
+    <ClInclude Include="source\game\Scene.h" />
     <ClInclude Include="source\game\Tile.h" />
     <ClInclude Include="source\physics\CircleCollider.h" />
     <ClInclude Include="source\physics\ContactListener.h" />
     <ClInclude Include="source\physics\Physics.h" />
     <ClInclude Include="source\physics\RectAngleCollider.h" />
+    <ClInclude Include="source\serialisation\ISerialisableItem.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TileConfig.h" />
     <ClInclude Include="TraceChannels.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponConfig.h" />

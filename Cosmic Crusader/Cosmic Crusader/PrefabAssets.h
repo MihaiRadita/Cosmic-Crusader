@@ -5,6 +5,7 @@
 #include "SelfControlledCreatureConfig.h"
 #include "WeaponConfig.h"
 #include "BulletConfig.h"
+#include "TileConfig.h"
 #include "physics/RectAngleCollider.h"
 
 

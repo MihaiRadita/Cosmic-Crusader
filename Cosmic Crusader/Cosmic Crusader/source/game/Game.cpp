@@ -1,31 +1,31 @@
 #include "stdafx.h"
 #include "Game.h"
+#include "TileConfig.h"
 
 
 
 namespace ratchet
 {
-	static constexpr auto sc_tiledToGameScale = 0.01f;
-	static constexpr auto sc_defaultZoom = 2.0f * sc_tiledToGameScale;
+	const float Game::sc_tiledToGameScale = 0.01f;
+	const float Game::sc_defaultZoom = 2.0f * sc_tiledToGameScale;
 
 	void Game::spawnObjects()
 	{
 		{ 
-			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap..tmj");
+			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap.tmj");
 
 			if (!file.is_open())
 			{
 				TRACE_CHANNEL("WARNING", "ERROR! The file could not be opened!");
 			}
 			
-			nlohmann::json j;
+			nlohmann::json jsonFile;
 
-			file >> j;
+			file >> jsonFile;
 			file.close();
 
 			nlohmann::json layer;
-
-			for (const auto& l : j["layers"])
+			for (const auto& l : jsonFile["layers"])
 			{
 				if (l["name"] == "Tile Objects")
 				{
@@ -35,65 +35,19 @@ namespace ratchet
 				}
 			}
 
-
 			const auto& objects = layer["objects"];
-
-			int coolideNumber = 0;
 
 			for (const auto& obj : objects)
 			{
-				auto config = GameObjectConfig();
-				config.m_Faction = Faction::FACTION_UNKNOWN;
-				config.m_colliderType = COLLIDERTYPE_UNKNOWN;
-				config.m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
-
-				config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
-
-				float tileWidth = 64.0f;
-				float tileHeight = 64.0f;
-
-				config.positionXOffset = 0.f;
-				config.positionYOffset = -tileHeight * config.scale.y;
-
-
-				float posX = obj["x"].get<float>() * config.scale.x;
-				float posY = obj["y"].get<float>() * config.scale.y;
-
-				posY += config.positionYOffset;
-
-				if (obj.contains("properties"))
+				auto config = TileConfig();
+				if (config.deserialise(obj))
 				{
-					for (const auto& prop : obj["properties"])
-					{
-						if (prop["name"] == "canJumpOver")
-						{
-							config.m_canJumpOver = prop["value"].get<bool>();
-							break;
-						}
-					}
+					GameObject::s_gameObjects.push_back(new Tile(config));
 				}
-
-				config.position = sf::Vector2f(posX, posY);
-				config.rotation = obj["rotation"];
-				config.startSpriteTexturePath = "D:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Tileset/";
-				config.startSpriteTexturePathAddition = obj["name"].get<std::string>();
-				config.startSpriteTexturePath = config.startSpriteTexturePath + config.startSpriteTexturePathAddition + ".png";
-
-				config.m_activeRenderer = true;
-
-				auto colliderConfig = RectAngleColliderConfig();
-				colliderConfig.m_layer = PhysicsLayer::Platforms;
-				colliderConfig.m_bodyDef.type = b2_staticBody;
-				colliderConfig.m_bodyDef.fixedRotation = true;
-				colliderConfig.m_fixtureDef.density = 0.0f;
-				colliderConfig.m_fixtureDef.friction = 76.f;
-				colliderConfig.m_fixtureDef.restitution = 0.01f;
-				colliderConfig.m_fixtureDef.isSensor = false;
-
-
-				config.m_colliderConfig = &colliderConfig;
-
-				GameObject::s_gameObjects.push_back(new GameObject(config));
+				else
+				{
+					TRACE_CHANNEL("GAMEOBJECT_INIT", "FAILED to deserialise tile.");
+				}
 			}
 		}
 
@@ -139,8 +93,8 @@ namespace ratchet
 			colliderConfig->m_fixtureDef.isSensor = true;
 
 			BulletConfig* bulletConfig = new BulletConfig();
-			bulletConfig->m_damage = 5.0f;
-			bulletConfig->m_ammo = 10.f;
+			bulletConfig->m_damage = weaponConfig->m_damage;
+			bulletConfig->m_ammo = weaponConfig->m_MaxAmmo;
 			bulletConfig->m_bulletLifeLimit = 1.f;
 			bulletConfig->m_BulletSpeed = 8.f;
 			bulletConfig->m_configLayer = weaponConfig->m_configLayer;

@@ -1,13 +1,15 @@
 #pragma once
 
 #include "ColliderBase.h"
+#include "serialisation/ISerialisableItem.h"
 
 namespace ratchet
 {
 	enum class Faction{FACTION_UNKNOWN = 0 ,TEAM_0, TEAM_1, };
+
 	enum class MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, AIR};
 
-	struct GameObjectConfig
+	struct GameObjectConfig : public ISerialisableItem
 	{
 #ifdef IS_RATCHET_DEBUG
 		bool m_debugDraw = false;
@@ -46,6 +48,9 @@ namespace ratchet
 		//Destructor
 		~GameObjectConfig();
 
+
+		virtual bool serialise(nlohmann::json& jsonFile) override;
+		virtual bool deserialise(const nlohmann::json& jsonFile) override;
 	};
 
 }

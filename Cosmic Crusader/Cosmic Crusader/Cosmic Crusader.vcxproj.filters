@@ -125,6 +125,15 @@
     <ClCompile Include="SelfControlledCreatureConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\serialisation\ISerialisableItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -205,5 +214,8 @@
     <ClInclude Include="TraceChannels.h" />
     <ClInclude Include="SelfControlledCreature.h" />
     <ClInclude Include="SelfControlledCreatureConfig.h" />
+    <ClInclude Include="source\serialisation\ISerialisableItem.h" />
+    <ClInclude Include="source\game\Scene.h" />
+    <ClInclude Include="TileConfig.h" />
   </ItemGroup>
 </Project>

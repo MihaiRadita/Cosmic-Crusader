@@ -33,4 +33,41 @@ namespace ratchet
 	{
 
 	}
+
+	bool GameObjectConfig::serialise(nlohmann::json& jsonFile)
+	{
+		return false;
+	}
+
+	bool GameObjectConfig::deserialise(const nlohmann::json& jsonFile)
+	{
+		//States
+		// m_Faction = static_cast<Faction>(jsonFile["faction"].get<int>());
+		//MovementType m_movementType;
+		//ColliderType m_colliderType;
+
+		////Transforms
+		//sf::Vector2f position;
+		//float rotation;
+		//sf::Vector2f scale;
+		//float positionXOffset;
+		//float positionYOffset;
+
+
+		////Graphics
+		//std::string startSpriteTexturePath;
+		//std::string spriteTexturePath;
+		//std::string startSpriteTexturePathAddition;
+		//std::string fallingSpriteTexturePath;
+		//bool m_activeRenderer;
+		//bool m_canJumpOver;
+
+		////Physics
+		//ColliderBaseConfig* m_colliderConfig = nullptr;
+
+		////Layers/Ids
+		//std::string m_configLayer;
+
+		return false;
+	}
 }
