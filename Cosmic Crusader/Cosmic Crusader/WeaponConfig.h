@@ -11,6 +11,9 @@ namespace ratchet
 	public:
 		WeaponConfig(int ammo, int damage, bool isWeaponAccesible);
 
+		virtual bool serialise(nlohmann::json& jsonFile) override;
+		virtual bool deserialise(const nlohmann::json& jsonFile) override;
+
 		//Weapon features
 		int m_damage;
 		int m_MaxAmmo;
