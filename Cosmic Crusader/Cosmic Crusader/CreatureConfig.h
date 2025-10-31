@@ -52,6 +52,9 @@ namespace ratchet
 
 		int m_currentlyEquippedWeaponIndex = 0;
 
+		virtual bool serialise(nlohmann::json& jsonFile) override;
+		virtual bool deserialise(const nlohmann::json& jsonFile) override;
+
 		//Cosntructors
 		CreatureConfig();
 

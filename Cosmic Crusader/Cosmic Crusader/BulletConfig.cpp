@@ -108,6 +108,22 @@ namespace ratchet
 			{
 				m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
 			}
+
+			if (propertyName == "colliderBulletGravityScale")
+			{
+				m_colliderConfig->m_gravityScale = propertyValue.get<float>();
+			}
+
+			if (propertyName == "colliderBulletLinearDamping")
+			{
+					m_colliderConfig->m_linearDamping = propertyValue.get<float>();
+			}
+
+			if (propertyName == "colliderBulletAngularDamping")
+			{
+					m_colliderConfig->m_angularDamping = propertyValue.get<float>();
+			}
+			
 		}
 
 		return true;

@@ -126,7 +126,6 @@ namespace ratchet
 		else if (const auto* rectangleConfig = dynamic_cast<RectAngleColliderConfig*>(config.m_colliderConfig))
 		{
 			m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
-			delete config.m_colliderConfig;
 		}
 	}
 

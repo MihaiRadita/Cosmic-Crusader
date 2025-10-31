@@ -121,13 +121,6 @@ namespace ratchet
 									bulletConfig.m_ammo = config.m_MaxAmmo;
 									bulletConfig.m_configLayer = config.m_configLayer;
 
-									if (bulletConfig.m_colliderConfig->m_bodyDef.type == b2_dynamicBody)
-									{
-											bulletConfig.m_colliderConfig->m_gravityScale = 0.0f;
-											bulletConfig.m_colliderConfig->m_linearDamping = 0.0f;
-											bulletConfig.m_colliderConfig->m_angularDamping = 0.0f;
-									}
-
 									PrefabAssets::Get().RegisterBulletConfig(bulletConfig.m_configLayer, &bulletConfig);
 								}
 								else
@@ -151,91 +144,83 @@ namespace ratchet
 		}
 
 		{
-			auto config = CreatureConfig();
+
+			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap.tmj");
+
+			if (!file.is_open())
+			{
+				TRACE_CHANNEL("WARNING", "ERROR! The file could not be opened!");
+			}
+
+			nlohmann::json jsonFile;
+
+			file >> jsonFile;
+			file.close();
+
+			nlohmann::json layer;
+			for (const auto& l : jsonFile["layers"])
+			{
+				if (l["name"] == "Player")
+				{
+					layer = l;
+					TRACE_CHANNEL("GAMEOBJECT_INIT", "We have a match!");
+					break;
+				}
+			}
+
+			const auto& objects = layer["objects"];
+
+			for (const auto& obj : objects)
+			{
+				auto config = CreatureConfig();
+
 #ifdef IS_RATCHET_DEBUG
 			config.m_debugDraw = true;
 #endif
 
-			config.m_Faction = Faction::TEAM_0;
-			config.m_movementType = MovementType::GROUND;
-			
-			config.m_colliderType = DYNAMIC;
-
-			config.m_animationStates = { ANIMATION_STATE::IDLE, ANIMATION_STATE::JUMP, ANIMATION_STATE::MOVING,
-										ANIMATION_STATE::JUMP_RUNNING, ANIMATION_STATE::FALL };
-
-			config.m_currentAnimationState = ANIMATION_STATE::IDLE;
-
-			config.positionXOffset = 0.f;
-			config.positionYOffset = 0.f;
-
-			config.position = sf::Vector2f(173.0f, -6.97f);
-			config.rotation = 0.0f;
-			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
-
-			config.m_movingSpeed = 7.0f;
-			config.m_jumpImpulse = -10.0f;
-			config.m_fallingSpeed = 7000.0f;
-			config.m_AngleBase = 45.f;
-			
-
-			config.m_recoilTime = 0.1f;
-			config.m_fireRate = 0.2f;
-
-			config.startSpriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png";
-			config.spriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/PlayerTextures/Player1Textures/";
-
-			config.m_activeRenderer = true;
-
-			auto colliderConfig = CapsuleColliderConfig();
-			colliderConfig.m_layer = PhysicsLayer::Creature;
-			colliderConfig.m_bodyDef.type = b2_dynamicBody;
-			colliderConfig.m_bodyDef.bullet = true;
-			colliderConfig.m_bodyDef.fixedRotation = true;
-			colliderConfig.m_massValue = 100.0f;
-			colliderConfig.m_fixtureDef.friction = 0.0f;
-			colliderConfig.m_fixtureDef.restitution = 0.f;
-			colliderConfig.m_fixtureDef.density = 0.0f;
-			colliderConfig.m_height = 1.13f;
-			colliderConfig.m_radius = 0.25f;
-			colliderConfig.m_fixtureDef.isSensor = false;
-			colliderConfig.m_isGroundRaycastOffset = 0.02f;
-
+				if (config.deserialise(obj))
+				{
 #ifdef IS_RATCHET_DEBUG
-			colliderConfig.m_debugDraw = false;
+			config.m_colliderConfig->m_debugDraw = false;
 #endif
+					if (obj["name"] == "Player")
+					{
 
-			if (colliderConfig.m_bodyDef.type == b2_dynamicBody)
-			{
-				colliderConfig.m_gravityScale = 1.0f;
-				colliderConfig.m_linearDamping = 0.0f;
-				colliderConfig.m_angularDamping = 0.0f;
+						config.m_animationStates = { ANIMATION_STATE::IDLE, ANIMATION_STATE::JUMP, ANIMATION_STATE::MOVING,
+													ANIMATION_STATE::JUMP_RUNNING, ANIMATION_STATE::FALL };
+
+						config.m_currentAnimationState = ANIMATION_STATE::IDLE;
+
+						config.m_usableWeaponTypeList = { {Weapon::TYPE::None, true}, {Weapon::TYPE::Blaster, false}, 
+														{Weapon::TYPE::FireLauncher, false}, {Weapon::TYPE::RocketLauncher, false} }; 
+														// ce arme POATE folosi
+
+						config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
+						config.m_currentState = WeaponAnimation::STATE::Aim;
+
+						config.m_characterAngles = { WeaponAnimation::ANGLE::Angle0,WeaponAnimation::ANGLE::Angle45, 
+													WeaponAnimation::ANGLE::Angle90,WeaponAnimation::ANGLE::AngleMinus45 };
+
+						config.m_weaponTypeList = { Weapon::TYPE::None, 
+													Weapon::TYPE::Blaster, Weapon::TYPE::FireLauncher, Weapon::TYPE::RocketLauncher };
+
+						config.m_initialWeaponConfigList = // reprezinta ce arme ai in inventar deja
+						{
+							std::make_pair(Weapon::TYPE::None, std::nullopt),
+						};
+
+						config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;
+
+						config.m_currentlyEquippedWeaponIndex = 0;
+
+						GameObject::s_gameObjects.push_back(new Player(config));
+					}
+				}
+				else
+				{
+					TRACE_CHANNEL("GAMEOBJECT_INIT", "FAILED to deserialise tile.");
+				}
 			}
-
-			config.m_colliderConfig = &colliderConfig;
-
-			config.m_usableWeaponTypeList = { {Weapon::TYPE::None, true}, {Weapon::TYPE::Blaster, false}, {Weapon::TYPE::FireLauncher, false}, {Weapon::TYPE::RocketLauncher, false} }; // ce arme POATE folosi
-
-			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
-			config.m_currentState = WeaponAnimation::STATE::Aim;
-
-			config.m_characterAngles = { WeaponAnimation::ANGLE::Angle0,WeaponAnimation::ANGLE::Angle45, WeaponAnimation::ANGLE::Angle90,WeaponAnimation::ANGLE::AngleMinus45 };
-
-			config.m_weaponTypeList = { Weapon::TYPE::None, Weapon::TYPE::Blaster, Weapon::TYPE::FireLauncher, Weapon::TYPE::RocketLauncher };
-
-			config.m_bodShoulderOffset = 0.4f;
-
-			config.m_initialWeaponConfigList = // reprezinta ce arme ai in inventar deja
-			{
-				std::make_pair(Weapon::TYPE::None, std::nullopt),
-			};
-
-			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;
-
-			config.m_currentlyEquippedWeaponIndex = 0;
-
-			GameObject::s_gameObjects.push_back(new Player(config));
-
 		}
 
 		{
