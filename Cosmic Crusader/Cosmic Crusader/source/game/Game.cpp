@@ -80,65 +80,68 @@ namespace ratchet
 
 			for (const auto& obj : objects)
 			{
-				if (obj.contains("name"))
+				if (obj["type"] == "Player")
 				{
-					std::string objName = obj["name"];
-					if (objName.find("Blaster Bullet") != std::string::npos)
+					if (obj.contains("name"))
 					{
-						continue;
-					}
-				}
-
-				auto config = WeaponConfig(0.0f, 0.0f, true);
-				if (config.deserialise(obj))
-				{
-					PrefabAssets::Get().RegisterWeaponConfig(config.m_configLayer, &config);
-
-					int bulletID = -1;
-
-					for (const auto& prop : obj["properties"])
-					{
-						if (prop["type"] == "object" && prop["name"] == "Bullet")
+						std::string objName = obj["name"];
+						if (objName.find("Blaster Bullet") != std::string::npos)
 						{
-							bulletID = prop["value"];
-							break;
+							continue;
 						}
 					}
 
-					if (bulletID != -1)
+					auto config = WeaponConfig(0.0f, 0.0f, true);
+					if (config.deserialise(obj))
 					{
-						for (const auto& candidate : objects)
+						PrefabAssets::Get().RegisterWeaponConfig(config.m_configLayer, &config);
+
+						int bulletID = -1;
+
+						for (const auto& prop : obj["properties"])
 						{
-							if (candidate["id"] == bulletID)
+							if (prop["type"] == "object" && prop["name"] == "Bullet")
 							{
-								auto bulletConfig = BulletConfig();
-								if (bulletConfig.deserialise(candidate))
-								{
-									TRACE_CHANNEL("GAMEOBJECT_INIT", "Attached bullet to weapon.");
-
-
-									bulletConfig.m_damage = config.m_damage;
-									bulletConfig.m_ammo = config.m_MaxAmmo;
-									bulletConfig.m_configLayer = config.m_configLayer;
-
-									PrefabAssets::Get().RegisterBulletConfig(bulletConfig.m_configLayer, &bulletConfig);
-								}
-								else
-								{
-									TRACE_CHANNEL("GAMEOBJECT_INIT", "Failed to deserialise bullet.");
-								}
+								bulletID = prop["value"];
 								break;
 							}
 						}
+
+						if (bulletID != -1)
+						{
+							for (const auto& candidate : objects)
+							{
+								if (candidate["id"] == bulletID)
+								{
+									auto bulletConfig = BulletConfig();
+									if (bulletConfig.deserialise(candidate))
+									{
+										TRACE_CHANNEL("GAMEOBJECT_INIT", "Attached bullet to weapon.");
+
+
+										bulletConfig.m_damage = config.m_damage;
+										bulletConfig.m_ammo = config.m_MaxAmmo;
+										bulletConfig.m_configLayer = config.m_configLayer;
+
+										PrefabAssets::Get().RegisterBulletConfig(bulletConfig.m_configLayer, &bulletConfig);
+									}
+									else
+									{
+										TRACE_CHANNEL("GAMEOBJECT_INIT", "Failed to deserialise bullet.");
+									}
+									break;
+								}
+							}
+						}
+
+						PrefabAssets::Get().RegisterWeaponConfig(config.m_configLayer, &config);
+
+						GameObject::s_gameObjects.push_back(new WeaponPickup(config));
 					}
-
-					PrefabAssets::Get().RegisterWeaponConfig(config.m_configLayer, &config);
-
-					GameObject::s_gameObjects.push_back(new WeaponPickup(config));
-				}
-				else
-				{
-					TRACE_CHANNEL("GAMEOBJECT_INIT", "FAILED to deserialise tile.");
+					else
+					{
+						TRACE_CHANNEL("GAMEOBJECT_INIT", "FAILED to deserialise tile.");
+					}
 				}
 			}
 		}
@@ -224,177 +227,328 @@ namespace ratchet
 		}
 
 		{
-			auto config = SelfControlledCreatureConfig();
-#ifdef IS_RATCHET_DEBUG
-			config.m_debugDraw = true;
-#endif
+			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap.tmj");
 
-			config.m_Faction = Faction::TEAM_1;
-			config.m_movementType = MovementType::GROUND;
-
-			config.m_animationStates = { ANIMATION_STATE::IDLE, ANIMATION_STATE::MOVING, ANIMATION_STATE::JUMP, ANIMATION_STATE::FALL };
-			config.m_currentAnimationState = ANIMATION_STATE::IDLE;
-
-			config.m_colliderType = DYNAMIC;
-			config.positionXOffset = 0.f;
-			config.positionYOffset = 0.f;
-			
-
-			config.position = sf::Vector2f(180.0f, -6.0f);
-			config.rotation = 0.0f;
-			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
-
-			config.m_movingSpeed = 5.0f;
-			config.m_jumpImpulse = -5.0f;
-			config.m_fallingSpeed = 7000.0f;
-			config.m_AngleBase = 45.f;
-
-			config.m_recoilTime = 0.1f;
-			config.m_fireRate = 0.7f;
-
-			config.m_targetMaxDistanceDetectionX = 3.5f;
-			config.m_targetMaxDistanceDetectionY = 1.5f;
-			config.m_targetMaxDistanceLoseX = 3.5f;
-			config.m_targetMaxDistanceLoseY = 3.5f;
-			config.m_targetMaxDistanceAttackX = 2.0f;
-			config.m_targetMaxDistanceAttackY = 1.5f;
-
-			config.startSpriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Enemy1Blaster/Angle0/Aim/Idle1.png";
-			config.spriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/";
-
-			config.m_activeRenderer = true;
-
-			auto colliderConfig = CapsuleColliderConfig();
-			colliderConfig.m_layer = PhysicsLayer::Creature;
-			colliderConfig.m_bodyDef.type = b2_dynamicBody;
-			colliderConfig.m_bodyDef.bullet = true;
-			colliderConfig.m_bodyDef.fixedRotation = true;
-			colliderConfig.m_fixtureDef.friction = 0.0f;
-			colliderConfig.m_fixtureDef.restitution = 0.f;
-			colliderConfig.m_fixtureDef.density = 0.0f;
-			colliderConfig.m_height = 1.13f;
-			colliderConfig.m_radius = 0.25f;
-			colliderConfig.m_massValue = 1500.f;
-			colliderConfig.m_fixtureDef.isSensor = false;
-			colliderConfig.m_isGroundRaycastOffset = 0.02f;
-			colliderConfig.m_JumpOverBottomRaycastOffsetX = 1.1f;
-			colliderConfig.m_JumpOverBottomRaycastOffsetY = 0.05f;
-			colliderConfig.m_JumpOverTopRaycastOffsetX = 1.1f;
-			colliderConfig.m_JumpOverTopRaycastOffsetY = 0.05f;
-			colliderConfig.m_checkFallingRiskRaycastStartOffsetX = 0.9f;
-			colliderConfig.m_checkFallingRiskRaycastStartOffsetY = 0.05f;
-			colliderConfig.m_checkFallingRiskRaycastEndOffsetY = 1.8f;
-
-
-#ifdef IS_RATCHET_DEBUG
-			colliderConfig.m_debugDraw = true;
-#endif
-
-			if (colliderConfig.m_bodyDef.type == b2_dynamicBody)
+			if (!file.is_open())
 			{
-				colliderConfig.m_gravityScale = 1.0f;
-				colliderConfig.m_linearDamping = 0.0f;
-				colliderConfig.m_angularDamping = 0.0f;
+				TRACE_CHANNEL("WARNING", "ERROR! The file could not be opened!");
 			}
 
-			config.m_colliderConfig = &colliderConfig;
+			nlohmann::json jsonFile;
 
-			config.m_usableWeaponTypeList = { {Weapon::TYPE::Enemy1Blaster, true} };
+			file >> jsonFile;
+			file.close();
 
-			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
-			config.m_currentState = WeaponAnimation::STATE::Aim;
-
-			config.m_characterAngles = { WeaponAnimation::ANGLE::Angle0 };
-
-			config.m_weaponTypeList = { Weapon::TYPE::Enemy1Blaster };
-
-			config.m_bodShoulderOffset = 0.4f;
-
-
-			auto* weaponConfig = new WeaponConfig(51, 12, true);
-			weaponConfig->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
-			weaponConfig->m_Faction = Faction::FACTION_UNKNOWN;
-			weaponConfig->m_colliderType = COLLIDERTYPE_UNKNOWN;
-			weaponConfig->m_weaponType = Weapon::TYPE::Enemy1Blaster;
-			weaponConfig->m_configLayer = "Super Launcher Enemy";
-			weaponConfig->m_activeRenderer = true;
-			weaponConfig->m_bulletPoolIncrementation = 5;
-
-			float tileWidth = 64.0f;
-			float tileHeight = 64.0f;
-
-			weaponConfig->positionXOffset = 0.f;
-			weaponConfig->positionYOffset = 0.f;
-
-			weaponConfig->position = sf::Vector2f(169.862f, -3.4f);
-			weaponConfig->rotation = 0.0f;
-			weaponConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
-
-			weaponConfig->startSpriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
-
-
-			// Weapon Start Shooting Config Points
-			weaponConfig->m_characterStartPointShootingOffset = sf::Vector2f(0.08f, 0.1f);
-
-			//Weapon Shooting Config Points Angles
-			weaponConfig->m_shootingOffsetAngle0 = sf::Vector2f(0.75f, 0.05f);
-
-			BulletConfig* bulletConfig = new BulletConfig();
-			bulletConfig->m_damage = 5.0f;
-			bulletConfig->m_ammo = 10.f;
-			bulletConfig->m_bulletLifeLimit = 1.f;
-			bulletConfig->m_BulletSpeed = 5.f;
-			bulletConfig->m_configLayer = weaponConfig->m_configLayer;
-			bulletConfig->m_Faction = Faction::TEAM_1;
-			bulletConfig->m_movementType = MovementType::AIR;
-			bulletConfig->m_colliderType = DYNAMIC;
-
-			bulletConfig->position = sf::Vector2f(6.7, 8.9f);
-
-			bulletConfig->positionXOffset = 0.f;
-			bulletConfig->positionYOffset = 0.f;
-
-			bulletConfig->m_activeRenderer = true;
-
-			bulletConfig->position = sf::Vector2f(0.0f, 0.0f);
-			bulletConfig->rotation = 0.0f;
-			bulletConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
-
-			bulletConfig->startSpriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
-
-			auto* colliderBulletConfig = new CircleColliderConfig();
-			colliderBulletConfig->m_layer = PhysicsLayer::Projectiles;
-			colliderBulletConfig->m_bodyDef.type = b2_dynamicBody;
-			colliderBulletConfig->m_fixtureDef.density = 0.0f;
-			colliderBulletConfig->m_bodyDef.fixedRotation = false;
-			colliderBulletConfig->m_fixtureDef.friction = 0.0f;
-			colliderBulletConfig->m_fixtureDef.restitution = 0.0f;
-			colliderBulletConfig->m_fixtureDef.isSensor = true;
-
-			if (colliderBulletConfig->m_bodyDef.type == b2_dynamicBody)
+			nlohmann::json layer;
+			for (const auto& l : jsonFile["layers"])
 			{
-				colliderBulletConfig->m_gravityScale = 0.0f;
-				colliderBulletConfig->m_linearDamping = 0.0f;
-				colliderBulletConfig->m_angularDamping = 0.0f;
+				if (l["name"] == "Enemies")
+				{
+					layer = l;
+					TRACE_CHANNEL("GAMEOBJECT_INIT", "We have a match!");
+					break;
+				}
 			}
 
-			bulletConfig->m_colliderConfig = colliderBulletConfig;
+			const auto& objects = layer["objects"];
 
-
-			 
-			config.m_initialWeaponConfigList =
+			for (const auto& obj : objects)
 			{
-				std::make_pair(Weapon::TYPE::Enemy1Blaster, *weaponConfig),
-			};
+				auto config = SelfControlledCreatureConfig();
 
-			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;
+#ifdef IS_RATCHET_DEBUG
+				config.m_debugDraw = true;
+#endif
 
-			config.m_currentlyEquippedWeaponIndex = 0;
+				if (config.deserialise(obj))
+				{
 
-			PrefabAssets::Get().RegisterWeaponConfig(weaponConfig->m_configLayer, weaponConfig);
-			PrefabAssets::Get().RegisterBulletConfig(bulletConfig->m_configLayer, bulletConfig);
+#ifdef IS_RATCHET_DEBUG
+					config.m_colliderConfig->m_debugDraw = false;
+#endif
+					if (obj["name"] == "Enemy")
+					{
+						config.m_animationStates = { ANIMATION_STATE::IDLE, ANIMATION_STATE::MOVING, ANIMATION_STATE::JUMP, ANIMATION_STATE::FALL };
+						config.m_currentAnimationState = ANIMATION_STATE::IDLE;
+						config.m_usableWeaponTypeList = { {Weapon::TYPE::Enemy1Blaster, true} };
+						config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
+						config.m_currentState = WeaponAnimation::STATE::Aim;
+						config.m_characterAngles = { WeaponAnimation::ANGLE::Angle0 };
+						config.m_weaponTypeList = { Weapon::TYPE::Enemy1Blaster };
 
-			GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
+						for (const auto& prop : obj["properties"])
+						{
+
+							int weaponID = -1;
+							if (prop["type"] == "object" && prop["name"] == "Blaster")
+							{
+								weaponID = prop["value"];
+							}
+
+							if (weaponID != -1)
+							{
+								nlohmann::json layer1;
+								for (const auto& l : jsonFile["layers"])
+								{
+									if (l["name"] == "Weapons")
+									{
+										layer1 = l;
+										TRACE_CHANNEL("GAMEOBJECT_INIT", "We have a match!");
+										break;
+									}
+								}
+
+								const auto& objects1 = layer1["objects"];
+
+								for (const auto& candidate : objects1)
+								{
+									if (candidate["type"] != "Player")
+									{
+										if (candidate["id"] == weaponID)
+										{
+											auto weaponConfig = WeaponConfig(0.0f, 0.0f, true);
+											if (weaponConfig.deserialise(candidate))
+											{
+												PrefabAssets::Get().RegisterWeaponConfig(weaponConfig.m_configLayer, &weaponConfig);
+										
+												TRACE_CHANNEL("GAMEOBJECT_INIT", "Attached bullet to weapon.");
+
+												int bulletID = -1;
+
+												for (const auto& prop : candidate["properties"])
+												{
+													if (prop["type"] == "object" && prop["name"] == "Bullet")
+													{
+														bulletID = prop["value"];
+														break;
+													}
+												}
+
+												if (bulletID != -1)
+												{
+													for (const auto& candidate : objects1)
+													{
+														if (candidate["id"] == bulletID)
+														{
+															auto bulletConfig = BulletConfig();
+															if (bulletConfig.deserialise(candidate))
+															{
+																TRACE_CHANNEL("GAMEOBJECT_INIT", "Attached bullet to weapon.");
+
+
+																bulletConfig.m_damage = weaponConfig.m_damage;
+																bulletConfig.m_ammo = weaponConfig.m_MaxAmmo;
+																bulletConfig.m_configLayer = weaponConfig.m_configLayer;
+
+																PrefabAssets::Get().RegisterBulletConfig(bulletConfig.m_configLayer, &bulletConfig);
+															}
+															else
+															{
+																TRACE_CHANNEL("GAMEOBJECT_INIT", "Failed to deserialise bullet.");
+															}
+															break;
+														}
+													}
+												}
+											}
+											else
+											{
+												TRACE_CHANNEL("GAMEOBJECT_INIT", "Failed to deserialise bullet.");
+											}
+
+											config.m_initialWeaponConfigList =
+											{
+												std::make_pair(Weapon::TYPE::Enemy1Blaster, weaponConfig),
+											};
+
+											config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;
+
+											config.m_currentlyEquippedWeaponIndex = 0;
+											break;
+										}
+									}
+								}
+							}
+
+						}
+						GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
+					}
+
+				}
+
+			}
+
+//			auto config = SelfControlledCreatureConfig();
+//#ifdef IS_RATCHET_DEBUG
+//			config.m_debugDraw = true;
+//#endif
+//
+//			config.m_Faction = Faction::TEAM_1;
+//			config.m_movementType = MovementType::GROUND;
+//
+//			config.m_animationStates = { ANIMATION_STATE::IDLE, ANIMATION_STATE::MOVING, ANIMATION_STATE::JUMP, ANIMATION_STATE::FALL };
+//			config.m_currentAnimationState = ANIMATION_STATE::IDLE;
+//
+//			config.m_colliderType = DYNAMIC;
+//			config.positionXOffset = 0.f;
+//			config.positionYOffset = 0.f;
+//			
+//
+//			config.position = sf::Vector2f(180.0f, -6.0f);
+//			config.rotation = 0.0f;
+//			config.scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+//
+//			config.m_movingSpeed = 5.0f;
+//			config.m_jumpImpulse = -5.0f;
+//			config.m_fallingSpeed = 7000.0f;
+//			config.m_AngleBase = 45.f;
+//
+//			config.m_recoilTime = 0.1f;
+//			config.m_fireRate = 0.7f;
+//
+//			config.m_targetMaxDistanceDetectionX = 3.5f;
+//			config.m_targetMaxDistanceDetectionY = 1.5f;
+//			config.m_targetMaxDistanceLoseX = 3.5f;
+//			config.m_targetMaxDistanceLoseY = 3.5f;
+//			config.m_targetMaxDistanceAttackX = 2.0f;
+//			config.m_targetMaxDistanceAttackY = 1.5f;
+//
+//			config.startSpriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Enemy1Blaster/Angle0/Aim/Idle1.png";
+//			config.spriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy1Textures/";
+//
+//			config.m_activeRenderer = true;
+//
+//			auto colliderConfig = CapsuleColliderConfig();
+//			colliderConfig.m_layer = PhysicsLayer::Creature;
+//			colliderConfig.m_bodyDef.type = b2_dynamicBody;
+//			colliderConfig.m_bodyDef.bullet = true;
+//			colliderConfig.m_bodyDef.fixedRotation = true;
+//			colliderConfig.m_fixtureDef.friction = 0.0f;
+//			colliderConfig.m_fixtureDef.restitution = 0.f;
+//			colliderConfig.m_fixtureDef.density = 0.0f;
+//			colliderConfig.m_height = 1.13f;
+//			colliderConfig.m_radius = 0.25f;
+//			colliderConfig.m_massValue = 1500.f;
+//			colliderConfig.m_fixtureDef.isSensor = false;
+//			colliderConfig.m_isGroundRaycastOffset = 0.02f;
+//			colliderConfig.m_JumpOverBottomRaycastOffsetX = 1.1f;
+//			colliderConfig.m_JumpOverBottomRaycastOffsetY = 0.05f;
+//			colliderConfig.m_JumpOverTopRaycastOffsetX = 1.1f;
+//			colliderConfig.m_JumpOverTopRaycastOffsetY = 0.05f;
+//			colliderConfig.m_checkFallingRiskRaycastStartOffsetX = 0.9f;
+//			colliderConfig.m_checkFallingRiskRaycastStartOffsetY = 0.05f;
+//			colliderConfig.m_checkFallingRiskRaycastEndOffsetY = 1.8f;
+//
+//
+//#ifdef IS_RATCHET_DEBUG
+//			colliderConfig.m_debugDraw = true;
+//#endif
+//
+//			if (colliderConfig.m_bodyDef.type == b2_dynamicBody)
+//			{
+//				colliderConfig.m_gravityScale = 1.0f;
+//				colliderConfig.m_linearDamping = 0.0f;
+//				colliderConfig.m_angularDamping = 0.0f;
+//			}
+//
+//			config.m_colliderConfig = &colliderConfig;
+//
+//			config.m_usableWeaponTypeList = { {Weapon::TYPE::Enemy1Blaster, true} };
+//
+//			config.m_currentAngle = WeaponAnimation::ANGLE::Angle0;
+//			config.m_currentState = WeaponAnimation::STATE::Aim;
+//
+//			config.m_characterAngles = { WeaponAnimation::ANGLE::Angle0 };
+//
+//			config.m_weaponTypeList = { Weapon::TYPE::Enemy1Blaster };
+//
+//			config.m_bodShoulderOffset = 0.4f;
+//
+//
+//			auto* weaponConfig = new WeaponConfig(51, 12, true);
+//			weaponConfig->m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
+//			weaponConfig->m_Faction = Faction::FACTION_UNKNOWN;
+//			weaponConfig->m_colliderType = COLLIDERTYPE_UNKNOWN;
+//			weaponConfig->m_weaponType = Weapon::TYPE::Enemy1Blaster;
+//			weaponConfig->m_configLayer = "Super Launcher Enemy";
+//			weaponConfig->m_activeRenderer = true;
+//			weaponConfig->m_bulletPoolIncrementation = 5;
+//
+//			float tileWidth = 64.0f;
+//			float tileHeight = 64.0f;
+//
+//			weaponConfig->positionXOffset = 0.f;
+//			weaponConfig->positionYOffset = 0.f;
+//
+//			weaponConfig->position = sf::Vector2f(169.862f, -3.4f);
+//			weaponConfig->rotation = 0.0f;
+//			weaponConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+//
+//			weaponConfig->startSpriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Blaster1.png";
+//
+//
+//			// Weapon Start Shooting Config Points
+//			weaponConfig->m_characterStartPointShootingOffset = sf::Vector2f(0.08f, 0.1f);
+//
+//			//Weapon Shooting Config Points Angles
+//			weaponConfig->m_shootingOffsetAngle0 = sf::Vector2f(0.75f, 0.05f);
+//
+//			BulletConfig* bulletConfig = new BulletConfig();
+//			bulletConfig->m_damage = 5.0f;
+//			bulletConfig->m_ammo = 10.f;
+//			bulletConfig->m_bulletLifeLimit = 1.f;
+//			bulletConfig->m_BulletSpeed = 5.f;
+//			bulletConfig->m_configLayer = weaponConfig->m_configLayer;
+//			bulletConfig->m_Faction = Faction::TEAM_1;
+//			bulletConfig->m_movementType = MovementType::AIR;
+//			bulletConfig->m_colliderType = DYNAMIC;
+//
+//			bulletConfig->position = sf::Vector2f(6.7, 8.9f);
+//
+//			bulletConfig->positionXOffset = 0.f;
+//			bulletConfig->positionYOffset = 0.f;
+//
+//			bulletConfig->m_activeRenderer = true;
+//
+//			bulletConfig->position = sf::Vector2f(0.0f, 0.0f);
+//			bulletConfig->rotation = 0.0f;
+//			bulletConfig->scale = sf::Vector2f(1.0f, 1.0f) * sc_tiledToGameScale;
+//
+//			bulletConfig->startSpriteTexturePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Level1/Objects/Weapons/Player/Bullet Blaster1.png";
+//
+//			auto* colliderBulletConfig = new CircleColliderConfig();
+//			colliderBulletConfig->m_layer = PhysicsLayer::Projectiles;
+//			colliderBulletConfig->m_bodyDef.type = b2_dynamicBody;
+//			colliderBulletConfig->m_fixtureDef.density = 0.0f;
+//			colliderBulletConfig->m_bodyDef.fixedRotation = false;
+//			colliderBulletConfig->m_fixtureDef.friction = 0.0f;
+//			colliderBulletConfig->m_fixtureDef.restitution = 0.0f;
+//			colliderBulletConfig->m_fixtureDef.isSensor = true;
+//
+//			if (colliderBulletConfig->m_bodyDef.type == b2_dynamicBody)
+//			{
+//				colliderBulletConfig->m_gravityScale = 0.0f;
+//				colliderBulletConfig->m_linearDamping = 0.0f;
+//				colliderBulletConfig->m_angularDamping = 0.0f;
+//			}
+//
+//			bulletConfig->m_colliderConfig = colliderBulletConfig;
+//
+//
+//			 
+//			config.m_initialWeaponConfigList =
+//			{
+//				std::make_pair(Weapon::TYPE::Enemy1Blaster, *weaponConfig),
+//			};
+//
+//			config.m_currentWeaponType = config.m_initialWeaponConfigList[0].first;
+//
+//			config.m_currentlyEquippedWeaponIndex = 0;
+//
+//			PrefabAssets::Get().RegisterWeaponConfig(weaponConfig->m_configLayer, weaponConfig);
+//			PrefabAssets::Get().RegisterBulletConfig(bulletConfig->m_configLayer, bulletConfig);
+//
+//			GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
 		}
 	}
 
