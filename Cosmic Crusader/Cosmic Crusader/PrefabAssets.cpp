@@ -21,12 +21,12 @@ namespace ratchet
 		m_creatureConfigs[id] = new CreatureConfig(config);
 	}
 
-	void PrefabAssets::RegisterWeaponConfig(std::string& id,WeaponConfig* config)
+	void PrefabAssets::RegisterWeaponConfig(int& id,WeaponConfig* config)
 	{
 		m_weaponConfigs[id] = new WeaponConfig(*config);
 	}
 
-	void PrefabAssets::RegisterBulletConfig(std::string& id, BulletConfig* config)
+	void PrefabAssets::RegisterBulletConfig(int& id, BulletConfig* config)
 	{
 		BulletConfig* copy = new BulletConfig(*config);
 		m_colliderConfigs[id] = config->m_colliderConfig;
@@ -36,7 +36,7 @@ namespace ratchet
 		m_bulletConfigs[id] = copy;
 	}
 
-	GameObjectConfig* PrefabAssets::GetGameObjectConfig(std::string& id)
+	GameObjectConfig* PrefabAssets::GetGameObjectConfig(const std::string& id)
 	{
 		auto it = m_gameObjectConfigs.find(id);
 		if (it != m_gameObjectConfigs.end())
@@ -46,7 +46,7 @@ namespace ratchet
 		return nullptr;
 	}
 
-	CreatureConfig* PrefabAssets::GetCreatureConfig(std::string& id)
+	CreatureConfig* PrefabAssets::GetCreatureConfig(const std::string& id)
 	{
 		auto it = m_creatureConfigs.find(id);
 		if (it != m_creatureConfigs.end())
@@ -56,7 +56,7 @@ namespace ratchet
 		return nullptr;
 	}
 
-	WeaponConfig* PrefabAssets::GetWeaponConfig(std::string& id)
+	WeaponConfig* PrefabAssets::GetWeaponConfig(const int& id)
 	{
 		auto it = m_weaponConfigs.find(id);
 		if (it != m_weaponConfigs.end())
@@ -66,7 +66,7 @@ namespace ratchet
 		return nullptr;
 	}
 
-	BulletConfig* PrefabAssets::GetBulletConfig(std::string& id)
+	BulletConfig* PrefabAssets::GetBulletConfig(const int& id)
 	{
 		auto it = m_bulletConfigs.find(id);
 		if (it != m_bulletConfigs.end())

@@ -21,6 +21,8 @@ namespace ratchet
 	{
 		GameObjectConfig::deserialise(jsonFile);
 
+		m_objectID = jsonFile["id"].get<int>();
+
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 

@@ -21,23 +21,23 @@ namespace ratchet
 		//List of prefab configs
 		std::map<std::string, GameObjectConfig*> m_gameObjectConfigs;
 		std::map<std::string, CreatureConfig*> m_creatureConfigs;
-		std::map<std::string, WeaponConfig*> m_weaponConfigs;
-		std::map<std::string, BulletConfig*> m_bulletConfigs;
+		std::map<int, WeaponConfig*> m_weaponConfigs;
+		std::map<int, BulletConfig*> m_bulletConfigs;
 
 		//List of collder prefab configs
-		std::map<std::string, ColliderBaseConfig*> m_colliderConfigs;
+		std::map<int, ColliderBaseConfig*> m_colliderConfigs;
 
 		//Registers Config
 		void RegisterGameObjectConfig(std::string& id,GameObjectConfig& config);
 		void RegisterCreatureConfig(std::string &id,CreatureConfig& config);
-		void RegisterWeaponConfig(std::string& id,WeaponConfig* config);
-		void RegisterBulletConfig(std::string& id,BulletConfig* config);
+		void RegisterWeaponConfig(int& id,WeaponConfig* config);
+		void RegisterBulletConfig(int& id,BulletConfig* config);
 
 		//Getters Configs
-		GameObjectConfig* GetGameObjectConfig(std::string& id);
-		CreatureConfig* GetCreatureConfig(std::string& id);
-		WeaponConfig* GetWeaponConfig(std::string& id);
-		BulletConfig* GetBulletConfig(std::string& id);
+		GameObjectConfig* GetGameObjectConfig(const std::string& id);
+		CreatureConfig* GetCreatureConfig(const std::string& id);
+		WeaponConfig* GetWeaponConfig(const int& id);
+		BulletConfig* GetBulletConfig(const int& id);
 
 		//Destrucotrs
 		void DestroyPrefabAssets();

@@ -33,6 +33,8 @@ namespace ratchet
 	{
 		GameObjectConfig::deserialise(jsonFile);
 
+		m_objectID = jsonFile["id"].get<int>();
+
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
@@ -67,6 +69,9 @@ namespace ratchet
 			const auto& propertyName = jsonProperty["name"];
 			const auto& propertyValue = jsonProperty["value"];
 
+			const auto& propertyType = jsonProperty["type"];
+
+
 			if (propertyName == "Faction")
 			{
 				m_Faction = static_cast<Faction>(propertyValue.get<int>());
@@ -94,11 +99,6 @@ namespace ratchet
 			}
 
 			m_characterStartPointShootingOffset = sf::Vector2f(m_weaponShootPointOffsetX, m_weaponShootPointOffsetY);
-
-			if (propertyName == "layer")
-			{
-				m_configLayer = propertyValue.get<std::string>();
-			}
 
 			if (propertyName == "damage")
 			{
@@ -199,6 +199,14 @@ namespace ratchet
 			if (propertyName == "isSensor")
 			{
 				m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+			}
+
+			if (propertyName == "Bullet" && propertyType == "object")
+			{
+				if (propertyValue.is_number_integer())
+				{
+					m_bulletID = propertyValue.get<int>();
+				}
 			}
 
 		}

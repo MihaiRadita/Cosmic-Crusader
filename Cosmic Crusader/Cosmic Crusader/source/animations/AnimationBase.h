@@ -7,11 +7,10 @@ namespace ratchet
 	enum ANIMATION_STATE { 
 		IDLE= 0, 
 		MOVING,
-		MOVING_LEFT, 
-		MOVING_RIGHT, 
 		JUMP, 
 		JUMP_RUNNING,
-		FALL
+		FALL,
+		Count
 	};
 
 	enum class AimingAngle {

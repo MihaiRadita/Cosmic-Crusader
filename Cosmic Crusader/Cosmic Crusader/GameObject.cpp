@@ -275,6 +275,10 @@ namespace ratchet
 		}
 	}
 
+	void GameObject::Awake()
+	{
+	}
+
 	void GameObject::Start()
 	{
 		PostCosntructFixup();

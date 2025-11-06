@@ -44,9 +44,9 @@ namespace ratchet
 
 		//Update functions
 		void update();
-		void updatePlayer();
 		void updatePhysics();
 		
+		void awake();
 		void start();
 
 
@@ -55,8 +55,6 @@ namespace ratchet
 
 		//Render functions
 		void render();
-		void renderPlayer();
-		void renderTile();
 
 		static const float sc_tiledToGameScale;
 		static const float sc_defaultZoom;

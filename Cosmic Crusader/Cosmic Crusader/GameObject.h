@@ -53,6 +53,7 @@ namespace ratchet
 
 		virtual void PostCosntructFixup();
 
+		virtual void Awake();
 		virtual void Start();
 
 

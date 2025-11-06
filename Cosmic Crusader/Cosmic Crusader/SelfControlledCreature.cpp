@@ -14,8 +14,6 @@ namespace ratchet
 		m_targetMaxDistanceLoseY = config.m_targetMaxDistanceLoseY;
 		m_targetMaxDistanceAttackX = config.m_targetMaxDistanceAttackX;
 		m_targetMaxDistanceAttackY = config.m_targetMaxDistanceAttackY;
-
-		SetTarget(m_faction);
 	}
 	SelfControlledCreature::~SelfControlledCreature()
 	{
@@ -110,6 +108,7 @@ namespace ratchet
 	void SelfControlledCreature::Start()
 	{
 		PostCosntructFixup();
+		SetTarget(m_faction);
 	}
 
 	void SelfControlledCreature::handleEvent()

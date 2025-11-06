@@ -29,7 +29,8 @@ namespace ratchet
 
 		TYPE m_weaponType;
 		int m_currentAmmo;
-		std::string m_WeaponID;
+		int m_WeaponID;
+		int m_bulletID;
 
 		bool m_facigRight = true;
 		int m_bulletPoolIncrementation;

@@ -90,7 +90,7 @@ namespace ratchet
 			// Create new inactive bullets in the pool.
 			for (int i = 0; i < m_bulletPoolIncrementation; i++)
 			{
-				auto* obj = GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_WeaponID), position, rotationDegrees, orientation);
+				auto* obj = GameObject::Instantiate<Bullet, BulletConfig>(*PrefabAssets::Get().GetBulletConfig(m_bulletID), position, rotationDegrees, orientation);
 				obj->setActive(false);
 				if (auto* bullet = dynamic_cast<Bullet*>(obj))
 				{

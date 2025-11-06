@@ -134,6 +134,9 @@
     <ClCompile Include="TileConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EnumMask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -217,5 +220,6 @@
     <ClInclude Include="source\serialisation\ISerialisableItem.h" />
     <ClInclude Include="source\game\Scene.h" />
     <ClInclude Include="TileConfig.h" />
+    <ClInclude Include="EnumMask.h" />
   </ItemGroup>
 </Project>

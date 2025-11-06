@@ -151,6 +151,7 @@
     <ClCompile Include="ColliderBase.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="CreatureConfig.cpp" />
+    <ClCompile Include="EnumMask.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectConfig.cpp" />
     <ClCompile Include="PrefabAssets.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="ColliderBase.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="CreatureConfig.h" />
+    <ClInclude Include="EnumMask.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectConfig.h" />
     <ClInclude Include="PrefabAssets.h" />

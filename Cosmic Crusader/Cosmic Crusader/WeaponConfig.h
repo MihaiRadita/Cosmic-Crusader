@@ -18,6 +18,9 @@ namespace ratchet
 		int m_damage;
 		int m_MaxAmmo;
 		bool m_isWeaponAccessible;
+
+		int m_bulletID = -1;
+
 		Weapon::TYPE m_weaponType;
 		float m_weaponShootPointOffsetX;
 		float m_weaponShootPointOffsetY;

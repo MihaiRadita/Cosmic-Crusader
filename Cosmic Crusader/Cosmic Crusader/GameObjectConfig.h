@@ -40,7 +40,7 @@ namespace ratchet
 		ColliderBaseConfig* m_colliderConfig = nullptr;
 
 		//Layers/Ids
-		std::string m_configLayer;
+		int m_objectID;
 
 		//Constructor
 		GameObjectConfig();
