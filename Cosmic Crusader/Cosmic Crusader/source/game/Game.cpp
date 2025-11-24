@@ -23,61 +23,6 @@ namespace ratchet
 
 			file >> jsonFile;
 			file.close();
-
-			/*
-			
-
-		{
-			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap.tmj");
-
-			if (!file.is_open())
-			{
-				TRACE_CHANNEL("WARNING", "ERROR! The file could not be opened!");
-			}
-
-			nlohmann::json jsonFile;
-
-			file >> jsonFile;
-			file.close();
-
-			nlohmann::json layer;
-
-			for (const auto& l : jsonFile["layers"])
-			{
-				if (l["name"] == "Enemies")
-				{
-					layer = l;
-					TRACE_CHANNEL("GAMEOBJECT_INIT", "We have a match!");
-					break;
-				}
-			}
-
-			const auto& objects = layer["objects"];
-
-			for (const auto& obj : objects)
-			{
-				auto config = SelfControlledCreatureConfig();
-
-#ifdef IS_RATCHET_DEBUG
-				config.m_debugDraw = true;
-#endif
-
-				if (config.deserialise(obj))
-				{
-
-#ifdef IS_RATCHET_DEBUG
-					config.m_colliderConfig->m_debugDraw = false;
-#endif
-					if (obj["name"] == "Enemy")
-					{
-						GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
-					}
-
-				}
-
-			}
-		}
-			*/
 			
 			// Deserialise from file.
 			for (const auto& layer : jsonFile["layers"])

@@ -158,6 +158,7 @@
     <ClCompile Include="RatchetMaths.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SelfControlledCreature.cpp" />
     <ClCompile Include="SelfControlledCreatureConfig.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="PrefabAssets.h" />
     <ClInclude Include="RatchetMaths.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SelfControlledCreature.h" />
     <ClInclude Include="SelfControlledCreatureConfig.h" />
     <ClInclude Include="source\animations\AnimationFall.h" />
