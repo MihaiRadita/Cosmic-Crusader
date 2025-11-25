@@ -12,7 +12,7 @@ namespace ratchet
 	void Game::spawnObjects()
 	{
 		{
-			std::ifstream file("Textures/Levels/Level1/JsonFIles/LevelMap.tmj");
+			std::ifstream file("F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj");
 
 			if (!file.is_open())
 			{

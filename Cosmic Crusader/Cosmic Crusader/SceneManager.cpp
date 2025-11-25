@@ -8,7 +8,11 @@ namespace ratchet
 	{
 		CheckAndBuildScenes();
 		LoadCombinedScenes();
+
 		m_currentScene = SceneType::MainMenu;
+
+		LoadSceneGameObjects();
+
 	}
 
 	ratchet::SceneManager::~SceneManager()
@@ -22,11 +26,9 @@ namespace ratchet
 
 	void ratchet::SceneManager::CheckAndBuildScenes()
 	{
-		SCENE_FOLDER = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes";
+		m_baseScenePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes";
 
-		fs::create_directories(SCENE_FOLDER);
-
-		const std::string combinedPath = SCENE_FOLDER + "GameScenes.json";
+		const std::string combinedPath = m_baseScenePath + "GameScenes.json";
 
 
 		m_sceneFiles = {
@@ -34,7 +36,6 @@ namespace ratchet
 			{SceneType::Level1, "Level1.tmj"}
 		};
 
-		m_baseScenePath = SCENE_FOLDER;
 
 		bool needsRebuild = false;
 
@@ -103,7 +104,7 @@ namespace ratchet
 
 	void ratchet::SceneManager::LoadCombinedScenes()
 	{
-		std::string combinedPath = SCENE_FOLDER + "GameScenes.json";
+		std::string combinedPath = m_baseScenePath + "GameScenes.json";
 
 		if (!fs::exists(combinedPath))
 		{
@@ -117,6 +118,141 @@ namespace ratchet
 
 		std::cout << "The Scene File has been created with scuccess!" << std::endl;
 
+	}
+
+	void SceneManager::updateSceneObjects()
+	{
+		auto& objects = m_sceneGameObjects[m_currentScene];
+
+		for (auto& obj : objects)
+		{
+			obj.update();
+		}
+	}
+
+	void SceneManager::renderSceneObjects(sf::RenderTarget& target)
+	{
+		auto& objects = m_sceneGameObjects[m_currentScene];
+
+		for (auto& obj : objects)
+		{
+			obj.render(target);
+		}
+	}
+
+	void SceneManager::SetScene(SceneType scene)
+	{
+		m_currentScene = scene;
+	}
+
+	void SceneManager::LoadScene(SceneType scene)
+	{
+		if (m_currentScene != scene)
+		{
+			m_currentScene = scene;
+		}
+	}
+
+	void SceneManager::LoadSceneGameObjects()
+	{
+		std::string sceneName = m_sceneFiles[m_currentScene];
+
+		if (!m_allScenes.contains("Scenes")) {
+			std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+			return;
+		}
+
+		auto& scenesNode = m_allScenes["Scenes"];
+		if (!scenesNode.contains(sceneName)) {
+			std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+			return;
+		}
+		
+		auto& sceneJson = scenesNode[sceneName];
+
+		if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
+			std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+			return;
+		}
+
+		for (const auto& layer : sceneJson["layers"])
+		{
+			const auto& validLayer = layer.contains("objects");
+			if (!validLayer) continue;
+
+			const auto& layerName = layer["name"].get<std::string>();
+			for (const auto& obj : layer["objects"])
+			{
+				bool succeeded = false;
+				if (layerName == "Tile Objects")
+				{
+					auto config = TileConfig();
+					if (config.deserialise(obj))
+					{
+						GameObject::s_gameObjects.push_back(new Tile(config));
+						succeeded = true;
+					}
+				}
+				else if (layerName == "Player")
+				{
+					auto config = CreatureConfig();
+#ifdef IS_RATCHET_DEBUG
+					config.m_debugDraw = true;
+#endif
+					if (config.deserialise(obj))
+					{
+#ifdef IS_RATCHET_DEBUG
+						config.m_colliderConfig->m_debugDraw = false;
+#endif
+						GameObject::s_gameObjects.push_back(new Player(config));
+						succeeded = true;
+					}
+				}
+				else if (layerName == "Enemies")
+				{
+					auto config = SelfControlledCreatureConfig();
+#ifdef IS_RATCHET_DEBUG
+					config.m_debugDraw = true;
+#endif
+					if (config.deserialise(obj))
+					{
+#ifdef IS_RATCHET_DEBUG
+						config.m_colliderConfig->m_debugDraw = false;
+#endif
+						GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
+						succeeded = true;
+					}
+				}
+				else if (layerName == "Weapons Bullets")
+				{
+					auto config = BulletConfig();
+					if (config.deserialise(obj))
+					{
+						PrefabAssets::Get().RegisterBulletConfig(config.m_objectID, &config);
+						succeeded = true;
+					}
+				}
+				else if (layerName == "Weapons")
+				{
+					auto config = WeaponConfig(0.0f, 0.0f, true);
+					if (config.deserialise(obj))
+					{
+						if (obj["type"] == "Weapon Pickup")
+						{
+							GameObject::s_gameObjects.push_back(new WeaponPickup(config));
+						}
+
+						PrefabAssets::Get().RegisterWeaponConfig(config.m_objectID, &config);
+						succeeded = true;
+					}
+				}
+
+				if (!succeeded)
+				{
+					TRACE_CHANNEL("GAMEOBJECT_INIT", "FAILED to deserialise tile.");
+				}
+			}
+		}
 	}
 
 	SceneManager* ratchet::SceneManager::GetSceneManager()
