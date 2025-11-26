@@ -11,6 +11,7 @@ namespace ratchet
 
 		m_currentScene = SceneType::MainMenu;
 
+
 		LoadSceneGameObjects();
 
 	}
@@ -122,27 +123,36 @@ namespace ratchet
 
 	void SceneManager::updateSceneObjects()
 	{
-		auto& objects = m_sceneGameObjects[m_currentScene];
-
-		for (auto& obj : objects)
+		if (m_currentScene == SceneType::MainMenu)
 		{
-			obj.update();
+			m_currentGameSceneState = SceneGameState::Pause;
+		}
+
+		const bool updatingUI = (m_currentGameSceneState == SceneGameState::Pause);
+		const bool updatingWorld = (m_currentGameSceneState == SceneGameState::Playing);
+
+		for (auto& obj : GameObject::s_gameObjects)
+		{
+			if ((updatingUI && obj->m_objectType == ObjectType::UI) ||
+				(updatingWorld && obj->m_objectType == ObjectType::World))
+			{
+				obj->update();
+			}
 		}
 	}
 
 	void SceneManager::renderSceneObjects(sf::RenderTarget& target)
 	{
-		auto& objects = m_sceneGameObjects[m_currentScene];
+		const bool inPause = (m_currentGameSceneState == SceneGameState::Pause);
 
-		for (auto& obj : objects)
+		for (auto& obj : GameObject::s_gameObjects)
 		{
-			obj.render(target);
-		}
-	}
+			if (obj->m_objectType == ObjectType::World)
+				obj->render(target); 
 
-	void SceneManager::SetScene(SceneType scene)
-	{
-		m_currentScene = scene;
+			if (inPause && obj->m_objectType == ObjectType::UI)
+				obj->render(target);
+		}
 	}
 
 	void SceneManager::LoadScene(SceneType scene)
@@ -150,6 +160,48 @@ namespace ratchet
 		if (m_currentScene != scene)
 		{
 			m_currentScene = scene;
+		}
+
+		ClearSceneObjects();
+
+		if (m_currentScene != SceneType::MainMenu)
+		{
+			m_currentGameSceneState = SceneGameState::Playing;
+		}
+		else
+		{
+			m_currentGameSceneState = SceneGameState::Pause;
+		}
+
+		LoadSceneGameObjects();
+	}
+
+	void SceneManager::LoadNextScene()
+	{
+		IncreaseSceneIndex();
+		m_currentScene = static_cast<SceneType>(m_sceneIndex);
+
+		ClearSceneObjects();
+
+		if (m_currentScene != SceneType::MainMenu)
+		{
+			m_currentGameSceneState = SceneGameState::Playing;
+		}
+		else
+		{
+			m_currentGameSceneState = SceneGameState::Pause;
+		}
+
+		LoadSceneGameObjects();
+	}
+
+	void SceneManager::IncreaseSceneIndex()
+	{
+		m_sceneIndex++;
+
+		if (m_sceneIndex >= m_sceneFiles.size())
+		{
+			m_sceneIndex = 0;
 		}
 	}
 
@@ -253,6 +305,17 @@ namespace ratchet
 				}
 			}
 		}
+	}
+
+	void SceneManager::ClearSceneObjects()
+	{
+		for (auto& obj : GameObject::s_gameObjects)
+		{
+			delete obj;
+			obj = nullptr;
+		}
+
+		GameObject::s_gameObjects.clear();
 	}
 
 	SceneManager* ratchet::SceneManager::GetSceneManager()

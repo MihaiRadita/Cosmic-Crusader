@@ -6,8 +6,8 @@
 
 namespace ratchet
 {
-	const float Game::sc_tiledToGameScale = 0.01f;
-	const float Game::sc_defaultZoom = 2.0f * sc_tiledToGameScale;
+	//const float Game::sc_tiledToGameScale = 0.01f;
+	//const float Game::sc_defaultZoom = 2.0f * sc_tiledToGameScale;
 
 	void Game::spawnObjects()
 	{

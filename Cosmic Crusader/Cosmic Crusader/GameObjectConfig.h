@@ -9,6 +9,8 @@ namespace ratchet
 
 	enum class MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, AIR};
 
+	enum class ObjectType{None = 0, World, UI};
+
 	struct GameObjectConfig : public ISerialisableItem
 	{
 #ifdef IS_RATCHET_DEBUG

@@ -21,6 +21,7 @@ namespace ratchet
 		Faction m_faction;
 		MovementType m_movementType;
 		ColliderType m_colliderType;
+		ObjectType m_objectType;
 
 		//Transforms
 		sf::Vector2f m_position;

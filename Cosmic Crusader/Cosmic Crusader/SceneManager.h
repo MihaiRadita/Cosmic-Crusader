@@ -24,6 +24,12 @@ namespace ratchet
 		Level1
 	};
 
+	enum SceneGameState
+	{
+		Playing =0, 
+		Pause
+	};
+
 	class SceneManager
 	{
 	public:
@@ -38,11 +44,14 @@ namespace ratchet
 		void renderSceneObjects(sf::RenderTarget& target);
 
 		//Setters
-		void SetScene(SceneType scene);
 
 		void LoadScene(SceneType scene);
+		void LoadNextScene();
+		void IncreaseSceneIndex();
 
 		void LoadSceneGameObjects();
+
+		void ClearSceneObjects();
 
 		//Getters
 		static SceneManager* GetSceneManager();
@@ -59,6 +68,12 @@ namespace ratchet
 		std::string m_baseScenePath;
 
 		static SceneManager* m_sceneManager;
+
+		int m_sceneIndex;
+
+		bool m_isUpdating = true;
+
+		SceneGameState m_currentGameSceneState;
 
 		std::map<SceneType,  std::vector<GameObject>> m_sceneGameObjects;
 
