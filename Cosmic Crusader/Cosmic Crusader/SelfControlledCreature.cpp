@@ -239,7 +239,7 @@ namespace ratchet
 	}
 	void SelfControlledCreature::update()
 	{
-		if (!m_activeGameObject) return;
+		//if (!m_activeGameObject) return;
 
 		if (m_collider && !m_collider->m_skipRaycastThisFrame)
 		{

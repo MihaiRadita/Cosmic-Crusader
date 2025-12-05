@@ -75,16 +75,16 @@ namespace ratchet
 		m_faction = config.m_Faction;
 		m_colliderType = config.m_colliderType;
 		m_movementType = config.m_movementType;
+		m_objectType = config.m_objectType;
 
 		//Transforms
 		m_position = config.position;
 		m_rotation = config.rotation;
 		m_scale = config.scale;
 
+		m_activeGameObject = config.m_activeObject;
 		m_activeRenderer = config.m_activeRenderer;
 		m_startSpritePath = config.startSpriteTexturePath;
-
-		m_canJumpOver = config.m_canJumpOver;
 
 		//Sprites and Terxtures
 
@@ -101,32 +101,34 @@ namespace ratchet
 		m_sprite.setRotation(m_rotation);
 		m_sprite.setScale(m_scale.x, m_scale.y);
 
-		m_activeGameObject = true;
-
-		if (const auto* capsuleConfig = dynamic_cast<CapsuleColliderConfig*>(config.m_colliderConfig))
+		if (m_objectType == ObjectType::World)
 		{
-			m_collider = new ratchet::CapsuleCollider(m_sprite, *capsuleConfig);
-
-			std::cout << "Runtime type: " << typeid(*m_collider).name() << std::endl;
-
-			if (CapsuleCollider* pd = dynamic_cast<CapsuleCollider*>(m_collider))
+			if (const auto* capsuleConfig = dynamic_cast<CapsuleColliderConfig*>(config.m_colliderConfig))
 			{
-				std::cout << "Runtime type: " << typeid(*pd).name() << std::endl;
+				m_collider = new ratchet::CapsuleCollider(m_sprite, *capsuleConfig);
 
-				float height = pd->getGlobalHeight();
+				std::cout << "Runtime type: " << typeid(*m_collider).name() << std::endl;
 
-				std::cout << height << std::endl;
+				if (CapsuleCollider* pd = dynamic_cast<CapsuleCollider*>(m_collider))
+				{
+					std::cout << "Runtime type: " << typeid(*pd).name() << std::endl;
+
+					float height = pd->getGlobalHeight();
+
+					std::cout << height << std::endl;
+				}
+
 			}
+			else if (const auto* circleConfig = dynamic_cast<CircleColliderConfig*>(config.m_colliderConfig))
+			{
+				m_collider = new ratchet::CircleCollider(m_sprite, *circleConfig);
+			}		
+			else if (const auto* rectangleConfig = dynamic_cast<RectAngleColliderConfig*>(config.m_colliderConfig))
+			{
+				m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
+			}
+		}
 
-		}
-		else if (const auto* circleConfig = dynamic_cast<CircleColliderConfig*>(config.m_colliderConfig))
-		{
-			m_collider = new ratchet::CircleCollider(m_sprite, *circleConfig);
-		}		
-		else if (const auto* rectangleConfig = dynamic_cast<RectAngleColliderConfig*>(config.m_colliderConfig))
-		{
-			m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
-		}
 	}
 
 	ratchet::GameObject::~GameObject()
@@ -150,12 +152,12 @@ namespace ratchet
 
 	void ratchet::GameObject::update()
 	{
-		if (!m_activeGameObject) return;
+		//if (!m_activeGameObject) return;
 	}
 
 	void ratchet::GameObject::render(sf::RenderTarget& target)
 	{
-		if (!m_activeGameObject) return;
+		//if (!m_activeGameObject) return;
 		if (!m_activeRenderer) return;
 
 #ifdef IS_RATCHET_DEBUG

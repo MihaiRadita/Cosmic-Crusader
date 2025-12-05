@@ -62,6 +62,11 @@ namespace ratchet
 				m_Faction = static_cast<Faction>(propertyValue.get<int>());
 			}
 
+			if (propertyName == "objectType")
+			{
+				m_objectType = static_cast<ObjectType>(propertyValue.get<int>());
+			}
+
 			if (propertyName == "movementType")
 			{
 				m_movementType = static_cast<MovementType>( propertyValue.get<int>());
@@ -140,6 +145,11 @@ namespace ratchet
 			if (propertyName == "spriteTexturePath")
 			{
 				spriteTexturePath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "activeObject")
+			{
+				m_activeObject = propertyValue.get<bool>();
 			}
 
 			if (propertyName == "activeRenderer")

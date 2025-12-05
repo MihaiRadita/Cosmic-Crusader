@@ -26,7 +26,7 @@ namespace ratchet
 
 	enum SceneGameState
 	{
-		Playing =0, 
+		Playing = 0, 
 		Pause
 	};
 
@@ -74,10 +74,6 @@ namespace ratchet
 		bool m_isUpdating = true;
 
 		SceneGameState m_currentGameSceneState;
-
-		std::map<SceneType,  std::vector<GameObject>> m_sceneGameObjects;
-
-		std::map<SceneType, std::vector<GameObjectConfig>>m_sceneGameObjectsConfigs;
 	};
 }
 

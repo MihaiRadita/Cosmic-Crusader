@@ -27,6 +27,7 @@ namespace ratchet
 
 	void ratchet::SceneManager::CheckAndBuildScenes()
 	{
+		// #TODO: FOLOSESTE RELATIVE PATH IN LOC DE FULL PATH
 		m_baseScenePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes";
 
 		const std::string combinedPath = m_baseScenePath + "GameScenes.json";
@@ -123,35 +124,45 @@ namespace ratchet
 
 	void SceneManager::updateSceneObjects()
 	{
-		if (m_currentScene == SceneType::MainMenu)
+		float timeStep = 1.0f / 120.0f;
+
+		if (m_currentScene != SceneType::MainMenu && m_currentGameSceneState != SceneGameState::Pause)
 		{
-			m_currentGameSceneState = SceneGameState::Pause;
+			Physics::update(timeStep);
 		}
 
-		const bool updatingUI = (m_currentGameSceneState == SceneGameState::Pause);
-		const bool updatingWorld = (m_currentGameSceneState == SceneGameState::Playing);
-
-		for (auto& obj : GameObject::s_gameObjects)
+		for (auto i = 0u; i < GameObject::s_gameObjects.size(); i++)
 		{
-			if ((updatingUI && obj->m_objectType == ObjectType::UI) ||
-				(updatingWorld && obj->m_objectType == ObjectType::World))
+			if (auto obj = GameObject::s_gameObjects[i])
 			{
 				obj->update();
 			}
+			else
+			{
+				TRACE_CHANNEL("GAME_OBJECT", "Cannot update null game object of index [", i, "].");
+			}
 		}
+
+		GameObject::clearQueuedObjectsToDestroy();
 	}
 
 	void SceneManager::renderSceneObjects(sf::RenderTarget& target)
 	{
-		const bool inPause = (m_currentGameSceneState == SceneGameState::Pause);
-
-		for (auto& obj : GameObject::s_gameObjects)
+		for (auto* obj : GameObject::s_gameObjects)
 		{
-			if (obj->m_objectType == ObjectType::World)
-				obj->render(target); 
+			TRACE_CHANNEL("RENDERING", "Rendering object at position: ", obj->getSprite().getPosition().x, ", ", obj->getSprite().getPosition().y);
+			TRACE_CHANNEL("RENDERING", "Texture pointer: ", obj->getSprite().getTexture());
 
-			if (inPause && obj->m_objectType == ObjectType::UI)
-				obj->render(target);
+			if (auto player = dynamic_cast<Player*>(obj))
+			{
+				sf::View view = target.getView();
+				view.setCenter(player->getCollider()->getBody()->GetPosition().x, player->getCollider()->getBody()->GetPosition().y);
+				target.setView(view);
+
+				sf::Sprite sprite = player->getSprite();
+			}
+
+			obj->render(target);
 		}
 	}
 
@@ -164,15 +175,6 @@ namespace ratchet
 
 		ClearSceneObjects();
 
-		if (m_currentScene != SceneType::MainMenu)
-		{
-			m_currentGameSceneState = SceneGameState::Playing;
-		}
-		else
-		{
-			m_currentGameSceneState = SceneGameState::Pause;
-		}
-
 		LoadSceneGameObjects();
 	}
 
@@ -182,15 +184,6 @@ namespace ratchet
 		m_currentScene = static_cast<SceneType>(m_sceneIndex);
 
 		ClearSceneObjects();
-
-		if (m_currentScene != SceneType::MainMenu)
-		{
-			m_currentGameSceneState = SceneGameState::Playing;
-		}
-		else
-		{
-			m_currentGameSceneState = SceneGameState::Pause;
-		}
 
 		LoadSceneGameObjects();
 	}
@@ -332,7 +325,7 @@ namespace ratchet
 	{
 		std::string fileName = m_sceneFiles[type];
 
-		return m_allScenes["scenes"][fileName];
+		return m_allScenes["Scenes"][fileName];
 	}
 
 	SceneManager* SceneManager::m_sceneManager = nullptr;

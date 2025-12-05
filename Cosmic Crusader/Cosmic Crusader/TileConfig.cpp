@@ -39,9 +39,18 @@ namespace ratchet
 			const auto& propertyName = jsonProperty["name"];
 			const auto& propertyValue = jsonProperty["value"];
 
+			if (propertyName == "objectType")
+			{
+				m_objectType = static_cast<ObjectType>(propertyValue.get<int>());
+			}
+
 			if (propertyName == "startSpriteTexturePath") startSpriteTexturePath = propertyValue.get<std::string>();
 
 			if (propertyName == "Faction") m_Faction = static_cast<Faction>(propertyValue.get<int>());
+			if (propertyName == "activeObject")
+			{
+				m_activeObject = propertyValue.get<bool>();
+			}
 			if (propertyName == "activeRenderer") m_activeRenderer = propertyValue.get<bool>();
 
 			if (propertyName == "colliderLayer") m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<float>());

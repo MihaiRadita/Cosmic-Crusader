@@ -140,6 +140,12 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButtonConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -225,5 +231,7 @@
     <ClInclude Include="TileConfig.h" />
     <ClInclude Include="EnumMask.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIButtonConfig.h" />
   </ItemGroup>
 </Project>

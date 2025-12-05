@@ -21,6 +21,7 @@ namespace ratchet
 		Faction m_Faction;
 		MovementType m_movementType;
 		ColliderType m_colliderType;
+		ObjectType m_objectType;
 
 		//Transforms
 		sf::Vector2f position;
@@ -36,6 +37,7 @@ namespace ratchet
 		std::string startSpriteTexturePathAddition;
 		std::string fallingSpriteTexturePath;
 		bool m_activeRenderer;
+		bool m_activeObject;
 		bool m_canJumpOver;
 
 		//Physics

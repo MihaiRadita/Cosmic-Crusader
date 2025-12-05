@@ -34,7 +34,7 @@ namespace ratchet
 
 	void Bullet::update()
 	{
-		if (!m_activeGameObject) return;
+		//if (!m_activeGameObject) return;
 
 		auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 

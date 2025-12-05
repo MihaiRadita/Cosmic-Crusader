@@ -47,6 +47,11 @@ namespace ratchet
 			const auto& propertyName = jsonProperty["name"];
 			const auto& propertyValue = jsonProperty["value"];
 
+			if (propertyName == "objectType")
+			{
+				m_objectType = static_cast<ObjectType>(propertyValue.get<int>());
+			}
+
 			if (propertyName == "bulletLifeLimit")
 			{
 				m_bulletLifeLimit = propertyValue.get<float>();
@@ -64,6 +69,11 @@ namespace ratchet
 			if (propertyName == "bulletMovementType")
 			{
 				m_movementType = static_cast<MovementType>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "activeObject")
+			{
+				m_activeObject = propertyValue.get<bool>();
 			}
 
 			if (propertyName == "activeRenderer")

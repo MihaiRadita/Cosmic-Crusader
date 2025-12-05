@@ -5,6 +5,8 @@
 
 #include "GameObject.h"
 
+#include "SceneManager.h"
+
 #include "WeaponPickup.h"
 
 #include "physics/Physics.h"
