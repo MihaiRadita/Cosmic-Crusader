@@ -181,35 +181,55 @@ namespace ratchet
 
 			if (propertyName == "colliderLayer")
 			{
-				m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<int>());
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<int>());
+				}
 			}
 			if (propertyName == "colliderType")
 			{
-				m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
-
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+				}
 			}
 
 			if (propertyName == "fixedRotation")
 			{
-				m_colliderConfig->m_bodyDef.fixedRotation = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.fixedRotation = propertyValue.get<bool>();
+				}
 			}
 
 			if (propertyName == "density")
 			{
-				m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				}
 			}
 			if (propertyName == "friction")
 			{
-				m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "restitution")
 			{
-				m_colliderConfig->m_fixtureDef.restitution = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.restitution = propertyValue.get<float>();
+				}
 			}
 			if (propertyName == "isSensor")
 			{
-				m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				}
 			}
 
 			if (propertyName == "Bullet" && propertyType == "object")

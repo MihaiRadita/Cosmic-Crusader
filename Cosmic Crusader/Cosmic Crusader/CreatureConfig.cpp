@@ -74,41 +74,60 @@ namespace ratchet
 
 			if (propertyName == "colliderBullet")
 			{
-				m_colliderConfig->m_bodyDef.bullet = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.bullet = propertyValue.get<bool>();
+				}
+
 			}
 
 			if (propertyName == "colliderHeight")
 			{
-				if (auto* capsule =dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
+				if (m_colliderConfig)
 				{
-					capsule->m_height = propertyValue.get<float>();
+					if (auto* capsule =dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
+					{
+						capsule->m_height = propertyValue.get<float>();
 
+					}
 				}
 			}
 
 			if (propertyName == "colliderLayer")
 			{
-				m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<int>());
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<int>());
+				}
 			}
 
 			if (propertyName == "colliderRadius")
 			{
-				if (auto* capsule = dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
+				if (m_colliderConfig)
 				{
-					capsule->m_radius = propertyValue.get<float>();
+					if (auto* capsule = dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
+					{
+						capsule->m_radius = propertyValue.get<float>();
 
+					}
 				}
 			}
 
 			if (propertyName == "colliderType")
 			{
-				m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+				}
 
 			}
 
 			if (propertyName == "density")
 			{
-				m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "fallingSpeed")
@@ -123,22 +142,34 @@ namespace ratchet
 
 			if (propertyName == "fixedRotation")
 			{
-				m_colliderConfig->m_bodyDef.fixedRotation = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.fixedRotation = propertyValue.get<bool>();
+				}
 			}
 
 			if (propertyName == "friction")
 			{
-				m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "isGroundRaycastOffset")
 			{
-				m_colliderConfig->m_isGroundRaycastOffset = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_isGroundRaycastOffset = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "isSensor")
 			{
-				m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				}
 			}
 
 			if (propertyName == "jumpImpulse")
@@ -148,7 +179,10 @@ namespace ratchet
 
 			if (propertyName == "massValue")
 			{
-				m_colliderConfig->m_massValue = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_massValue = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "movementType")
@@ -168,7 +202,10 @@ namespace ratchet
 
 			if (propertyName == "restitution")
 			{
-				m_colliderConfig->m_fixtureDef.restitution = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.restitution = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "spriteTexturePath")
@@ -183,17 +220,26 @@ namespace ratchet
 
 			if (propertyName == "colliderGravityScale")
 			{
-				m_colliderConfig->m_gravityScale = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_gravityScale = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderLinearDamping")
 			{
-				m_colliderConfig->m_linearDamping = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_linearDamping = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderAngularDamping")
 			{
-				m_colliderConfig->m_angularDamping = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_angularDamping = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "animationStateListMask")

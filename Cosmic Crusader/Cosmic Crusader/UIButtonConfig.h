@@ -13,8 +13,17 @@ namespace ratchet
 	struct UIButtonConfig : public GameObjectConfig
 	{
 	public:
+		UIButtonConfig();
+		~UIButtonConfig();
+
+		virtual bool serialise(nlohmann::json& jsonFile) override;
+		virtual bool deserialise(const nlohmann::json& jsonFile) override;
+
 
 	private:
+		ButtonNameState m_nameState;
+		ButtonNameState m_parentNameState;
+		
 	};
 
 }

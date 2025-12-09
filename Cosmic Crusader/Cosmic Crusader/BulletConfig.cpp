@@ -94,48 +94,77 @@ namespace ratchet
 
 			if (propertyName == "colliderBulletLayer")
 			{
-				m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<int>());
+				if(m_colliderConfig)
+				{
+					m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<int>());
+				}
 			}
 			if (propertyName == "colliderBulletType")
 			{
-				m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+				}
 			}
 			if (propertyName == "colliderBulletDensity")
 			{
-				m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				}
 			}
 			if (propertyName == "colliderBulletFixedRotation")
 			{
-				m_colliderConfig->m_bodyDef.fixedRotation = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.fixedRotation = propertyValue.get<bool>();
+				}
 			}
 			if (propertyName == "colliderBulletFriction")
 			{
-				m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				}
 			}
 			if (propertyName == "colliderBulletRestitution")
 			{
-				m_colliderConfig->m_fixtureDef.restitution = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.restitution = propertyValue.get<float>();
+				}
 			}
 			if (propertyName == "colliderBulletIsSensor")
 			{
-				m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				}
 			}
 
 			if (propertyName == "colliderBulletGravityScale")
 			{
-				m_colliderConfig->m_gravityScale = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_gravityScale = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderBulletLinearDamping")
 			{
+				if (m_colliderConfig)
+				{
 					m_colliderConfig->m_linearDamping = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderBulletAngularDamping")
 			{
+				if (m_colliderConfig)
+				{
 					m_colliderConfig->m_angularDamping = propertyValue.get<float>();
-			}
-			
+				}
+			}		
 		}
 
 		return true;

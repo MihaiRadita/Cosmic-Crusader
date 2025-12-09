@@ -159,17 +159,26 @@ namespace ratchet
 
 			if (propertyName == "colliderLayer")
 			{
-				m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<int>());
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<int>());
+				}
 			}
 
 			if (propertyName == "colliderType")
 			{
-				m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+				}
 			}
 
 			if (propertyName == "colliderBullet")
 			{
-				m_colliderConfig->m_bodyDef.bullet = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.bullet = propertyValue.get<bool>();
+				}
 			}
 
 			if (propertyName == "colliderFixedRotation")
@@ -179,7 +188,10 @@ namespace ratchet
 
 			if (propertyName == "colliderFriction")
 			{
-				m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderRestitution")
@@ -189,90 +201,137 @@ namespace ratchet
 
 			if (propertyName == "colliderDensity")
 			{
-				m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderHeight")
 			{
-				if (auto* capsule = dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
+				if (m_colliderConfig)
 				{
-					capsule->m_height = propertyValue.get<float>();
+					if (auto* capsule = dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
+					{
+						capsule->m_height = propertyValue.get<float>();
+					}
 				}
 
 			}
 
 			if (propertyName == "colliderRadius")
 			{
-				if (auto* capsule = dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
+				if (m_colliderConfig)
 				{
-					capsule->m_radius = propertyValue.get<float>();
+					if (auto* capsule = dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
+					{
+						capsule->m_radius = propertyValue.get<float>();
+					}
 				}
-
 			}
 
 			if (propertyName == "colliderMassValue")
 			{
-				m_colliderConfig->m_massValue = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_massValue = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderIsSensor")
 			{
-				m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				}
 			}
 
 			if (propertyName == "colliderIsGroundRaycastOffset")
 			{
-				m_colliderConfig->m_isGroundRaycastOffset = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_isGroundRaycastOffset = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderJumpOverBottomRaycastOffsetX")
 			{
-				m_colliderConfig->m_JumpOverBottomRaycastOffsetX = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_JumpOverBottomRaycastOffsetX = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderJumpOverBottomRaycastOffsetY")
 			{
-				m_colliderConfig->m_JumpOverBottomRaycastOffsetY = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_JumpOverBottomRaycastOffsetY = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderJumpOverTopRaycastOffsetX")
 			{
-				m_colliderConfig->m_JumpOverTopRaycastOffsetX = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_JumpOverTopRaycastOffsetX = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderJumpOverTopRaycastOffsetY")
 			{
-				m_colliderConfig->m_JumpOverTopRaycastOffsetY = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_JumpOverTopRaycastOffsetY = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderCheckFallingRiskRaycastStartOffsetX")
 			{
-				m_colliderConfig->m_checkFallingRiskRaycastStartOffsetX = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_checkFallingRiskRaycastStartOffsetX = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderCheckFallingRiskRaycastStartOffsetY")
 			{
-				m_colliderConfig->m_checkFallingRiskRaycastStartOffsetY = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_checkFallingRiskRaycastStartOffsetY = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderCheckFallingRiskRaycastEndOffsetY")
 			{
-				m_colliderConfig->m_checkFallingRiskRaycastEndOffsetY = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_checkFallingRiskRaycastEndOffsetY = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderGravityScale")
 			{
-				m_colliderConfig->m_gravityScale = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_gravityScale = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderLinearDamping")
 			{
-				m_colliderConfig->m_linearDamping = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_linearDamping = propertyValue.get<float>();
+				}
 			}
 
 			if (propertyName == "colliderAngularDamping")
 			{
-				m_colliderConfig->m_angularDamping = propertyValue.get<float>();
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_angularDamping = propertyValue.get<float>();
+				}
 			}
 			
 			if (propertyName == "bodyShoulderOffset")

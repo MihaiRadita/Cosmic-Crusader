@@ -53,13 +53,55 @@ namespace ratchet
 			}
 			if (propertyName == "activeRenderer") m_activeRenderer = propertyValue.get<bool>();
 
-			if (propertyName == "colliderLayer") m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<float>());
-			if (propertyName == "colliderType") m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
-			if (propertyName == "colliderFixedRotation") m_colliderConfig->m_bodyDef.fixedRotation = propertyValue.get<bool>();
-			if (propertyName == "colliderDensity") m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
-			if (propertyName == "colliderFriction") m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
-			if (propertyName == "colliderRestitution") m_colliderConfig->m_fixtureDef.restitution = propertyValue.get<float>();
-			if (propertyName == "colliderIsSensor") m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+			if (propertyName == "colliderLayer")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_layer = static_cast<PhysicsLayer>(propertyValue.get<float>());
+				}
+			}
+			if (propertyName == "colliderType")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+				}
+			}
+			if (propertyName == "colliderFixedRotation")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyDef.fixedRotation = propertyValue.get<bool>();
+				}
+			}
+			if (propertyName == "colliderDensity")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
+				}
+			}
+			if (propertyName == "colliderFriction")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
+				}
+			}
+			if (propertyName == "colliderRestitution")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.restitution = propertyValue.get<float>();
+				}
+			}
+			if (propertyName == "colliderIsSensor")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
+				}
+			}
 		}
 
 		return true;

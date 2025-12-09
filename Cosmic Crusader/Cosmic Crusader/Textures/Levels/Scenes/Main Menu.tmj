@@ -26,11 +26,57 @@
                  "height":100,
                  "id":9,
                  "name":"Play Button",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"buttonNameState",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"buttonParentNameState",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"movementType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Play Button.png"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":600,
-                 "x":64,
+                 "x":60,
                  "y":256
                 }, 
                 {
@@ -38,6 +84,52 @@
                  "height":100,
                  "id":10,
                  "name":"Options Button",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"buttonNameState",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"buttonParentNameState",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"movementType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Options Button.png"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -50,6 +142,52 @@
                  "height":100,
                  "id":11,
                  "name":"Exit Button",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"buttonNameState",
+                         "type":"int",
+                         "value":8
+                        }, 
+                        {
+                         "name":"buttonParentNameState",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"movementType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Exit Button.png"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
