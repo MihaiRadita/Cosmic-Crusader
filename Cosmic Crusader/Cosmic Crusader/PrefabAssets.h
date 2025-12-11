@@ -7,6 +7,7 @@
 #include "BulletConfig.h"
 #include "TileConfig.h"
 #include "physics/RectAngleCollider.h"
+#include "UIButtonConfig.h"
 
 
 namespace ratchet

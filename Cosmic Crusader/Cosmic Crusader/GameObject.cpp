@@ -171,32 +171,35 @@ namespace ratchet
 			}
 		}
 
-		if (m_debugDraw)
+		if (m_objectType == ObjectType::World)
 		{
-			// DRAW CIRCLE AT POSITION
+			if (m_debugDraw)
 			{
-				auto circleShape = sf::CircleShape(0.05f);
-				circleShape.setFillColor(sf::Color::Transparent);
-				circleShape.setOutlineColor(sf::Color::Cyan);
-				circleShape.setOutlineThickness(0.03f);
-				const auto position = getPosition();
-				circleShape.setPosition(position.x - circleShape.getRadius(), position.y - circleShape.getRadius());
-				target.draw(circleShape);
-			}
+				// DRAW CIRCLE AT POSITION
+				{
+					auto circleShape = sf::CircleShape(0.05f);
+					circleShape.setFillColor(sf::Color::Transparent);
+					circleShape.setOutlineColor(sf::Color::Cyan);
+					circleShape.setOutlineThickness(0.03f);
+					const auto position = getPosition();
+					circleShape.setPosition(position.x - circleShape.getRadius(), position.y - circleShape.getRadius());
+					target.draw(circleShape);
+				}
 
-			// DRAW SPRITE BOUNDS
-			{
-				auto spriteOutline = sf::RectangleShape(sf::Vector2f(
-					m_sprite.getGlobalBounds().width,
-					m_sprite.getGlobalBounds().height)
-				);
-				spriteOutline.setFillColor(sf::Color::Transparent);
-				spriteOutline.setOutlineColor(sf::Color::Red);
-				spriteOutline.setOutlineThickness(0.01f);
-				spriteOutline.setPosition(
-					m_sprite.getPosition().x,
-					m_sprite.getPosition().y);
-				target.draw(spriteOutline);
+				// DRAW SPRITE BOUNDS
+				{
+					auto spriteOutline = sf::RectangleShape(sf::Vector2f(
+						m_sprite.getGlobalBounds().width,
+						m_sprite.getGlobalBounds().height)
+					);
+					spriteOutline.setFillColor(sf::Color::Transparent);
+					spriteOutline.setOutlineColor(sf::Color::Red);
+					spriteOutline.setOutlineThickness(0.01f);
+					spriteOutline.setPosition(
+						m_sprite.getPosition().x,
+						m_sprite.getPosition().y);
+					target.draw(spriteOutline);
+				}
 			}
 		}
 #endif

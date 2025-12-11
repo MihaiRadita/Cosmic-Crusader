@@ -146,6 +146,9 @@
     <ClCompile Include="UIButtonConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UIClickButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -233,5 +236,6 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIButtonConfig.h" />
+    <ClInclude Include="UIClickButton.h" />
   </ItemGroup>
 </Project>

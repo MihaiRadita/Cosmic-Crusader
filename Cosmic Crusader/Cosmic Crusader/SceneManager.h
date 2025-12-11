@@ -5,6 +5,8 @@
 #include "game/Player.h"
 #include "game/Tile.h"
 #include "WeaponPickup.h"
+#include "UIClickButton.h"
+
 
 #include "physics/Physics.h"
 

@@ -19,7 +19,7 @@
         {
          "draworder":"topdown",
          "id":2,
-         "name":"Main Menu",
+         "name":"Click Buttons",
          "objects":[
                 {
                  "gid":46,

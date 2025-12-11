@@ -59,6 +59,8 @@ namespace ratchet
 		void render();
 
 		inline static const float sc_tiledToGameScale = 0.01;
-		inline static const float sc_defaultZoom = 2.0f * sc_tiledToGameScale;;
+		inline static const float sc_MainMenuUIToGAmeScale = 0.1;
+		inline static const float sc_defaultZoom = 2.0f * sc_tiledToGameScale;
+		inline static const float scUIZoom = 1.0f;
 	};
 }

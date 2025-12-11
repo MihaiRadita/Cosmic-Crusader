@@ -26,14 +26,14 @@ namespace ratchet
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
-		scale = sf::Vector2f(1.0f, 1.0f) * Game::sc_tiledToGameScale;
+		scale = sf::Vector2f(1.0f, 1.0f);
 		positionXOffset = 0.f;
-		positionYOffset = -tileHeight * scale.y;
+		positionYOffset = tileHeight;
 
-		float posX = jsonFile["x"].get<float>() * scale.x;
-		float posY = jsonFile["y"].get<float>() * scale.y;
+		float posX = jsonFile["x"].get<float>();
+		float posY = jsonFile["y"].get<float>();
 
-		posY += positionYOffset;
+		posY -= positionYOffset;
 
 		position = sf::Vector2f(posX, posY);
 		rotation = jsonFile["rotation"];
@@ -78,6 +78,16 @@ namespace ratchet
 			if (propertyName == "startSpriteTexturePath")
 			{
 				startSpriteTexturePath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "buttonNameState")
+			{
+				m_nameState = static_cast<ButtonNameState>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "buttonParentNameState")
+			{
+				m_parentNameState = static_cast<ButtonNameState>(propertyValue.get<int>());
 			}
 		}
 

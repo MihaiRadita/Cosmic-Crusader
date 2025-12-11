@@ -28,13 +28,13 @@ namespace ratchet
 	void ratchet::SceneManager::CheckAndBuildScenes()
 	{
 		// #TODO: FOLOSESTE RELATIVE PATH IN LOC DE FULL PATH
-		m_baseScenePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes";
+		m_baseScenePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/";
 
 		const std::string combinedPath = m_baseScenePath + "GameScenes.json";
 
 
 		m_sceneFiles = {
-			{SceneType::MainMenu, "MainMenu.tmj"},
+			{SceneType::MainMenu, "Main Menu.tmj"},
 			{SceneType::Level1, "Level1.tmj"}
 		};
 
@@ -126,7 +126,7 @@ namespace ratchet
 	{
 		float timeStep = 1.0f / 120.0f;
 
-		if (m_currentScene != SceneType::MainMenu && m_currentGameSceneState != SceneGameState::Pause)
+		if (m_currentScene != SceneType::MainMenu)
 		{
 			Physics::update(timeStep);
 		}
@@ -202,12 +202,12 @@ namespace ratchet
 	{
 		std::string sceneName = m_sceneFiles[m_currentScene];
 
-		if (!m_allScenes.contains("Scenes")) {
+		if (!m_allScenes.contains("scenes")) {
 			std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
 			return;
 		}
 
-		auto& scenesNode = m_allScenes["Scenes"];
+		auto& scenesNode = m_allScenes["scenes"];
 		if (!scenesNode.contains(sceneName)) {
 			std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
 			return;
@@ -290,6 +290,16 @@ namespace ratchet
 						PrefabAssets::Get().RegisterWeaponConfig(config.m_objectID, &config);
 						succeeded = true;
 					}
+				}
+				else if (layerName == "Click Buttons")
+				{
+					auto config = UIButtonConfig();
+					if (config.deserialise(obj))
+					{
+						GameObject::s_gameObjects.push_back(new UIClickButton(config));
+					}
+
+					succeeded = true;
 				}
 
 				if (!succeeded)
