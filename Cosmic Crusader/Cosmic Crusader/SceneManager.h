@@ -37,8 +37,9 @@ namespace ratchet
 	public:
 
 
-		SceneManager();
-		~SceneManager();
+		SceneManager(const SceneManager&) = delete;
+		SceneManager& operator=(const SceneManager&) = delete;
+		//~SceneManager();
 		void CheckAndBuildScenes();
 		void LoadCombinedScenes();
 
@@ -55,12 +56,22 @@ namespace ratchet
 
 		void ClearSceneObjects();
 
+		void LoadSceneBasicFeatures();
+
 		//Getters
-		static SceneManager* GetSceneManager();
+		static SceneManager& Get();
 		nlohmann::json& GetScene(SceneType type);
 
+		inline static float sc_tiledToGameScale = 0.0f;
+		inline static float sc_defaultZoom = 0.0f;
+
+		bool IsCameraDirty();
+
+		void ClearCameraDirty();
 
 	private:
+
+		SceneManager();
 
 		std::map<SceneType, std::string> m_sceneFiles;
 		SceneType m_currentScene;
@@ -69,11 +80,12 @@ namespace ratchet
 
 		std::string m_baseScenePath;
 
-		static SceneManager* m_sceneManager;
-
 		int m_sceneIndex;
 
 		bool m_isUpdating = true;
+
+		bool m_cameraDirty;
+
 
 		SceneGameState m_currentGameSceneState;
 	};

@@ -10,20 +10,31 @@ namespace ratchet
 		LoadCombinedScenes();
 
 		m_currentScene = SceneType::MainMenu;
+		m_sceneIndex = static_cast<int>(m_currentScene);
 
-
+		LoadSceneBasicFeatures();
 		LoadSceneGameObjects();
 
 	}
 
-	ratchet::SceneManager::~SceneManager()
+	bool SceneManager::IsCameraDirty()
+	{
+		return m_cameraDirty;
+	}
+
+	void SceneManager::ClearCameraDirty()
+	{
+		m_cameraDirty = false;
+	}
+
+	/*ratchet::SceneManager::~SceneManager()
 	{
 		if (m_sceneManager != nullptr)
 		{
 			delete m_sceneManager;
 			m_sceneManager = nullptr;
 		}
-	}
+	}*/
 
 	void ratchet::SceneManager::CheckAndBuildScenes()
 	{
@@ -148,20 +159,26 @@ namespace ratchet
 
 	void SceneManager::renderSceneObjects(sf::RenderTarget& target)
 	{
+		Player* player = nullptr;
+
 		for (auto* obj : GameObject::s_gameObjects)
 		{
-			TRACE_CHANNEL("RENDERING", "Rendering object at position: ", obj->getSprite().getPosition().x, ", ", obj->getSprite().getPosition().y);
-			TRACE_CHANNEL("RENDERING", "Texture pointer: ", obj->getSprite().getTexture());
+			if ((player = dynamic_cast<Player*>(obj)))
+				break;
+		}
 
-			if (auto player = dynamic_cast<Player*>(obj))
-			{
-				sf::View view = target.getView();
-				view.setCenter(player->getCollider()->getBody()->GetPosition().x, player->getCollider()->getBody()->GetPosition().y);
-				target.setView(view);
+		if (player)
+		{
+			sf::View view = target.getView();
+			view.setCenter(
+				player->getCollider()->getBody()->GetPosition().x,
+				player->getCollider()->getBody()->GetPosition().y
+			);
+			target.setView(view);
+		}
 
-				sf::Sprite sprite = player->getSprite();
-			}
-
+		for (auto* obj : GameObject::s_gameObjects)
+		{
 			obj->render(target);
 		}
 	}
@@ -174,8 +191,10 @@ namespace ratchet
 		}
 
 		ClearSceneObjects();
+		LoadSceneBasicFeatures();
 
 		LoadSceneGameObjects();
+		m_cameraDirty = true;
 	}
 
 	void SceneManager::LoadNextScene()
@@ -184,8 +203,10 @@ namespace ratchet
 		m_currentScene = static_cast<SceneType>(m_sceneIndex);
 
 		ClearSceneObjects();
+		LoadSceneBasicFeatures();
 
 		LoadSceneGameObjects();
+		m_cameraDirty = true;
 	}
 
 	void SceneManager::IncreaseSceneIndex()
@@ -195,6 +216,67 @@ namespace ratchet
 		if (m_sceneIndex >= m_sceneFiles.size())
 		{
 			m_sceneIndex = 0;
+		}
+	}
+
+	void SceneManager::LoadSceneBasicFeatures()
+	{
+		std::string sceneName = m_sceneFiles[m_currentScene];
+
+		if (!m_allScenes.contains("scenes")) {
+			std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+			return;
+		}
+
+		auto& scenesNode = m_allScenes["scenes"];
+		if (!scenesNode.contains(sceneName)) {
+			std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+			return;
+		}
+
+		auto& sceneJson = scenesNode[sceneName];
+
+		if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
+			std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+			return;
+		}
+
+		for (const auto& layer : sceneJson["layers"])
+		{
+			const auto& layerName = layer["name"].get<std::string>();
+			if (layerName == "Scene Features")
+			{
+				const auto& validLayer = layer.contains("objects");
+				if (!validLayer) continue;
+
+				for (const auto& obj : layer["objects"])
+				{
+					if (obj["name"] == "Scene Camera")
+					{
+						for (const auto& prop : obj["properties"])
+						{
+							const auto& propertyName = prop["name"].get<std::string>();
+							const auto& propertyValue = prop["value"];
+							if (propertyName == "cameraZoom")
+							{
+								sc_defaultZoom = propertyValue.get<float>();
+							}
+						}
+					}
+					if (obj["name"] == "Scene Object Dimension")
+					{
+						for (const auto& prop : obj["properties"])
+						{
+							const auto& propertyName = prop["name"].get<std::string>();
+							const auto& propertyValue = prop["value"];
+							if (propertyName == "tileToGameScale")
+							{
+								sc_tiledToGameScale = propertyValue.get<float>();
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -229,6 +311,7 @@ namespace ratchet
 			for (const auto& obj : layer["objects"])
 			{
 				bool succeeded = false;
+
 				if (layerName == "Tile Objects")
 				{
 					auto config = TileConfig();
@@ -321,23 +404,18 @@ namespace ratchet
 		GameObject::s_gameObjects.clear();
 	}
 
-	SceneManager* ratchet::SceneManager::GetSceneManager()
-	{
-		if (!m_sceneManager)
-		{
-			m_sceneManager = new SceneManager();
-		}
 
-		return m_sceneManager;
+	SceneManager& SceneManager::Get()
+	{
+		static SceneManager instance;
+		return instance;
 	}
 
 	nlohmann::json& ratchet::SceneManager::GetScene(SceneType type)
 	{
 		std::string fileName = m_sceneFiles[type];
 
-		return m_allScenes["Scenes"][fileName];
+		return m_allScenes["scenes"][fileName];
 	}
-
-	SceneManager* SceneManager::m_sceneManager = nullptr;
 }
 

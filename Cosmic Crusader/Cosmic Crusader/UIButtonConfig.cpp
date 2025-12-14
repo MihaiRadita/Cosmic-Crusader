@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "UIButtonConfig.h"
 
-#include "game/Game.h"
+#include "SceneManager.h"
 
 #include "EnumMask.h"
 
@@ -26,7 +26,7 @@ namespace ratchet
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
-		scale = sf::Vector2f(1.0f, 1.0f);
+		scale = sf::Vector2f(1.0f, 1.0f) * SceneManager::sc_tiledToGameScale;
 		positionXOffset = 0.f;
 		positionYOffset = tileHeight;
 

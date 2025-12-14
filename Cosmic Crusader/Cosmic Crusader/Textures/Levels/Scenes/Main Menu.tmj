@@ -3,20 +3,6 @@
  "infinite":true,
  "layers":[
         {
-         "chunks":[],
-         "height":0,
-         "id":1,
-         "name":"Tile Layer 1",
-         "opacity":1,
-         "startx":0,
-         "starty":0,
-         "type":"tilelayer",
-         "visible":true,
-         "width":0,
-         "x":0,
-         "y":0
-        }, 
-        {
          "draworder":"topdown",
          "id":2,
          "name":"Click Buttons",
@@ -75,7 +61,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":600,
+                 "width":300,
                  "x":60,
                  "y":256
                 }, 
@@ -133,7 +119,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":600,
+                 "width":300,
                  "x":64,
                  "y":448
                 }, 
@@ -191,7 +177,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":600,
+                 "width":300,
                  "x":64,
                  "y":640
                 }],
@@ -200,9 +186,56 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Scene Features",
+         "objects":[
+                {
+                 "height":0,
+                 "id":14,
+                 "name":"Scene Camera",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"cameraZoom",
+                         "type":"float",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":0,
+                 "y":64
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"Scene Object Dimension",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"tileToGameScale",
+                         "type":"float",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":0,
+                 "y":62.6666666666667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":14,
+ "nextlayerid":6,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

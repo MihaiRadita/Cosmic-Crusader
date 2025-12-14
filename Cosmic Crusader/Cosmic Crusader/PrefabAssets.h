@@ -20,7 +20,7 @@ namespace ratchet
 		static PrefabAssets& Get();
 
 		//List of prefab configs
-		std::map<std::string, GameObjectConfig*> m_gameObjectConfigs;
+		std::map<int, GameObjectConfig*> m_gameObjectConfigs;
 		std::map<std::string, CreatureConfig*> m_creatureConfigs;
 		std::map<int, WeaponConfig*> m_weaponConfigs;
 		std::map<int, BulletConfig*> m_bulletConfigs;
@@ -29,13 +29,13 @@ namespace ratchet
 		std::map<int, ColliderBaseConfig*> m_colliderConfigs;
 
 		//Registers Config
-		void RegisterGameObjectConfig(std::string& id,GameObjectConfig& config);
+		void RegisterGameObjectConfig(int& id,GameObjectConfig* config);
 		void RegisterCreatureConfig(std::string &id,CreatureConfig& config);
 		void RegisterWeaponConfig(int& id,WeaponConfig* config);
 		void RegisterBulletConfig(int& id,BulletConfig* config);
 
 		//Getters Configs
-		GameObjectConfig* GetGameObjectConfig(const std::string& id);
+		GameObjectConfig* GetGameObjectConfig(const int& id);
 		CreatureConfig* GetCreatureConfig(const std::string& id);
 		WeaponConfig* GetWeaponConfig(const int& id);
 		BulletConfig* GetBulletConfig(const int& id);

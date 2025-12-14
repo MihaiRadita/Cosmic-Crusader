@@ -11,100 +11,30 @@ namespace ratchet
 
 	void Game::spawnObjects()
 	{
-		{
-			SceneManager::GetSceneManager();
-//			std::ifstream file("F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj");
-//
-//			if (!file.is_open())
-//			{
-//				TRACE_CHANNEL("WARNING", "ERROR! The file could not be opened!");
-//			}
-//
-//			nlohmann::json jsonFile;
-//
-//			file >> jsonFile;
-//			file.close();
-//			
-//			// Deserialise from file.
-//			for (const auto& layer : jsonFile["layers"])
-//			{
-//				const auto& validLayer = layer.contains("objects");
-//				if (!validLayer) continue;
-//
-//				const auto& layerName = layer["name"].get<std::string>();
-//				for (const auto& obj : layer["objects"])
-//				{
-//					bool succeeded = false;
-//					if (layerName == "Tile Objects")
-//					{
-//						auto config = TileConfig();
-//						if (config.deserialise(obj))
-//						{
-//							GameObject::s_gameObjects.push_back(new Tile(config));
-//							succeeded = true;
-//						}
-//					}
-//					else if (layerName == "Player")
-//					{
-//						auto config = CreatureConfig();
-//#ifdef IS_RATCHET_DEBUG
-//						config.m_debugDraw = true;
-//#endif
-//						if (config.deserialise(obj))
-//						{
-//#ifdef IS_RATCHET_DEBUG
-//							config.m_colliderConfig->m_debugDraw = false;
-//#endif
-//							GameObject::s_gameObjects.push_back(new Player(config));
-//							succeeded = true;
-//						}
-//					}
-//					else if (layerName == "Enemies")
-//					{
-//						auto config = SelfControlledCreatureConfig();
-//#ifdef IS_RATCHET_DEBUG
-//						config.m_debugDraw = true;
-//#endif
-//						if (config.deserialise(obj))
-//						{
-//#ifdef IS_RATCHET_DEBUG
-//							config.m_colliderConfig->m_debugDraw = false;
-//#endif
-//							GameObject::s_gameObjects.push_back(new SelfControlledCreature(config));
-//							succeeded = true;
-//						}
-//					}
-//					else if (layerName == "Weapons Bullets")
-//					{
-//						auto config = BulletConfig();
-//						if (config.deserialise(obj))
-//						{
-//							PrefabAssets::Get().RegisterBulletConfig(config.m_objectID, &config);
-//							succeeded = true;
-//						}
-//					}
-//					else if (layerName == "Weapons")
-//					{
-//						auto config = WeaponConfig(0.0f, 0.0f, true);
-//						if (config.deserialise(obj))
-//						{
-//							if (obj["type"] == "Weapon Pickup")
-//							{
-//								GameObject::s_gameObjects.push_back(new WeaponPickup(config));
-//							}
-//
-//							PrefabAssets::Get().RegisterWeaponConfig(config.m_objectID, &config);
-//							succeeded = true;
-//						}
-//					}
-//
-//					if(!succeeded)
-//					{
-//						TRACE_CHANNEL("GAMEOBJECT_INIT", "FAILED to deserialise tile.");
-//					}
-//				}
-//			}
-		}
+		SceneManager::Get();
+	}
+
+	void Game::applySceneView()
+	{
+		/*std::cout << "applySceneView called, zoom = "
+			<< SceneManager::Get().sc_defaultZoom << "\n";*/
+
+		std::cout<<"THE ZOOM : " << SceneManager::Get().sc_defaultZoom << std::endl;
+		sf::View view = m_window.getDefaultView();
+
+		float defaultWidth = view.getSize().x;
+		float defaultHeight = view.getSize().y;
+
+		view.zoom(SceneManager::Get().sc_defaultZoom);
+		m_window.setView(view);
+
+		float zoomX = defaultWidth / view.getSize().x;
+		float zoomY = defaultHeight / view.getSize().y;
+
+		std::cout << "Zoom applied: X=" << zoomX << " Y=" << zoomY << std::endl;
+
+		std::cout << "YAAYYYY!" << std::endl;
+
 	}
 
 	Game::Game()
@@ -113,6 +43,7 @@ namespace ratchet
 		initPhysics();
 		initWeaponManager();
 		spawnObjects();
+		applySceneView();
 
 	}
 
@@ -135,10 +66,6 @@ namespace ratchet
 
 		WindowManager::create(&m_window);
 		// m_window.setFramerateLimit(60);
-
-		sf::View view = m_window.getView();
-		view.zoom(scUIZoom);
-		m_window.setView(view);
 	}
 
 	void Game::initPhysics()
@@ -150,7 +77,6 @@ namespace ratchet
 	{
 		WeaponManager::instance()->addAllWeapons();
 	}
-
 
 	const sf::RenderWindow& Game::getWindow() const
 	{
@@ -190,38 +116,15 @@ namespace ratchet
 	{
 		handleEvents();
 
-		//// SFML Time Calculation
-		//sf::Vector2i newMousePos = sf::Mouse::getPosition(m_window);
+		if (SceneManager::Get().IsCameraDirty())
+		{
+			applySceneView();
+			SceneManager::Get().ClearCameraDirty();
 
-		//if (currenmousePosition != newMousePos)
-		//{
-		//	currenmousePosition = newMousePos;
-		//	TRACE_CHANNEL("MOUSE", "Mouse Position: ", currenmousePosition.x, ", ", currenmousePosition.y, " !");
+		}
+		
 
-		//	sf::Vector2f newMouseWorld = m_window.mapPixelToCoords(currenmousePosition);
-
-		//	TRACE_CHANNEL("MOUSE", "Mouse Position in Wolrd: ", newMouseWorld.x, ", ", newMouseWorld.y, "!");
-		//}
-
-		//float timeStep = 1.0f / 120.0f;
-
-		//Physics::update(timeStep);
-
-		//for (auto i = 0u; i < GameObject::s_gameObjects.size(); i++)
-		//{
-		//	if (auto obj = GameObject::s_gameObjects[i])
-		//	{
-		//		obj->update();
-		//	}
-		//	else
-		//	{
-		//		TRACE_CHANNEL("GAME_OBJECT", "Cannot update null game object of index [", i, "].");
-		//	}
-		//}
-
-		//GameObject::clearQueuedObjectsToDestroy();
-
-		SceneManager::GetSceneManager()->updateSceneObjects();
+		SceneManager::Get().updateSceneObjects();
 
 	}
 
@@ -245,24 +148,8 @@ namespace ratchet
 	{
 		m_window.clear(sf::Color::Black);
 
-		/*for (auto* obj : GameObject::s_gameObjects)
-		{
-			TRACE_CHANNEL("RENDERING", "Rendering object at position: ", obj->getSprite().getPosition().x, ", ", obj->getSprite().getPosition().y);
-			TRACE_CHANNEL("RENDERING", "Texture pointer: ", obj->getSprite().getTexture());
 
-			if (auto player = dynamic_cast<Player*>(obj))
-			{
-				sf::View view = m_window.getView();
-				view.setCenter(player->getCollider()->getBody()->GetPosition().x, player->getCollider()->getBody()->GetPosition().y);
-				m_window.setView(view);
-
-				sf::Sprite sprite = player->getSprite();
-			}
-
-			obj->render(m_window);
-		}*/
-
-		SceneManager::GetSceneManager()->renderSceneObjects(m_window);
+		SceneManager::Get().renderSceneObjects(m_window);
 
 		m_window.display();
 
