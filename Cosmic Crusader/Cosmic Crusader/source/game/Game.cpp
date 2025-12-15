@@ -6,9 +6,6 @@
 
 namespace ratchet
 {
-	//const float Game::sc_tiledToGameScale = 0.01f;
-	//const float Game::sc_defaultZoom = 2.0f * sc_tiledToGameScale;
-
 	void Game::spawnObjects()
 	{
 		SceneManager::Get();
@@ -16,9 +13,6 @@ namespace ratchet
 
 	void Game::applySceneView()
 	{
-		/*std::cout << "applySceneView called, zoom = "
-			<< SceneManager::Get().sc_defaultZoom << "\n";*/
-
 		std::cout<<"THE ZOOM : " << SceneManager::Get().sc_defaultZoom << std::endl;
 		sf::View view = m_window.getDefaultView();
 

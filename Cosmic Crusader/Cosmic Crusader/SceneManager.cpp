@@ -27,14 +27,6 @@ namespace ratchet
 		m_cameraDirty = false;
 	}
 
-	/*ratchet::SceneManager::~SceneManager()
-	{
-		if (m_sceneManager != nullptr)
-		{
-			delete m_sceneManager;
-			m_sceneManager = nullptr;
-		}
-	}*/
 
 	void ratchet::SceneManager::CheckAndBuildScenes()
 	{
