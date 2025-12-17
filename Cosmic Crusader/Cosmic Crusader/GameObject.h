@@ -32,7 +32,10 @@ namespace ratchet
 		std::string m_startSpritePath;
 		sf::Sprite m_sprite;
 		sf::Texture m_spriteTexture;
+
+		bool m_activeGameObject;
 		bool m_activeRenderer;
+		
 
 		//Getters
 		sf::Sprite getSprite();
@@ -49,6 +52,8 @@ namespace ratchet
 		//Setters
 		void SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees);
 		void SetActiveRenderer(bool active);
+
+		void setColliderToDestroy();
 
 		virtual void PostCosntructFixup();
 
@@ -139,7 +144,6 @@ namespace ratchet
 
 		virtual void destroy();
 	protected:
-		bool m_activeGameObject;
 
 		struct Input
 		{

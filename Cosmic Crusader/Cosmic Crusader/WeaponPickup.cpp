@@ -67,7 +67,6 @@ namespace ratchet
 
 	void WeaponPickup::PostCosntructFixup()
 	{
-
 		if (m_collider)
 		{
 			m_collider->SetOwner(this);

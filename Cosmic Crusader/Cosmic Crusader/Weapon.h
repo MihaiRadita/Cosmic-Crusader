@@ -35,6 +35,8 @@ namespace ratchet
 		bool m_facigRight = true;
 		int m_bulletPoolIncrementation;
 
+		static void ClearWeaponList();
+		static void ClearBulletList();
 		
 		void Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight);
 		static void releaseBullet(Bullet* bulletToRelease);

@@ -17,7 +17,11 @@ namespace ratchet
 	}
 	SelfControlledCreature::~SelfControlledCreature()
 	{
-
+		if (m_collider)
+		{
+			delete m_collider;
+			m_collider = nullptr;
+		}
 	}
 	void SelfControlledCreature::checkTargetToAttack(Creature* target)
 	{
@@ -239,7 +243,7 @@ namespace ratchet
 	}
 	void SelfControlledCreature::update()
 	{
-		//if (!m_activeGameObject) return;
+		if (!m_activeGameObject) return;
 
 		if (m_collider && !m_collider->m_skipRaycastThisFrame)
 		{

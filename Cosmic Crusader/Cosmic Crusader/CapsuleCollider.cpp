@@ -14,7 +14,9 @@ namespace ratchet
 
 	void CapsuleCollider::initVariables(sf::Sprite& sprite, const CapsuleColliderConfig& config)
 	{
-
+		
+		isColliderSetDestroy = false;
+		
 
 		m_JumpOverBottomRaycastOffsetX = config.m_JumpOverBottomRaycastOffsetX;
 		m_JumpOverBottomRaycastOffsetY = config.m_JumpOverBottomRaycastOffsetY;
@@ -61,6 +63,13 @@ namespace ratchet
 		}
 
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
+
+		if (!s_physicsWorld)
+		{
+			m_body = nullptr;
+			return;
+		}
+
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 		if (m_massValue != 0.0f)
@@ -166,6 +175,10 @@ namespace ratchet
 
 	b2Vec2 CapsuleCollider::getColliderPosition()
 	{
+		if (!m_body)
+		{
+			return b2Vec2_zero;
+		}
 		return m_body->GetTransform().p;
 	}
 
@@ -190,7 +203,7 @@ namespace ratchet
 	}
 
 
-#ifdef IS_RATCHET_DEBUG
+//#ifdef IS_RATCHET_DEBUG
 	void CapsuleCollider::printBodyPositionRotation()
 	{
 		TRACE_CHANNEL("COLLISION", getColliderPosition().x, " x axis ", getColliderPosition().y, " y axis ");
@@ -199,6 +212,11 @@ namespace ratchet
 
 	void CapsuleCollider::printSpriteColliderPosition(sf::Sprite& sprite, int bodyState)
 	{
+		if (!m_body)
+		{
+			return;
+		}
+
 		if (bodyState == STATIC)
 		{
 			TRACE_CHANNEL("COLLISION", "Static position is ", m_body->GetTransform().p.x, " , ", m_body->GetTransform().p.y, " VS Sprite position ",
@@ -213,9 +231,13 @@ namespace ratchet
 
 	void CapsuleCollider::debugRender(sf::RenderTarget& target)
 	{
-#ifdef IS_RATCHET_DEBUG
-		if (!m_debugDraw) return;
-#endif
+//#ifdef IS_RATCHET_DEBUG
+//		if (!m_debugDraw) return;
+//#endif
+		if (!m_body)
+		{
+			return;
+		}
 
 		const auto worldOrigin = getColliderPosition() + m_origin;
 
@@ -316,9 +338,14 @@ namespace ratchet
 		sf::Vertex raycastCheckFallingRisk[] = { sf::Vertex(sf::Vector2f(sartPointCheckFallingRisk.x,sartPointCheckFallingRisk.y), sf::Color::Blue) , sf::Vertex(sf::Vector2f(sartPointCheckFallingRisk.x,endPointCheckFallingRisk.y), sf::Color::Blue) };
 		target.draw(raycastCheckFallingRisk, 2, sf::Lines);
 	}
-#endif
+//#endif
 		void CapsuleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
 		{
+			if (!m_body)
+			{
+				return;
+			}
+
 			ColliderBase::getMiddlePointsForRaycast(xStart, yStart, xEnd, yEnd);
 
 			b2Vec2 playerPosition = m_body->GetPosition();
@@ -333,6 +360,11 @@ namespace ratchet
 
 		void CapsuleCollider::getJumpOverPlatformsBottomRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
 		{
+			if (!m_body)
+			{
+				return;
+			}
+
 			ColliderBase::getJumpOverPlatformsBottomRaycastPoints(xStart, yStart, xEnd, yEnd, direction);
 
 			b2Vec2 playerPosition = m_body->GetPosition();
@@ -348,6 +380,11 @@ namespace ratchet
 
 		void CapsuleCollider::getJumpOverPlatformsTopRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
 		{
+
+			if (!m_body)
+			{
+				return;
+			}
 
 			ColliderBase::getJumpOverPlatformsTopRaycastPoints( xStart, yStart, xEnd, yEnd, direction);
 
@@ -365,6 +402,12 @@ namespace ratchet
 
 		bool CapsuleCollider::performGroundRayCast(sf::Sprite& sprite)
 		{
+			
+			if (!m_body || !s_physicsWorld)
+			{
+				return false;
+			}
+			
 			b2Vec2 startPointMiddle = b2Vec2{};
 			b2Vec2 endPointMiddle = b2Vec2{};
 			getMiddlePointsForRaycast(startPointMiddle.x, startPointMiddle.y, endPointMiddle.x, endPointMiddle.y);
@@ -387,13 +430,18 @@ namespace ratchet
 			{
 				return true;
 			}
-
+			
 			return false;
 		}
 
 		bool CapsuleCollider::performJumpOverPlatformsRaycast(sf::Sprite& sprite, float& direction)
 		{
 
+			if (!m_body || !s_physicsWorld)
+			{
+				return false;
+			}
+			
 			b2Vec2 sartPointMiddleJump = b2Vec2{};
 			b2Vec2 endPointMiddleJump = b2Vec2{};
 
@@ -419,8 +467,8 @@ namespace ratchet
 
 					JumpOverPlatformsRayCastCallBack callBackMiddleJumpOver2(m_body);
 
-					getJumpOverPlatformsTopRaycastPoints(sartPointMiddleJumpCheck.x, sartPointMiddleJumpCheck.y, endPointMiddleJumpCheck.x, endPointMiddleJumpCheck.y ,direction);
-					
+					getJumpOverPlatformsTopRaycastPoints(sartPointMiddleJumpCheck.x, sartPointMiddleJumpCheck.y, endPointMiddleJumpCheck.x, endPointMiddleJumpCheck.y, direction);
+
 					s_physicsWorld->RayCast(&callBackMiddleJumpOver2, sartPointMiddleJumpCheck, endPointMiddleJumpCheck);
 
 					callBackMiddleJumpOver2.m_fraction;
@@ -439,6 +487,11 @@ namespace ratchet
 
 		void CapsuleCollider::getCheckFallingRiscRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
 		{
+			if (!m_body)
+			{
+				return;
+			}
+
 			ColliderBase::getCheckFallingRiscRaycastPoints(xStart, yStart, xEnd, yEnd, direction);
 
 			b2Vec2 characterPosition = m_body->GetPosition();
@@ -452,6 +505,11 @@ namespace ratchet
 
 		bool CapsuleCollider::performCheckFallingRiskRaycast(sf::Sprite& sprite, float& direction)
 		{
+			if (!m_body || !s_physicsWorld)
+			{
+				return false;
+			}
+			
 			b2Vec2 startCheckFallingRisk = b2Vec2{};
 			b2Vec2 endCheckFallingRisk = b2Vec2{};
 
@@ -467,7 +525,7 @@ namespace ratchet
 			}
 
 			return false;
-
+			
 		}
 }
 

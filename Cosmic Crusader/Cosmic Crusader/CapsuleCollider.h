@@ -23,7 +23,7 @@ namespace ratchet
 		void initVariables(sf::Sprite& sprite, const CapsuleColliderConfig& config);
 
 		//Destructors
-		~CapsuleCollider();
+		~CapsuleCollider() override;
 
 		//Getters
 		float getLocalRadius() const { return m_radius; }

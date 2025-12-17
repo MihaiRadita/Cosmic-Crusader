@@ -16,7 +16,7 @@ namespace ratchet
 		m_gameObjectConfigs[id] = new GameObjectConfig(*config);
 	}
 
-	void PrefabAssets::RegisterCreatureConfig(std::string& id,CreatureConfig& config)
+	void PrefabAssets::RegisterCreatureConfig(int& id,CreatureConfig& config)
 	{
 		m_creatureConfigs[id] = new CreatureConfig(config);
 	}
@@ -36,6 +36,54 @@ namespace ratchet
 		m_bulletConfigs[id] = copy;
 	}
 
+	bool PrefabAssets::isCreatureConfigExists(int& id)
+	{
+		auto it = m_creatureConfigs.find(id);
+
+		if (it != m_creatureConfigs.end())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	bool PrefabAssets::isWeaponConfigExists(int& id)
+	{
+		auto it = m_weaponConfigs.find(id);
+
+		if (it != m_weaponConfigs.end())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	bool PrefabAssets::isGameObjectConfigExists(int& id)
+	{
+		auto it = m_gameObjectConfigs.find(id);
+
+		if (it != m_gameObjectConfigs.end())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	bool PrefabAssets::isBulletConfigExists(int& id)
+	{
+		auto it = m_bulletConfigs.find(id);
+
+		if (it != m_bulletConfigs.end())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	GameObjectConfig* PrefabAssets::GetGameObjectConfig(const int& id)
 	{
 		auto it = m_gameObjectConfigs.find(id);
@@ -46,7 +94,7 @@ namespace ratchet
 		return nullptr;
 	}
 
-	CreatureConfig* PrefabAssets::GetCreatureConfig(const std::string& id)
+	CreatureConfig* PrefabAssets::GetCreatureConfig(const int& id)
 	{
 		auto it = m_creatureConfigs.find(id);
 		if (it != m_creatureConfigs.end())

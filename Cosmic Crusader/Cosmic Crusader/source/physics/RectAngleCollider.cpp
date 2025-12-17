@@ -40,6 +40,8 @@ namespace ratchet
 	void RectAngleCollider::initVariables(sf::Sprite& sprite, const RectAngleColliderConfig& config)
 	{
 
+		isColliderSetDestroy = false;
+
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
@@ -69,7 +71,14 @@ namespace ratchet
 		}
 
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
+
+		if (!s_physicsWorld)
+		{
+			m_body = nullptr;
+			return;
+		}
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
+
 
 		m_body->SetGravityScale(config.m_gravityScale);
 		m_body->SetLinearDamping(config.m_linearDamping);
@@ -155,18 +164,29 @@ namespace ratchet
 
 	b2Vec2 RectAngleCollider::getColliderPosition()
 	{
+		if (!m_body)
+		{
+			return b2Vec2_zero;
+		}
 		return m_body->GetTransform().p;
 	}
-
-#ifdef IS_RATCHET_DEBUG
 	void RectAngleCollider::printBodyPositionRotation()
 	{
+		if (!m_body)
+		{
+			return;
+		}
 		TRACE_CHANNEL("PHYSICS", getColliderPosition().x, " x axis ", getColliderPosition().y, " y axis ");
 		TRACE_CHANNEL("PHYSICS", m_body->GetAngle(), " degrees ");
 	}
 
 	void RectAngleCollider::printSpriteColliderPosition(sf::Sprite& sprite, int bodyState)
 	{
+		if (!m_body)
+		{
+			return;
+		}
+
 		if (bodyState == STATIC)
 		{
 			TRACE_CHANNEL("PHYSICS", "Static position is ", m_body->GetTransform().p.x, " , ", m_body->GetTransform().p.y, " VS Sprite position ",
@@ -181,10 +201,11 @@ namespace ratchet
 
 	void RectAngleCollider::debugRender(sf::RenderTarget& target)
 	{
-#ifdef IS_RATCHET_DEBUG
-		if (!m_debugDraw) return;
-#endif
 
+		if (!m_body)
+		{
+			return;
+		}
 		auto* fixture = m_body->GetFixtureList();
 		while (fixture)
 		{
@@ -268,10 +289,14 @@ namespace ratchet
 		target.draw(outline);
 		//target.draw(bodyPosition);
 	}
-#endif
 
 	void RectAngleCollider::drawColliderCenterBased(sf::RenderTarget& target)
 	{
+		if (!m_body)
+		{
+			return;
+		}
+
 		auto colliderOutline = sf::RectangleShape(sf::Vector2f(
 			getGlobalWidth(),
 			getGlobalHeight())
@@ -286,14 +311,19 @@ namespace ratchet
 		colliderOutline.setOutlineColor(sf::Color::Green);
 		colliderOutline.setOutlineThickness(0.01f);
 		colliderOutline.setPosition(
-			getBody()->GetPosition().x,
-			getBody()->GetPosition().y);
-		colliderOutline.setRotation(getBody()->GetAngle() * (180.f / M_PI));
+			m_body->GetPosition().x,
+			m_body->GetPosition().y);
+		colliderOutline.setRotation(m_body->GetAngle() * (180.f / M_PI));
 		target.draw(colliderOutline);
 	}
 
 	void RectAngleCollider::getLeftPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
 	{
+
+		if (!m_body)
+		{
+			return;
+		}
 		ColliderBase::getLeftPointsForRaycast(xStart, yStart, xEnd, yEnd);
 
 		b2Vec2 playerPosition = m_body->GetPosition();
@@ -307,6 +337,11 @@ namespace ratchet
 
 	void RectAngleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
 	{
+		if (!m_body)
+		{
+			return;
+		}
+
 		ColliderBase::getMiddlePointsForRaycast(xStart, yStart, xEnd, yEnd);
 
 		b2Vec2 playerPosition = m_body->GetPosition();
@@ -320,6 +355,10 @@ namespace ratchet
 
 	void RectAngleCollider::getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
 	{
+		if (!m_body)
+		{
+			return;
+		}
 		ColliderBase::getRightPointsForRaycast(xStart, yStart, xEnd, yEnd);
 
 		b2Vec2 playerPosition = m_body->GetPosition();
@@ -333,6 +372,11 @@ namespace ratchet
 
 	bool RectAngleCollider::performGroundRayCast(sf::Sprite& sprite)
 	{
+		if (!m_body || !s_physicsWorld)
+		{
+			return false;
+		}
+
 		float playerWidth = sprite.getGlobalBounds().width;
 		float playerHeight = sprite.getGlobalBounds().height;
 		b2Vec2 playerPosition = m_body->GetPosition();
@@ -365,7 +409,10 @@ namespace ratchet
 		}
 
 		TRACE_CHANNEL("COLLISION", "HIT : ", callbackLeft.m_hit);
+		
+
 		return false;
+
 	}
 
 	RectAngleColliderConfig::RectAngleColliderConfig()

@@ -29,12 +29,17 @@ namespace ratchet
 		//Simulation Physics
 		static void simulatePhysics(float& deltaTime);
 
+		static void SetSimulationEnabled(bool enabled);
+
+		static bool IsSimulationEnabled();
+
 		//Update Function
 		static void update(float& deltaTime);
 
 		//bool shouldSkipRaycastThisFrame(); 
 
 		bool m_skipRaycastThisFrame = false;
+		static bool s_simulationEnabled;
 	protected:
 		static b2World* s_physicsWorld;
 		static ContactListener* s_contactListener;
@@ -48,7 +53,5 @@ namespace ratchet
 		double m_accumulator;  // Acumulator pentru timpul scurs dintre pa?ii de simulare
 
 		static const double sc_fixedDeltaTime;
-
-
 	};
 }

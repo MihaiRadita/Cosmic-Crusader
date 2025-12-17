@@ -30,7 +30,7 @@ namespace ratchet
 		void initVariables(sf::Sprite& sprite, const RectAngleColliderConfig& config);
 
 		//Destructors
-		~RectAngleCollider();
+		~RectAngleCollider() override;
 
 		//Getters
 		float getLocalWidth() const { return m_width; }

@@ -69,6 +69,8 @@ namespace ratchet
 		b2Body* m_body = nullptr;
 		b2MassData m_massData;
 
+		bool isColliderSetDestroy = false;
+
 		float m_massValue = 0.f;
 
 		bool m_skipRaycastThisFrame = false;
@@ -99,7 +101,7 @@ namespace ratchet
 
 		//Constructors
 		ColliderBase(const ColliderBaseConfig& config);
-		~ColliderBase();
+		virtual ~ColliderBase() = default;
 
 		void applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity);
 
@@ -143,7 +145,7 @@ namespace ratchet
 		float m_scaleY = 1.0f;
 
 #ifdef IS_RATCHET_DEBUG
-		bool m_debugDraw = false;
+		bool m_debugDraw = true;
 #endif
 	};
 

@@ -133,7 +133,11 @@ namespace ratchet
 
 	ratchet::GameObject::~GameObject()
 	{
-		delete m_collider;
+		if (m_collider)
+		{
+			delete m_collider;
+			m_collider = nullptr;
+		}
 	}
 
 	void ratchet::GameObject::init()
@@ -211,9 +215,14 @@ namespace ratchet
 	{
 		for (auto* gameObject : s_gameObjects) 
 		{
-			if (gameObject != nullptr && gameObject->m_collider != nullptr && gameObject->m_collider->getBody() == body)
+			if (Physics::IsSimulationEnabled())
 			{
-				return gameObject;
+
+				bool enabled = gameObject->m_collider->getBody()->IsEnabled();
+				if (gameObject != nullptr && gameObject->m_collider != nullptr && gameObject->m_collider->getBody() == body)
+				{
+					return gameObject;
+				}
 			}
 		}
 
@@ -270,6 +279,14 @@ namespace ratchet
 	void GameObject::SetActiveRenderer(bool active)
 	{
 		m_activeRenderer = active;
+	}
+
+	void GameObject::setColliderToDestroy()
+	{
+		if (m_collider)
+		{
+			m_collider->isColliderSetDestroy = true;
+		}
 	}
 
 	void GameObject::PostCosntructFixup()

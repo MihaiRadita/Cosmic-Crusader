@@ -20,9 +20,6 @@ namespace ratchet
 		m_checkTopPlatformsDirectionX = 1.f;
 	}
 
-	ColliderBase::~ColliderBase()
-	{
-	}
 
 	void ColliderBase::applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity)
 	{

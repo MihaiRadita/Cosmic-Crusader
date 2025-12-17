@@ -53,7 +53,22 @@ namespace ratchet
 
 	void Physics::simulatePhysics(float& deltaTime)
 	{
+		if (!s_physicsWorld || !s_simulationEnabled)
+		{
+			return;
+		}
+
 		s_physicsWorld->Step(sc_timeStep, sc_velocityIterations, sc_positionIterations);
+	}
+
+	void Physics::SetSimulationEnabled(bool enabled)
+	{
+		s_simulationEnabled = enabled;
+	}
+
+	bool Physics::IsSimulationEnabled()
+	{
+		return s_simulationEnabled;
 	}
 
 
@@ -62,17 +77,11 @@ namespace ratchet
 		simulatePhysics(deltatime);
 	}
 
-
-	//bool Physics::shouldSkipRaycastThisFrame()
-	//{
-	//	//return m_skipRaycastThisFrame;
-	//}
-
 	b2World* Physics::s_physicsWorld = nullptr;
 	const float Physics::sc_metersScale = 20.f;
 
 
 	ContactListener* Physics::s_contactListener;
-
+	bool Physics::s_simulationEnabled = false;
 
 }

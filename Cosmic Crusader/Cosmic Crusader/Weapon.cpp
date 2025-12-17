@@ -38,6 +38,36 @@ namespace ratchet
 		m_currentAmmo = weapon.m_currentAmmo;
 	}
 
+	void Weapon::ClearWeaponList()
+	{
+		for (auto& pair : s_availableBulletList)
+		{
+			auto& bulletQueue = pair.second;
+			while (!bulletQueue.empty())
+			{
+				bulletQueue.pop();
+			}
+		}
+
+		s_availableBulletList.clear();
+	}
+
+	void Weapon::ClearBulletList()
+	{
+
+		for (auto& pair : s_inUseBulletList)
+		{
+			auto& bulletList = pair.second;
+			while (!bulletList.empty())
+			{
+				bulletList.pop_back();
+			}
+			bulletList.clear();
+		}
+
+		s_inUseBulletList.clear();
+	}
+
 	void Weapon::Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight)
 	{
 	#ifdef IS_RATCHET_DEBUG

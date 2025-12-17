@@ -278,7 +278,7 @@ namespace ratchet
 
 	void Player::update()
 	{
-		//if (!m_activeGameObject) return;
+		if (!m_activeGameObject) return;
 
 		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
 		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);

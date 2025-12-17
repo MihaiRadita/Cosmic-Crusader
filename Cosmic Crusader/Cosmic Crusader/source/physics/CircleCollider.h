@@ -34,7 +34,7 @@ namespace ratchet
 		void drawColliderCenterBased(sf::RenderTarget& target) override;
 
 		//Destructors
-		~CircleCollider();
+		~CircleCollider() override;
 
 		//Getters
 		b2BodyDef getBodyDef();

@@ -43,13 +43,16 @@ namespace ratchet
 
 	Game::~Game()
 	{
+		Physics::SetSimulationEnabled(false);
 		WindowManager::clear();
+
 
 		for (auto& obj : GameObject::s_gameObjects)
 		{
 			delete obj;
 		}
 		GameObject::s_gameObjects.clear();
+		PrefabAssets::Get().DestroyPrefabAssets();
 		Physics::DestroyPhysicsInstance();
 
 	}
@@ -94,7 +97,10 @@ namespace ratchet
 
 			if (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::G)
 			{
+				m_window.clear(sf::Color::Black);
+				m_window.display();
 
+				SceneManager::Get().LoadNextScene();
 			}
 
 			for (const auto& obj : GameObject::s_gameObjects)
@@ -117,25 +123,18 @@ namespace ratchet
 
 		}
 		
-
 		SceneManager::Get().updateSceneObjects();
 
 	}
 
 	void Game::awake()
 	{
-		for (auto* obj : GameObject::s_gameObjects)
-		{
-			obj->Awake();
-		}
+		SceneManager::Get().AwakeSceneObjects();
 	}
 
 	void Game::start()
 	{
-		for (auto* obj : GameObject::s_gameObjects)
-		{
-			obj->Start();
-		}
+		SceneManager::Get().StartSceneObjects();
 	}
 
 	void Game::render()

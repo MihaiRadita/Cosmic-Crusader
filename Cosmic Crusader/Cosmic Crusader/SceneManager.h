@@ -58,12 +58,21 @@ namespace ratchet
 
 		void LoadSceneBasicFeatures();
 
+		void StartSceneObjects();
+		void AwakeSceneObjects();
+
 		//Getters
 		static SceneManager& Get();
 		nlohmann::json& GetScene(SceneType type);
 
 		inline static float sc_tiledToGameScale = 0.0f;
 		inline static float sc_defaultZoom = 0.0f;
+
+		void StopUpdating();
+		void StopRendering();
+
+		bool m_isUpdating = true;
+		bool m_isrendering = true;
 
 		bool IsCameraDirty();
 
@@ -82,7 +91,7 @@ namespace ratchet
 
 		int m_sceneIndex;
 
-		bool m_isUpdating = true;
+		//bool m_isUpdating = true;
 
 		bool m_cameraDirty;
 

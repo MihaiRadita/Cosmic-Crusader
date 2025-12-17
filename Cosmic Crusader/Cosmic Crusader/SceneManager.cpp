@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SceneManager.h"
-
+#include "Weapon.h"
 
 namespace ratchet
 {
@@ -14,6 +14,9 @@ namespace ratchet
 
 		LoadSceneBasicFeatures();
 		LoadSceneGameObjects();
+
+		AwakeSceneObjects();
+		StartSceneObjects();
 
 	}
 
@@ -127,52 +130,74 @@ namespace ratchet
 
 	void SceneManager::updateSceneObjects()
 	{
-		float timeStep = 1.0f / 120.0f;
-
-		if (m_currentScene != SceneType::MainMenu)
 		{
-			Physics::update(timeStep);
-		}
-
-		for (auto i = 0u; i < GameObject::s_gameObjects.size(); i++)
-		{
-			if (auto obj = GameObject::s_gameObjects[i])
+			float timeStep = 1.0f / 120.0f;
+			if (m_currentScene != SceneType::MainMenu)
 			{
-				obj->update();
+				if (!Physics::IsSimulationEnabled())
+				{
+					Physics::SetSimulationEnabled(true);
+				}
+				Physics::update(timeStep);
 			}
 			else
 			{
-				TRACE_CHANNEL("GAME_OBJECT", "Cannot update null game object of index [", i, "].");
+				if (Physics::IsSimulationEnabled())
+				{
+					Physics::SetSimulationEnabled(false);
+				}
+				Physics::SetSimulationEnabled(false);
 			}
-		}
 
-		GameObject::clearQueuedObjectsToDestroy();
+			for (auto i = 0u; i < GameObject::s_gameObjects.size(); i++)
+			{
+				if (auto obj = GameObject::s_gameObjects[i])
+				{
+					if (obj)
+					{
+						obj->update();
+					}
+				}
+				else
+				{
+					TRACE_CHANNEL("GAME_OBJECT", "Cannot update null game object of index [", i, "].");
+				}
+			}
+
+
+		}
 	}
 
 	void SceneManager::renderSceneObjects(sf::RenderTarget& target)
 	{
-		Player* player = nullptr;
-
-		for (auto* obj : GameObject::s_gameObjects)
 		{
-			if ((player = dynamic_cast<Player*>(obj)))
-				break;
+			Player* player = nullptr;
+
+			for (auto* obj : GameObject::s_gameObjects)
+			{
+				if ((player = dynamic_cast<Player*>(obj)))
+					break;
+			}
+
+			if (player)
+			{
+				sf::View view = target.getView();
+				view.setCenter(
+					player->getCollider()->getBody()->GetPosition().x,
+					player->getCollider()->getBody()->GetPosition().y
+				);
+				target.setView(view);
+			}
+
+			for (auto* obj : GameObject::s_gameObjects)
+			{
+				if (obj)
+				{
+					obj->render(target);
+				}
+			}
 		}
 
-		if (player)
-		{
-			sf::View view = target.getView();
-			view.setCenter(
-				player->getCollider()->getBody()->GetPosition().x,
-				player->getCollider()->getBody()->GetPosition().y
-			);
-			target.setView(view);
-		}
-
-		for (auto* obj : GameObject::s_gameObjects)
-		{
-			obj->render(target);
-		}
 	}
 
 	void SceneManager::LoadScene(SceneType scene)
@@ -194,11 +219,33 @@ namespace ratchet
 		IncreaseSceneIndex();
 		m_currentScene = static_cast<SceneType>(m_sceneIndex);
 
+		Physics::SetSimulationEnabled(false);
+
+		Weapon::ClearWeaponList();
+		Weapon::ClearBulletList();
+
+		StopUpdating();
+
 		ClearSceneObjects();
+
+		m_isrendering = false;
+		m_isUpdating = false;
+
 		LoadSceneBasicFeatures();
 
 		LoadSceneGameObjects();
+
+		AwakeSceneObjects();
+		StartSceneObjects();
+
+
+
+		m_isrendering = true;
+		m_isUpdating = true;
+
 		m_cameraDirty = true;
+
+		Physics::SetSimulationEnabled(true);
 	}
 
 	void SceneManager::IncreaseSceneIndex()
@@ -269,6 +316,22 @@ namespace ratchet
 					}
 				}
 			}
+		}
+	}
+
+	void SceneManager::StartSceneObjects()
+	{
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			obj->Start();
+		}
+	}
+
+	void SceneManager::AwakeSceneObjects()
+	{
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			obj->Awake();
 		}
 	}
 
@@ -348,7 +411,10 @@ namespace ratchet
 					auto config = BulletConfig();
 					if (config.deserialise(obj))
 					{
-						PrefabAssets::Get().RegisterBulletConfig(config.m_objectID, &config);
+						if (!PrefabAssets::Get().isBulletConfigExists(config.m_objectID))
+						{
+							PrefabAssets::Get().RegisterBulletConfig(config.m_objectID, &config);
+						}
 						succeeded = true;
 					}
 				}
@@ -362,7 +428,10 @@ namespace ratchet
 							GameObject::s_gameObjects.push_back(new WeaponPickup(config));
 						}
 
-						PrefabAssets::Get().RegisterWeaponConfig(config.m_objectID, &config);
+						if (!PrefabAssets::Get().isWeaponConfigExists(config.m_objectID))
+						{
+							PrefabAssets::Get().RegisterWeaponConfig(config.m_objectID, &config);
+						}
 						succeeded = true;
 					}
 				}
@@ -387,10 +456,15 @@ namespace ratchet
 
 	void SceneManager::ClearSceneObjects()
 	{
-		for (auto& obj : GameObject::s_gameObjects)
+		GameObject::clearQueuedObjectsToDestroy();
+
+		for (auto* obj : GameObject::s_gameObjects)
 		{
-			delete obj;
-			obj = nullptr;
+			if (obj != nullptr)
+			{
+				delete obj;
+				obj = nullptr;
+			}
 		}
 
 		GameObject::s_gameObjects.clear();
@@ -408,6 +482,26 @@ namespace ratchet
 		std::string fileName = m_sceneFiles[type];
 
 		return m_allScenes["scenes"][fileName];
+	}
+	void SceneManager::StopUpdating()
+	{
+		for (auto& obj : GameObject::s_gameObjects)
+		{
+			if (obj->m_activeGameObject)
+			{
+				obj->m_activeGameObject = false;
+			}
+		}
+	}
+	void SceneManager::StopRendering()
+	{
+		for (auto& obj : GameObject::s_gameObjects)
+		{
+			if (obj->m_activeRenderer)
+			{
+				obj->m_activeRenderer = false;
+			}
+		}
 	}
 }
 

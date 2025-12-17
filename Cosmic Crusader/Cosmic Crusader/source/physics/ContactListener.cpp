@@ -8,6 +8,10 @@ namespace ratchet
 {
 	void ratchet::ContactListener::BeginContact(b2Contact* contact)
     {
+		if (!Physics::IsSimulationEnabled())
+		{
+			return;
+		}
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
 
@@ -37,6 +41,11 @@ namespace ratchet
 
 	void ratchet::ContactListener::EndContact(b2Contact* contact)
 	{
+		if (!Physics::IsSimulationEnabled())
+		{
+			return;
+		}
+
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
 

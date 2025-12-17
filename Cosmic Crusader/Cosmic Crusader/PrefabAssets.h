@@ -21,7 +21,7 @@ namespace ratchet
 
 		//List of prefab configs
 		std::map<int, GameObjectConfig*> m_gameObjectConfigs;
-		std::map<std::string, CreatureConfig*> m_creatureConfigs;
+		std::map<int, CreatureConfig*> m_creatureConfigs;
 		std::map<int, WeaponConfig*> m_weaponConfigs;
 		std::map<int, BulletConfig*> m_bulletConfigs;
 
@@ -30,13 +30,18 @@ namespace ratchet
 
 		//Registers Config
 		void RegisterGameObjectConfig(int& id,GameObjectConfig* config);
-		void RegisterCreatureConfig(std::string &id,CreatureConfig& config);
+		void RegisterCreatureConfig(int &id,CreatureConfig& config);
 		void RegisterWeaponConfig(int& id,WeaponConfig* config);
 		void RegisterBulletConfig(int& id,BulletConfig* config);
 
+		bool isCreatureConfigExists(int& id);
+		bool isWeaponConfigExists(int& id);
+		bool isGameObjectConfigExists(int& id);
+		bool isBulletConfigExists(int& id);
+
 		//Getters Configs
 		GameObjectConfig* GetGameObjectConfig(const int& id);
-		CreatureConfig* GetCreatureConfig(const std::string& id);
+		CreatureConfig* GetCreatureConfig(const int& id);
 		WeaponConfig* GetWeaponConfig(const int& id);
 		BulletConfig* GetBulletConfig(const int& id);
 

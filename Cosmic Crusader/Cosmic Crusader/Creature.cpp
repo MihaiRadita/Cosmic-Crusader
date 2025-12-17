@@ -189,6 +189,8 @@ namespace ratchet
 
 	void Creature::update()
 	{
+		if (!m_activeGameObject) return;
+
 		updateWeaponSelection();
 		updateMovement();
 		updateJump();
