@@ -17,7 +17,6 @@ namespace ratchet
 
 		AwakeSceneObjects();
 		StartSceneObjects();
-
 	}
 
 	bool SceneManager::IsCameraDirty()
@@ -30,7 +29,6 @@ namespace ratchet
 		m_cameraDirty = false;
 	}
 
-
 	void ratchet::SceneManager::CheckAndBuildScenes()
 	{
 		// #TODO: FOLOSESTE RELATIVE PATH IN LOC DE FULL PATH
@@ -38,12 +36,10 @@ namespace ratchet
 
 		const std::string combinedPath = m_baseScenePath + "GameScenes.json";
 
-
 		m_sceneFiles = {
 			{SceneType::MainMenu, "Main Menu.tmj"},
 			{SceneType::Level1, "Level1.tmj"}
 		};
-
 
 		bool needsRebuild = false;
 
@@ -125,7 +121,6 @@ namespace ratchet
 		in >> m_allScenes;
 
 		std::cout << "The Scene File has been created with scuccess!" << std::endl;
-
 	}
 
 	void SceneManager::updateSceneObjects()
@@ -151,6 +146,7 @@ namespace ratchet
 
 			for (auto i = 0u; i < GameObject::s_gameObjects.size(); i++)
 			{
+				GameObject::clearQueuedObjectsToDestroy();
 				if (auto obj = GameObject::s_gameObjects[i])
 				{
 					if (obj)
@@ -163,8 +159,6 @@ namespace ratchet
 					TRACE_CHANNEL("GAME_OBJECT", "Cannot update null game object of index [", i, "].");
 				}
 			}
-
-
 		}
 	}
 
@@ -483,6 +477,7 @@ namespace ratchet
 
 		return m_allScenes["scenes"][fileName];
 	}
+
 	void SceneManager::StopUpdating()
 	{
 		for (auto& obj : GameObject::s_gameObjects)
@@ -493,6 +488,7 @@ namespace ratchet
 			}
 		}
 	}
+
 	void SceneManager::StopRendering()
 	{
 		for (auto& obj : GameObject::s_gameObjects)

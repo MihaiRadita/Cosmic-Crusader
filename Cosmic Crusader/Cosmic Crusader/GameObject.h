@@ -15,7 +15,6 @@ namespace ratchet
 	{
 	public:
 
-
 		//States
 		Faction m_faction;
 		MovementType m_movementType;
@@ -59,10 +58,6 @@ namespace ratchet
 
 		virtual void Awake();
 		virtual void Start();
-
-
-		//void SetTarget(TargetType& targettype);
-		
 
 		virtual void invertCharacterMovingSpriteScale(int direction);
 
@@ -114,6 +109,8 @@ namespace ratchet
 		 static GameObject* findGameObjectByBody(const b2Body* body);
 
 		 static void addGameObjectoDestory(GameObject* object);
+
+		 static void removeGameObjectToDestroy(GameObject* object);
 
 		 virtual bool isActive() const;
 		 virtual void setActive(bool active);
@@ -181,7 +178,5 @@ namespace ratchet
 		ratchet::GameObject::s_gameObjects.emplace_back(newGameObject);
 		return newGameObject;
 	}
-
-
 }
 

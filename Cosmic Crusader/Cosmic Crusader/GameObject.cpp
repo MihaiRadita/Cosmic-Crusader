@@ -306,24 +306,6 @@ namespace ratchet
 		PostCosntructFixup();
 	}
 
-	/*void GameObject::SetTarget(TargetType& targettype)
-	{
-		for (auto* obj : s_gameObjects)
-		{
-			if (obj != this)
-			{
-				if (targettype != TargetType::TARGET_UNKNOWN)
-				{
-					if (obj->m_targetType == targettype)
-					{
-						m_target = obj;
-						break;
-					}
-				}
-			}
-		}
-	}*/
-
 	void GameObject::invertCharacterMovingSpriteScale(int direction)
 	{
 	}
@@ -333,10 +315,9 @@ namespace ratchet
 		if (this == nullptr) {
 			return;
 		}
-		if (m_collider) {
-			delete m_collider;  
-			m_collider = nullptr;
-		}
+
+		this->m_activeGameObject = false;
+		this->m_activeRenderer = false;
 
 		auto it = std::find(s_gameObjects.begin(), s_gameObjects.end(), this);
 		if (it != s_gameObjects.end()) {

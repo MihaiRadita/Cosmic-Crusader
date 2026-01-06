@@ -52,7 +52,6 @@ namespace ratchet
 		//Destructor
 		~GameObjectConfig();
 
-
 		virtual bool serialise(nlohmann::json& jsonFile) override;
 		virtual bool deserialise(const nlohmann::json& jsonFile) override;
 	};
