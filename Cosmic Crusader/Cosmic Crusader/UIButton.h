@@ -13,7 +13,20 @@ namespace ratchet
 		UIButton(UIButtonConfig& config);
 		~UIButton();
 
-	private:
+		void update() override;
+
+		void handleUIEvent(sf::Event& event);
+
+		bool checkUIButtonInteraction();
+
+		bool m_isButtonInteracting = false;
+		bool m_isButtonEventTirggered = false;
+
+		ButtonNameState getButtonNameState();
+		bool getIsButtonInteracting();
+		bool getIsButtonEventTriggerd();
+
+	protected:
 
 		ButtonNameState m_nameState;
 		ButtonNameState m_parentNameState;

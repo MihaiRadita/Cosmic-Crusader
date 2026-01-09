@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "UIClickButton.h"
 
+#include "WindowManager.h"
+
+#include "SceneManager.h"
+
 namespace ratchet
 {
 	UIClickButton::UIClickButton(UIButtonConfig& config) : UIButton(config)
@@ -12,6 +16,27 @@ namespace ratchet
 	UIClickButton::~UIClickButton()
 	{
 
+	}
+
+	void UIClickButton::update()
+	{
+		UIButton::update();
+
+		m_isButtonInteracting = checkUIButtonInteraction();
+
+		if (m_isButtonEventTirggered)
+		{
+			if (m_nameState == ButtonNameState::Play)
+			{
+				WindowManager::Get()->clear(sf::Color::Black);
+				WindowManager::Get()->display();
+
+				m_isButtonInteracting = false;
+				m_isButtonEventTirggered = false;
+
+				SceneManager::Get().LoadNextScene();
+			}
+		}
 	}
 
 }

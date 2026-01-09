@@ -109,6 +109,12 @@ namespace ratchet
 				{
 					player->handleEvent(sfEvent);
 				}
+
+				if (auto uiButton = dynamic_cast<UIClickButton*>(obj))
+				{
+					uiButton->handleUIEvent(sfEvent);
+
+				}
 			}
 		}
 	}

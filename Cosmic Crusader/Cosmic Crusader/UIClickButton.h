@@ -11,6 +11,7 @@ namespace ratchet
 
 		~UIClickButton();
 
+		void update() override;
 
 	private:
 
