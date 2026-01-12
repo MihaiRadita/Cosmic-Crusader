@@ -36,6 +36,10 @@ namespace ratchet
 
 				SceneManager::Get().LoadNextScene();
 			}
+			else if (m_nameState == ButtonNameState::Exit)
+			{
+				WindowManager::Get()->close();
+			}
 		}
 	}
 
