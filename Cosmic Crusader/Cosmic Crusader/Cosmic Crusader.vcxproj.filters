@@ -149,6 +149,18 @@
     <ClCompile Include="UIClickButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UISliderButtonConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UISliderButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UITextConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -237,5 +249,9 @@
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIButtonConfig.h" />
     <ClInclude Include="UIClickButton.h" />
+    <ClInclude Include="UISliderButtonConfig.h" />
+    <ClInclude Include="UISliderButton.h" />
+    <ClInclude Include="UIText.h" />
+    <ClInclude Include="UITextConfig.h" />
   </ItemGroup>
 </Project>

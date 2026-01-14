@@ -20,7 +20,7 @@ namespace ratchet
 
 	void UIButton::update()
 	{
-
+		m_isButtonInteracting = checkUIButtonInteraction();
 	}
 
 	void UIButton::handleUIEvent(sf::Event& event)

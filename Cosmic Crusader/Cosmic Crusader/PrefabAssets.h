@@ -8,6 +8,8 @@
 #include "TileConfig.h"
 #include "physics/RectAngleCollider.h"
 #include "UIButtonConfig.h"
+#include "UISliderButtonConfig.h"
+#include "UITextConfig.h"
 
 
 namespace ratchet

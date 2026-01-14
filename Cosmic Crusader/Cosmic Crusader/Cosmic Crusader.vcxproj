@@ -187,6 +187,10 @@
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIButtonConfig.cpp" />
     <ClCompile Include="UIClickButton.cpp" />
+    <ClCompile Include="UISliderButton.cpp" />
+    <ClCompile Include="UISliderButtonConfig.cpp" />
+    <ClCompile Include="UIText.cpp" />
+    <ClCompile Include="UITextConfig.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponConfig.cpp" />
     <ClCompile Include="WeaponManager.cpp" />
@@ -231,6 +235,10 @@
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIButtonConfig.h" />
     <ClInclude Include="UIClickButton.h" />
+    <ClInclude Include="UISliderButton.h" />
+    <ClInclude Include="UISliderButtonConfig.h" />
+    <ClInclude Include="UIText.h" />
+    <ClInclude Include="UITextConfig.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponConfig.h" />
     <ClInclude Include="WeaponManager.h" />

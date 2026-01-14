@@ -22,8 +22,6 @@ namespace ratchet
 	{
 		UIButton::update();
 
-		m_isButtonInteracting = checkUIButtonInteraction();
-
 		if (m_isButtonEventTirggered)
 		{
 			if (m_nameState == ButtonNameState::Play)

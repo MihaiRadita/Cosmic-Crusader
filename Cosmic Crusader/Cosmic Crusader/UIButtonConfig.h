@@ -4,10 +4,16 @@
 namespace ratchet
 {
 	enum class ButtonNameState {
-		None = 0, Play, Options,
+		None = 0, Play, Options,Slider,
 		Back_Value,Next_Value,
 		Swicther_On, Switcher_Off,
 		Back, Exit
+	};
+
+	enum class ButtonNameAction
+	{
+		None = 0, MusicVolume, SoundEffectVolume, 
+		Resolution
 	};
 
 	struct UIButtonConfig : public GameObjectConfig
@@ -20,6 +26,7 @@ namespace ratchet
 
 		ButtonNameState m_nameState;
 		ButtonNameState m_parentNameState;
+		ButtonNameAction m_nameAction;
 		
 	};
 
