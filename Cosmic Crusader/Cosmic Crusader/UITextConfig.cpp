@@ -40,12 +40,12 @@ namespace ratchet
 		startSpriteTexturePath = "";
 		startSpriteTexturePathAddition = "";
 
-		m_colliderConfig = nullptr;
-
 		m_TextType = UITextType::None;
 		m_textSize = 16.f;
 		m_textColor = sf::Color::White;
 		m_TextValue.clear();
+
+		m_colliderConfig = nullptr;
 
 		if (jsonFile.contains("text"))
 		{

@@ -11,6 +11,7 @@ namespace ratchet
 		m_parentNameState = config.m_parentNameState;
 		m_isButtonInteracting = false;
 		m_isButtonEventTirggered = false;
+		m_nameAction = config.m_nameAction;
 	}
 
 	UIButton::~UIButton()
@@ -21,6 +22,11 @@ namespace ratchet
 	void UIButton::update()
 	{
 		m_isButtonInteracting = checkUIButtonInteraction();
+	}
+
+	void UIButton::render(sf::RenderTarget& target)
+	{
+		GameObject::render(target);
 	}
 
 	void UIButton::handleUIEvent(sf::Event& event)
@@ -88,6 +94,16 @@ namespace ratchet
 	ButtonNameState UIButton::getButtonNameState()
 	{
 		return m_nameState;
+	}
+
+	ButtonNameState UIButton::getParentButtonNameState()
+	{
+		return m_parentNameState;
+	}
+
+	ButtonNameAction UIButton::getButtonNameAction()
+	{
+		return m_nameAction;
 	}
 
 	bool UIButton::getIsButtonInteracting()

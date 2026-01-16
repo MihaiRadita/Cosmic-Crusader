@@ -1,6 +1,7 @@
 #pragma once
 
 #include "UIButtonConfig.h"
+#include "UITextConfig.h"
 
 namespace ratchet
 {
@@ -17,12 +18,14 @@ namespace ratchet
 		ButtonNameState m_buttonNameState;
 		ButtonNameState m_buttonParentNameState;
 
-		int m_currentSliderValue;
-		int m_sliderValueIncreasse;
+		float m_currentSliderValue;
+		float m_sliderValueIncreasse;
 
-		UIButtonConfig m_minusButton;
-		UIButtonConfig m_plusButton;
+		UIButtonConfig m_minusButtonConfig;
+		UIButtonConfig m_plusButtonConfig;
 
+		UITextConfig m_UITitleConfig;
+		UITextConfig m_UITextValueConfig;
 
 	};
 }

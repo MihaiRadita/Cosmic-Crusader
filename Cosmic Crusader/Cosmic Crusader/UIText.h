@@ -27,7 +27,7 @@ namespace ratchet
 
 		bool checkNumberIfDifferent(float& value);
 
-		void setNumberValue(float value);
+		void setNumberValue(float& value);
 
 	private:
 	};

@@ -19,6 +19,61 @@ namespace ratchet
 		StartSceneObjects();
 	}
 
+	bool SceneManager::FindObjectById(int& id, nlohmann::json& outObj, const std::string& layerName)
+	{
+		auto& scene = GetScene(m_currentScene);
+
+		if (!scene.contains("layers") || !scene["layers"].is_array()) {
+			std::cout << "WARNING: Scene has no layers or layers is not an array: " << scene["name"] << "\n";
+			return false;
+		}
+
+		for (const auto& layer : scene["layers"])
+		{
+			const auto& validLayer = layer.contains("objects");
+			if (!validLayer) continue;
+
+
+			if (layer["name"].get<std::string>() != layerName)
+				continue;
+			
+			for (const auto& obj : layer["objects"])
+			{
+				if (obj["id"] == id)
+				{
+					outObj = obj;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	std::string SceneManager::GetLayerNameObjectByID(int& id)
+	{
+		auto& scene = GetScene(m_currentScene);
+
+		if (!scene.contains("layers") || !scene["layers"].is_array()) {
+			std::cout << "WARNING: Scene has no layers or layers is not an array: " << scene["name"] << "\n";
+			return "";
+		}
+
+		for (const auto& layer : scene["layers"])
+		{
+			if (!layer.contains("objects")) continue;
+
+			for (const auto& obj : layer["objects"])
+			{
+				if (obj.contains("id") && obj["id"] == id)
+				{
+					return layer["name"].get<std::string>();
+				}
+			}
+		}
+
+		return "";
+	}
+
 	bool SceneManager::IsCameraDirty()
 	{
 		return m_cameraDirty;

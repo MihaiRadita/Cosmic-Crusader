@@ -41,4 +41,9 @@ namespace ratchet
 		}
 	}
 
+	void UIClickButton::render(sf::RenderTarget& target)
+	{
+		UIButton::render(target);
+	}
+
 }

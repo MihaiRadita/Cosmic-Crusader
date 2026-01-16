@@ -14,6 +14,7 @@ namespace ratchet
 		~UIButton();
 
 		void update() override;
+		void render(sf::RenderTarget& target) override;
 
 		void handleUIEvent(sf::Event& event);
 
@@ -23,6 +24,8 @@ namespace ratchet
 		bool m_isButtonEventTirggered = false;
 
 		ButtonNameState getButtonNameState();
+		ButtonNameState getParentButtonNameState();
+		ButtonNameAction getButtonNameAction();
 		bool getIsButtonInteracting();
 		bool getIsButtonEventTriggerd();
 
@@ -30,6 +33,7 @@ namespace ratchet
 
 		ButtonNameState m_nameState;
 		ButtonNameState m_parentNameState;
+		ButtonNameAction m_nameAction;
 
 	};
 }

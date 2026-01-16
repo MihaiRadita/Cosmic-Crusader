@@ -89,6 +89,11 @@ namespace ratchet
 			{
 				m_parentNameState = static_cast<ButtonNameState>(propertyValue.get<int>());
 			}
+
+			if (propertyName == "buttonNameAction")
+			{
+				m_nameAction = static_cast<ButtonNameAction>(propertyValue.get<int>());
+			}
 		}
 
 		return true;

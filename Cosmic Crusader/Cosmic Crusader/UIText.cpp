@@ -26,6 +26,7 @@ namespace ratchet
 	}
 	UIText::~UIText()
 	{
+
 	}
 	void UIText::update()
 	{
@@ -33,7 +34,9 @@ namespace ratchet
 	}
 	void UIText::render(sf::RenderTarget& target)
 	{
+		if (!m_activeRenderer) return;
 
+		target.draw(m_UIText);
 	}
 	bool UIText::checkNumberIfDifferent(float& value)
 	{
@@ -60,9 +63,9 @@ namespace ratchet
 		return value != currentValue;
 
 	}
-	void UIText::setNumberValue(float value)
+	void UIText::setNumberValue(float& value)
 	{
-		if (m_TextType == UITextType::Number)
+		if (m_TextType != UITextType::Number)
 		{
 			return;
 		}

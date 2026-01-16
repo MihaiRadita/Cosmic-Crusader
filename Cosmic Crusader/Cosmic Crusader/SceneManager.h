@@ -77,6 +77,9 @@ namespace ratchet
 		bool IsCameraDirty();
 
 		void ClearCameraDirty();
+		bool FindObjectById(int& id, nlohmann::json& outObj, const std::string& layerName);
+
+		std::string GetLayerNameObjectByID(int& id);
 
 	private:
 

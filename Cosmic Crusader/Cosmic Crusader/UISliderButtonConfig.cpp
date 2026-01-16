@@ -26,6 +26,8 @@ namespace ratchet
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
+		int id = jsonFile["id"].get<int>();
+
 		scale = sf::Vector2f(1.0f, 1.0f) * SceneManager::sc_tiledToGameScale;
 		positionXOffset = 0.f;
 		positionYOffset = tileHeight;
@@ -70,6 +72,35 @@ namespace ratchet
 				m_buttonNameAction = static_cast<ButtonNameAction>(propertyValue.get<int>());
 			}
 
+			if (propertyName == "buttonNameState")
+			{
+				m_nameState = static_cast<ButtonNameState>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "buttonParentNameState")
+			{
+				m_parentNameState = static_cast<ButtonNameState>(propertyValue.get<int>());
+			}
+
+
+			if (propertyName == "currentSliderValue")
+			{
+				m_currentSliderValue = propertyValue.get<float>();
+			}
+
+
+			if (propertyName == "minusButton" && propertyType == "object")
+			{
+				int minusId = propertyValue.get<int>();
+
+				nlohmann::json minusObj;
+
+				if (SceneManager::Get().FindObjectById(minusId, minusObj, SceneManager::Get().GetLayerNameObjectByID(id)))
+				{
+					m_minusButtonConfig.deserialise(minusObj);
+				}
+			}
+
 			if (propertyName == "movementType")
 			{
 				m_movementType = static_cast<MovementType>(propertyValue.get<int>());
@@ -80,19 +111,46 @@ namespace ratchet
 				m_objectType = static_cast<ObjectType>(propertyValue.get<int>());
 			}
 
-			if (propertyName == "startSpriteTexturePath")
+			if (propertyName == "plusButton" && propertyType == "object")
 			{
-				startSpriteTexturePath = propertyValue.get<std::string>();
+				int plusId = propertyValue.get<int>();
+
+				nlohmann::json plusObj;
+				if (SceneManager::Get().FindObjectById(plusId, plusObj,SceneManager::Get().GetLayerNameObjectByID(id)))
+				{
+					m_plusButtonConfig.deserialise(plusObj);
+				}
+		
 			}
 
-			if (propertyName == "buttonNameState")
+			if (propertyName == "sliderTitle" && propertyType == "object")
 			{
-				m_nameState = static_cast<ButtonNameState>(propertyValue.get<int>());
+				int titleID = propertyValue.get<int>();
+
+				nlohmann::json titleObj;
+
+				if (SceneManager::Get().FindObjectById(titleID, titleObj, SceneManager::Get().GetLayerNameObjectByID(id)))
+				{
+					m_UITitleConfig.deserialise(titleObj);
+				}
+
 			}
 
-			if (propertyName == "buttonParentNameState")
+			if (propertyName == "sliderValueIncrease")
 			{
-				m_parentNameState = static_cast<ButtonNameState>(propertyValue.get<int>());
+				m_sliderValueIncreasse = propertyValue.get<float>();
+			}
+
+			if (propertyName == "sliderValueText" && propertyType == "object")
+			{
+				int valueTextId = propertyValue.get<int>();
+
+				nlohmann::json valueTextObj;
+
+				if (SceneManager::Get().FindObjectById(valueTextId, valueTextObj, SceneManager::Get().GetLayerNameObjectByID(id)))
+				{
+					m_UITextValueConfig.deserialise(valueTextObj);
+				}
 			}
 		}
 

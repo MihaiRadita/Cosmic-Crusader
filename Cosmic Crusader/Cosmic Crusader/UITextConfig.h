@@ -8,6 +8,13 @@ namespace ratchet
 		None = 0, Text, Number 
 	};
 
+	enum class TextConnectedObject {
+		None = 0, Play, Options, Slider,
+		Back_Value, Next_Value,
+		Swicther_On, Switcher_Off,
+		Back, Exit
+	};
+
 	struct UITextConfig : public GameObjectConfig
 	{
 		UITextType m_TextType;

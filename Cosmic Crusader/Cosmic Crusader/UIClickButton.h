@@ -12,6 +12,7 @@ namespace ratchet
 		~UIClickButton();
 
 		void update() override;
+		void render(sf::RenderTarget& target) override;
 
 	private:
 
