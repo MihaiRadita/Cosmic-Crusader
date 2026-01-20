@@ -19,7 +19,8 @@ namespace ratchet
 
 		sf::Text m_UIText;
 
-		UIText(UITextConfig& config);
+		UIText() = default;
+		UIText(const UITextConfig& config);
 		~UIText();
 
 		void update() override;

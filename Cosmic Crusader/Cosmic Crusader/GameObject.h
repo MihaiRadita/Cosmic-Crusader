@@ -51,6 +51,7 @@ namespace ratchet
 		//Setters
 		void SetPositionAndRotation(const sf::Vector2f& position, const float& rotationDegrees);
 		void SetActiveRenderer(bool active);
+		void SetActiveObject(bool active);
 
 		void setColliderToDestroy();
 

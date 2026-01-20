@@ -6,6 +6,7 @@
 #include "game/Tile.h"
 #include "WeaponPickup.h"
 #include "UIClickButton.h"
+#include "UISliderButton.h"
 
 
 #include "physics/Physics.h"
@@ -78,6 +79,8 @@ namespace ratchet
 
 		void ClearCameraDirty();
 		bool FindObjectById(int& id, nlohmann::json& outObj, const std::string& layerName);
+
+		void StartSceneManager();
 
 		std::string GetLayerNameObjectByID(int& id);
 

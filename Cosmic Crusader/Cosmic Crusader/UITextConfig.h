@@ -23,6 +23,9 @@ namespace ratchet
 		std::string m_TextValue;
 		std::string m_textFontPath;
 
+		float m_XUnit = 64.f;
+		float m_YUnit = 64.f;
+
 		UITextConfig();
 		~UITextConfig();
 

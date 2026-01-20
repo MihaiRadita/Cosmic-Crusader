@@ -11,12 +11,6 @@ namespace ratchet
 
 		m_currentScene = SceneType::MainMenu;
 		m_sceneIndex = static_cast<int>(m_currentScene);
-
-		LoadSceneBasicFeatures();
-		LoadSceneGameObjects();
-
-		AwakeSceneObjects();
-		StartSceneObjects();
 	}
 
 	bool SceneManager::FindObjectById(int& id, nlohmann::json& outObj, const std::string& layerName)
@@ -47,6 +41,15 @@ namespace ratchet
 			}
 		}
 		return false;
+	}
+
+	void SceneManager::StartSceneManager()
+	{
+		LoadSceneBasicFeatures();
+		LoadSceneGameObjects();
+
+		AwakeSceneObjects();
+		StartSceneObjects();
 	}
 
 	std::string SceneManager::GetLayerNameObjectByID(int& id)
@@ -492,6 +495,28 @@ namespace ratchet
 						GameObject::s_gameObjects.push_back(new UIClickButton(config));
 					}
 
+					succeeded = true;
+				}
+				else if (layerName == "Slider Buttons")
+				{
+					if (obj["name"] == "Slider Button")
+					{
+						auto config = UISliderButtonConfig();
+
+						if (config.deserialise(obj))
+						{
+							GameObject::s_gameObjects.push_back(new UISliderButton(config));
+						}
+					}
+					else if (obj["name"] == "Back Button")
+					{
+						auto config = UIButtonConfig();
+
+						if (config.deserialise(obj))
+						{
+							GameObject::s_gameObjects.push_back(new UIClickButton(config));
+						}
+					}
 					succeeded = true;
 				}
 

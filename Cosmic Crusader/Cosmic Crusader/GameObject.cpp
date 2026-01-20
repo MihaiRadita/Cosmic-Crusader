@@ -281,6 +281,11 @@ namespace ratchet
 		m_activeRenderer = active;
 	}
 
+	void GameObject::SetActiveObject(bool active)
+	{
+		m_activeGameObject = active;
+	}
+
 	void GameObject::setColliderToDestroy()
 	{
 		if (m_collider)

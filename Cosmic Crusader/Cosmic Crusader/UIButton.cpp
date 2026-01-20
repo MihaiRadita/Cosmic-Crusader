@@ -5,13 +5,15 @@
 
 namespace ratchet
 {
-	UIButton::UIButton(UIButtonConfig& config) : GameObject(config)
+	UIButton::UIButton(const UIButtonConfig& config) : GameObject(config)
 	{
 		m_nameState = config.m_nameState;
 		m_parentNameState = config.m_parentNameState;
+		m_nameAction = config.m_nameAction;
 		m_isButtonInteracting = false;
 		m_isButtonEventTirggered = false;
-		m_nameAction = config.m_nameAction;
+
+		m_isEventAllreadyActive = false;
 	}
 
 	UIButton::~UIButton()
@@ -35,46 +37,34 @@ namespace ratchet
 		{
 		case sf::Event::MouseButtonPressed:
 		{
-			if (event.mouseButton.button == sf::Mouse::Left)
+			if (!m_isEventAllreadyActive)
 			{
-				if (m_isButtonInteracting)
+				if (event.mouseButton.button == sf::Mouse::Left)
 				{
-					m_isButtonEventTirggered = true;
+					if (m_isButtonInteracting)
+					{
+						m_isEventAllreadyActive = true;
+						m_isButtonEventTirggered = true;
+					}
 				}
 			}
+
+			break;
 		}
 		case sf::Event::MouseButtonReleased:
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
 				m_isButtonEventTirggered = false;
+				m_isEventAllreadyActive = false;
 			}
+
+			break;
 		}
 		default:
 			break;
 		}
 
-		if (event.MouseButtonPressed)
-		{
-			if (event.mouseButton.button == sf::Mouse::Left)
-			{
-				if (m_isButtonInteracting)
-				{
-					m_isButtonEventTirggered = true;
-				}
-				else
-				{
-					m_isButtonEventTirggered = false;
-				}
-			}
-		}
-		else if(event.MouseButtonReleased)
-		{
-			if (event.mouseButton.button == sf::Mouse::Left)
-			{
-				m_isButtonEventTirggered = false;
-			}
-		}
 	}
 
 	bool UIButton::checkUIButtonInteraction()
@@ -85,9 +75,25 @@ namespace ratchet
 		if ((mouseWorldPosition.x >= m_sprite.getPosition().x && mouseWorldPosition.x <= (m_sprite.getPosition().x + m_sprite.getGlobalBounds().width))
 			&& (mouseWorldPosition.y >= m_sprite.getPosition().y && mouseWorldPosition.y <= (m_sprite.getPosition().y + m_sprite.getGlobalBounds().height)))
 		{
+			auto state = m_nameState;
 			return true;
 		}
 
+		return false;
+	}
+
+
+	void UIButton::setButtonsSectionActive(bool active)
+	{
+
+	}
+
+	void UIButton::setButtonActive(bool active)
+	{
+	}
+
+	bool UIButton::checkIsButtonActive()
+	{
 		return false;
 	}
 
@@ -99,11 +105,6 @@ namespace ratchet
 	ButtonNameState UIButton::getParentButtonNameState()
 	{
 		return m_parentNameState;
-	}
-
-	ButtonNameAction UIButton::getButtonNameAction()
-	{
-		return m_nameAction;
 	}
 
 	bool UIButton::getIsButtonInteracting()

@@ -10,7 +10,7 @@ namespace ratchet
 	{
 	public:
 
-		UIButton(UIButtonConfig& config);
+		UIButton(const UIButtonConfig& config);
 		~UIButton();
 
 		void update() override;
@@ -19,6 +19,12 @@ namespace ratchet
 		void handleUIEvent(sf::Event& event);
 
 		bool checkUIButtonInteraction();
+
+		virtual void setButtonsSectionActive(bool active);
+		virtual void setButtonActive(bool active);
+
+
+		virtual bool checkIsButtonActive();
 
 		bool m_isButtonInteracting = false;
 		bool m_isButtonEventTirggered = false;
@@ -29,11 +35,14 @@ namespace ratchet
 		bool getIsButtonInteracting();
 		bool getIsButtonEventTriggerd();
 
-	protected:
-
 		ButtonNameState m_nameState;
 		ButtonNameState m_parentNameState;
 		ButtonNameAction m_nameAction;
+
+		bool m_isEventAllreadyActive = false;
+
+	protected:
+
 
 	};
 }

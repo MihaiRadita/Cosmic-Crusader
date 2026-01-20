@@ -3,7 +3,7 @@
 
 namespace ratchet
 {
-	UIText::UIText(UITextConfig& config) : GameObject(config)
+	UIText::UIText(const UITextConfig& config) : GameObject(config)
 	{
 		m_TextType = config.m_TextType;
 		m_textSize = config.m_textSize;
@@ -22,6 +22,17 @@ namespace ratchet
 		m_UIText.setCharacterSize(static_cast<int>(m_textSize));
 		m_UIText.setFillColor(m_textColor);
 		m_UIText.setString(m_TextValue);
+
+
+		sf::FloatRect bounds = m_UIText.getLocalBounds();
+		m_UIText.setOrigin(
+			bounds.left + bounds.width / 2.f,
+			bounds.top + bounds.height / 2.f
+		);
+
+		m_UIText.setPosition(m_position.x, m_position.y);
+		m_UIText.setRotation(m_rotation);
+		m_UIText.setScale(m_scale.x, m_scale.y);
 
 	}
 	UIText::~UIText()

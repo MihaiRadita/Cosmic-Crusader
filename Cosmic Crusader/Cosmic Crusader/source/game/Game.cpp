@@ -9,6 +9,7 @@ namespace ratchet
 	void Game::spawnObjects()
 	{
 		SceneManager::Get();
+		SceneManager::Get().StartSceneManager();
 	}
 
 	void Game::applySceneView()
@@ -114,6 +115,10 @@ namespace ratchet
 				{
 					uiButton->handleUIEvent(sfEvent);
 
+				}
+				else if (auto uiSlider = dynamic_cast<UISliderButton*>(obj))
+				{
+					uiSlider->handleButtonsEvent(sfEvent);
 				}
 			}
 		}

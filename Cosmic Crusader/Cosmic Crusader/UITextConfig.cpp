@@ -27,13 +27,17 @@ namespace ratchet
 		float tileHeight = jsonFile["height"];
 
 		scale = sf::Vector2f(1.0f, 1.0f) * SceneManager::sc_tiledToGameScale;
-		positionXOffset = 0.f;
-		positionYOffset = tileHeight;
+		float positionXOffsetUNit = tileWidth / m_XUnit;
+		float positionYOffsetUnit = tileHeight / m_YUnit;
+		positionXOffset = tileWidth / 2.0f;
+		positionYOffset = tileHeight / 2.0f;
+
 
 		float posX = jsonFile["x"].get<float>();
 		float posY = jsonFile["y"].get<float>();
 
-		posY -= positionYOffset;
+		posX += positionXOffset;
+		posY += positionYOffset;
 
 		position = sf::Vector2f(posX, posY);
 		rotation = jsonFile["rotation"];
@@ -71,7 +75,7 @@ namespace ratchet
 				sf::Uint8 b = (rgba >> 8) & 0xFF;
 				sf::Uint8 a = rgba & 0xFF;
 
-				m_textColor = sf::Color(r, g, b, a);
+				m_textColor = sf::Color(r, g, b);
 			}
 			else
 			{
@@ -121,6 +125,11 @@ namespace ratchet
 				if (propertyName == "textType")
 				{
 					m_TextType = static_cast<UITextType>(propertyValue.get<int>());
+				}
+
+				if (propertyName == "textValue")
+				{
+					m_TextValue = propertyValue.get<std::string>();
 				}
 			}
 

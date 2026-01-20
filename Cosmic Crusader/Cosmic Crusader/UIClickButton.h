@@ -7,12 +7,19 @@ namespace ratchet
 	{
 	public:
 
-		UIClickButton(UIButtonConfig& config);
+		UIClickButton() = default;
+
+		UIClickButton(const UIButtonConfig& config);
 
 		~UIClickButton();
 
 		void update() override;
 		void render(sf::RenderTarget& target) override;
+
+		void setButtonsSectionActive(bool active) override;
+		void setButtonActive(bool active) override;
+
+		bool checkIsButtonActive() override;
 
 	private:
 

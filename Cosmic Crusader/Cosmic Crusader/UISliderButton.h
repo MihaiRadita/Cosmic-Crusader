@@ -9,12 +9,8 @@ namespace ratchet
 	class UISliderButton : public UIButton
 	{
 	public:
-		UISliderButton(UISliderButtonConfig& config);
+		UISliderButton(const UISliderButtonConfig& config);
 		~UISliderButton();
-
-		ButtonNameAction m_buttonNameAction;
-		ButtonNameState m_buttonNameState;
-		ButtonNameState m_buttonParentNameState;
 
 		float m_currentSliderValue;
 		float m_sliderValueIncreasse;
@@ -23,11 +19,18 @@ namespace ratchet
 		void update() override;
 		void render(sf::RenderTarget& target) override;
 
+		void handleButtonsEvent(sf::Event& event);
+
+		bool checkIsButtonActive() override;
+
+		void setButtonActive(bool active) override;
+
 		UIClickButton m_minusButton;
 		UIClickButton m_plusButton;
 
 		UIText m_UITitle;
 		UIText m_UITextValue;
+		//ButtonNameAction m_nameAction;
 
 		float getSliderValueModified();
 

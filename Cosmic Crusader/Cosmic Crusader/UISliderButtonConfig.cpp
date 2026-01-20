@@ -47,7 +47,7 @@ namespace ratchet
 
 		for (const auto& jsonProperty : jsonFile["properties"])
 		{
-			const auto& propertyName = jsonProperty["name"];
+			const auto& propertyName = jsonProperty["name"].get<std::string>();
 			const auto& propertyValue = jsonProperty["value"];
 
 			const auto& propertyType = jsonProperty["type"];
@@ -69,7 +69,7 @@ namespace ratchet
 
 			if (propertyName == "buttonNameAction")
 			{
-				m_buttonNameAction = static_cast<ButtonNameAction>(propertyValue.get<int>());
+				m_nameAction = static_cast<ButtonNameAction>(propertyValue.get<int>());
 			}
 
 			if (propertyName == "buttonNameState")
@@ -89,7 +89,7 @@ namespace ratchet
 			}
 
 
-			if (propertyName == "minusButton" && propertyType == "object")
+			if (propertyName == "minusButton")
 			{
 				int minusId = propertyValue.get<int>();
 
@@ -97,7 +97,10 @@ namespace ratchet
 
 				if (SceneManager::Get().FindObjectById(minusId, minusObj, SceneManager::Get().GetLayerNameObjectByID(id)))
 				{
-					m_minusButtonConfig.deserialise(minusObj);
+					if(m_minusButtonConfig.deserialise(minusObj))
+					{
+						std::cout << "Slider Button SUCCESS!" << std::endl;
+					}
 				}
 			}
 
@@ -111,19 +114,27 @@ namespace ratchet
 				m_objectType = static_cast<ObjectType>(propertyValue.get<int>());
 			}
 
-			if (propertyName == "plusButton" && propertyType == "object")
+			if (propertyName == "plusButton")
 			{
 				int plusId = propertyValue.get<int>();
 
 				nlohmann::json plusObj;
 				if (SceneManager::Get().FindObjectById(plusId, plusObj,SceneManager::Get().GetLayerNameObjectByID(id)))
 				{
-					m_plusButtonConfig.deserialise(plusObj);
+					if (m_plusButtonConfig.deserialise(plusObj))
+					{
+						std::cout << "Slider Button SUCCESS!" << std::endl;
+					}
 				}
 		
 			}
 
-			if (propertyName == "sliderTitle" && propertyType == "object")
+			if (propertyName == "sliderMaxValue")
+			{
+				m_sliderMaxValue = propertyValue.get<float>();
+			}
+
+			if (propertyName == "sliderTitle")
 			{
 				int titleID = propertyValue.get<int>();
 
@@ -131,7 +142,10 @@ namespace ratchet
 
 				if (SceneManager::Get().FindObjectById(titleID, titleObj, SceneManager::Get().GetLayerNameObjectByID(id)))
 				{
-					m_UITitleConfig.deserialise(titleObj);
+					if (m_UITitleConfig.deserialise(titleObj))
+					{
+						std::cout << "Slider Text SUCCESS!" << std::endl;
+					}
 				}
 
 			}
@@ -141,7 +155,7 @@ namespace ratchet
 				m_sliderValueIncreasse = propertyValue.get<float>();
 			}
 
-			if (propertyName == "sliderValueText" && propertyType == "object")
+			if (propertyName == "sliderValueText")
 			{
 				int valueTextId = propertyValue.get<int>();
 
@@ -149,7 +163,12 @@ namespace ratchet
 
 				if (SceneManager::Get().FindObjectById(valueTextId, valueTextObj, SceneManager::Get().GetLayerNameObjectByID(id)))
 				{
-					m_UITextValueConfig.deserialise(valueTextObj);
+					auto config = UITextConfig();
+					if(config.deserialise(valueTextObj))
+					{
+						std::cout << "Slider Text SUCCESS!" << std::endl;
+						m_UITextValueConfig = config;
+					}
 				}
 			}
 		}

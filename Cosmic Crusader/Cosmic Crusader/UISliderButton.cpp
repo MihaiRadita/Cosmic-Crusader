@@ -5,18 +5,15 @@
 
 namespace ratchet
 {
-	UISliderButton::UISliderButton(UISliderButtonConfig& config) : UIButton(config),
+	UISliderButton::UISliderButton(const UISliderButtonConfig& config) : UIButton(config),
 					m_minusButton(config.m_minusButtonConfig),
 					m_plusButton(config.m_plusButtonConfig),
 					m_UITitle(config.m_UITitleConfig),
 					m_UITextValue(config.m_UITextValueConfig)
 	{
-		m_nameState = config.m_nameState;
-		m_parentNameState = config.m_parentNameState;
-		m_buttonNameAction = config.m_buttonNameAction;
-
 		m_currentSliderValue = config.m_currentSliderValue;
 		m_sliderValueIncreasse = config.m_sliderValueIncreasse;
+		m_sliderMaxValue = config.m_sliderMaxValue;
 
 	}
 	UISliderButton::~UISliderButton()
@@ -25,7 +22,8 @@ namespace ratchet
 	}
 	void UISliderButton::update()
 	{
-		if (m_activeGameObject)
+		m_position;
+		if (!m_activeGameObject)
 		{
 			return;
 		}
@@ -47,6 +45,16 @@ namespace ratchet
 			break;
 
 		}
+
+		if (m_plusButton.m_isButtonEventTirggered)
+		{
+			m_plusButton.m_isButtonEventTirggered = false;
+		}
+
+		if (m_minusButton.m_isButtonEventTirggered)
+		{
+			m_minusButton.m_isButtonEventTirggered = false;
+		}
 		
 	}
 	void UISliderButton::render(sf::RenderTarget& target)
@@ -63,19 +71,63 @@ namespace ratchet
 		m_minusButton.render(target);
 	}
 
+	void UISliderButton::handleButtonsEvent(sf::Event& event)
+	{
+		m_plusButton.handleUIEvent(event);
+		m_minusButton.handleUIEvent(event);
+	}
+
+
+	bool UISliderButton::checkIsButtonActive()
+	{
+		if (this->m_activeGameObject && this->m_activeRenderer)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	void UISliderButton::setButtonActive(bool active)
+	{
+		this->SetActiveObject(active);
+		this->SetActiveRenderer(active);
+
+		m_UITitle.SetActiveObject(active);
+		m_UITitle.SetActiveRenderer(active);
+
+		m_UITextValue.SetActiveObject(active);
+		m_UITextValue.SetActiveRenderer(active);
+
+		m_plusButton.SetActiveObject(active);
+		m_plusButton.SetActiveRenderer(active);
+
+		m_minusButton.SetActiveObject(active);
+		m_minusButton.SetActiveRenderer(active);
+	}
+
 	float UISliderButton::getSliderValueModified()
 	{
-		if (m_nameAction == m_plusButton.getButtonNameAction())
 		{
 			if (m_plusButton.m_isButtonEventTirggered)
 			{
 				m_currentSliderValue += m_sliderValueIncreasse;
+
+				if (m_currentSliderValue > m_sliderMaxValue)
+				{
+					m_currentSliderValue = m_sliderMaxValue;
+				}
 
 				m_UITextValue.setNumberValue(m_currentSliderValue);
 			}
 			else if (m_minusButton.m_isButtonEventTirggered)
 			{
 				m_currentSliderValue -= m_sliderValueIncreasse;
+
+				if (m_currentSliderValue < 0.0f)
+				{
+					m_currentSliderValue = 0.0f;
+				}
 
 				m_UITextValue.setNumberValue(m_currentSliderValue);
 			}
