@@ -70,10 +70,10 @@ namespace ratchet
 				std::string colorStr = textJson["color"].get<std::string>();
 				unsigned int rgba = std::stoul(colorStr.substr(1), nullptr, 16);
 
-				sf::Uint8 r = (rgba >> 24) & 0xFF;
-				sf::Uint8 g = (rgba >> 16) & 0xFF;
-				sf::Uint8 b = (rgba >> 8) & 0xFF;
-				sf::Uint8 a = rgba & 0xFF;
+				sf::Uint8 a = (rgba >> 24) & 0xFF;
+				sf::Uint8 r = (rgba >> 16) & 0xFF;
+				sf::Uint8 g = (rgba >> 8) & 0xFF;
+				sf::Uint8 b = rgba & 0xFF;
 
 				m_textColor = sf::Color(r, g, b);
 			}

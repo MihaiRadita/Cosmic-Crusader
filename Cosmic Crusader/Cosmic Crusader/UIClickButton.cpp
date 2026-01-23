@@ -31,9 +31,9 @@ namespace ratchet
 
 		if (m_isButtonEventTirggered)
 		{
-			auto state = m_nameState;
-			if (m_nameState == ButtonNameState::Play)
+			switch (m_nameState)
 			{
+			case ButtonNameState::Play:
 				WindowManager::Get()->clear(sf::Color::Black);
 				WindowManager::Get()->display();
 
@@ -41,32 +41,26 @@ namespace ratchet
 				m_isButtonEventTirggered = false;
 
 				SceneManager::Get().LoadNextScene();
-			}
-			else if (m_nameState == ButtonNameState::Exit)
-			{
+				break;
+			case ButtonNameState::Exit:
 				WindowManager::Get()->close();
-			}
+				break;
 
-			else if (m_nameState == ButtonNameState::Options)
-			{
+			case ButtonNameState::Options:
 				setButtonsSectionActive(true);
-			}
+				break;
 
-			else if (m_nameState == ButtonNameState::Back)
-			{
+			case ButtonNameState::Back:
 				setButtonsSectionActive(false);
-			}
+				break;
 
-			else if (m_nameState == ButtonNameState::Next_Value)
-			{
-				std::cout << "MInus Button!" << std::endl;
-				//m_isButtonEventTirggered = true;
-			}
+			case ButtonNameState::Next_Value:
+				std::cout << "Plus Button!" << std::endl;
+				break;
 
-			else if (m_nameState == ButtonNameState::Back_Value)
-			{
-				std::cout << "PLus Button!" << std::endl;
-				//m_isButtonEventTirggered = true;
+			case ButtonNameState::Back_Value:
+				std::cout << "Minus Button!" << std::endl;
+				break;
 			}
 		}
 	}
@@ -84,12 +78,14 @@ namespace ratchet
 			m_isEventAllreadyActive = !active;
 			m_isButtonInteracting = !active;
 			this->setButtonActive(!active);
+			m_sprite.setColor(sf::Color(255, 255, 255, 150));
 		}
 		else if(active != this->checkIsButtonActive())
 		{
 			m_isEventAllreadyActive = active;
 			m_isButtonInteracting = active;
 			this->setButtonActive(active);
+			m_sprite.setColor(sf::Color(255, 255, 255, 150));
 		}
 
 		for (auto& obj : s_gameObjects)

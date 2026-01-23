@@ -14,6 +14,9 @@ namespace ratchet
 		m_isButtonEventTirggered = false;
 
 		m_isEventAllreadyActive = false;
+
+		m_sprite.setColor(sf::Color(255, 255, 255, 150));
+
 	}
 
 	UIButton::~UIButton()
@@ -23,7 +26,22 @@ namespace ratchet
 
 	void UIButton::update()
 	{
+		bool wasButtonIteracting = m_isButtonInteracting;
 		m_isButtonInteracting = checkUIButtonInteraction();
+
+		if (wasButtonIteracting != m_isButtonInteracting)
+		{
+			if (m_isButtonInteracting)
+			{
+				m_sprite.setColor(sf::Color(255, 255, 255, 255));
+			}
+			else
+			{
+				m_sprite.setColor(sf::Color(255, 255, 255, 150));
+			}
+		}
+
+	
 	}
 
 	void UIButton::render(sf::RenderTarget& target)
