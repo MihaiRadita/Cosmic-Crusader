@@ -149,14 +149,14 @@ namespace ratchet
 				{
 					if (!m_waitTostartAttack)
 					{
-						m_fireCooldown.restart();
+						m_fireCooldown.m_clock.restart();
 						m_waitTostartAttack = true;
 						m_input.m_isFiring = false;
 
 					}
 					else
 					{
-						if (m_fireCooldown.getElapsedTime().asSeconds() >= m_fireRate)
+						if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
 						{
 							m_input.m_isFiring = true;
 						
@@ -178,7 +178,7 @@ namespace ratchet
 				}
 				m_waitTostartAttack = false;
 
-				m_fireCooldown.restart();
+				m_fireCooldown.m_clock.restart();
 
 				if (m_canJumpOver)
 				{
@@ -228,7 +228,7 @@ namespace ratchet
 				m_input.m_isFiring = false;
 			}
 			m_waitTostartAttack = false;
-			m_fireCooldown.restart();
+			m_fireCooldown.m_clock.restart();
 
 		}
 

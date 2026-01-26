@@ -93,7 +93,10 @@ namespace ratchet
 
 			if (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::Escape)
 			{
-				m_window.close();
+				if (SceneManager::Get().GetCurrentScene() != SceneType::MainMenu)
+				{
+					SceneManager::Get().SetGameScenePauseState();
+				}
 			}
 
 			if (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::G)
@@ -119,6 +122,11 @@ namespace ratchet
 				else if (auto uiSlider = dynamic_cast<UISliderButton*>(obj))
 				{
 					uiSlider->handleButtonsEvent(sfEvent);
+				}
+
+				else if (auto bullet = dynamic_cast<Bullet*>(obj))
+				{
+					bullet->bulletHandleEvents();
 				}
 			}
 		}

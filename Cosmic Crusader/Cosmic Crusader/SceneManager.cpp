@@ -10,6 +10,7 @@ namespace ratchet
 		LoadCombinedScenes();
 
 		m_currentScene = SceneType::MainMenu;
+		m_currentGameSceneState = SceneGameState::Playing;
 		m_sceneIndex = static_cast<int>(m_currentScene);
 	}
 
@@ -41,6 +42,11 @@ namespace ratchet
 			}
 		}
 		return false;
+	}
+
+	SceneType SceneManager::GetCurrentScene()
+	{
+		return m_currentScene;
 	}
 
 	void SceneManager::StartSceneManager()
@@ -75,6 +81,11 @@ namespace ratchet
 		}
 
 		return "";
+	}
+
+	void SceneManager::SetGameScenePauseState()
+	{
+		m_isPaused = !m_isPaused;
 	}
 
 	bool SceneManager::IsCameraDirty()
@@ -183,6 +194,7 @@ namespace ratchet
 
 	void SceneManager::updateSceneObjects()
 	{
+		if(!m_isPaused)
 		{
 			float timeStep = 1.0f / 120.0f;
 			if (m_currentScene != SceneType::MainMenu)
@@ -297,6 +309,8 @@ namespace ratchet
 
 		m_cameraDirty = true;
 
+		m_isPaused = false;
+
 		Physics::SetSimulationEnabled(true);
 	}
 
@@ -369,6 +383,9 @@ namespace ratchet
 				}
 			}
 		}
+
+		m_currentGameSceneState = SceneGameState::Playing;
+		m_isPaused = false;
 	}
 
 	void SceneManager::StartSceneObjects()

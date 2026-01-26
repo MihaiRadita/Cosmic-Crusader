@@ -4,6 +4,8 @@
 
 #include "PrefabAssets.h"
 
+#include "SceneManager.h"
+
 
 
 namespace ratchet

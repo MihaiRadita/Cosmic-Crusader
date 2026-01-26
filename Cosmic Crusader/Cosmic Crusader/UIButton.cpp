@@ -15,7 +15,7 @@ namespace ratchet
 
 		m_isEventAllreadyActive = false;
 
-		m_sprite.setColor(sf::Color(255, 255, 255, 150));
+		m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
 
 	}
 
@@ -33,11 +33,11 @@ namespace ratchet
 		{
 			if (m_isButtonInteracting)
 			{
-				m_sprite.setColor(sf::Color(255, 255, 255, 255));
+				m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 255));
 			}
 			else
 			{
-				m_sprite.setColor(sf::Color(255, 255, 255, 150));
+				m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
 			}
 		}
 

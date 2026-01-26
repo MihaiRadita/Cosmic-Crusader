@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-
+#include "SceneManager.h"
 
 namespace ratchet
 {
@@ -16,33 +16,40 @@ namespace ratchet
 		m_bulletSpeed = config.m_BulletSpeed;
 		m_bulletLifeLimit = config.m_bulletLifeLimit;
 
-		m_bulletTimer.restart();
+		m_bulletTimer.Restart();
 
 		setOrignAtCenter();
 	}
 
 	Bullet::~Bullet()
 	{
+
 	}
 
 	void Bullet::setActive(bool active)
 	{
 		GameObject::setActive(active);
 
-		m_bulletTimer.restart();
+		m_bulletTimer.Restart();
 	}
 
 	void Bullet::update()
 	{
-		if (!m_activeGameObject) return;
+
+		if (!m_activeGameObject)
+		{
+			return;
+		}
 
 		auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
 		m_sprite.setPosition(spritePosition);
 
-		if (m_bulletTimer.getElapsedTime().asSeconds() >= m_bulletLifeLimit)
+
+		if (m_bulletTimer.GetElapsed().asSeconds() >= m_bulletLifeLimit)
 		{
-			m_bulletTimer.restart();
+			m_bulletTimer.Restart();
+
 			Weapon::releaseBullet(this);
 		}
 
@@ -107,6 +114,17 @@ namespace ratchet
 		b2Vec2 velocity(direction.x * speed, direction.y * speed);
 
 		m_collider->getBody()->SetLinearVelocity(velocity);
+	}
+	void Bullet::bulletHandleEvents()
+	{
+		if (SceneManager::Get().m_isPaused)
+		{
+			m_bulletTimer.Freeze();
+		}
+		else if (!SceneManager::Get().m_isPaused)
+		{
+			m_bulletTimer.Resume();
+		}
 	}
 	void Bullet::setOrignAtCenter()
 	{

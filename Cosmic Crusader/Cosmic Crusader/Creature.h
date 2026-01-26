@@ -15,6 +15,8 @@
 
 #include "WindowManager.h"
 
+#include "Timer.h"
+
 #include "Bullet.h"
 
 namespace ratchet
@@ -32,7 +34,7 @@ namespace ratchet
 		bool m_facingRight = true;
 		bool m_previusFacingRight = false;
 		bool m_isAnimationInverted = false;
-		sf::Clock m_fireCooldown;
+		Timer m_fireCooldown;
 		float m_fireRate; // Fires every m_fireRate seconds
 		float m_recoilTime; // Recoil animation duration
 		int m_lastFiredWeaponIndex = -1;

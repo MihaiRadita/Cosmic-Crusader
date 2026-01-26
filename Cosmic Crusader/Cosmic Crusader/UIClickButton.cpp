@@ -78,14 +78,14 @@ namespace ratchet
 			m_isEventAllreadyActive = !active;
 			m_isButtonInteracting = !active;
 			this->setButtonActive(!active);
-			m_sprite.setColor(sf::Color(255, 255, 255, 150));
+			m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
 		}
 		else if(active != this->checkIsButtonActive())
 		{
 			m_isEventAllreadyActive = active;
 			m_isButtonInteracting = active;
 			this->setButtonActive(active);
-			m_sprite.setColor(sf::Color(255, 255, 255, 150));
+			m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
 		}
 
 		for (auto& obj : s_gameObjects)

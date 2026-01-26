@@ -161,6 +161,9 @@
     <ClCompile Include="UITextConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -253,5 +256,6 @@
     <ClInclude Include="UISliderButton.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="UITextConfig.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
 </Project>

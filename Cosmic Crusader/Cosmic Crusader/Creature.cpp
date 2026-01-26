@@ -20,6 +20,8 @@ namespace ratchet
 		m_fireRate = config.m_fireRate;
 		m_recoilTime = config.m_recoilTime;
 
+		m_fireCooldown = Timer();
+
 		//Angles
 		m_baseAngle = config.m_AngleBase;
 		m_HalfBaseAngle = m_baseAngle / 2.0f;
@@ -318,7 +320,7 @@ namespace ratchet
 			if (m_currentWeaponType != Weapon::TYPE::None)
 			{
 				bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
-				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.getElapsedTime().asSeconds() >= m_recoilTime;
+				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_recoilTime;
 
 				if (justPassedRecoilTime)
 				{
@@ -331,10 +333,10 @@ namespace ratchet
 					if (isOnRecoil == false)
 					{
 						const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
-						const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.getElapsedTime().asSeconds() >= m_fireRate;
+						const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate;
 						if (isReadyToFire)
 						{
-							m_fireCooldown.restart();
+							m_fireCooldown.m_clock.restart();
 							m_currentCharacterState = WeaponAnimation::STATE::Recoil;
 #ifdef IS_RATCHET_DEBUG
 							TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");
@@ -419,7 +421,7 @@ namespace ratchet
 			if (m_currentWeaponType != Weapon::TYPE::None)
 			{
 				bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
-				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.getElapsedTime().asSeconds() >= m_recoilTime;
+				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_recoilTime;
 
 				if (justPassedRecoilTime)
 				{
@@ -432,10 +434,10 @@ namespace ratchet
 					if (isOnRecoil == false)
 					{
 						const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
-						const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.getElapsedTime().asSeconds() >= m_fireRate;
+						const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate;
 						if (isReadyToFire)
 						{
-							m_fireCooldown.restart();
+							m_fireCooldown.m_clock.restart();
 							m_currentCharacterState = WeaponAnimation::STATE::Recoil;
 #ifdef IS_RATCHET_DEBUG
 							TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");

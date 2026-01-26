@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
-
+#include "Timer.h"
 
 
 namespace ratchet
@@ -21,6 +21,8 @@ namespace ratchet
 
 		void launchBullet(const sf::Vector2f& direction, const float& speed);
 
+		void bulletHandleEvents();
+
 		void setOrignAtCenter();
 
 		void render(sf::RenderTarget& target) override;
@@ -35,7 +37,10 @@ namespace ratchet
 		float m_bulletSpeed;
 		float m_bulletLifeLimit;
 
-		sf::Clock m_bulletTimer;
+		bool m_bulletTimerShouldReset = false;
+
+
+		Timer m_bulletTimer;
 
 	private:
 

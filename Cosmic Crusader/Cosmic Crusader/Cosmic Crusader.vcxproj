@@ -184,6 +184,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TileConfig.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIButtonConfig.cpp" />
     <ClCompile Include="UIClickButton.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="source\serialisation\ISerialisableItem.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TileConfig.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TraceChannels.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIButtonConfig.h" />

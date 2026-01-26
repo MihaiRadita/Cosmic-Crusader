@@ -75,14 +75,20 @@ namespace ratchet
 		bool m_isUpdating = true;
 		bool m_isrendering = true;
 
+		bool m_isPaused = false;
+
 		bool IsCameraDirty();
 
 		void ClearCameraDirty();
 		bool FindObjectById(int& id, nlohmann::json& outObj, const std::string& layerName);
 
+		SceneType GetCurrentScene();
+
 		void StartSceneManager();
 
 		std::string GetLayerNameObjectByID(int& id);
+
+		void SetGameScenePauseState();
 
 	private:
 
