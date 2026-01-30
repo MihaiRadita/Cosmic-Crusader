@@ -123,11 +123,16 @@ namespace ratchet
 				{
 					uiSlider->handleButtonsEvent(sfEvent);
 				}
-
 				else if (auto bullet = dynamic_cast<Bullet*>(obj))
 				{
 					bullet->bulletHandleEvents();
 				}
+				else if (auto selfCreature = dynamic_cast<SelfControlledCreature*>(obj))
+				{
+					selfCreature->handleSelfCreatureEvent();
+				}
+
+			
 			}
 		}
 	}

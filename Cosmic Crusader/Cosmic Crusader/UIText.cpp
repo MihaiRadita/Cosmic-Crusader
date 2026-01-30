@@ -10,6 +10,7 @@ namespace ratchet
 		m_textColor = config.m_textColor;
 		m_TextValue = config.m_TextValue;
 		m_textFontPath = config.m_textFontPath;
+		m_textConnectedObject = config.m_textConnectedObject;
 
 		if (m_textFont.loadFromFile(m_textFontPath) == false)
 		{
@@ -48,6 +49,11 @@ namespace ratchet
 		if (!m_activeRenderer) return;
 
 		target.draw(m_UIText);
+	}
+	void UIText::setUITextActive(bool active)
+	{
+		this->SetActiveObject(active);
+		this->SetActiveRenderer(active);
 	}
 	bool UIText::checkNumberIfDifferent(float& value)
 	{

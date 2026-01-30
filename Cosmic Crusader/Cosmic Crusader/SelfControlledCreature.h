@@ -35,6 +35,8 @@ namespace ratchet
 		//Check Attack Target Function
 		void checkTargetToAttack(Creature* target);
 
+		void handleSelfCreatureEvent();
+
 		bool m_isTargetDetected = false;
 		bool m_isTagetBehindCharacter = false;
 

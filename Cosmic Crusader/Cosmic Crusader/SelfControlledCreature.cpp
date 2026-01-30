@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SelfControlledCreature.h"
 
+#include "SceneManager.h"
 
 namespace ratchet
 {
@@ -42,6 +43,18 @@ namespace ratchet
 		}
 
 
+	}
+
+	void SelfControlledCreature::handleSelfCreatureEvent()
+	{
+		if (SceneManager::Get().m_isPaused)
+		{
+			m_fireCooldown.Freeze();
+		}
+		else if (!SceneManager::Get().m_isPaused)
+		{
+			m_fireCooldown.Resume();
+		}
 	}
 	void SelfControlledCreature::canJumpOver()
 	{

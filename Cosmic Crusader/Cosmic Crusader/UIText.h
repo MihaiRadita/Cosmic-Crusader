@@ -16,6 +16,8 @@ namespace ratchet
 		std::string m_textFontPath;
 		sf::Font m_textFont;
 
+		TextConnectedObject m_textConnectedObject;
+
 
 		sf::Text m_UIText;
 
@@ -25,6 +27,7 @@ namespace ratchet
 
 		void update() override;
 		void render(sf::RenderTarget& target) override;
+		void setUITextActive(bool active);
 
 		bool checkNumberIfDifferent(float& value);
 

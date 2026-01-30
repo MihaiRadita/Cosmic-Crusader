@@ -90,6 +90,18 @@ namespace ratchet
 
 		for (auto& obj : s_gameObjects)
 		{
+			if (auto uiText = dynamic_cast<UIText*>(obj))
+			{
+				if ((int)uiText->m_textConnectedObject == (int)this->m_nameState)
+				{
+					uiText->setUITextActive(active);
+				}
+				else if ((int)uiText->m_textConnectedObject == (int)this->m_parentNameState)
+				{
+					uiText->setUITextActive(active);
+				}
+			}
+
 			if (obj->m_objectType == ObjectType::UI)
 			{
 				if (obj == this)

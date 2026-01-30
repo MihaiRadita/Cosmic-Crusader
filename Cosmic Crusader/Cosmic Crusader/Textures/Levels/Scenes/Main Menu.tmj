@@ -89,7 +89,7 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"buttonParentNameState",
@@ -147,7 +147,7 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":9
+                         "value":11
                         }, 
                         {
                          "name":"buttonParentNameState",
@@ -786,7 +786,7 @@
                 {
                  "height":64,
                  "id":21,
-                 "name":"Audio Options Text",
+                 "name":"UI Text",
                  "properties":[
                         {
                          "name":"Faction",
@@ -821,7 +821,7 @@
                         {
                          "name":"textConnectedObject",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"textFontPath",
@@ -857,7 +857,7 @@
                 {
                  "height":64,
                  "id":23,
-                 "name":"Graphics Options Text",
+                 "name":"UI Text",
                  "properties":[
                         {
                          "name":"Faction",
@@ -892,7 +892,7 @@
                         {
                          "name":"textConnectedObject",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"textFontPath",
@@ -1162,12 +1162,12 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":8
+                         "value":9
                         }, 
                         {
                          "name":"buttonParentNameState",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"colliderType",

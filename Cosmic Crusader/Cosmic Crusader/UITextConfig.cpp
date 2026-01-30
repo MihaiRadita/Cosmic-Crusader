@@ -131,6 +131,11 @@ namespace ratchet
 				{
 					m_TextValue = propertyValue.get<std::string>();
 				}
+
+				if (propertyName == "textConnectedObject")
+				{
+					m_textConnectedObject = static_cast<TextConnectedObject>(propertyValue.get<int>());
+				}
 			}
 
 		}

@@ -4,10 +4,10 @@
 namespace ratchet
 {
 	enum class ButtonNameState {
-		None = 0, Play, Options,Slider,
+		None = 0, Play,Resume, Options,Slider,
 		Back_Value,Next_Value,
 		Swicther_On, Switcher_Off,
-		Back, Exit
+		Back,Quit, Exit
 	};
 
 	enum class ButtonNameAction

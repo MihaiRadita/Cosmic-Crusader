@@ -534,6 +534,15 @@ namespace ratchet
 							GameObject::s_gameObjects.push_back(new UIClickButton(config));
 						}
 					}
+					else if (obj["name"] == "UI Text")
+					{
+						auto config = UITextConfig();
+
+						if (config.deserialise(obj))
+						{
+							GameObject::s_gameObjects.push_back(new UIText(config));
+						}
+					}
 					succeeded = true;
 				}
 

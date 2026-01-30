@@ -9,10 +9,10 @@ namespace ratchet
 	};
 
 	enum class TextConnectedObject {
-		None = 0, Play, Options, Slider,
+		None = 0, Play, Resume, Options, Slider,
 		Back_Value, Next_Value,
 		Swicther_On, Switcher_Off,
-		Back, Exit
+		Back, Quit, Exit
 	};
 
 	struct UITextConfig : public GameObjectConfig
@@ -22,6 +22,8 @@ namespace ratchet
 		sf::Color m_textColor;
 		std::string m_TextValue;
 		std::string m_textFontPath;
+
+		TextConnectedObject m_textConnectedObject;
 
 		float m_XUnit = 64.f;
 		float m_YUnit = 64.f;
