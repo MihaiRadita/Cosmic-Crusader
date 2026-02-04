@@ -294,25 +294,25 @@ namespace ratchet
 				);
 			}
 
+			target.setView(m_worldView);
 			for (auto* obj : GameObject::s_gameObjects)
 			{
 				if (obj)
 				{
 					if (obj->m_objectType == ObjectType::World)
 					{
-						target.setView(m_worldView);
 						obj->render(target);
 					}
 				}
 			}
 
+			target.setView(m_uiView);
 			for (auto* obj : GameObject::s_gameObjects)
 			{
 				if (obj)
 				{
 					if (obj->m_objectType == ObjectType::UI)
 					{
-						target.setView(m_uiView);
 						obj->render(target);
 					}
 
