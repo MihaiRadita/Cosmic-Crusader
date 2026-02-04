@@ -8,7 +8,6 @@
 #include "UIClickButton.h"
 #include "UISliderButton.h"
 
-
 #include "physics/Physics.h"
 
 #include "WindowManager.h"
@@ -77,6 +76,9 @@ namespace ratchet
 
 		bool m_isPaused = false;
 
+		sf::Vector2f m_worldCenter;
+		sf::Vector2f m_uiCenter;
+
 		bool IsCameraDirty();
 
 		void ClearCameraDirty();
@@ -90,6 +92,10 @@ namespace ratchet
 
 		void SetGameScenePauseState();
 
+		sf::View GetWorldViewView();
+
+		void ApplySceneView();
+
 	private:
 
 		SceneManager();
@@ -101,9 +107,10 @@ namespace ratchet
 
 		std::string m_baseScenePath;
 
-		int m_sceneIndex;
+		sf::View m_worldView;
+		sf::View m_uiView;
 
-		//bool m_isUpdating = true;
+		int m_sceneIndex;
 
 		bool m_cameraDirty;
 

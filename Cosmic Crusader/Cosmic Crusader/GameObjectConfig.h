@@ -9,7 +9,7 @@ namespace ratchet
 
 	enum class MovementType{MOVEMENTTYPE_UNKNOWN = 0 ,GROUND, AIR};
 
-	enum class ObjectType{None = 0, World, UI};
+	enum class ObjectType{None = 0, World, UI, HUD};
 
 	struct GameObjectConfig : public ISerialisableItem
 	{

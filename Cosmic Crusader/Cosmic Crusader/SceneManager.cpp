@@ -51,11 +51,28 @@ namespace ratchet
 
 	void SceneManager::StartSceneManager()
 	{
+
 		LoadSceneBasicFeatures();
 		LoadSceneGameObjects();
 
 		AwakeSceneObjects();
 		StartSceneObjects();
+	}
+
+	void SceneManager::StartSceneObjects()
+	{
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			obj->Start();
+		}
+
+		m_worldView.setSize(sf::Vector2f(WindowManager::Get()->getSize().x * sc_defaultZoom, 
+										 WindowManager::Get()->getSize().y * sc_defaultZoom));
+		m_worldView.setCenter(sf::Vector2f(m_worldCenter));
+
+		m_uiView.setSize(sf::Vector2f(WindowManager::Get()->getSize().x * sc_defaultZoom,
+										 WindowManager::Get()->getSize().y * sc_defaultZoom));
+		m_uiView.setCenter(sf::Vector2f(m_uiCenter));
 	}
 
 	std::string SceneManager::GetLayerNameObjectByID(int& id)
@@ -79,13 +96,36 @@ namespace ratchet
 				}
 			}
 		}
-
 		return "";
 	}
 
 	void SceneManager::SetGameScenePauseState()
 	{
 		m_isPaused = !m_isPaused;
+	}
+
+	sf::View SceneManager::GetWorldViewView()
+	{
+		return m_worldView;
+	}
+
+	void SceneManager::ApplySceneView()
+	{
+		std::cout << "THE ZOOM : " << sc_defaultZoom << std::endl;
+		sf::View view = SceneManager::Get().GetWorldViewView();
+
+		float defaultWidth = view.getSize().x;
+		float defaultHeight = view.getSize().y;
+
+		view.zoom(sc_defaultZoom);
+		WindowManager::Get()->setView(view);
+
+		float zoomX = defaultWidth / view.getSize().x;
+		float zoomY = defaultHeight / view.getSize().y;
+
+		std::cout << "Zoom applied: X=" << zoomX << " Y=" << zoomY << std::endl;
+
+		std::cout << "YAAYYYY!" << std::endl;
 	}
 
 	bool SceneManager::IsCameraDirty()
@@ -245,21 +285,41 @@ namespace ratchet
 
 			if (player)
 			{
-				sf::View view = target.getView();
-				view.setCenter(
+				m_worldView = target.getView();
+
+				sf::Vector2f size = m_worldView.getSize();
+				m_worldView.setCenter(
 					player->getCollider()->getBody()->GetPosition().x,
 					player->getCollider()->getBody()->GetPosition().y
 				);
-				target.setView(view);
 			}
 
 			for (auto* obj : GameObject::s_gameObjects)
 			{
 				if (obj)
 				{
-					obj->render(target);
+					if (obj->m_objectType == ObjectType::World)
+					{
+						target.setView(m_worldView);
+						obj->render(target);
+					}
 				}
 			}
+
+			for (auto* obj : GameObject::s_gameObjects)
+			{
+				if (obj)
+				{
+					if (obj->m_objectType == ObjectType::UI)
+					{
+						target.setView(m_uiView);
+						obj->render(target);
+					}
+
+				}
+
+			}
+
 		}
 
 	}
@@ -366,6 +426,26 @@ namespace ratchet
 							{
 								sc_defaultZoom = propertyValue.get<float>();
 							}
+
+							if (propertyName == "worldCenterX")
+							{
+								m_worldCenter.x = propertyValue.get<float>();
+							}
+
+							if (propertyValue == "worldCenterY")
+							{
+								m_worldCenter.y = propertyValue.get<float>();
+							}
+
+							if (propertyName == "uiCenterX")
+							{
+								m_uiCenter.x = propertyValue.get<float>();
+							}
+
+							if (propertyName == "uiCenterY")
+							{
+								m_uiCenter.y = propertyValue.get<float>();
+							}
 						}
 					}
 					if (obj["name"] == "Scene Object Dimension")
@@ -388,13 +468,6 @@ namespace ratchet
 		m_isPaused = false;
 	}
 
-	void SceneManager::StartSceneObjects()
-	{
-		for (auto* obj : GameObject::s_gameObjects)
-		{
-			obj->Start();
-		}
-	}
 
 	void SceneManager::AwakeSceneObjects()
 	{

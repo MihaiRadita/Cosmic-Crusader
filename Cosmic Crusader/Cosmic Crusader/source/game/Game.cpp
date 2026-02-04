@@ -14,22 +14,7 @@ namespace ratchet
 
 	void Game::applySceneView()
 	{
-		std::cout<<"THE ZOOM : " << SceneManager::Get().sc_defaultZoom << std::endl;
-		sf::View view = m_window.getDefaultView();
-
-		float defaultWidth = view.getSize().x;
-		float defaultHeight = view.getSize().y;
-
-		view.zoom(SceneManager::Get().sc_defaultZoom);
-		m_window.setView(view);
-
-		float zoomX = defaultWidth / view.getSize().x;
-		float zoomY = defaultHeight / view.getSize().y;
-
-		std::cout << "Zoom applied: X=" << zoomX << " Y=" << zoomY << std::endl;
-
-		std::cout << "YAAYYYY!" << std::endl;
-
+		SceneManager::Get().ApplySceneView();
 	}
 
 	Game::Game()
@@ -37,9 +22,6 @@ namespace ratchet
 		initWindow();
 		initPhysics();
 		initWeaponManager();
-		spawnObjects();
-		applySceneView();
-
 	}
 
 	Game::~Game()
@@ -158,6 +140,8 @@ namespace ratchet
 
 	void Game::start()
 	{
+		spawnObjects();
+		applySceneView();
 		SceneManager::Get().StartSceneObjects();
 	}
 

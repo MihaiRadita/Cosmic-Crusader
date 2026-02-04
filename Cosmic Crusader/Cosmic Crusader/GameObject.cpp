@@ -103,29 +103,32 @@ namespace ratchet
 
 		if (m_objectType == ObjectType::World)
 		{
-			if (const auto* capsuleConfig = dynamic_cast<CapsuleColliderConfig*>(config.m_colliderConfig))
+			if (config.m_colliderConfig)
 			{
-				m_collider = new ratchet::CapsuleCollider(m_sprite, *capsuleConfig);
-
-				std::cout << "Runtime type: " << typeid(*m_collider).name() << std::endl;
-
-				if (CapsuleCollider* pd = dynamic_cast<CapsuleCollider*>(m_collider))
+				if (const auto* capsuleConfig = dynamic_cast<CapsuleColliderConfig*>(config.m_colliderConfig))
 				{
-					std::cout << "Runtime type: " << typeid(*pd).name() << std::endl;
+					m_collider = new ratchet::CapsuleCollider(m_sprite, *capsuleConfig);
 
-					float height = pd->getGlobalHeight();
+					std::cout << "Runtime type: " << typeid(*m_collider).name() << std::endl;
 
-					std::cout << height << std::endl;
+					if (CapsuleCollider* pd = dynamic_cast<CapsuleCollider*>(m_collider))
+					{
+						std::cout << "Runtime type: " << typeid(*pd).name() << std::endl;
+
+						float height = pd->getGlobalHeight();
+
+						std::cout << height << std::endl;
+					}
+
 				}
-
-			}
-			else if (const auto* circleConfig = dynamic_cast<CircleColliderConfig*>(config.m_colliderConfig))
-			{
-				m_collider = new ratchet::CircleCollider(m_sprite, *circleConfig);
-			}		
-			else if (const auto* rectangleConfig = dynamic_cast<RectAngleColliderConfig*>(config.m_colliderConfig))
-			{
-				m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
+				else if (const auto* circleConfig = dynamic_cast<CircleColliderConfig*>(config.m_colliderConfig))
+				{
+					m_collider = new ratchet::CircleCollider(m_sprite, *circleConfig);
+				}		
+				else if (const auto* rectangleConfig = dynamic_cast<RectAngleColliderConfig*>(config.m_colliderConfig))
+				{
+					m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
+				}
 			}
 		}
 
@@ -217,11 +220,13 @@ namespace ratchet
 		{
 			if (Physics::IsSimulationEnabled())
 			{
-
-				bool enabled = gameObject->m_collider->getBody()->IsEnabled();
-				if (gameObject != nullptr && gameObject->m_collider != nullptr && gameObject->m_collider->getBody() == body)
+				if (gameObject->m_collider)
 				{
-					return gameObject;
+					bool enabled = gameObject->m_collider->getBody()->IsEnabled();
+					if (gameObject != nullptr && gameObject->m_collider != nullptr && gameObject->m_collider->getBody() == body)
+					{
+						return gameObject;
+					}
 				}
 			}
 		}
