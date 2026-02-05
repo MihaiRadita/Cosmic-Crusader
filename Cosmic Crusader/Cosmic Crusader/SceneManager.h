@@ -92,7 +92,7 @@ namespace ratchet
 
 		void SetGameScenePauseState();
 
-		sf::View GetWorldViewView();
+		sf::View GetWorldView();
 
 		void ApplySceneView();
 
@@ -104,6 +104,8 @@ namespace ratchet
 		SceneType m_currentScene;
 
 		nlohmann::json m_allScenes;
+
+		sf::RectangleShape m_uiTestShape;
 
 		std::string m_baseScenePath;
 

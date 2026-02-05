@@ -113,8 +113,6 @@ namespace ratchet
 				{
 					selfCreature->handleSelfCreatureEvent();
 				}
-
-			
 			}
 		}
 	}
@@ -130,7 +128,6 @@ namespace ratchet
 		}
 		
 		SceneManager::Get().updateSceneObjects();
-
 	}
 
 	void Game::awake()
@@ -148,7 +145,6 @@ namespace ratchet
 	void Game::render()
 	{
 		m_window.clear(sf::Color::Black);
-
 
 		SceneManager::Get().renderSceneObjects(m_window);
 

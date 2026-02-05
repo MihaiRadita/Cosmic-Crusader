@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
-
+#include "SceneManager.h"
 
 namespace ratchet
 {
@@ -196,7 +196,7 @@ namespace ratchet
 			
 			m_bodyShoulderPosition = getPosition();
 			auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
-			auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
+			auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition, SceneManager::Get().GetWorldView());
 
 
 			auto shoulderToMouseVector = mouseWorldPosition - m_bodyShoulderPosition;
@@ -262,7 +262,7 @@ namespace ratchet
 	{
 		sf::Vector2f firePoint = m_currentFirePoint;
 		sf::Vector2i mousePos = sf::Mouse::getPosition(*WindowManager::Get());
-		sf::Vector2f mouseWorldPos = WindowManager::Get()->mapPixelToCoords(mousePos);
+		sf::Vector2f mouseWorldPos = WindowManager::Get()->mapPixelToCoords(mousePos, SceneManager::Get().GetWorldView());
 
 		sf::Vector2f direction = mouseWorldPos - firePoint;
 		sf::Vector2f directionNormalised = sf::Vector2f(0.0f, 0.0f);

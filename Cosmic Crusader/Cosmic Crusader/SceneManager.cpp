@@ -51,7 +51,6 @@ namespace ratchet
 
 	void SceneManager::StartSceneManager()
 	{
-
 		LoadSceneBasicFeatures();
 		LoadSceneGameObjects();
 
@@ -73,6 +72,15 @@ namespace ratchet
 		m_uiView.setSize(sf::Vector2f(WindowManager::Get()->getSize().x * sc_defaultZoom,
 										 WindowManager::Get()->getSize().y * sc_defaultZoom));
 		m_uiView.setCenter(sf::Vector2f(m_uiCenter));
+
+
+		if (m_currentScene == SceneType::Level1)
+		{
+			m_uiTestShape.setSize(sf::Vector2f(20.f, 20.f));
+			m_uiTestShape.setScale(sf::Vector2f(1.0f * sc_defaultZoom, 1.0f * sc_defaultZoom));
+			m_uiTestShape.setFillColor(sf::Color::Green);
+			m_uiTestShape.setPosition(sf::Vector2f(m_uiCenter.x, m_uiCenter.y));
+		}
 	}
 
 	std::string SceneManager::GetLayerNameObjectByID(int& id)
@@ -104,7 +112,7 @@ namespace ratchet
 		m_isPaused = !m_isPaused;
 	}
 
-	sf::View SceneManager::GetWorldViewView()
+	sf::View SceneManager::GetWorldView()
 	{
 		return m_worldView;
 	}
@@ -112,7 +120,7 @@ namespace ratchet
 	void SceneManager::ApplySceneView()
 	{
 		std::cout << "THE ZOOM : " << sc_defaultZoom << std::endl;
-		sf::View view = SceneManager::Get().GetWorldViewView();
+		sf::View view = SceneManager::Get().GetWorldView();
 
 		float defaultWidth = view.getSize().x;
 		float defaultHeight = view.getSize().y;
@@ -285,6 +293,7 @@ namespace ratchet
 
 			if (player)
 			{
+				target.setView(m_worldView);
 				m_worldView = target.getView();
 
 				sf::Vector2f size = m_worldView.getSize();
@@ -294,34 +303,37 @@ namespace ratchet
 				);
 			}
 
-			target.setView(m_worldView);
 			for (auto* obj : GameObject::s_gameObjects)
 			{
 				if (obj)
 				{
 					if (obj->m_objectType == ObjectType::World)
 					{
+						target.setView(m_worldView);
 						obj->render(target);
 					}
 				}
 			}
 
 			target.setView(m_uiView);
+			if (m_currentScene == SceneType::Level1)
+			{
+				target.draw(m_uiTestShape);
+			}
+
 			for (auto* obj : GameObject::s_gameObjects)
 			{
 				if (obj)
 				{
 					if (obj->m_objectType == ObjectType::UI)
 					{
+						target.setView(m_uiView);
 						obj->render(target);
 					}
 
 				}
-
 			}
-
 		}
-
 	}
 
 	void SceneManager::LoadScene(SceneType scene)
