@@ -3,6 +3,8 @@
 
 #include "WindowManager.h"
 
+#include "SceneManager.h"
+
 namespace ratchet
 {
 	UIButton::UIButton(const UIButtonConfig& config) : GameObject(config)
@@ -14,6 +16,9 @@ namespace ratchet
 		m_isButtonEventTirggered = false;
 
 		m_isEventAllreadyActive = false;
+
+		m_uiButtonOffsetX = config.m_uiButtonOffsetX;
+		m_uiButtonOffsetY = config.m_uiButtonOffsetY;
 
 		m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
 
@@ -88,7 +93,7 @@ namespace ratchet
 	bool UIButton::checkUIButtonInteraction()
 	{
 		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
-		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);
+		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition, SceneManager::Get().GetUIView());
 
 		if ((mouseWorldPosition.x >= m_sprite.getPosition().x && mouseWorldPosition.x <= (m_sprite.getPosition().x + m_sprite.getGlobalBounds().width))
 			&& (mouseWorldPosition.y >= m_sprite.getPosition().y && mouseWorldPosition.y <= (m_sprite.getPosition().y + m_sprite.getGlobalBounds().height)))
@@ -108,6 +113,12 @@ namespace ratchet
 
 	void UIButton::setButtonActive(bool active)
 	{
+
+	}
+
+	void UIButton::setAllButtonsActive(bool active)
+	{
+
 	}
 
 	bool UIButton::checkIsButtonActive()

@@ -36,6 +36,15 @@ namespace ratchet
 
 	void Player::handleEvent(sf::Event& event)
 	{
+		if (SceneManager::Get().m_isPaused)
+		{
+			m_fireCooldown.Freeze();
+		}
+		else if (!SceneManager::Get().m_isPaused)
+		{
+			m_fireCooldown.Resume();
+		}
+
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
@@ -161,11 +170,15 @@ namespace ratchet
 
 		case sf::Event::MouseButtonPressed:
 		{
-			if (event.mouseButton.button == sf::Mouse::Left)
+			if (!SceneManager::Get().m_isPaused)
 			{
-				if (!m_input.m_isFiring)
-					m_input.m_isFiring = true;
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					if (!m_input.m_isFiring)
+						m_input.m_isFiring = true;
+				}
 			}
+			
 			break;
 		}
 
@@ -303,6 +316,8 @@ namespace ratchet
 
 		Creature::update();
 	}
+
+
 
 	void Player::updateMovement()
 	{

@@ -81,6 +81,7 @@ namespace ratchet
 				}
 			}
 
+
 			if (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::G)
 			{
 				m_window.clear(sf::Color::Black);
@@ -91,11 +92,6 @@ namespace ratchet
 
 			for (const auto& obj : GameObject::s_gameObjects)
 			{
-				if (auto player = dynamic_cast<Player*>(obj))
-				{
-					player->handleEvent(sfEvent);
-				}
-
 				if (auto uiButton = dynamic_cast<UIClickButton*>(obj))
 				{
 					uiButton->handleUIEvent(sfEvent);
@@ -105,14 +101,22 @@ namespace ratchet
 				{
 					uiSlider->handleButtonsEvent(sfEvent);
 				}
-				else if (auto bullet = dynamic_cast<Bullet*>(obj))
+				if (auto player = dynamic_cast<Player*>(obj))
 				{
-					bullet->bulletHandleEvents();
+					player->handleEvent(sfEvent);
 				}
-				else if (auto selfCreature = dynamic_cast<SelfControlledCreature*>(obj))
-				{
-					selfCreature->handleSelfCreatureEvent();
-				}
+			}
+		}
+
+		for (const auto& obj : GameObject::s_gameObjects)
+		{
+			if (auto selfCreature = dynamic_cast<SelfControlledCreature*>(obj))
+			{
+				selfCreature->handleSelfCreatureEvent();
+			}
+			else if (auto bullet = dynamic_cast<Bullet*>(obj))
+			{
+				bullet->bulletHandleEvents();
 			}
 		}
 	}

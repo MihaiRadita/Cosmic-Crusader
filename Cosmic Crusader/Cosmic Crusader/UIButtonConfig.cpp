@@ -9,7 +9,8 @@ namespace ratchet
 {
 	UIButtonConfig::UIButtonConfig() : GameObjectConfig()
 	{
-
+		m_uiButtonOffsetX = 0.0f;
+		m_uiButtonOffsetY = 0.0f;
 	}
 	UIButtonConfig::~UIButtonConfig()
 	{
@@ -89,6 +90,17 @@ namespace ratchet
 			{
 				m_parentNameState = static_cast<ButtonNameState>(propertyValue.get<int>());
 			}
+
+			if (propertyName == "buttonUIXOffset")
+			{
+				m_uiButtonOffsetX = propertyValue.get<float>();
+			}
+
+			if (propertyName == "buttonUIYOffset")
+			{
+				m_uiButtonOffsetY = propertyValue.get<float>();
+			}
+
 
 			if (propertyName == "buttonNameAction")
 			{

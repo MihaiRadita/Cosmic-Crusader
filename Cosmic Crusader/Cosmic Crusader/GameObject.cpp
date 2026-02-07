@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
+#include "UIClickButton.h"
 
 
 namespace ratchet
@@ -160,6 +161,7 @@ namespace ratchet
 	void ratchet::GameObject::update()
 	{
 		//if (!m_activeGameObject) return;
+
 	}
 
 	void ratchet::GameObject::render(sf::RenderTarget& target)

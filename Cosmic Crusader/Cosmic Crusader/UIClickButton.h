@@ -18,6 +18,7 @@ namespace ratchet
 
 		void setButtonsSectionActive(bool active) override;
 		void setButtonActive(bool active) override;
+		void setAllButtonsActive(bool active) override;
 
 		bool checkIsButtonActive() override;
 

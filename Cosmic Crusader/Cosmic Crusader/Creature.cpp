@@ -488,6 +488,7 @@ namespace ratchet
 		}
 	}
 
+
 	void Creature::invertCharacterMovingSpriteScale(int direction)
 	{
 		m_sprite.setScale(m_scale.x * (float)direction, m_scale.y);

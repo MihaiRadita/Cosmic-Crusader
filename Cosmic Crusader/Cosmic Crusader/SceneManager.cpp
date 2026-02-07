@@ -110,11 +110,30 @@ namespace ratchet
 	void SceneManager::SetGameScenePauseState()
 	{
 		m_isPaused = !m_isPaused;
+
+		SetPauseMenuActive(m_isPaused);
+	}
+
+	void SceneManager::SetPauseMenuActive(bool active)
+	{
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			if (obj->m_objectType == ObjectType::UI)
+			{
+				obj->SetActiveObject(active);
+				obj->SetActiveRenderer(active);
+			}
+		}
 	}
 
 	sf::View SceneManager::GetWorldView()
 	{
 		return m_worldView;
+	}
+
+	sf::View SceneManager::GetUIView()
+	{
+		return m_uiView;
 	}
 
 	void SceneManager::ApplySceneView()
@@ -278,6 +297,28 @@ namespace ratchet
 				}
 			}
 		}
+		else
+		{
+			for (auto i = 0u; i < GameObject::s_gameObjects.size(); i++)
+			{
+				GameObject::clearQueuedObjectsToDestroy();
+
+				if (auto obj = GameObject::s_gameObjects[i])
+				{
+					if (obj)
+					{
+						if (obj->m_objectType == ObjectType::UI)
+						{
+							obj->update();
+						}
+					}
+				}
+				else
+				{
+					TRACE_CHANNEL("GAME_OBJECT", "Cannot update null game object of index [", i, "].");
+				}
+			}
+		}
 	}
 
 	void SceneManager::renderSceneObjects(sf::RenderTarget& target)
@@ -327,6 +368,16 @@ namespace ratchet
 				{
 					if (obj->m_objectType == ObjectType::UI)
 					{
+						if (m_currentScene == SceneType::Level1)
+						{
+							if (auto* clickButton = dynamic_cast<UIClickButton*>(obj))
+							{
+								clickButton->m_sprite.setPosition(sf::Vector2f(m_uiView.getCenter().x + clickButton->m_uiButtonOffsetX * 2 * 0.1, 
+																	  m_uiView.getCenter().y + clickButton->m_uiButtonOffsetY * 2 * 0.1));
+
+								sf::Vector2f position = clickButton->m_sprite.getPosition();
+							}
+						}
 						target.setView(m_uiView);
 						obj->render(target);
 					}
@@ -489,6 +540,7 @@ namespace ratchet
 		}
 	}
 
+
 	void SceneManager::LoadSceneGameObjects()
 	{
 		std::string sceneName = m_sceneFiles[m_currentScene];
@@ -589,7 +641,7 @@ namespace ratchet
 						succeeded = true;
 					}
 				}
-				else if (layerName == "Click Buttons")
+				else if (layerName == "Click Buttons" || layerName == "Pause Menu Click Buttons")
 				{
 					auto config = UIButtonConfig();
 					if (config.deserialise(obj))

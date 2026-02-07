@@ -27,6 +27,9 @@ namespace ratchet
 		ButtonNameState m_nameState;
 		ButtonNameState m_parentNameState;
 		ButtonNameAction m_nameAction;
+
+		float m_uiButtonOffsetX;
+		float m_uiButtonOffsetY;
 		
 	};
 

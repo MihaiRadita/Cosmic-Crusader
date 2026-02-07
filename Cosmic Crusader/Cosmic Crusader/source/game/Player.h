@@ -56,6 +56,7 @@ namespace ratchet
 
 		//Update functions
 		void update() override;
+
 		void updateMovement() override;
 		void updateRotation() override;
 		void updateJump() override;

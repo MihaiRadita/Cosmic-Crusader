@@ -47,6 +47,7 @@ namespace ratchet
 
 	void SelfControlledCreature::handleSelfCreatureEvent()
 	{
+
 		if (SceneManager::Get().m_isPaused)
 		{
 			m_fireCooldown.Freeze();
@@ -130,6 +131,9 @@ namespace ratchet
 
 	void SelfControlledCreature::handleEvent()
 	{
+
+
+		handleSelfCreatureEvent();
 		detectTarget(m_target);
 
 		if (m_isTargetDetected)
@@ -256,6 +260,15 @@ namespace ratchet
 	}
 	void SelfControlledCreature::update()
 	{
+		if (SceneManager::Get().m_isPaused)
+		{
+			m_fireCooldown.Freeze();
+		}
+		else if (!SceneManager::Get().m_isPaused)
+		{
+			m_fireCooldown.Resume();
+		}
+
 		if (!m_activeGameObject) return;
 
 		if (m_collider && !m_collider->m_skipRaycastThisFrame)
@@ -274,6 +287,7 @@ namespace ratchet
 
 		Creature::update();
 	}
+
 	void SelfControlledCreature::updateMovement()
 	{
 

@@ -49,6 +49,11 @@ namespace ratchet
 			case ButtonNameState::Options:
 				setButtonsSectionActive(true);
 				break;
+			case ButtonNameState::Resume:
+				SceneManager::Get().SetGameScenePauseState();
+				m_isButtonInteracting = false;
+				m_isButtonEventTirggered = false;
+				break;
 
 			case ButtonNameState::Back:
 				setButtonsSectionActive(false);
@@ -194,6 +199,11 @@ namespace ratchet
 	{
 		this->SetActiveObject(active);
 		this->SetActiveRenderer(active);
+	}
+
+	void UIClickButton::setAllButtonsActive(bool active)
+	{
+
 	}
 
 	bool UIClickButton::checkIsButtonActive()

@@ -58,6 +58,7 @@ namespace ratchet
 		//update functions
 		void handleEvent();
 		void update() override;
+	
 		void updateMovement() override;
 
 		void render(sf::RenderTarget& target) override;

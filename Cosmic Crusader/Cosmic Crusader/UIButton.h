@@ -22,6 +22,7 @@ namespace ratchet
 
 		virtual void setButtonsSectionActive(bool active);
 		virtual void setButtonActive(bool active);
+		virtual void setAllButtonsActive(bool active);
 
 
 		virtual bool checkIsButtonActive();
@@ -40,6 +41,9 @@ namespace ratchet
 		ButtonNameAction m_nameAction;
 
 		bool m_isEventAllreadyActive = false;
+
+		float m_uiButtonOffsetX;
+		float m_uiButtonOffsetY;
 
 	protected:
 
