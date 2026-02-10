@@ -25,6 +25,8 @@ namespace ratchet
 		UIText(const UITextConfig& config);
 		~UIText();
 
+		void Start() override;
+
 		void update() override;
 		void render(sf::RenderTarget& target) override;
 		void setUITextActive(bool active);
@@ -32,6 +34,9 @@ namespace ratchet
 		bool checkNumberIfDifferent(float& value);
 
 		void setNumberValue(float& value);
+
+		float m_uiTextOffsetX;
+		float m_uiTextOffsetY;
 
 	private:
 	};

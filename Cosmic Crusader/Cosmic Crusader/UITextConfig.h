@@ -28,6 +28,9 @@ namespace ratchet
 		float m_XUnit = 64.f;
 		float m_YUnit = 64.f;
 
+		float m_uiTextOffsetX;
+		float m_uiTextOffsetY;
+
 		UITextConfig();
 		~UITextConfig();
 

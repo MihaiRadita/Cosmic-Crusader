@@ -71,7 +71,12 @@ namespace ratchet
 
 		m_uiView.setSize(sf::Vector2f(WindowManager::Get()->getSize().x * sc_defaultZoom,
 										 WindowManager::Get()->getSize().y * sc_defaultZoom));
-		m_uiView.setCenter(sf::Vector2f(m_uiCenter));
+
+		if (m_currentGameSceneState == SceneType::MainMenu)
+		{
+			m_uiView.setCenter(sf::Vector2f(m_uiCenter));
+		}
+		//m_uiView.setCenter(sf::Vector2f(m_uiCenter));
 
 
 		if (m_currentScene == SceneType::Level1)
@@ -368,7 +373,7 @@ namespace ratchet
 				{
 					if (obj->m_objectType == ObjectType::UI)
 					{
-						if (m_currentScene == SceneType::Level1)
+						/*if (m_currentScene == SceneType::Level1)
 						{
 							if (auto* clickButton = dynamic_cast<UIClickButton*>(obj))
 							{
@@ -377,7 +382,7 @@ namespace ratchet
 
 								sf::Vector2f position = clickButton->m_sprite.getPosition();
 							}
-						}
+						}*/
 						target.setView(m_uiView);
 						obj->render(target);
 					}

@@ -71,6 +71,14 @@ namespace ratchet
 		m_minusButton.render(target);
 	}
 
+	void UISliderButton::Start()
+	{
+		m_UITitle.Start();
+		m_minusButton.Start();
+		m_plusButton.Start();
+		m_UITextValue.Start();
+	}
+
 	void UISliderButton::handleButtonsEvent(sf::Event& event)
 	{
 		m_plusButton.handleUIEvent(event);

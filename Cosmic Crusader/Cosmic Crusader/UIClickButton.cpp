@@ -51,6 +51,10 @@ namespace ratchet
 				break;
 			case ButtonNameState::Resume:
 				SceneManager::Get().SetGameScenePauseState();
+				if (!SceneManager::Get().m_isPaused)
+				{
+					WindowManager::Get()->setKeyRepeatEnabled(true);
+				}
 				m_isButtonInteracting = false;
 				m_isButtonEventTirggered = false;
 				break;
@@ -66,6 +70,11 @@ namespace ratchet
 			case ButtonNameState::Back_Value:
 				std::cout << "Minus Button!" << std::endl;
 				break;
+
+			case ButtonNameState::Quit:
+				m_isButtonInteracting = false;
+				m_isButtonEventTirggered = false;
+				SceneManager::Get().LoadNextScene();
 			}
 		}
 	}

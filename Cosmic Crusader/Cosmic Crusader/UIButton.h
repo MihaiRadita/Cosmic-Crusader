@@ -24,6 +24,8 @@ namespace ratchet
 		virtual void setButtonActive(bool active);
 		virtual void setAllButtonsActive(bool active);
 
+		void Start() override;
+
 
 		virtual bool checkIsButtonActive();
 

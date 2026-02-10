@@ -78,6 +78,15 @@ namespace ratchet
 				if (SceneManager::Get().GetCurrentScene() != SceneType::MainMenu)
 				{
 					SceneManager::Get().SetGameScenePauseState();
+
+					if (SceneManager::Get().m_isPaused)
+					{
+						WindowManager::Get()->setKeyRepeatEnabled(false);
+					}
+					else
+					{
+						WindowManager::Get()->setKeyRepeatEnabled(true);
+					}
 				}
 			}
 
@@ -105,16 +114,16 @@ namespace ratchet
 				{
 					player->handleEvent(sfEvent);
 				}
+				else if (auto selfCreature = dynamic_cast<SelfControlledCreature*>(obj))
+				{
+					selfCreature->handleSelfCreatureEvent();
+				}
 			}
 		}
 
 		for (const auto& obj : GameObject::s_gameObjects)
 		{
-			if (auto selfCreature = dynamic_cast<SelfControlledCreature*>(obj))
-			{
-				selfCreature->handleSelfCreatureEvent();
-			}
-			else if (auto bullet = dynamic_cast<Bullet*>(obj))
+			if (auto bullet = dynamic_cast<Bullet*>(obj))
 			{
 				bullet->bulletHandleEvents();
 			}

@@ -31,6 +31,7 @@ namespace ratchet
 
 	void UIButton::update()
 	{
+
 		bool wasButtonIteracting = m_isButtonInteracting;
 		m_isButtonInteracting = checkUIButtonInteraction();
 
@@ -119,6 +120,14 @@ namespace ratchet
 	void UIButton::setAllButtonsActive(bool active)
 	{
 
+	}
+
+	void UIButton::Start()
+	{
+		sf::View view = SceneManager::Get().GetUIView();
+		sf::Vector2f center = view.getCenter();
+		m_sprite.setPosition(sf::Vector2f(SceneManager::Get().GetUIView().getCenter().x + m_uiButtonOffsetX,
+							 SceneManager::Get().GetUIView().getCenter().y + m_uiButtonOffsetY));
 	}
 
 	bool UIButton::checkIsButtonActive()

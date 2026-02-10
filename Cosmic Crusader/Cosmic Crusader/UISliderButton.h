@@ -19,6 +19,8 @@ namespace ratchet
 		void update() override;
 		void render(sf::RenderTarget& target) override;
 
+		void Start() override;
+
 		void handleButtonsEvent(sf::Event& event);
 
 		bool checkIsButtonActive() override;

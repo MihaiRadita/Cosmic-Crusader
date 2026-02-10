@@ -9,7 +9,8 @@ namespace ratchet
 {
 	UITextConfig::UITextConfig()
 	{
-
+		m_uiTextOffsetX = 0.0f;
+		m_uiTextOffsetY = 0.0f;
 	}
 
 	UITextConfig::~UITextConfig()
@@ -130,6 +131,16 @@ namespace ratchet
 				if (propertyName == "textValue")
 				{
 					m_TextValue = propertyValue.get<std::string>();
+				}
+
+				if (propertyName == "textUIXOffset")
+				{
+					m_uiTextOffsetX = propertyValue.get<float>();
+				}
+
+				if (propertyName == "textUIYOffset")
+				{
+					m_uiTextOffsetY = propertyValue.get<float>();
 				}
 
 				if (propertyName == "textConnectedObject")

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "UIText.h"
 
+#include "SceneManager.h"
+
 namespace ratchet
 {
 	UIText::UIText(const UITextConfig& config) : GameObject(config)
@@ -35,14 +37,31 @@ namespace ratchet
 		m_UIText.setRotation(m_rotation);
 		m_UIText.setScale(m_scale.x, m_scale.y);
 
+		m_uiTextOffsetX = config.m_uiTextOffsetX;
+		m_uiTextOffsetY = config.m_uiTextOffsetY;
+
 	}
 	UIText::~UIText()
 	{
 
 	}
+	void UIText::Start()
+	{
+		sf::View view = SceneManager::Get().GetUIView();
+		sf::Vector2f center = view.getCenter();
+
+
+		m_UIText.setPosition(sf::Vector2f(SceneManager::Get().GetUIView().getCenter().x + m_uiTextOffsetX,
+										  SceneManager::Get().GetUIView().getCenter().y + m_uiTextOffsetY));
+
+	/*	if (m_textConnectedObject == TextConnectedObject::Options)
+		{
+			m_UIText.setPosition(sf::Vector2f(SceneManager::Get().GetUIView().getCenter().x  450.f,
+								SceneManager::Get().GetUIView().getCenter().y -300));
+		}*/
+	}
 	void UIText::update()
 	{
-
 	}
 	void UIText::render(sf::RenderTarget& target)
 	{
