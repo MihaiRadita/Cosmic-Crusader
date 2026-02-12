@@ -82,6 +82,8 @@ namespace ratchet
 		sf::Vector2f m_worldCenter;
 		sf::Vector2f m_uiCenter;
 
+		sf::Vector2f m_uiViewSize;
+
 		bool IsCameraDirty();
 
 		void ClearCameraDirty();

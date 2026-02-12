@@ -10,7 +10,7 @@ namespace ratchet
 	{
 		return m_sprite;
 	}
-
+	
 	sf::Vector2f ratchet::GameObject::getPosition()
 	{
 		return m_position;

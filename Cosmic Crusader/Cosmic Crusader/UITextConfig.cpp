@@ -27,7 +27,7 @@ namespace ratchet
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
-		scale = sf::Vector2f(1.0f, 1.0f) * SceneManager::sc_tiledToGameScale;
+		scale = sf::Vector2f(1.0f, 1.0f);
 		float positionXOffsetUNit = tileWidth / m_XUnit;
 		float positionYOffsetUnit = tileHeight / m_YUnit;
 		positionXOffset = tileWidth / 2.0f;

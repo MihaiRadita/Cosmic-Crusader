@@ -60,31 +60,29 @@ namespace ratchet
 
 	void SceneManager::StartSceneObjects()
 	{
-		for (auto* obj : GameObject::s_gameObjects)
-		{
-			obj->Start();
-		}
-
 		m_worldView.setSize(sf::Vector2f(WindowManager::Get()->getSize().x * sc_defaultZoom, 
 										 WindowManager::Get()->getSize().y * sc_defaultZoom));
 		m_worldView.setCenter(sf::Vector2f(m_worldCenter));
 
-		m_uiView.setSize(sf::Vector2f(WindowManager::Get()->getSize().x * sc_defaultZoom,
-										 WindowManager::Get()->getSize().y * sc_defaultZoom));
+		sf::Vector2f windowSize = sf::Vector2f(WindowManager::Get()->getSize().x, WindowManager::Get()->getSize().y);
 
-		if (m_currentGameSceneState == SceneType::MainMenu)
+		m_uiViewSize = sf::Vector2f(1280, 720);
+		m_uiView.setSize(sf::Vector2f(m_uiViewSize.x, m_uiViewSize.y));
+		sf::Vector2f uiSizeView = sf::Vector2f(m_uiView.getSize().x, m_uiView.getSize().y);
+		m_uiView.setCenter(sf::Vector2f(m_uiViewSize.x / 2.0f, m_uiViewSize.y / 2.0f));
+
+		for (auto* obj : GameObject::s_gameObjects)
 		{
-			m_uiView.setCenter(sf::Vector2f(m_uiCenter));
-		}
-		//m_uiView.setCenter(sf::Vector2f(m_uiCenter));
 
+			obj->Start();
+		}
 
 		if (m_currentScene == SceneType::Level1)
 		{
 			m_uiTestShape.setSize(sf::Vector2f(20.f, 20.f));
-			m_uiTestShape.setScale(sf::Vector2f(1.0f * sc_defaultZoom, 1.0f * sc_defaultZoom));
+			m_uiTestShape.setScale(sf::Vector2f(1.0f, 1.0f));
 			m_uiTestShape.setFillColor(sf::Color::Green);
-			m_uiTestShape.setPosition(sf::Vector2f(m_uiCenter.x, m_uiCenter.y));
+			m_uiTestShape.setPosition(sf::Vector2f(m_uiView.getCenter().x, m_uiView.getCenter().y));
 		}
 	}
 
@@ -123,10 +121,35 @@ namespace ratchet
 	{
 		for (auto* obj : GameObject::s_gameObjects)
 		{
+		
 			if (obj->m_objectType == ObjectType::UI)
 			{
-				obj->SetActiveObject(active);
-				obj->SetActiveRenderer(active);
+				if (active)
+				{
+					if (auto* button = dynamic_cast<UIButton*>(obj))
+					{
+						if (button->m_parentNameState == ButtonNameState::None)
+						{
+							button->SetActiveObject(active);
+							button->SetActiveRenderer(active);
+						}
+				
+					}
+
+					if (auto* text = dynamic_cast<UIText*>(obj))
+					{
+						if (text->m_textConnectedObject == TextConnectedObject::None)
+						{
+							text->SetActiveObject(active);
+							text->SetActiveRenderer(active);
+						}
+					}
+				}
+				else
+				{
+					obj->SetActiveObject(active);
+					obj->SetActiveRenderer(active);
+				}
 			}
 		}
 	}
@@ -373,16 +396,6 @@ namespace ratchet
 				{
 					if (obj->m_objectType == ObjectType::UI)
 					{
-						/*if (m_currentScene == SceneType::Level1)
-						{
-							if (auto* clickButton = dynamic_cast<UIClickButton*>(obj))
-							{
-								clickButton->m_sprite.setPosition(sf::Vector2f(m_uiView.getCenter().x + clickButton->m_uiButtonOffsetX * 2 * 0.1, 
-																	  m_uiView.getCenter().y + clickButton->m_uiButtonOffsetY * 2 * 0.1));
-
-								sf::Vector2f position = clickButton->m_sprite.getPosition();
-							}
-						}*/
 						target.setView(m_uiView);
 						obj->render(target);
 					}
@@ -656,7 +669,7 @@ namespace ratchet
 
 					succeeded = true;
 				}
-				else if (layerName == "Slider Buttons")
+				else if (layerName == "Slider Buttons" || layerName == "Pause Menu Slider Buttons")
 				{
 					if (obj["name"] == "Slider Button")
 					{

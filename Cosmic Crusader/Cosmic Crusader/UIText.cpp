@@ -50,15 +50,13 @@ namespace ratchet
 		sf::View view = SceneManager::Get().GetUIView();
 		sf::Vector2f center = view.getCenter();
 
+		sf::Vector2f bouns = sf::Vector2f(m_UIText.getLocalBounds().width, m_UIText.getLocalBounds().height);
 
+		sf::Vector2f textOrgin = sf::Vector2f(m_UIText.getLocalBounds().width / 2.0f,
+											   m_UIText.getLocalBounds().height /2.0f);
+		m_UIText.setOrigin(textOrgin);
 		m_UIText.setPosition(sf::Vector2f(SceneManager::Get().GetUIView().getCenter().x + m_uiTextOffsetX,
 										  SceneManager::Get().GetUIView().getCenter().y + m_uiTextOffsetY));
-
-	/*	if (m_textConnectedObject == TextConnectedObject::Options)
-		{
-			m_UIText.setPosition(sf::Vector2f(SceneManager::Get().GetUIView().getCenter().x  450.f,
-								SceneManager::Get().GetUIView().getCenter().y -300));
-		}*/
 	}
 	void UIText::update()
 	{

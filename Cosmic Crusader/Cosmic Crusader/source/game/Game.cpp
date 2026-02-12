@@ -151,7 +151,7 @@ namespace ratchet
 	void Game::start()
 	{
 		spawnObjects();
-		applySceneView();
+		//applySceneView();
 		SceneManager::Get().StartSceneObjects();
 	}
 

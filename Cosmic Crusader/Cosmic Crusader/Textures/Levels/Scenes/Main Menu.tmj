@@ -9,7 +9,7 @@
          "objects":[
                 {
                  "gid":46,
-                 "height":100,
+                 "height":64,
                  "id":9,
                  "name":"Play Button",
                  "properties":[
@@ -41,12 +41,12 @@
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":-600
+                         "value":-576
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":-180
+                         "value":-128
                         }, 
                         {
                          "name":"colliderType",
@@ -71,13 +71,13 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":300,
-                 "x":60,
-                 "y":256
+                 "width":192,
+                 "x":64,
+                 "y":192
                 }, 
                 {
                  "gid":40,
-                 "height":100,
+                 "height":64,
                  "id":10,
                  "name":"Options Button",
                  "properties":[
@@ -109,7 +109,7 @@
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":-600
+                         "value":-576
                         }, 
                         {
                          "name":"buttonUIYOffset",
@@ -139,13 +139,13 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":300,
+                 "width":192,
                  "x":64,
-                 "y":448
+                 "y":320
                 }, 
                 {
                  "gid":44,
-                 "height":100,
+                 "height":64,
                  "id":11,
                  "name":"Exit Button",
                  "properties":[
@@ -177,12 +177,12 @@
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":-600
+                         "value":-576
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":180
+                         "value":128
                         }, 
                         {
                          "name":"colliderType",
@@ -207,13 +207,13 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":300,
+                 "width":192,
                  "x":64,
-                 "y":640
+                 "y":449
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -251,22 +251,22 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":5
+                         "value":6
                         }, 
                         {
                          "name":"buttonParentNameState",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":-344
+                         "value":-320
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":-100
+                         "value":-64
                         }, 
                         {
                          "name":"colliderType",
@@ -324,22 +324,22 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":5
+                         "value":6
                         }, 
                         {
                          "name":"buttonParentNameState",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":280
+                         "value":384
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":-100
+                         "value":-64
                         }, 
                         {
                          "name":"colliderType",
@@ -397,22 +397,22 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":5
+                         "value":6
                         }, 
                         {
                          "name":"buttonParentNameState",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":-344
+                         "value":-320
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":100
+                         "value":128
                         }, 
                         {
                          "name":"colliderType",
@@ -470,22 +470,22 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":4
+                         "value":5
                         }, 
                         {
                          "name":"buttonParentNameState",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":-600
+                         "value":-576
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":-100
+                         "value":-64
                         }, 
                         {
                          "name":"colliderType",
@@ -543,22 +543,22 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":4
+                         "value":5
                         }, 
                         {
                          "name":"buttonParentNameState",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":21
+                         "value":128
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":-100
+                         "value":-64
                         }, 
                         {
                          "name":"colliderType",
@@ -584,8 +584,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":518,
-                 "y":258
+                 "x":512,
+                 "y":256
                 }, 
                 {
                  "gid":61,
@@ -616,22 +616,22 @@
                         {
                          "name":"buttonNameState",
                          "type":"int",
-                         "value":4
+                         "value":5
                         }, 
                         {
                          "name":"buttonParentNameState",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":-600
+                         "value":-576
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":100
+                         "value":128
                         }, 
                         {
                          "name":"colliderType",
@@ -698,7 +698,7 @@
                         {
                          "name":"textConnectedObject",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"textFontPath",
@@ -713,12 +713,12 @@
                         {
                          "name":"textUIXOffset",
                          "type":"float",
-                         "value":-420
+                         "value":-418
                         }, 
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":-64
+                         "value":-53
                         }, 
                         {
                          "name":"textValue",
@@ -779,7 +779,7 @@
                         {
                          "name":"textConnectedObject",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"textFontPath",
@@ -794,12 +794,12 @@
                         {
                          "name":"textUIXOffset",
                          "type":"float",
-                         "value":200
+                         "value":286
                         }, 
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":-64
+                         "value":-53
                         }, 
                         {
                          "name":"textValue",
@@ -860,7 +860,7 @@
                         {
                          "name":"textConnectedObject",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"textFontPath",
@@ -875,12 +875,12 @@
                         {
                          "name":"textUIXOffset",
                          "type":"float",
-                         "value":-420
+                         "value":-418
                         }, 
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":134
+                         "value":139
                         }, 
                         {
                          "name":"textValue",
@@ -956,12 +956,12 @@
                         {
                          "name":"textUIXOffset",
                          "type":"float",
-                         "value":-450
+                         "value":-448
                         }, 
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":-250
+                         "value":-192
                         }, 
                         {
                          "name":"textValue",
@@ -1037,12 +1037,12 @@
                         {
                          "name":"textUIXOffset",
                          "type":"float",
-                         "value":200
+                         "value":320
                         }, 
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":-250
+                         "value":-192
                         }, 
                         {
                          "name":"textValue",
@@ -1103,7 +1103,7 @@
                         {
                          "name":"textConnectedObject",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"textFontPath",
@@ -1118,12 +1118,12 @@
                         {
                          "name":"textUIXOffset",
                          "type":"float",
-                         "value":-450
+                         "value":-448
                         }, 
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":-150
+                         "value":-128
                         }, 
                         {
                          "name":"textValue",
@@ -1184,7 +1184,7 @@
                         {
                          "name":"textConnectedObject",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"textFontPath",
@@ -1199,12 +1199,12 @@
                         {
                          "name":"textUIXOffset",
                          "type":"float",
-                         "value":150
+                         "value":256
                         }, 
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":-150
+                         "value":-128
                         }, 
                         {
                          "name":"textValue",
@@ -1265,7 +1265,7 @@
                         {
                          "name":"textConnectedObject",
                          "type":"int",
-                         "value":2
+                         "value":3
                         }, 
                         {
                          "name":"textFontPath",
@@ -1280,12 +1280,12 @@
                         {
                          "name":"textUIXOffset",
                          "type":"float",
-                         "value":-400
+                         "value":-384
                         }, 
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":50
+                         "value":64
                         }, 
                         {
                          "name":"textValue",
@@ -1342,12 +1342,12 @@
                         {
                          "name":"buttonUIXOffset",
                          "type":"float",
-                         "value":400
+                         "value":384
                         }, 
                         {
                          "name":"buttonUIYOffset",
                          "type":"float",
-                         "value":250
+                         "value":256
                         }, 
                         {
                          "name":"colliderType",
