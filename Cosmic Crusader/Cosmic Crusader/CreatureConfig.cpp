@@ -9,7 +9,7 @@ namespace ratchet
 {
 	bool CreatureConfig::serialise(nlohmann::json& jsonFile)
 	{
-		return GameObjectConfig::serialise(jsonFile);
+		return false;
 	}
 	bool CreatureConfig::deserialise(const nlohmann::json& jsonFile)
 	{

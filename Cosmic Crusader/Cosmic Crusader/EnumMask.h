@@ -26,6 +26,11 @@ public:
 		m_value = 0;
 	}
 
+	int getRawValue()
+	{
+		return m_value;
+	}
+
 	std::vector<T> getValueList(const int enumElementCount) const
 	{
 		std::vector<T> valueList;

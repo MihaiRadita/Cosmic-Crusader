@@ -3,6 +3,10 @@
 
 //#include "game/Player.h"
 
+#include "EnumMask.h"
+
+#include "SceneManager.h"
+
 
 namespace ratchet
 {
@@ -486,6 +490,60 @@ namespace ratchet
 			m_mustSpawnBullet = false;
 
 		}
+	}
+
+	void Creature::serialise(nlohmann::json& jsonFile)
+	{
+		 GameObject::serialise(jsonFile);
+
+		 jsonFile["x"] = m_position.x + m_checkPointOffsetX;
+		 jsonFile["y"] = m_position.x + m_checkPointOffsetY;
+
+		EnumMask<Weapon::TYPE> saveMask;
+
+		for (auto& weapons : m_ownedWeaponList)
+		{
+			if (weapons->m_weaponType != Weapon::TYPE::None)
+			{
+				for (const auto& [weaponType, isUsable] : m_usableWeaponTypeList)
+				{
+					if (isUsable)
+					{
+						saveMask.addValue(weaponType);
+
+						for (auto& prop : jsonFile["properties"])
+						{
+							auto& propName = prop["name"];
+							auto& propValue = prop["value"];
+
+							if (propName == "usableWeaponCheckListMask")
+							{
+								propValue = saveMask.getRawValue();
+							}
+						}
+
+
+						nlohmann::json weponWasPcikedUp;
+						if (SceneManager::Get().FindObjectById(weapons->m_WeaponID, weponWasPcikedUp,
+							SceneManager::Get().GetLayerNameObjectByID(weapons->m_WeaponID)))
+						{
+							for (auto& prop : weponWasPcikedUp["properties"])
+							{
+								auto& propName = prop["name"];
+								auto& propValue = prop["value"];
+
+								if (propName == "isWeaponAccesible")
+								{
+									propValue = !isUsable;
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
 	}
 
 

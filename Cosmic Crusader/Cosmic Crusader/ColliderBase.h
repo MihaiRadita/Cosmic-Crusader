@@ -11,7 +11,8 @@ namespace ratchet
 		Creature, 
 		Player,
 		Items, 
-		Projectiles
+		Projectiles,
+		CheckPoints
 	};
 
 	enum ColliderType { COLLIDERTYPE_UNKNOWN = 0, STATIC, DYNAMIC };

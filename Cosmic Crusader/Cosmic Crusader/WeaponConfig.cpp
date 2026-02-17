@@ -71,16 +71,16 @@ namespace ratchet
 
 			const auto& propertyType = jsonProperty["type"];
 
+			if (propertyName == "objectType")
+			{
+				m_objectType = static_cast<ObjectType>(propertyValue.get<int>());
+			}
 
 			if (propertyName == "Faction")
 			{
 				m_Faction = static_cast<Faction>(propertyValue.get<int>());
 			}
 
-			if (propertyName == "objectType")
-			{
-				m_objectType = static_cast<ObjectType>(propertyValue.get<int>());
-			}
 
 			if (propertyName == "activeObject")
 			{

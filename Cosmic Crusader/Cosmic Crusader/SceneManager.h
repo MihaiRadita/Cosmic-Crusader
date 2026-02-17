@@ -7,6 +7,7 @@
 #include "WeaponPickup.h"
 #include "UIClickButton.h"
 #include "UISliderButton.h"
+#include "Checkpoint.h"
 
 #include "physics/Physics.h"
 

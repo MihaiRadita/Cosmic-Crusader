@@ -164,6 +164,12 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Checkpoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckpointConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -257,5 +263,7 @@
     <ClInclude Include="UIText.h" />
     <ClInclude Include="UITextConfig.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Checkpoint.h" />
+    <ClInclude Include="CheckpointConfig.h" />
   </ItemGroup>
 </Project>

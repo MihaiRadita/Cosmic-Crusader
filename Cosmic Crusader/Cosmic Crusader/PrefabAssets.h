@@ -10,6 +10,7 @@
 #include "UIButtonConfig.h"
 #include "UISliderButtonConfig.h"
 #include "UITextConfig.h"
+#include "CheckpointConfig.h"
 
 
 

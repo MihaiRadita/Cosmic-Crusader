@@ -63,6 +63,8 @@ namespace ratchet
 		void updateRunningJump() override;
 		void setIsOnGround(bool isGround);
 
+		void serialise(nlohmann::json& jsonFile) override;
+
 		//Render
 
 		//Destructor

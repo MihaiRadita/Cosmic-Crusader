@@ -101,6 +101,9 @@ namespace ratchet
 		virtual void OnSensorEnter(GameObject* obj);
 		virtual void OnSensorExit(GameObject* obj);
 
+		//Save Functions
+		virtual void serialise(nlohmann::json& jsonFile);
+
 		//Getters
 		const sf::FloatRect getBounds() const;
 

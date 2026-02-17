@@ -41,9 +41,13 @@ namespace ratchet
 		creatureThatPickedUpTheWeapon->setWeaponIndex(creatureThatPickedUpTheWeapon->getWeaponListSize() - 1);
 		creatureThatPickedUpTheWeapon->setWeapon(creatureThatPickedUpTheWeapon->m_currentEquippedWeaponIndex);
 	}
+
 	WeaponPickup::WeaponPickup(const WeaponConfig& config): GameObject(config)
 	{
+		m_weaponId = config.m_objectID;
+
 		m_weaponConfig = config;
+
 		
 		if (m_weaponConfig.has_value())
 		{
@@ -76,6 +80,22 @@ namespace ratchet
 	void WeaponPickup::Start()
 	{
 		PostCosntructFixup();
+	}
+
+	void WeaponPickup::serialise(nlohmann::json& jsonFile)
+	{
+		GameObject::serialise(jsonFile);
+
+		for (auto& prop : jsonFile["properties"])
+		{
+			auto& propName = prop["name"];
+			auto& proValue = prop["value"];
+
+			if (propName == "isWeaponAccessible")
+			{
+				proValue = false;
+			}
+		}
 	}
 
 	void WeaponPickup::OnCollisionEnter(GameObject* obj)

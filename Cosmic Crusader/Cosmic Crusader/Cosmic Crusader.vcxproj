@@ -148,6 +148,8 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletConfig.cpp" />
     <ClCompile Include="CapsuleCollider.cpp" />
+    <ClCompile Include="Checkpoint.cpp" />
+    <ClCompile Include="CheckpointConfig.cpp" />
     <ClCompile Include="ColliderBase.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="CreatureConfig.cpp" />
@@ -202,6 +204,8 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletConfig.h" />
     <ClInclude Include="CapsuleCollider.h" />
+    <ClInclude Include="Checkpoint.h" />
+    <ClInclude Include="CheckpointConfig.h" />
     <ClInclude Include="ColliderBase.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="CreatureConfig.h" />

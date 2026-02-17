@@ -375,6 +375,10 @@ namespace ratchet
 		// m_isGround = isGround;
 	}
 
+	void Player::serialise(nlohmann::json& jsonFile)
+	{
+		Creature::serialise(jsonFile);
+	}
 
 	Player::~Player() 
 	{

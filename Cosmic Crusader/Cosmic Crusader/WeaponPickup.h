@@ -17,6 +17,8 @@ namespace ratchet
 		bool m_isPickup = false;
 		bool m_IsWeaponAccessible = false;
 
+		int m_weaponId;
+
 		Weapon::TYPE m_weaponType;
 		std::optional<WeaponConfig> m_weaponConfig;
 
@@ -30,6 +32,9 @@ namespace ratchet
 
 		void PostCosntructFixup() override;
 		void Start() override;
+
+
+		void serialise(nlohmann::json& jsonFile) override;
 
 		std::string m_weaponPickupID;
 

@@ -95,6 +95,9 @@ namespace ratchet
 		void updateWeaponSelection() override;
 		void updateShooting();
 
+
+		void serialise(nlohmann::json& jsonFile) override;
+
 		//Render functions
 
 		//Sprite functions
@@ -152,6 +155,10 @@ namespace ratchet
 		std::vector<Weapon*> m_ownedWeaponList; 
 		std::vector <Weapon::TYPE> m_weaponTypeList;
 		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
+
+
+		float m_checkPointOffsetX;
+		float m_checkPointOffsetY;
 
 
 		 WeaponAnimation::ANGLE m_currentCharacterAngle;

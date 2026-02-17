@@ -649,7 +649,10 @@ namespace ratchet
 					{
 						if (obj["type"] == "Weapon Pickup")
 						{
-							GameObject::s_gameObjects.push_back(new WeaponPickup(config));
+							if (config.m_isWeaponAccessible)
+							{
+								GameObject::s_gameObjects.push_back(new WeaponPickup(config));
+							}
 						}
 
 						if (!PrefabAssets::Get().isWeaponConfigExists(config.m_objectID))
@@ -698,8 +701,17 @@ namespace ratchet
 							GameObject::s_gameObjects.push_back(new UIText(config));
 						}
 					}
-					succeeded = true;
 				}
+				else if (layerName == "Check Points")
+				{
+					auto config = CheckpointConfig();
+
+					if (config.deserialise(obj))
+					{
+						GameObject::s_gameObjects.push_back(new Checkpoint(config));
+					}
+				}
+				succeeded = true;
 
 				if (!succeeded)
 				{
