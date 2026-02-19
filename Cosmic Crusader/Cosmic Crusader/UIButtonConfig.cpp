@@ -91,6 +91,21 @@ namespace ratchet
 				m_parentNameState = static_cast<ButtonNameState>(propertyValue.get<int>());
 			}
 
+			if (propertyName == "buttonBackSection")
+			{
+				m_BackNameSection = static_cast<ButtonNameSection>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "buttonNextSection")
+			{
+				m_NextNameSection = static_cast<ButtonNameSection>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "buttonSection")
+			{
+				m_nameSection = static_cast<ButtonNameSection>(propertyValue.get<int>());
+			}
+
 			if (propertyName == "buttonUIXOffset")
 			{
 				m_uiButtonOffsetX = propertyValue.get<float>();

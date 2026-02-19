@@ -42,6 +42,10 @@ namespace ratchet
 		ButtonNameState m_parentNameState;
 		ButtonNameAction m_nameAction;
 
+		ButtonNameSection m_nameSection;
+		ButtonNameSection m_BackNameSection;
+		ButtonNameSection m_NextNameSection;
+
 		bool m_isEventAllreadyActive = false;
 
 		float m_uiButtonOffsetX;

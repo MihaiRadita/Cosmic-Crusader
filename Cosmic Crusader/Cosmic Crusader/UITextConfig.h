@@ -9,7 +9,7 @@ namespace ratchet
 	};
 
 	enum class TextConnectedObject {
-		None = 0, Play, Resume, Options, Slider,
+		None = 0, Play, NewGame, Continue, Resume, Options, Slider,
 		Back_Value, Next_Value,
 		Swicther_On, Switcher_Off,
 		Back, Quit, Exit

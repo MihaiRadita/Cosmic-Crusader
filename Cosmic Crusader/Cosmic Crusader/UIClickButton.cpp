@@ -34,6 +34,10 @@ namespace ratchet
 			switch (m_nameState)
 			{
 			case ButtonNameState::Play:
+				setButtonsSectionActive(true);
+				break;
+
+			case ButtonNameState::Continue:
 				WindowManager::Get()->clear(sf::Color::Black);
 				WindowManager::Get()->display();
 
@@ -42,6 +46,7 @@ namespace ratchet
 
 				SceneManager::Get().LoadNextScene();
 				break;
+
 			case ButtonNameState::Exit:
 				WindowManager::Get()->close();
 				break;
@@ -124,79 +129,74 @@ namespace ratchet
 				}
 				if (auto* ui = dynamic_cast<UIClickButton*>(obj))
 				{
-					if (ui->m_parentNameState != m_nameState)
+					if (active)
 					{
-
-						if (active == true)
+						if (ui->m_nameSection == m_nameSection)
 						{
-							m_isEventAllreadyActive = !active;
 							m_isButtonInteracting = !active;
-
+							m_isEventAllreadyActive = !active;
+							ui->setButtonActive(!active);
 						}
-						else
+						else if (ui->m_nameSection == m_NextNameSection)
 						{
 							m_isEventAllreadyActive = active;
 							m_isButtonInteracting = active;
-						}
-
-						ui->setButtonActive(!active);
-
-					}
-					else if(ui->m_parentNameState == m_nameState)
-					{
-						if (ui->checkIsButtonActive() == checkIsButtonActive())
-						{
-							if (active == true)
-							{
-								m_isEventAllreadyActive = !active;
-								m_isButtonInteracting = !active;
-
-							}
-							else
-							{
-								m_isEventAllreadyActive = active;
-								m_isButtonInteracting = active;
-							}
 							ui->setButtonActive(active);
 
 						}
 					}
+					else
+					{
+						
+						if (ui->m_nameSection == m_nameSection)
+						{
+							m_isButtonInteracting = active;
+							m_isEventAllreadyActive = active;
+							ui->setButtonActive(active);
+						}
+						else if (ui->m_nameSection == m_BackNameSection)
+						{
+							m_isEventAllreadyActive = !active;
+							m_isButtonInteracting = !active;
+							ui->setButtonActive(!active);
+
+						}
+					}
+	
 				}
 				else if (auto* ui = dynamic_cast<UISliderButton*>(obj))
 				{
-					if (ui->getParentButtonNameState() != m_nameState)
+					if (active)
 					{
-						if (active == true)
+						if (ui->m_nameSection == m_nameSection)
 						{
-							m_isEventAllreadyActive = !active;
-
 							m_isButtonInteracting = !active;
+							m_isEventAllreadyActive = !active;
+							ui->setButtonActive(!active);
 						}
-						else
+						else if (ui->m_nameSection == m_NextNameSection)
 						{
 							m_isEventAllreadyActive = active;
-						}
-						m_isButtonInteracting = active;
-
-						ui->setButtonActive(active);
-					}
-					else if (ui->getParentButtonNameState() == m_nameState)
-					{
-						if (ui->checkIsButtonActive() == checkIsButtonActive())
-						{
-
-							if (active == true)
-							{
-								m_isEventAllreadyActive = !active;
-								m_isButtonInteracting = !active;
-
-							}
-							else
-							{
-								m_isEventAllreadyActive = active;
-								m_isButtonInteracting = active;
-							}
+							m_isButtonInteracting = active;
 							ui->setButtonActive(active);
+
+						}
+					}
+					else
+					{
+
+						if (ui->m_nameSection == m_nameSection)
+						{
+							m_isButtonInteracting = active;
+							m_isEventAllreadyActive = active;
+							ui->setButtonActive(active);
+						}
+						else if (ui->m_nameSection == m_BackNameSection)
+						{
+							m_isEventAllreadyActive = !active;
+							m_isButtonInteracting = !active;
+							ui->setButtonActive(!active);
+
 						}
 					}
 				}

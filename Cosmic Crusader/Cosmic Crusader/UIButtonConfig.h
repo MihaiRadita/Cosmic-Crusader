@@ -4,10 +4,15 @@
 namespace ratchet
 {
 	enum class ButtonNameState {
-		None = 0, Play,Resume, Options,Slider,
+		None = 0, Play,NewGame,Continue,Resume, Options,Slider,
 		Back_Value,Next_Value,
 		Swicther_On, Switcher_Off,
 		Back,Quit, Exit
+	};
+
+	enum class ButtonNameSection
+	{
+		None = 0,MainSection, PlaySection,OptionSection
 	};
 
 	enum class ButtonNameAction
@@ -27,6 +32,10 @@ namespace ratchet
 		ButtonNameState m_nameState;
 		ButtonNameState m_parentNameState;
 		ButtonNameAction m_nameAction;
+
+		ButtonNameSection m_BackNameSection;
+		ButtonNameSection m_nameSection;
+		ButtonNameSection m_NextNameSection;
 
 		float m_uiButtonOffsetX;
 		float m_uiButtonOffsetY;

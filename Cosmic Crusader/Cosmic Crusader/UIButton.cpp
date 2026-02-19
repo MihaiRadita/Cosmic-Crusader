@@ -12,6 +12,9 @@ namespace ratchet
 		m_nameState = config.m_nameState;
 		m_parentNameState = config.m_parentNameState;
 		m_nameAction = config.m_nameAction;
+		m_nameSection = config.m_nameSection;
+		m_BackNameSection = config.m_BackNameSection;
+		m_NextNameSection = config.m_NextNameSection;
 		m_isButtonInteracting = false;
 		m_isButtonEventTirggered = false;
 

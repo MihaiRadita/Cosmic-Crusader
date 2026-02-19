@@ -519,6 +519,7 @@ namespace ratchet
 							if (propName == "usableWeaponCheckListMask")
 							{
 								propValue = saveMask.getRawValue();
+								break;
 							}
 						}
 
