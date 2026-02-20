@@ -240,6 +240,11 @@ namespace ratchet
 				}
 			}
 
+			if (propertyName == "isWeaponAccesible")
+			{
+				m_isWeaponAccessible = propertyValue.get<bool>();
+			}
+
 		}
 
 		return true;

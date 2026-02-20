@@ -21,6 +21,9 @@ namespace ratchet
 		m_jumpImpulse = config.m_jumpImpulse;
 		m_bodShoulderOffset = config.m_bodShoulderOffset;
 
+		m_checkPointOffsetX = 0.0f;
+		m_checkPointOffsetY = 0.0f;
+
 		m_fireRate = config.m_fireRate;
 		m_recoilTime = config.m_recoilTime;
 
@@ -496,58 +499,50 @@ namespace ratchet
 	{
 		 GameObject::serialise(jsonFile);
 
-		 jsonFile["x"] = m_position.x + m_checkPointOffsetX;
-		 jsonFile["y"] = m_position.x + m_checkPointOffsetY;
+		 jsonFile["x"] = m_sprite.getPosition().x * 100;
+		 jsonFile["y"] = m_sprite.getPosition().y * 100;
 
-		EnumMask<Weapon::TYPE> saveMask;
+		 EnumMask<Weapon::TYPE> saveMask;
 
-		for (auto& weapons : m_ownedWeaponList)
+		for (auto& weapon : m_ownedWeaponList)
 		{
-			if (weapons->m_weaponType != Weapon::TYPE::None)
+
+			auto it = m_usableWeaponTypeList.find(weapon->m_weaponType);
+			if (it != m_usableWeaponTypeList.end() && it->second)
 			{
-				for (const auto& [weaponType, isUsable] : m_usableWeaponTypeList)
+				saveMask.addValue(weapon->m_weaponType);
+
+				auto* weaponObj = SceneManager::Get().FindObjectById(
+					weapon->m_WeaponID,
+					SceneManager::Get().GetLayerNameObjectByID(weapon->m_WeaponID)
+				);
+
+				if (weaponObj)
 				{
-					if (isUsable)
+					for (auto& prop : (*weaponObj)["properties"])
 					{
-						saveMask.addValue(weaponType);
-
-						for (auto& prop : jsonFile["properties"])
+						if (prop["name"] == "isWeaponAccesible")
 						{
-							auto& propName = prop["name"];
-							auto& propValue = prop["value"];
-
-							if (propName == "usableWeaponCheckListMask")
-							{
-								propValue = saveMask.getRawValue();
-								break;
-							}
-						}
-
-
-						nlohmann::json weponWasPcikedUp;
-						if (SceneManager::Get().FindObjectById(weapons->m_WeaponID, weponWasPcikedUp,
-							SceneManager::Get().GetLayerNameObjectByID(weapons->m_WeaponID)))
-						{
-							for (auto& prop : weponWasPcikedUp["properties"])
-							{
-								auto& propName = prop["name"];
-								auto& propValue = prop["value"];
-
-								if (propName == "isWeaponAccesible")
-								{
-									propValue = !isUsable;
-									break;
-								}
-							}
+							auto& value = prop["value"];
+							value = false;
+							break;
 						}
 					}
 				}
 			}
 		}
-		
+
+		for (auto& prop : jsonFile["properties"])
+		{
+			if (prop["name"] == "usableWeaponCheckListMask")
+			{
+				auto& value = prop["value"];
+				value = saveMask.getRawValue();
+				break;
+			}
+		}
 	}
-
-
+		
 	void Creature::invertCharacterMovingSpriteScale(int direction)
 	{
 		m_sprite.setScale(m_scale.x * (float)direction, m_scale.y);

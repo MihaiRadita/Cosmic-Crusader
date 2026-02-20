@@ -60,6 +60,9 @@ namespace ratchet
 		float m_tangentHalfBase;
 		float m_tangentx3HalfBase; 
 
+		float m_checkPointOffsetX;
+		float m_checkPointOffsetY;
+
 		//Charater boby areas points
 		sf::Vector2f m_bodyShoulderPosition;
 		float m_bodShoulderOffset;
@@ -157,8 +160,7 @@ namespace ratchet
 		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
 
 
-		float m_checkPointOffsetX;
-		float m_checkPointOffsetY;
+
 
 
 		 WeaponAnimation::ANGLE m_currentCharacterAngle;

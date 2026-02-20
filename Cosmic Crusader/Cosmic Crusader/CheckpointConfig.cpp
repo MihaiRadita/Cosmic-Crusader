@@ -62,6 +62,16 @@ namespace ratchet
 				m_activeRenderer = propertyValue.get<bool>();
 			}
 
+			if (propertyName == "checkPointOffetX")
+			{
+				m_checkPointOffsetX = propertyValue.get<float>();
+			}
+
+			if (propertyName == "checkPointOffetY")
+			{
+				m_checkPointOffsetY = propertyValue.get<float>();
+			}
+
 			if (propertyName == "colliderDensity")
 			{
 				m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
@@ -95,6 +105,11 @@ namespace ratchet
 			if (propertyName == "flagRedTexture")
 			{
 				m_RedFlagPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "isCheckPointPicked")
+			{
+				m_isCheckPointPickked = propertyValue.get<bool>();
 			}
 
 			if (propertyName == "objectType")

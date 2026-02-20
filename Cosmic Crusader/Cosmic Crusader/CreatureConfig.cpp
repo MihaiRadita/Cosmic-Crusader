@@ -328,7 +328,14 @@ namespace ratchet
 					m_usableWeaponTypeList[weaponType] = isUsable;
 				}
 			}
+		}
 
+		for (const auto& jsonProperty : jsonFile["properties"])
+		{
+			const auto& propertyName = jsonProperty["name"];
+			const auto& propertyValue = jsonProperty["value"];
+
+			const auto& propertyType = jsonProperty["type"];
 			if (propertyName.get<std::string>().find("initialWeapon_") != std::string::npos)
 			{
 				const auto id = propertyValue.get<int>();
@@ -339,8 +346,11 @@ namespace ratchet
 				{
 					if (auto* weaponConfigPtr = PrefabAssets::Get().GetWeaponConfig(id))
 					{
-						weaponConfig.emplace(*weaponConfigPtr);
-						weaponType = weaponConfigPtr->m_weaponType;
+						if (m_usableWeaponTypeList[weaponConfigPtr->m_weaponType] == true)
+						{
+							weaponConfig.emplace(*weaponConfigPtr);
+							weaponType = weaponConfigPtr->m_weaponType;
+						}
 					}
 				}
 

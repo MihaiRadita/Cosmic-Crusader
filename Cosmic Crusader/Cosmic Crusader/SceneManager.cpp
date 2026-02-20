@@ -7,41 +7,32 @@ namespace ratchet
 	ratchet::SceneManager::SceneManager()
 	{
 		CheckAndBuildScenes();
-		LoadCombinedScenes();
 
 		m_currentScene = SceneType::MainMenu;
 		m_currentGameSceneState = SceneGameState::Playing;
 		m_sceneIndex = static_cast<int>(m_currentScene);
 	}
 
-	bool SceneManager::FindObjectById(int& id, nlohmann::json& outObj, const std::string& layerName)
+	nlohmann::json* SceneManager::FindObjectById(int id, const std::string& layerName)
 	{
 		auto& scene = GetScene(m_currentScene);
 
-		if (!scene.contains("layers") || !scene["layers"].is_array()) {
-			std::cout << "WARNING: Scene has no layers or layers is not an array: " << scene["name"] << "\n";
-			return false;
-		}
-
-		for (const auto& layer : scene["layers"])
+		for (auto& layer : scene["layers"])
 		{
-			const auto& validLayer = layer.contains("objects");
-			if (!validLayer) continue;
+			if (!layer.contains("objects")) continue;
 
+			if (layer["name"] != layerName) continue;
 
-			if (layer["name"].get<std::string>() != layerName)
-				continue;
-			
-			for (const auto& obj : layer["objects"])
+			for (auto& obj : layer["objects"])
 			{
 				if (obj["id"] == id)
 				{
-					outObj = obj;
-					return true;
+					return &obj; 
 				}
 			}
 		}
-		return false;
+
+		return nullptr;
 	}
 
 	SceneType SceneManager::GetCurrentScene()
@@ -51,6 +42,7 @@ namespace ratchet
 
 	void SceneManager::StartSceneManager()
 	{
+		LoadCombinedScenes();
 		LoadSceneBasicFeatures();
 		LoadSceneGameObjects();
 
@@ -463,6 +455,104 @@ namespace ratchet
 		{
 			m_sceneIndex = 0;
 		}
+	}
+
+	void SceneManager::SaveGame()
+	{
+		std::string sceneName = m_sceneFiles[m_currentScene];
+
+		if (!m_allScenes.contains("scenes")) {
+			std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+			return;
+		}
+
+		auto& scenesNode = m_allScenes["scenes"];
+		if (!scenesNode.contains(sceneName)) {
+			std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+			return;
+		}
+
+		auto& sceneJson = scenesNode[sceneName];
+
+		if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
+			std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+			return;
+		}
+		
+		for (auto& layer : sceneJson["layers"])
+		{
+			const auto& validLayer = layer.contains("objects");
+			if (!validLayer) continue;
+
+			const auto& layerName = layer["name"].get<std::string>();
+
+			if (layerName == "Player")
+			{
+				for (auto& obj : layer["objects"])
+				{
+					if (obj["name"] == "Player")
+					{
+						auto& playerData = obj;
+						for (auto& object : GameObject::s_gameObjects)
+						{
+							auto* player = dynamic_cast<Player*>(object);
+
+							if (player)
+							{
+								player->serialise(playerData);
+
+								for (auto& layer1 : sceneJson["layers"])
+								{
+									const auto& validLayer = layer1.contains("objects");
+									if (!validLayer) continue;
+
+									const auto& layerName1 = layer1["name"].get<std::string>();
+
+									if (layerName1 == "Check Points")
+									{
+										for (auto& obj1 : layer1["objects"])
+										{
+											if (obj1["name"] == "Check Point")
+											{
+												for (auto& object1 : GameObject::s_gameObjects)
+												{
+													auto* checkPoint = dynamic_cast<Checkpoint*>(object1);
+
+													if (checkPoint)
+													{
+														if (checkPoint->m_objectId == player->m_playerCheckPointID)
+														{
+															auto& checkPointData = obj1;
+															checkPoint->serialise(checkPointData);
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		std::string combinedPath = m_baseScenePath + "GameScenes.json";
+
+		if (!fs::exists(combinedPath))
+		{
+			std::cout << "ERROR! File does not exists!" << std::endl;
+			return;
+		}
+
+		std::ofstream out(combinedPath);
+
+		out << m_allScenes;
+
+		std::cout << "The Scene File has been created with scuccess!" << std::endl;
+
+
 	}
 
 	void SceneManager::LoadSceneBasicFeatures()

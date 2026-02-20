@@ -29,6 +29,8 @@ namespace ratchet
 		//Constructors
 		Player(const CreatureConfig& config);
 
+		int m_playerCheckPointID = 0;
+
 		//Init functions
 		void initVariables();
 

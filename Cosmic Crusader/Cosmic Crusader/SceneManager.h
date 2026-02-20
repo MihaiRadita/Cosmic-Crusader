@@ -53,6 +53,8 @@ namespace ratchet
 		void LoadNextScene();
 		void IncreaseSceneIndex();
 
+		void SaveGame();
+
 		void LoadSceneGameObjects();
 
 		void ClearSceneObjects();
@@ -88,7 +90,7 @@ namespace ratchet
 		bool IsCameraDirty();
 
 		void ClearCameraDirty();
-		bool FindObjectById(int& id, nlohmann::json& outObj, const std::string& layerName);
+		nlohmann::json* FindObjectById(int id, const std::string& layerName);
 
 		SceneType GetCurrentScene();
 

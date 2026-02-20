@@ -15,12 +15,20 @@ namespace ratchet
 		Checkpoint(const CheckpointConfig& config);
 		~Checkpoint();
 
-
 		sf::Texture m_redFlagTexture;
 		sf::Texture m_greenFlagTexture;
 
 		std::string m_RedFlagPath;
 		std::string m_GreenFlagPath;
+
+		float m_checkPointOffsetX;
+		float m_checkPointOffsetY;
+
+		bool m_isCheckPointPickked;
+
+
+
+		void serialise(nlohmann::json& jsonFile) override;
 
 		void Start() override;
 

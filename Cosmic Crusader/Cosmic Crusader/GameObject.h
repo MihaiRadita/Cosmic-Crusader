@@ -26,6 +26,8 @@ namespace ratchet
 		float m_rotation;
 		sf::Vector2f m_scale;
 		
+		int m_objectId;
+
 		//Graphics
 		std::string m_spritePath;
 		std::string m_startSpritePath;

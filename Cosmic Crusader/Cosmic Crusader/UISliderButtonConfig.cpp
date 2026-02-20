@@ -93,11 +93,13 @@ namespace ratchet
 			{
 				int minusId = propertyValue.get<int>();
 
-				nlohmann::json minusObj;
 
-				if (SceneManager::Get().FindObjectById(minusId, minusObj, SceneManager::Get().GetLayerNameObjectByID(id)))
+
+				auto* minusObj = SceneManager::Get().FindObjectById(minusId, SceneManager::Get().GetLayerNameObjectByID(id));
+
+				if (minusObj)
 				{
-					if(m_minusButtonConfig.deserialise(minusObj))
+					if(m_minusButtonConfig.deserialise(*minusObj))
 					{
 						std::cout << "Slider Button SUCCESS!" << std::endl;
 					}
@@ -118,10 +120,10 @@ namespace ratchet
 			{
 				int plusId = propertyValue.get<int>();
 
-				nlohmann::json plusObj;
-				if (SceneManager::Get().FindObjectById(plusId, plusObj,SceneManager::Get().GetLayerNameObjectByID(id)))
+				auto* plusObj = SceneManager::Get().FindObjectById(plusId, SceneManager::Get().GetLayerNameObjectByID(id));
+				if (plusObj)
 				{
-					if (m_plusButtonConfig.deserialise(plusObj))
+					if (m_plusButtonConfig.deserialise(*plusObj))
 					{
 						std::cout << "Slider Button SUCCESS!" << std::endl;
 					}
@@ -138,11 +140,11 @@ namespace ratchet
 			{
 				int titleID = propertyValue.get<int>();
 
-				nlohmann::json titleObj;
+				auto* titleObj = SceneManager::Get().FindObjectById(titleID, SceneManager::Get().GetLayerNameObjectByID(id));
 
-				if (SceneManager::Get().FindObjectById(titleID, titleObj, SceneManager::Get().GetLayerNameObjectByID(id)))
+				if (titleObj)
 				{
-					if (m_UITitleConfig.deserialise(titleObj))
+					if (m_UITitleConfig.deserialise(*titleObj))
 					{
 						std::cout << "Slider Text SUCCESS!" << std::endl;
 					}
@@ -159,12 +161,12 @@ namespace ratchet
 			{
 				int valueTextId = propertyValue.get<int>();
 
-				nlohmann::json valueTextObj;
+				auto* valueTextObj = SceneManager::Get().FindObjectById(valueTextId, SceneManager::Get().GetLayerNameObjectByID(id));
 
-				if (SceneManager::Get().FindObjectById(valueTextId, valueTextObj, SceneManager::Get().GetLayerNameObjectByID(id)))
+				if (SceneManager::Get().FindObjectById(valueTextId, SceneManager::Get().GetLayerNameObjectByID(id)))
 				{
 					auto config = UITextConfig();
-					if(config.deserialise(valueTextObj))
+					if(config.deserialise(*valueTextObj))
 					{
 						std::cout << "Slider Text SUCCESS!" << std::endl;
 						m_UITextValueConfig = config;
