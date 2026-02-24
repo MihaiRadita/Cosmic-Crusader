@@ -25,6 +25,9 @@ namespace ratchet
 		float m_checkPointOffsetY;
 
 		bool m_isCheckPointPickked;
+		bool m_isCheckPointInteracting;
+
+		void handleCheckPointEvent(sf::Event& event);
 
 
 

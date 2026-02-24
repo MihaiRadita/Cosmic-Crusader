@@ -118,6 +118,10 @@ namespace ratchet
 				{
 					selfCreature->handleSelfCreatureEvent();
 				}
+				else if (auto checkPoint = dynamic_cast<Checkpoint*>(obj))
+				{
+					checkPoint->handleCheckPointEvent(sfEvent);
+				}
 			}
 		}
 

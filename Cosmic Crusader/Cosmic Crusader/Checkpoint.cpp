@@ -32,6 +32,30 @@ namespace ratchet
 
 	}
 
+	void Checkpoint::handleCheckPointEvent(sf::Event& event)
+	{
+		
+		if(event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::E)
+			{
+				if (m_isCheckPointInteracting)
+				{
+					if (!m_isCheckPointPickked)
+					{
+						m_isCheckPointPickked = true;
+						SceneManager::Get().SaveGame();
+					}
+				}
+			}
+		}
+		else
+		{
+			m_isCheckPointPickked = false;
+			//std::cout << "No Check Point pressed" << std::endl;
+		}
+	}
+
 	void Checkpoint::serialise(nlohmann::json& jsonFile)
 	{
 		if (m_isCheckPointPickked)
@@ -59,15 +83,11 @@ namespace ratchet
 
 		if (player)
 		{
-			if (!m_isCheckPointPickked)
+			if (!m_isCheckPointInteracting)
 			{
 				player->m_playerCheckPointID = m_objectId;
-				player->m_checkPointOffsetX = m_checkPointOffsetX;
-				player->m_checkPointOffsetY = m_checkPointOffsetY;
 				std::cout << "Player HAS TOUCHED CEHCK POINT"<<std::endl;
-				m_isCheckPointPickked = true;
-
-				SceneManager::Get().SaveGame();
+				m_isCheckPointInteracting = true;
 			}
 
 		}
@@ -79,6 +99,8 @@ namespace ratchet
 		if (player)
 		{
 			std::cout << "Player HAS Exit CEHCK POINT"<<std::endl;
+
+			m_isCheckPointInteracting = false;
 		}
 	}
 }

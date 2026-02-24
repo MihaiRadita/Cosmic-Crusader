@@ -17,6 +17,8 @@
 
 #include "SelfControlledCreature.h"
 
+#include "Checkpoint.h"
+
 namespace ratchet
 {
 	class Game {

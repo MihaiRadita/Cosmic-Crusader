@@ -500,37 +500,6 @@ namespace ratchet
 							if (player)
 							{
 								player->serialise(playerData);
-
-								for (auto& layer1 : sceneJson["layers"])
-								{
-									const auto& validLayer = layer1.contains("objects");
-									if (!validLayer) continue;
-
-									const auto& layerName1 = layer1["name"].get<std::string>();
-
-									if (layerName1 == "Check Points")
-									{
-										for (auto& obj1 : layer1["objects"])
-										{
-											if (obj1["name"] == "Check Point")
-											{
-												for (auto& object1 : GameObject::s_gameObjects)
-												{
-													auto* checkPoint = dynamic_cast<Checkpoint*>(object1);
-
-													if (checkPoint)
-													{
-														if (checkPoint->m_objectId == player->m_playerCheckPointID)
-														{
-															auto& checkPointData = obj1;
-															checkPoint->serialise(checkPointData);
-														}
-													}
-												}
-											}
-										}
-									}
-								}
 							}
 						}
 					}
