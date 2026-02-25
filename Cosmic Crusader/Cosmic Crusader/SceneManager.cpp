@@ -524,6 +524,113 @@ namespace ratchet
 
 	}
 
+	void SceneManager::SetNewGame()
+	{
+		for (auto& [type, fileName] : m_sceneFiles)
+		{
+			if (type != SceneType::MainMenu)
+			{
+				std::string originalLevelPath = m_baseScenePath + fileName;
+
+				if (!fs::exists(originalLevelPath))
+				{
+					std::cout << "ERROR! File does not exists!" << std::endl;
+					return;
+				}
+
+				nlohmann::json originalSceneJson;
+
+				std::ifstream in(originalLevelPath);
+				 
+				in >> originalSceneJson;
+
+				std::string sceneName = fileName;
+
+				if (!m_allScenes.contains("scenes")) {
+					std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+					return;
+				}
+
+				auto& scenesNode = m_allScenes["scenes"];
+				if (!scenesNode.contains(sceneName)) {
+					std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+					return;
+				}
+
+				auto& sceneJson = scenesNode[sceneName];
+
+				if (!sceneJson.contains("layers")) {
+					std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+					return;
+				}
+
+				if (!originalSceneJson.contains("layers"))
+				{
+					std::cout << "WARNING: Scene has no layers or layers is not an array: " << fileName << "\n";
+					return;
+				}
+
+				
+				for (auto& layer : sceneJson["layers"])
+				{
+					const auto& validLayer = layer.contains("objects");
+					if (!validLayer) continue;
+
+					const auto& layerName = layer["name"].get<std::string>();
+
+					if (layerName == "Player" || layerName == "Weapons")
+					{
+						for (auto& obj : layer["objects"])
+						{
+							if (obj["name"] == "Player" || obj["name"] == "Blaster")
+							{
+								if (!originalSceneJson.contains("layers"))
+								{
+									std::cout << "WARNING: Scene has no layers << " << std::endl;
+									return;
+								}
+
+								for (auto& layer1 : originalSceneJson["layers"])
+								{
+									auto& layerName1 = layer1["name"];
+
+									if (layerName1 == layerName)
+									{
+										for (auto& obj1 : layer1["objects"])
+										{
+											if (obj1["name"] == obj["name"] && obj1["id"] == obj["id"])
+											{
+												obj = obj1;
+												break;
+											}
+										}
+
+									}
+
+								}
+							}
+						}
+					}
+				}
+
+			}
+		}
+
+		std::string combinedPath = m_baseScenePath + "GameScenes.json";
+
+		if (!fs::exists(combinedPath))
+		{
+			std::cout << "ERROR! File does not exists!" << std::endl;
+			return;
+		}
+
+		std::ofstream out(combinedPath);
+
+		out << m_allScenes;
+
+		std::cout << "The Scene File has been created with scuccess!" << std::endl;
+	}
+
 	void SceneManager::LoadSceneBasicFeatures()
 	{
 		std::string sceneName = m_sceneFiles[m_currentScene];

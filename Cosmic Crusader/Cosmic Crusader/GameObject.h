@@ -105,6 +105,7 @@ namespace ratchet
 
 		//Save Functions
 		virtual void serialise(nlohmann::json& jsonFile);
+		virtual void resetSerialise(nlohmann::json& orginaljsonFile, nlohmann::json& jsonFile);
 
 		//Getters
 		const sf::FloatRect getBounds() const;

@@ -100,6 +100,7 @@ namespace ratchet
 
 
 		void serialise(nlohmann::json& jsonFile) override;
+		void resetSerialise(nlohmann::json& originaljsonFile, nlohmann::json& jsonFile) override;
 
 		//Render functions
 

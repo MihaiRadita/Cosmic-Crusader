@@ -55,6 +55,8 @@ namespace ratchet
 
 		void SaveGame();
 
+		void SetNewGame();
+
 		void LoadSceneGameObjects();
 
 		void ClearSceneObjects();

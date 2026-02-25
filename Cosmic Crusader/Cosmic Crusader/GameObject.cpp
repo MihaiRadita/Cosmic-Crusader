@@ -449,6 +449,11 @@ namespace ratchet
 
 	}
 
+	void GameObject::resetSerialise(nlohmann::json& originaljsonFile, nlohmann::json& jsonFile)
+	{
+
+	}
+
 	const sf::FloatRect ratchet::GameObject::getBounds() const
 	{
 		return m_sprite.getGlobalBounds();

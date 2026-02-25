@@ -47,6 +47,18 @@ namespace ratchet
 				SceneManager::Get().LoadNextScene();
 				break;
 
+			case ButtonNameState::NewGame:
+				WindowManager::Get()->clear(sf::Color::Black);
+				WindowManager::Get()->display();
+
+				m_isButtonInteracting = false;
+				m_isButtonEventTirggered = false;
+
+				SceneManager::Get().SetNewGame();
+
+				SceneManager::Get().LoadNextScene();
+				break;
+
 			case ButtonNameState::Exit:
 				WindowManager::Get()->close();
 				break;

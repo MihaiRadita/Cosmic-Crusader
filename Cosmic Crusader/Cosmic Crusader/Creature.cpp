@@ -542,6 +542,29 @@ namespace ratchet
 			}
 		}
 	}
+
+	void Creature::resetSerialise(nlohmann::json& originaljsonFile, nlohmann::json& jsonFile)
+	{
+		if (!originaljsonFile.contains("layers"))
+		{
+			std::cout << "WARNING: Scene has no layers << " << std::endl;
+			return;
+		}
+
+		for (auto& layer : originaljsonFile["layers"])
+		{
+			auto& layerName = layer["name"];
+
+			for (auto& obj : layer["objects"])
+			{
+				if (obj["name"] == jsonFile["name"])
+				{
+					jsonFile = obj;
+					return;
+				}
+			}
+		}
+	}
 		
 	void Creature::invertCharacterMovingSpriteScale(int direction)
 	{
