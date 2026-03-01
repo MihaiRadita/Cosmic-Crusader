@@ -8,7 +8,7 @@
          "name":"Click Buttons",
          "objects":[
                 {
-                 "gid":46,
+                 "gid":45,
                  "height":64,
                  "id":9,
                  "name":"Play Button",
@@ -81,17 +81,17 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Play Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Play Button.png"
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":192,
                  "x":64,
                  "y":192
                 }, 
                 {
-                 "gid":40,
+                 "gid":39,
                  "height":64,
                  "id":10,
                  "name":"Options Button",
@@ -164,17 +164,17 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Options Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Options Button.png"
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":192,
                  "x":64,
                  "y":320
                 }, 
                 {
-                 "gid":44,
+                 "gid":43,
                  "height":64,
                  "id":11,
                  "name":"Exit Button",
@@ -247,17 +247,17 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Exit Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Exit Button.png"
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":192,
                  "x":64,
                  "y":449
                 }, 
                 {
-                 "gid":63,
+                 "gid":62,
                  "height":64,
                  "id":44,
                  "name":"Continue Button",
@@ -330,17 +330,17 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Continue Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Continue Button.png"
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":192,
                  "x":64,
                  "y":192
                 }, 
                 {
-                 "gid":64,
+                 "gid":63,
                  "height":64,
                  "id":45,
                  "name":"New Game Button",
@@ -413,17 +413,17 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/New Game Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/New Game Button.png"
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":192,
                  "x":64,
                  "y":320
                 }, 
                 {
-                 "gid":34,
+                 "gid":33,
                  "height":64,
                  "id":46,
                  "name":"Back Button",
@@ -496,11 +496,11 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Button.png"
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":192,
                  "x":64,
                  "y":448
@@ -517,7 +517,7 @@
          "name":"Slider Buttons",
          "objects":[
                 {
-                 "gid":60,
+                 "gid":59,
                  "height":64,
                  "id":18,
                  "name":"Next Value Button",
@@ -595,7 +595,7 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Next Value Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Next Value Button.png"
                         }],
                  "rotation":0,
                  "type":"",
@@ -605,7 +605,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":60,
+                 "gid":59,
                  "height":64,
                  "id":35,
                  "name":"Next Value Button",
@@ -683,7 +683,7 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Next Value Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Next Value Button.png"
                         }],
                  "rotation":0,
                  "type":"",
@@ -693,7 +693,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":60,
+                 "gid":59,
                  "height":64,
                  "id":34,
                  "name":"Next Value Button",
@@ -771,7 +771,7 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Next Value Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Next Value Button.png"
                         }],
                  "rotation":0,
                  "type":"",
@@ -781,7 +781,7 @@
                  "y":448
                 }, 
                 {
-                 "gid":61,
+                 "gid":60,
                  "height":64,
                  "id":19,
                  "name":"Back Value Button",
@@ -859,7 +859,7 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Value Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Value Button.png"
                         }],
                  "rotation":0,
                  "type":"",
@@ -869,7 +869,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":61,
+                 "gid":60,
                  "height":64,
                  "id":33,
                  "name":"Back Value Button",
@@ -947,7 +947,7 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Value Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Value Button.png"
                         }],
                  "rotation":0,
                  "type":"",
@@ -957,7 +957,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":61,
+                 "gid":60,
                  "height":64,
                  "id":32,
                  "name":"Back Value Button",
@@ -1035,7 +1035,7 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Value Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Value Button.png"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1087,7 +1087,7 @@
                         {
                          "name":"textFontPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Fonts\/UI Font.ttf"
+                         "value":"Fonts\/UI Font.ttf"
                         }, 
                         {
                          "name":"textType",
@@ -1168,7 +1168,7 @@
                         {
                          "name":"textFontPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Fonts\/UI Font.ttf"
+                         "value":"Fonts\/UI Font.ttf"
                         }, 
                         {
                          "name":"textType",
@@ -1249,7 +1249,7 @@
                         {
                          "name":"textFontPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Fonts\/UI Font.ttf"
+                         "value":"Fonts\/UI Font.ttf"
                         }, 
                         {
                          "name":"textType",
@@ -1330,7 +1330,7 @@
                         {
                          "name":"textFontPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Fonts\/UI Font.ttf"
+                         "value":"Fonts\/UI Font.ttf"
                         }, 
                         {
                          "name":"textType",
@@ -1411,7 +1411,7 @@
                         {
                          "name":"textFontPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Fonts\/UI Font.ttf"
+                         "value":"Fonts\/UI Font.ttf"
                         }, 
                         {
                          "name":"textType",
@@ -1492,7 +1492,7 @@
                         {
                          "name":"textFontPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Fonts\/UI Font.ttf"
+                         "value":"Fonts\/UI Font.ttf"
                         }, 
                         {
                          "name":"textType",
@@ -1573,7 +1573,7 @@
                         {
                          "name":"textFontPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Fonts\/UI Font.ttf"
+                         "value":"Fonts\/UI Font.ttf"
                         }, 
                         {
                          "name":"textType",
@@ -1654,7 +1654,7 @@
                         {
                          "name":"textFontPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Fonts\/UI Font.ttf"
+                         "value":"Fonts\/UI Font.ttf"
                         }, 
                         {
                          "name":"textType",
@@ -1693,7 +1693,7 @@
                  "y":320
                 }, 
                 {
-                 "gid":34,
+                 "gid":33,
                  "height":64,
                  "id":36,
                  "name":"Back Button",
@@ -1766,7 +1766,7 @@
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Button.png"
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Back Button.png"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2170,20 +2170,20 @@
  "nextobjectid":47,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.0",
  "tileheight":64,
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/Tiled2\/LevelMap1\/PlatformsTile.tsx"
+         "source":"..\/..\/..\/..\/..\/Art\/Tiled\/LevelMap1\/PlatformsTile.tsx"
         }, 
         {
          "firstgid":33,
-         "source":"..\/Tiled2\/LevelMap1\/Back  col_Button.tsx"
+         "source":"..\/..\/..\/..\/..\/Art\/Tiled\/LevelMap1\/Back  col_Button.tsx"
         }, 
         {
          "columns":0,
-         "firstgid":34,
+         "firstgid":33,
          "grid":
             {
              "height":1,
@@ -2198,95 +2198,95 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Back  col_Button.png",
-                 "imageheight":200,
-                 "imagewidth":600
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Back Button.png",
+                 "imageheight":64,
+                 "imagewidth":192
                 }, 
                 {
                  "id":1,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Menu  col_Button.png",
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Menu Button.png",
                  "imageheight":200,
                  "imagewidth":600
                 }, 
                 {
                  "id":2,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Resume  col_Button.png",
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Resume Button.png",
                  "imageheight":200,
                  "imagewidth":600
                 }, 
                 {
                  "id":3,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Continue  col_Button.png",
-                 "imageheight":200,
-                 "imagewidth":600
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Continue Button.png",
+                 "imageheight":64,
+                 "imagewidth":192
                 }, 
                 {
                  "id":4,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/New Game  col_Button.png",
-                 "imageheight":200,
-                 "imagewidth":600
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/New Game Button.png",
+                 "imageheight":64,
+                 "imagewidth":192
                 }, 
                 {
                  "id":5,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Controls  col_Button.png",
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Controls Button.png",
                  "imageheight":200,
                  "imagewidth":600
                 }, 
                 {
                  "id":6,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Options  col_Button.png",
-                 "imageheight":200,
-                 "imagewidth":600
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Options Button.png",
+                 "imageheight":64,
+                 "imagewidth":192
                 }, 
                 {
                  "id":7,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Settings  col_Button.png",
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Settings Button.png",
                  "imageheight":200,
                  "imagewidth":600
                 }, 
                 {
                  "id":8,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Load  col_Button.png",
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Load Button.png",
                  "imageheight":200,
                  "imagewidth":600
                 }, 
                 {
                  "id":9,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Quit  col_Button.png",
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Quit Button.png",
                  "imageheight":200,
                  "imagewidth":600
                 }, 
                 {
                  "id":10,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Exit  col_Button.png",
-                 "imageheight":200,
-                 "imagewidth":600
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Exit Button.png",
+                 "imageheight":64,
+                 "imagewidth":192
                 }, 
                 {
                  "id":11,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Start  col_Button.png",
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Start Button.png",
                  "imageheight":200,
                  "imagewidth":600
                 }, 
                 {
                  "id":12,
-                 "image":"..\/Cosmi Crusader Main Menu\/Large Buttons\/Colored Large Buttons\/Play col_Button.png",
-                 "imageheight":200,
-                 "imagewidth":600
+                 "image":"..\/..\/UI\/UI Buttons\/Colored Large Buttons\/Play Button.png",
+                 "imageheight":64,
+                 "imagewidth":192
                 }],
          "tilewidth":600
         }, 
         {
-         "firstgid":47,
-         "source":"..\/Tiled2\/LevelMap1\/Main Menu.tsx"
+         "firstgid":46,
+         "source":"..\/..\/..\/..\/..\/Art\/Tiled\/LevelMap1\/Main Menu.tsx"
+        }, 
+        {
+         "firstgid":62,
+         "source":"..\/..\/..\/..\/..\/Art\/Tiled\/LevelMap1\/Continue Button.tsx"
         }, 
         {
          "firstgid":63,
-         "source":"..\/Tiled2\/LevelMap1\/Continue Button.tsx"
-        }, 
-        {
-         "firstgid":64,
-         "source":"..\/Tiled2\/LevelMap1\/New Game Button.tsx"
+         "source":"..\/..\/..\/..\/..\/Art\/Tiled\/LevelMap1\/New Game Button.tsx"
         }],
  "tilewidth":64,
  "type":"map",
