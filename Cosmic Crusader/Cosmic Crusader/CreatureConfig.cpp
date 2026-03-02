@@ -11,6 +11,19 @@ namespace ratchet
 	{
 		return false;
 	}
+
+	ratchet::CreatureConfig::CreatureConfig() : GameObjectConfig()
+	{
+		m_movingSpeed = 0.f;
+		m_fallingSpeed = 0.f;
+		m_jumpImpulse = 0.f;
+
+		m_recoilTime = 0.0f;
+		m_fireRate = 0.0f;
+
+		m_health = 0.0f;
+	}
+
 	bool CreatureConfig::deserialise(const nlohmann::json& jsonFile)
 	{
 		GameObjectConfig::deserialise(jsonFile);
@@ -154,6 +167,11 @@ namespace ratchet
 				{
 					m_colliderConfig->m_fixtureDef.friction = propertyValue.get<float>();
 				}
+			}
+
+			if (propertyName == "health")
+			{
+				m_health = propertyValue.get<float>();
 			}
 
 			if (propertyName == "isGroundRaycastOffset")
@@ -369,15 +387,6 @@ namespace ratchet
 		}
 
 		return true;
-	}
-	ratchet::CreatureConfig::CreatureConfig() : GameObjectConfig()
-	{
-		m_movingSpeed = 0.f;
-		m_fallingSpeed = 0.f;
-		m_jumpImpulse = 0.f;
-
-		m_recoilTime = 0.0f;
-		m_fireRate = 0.0f;
 	}
 
 	ratchet::CreatureConfig::~CreatureConfig()

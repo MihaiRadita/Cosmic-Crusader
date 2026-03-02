@@ -26,6 +26,9 @@ namespace ratchet
 		float m_weaponShootPointOffsetY;
 		int m_bulletPoolIncrementation;
 
+
+		float m_weponDamage;
+
 		//Weapon Shooting Points Offsets
 		sf::Vector2f m_shootingOffsetAngle0;
 		sf::Vector2f m_shootingOffsetAngle45;

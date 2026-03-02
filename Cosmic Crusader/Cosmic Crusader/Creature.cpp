@@ -21,6 +21,8 @@ namespace ratchet
 		m_jumpImpulse = config.m_jumpImpulse;
 		m_bodShoulderOffset = config.m_bodShoulderOffset;
 
+		m_health = config.m_health;
+
 		m_checkPointOffsetX = 0.0f;
 		m_checkPointOffsetY = 0.0f;
 
@@ -475,6 +477,11 @@ namespace ratchet
 
 	void Creature::updateWeaponSelection()
 	{
+		if (m_isDeath)
+		{
+			return;
+		}
+
 		if (m_currentEquippedWeaponIndex != m_input.weaponInputIndex)
 		{
 			m_currentEquippedWeaponIndex = m_input.weaponInputIndex;
@@ -484,6 +491,11 @@ namespace ratchet
 
 	void Creature::updateShooting()
 	{
+		if (m_isDeath)
+		{
+			return;
+		}
+
 		if (m_mustSpawnBullet)
 		{
 			m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
@@ -568,6 +580,11 @@ namespace ratchet
 		
 	void Creature::invertCharacterMovingSpriteScale(int direction)
 	{
+		if (m_isDeath)
+		{
+			return;
+		}
+
 		m_sprite.setScale(m_scale.x * (float)direction, m_scale.y);
 		if (direction < 0)
 		{
@@ -613,6 +630,21 @@ namespace ratchet
 
 			// salveaza stare curenta in stare anterioara	
 			m_characterAnimSwitch = m_currentAnimationState;
+		}
+	}
+	void Creature::TakeDamage(float& damage)
+	{
+		m_health -= damage;
+
+		std::cout << "Charcter has life remained : " << m_health << std::endl;
+
+		if (m_health <= 0.0f)
+		{
+			m_health = 0.0f;
+
+			m_isDeath = true;
+
+			std::cout << "Character is Death!" << std::endl;
 		}
 	}
 
@@ -666,6 +698,7 @@ namespace ratchet
 		if (config.has_value())
 		{
 			newWeapon->m_currentAmmo = config->m_MaxAmmo;
+			newWeapon->m_weaponDamage = config->m_damage;
 			shootingPointXOffset = config->m_weaponShootPointOffsetX;
 			shootingPointYOffset = config->m_weaponShootPointOffsetY;
 			newWeapon->m_WeaponID = config->m_objectID;

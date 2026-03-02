@@ -27,6 +27,8 @@ namespace ratchet
 
 		float m_fireRate;
 		float m_recoilTime;
+
+		float m_health;
 	
 		//Anlges
 		float m_AngleBase;

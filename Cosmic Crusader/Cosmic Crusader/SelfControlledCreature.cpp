@@ -42,7 +42,6 @@ namespace ratchet
 			m_isAttacking = false;
 		}
 
-
 	}
 
 	void SelfControlledCreature::handleSelfCreatureEvent()
@@ -130,7 +129,21 @@ namespace ratchet
 
 	void SelfControlledCreature::handleEvent()
 	{
+		if (m_isDeath)
+		{
+			m_input.m_isFiring = false;
+			return;
+		}
 
+		if (m_target->m_isDeath)
+		{
+			if (m_isAttacking == true)
+			{
+				m_isAttacking = false;
+				m_input.m_isFiring = false;
+			}
+			return;
+		}
 
 		handleSelfCreatureEvent();
 		detectTarget(m_target);
@@ -259,6 +272,12 @@ namespace ratchet
 	}
 	void SelfControlledCreature::update()
 	{
+		if (m_isDeath)
+		{
+			GameObject::DestroyGameObject();
+			return;
+		}
+
 		if (SceneManager::Get().m_isPaused)
 		{
 			m_fireCooldown.Freeze();

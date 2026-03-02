@@ -154,7 +154,21 @@ namespace ratchet
 		{
 			if (obj->m_faction != this->m_faction)
 			{
-				Weapon::releaseBullet(this);
+				if (auto* creature = dynamic_cast<Creature*>(obj))
+				{
+					if (creature->m_isDeath)
+					{
+						return;
+					}
+					else
+					{
+						creature->TakeDamage(m_damage);
+						Weapon::releaseBullet(this);
+
+					}
+
+				}
+
 			}
 		}
 	}

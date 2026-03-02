@@ -39,6 +39,7 @@ namespace ratchet
 		float m_recoilTime; // Recoil animation duration
 		int m_lastFiredWeaponIndex = -1;
 		bool m_mustSpawnBullet = false;
+		bool m_isDeath = false;
 
 		//target detect distance 
 		float m_targetMaxDistanceDetectionX;
@@ -50,6 +51,8 @@ namespace ratchet
 		//target lose distance
 		float m_targetMaxDistanceLoseX;
 		float m_targetMaxDistanceLoseY;
+
+		float m_health = 0.0f;
 
 		sf::Vector2f currentMousePositiion = sf::Vector2f(0.0f,0.0f);
 
@@ -145,6 +148,9 @@ namespace ratchet
 
 		//Shooting Points Function
 		void computeShootingPoint();
+
+		//Other functions
+		void TakeDamage(float& damage);
 
 		int m_equippedWeaponIndex = 0;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="20" nextobjectid="5154">
  <editorsettings>
-  <export target="../../LevelMaps/LevelMap28.tmj" format="json"/>
+  <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/LevelMap28.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="PlatformsTile.tsx"/>
  <tileset firstgid="33" source="Weapons.tsx"/>
@@ -62060,7 +62060,7 @@
     <property name="characterStartPointShootingOffsetY" type="float" value="0.1"/>
     <property name="colliderLayer" type="int" value="4"/>
     <property name="colliderType" type="int" value="0"/>
-    <property name="damage" type="int" value="12"/>
+    <property name="damage" type="int" value="5"/>
     <property name="density" type="float" value="0"/>
     <property name="fixedRotation" type="bool" value="true"/>
     <property name="friction" type="float" value="0"/>
@@ -62081,6 +62081,7 @@
     <property name="shootingOffsetAngleMinus45X" type="float" value="0.66"/>
     <property name="shootingOffsetAngleMinus45Y" type="float" value="0.34"/>
     <property name="startSpriteTexturePath" value="Textures/Objects/Weapons/Player/Blaster1.png"/>
+    <property name="weaponDamage" type="float" value="5"/>
     <property name="weaponType" type="int" value="1"/>
    </properties>
   </object>
@@ -62095,7 +62096,7 @@
     <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
     <property name="characterStartPointShootingOffsetY" type="float" value="0.1"/>
     <property name="colliderType" type="int" value="0"/>
-    <property name="damage" type="int" value="12"/>
+    <property name="damage" type="int" value="5"/>
     <property name="isWeaponAccesible" type="bool" value="true"/>
     <property name="layer" value="Super Launcher Enemy"/>
     <property name="movementType" type="int" value="0"/>
@@ -62105,6 +62106,7 @@
     <property name="shootingOffsetAngle0X" type="float" value="0.75"/>
     <property name="shootingOffsetAngle0Y" type="float" value="0.05"/>
     <property name="startSpriteTexturePath" value="Textures/Objects/Weapons/Player/Blaster1.png"/>
+    <property name="weaponDamage" type="float" value="5"/>
     <property name="weaponType" type="int" value="4"/>
    </properties>
   </object>
@@ -62226,6 +62228,7 @@
     <property name="currentWeaponType" type="int" value="4"/>
     <property name="fallingSpeed" type="float" value="7000"/>
     <property name="fireRate" type="float" value="0.7"/>
+    <property name="health" type="float" value="10"/>
     <property name="initialWeapon_0" type="object" value="5116"/>
     <property name="jumpImpulse" type="float" value="-5"/>
     <property name="movementType" type="int" value="1"/>
@@ -62274,6 +62277,7 @@
     <property name="fireRate" type="float" value="0.2"/>
     <property name="fixedRotation" type="bool" value="true"/>
     <property name="friction" type="float" value="0"/>
+    <property name="health" type="float" value="15"/>
     <property name="initialWeapon_0" type="object" value="0"/>
     <property name="initialWeapon_1" type="object" value="3903"/>
     <property name="isGroundRaycastOffset" type="float" value="0.02"/>

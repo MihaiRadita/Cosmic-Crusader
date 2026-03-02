@@ -124,6 +124,12 @@ namespace ratchet
 			{
 				m_colliderType = static_cast<ColliderType>(propertyValue.get<int>());
 			}
+
+			if (propertyName == "damage")
+			{
+				m_damage = propertyValue.get<float>();
+			}
+
 			if (propertyName == "weaponType")
 			{
 				m_weaponType = static_cast<Weapon::TYPE>(propertyValue.get<int>());

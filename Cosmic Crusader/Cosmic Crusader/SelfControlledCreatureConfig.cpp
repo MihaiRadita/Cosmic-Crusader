@@ -107,6 +107,11 @@ namespace ratchet
 				m_fireRate = propertyValue.get<float>();
 			}
 
+			if (propertyName == "health")
+			{
+				m_health = propertyValue.get<float>();
+			}
+
 			if (propertyName == "targetMaxDistanceDetectionX")
 			{
 				m_targetMaxDistanceDetectionX = propertyValue.get<float>();

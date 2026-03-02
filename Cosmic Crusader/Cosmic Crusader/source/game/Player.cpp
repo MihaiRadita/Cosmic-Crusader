@@ -45,6 +45,12 @@ namespace ratchet
 			m_fireCooldown.Resume();
 		}
 
+		if (m_isDeath)
+		{
+			m_input.m_isFiring = false;
+			return;
+		}
+
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
@@ -203,6 +209,11 @@ namespace ratchet
 
 	void Player::computeAimAngleState()
 	{
+		if (m_isDeath)
+		{
+			return;
+		}
+
 		if (m_currentWeaponType != Weapon::TYPE::None)
 		{
 			WeaponAnimation::ANGLE weaponAnimationAngle;
@@ -273,6 +284,11 @@ namespace ratchet
 
 	void Player::computeAimBulletRotation()
 	{
+		if (m_isDeath)
+		{
+			return;
+		}
+
 		sf::Vector2f firePoint = m_currentFirePoint;
 		sf::Vector2i mousePos = sf::Mouse::getPosition(*WindowManager::Get());
 		sf::Vector2f mouseWorldPos = WindowManager::Get()->mapPixelToCoords(mousePos, SceneManager::Get().GetWorldView());
@@ -291,6 +307,8 @@ namespace ratchet
 
 	void Player::update()
 	{
+		float health = m_health;
+
 		if (!m_activeGameObject) return;
 
 		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
@@ -330,8 +348,13 @@ namespace ratchet
 
 		TRACE_CHANNEL("Player Position", "X: ", getPosition().x, " Y: ", getPosition().y);
 
+
 		if (m_input.x != 0)
 		{
+			if (m_isDeath)
+			{
+				m_input.x = 0.f;
+			}
 			m_isMoving = true;
 			changeX = true;
 			xVelocity = m_movementSpeed * m_input.x;

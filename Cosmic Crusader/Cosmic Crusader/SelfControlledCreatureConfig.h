@@ -27,6 +27,7 @@ namespace ratchet
 		float m_targetMaxDistanceAttackX;
 		float m_targetMaxDistanceAttackY;
 
+
 		//Constructor
 		SelfControlledCreatureConfig();
 

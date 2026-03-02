@@ -48,6 +48,8 @@ namespace ratchet
 
 		m_weaponConfig = config;
 
+		m_weaponDamage = config.m_damage;
+
 		
 		if (m_weaponConfig.has_value())
 		{
@@ -60,6 +62,7 @@ namespace ratchet
 			m_shootingOffsetAngle90 = m_weaponConfig->m_shootingOffsetAngle90;
 			m_shootingOffsetAngleMinus45 = m_weaponConfig->m_shootingOffsetAngleMinus45;
 			m_weaponConfig->m_bulletPoolIncrementation = config.m_bulletPoolIncrementation;
+			m_weaponConfig->m_damage = config.m_damage;
 
 		}
 		m_IsWeaponAccessible = config.m_isWeaponAccessible;

@@ -32,6 +32,8 @@ namespace ratchet
 		int m_WeaponID;
 		int m_bulletID;
 
+		float m_weaponDamage = 0.0f;
+
 		bool m_facigRight = true;
 		int m_bulletPoolIncrementation;
 

@@ -37,6 +37,8 @@ namespace ratchet
 		float m_bulletSpeed;
 		float m_bulletLifeLimit;
 
+		float m_bulletDamage = 0.0f;
+
 		bool m_bulletTimerShouldReset = false;
 
 

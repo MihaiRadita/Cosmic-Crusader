@@ -115,6 +115,16 @@ namespace ratchet
 			availableBullet->setPositionRotationOrientation(position, rotationDegrees, orientation);
 			s_availableBulletList[m_weaponType].pop();
 
+			auto& bulletList = s_inUseBulletList[m_weaponType];
+
+			for (auto& bullet : bulletList)
+			{
+				if (auto* buletobj = dynamic_cast<Bullet*>(bullet))
+				{
+					float dmamage = buletobj->m_damage;
+				}
+			}
+
 			return availableBullet;
 		}
 		else
@@ -126,9 +136,13 @@ namespace ratchet
 				obj->setActive(false);
 				if (auto* bullet = dynamic_cast<Bullet*>(obj))
 				{
+					bullet->m_damage = m_weaponDamage;
 					s_availableBulletList[m_weaponType].push(bullet);
+
 				}
 			}
+
+
 
 			return findOrCreateBulletFromPool(position, rotationDegrees, orientation);
 		}

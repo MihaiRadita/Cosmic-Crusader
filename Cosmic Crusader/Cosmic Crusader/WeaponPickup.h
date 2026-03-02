@@ -19,6 +19,8 @@ namespace ratchet
 
 		int m_weaponId;
 
+		float m_weaponDamage = 0.0f;
+
 		Weapon::TYPE m_weaponType;
 		std::optional<WeaponConfig> m_weaponConfig;
 
