@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationDeath.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletConfig.cpp" />
     <ClCompile Include="CapsuleCollider.cpp" />
@@ -201,6 +202,7 @@
     <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationDeath.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletConfig.h" />
     <ClInclude Include="CapsuleCollider.h" />

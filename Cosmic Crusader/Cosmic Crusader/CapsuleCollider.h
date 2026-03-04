@@ -59,11 +59,11 @@ namespace ratchet
 		virtual void getCheckFallingRiscRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const override;
 		bool performCheckFallingRiskRaycast(sf::Sprite& sprite, float& direction) override;
 
+		float m_height;
+		float m_radius;
 	private:
 
 		// General
-		float m_height;
-		float m_radius;
 
 		//Physics
 		b2PolygonShape m_boxShape;

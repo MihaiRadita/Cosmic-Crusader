@@ -170,6 +170,9 @@
     <ClCompile Include="CheckpointConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationDeath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -265,5 +268,6 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Checkpoint.h" />
     <ClInclude Include="CheckpointConfig.h" />
+    <ClInclude Include="AnimationDeath.h" />
   </ItemGroup>
 </Project>

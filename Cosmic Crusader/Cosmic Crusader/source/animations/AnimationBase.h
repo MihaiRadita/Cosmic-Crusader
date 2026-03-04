@@ -10,6 +10,7 @@ namespace ratchet
 		JUMP, 
 		JUMP_RUNNING,
 		FALL,
+		DIE,
 		Count
 	};
 

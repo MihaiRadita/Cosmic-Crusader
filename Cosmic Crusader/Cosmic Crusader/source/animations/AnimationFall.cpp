@@ -104,11 +104,15 @@ namespace ratchet
 				m_isAnimTransition = false;
 				if (weaponUsed != Weapon::TYPE::None)
 				{
+					sf::Vector2u texSize = m_weaponAnimationFramesMap[weaponUsed][angle][state][m_currentFrameIndex].getSize();
 					sprite.setTexture(m_weaponAnimationFramesMap[weaponUsed][angle][state][m_currentFrameIndex]);
+					sprite.setTextureRect(sf::IntRect(0, 0, texSize.x, texSize.y));
 				}
 				else
 				{
+					sf::Vector2u texSize = m_animationFrames[m_currentFrameIndex].getSize();
 					sprite.setTexture(m_animationFrames[m_currentFrameIndex]);
+					sprite.setTextureRect(sf::IntRect(0, 0, texSize.x, texSize.y));
 				}
 
 #ifdef IS_RATCHET_DEBUG
@@ -145,11 +149,15 @@ namespace ratchet
 
 				if (weaponUsed != Weapon::TYPE::None)
 				{
+					sf::Vector2u texSize = m_weaponAnimationFramesMap[weaponUsed][angle][state][m_currentFrameIndex].getSize();
 					sprite.setTexture(m_weaponAnimationFramesMap[weaponUsed][angle][state][m_currentFrameIndex]);
+					sprite.setTextureRect(sf::IntRect(0, 0, texSize.x, texSize.y));
 				}
 				else
 				{
+					sf::Vector2u texSize = m_animationFrames[m_currentFrameIndex].getSize();
 					sprite.setTexture(m_animationFrames[m_currentFrameIndex]);
+					sprite.setTextureRect(sf::IntRect(0, 0, texSize.x, texSize.y));
 				}
 
 #ifdef IS_RATCHET_DEBUG

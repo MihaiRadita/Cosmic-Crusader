@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="20" nextobjectid="5154">
  <editorsettings>
-  <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/LevelMap28.tmj" format="json"/>
+  <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="PlatformsTile.tsx"/>
  <tileset firstgid="33" source="Weapons.tsx"/>
@@ -62196,7 +62196,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="angleBase" type="float" value="45"/>
-    <property name="animationStateListMask" type="int" value="23"/>
+    <property name="animationStateListMask" type="int" value="55"/>
     <property name="bodyShoulderOffset" type="float" value="0.4"/>
     <property name="characterAnglesMask" type="int" value="1"/>
     <property name="colliderAngularDamping" type="float" value="0"/>
@@ -62256,7 +62256,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="angleBase" type="float" value="45"/>
-    <property name="animationStateListMask" type="int" value="31"/>
+    <property name="animationStateListMask" type="int" value="63"/>
     <property name="bodyShoulderOffset" type="float" value="0.4"/>
     <property name="characterAnglesMask" type="int" value="15"/>
     <property name="colliderAngularDamping" type="float" value="0"/>

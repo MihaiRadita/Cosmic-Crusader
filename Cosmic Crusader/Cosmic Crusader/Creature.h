@@ -9,6 +9,7 @@
 #include "animations/AnimationJump.h"
 #include "animations/AnimationFall.h"
 #include "animations/AnimationJumpRun.h"
+#include "AnimationDeath.h"
 
 #include "animations/Animator.h"
 #include "WeaponManager.h"

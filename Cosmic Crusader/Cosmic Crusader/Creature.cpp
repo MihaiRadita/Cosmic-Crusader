@@ -155,6 +155,10 @@ namespace ratchet
 			case ANIMATION_STATE::FALL:
 				m_animationList.emplace(ANIMATION_STATE::FALL, new AnimationFall(m_spritePath, m_weaponTypeList));
 				break;
+				
+			case ANIMATION_STATE::DIE:
+				m_animationList.emplace(ANIMATION_STATE::DIE, new AnimationDeath(m_spritePath, m_weaponTypeList));
+				break;
 			}
 		}
 
@@ -315,7 +319,7 @@ namespace ratchet
 				}
 			}
 
-			if (isNoControlActive() && isGrounded() && m_isMoving == false)
+			if (isNoControlActive() && isGrounded() && m_isMoving == false && !m_isDeath)
 			{
 #ifdef IS_RATCHET_DEBUG
 			TRACE_CHANNEL("ANIMATION", "Idle");
@@ -355,6 +359,25 @@ namespace ratchet
 							m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
 						}
 					}
+				}
+			}
+
+			if (m_isDeath && isGrounded())
+			{
+				if (m_currentAnimationState != DIE)
+				{
+					m_currentAnimationState = DIE;
+
+					if (m_currentWeaponType != Weapon::TYPE::None)
+					{
+						m_currentWeaponType = Weapon::TYPE::None;
+						int index = static_cast<int>(m_currentWeaponType);
+
+						setWeapon(index);
+					}
+
+
+					switchAnimation();
 				}
 			}
 
@@ -416,7 +439,7 @@ namespace ratchet
 				}
 			}
 
-			if (isNoControlActive() && isGrounded() && m_isMoving == false)
+			if (isNoControlActive() && isGrounded() && m_isMoving == false && !m_isDeath)
 			{
 #ifdef IS_RATCHET_DEBUG
 				TRACE_CHANNEL("ANIMATION", "Idle");
