@@ -192,6 +192,12 @@ namespace ratchet
 		return m_bottomCircleShape.m_radius;
 	}
 
+	void CapsuleCollider::RestartColliderFeatures(sf::Sprite& sprite, const CapsuleColliderConfig& config)
+	{
+		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
+
+	}
+
 	CapsuleColliderConfig::CapsuleColliderConfig()
 	{
 		m_collierFacingDirectionX = 0.0f;

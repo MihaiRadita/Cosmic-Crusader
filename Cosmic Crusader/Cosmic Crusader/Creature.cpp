@@ -206,6 +206,8 @@ namespace ratchet
 	{
 		if (!m_activeGameObject) return;
 
+		checkCharacterGameOverTuned();
+
 		updateWeaponSelection();
 		updateMovement();
 		updateJump();
@@ -327,6 +329,7 @@ namespace ratchet
 #endif			
 				m_isMoving = false;
 				m_currentAnimationState = ANIMATION_STATE::IDLE;
+
 				switchAnimation();
 			}
 
@@ -375,7 +378,6 @@ namespace ratchet
 
 						setWeapon(index);
 					}
-
 
 					switchAnimation();
 				}
@@ -530,6 +532,11 @@ namespace ratchet
 		}
 	}
 
+	void Creature::RestartObjectFeatures()
+	{
+
+	}
+
 	void Creature::serialise(nlohmann::json& jsonFile)
 	{
 		 GameObject::serialise(jsonFile);
@@ -625,6 +632,37 @@ namespace ratchet
 			return false;
 		}
 		return true;
+	}
+
+	void Creature::checkCharacterGameOverTuned()
+	{
+		auto* player = dynamic_cast<Player*>(this);
+
+		if (player)
+		{
+			if (player->m_isDeath && m_characterAnimator->getAbstractAnimation()->isAnimationEnd())
+			{
+				SceneManager::Get().m_gameOver = true;
+				SceneManager::Get().RestartLevel();
+				player->m_isDeath = false;
+
+				for (auto* weapon : player->m_ownedWeaponList)
+				{
+					if (weapon->m_weaponType != Weapon::TYPE::None)
+					{
+						weapon->ClearBulletList();
+
+						weapon->ClearBulletsListFomrWorld();
+					}
+				}
+
+				
+				m_characterAnimator->getAbstractAnimation()->SetAnimationEnd(false);
+
+			}
+
+		}
+
 	}
 
 	void Creature::PostCosntructFixup()

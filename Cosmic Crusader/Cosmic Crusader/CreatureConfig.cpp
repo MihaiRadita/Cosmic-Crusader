@@ -28,6 +28,7 @@ namespace ratchet
 	{
 		GameObjectConfig::deserialise(jsonFile);
 
+		m_objectID = jsonFile["id"];
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
@@ -44,6 +45,7 @@ namespace ratchet
 		rotation = jsonFile["rotation"];
 		startSpriteTexturePath = "";
 		startSpriteTexturePathAddition = "";
+
 
 		// Custom Properties
 		m_colliderConfig = new CapsuleColliderConfig();

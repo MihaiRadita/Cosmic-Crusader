@@ -41,6 +41,8 @@ namespace ratchet
 		float getTopCircleRadius();
 		float getBottomCircleRadius();
 
+		void RestartColliderFeatures(sf::Sprite& sprite, const CapsuleColliderConfig& config);
+
 		short m_userDataName;
 
 #ifdef IS_RATCHET_DEBUG

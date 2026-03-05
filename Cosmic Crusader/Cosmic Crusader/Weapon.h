@@ -43,6 +43,9 @@ namespace ratchet
 		void Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight);
 		static void releaseBullet(Bullet* bulletToRelease);
 
+
+		void ClearBulletsListFomrWorld();
+
 	private:
 		Bullet* findOrCreateBulletFromPool(const sf::Vector2f position, const float rotationDegrees, const bool orientation);
 

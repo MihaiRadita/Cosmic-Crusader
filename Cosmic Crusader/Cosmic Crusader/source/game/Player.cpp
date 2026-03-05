@@ -305,6 +305,85 @@ namespace ratchet
 		m_currenFireDirectionNorm = directionNormalised;
 	}
 
+	void Player::RestartObjectFeatures()
+	{
+		const auto& sceneFiles = SceneManager::Get().GetSceneFiles();
+		std::string sceneName = SceneManager::Get().GetSceneFiles()[SceneManager::Get().GetCurrentScene()];
+		const auto& allScenes = SceneManager::Get().GetAllScenesFile();
+
+		if (sceneName == "Main Menu")
+		{
+			return;
+		}
+
+		if (!allScenes.contains("scenes")) {
+			std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+			return;
+		}
+
+		auto& scenesNode = allScenes["scenes"];
+		if (!scenesNode.contains(sceneName)) {
+			std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+			return;
+		}
+
+		auto& sceneJson = scenesNode[sceneName];
+
+		if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
+			std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+			return;
+		}
+
+		for (auto& layer : sceneJson["layers"])
+		{
+			const auto& validLayer = layer.contains("objects");
+			if (!validLayer) continue;
+
+			const auto& layerName = layer["name"].get<std::string>();
+
+			if (layerName == "Player")
+			{
+				for (auto& obj : layer["objects"])
+				{
+					const auto& objName = obj["name"];
+
+					if (objName == "Player")
+					{
+						const auto& objID = obj["id"];
+
+						if (objID == m_objectId)
+						{
+							auto config = CreatureConfig();
+							auto* configPtr = &config;
+
+							if (config.deserialise(obj))
+							{
+								m_currentAnimationState = ANIMATION_STATE::IDLE;
+								m_health = config.m_health;
+								//m_position = sf::Vector2f(config.position.x, config.position.y);
+
+								
+								if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(m_collider))
+								{
+									auto* configColliderPtr = config.m_colliderConfig;
+
+									capsuleCollider->m_body->SetTransform(b2Vec2(config.position.x, config.position.y),0.0f);
+
+									capsuleCollider->m_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+									capsuleCollider->m_body->SetAngularVelocity(0.0f);
+									
+									setPosition(sf::Vector2f(config.position.x, config.position.y));
+								}
+
+							}
+
+						}
+					}
+				}
+			}
+		}
+	}
+
 	void Player::update()
 	{
 		float health = m_health;
@@ -339,6 +418,8 @@ namespace ratchet
 
 	void Player::updateMovement()
 	{
+		//sf::Vector2f position = m_sprite.getPosition();
+
 		m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 		m_isMoving = false;
 		bool changeX = false;
@@ -374,6 +455,7 @@ namespace ratchet
 		m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
 
 		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+
 		setPosition(playerPosition);
 
 		TRACE_CHANNEL("PHYSICS", "[PLAYER] AFTER", " Velocity ", " X: ", m_collider->m_body->GetLinearVelocity().x, ", Y: ", m_collider->m_body->GetLinearVelocity().y);

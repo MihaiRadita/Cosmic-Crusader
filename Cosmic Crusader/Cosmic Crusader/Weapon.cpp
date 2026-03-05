@@ -107,6 +107,20 @@ namespace ratchet
 		}
 	}
 
+	void Weapon::ClearBulletsListFomrWorld()
+	{
+		for (auto* object : GameObject::s_gameObjects)
+		{
+			if (auto* bullet = dynamic_cast<Bullet*>(object))
+			{
+				if (bullet->m_objectId == m_WeaponID)
+				{
+					bullet->DestroyGameObject();
+				}
+			}
+		}
+	}
+
 	Bullet* Weapon::findOrCreateBulletFromPool(const sf::Vector2f position, const float rotationDegrees, const bool orientation)
 	{
 		if (s_availableBulletList[m_weaponType].empty() == false)

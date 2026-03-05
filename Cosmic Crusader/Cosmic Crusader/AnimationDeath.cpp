@@ -48,6 +48,14 @@ namespace ratchet
 					{
 						m_currentFrameIndex = 0;
 					}
+
+					if (!m_repeatAnimation)
+					{
+						if (!m_endAnimation)
+						{
+							m_endAnimation = true;
+						}
+					}
 				}
 				if (increaseFrameIndex)
 				{
@@ -92,6 +100,14 @@ namespace ratchet
 					if (m_repeatAnimation)
 					{
 						m_currentFrameIndex = 0;
+					}
+
+					if (!m_repeatAnimation)
+					{
+						if (!m_endAnimation)
+						{
+							m_endAnimation = true;
+						}
 					}
 				}
 
@@ -154,6 +170,8 @@ namespace ratchet
 		m_animationTimer.restart();
 		m_animationSwitch = true;
 		m_repeatAnimation = false;
+
+		m_endAnimation = false;
 	}
 
 	std::vector<sf::Texture> AnimationDeath::addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state)

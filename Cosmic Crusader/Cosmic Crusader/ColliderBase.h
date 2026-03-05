@@ -53,6 +53,7 @@ namespace ratchet
 
 		std::optional<b2Vec2> m_origin = std::nullopt;
 
+
 #ifdef IS_RATCHET_DEBUG
 		bool m_debugDraw = false;
 #endif

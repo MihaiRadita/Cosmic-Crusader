@@ -52,6 +52,8 @@ namespace ratchet
 		m_animationTimer.restart();
 		m_animationSwitch = true;
 		m_repeatAnimation = true;
+
+		m_endAnimation = false;
 	}
 
 	std::vector<sf::Texture> AnimationFall::addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state)

@@ -56,6 +56,8 @@ namespace ratchet
 		m_animationSwitch = true;
 		m_currentJumpTimeLimit = m_animTimeLimit;
 		m_repeatAnimation = false;
+
+		m_endAnimation = false;
 	}
 
 	//Geters

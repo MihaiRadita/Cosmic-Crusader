@@ -103,6 +103,8 @@ namespace ratchet
 		void updateShooting();
 
 
+		void RestartObjectFeatures() override;
+
 		void serialise(nlohmann::json& jsonFile) override;
 		void resetSerialise(nlohmann::json& originaljsonFile, nlohmann::json& jsonFile) override;
 
@@ -111,6 +113,8 @@ namespace ratchet
 		//Sprite functions
 		void invertCharacterMovingSpriteScale(int direction) override;
 		bool isNoControlActive();
+
+		void checkCharacterGameOverTuned();
 
 
 		void PostCosntructFixup() override;

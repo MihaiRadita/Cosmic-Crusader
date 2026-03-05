@@ -78,6 +78,8 @@ namespace ratchet
 		m_movementType = config.m_movementType;
 		m_objectType = config.m_objectType;
 
+		m_objectId = config.m_objectID;
+
 		//Transforms
 		m_position = config.position;
 		m_rotation = config.rotation;
@@ -320,6 +322,11 @@ namespace ratchet
 
 	void GameObject::invertCharacterMovingSpriteScale(int direction)
 	{
+	}
+
+	void GameObject::RestartObjectFeatures()
+	{
+
 	}
 
 	void GameObject::DestroyGameObject()

@@ -64,6 +64,8 @@ namespace ratchet
 
 		virtual void invertCharacterMovingSpriteScale(int direction);
 
+		virtual void RestartObjectFeatures();
+
 		//Physics
 		sf::Vector2f m_colliderScaleMultipier;
 		ColliderBase* m_collider = nullptr;

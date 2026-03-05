@@ -7,6 +7,7 @@ namespace ratchet
 {
 	void AnimationBase::initVariables()
 	{
+
 	}
 
 	std::vector<sf::Texture> AnimationBase::addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state)
@@ -60,6 +61,16 @@ namespace ratchet
 #ifdef IS_RATCHET_DEBUG
 		TRACE_CHANNEL("ANIMATION", "No animation frmae list to reverse");
 #endif
+	}
+
+	bool AnimationBase::isAnimationEnd()
+	{
+		return m_endAnimation;
+	}
+
+	void AnimationBase::SetAnimationEnd(bool end)
+	{
+		m_endAnimation = end;
 	}
 
 	void AnimationBase::playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)

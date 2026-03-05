@@ -47,6 +47,10 @@ namespace ratchet
 		virtual bool isCurrentAnimationIndexValue();
 		virtual void invertAnimationFramesList(Weapon::TYPE& weaponused);
 
+		bool isAnimationEnd();
+
+		void SetAnimationEnd(bool end);
+
 	protected:
 		float m_animTimeLimit;
 		int m_currentFrameIndex;
@@ -55,5 +59,6 @@ namespace ratchet
 		sf::Clock m_animationTimer;
 		bool m_initialTexture;
 		bool m_repeatAnimation;
+		bool m_endAnimation;
 	};
 }

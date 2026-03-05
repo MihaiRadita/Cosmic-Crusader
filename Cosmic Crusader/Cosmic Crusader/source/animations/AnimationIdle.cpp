@@ -53,6 +53,8 @@ namespace ratchet
 		m_animationTimer.restart();
 		m_animationSwitch = true;
 		m_repeatAnimation = true;
+
+		m_endAnimation = false;
 		
 	}
 

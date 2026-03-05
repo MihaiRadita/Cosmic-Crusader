@@ -68,6 +68,7 @@ namespace ratchet
 
 		void SetPauseMenuActive(bool active);
 
+
 		//Getters
 		static SceneManager& Get();
 		nlohmann::json& GetScene(SceneType type);
@@ -81,6 +82,8 @@ namespace ratchet
 		bool m_isUpdating = true;
 		bool m_isrendering = true;
 		bool m_isPuaseEventActvie = false;
+
+		bool m_gameOver = false;
 
 		bool m_isPaused = false;
 
@@ -105,7 +108,13 @@ namespace ratchet
 		sf::View GetWorldView();
 		sf::View GetUIView();
 
+		std::map<SceneType, std::string> GetSceneFiles();
+
+		nlohmann::json GetAllScenesFile();
+
 		void ApplySceneView();
+
+		void RestartLevel();
 
 	private:
 

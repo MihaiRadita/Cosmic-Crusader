@@ -156,6 +156,16 @@ namespace ratchet
 		return m_uiView;
 	}
 
+	std::map<SceneType, std::string> SceneManager::GetSceneFiles()
+	{
+		return m_sceneFiles;
+	}
+
+	nlohmann::json SceneManager::GetAllScenesFile()
+	{
+		return m_allScenes;
+	}
+
 	void SceneManager::ApplySceneView()
 	{
 		std::cout << "THE ZOOM : " << sc_defaultZoom << std::endl;
@@ -173,6 +183,54 @@ namespace ratchet
 		std::cout << "Zoom applied: X=" << zoomX << " Y=" << zoomY << std::endl;
 
 		std::cout << "YAAYYYY!" << std::endl;
+	}
+
+	void SceneManager::RestartLevel()
+	{
+		for (auto* object : GameObject::s_gameObjects)
+		{
+			if (object->m_objectType != ObjectType::UI)
+			{
+				object->m_activeRenderer = false;
+			}
+		}
+
+		WindowManager::Get()->clear(sf::Color::Black);
+		WindowManager::Get()->display();
+
+		Timer timer;
+
+		if (m_gameOver)
+		{
+			while (m_gameOver)
+			{
+				std::cout << "Timer Passed :" << timer.m_accumulatedTime.asSeconds() << " seconds " << std::endl;
+
+				if (timer.GetElapsed().asSeconds() >= 2.0f)
+				{
+					m_gameOver = false;
+				}
+			}
+			if (!m_gameOver)
+			{
+				for (auto* object : GameObject::s_gameObjects)
+				{
+					if (object->m_objectType != ObjectType::UI)
+					{
+						object->m_activeRenderer = true;
+					}
+
+					auto* player = dynamic_cast<Player*>(object);
+
+					if (player)
+					{
+						player->RestartObjectFeatures();
+					}
+				}
+			}
+
+		}
+
 	}
 
 	bool SceneManager::IsCameraDirty()
