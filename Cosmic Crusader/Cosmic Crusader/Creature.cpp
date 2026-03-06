@@ -287,36 +287,45 @@ namespace ratchet
 
 			if (!isGrounded())
 			{
-				if (m_currentAnimationState != JUMP && m_currentAnimationState != JUMP_RUNNING)
+				if (!m_isDeath)
 				{
-					if (m_currentAnimationState != FALL)
+					if (m_currentAnimationState != JUMP && m_currentAnimationState != JUMP_RUNNING)
 					{
-						m_currentAnimationState = FALL;
-						switchAnimation();
+						if (m_currentAnimationState != FALL)
+						{
+							m_currentAnimationState = FALL;
+							switchAnimation();
+						}
 					}
 				}
 			}
 
 			if (m_input.isJump && isGrounded())
 			{
-				if (m_currentAnimationState != MOVING)
+				if (!m_isDeath)
 				{
-					if (m_currentAnimationState != JUMP)
+					if (m_currentAnimationState != MOVING)
 					{
-						m_currentAnimationState = JUMP;
-						m_isFallingWithoutJumping = false;
-						switchAnimation();
+						if (m_currentAnimationState != JUMP)
+						{
+							m_currentAnimationState = JUMP;
+							m_isFallingWithoutJumping = false;
+							switchAnimation();
+						}
 					}
 				}
 			}
 			if (m_input.isJump && isGrounded() && m_isMoving == true)
 			{
-				if (m_currentAnimationState == MOVING)
+				if (!m_isDeath)
 				{
-					if (m_currentAnimationState != JUMP_RUNNING)
+					if (m_currentAnimationState == MOVING)
 					{
-						m_currentAnimationState = JUMP_RUNNING;
-						switchAnimation();
+						if (m_currentAnimationState != JUMP_RUNNING)
+						{
+							m_currentAnimationState = JUMP_RUNNING;
+							switchAnimation();
+						}
 					}
 				}
 			}
@@ -379,7 +388,10 @@ namespace ratchet
 						setWeapon(index);
 					}
 
-					switchAnimation();
+
+ 					switchAnimation();
+
+					m_input.resetControls();
 				}
 			}
 
@@ -495,6 +507,10 @@ namespace ratchet
 	}
 	void Creature::updateJump()
 	{
+		if (m_isDeath && !isGrounded())
+		{
+			m_isMoving = false;
+		}
 	}
 	void Creature::updateRunningJump()
 	{
@@ -637,32 +653,75 @@ namespace ratchet
 	void Creature::checkCharacterGameOverTuned()
 	{
 		auto* player = dynamic_cast<Player*>(this);
+		auto* enemy = dynamic_cast<SelfControlledCreature*>(this);
 
 		if (player)
 		{
 			if (player->m_isDeath && m_characterAnimator->getAbstractAnimation()->isAnimationEnd())
 			{
-				SceneManager::Get().m_gameOver = true;
+
+				Timer timer;
+				while (SceneManager::Get().m_gameOver == false)
+				{
+					if (timer.GetElapsed().asSeconds() >= 1.2f)
+					{
+						SceneManager::Get().m_gameOver = true;
+					}
+
+				}
+
 				SceneManager::Get().RestartLevel();
 				player->m_isDeath = false;
+
+				std::vector<Bullet*> bulletsToDestroy;
+
+				for (auto* object : GameObject::s_gameObjects)
+				{
+					if (auto* bullet = dynamic_cast<Bullet*>(object))
+					{
+						bulletsToDestroy.push_back(bullet);
+					}
+				}
+
+				for (auto* bullet : bulletsToDestroy)
+				{
+					bullet->DestroyGameObject();
+				}
 
 				for (auto* weapon : player->m_ownedWeaponList)
 				{
 					if (weapon->m_weaponType != Weapon::TYPE::None)
 					{
 						weapon->ClearBulletList();
-
-						weapon->ClearBulletsListFomrWorld();
 					}
 				}
 
-				
 				m_characterAnimator->getAbstractAnimation()->SetAnimationEnd(false);
 
 			}
 
 		}
+		else if (enemy)
+		{
+			for (auto* object : s_gameObjects)
+			{
+				auto* playerTarget = dynamic_cast<Player*>(object);
 
+				if(playerTarget)
+				{
+					if (playerTarget->m_isDeath)
+					{
+						for (auto* weapon : enemy->m_ownedWeaponList)
+						{
+							if (weapon->m_weaponType != Weapon::TYPE::None)
+							{
+								weapon->ClearBulletList();
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	void Creature::PostCosntructFixup()

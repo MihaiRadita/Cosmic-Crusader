@@ -46,6 +46,8 @@ namespace ratchet
 
 		void ClearBulletsListFomrWorld();
 
+		void ClearrAllBulletsFormLists();
+
 	private:
 		Bullet* findOrCreateBulletFromPool(const sf::Vector2f position, const float rotationDegrees, const bool orientation);
 

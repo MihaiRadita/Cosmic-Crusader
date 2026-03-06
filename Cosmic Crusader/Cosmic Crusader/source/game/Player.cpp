@@ -66,6 +66,12 @@ namespace ratchet
 				if (m_input.x <= 0) m_input.x = +1;
 				break;
 			case sf::Keyboard::Space:
+
+				if (m_isDeath)
+				{
+					m_input.isJump = false;
+				}
+
 				m_input.isJump = true;
 				break;
 			default:
@@ -360,8 +366,6 @@ namespace ratchet
 							{
 								m_currentAnimationState = ANIMATION_STATE::IDLE;
 								m_health = config.m_health;
-								//m_position = sf::Vector2f(config.position.x, config.position.y);
-
 								
 								if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(m_collider))
 								{
@@ -376,7 +380,6 @@ namespace ratchet
 								}
 
 							}
-
 						}
 					}
 				}
@@ -435,6 +438,8 @@ namespace ratchet
 			if (m_isDeath)
 			{
 				m_input.x = 0.f;
+				m_input.y = 0.0f;
+				m_isMoving = false;
 			}
 			m_isMoving = true;
 			changeX = true;
@@ -452,7 +457,10 @@ namespace ratchet
 
 		TRACE_CHANNEL("PHYSICS", "[PLAYER] BEFORE", " Velocity ", " X: ", m_collider->m_body->GetLinearVelocity().x, ", Y: ", m_collider->m_body->GetLinearVelocity().y);
 
-		m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
+		if (m_isDeath == false)
+		{
+			m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
+		}
 
 		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 

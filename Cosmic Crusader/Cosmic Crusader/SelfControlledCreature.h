@@ -53,6 +53,8 @@ namespace ratchet
 
 		void computeAimBulletRotation() override;
 
+		void RestartObjectFeatures()override;
+
 		void Start() override;
 
 		//update functions

@@ -59,15 +59,18 @@ namespace ratchet
 
 		for (auto& pair : s_inUseBulletList)
 		{
-			auto& bulletList = pair.second;
-			while (!bulletList.empty())
-			{
-				bulletList.pop_back();
-			}
-			bulletList.clear();
+			pair.second.clear();
 		}
-
 		s_inUseBulletList.clear();
+
+		for (auto& pair : s_availableBulletList)
+		{
+			while (!pair.second.empty())
+			{
+				pair.second.pop();
+			}
+		}
+		s_availableBulletList.clear();
 	}
 
 	void Weapon::Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight)
@@ -113,12 +116,14 @@ namespace ratchet
 		{
 			if (auto* bullet = dynamic_cast<Bullet*>(object))
 			{
-				if (bullet->m_objectId == m_WeaponID)
-				{
-					bullet->DestroyGameObject();
-				}
+				bullet->DestroyGameObject();	
 			}
 		}
+	}
+
+	void Weapon::ClearrAllBulletsFormLists()
+	{
+	
 	}
 
 	Bullet* Weapon::findOrCreateBulletFromPool(const sf::Vector2f position, const float rotationDegrees, const bool orientation)

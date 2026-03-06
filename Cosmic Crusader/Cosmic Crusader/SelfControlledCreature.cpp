@@ -121,6 +121,84 @@ namespace ratchet
 		m_currentFireRoationDegrees = angleDeg;
 		m_currenFireDirectionNorm = directionNormalised;
 	}
+	void SelfControlledCreature::RestartObjectFeatures()
+	{
+		const auto& sceneFiles = SceneManager::Get().GetSceneFiles();
+		std::string sceneName = SceneManager::Get().GetSceneFiles()[SceneManager::Get().GetCurrentScene()];
+		const auto& allScenes = SceneManager::Get().GetAllScenesFile();
+
+		if (sceneName == "Main Menu")
+		{
+			return;
+		}
+
+		if (!allScenes.contains("scenes")) {
+			std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+			return;
+		}
+
+		auto& scenesNode = allScenes["scenes"];
+		if (!scenesNode.contains(sceneName)) {
+			std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+			return;
+		}
+
+		auto& sceneJson = scenesNode[sceneName];
+
+		if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
+			std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+			return;
+		}
+
+		for (auto& layer : sceneJson["layers"])
+		{
+			const auto& validLayer = layer.contains("objects");
+			if (!validLayer) continue;
+
+			const auto& layerName = layer["name"].get<std::string>();
+
+			if (layerName == "Enemies")
+			{
+				for (auto& obj : layer["objects"])
+				{
+					const auto& objName = obj["name"];
+
+					if (objName == "Enemy")
+					{
+						const auto& objID = obj["id"];
+
+						if (objID == m_objectId)
+						{
+							auto config = SelfControlledCreatureConfig();
+							auto* configPtr = &config;
+
+							if (config.deserialise(obj))
+							{
+								m_currentAnimationState = ANIMATION_STATE::IDLE;
+								m_health = config.m_health;
+								//m_position = sf::Vector2f(config.position.x, config.position.y);
+
+
+								if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(m_collider))
+								{
+									auto* configColliderPtr = config.m_colliderConfig;
+
+									capsuleCollider->m_body->SetTransform(b2Vec2(config.position.x, config.position.y), 0.0f);
+
+									capsuleCollider->m_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+									capsuleCollider->m_body->SetAngularVelocity(0.0f);
+
+									setPosition(sf::Vector2f(config.position.x, config.position.y));
+								}
+
+							}
+
+						}
+					}
+				}
+			}
+		}
+	}
 	void SelfControlledCreature::Start()
 	{
 		PostCosntructFixup();

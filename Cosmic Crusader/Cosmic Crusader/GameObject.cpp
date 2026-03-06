@@ -344,6 +344,7 @@ namespace ratchet
 		}
 
 		delete this; 
+
 		TRACE_CHANNEL("GAMEOBJECT_INIT", "The Object HAS BEEN DESTROYED!");
 	}
 

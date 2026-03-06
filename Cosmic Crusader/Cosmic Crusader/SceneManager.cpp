@@ -204,8 +204,6 @@ namespace ratchet
 		{
 			while (m_gameOver)
 			{
-				std::cout << "Timer Passed :" << timer.m_accumulatedTime.asSeconds() << " seconds " << std::endl;
-
 				if (timer.GetElapsed().asSeconds() >= 2.0f)
 				{
 					m_gameOver = false;
@@ -228,9 +226,7 @@ namespace ratchet
 					}
 				}
 			}
-
 		}
-
 	}
 
 	bool SceneManager::IsCameraDirty()
