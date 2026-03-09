@@ -206,7 +206,7 @@ namespace ratchet
 	{
 		if (!m_activeGameObject) return;
 
-		checkCharacterGameOverTuned();
+		checkCharacterGameOverTurned();
 
 		updateWeaponSelection();
 		updateMovement();
@@ -650,7 +650,7 @@ namespace ratchet
 		return true;
 	}
 
-	void Creature::checkCharacterGameOverTuned()
+	void Creature::checkCharacterGameOverTurned()
 	{
 		auto* player = dynamic_cast<Player*>(this);
 		auto* enemy = dynamic_cast<SelfControlledCreature*>(this);
@@ -770,8 +770,6 @@ namespace ratchet
 
 	void Creature::detectTarget(GameObject* target)
 	{
-
-
 		sf::Vector2f targetdistancevector = this->getPosition() - target->getPosition();
 
 		if (targetdistancevector.x > 0.0f)

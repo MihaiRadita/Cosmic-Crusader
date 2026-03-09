@@ -114,7 +114,7 @@ namespace ratchet
 		void invertCharacterMovingSpriteScale(int direction) override;
 		bool isNoControlActive();
 
-		void checkCharacterGameOverTuned();
+		void checkCharacterGameOverTurned();
 
 
 		void PostCosntructFixup() override;

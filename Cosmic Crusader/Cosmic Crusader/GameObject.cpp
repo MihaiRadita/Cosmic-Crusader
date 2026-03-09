@@ -375,6 +375,16 @@ namespace ratchet
 		}
 	}
 
+	void GameObject::setDebugDraw(bool value)
+	{
+		m_debugDraw = value;
+	}
+
+	bool GameObject::getDebuDraw()
+	{
+		return m_debugDraw;
+	}
+
 	void GameObject::addGameObjectoDestory(GameObject* object)
 	{
 		if (object && s_destroyQueuedSet.insert(object).second) 

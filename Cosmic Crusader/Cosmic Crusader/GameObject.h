@@ -137,6 +137,10 @@ namespace ratchet
 		 void RemoveGameObjectFromList();
 		 static void clearQueuedObjectsToDestroy();
 
+		 void setDebugDraw(bool value);
+
+		 bool getDebuDraw();
+
 		template<typename GameObjectChildType, typename GameObjectChildConfig>
 		static GameObject* Instantiate(
 			const GameObjectChildConfig& gameObjectConfig, 

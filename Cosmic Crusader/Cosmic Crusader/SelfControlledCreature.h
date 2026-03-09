@@ -32,6 +32,7 @@ namespace ratchet
 		bool m_canJumpOver = false;
 		bool m_isFallingRisk = false;
 
+
 		//Check Attack Target Function
 		void checkTargetToAttack(Creature* target);
 

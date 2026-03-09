@@ -15,6 +15,8 @@ namespace ratchet
 		m_targetMaxDistanceLoseY = config.m_targetMaxDistanceLoseY;
 		m_targetMaxDistanceAttackX = config.m_targetMaxDistanceAttackX;
 		m_targetMaxDistanceAttackY = config.m_targetMaxDistanceAttackY;
+
+		m_objectId = config.m_objectID;
 	}
 	SelfControlledCreature::~SelfControlledCreature()
 	{
@@ -352,6 +354,16 @@ namespace ratchet
 	{
 		if (m_isDeath)
 		{
+			for (size_t i = 0; i < GameObject::s_gameObjects.size(); i++)
+			{
+				if (GameObject::s_gameObjects[i] == this)
+				{
+					SceneManager::Get().m_characters_destroyed_ID.push_back(m_objectId);
+					SceneManager::Get().m_characters_destroyed_index.push_back(i);
+					break;
+				}
+			}
+
 			GameObject::DestroyGameObject();
 			return;
 		}
