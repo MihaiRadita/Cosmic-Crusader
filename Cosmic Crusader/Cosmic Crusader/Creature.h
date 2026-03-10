@@ -41,6 +41,7 @@ namespace ratchet
 		int m_lastFiredWeaponIndex = -1;
 		bool m_mustSpawnBullet = false;
 		bool m_isDeath = false;
+		bool m_isDeathFall = false;
 
 		//target detect distance 
 		float m_targetMaxDistanceDetectionX;

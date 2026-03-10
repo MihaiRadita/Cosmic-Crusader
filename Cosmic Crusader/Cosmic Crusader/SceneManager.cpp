@@ -52,6 +52,8 @@ namespace ratchet
 
 	void SceneManager::StartSceneObjects()
 	{
+		m_isViewFollow = true;
+
 		m_worldView.setSize(sf::Vector2f(WindowManager::Get()->getSize().x * sc_defaultZoom, 
 										 WindowManager::Get()->getSize().y * sc_defaultZoom));
 		m_worldView.setCenter(sf::Vector2f(m_worldCenter));
@@ -144,6 +146,12 @@ namespace ratchet
 				}
 			}
 		}
+	}
+
+	void SceneManager::ClearDestroyedCharactersLists()
+	{
+		m_characters_destroyed_ID.clear();
+		m_characters_destroyed_index.clear();
 	}
 
 	sf::View SceneManager::GetWorldView()
@@ -294,7 +302,7 @@ namespace ratchet
 																if (i == index)
 																{
 																	GameObject::s_gameObjects.insert(GameObject::s_gameObjects.begin() + i,
-																		new SelfControlledCreature(config));
+																									 new SelfControlledCreature(config));
 
 																	if (auto* enemy1 = dynamic_cast<SelfControlledCreature*>(GameObject::s_gameObjects[index]))
 																	{
@@ -312,10 +320,7 @@ namespace ratchet
 											}
 										}
 									}
-
-									m_characters_destroyed_ID.clear();
-									m_characters_destroyed_index.clear();
-
+									SceneManager::Get().ClearDestroyedCharactersLists();
 								}
 							}
 						}
@@ -504,14 +509,17 @@ namespace ratchet
 
 			if (player)
 			{
-				target.setView(m_worldView);
-				m_worldView = target.getView();
+				if (m_isViewFollow)
+				{
+					target.setView(m_worldView);
+					m_worldView = target.getView();
 
-				sf::Vector2f size = m_worldView.getSize();
-				m_worldView.setCenter(
-					player->getCollider()->getBody()->GetPosition().x,
-					player->getCollider()->getBody()->GetPosition().y
-				);
+					sf::Vector2f size = m_worldView.getSize();
+					m_worldView.setCenter(
+						player->getCollider()->getBody()->GetPosition().x,
+						player->getCollider()->getBody()->GetPosition().y
+					);
+				}
 			}
 
 			for (auto* obj : GameObject::s_gameObjects)
@@ -1025,6 +1033,15 @@ namespace ratchet
 					if (config.deserialise(obj))
 					{
 						GameObject::s_gameObjects.push_back(new Checkpoint(config));
+					}
+				}
+				else if (layerName == "Action Triggers")
+				{
+					auto config = ActionTriggerConfig();
+
+					if (config.deserialise(obj))
+					{
+						GameObject::s_gameObjects.push_back(new ActionTrigger(config));
 					}
 				}
 				succeeded = true;

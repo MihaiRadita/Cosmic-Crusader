@@ -11,6 +11,7 @@
 #include "UISliderButtonConfig.h"
 #include "UITextConfig.h"
 #include "CheckpointConfig.h"
+#include "ActionTriggerConfig.h"
 
 
 

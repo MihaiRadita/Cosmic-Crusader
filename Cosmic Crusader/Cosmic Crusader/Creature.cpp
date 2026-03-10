@@ -657,47 +657,56 @@ namespace ratchet
 
 		if (player)
 		{
-			if (player->m_isDeath && m_characterAnimator->getAbstractAnimation()->isAnimationEnd())
+			if (player->m_isDeath)
 			{
-
-				Timer timer;
-				while (SceneManager::Get().m_gameOver == false)
+				if (m_currentAnimationState == ANIMATION_STATE::DIE)
 				{
-					if (timer.GetElapsed().asSeconds() >= 1.2f)
+					if (m_characterAnimator->getAbstractAnimation()->isAnimationEnd())
 					{
-						SceneManager::Get().m_gameOver = true;
-					}
-
-				}
-
-				SceneManager::Get().RestartLevel();
-				player->m_isDeath = false;
-
-				std::vector<Bullet*> bulletsToDestroy;
-
-				for (auto* object : GameObject::s_gameObjects)
-				{
-					if (auto* bullet = dynamic_cast<Bullet*>(object))
-					{
-						bulletsToDestroy.push_back(bullet);
+						Timer timer;
+						while (SceneManager::Get().m_gameOver == false)
+						{
+							if (timer.GetElapsed().asSeconds() >= 1.2f)
+							{
+								SceneManager::Get().m_gameOver = true;
+							}
+						}
 					}
 				}
-
-				for (auto* bullet : bulletsToDestroy)
+				
+				if (SceneManager::Get().m_gameOver)
 				{
-					bullet->DestroyGameObject();
-				}
+					SceneManager::Get().RestartLevel();
+					player->m_isDeath = false;
 
-				for (auto* weapon : player->m_ownedWeaponList)
-				{
-					if (weapon->m_weaponType != Weapon::TYPE::None)
+					std::vector<Bullet*> bulletsToDestroy;
+
+					for (auto* object : GameObject::s_gameObjects)
 					{
-						weapon->ClearBulletList();
+						if (auto* bullet = dynamic_cast<Bullet*>(object))
+						{
+							bulletsToDestroy.push_back(bullet);
+						}
 					}
+
+					for (auto* bullet : bulletsToDestroy)
+					{
+						bullet->DestroyGameObject();
+					}
+
+					for (auto* weapon : player->m_ownedWeaponList)
+					{
+						if (weapon->m_weaponType != Weapon::TYPE::None)
+						{
+							weapon->ClearBulletList();
+						}
+					}
+
+					m_characterAnimator->getAbstractAnimation()->SetAnimationEnd(false);
+
+					m_input.resetControls();
 				}
-
-				m_characterAnimator->getAbstractAnimation()->SetAnimationEnd(false);
-
+				
 			}
 
 		}

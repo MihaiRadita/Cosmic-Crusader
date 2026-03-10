@@ -91,8 +91,7 @@ namespace ratchet
 			case ButtonNameState::Quit:
 				m_isButtonInteracting = false;
 				m_isButtonEventTirggered = false;
-				SceneManager::Get().m_characters_destroyed_ID.clear();
-				SceneManager::Get().m_characters_destroyed_index.clear();
+				SceneManager::Get().ClearDestroyedCharactersLists();
 				SceneManager::Get().LoadNextScene();
 			}
 		}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="20" nextobjectid="5154">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="21" nextobjectid="5161">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -55,6 +55,7 @@
  <tileset firstgid="66" source="Check Points.tsx"/>
  <tileset firstgid="67" source="New Game Button.tsx"/>
  <tileset firstgid="68" source="Continue Button.tsx"/>
+ <tileset firstgid="69" source="Action Triggers.tsx"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
   <object id="3830" name="PathPoint" x="640" y="576">
    <point/>
@@ -62246,6 +62247,26 @@
     <property name="usableWeaponCheckListMask" type="int" value="16"/>
     <property name="usableWeaponTypeListMask" type="int" value="16"/>
     <property name="weaponTypeListMask" type="int" value="16"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="20" name="Action Triggers">
+  <object id="5160" name="Action Trigger" gid="69" x="19456" y="192" width="1280" height="320">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="actionTriggerName" type="int" value="1"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderIsSensor" type="bool" value="true"/>
+    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="isActionTriggerInteracting" type="bool" value="false"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
  </objectgroup>

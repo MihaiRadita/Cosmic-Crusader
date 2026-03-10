@@ -12,7 +12,8 @@ namespace ratchet
 		Player,
 		Items, 
 		Projectiles,
-		CheckPoints
+		CheckPoints,
+		DeathFallTrigger
 	};
 
 	enum ColliderType { COLLIDERTYPE_UNKNOWN = 0, STATIC, DYNAMIC };

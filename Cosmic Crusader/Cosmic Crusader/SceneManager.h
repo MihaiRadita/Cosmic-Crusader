@@ -8,6 +8,7 @@
 #include "UIClickButton.h"
 #include "UISliderButton.h"
 #include "Checkpoint.h"
+#include "ActionTrigger.h"
 
 #include "physics/Physics.h"
 
@@ -68,6 +69,8 @@ namespace ratchet
 
 		void SetPauseMenuActive(bool active);
 
+		void ClearDestroyedCharactersLists();
+
 
 		//Getters
 		static SceneManager& Get();
@@ -91,6 +94,8 @@ namespace ratchet
 		sf::Vector2f m_uiCenter;
 
 		sf::Vector2f m_uiViewSize;
+
+		bool m_isViewFollow;
 
 		bool IsCameraDirty();
 

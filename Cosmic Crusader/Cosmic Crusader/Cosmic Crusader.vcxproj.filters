@@ -173,6 +173,12 @@
     <ClCompile Include="AnimationDeath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ActionTrigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionTriggerConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -269,5 +275,7 @@
     <ClInclude Include="Checkpoint.h" />
     <ClInclude Include="CheckpointConfig.h" />
     <ClInclude Include="AnimationDeath.h" />
+    <ClInclude Include="ActionTrigger.h" />
+    <ClInclude Include="ActionTriggerConfig.h" />
   </ItemGroup>
 </Project>
