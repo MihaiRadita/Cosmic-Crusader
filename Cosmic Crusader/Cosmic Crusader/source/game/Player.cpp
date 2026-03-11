@@ -60,9 +60,17 @@ namespace ratchet
 			switch (key)
 			{
 			case sf::Keyboard::A:
+				if (m_isDeath)
+				{
+					m_input.resetMovementControls();
+				}
 				if (m_input.x >= 0) m_input.x = -1;
 				break;
 			case sf::Keyboard::D:
+				if (m_isDeath)
+				{
+					m_input.resetMovementControls();
+				}
 				if (m_input.x <= 0) m_input.x = +1;
 				break;
 			case sf::Keyboard::Space:

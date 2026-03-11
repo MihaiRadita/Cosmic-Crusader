@@ -10,7 +10,7 @@
 
 namespace ratchet
 {
-
+	
 	Creature::Creature(const CreatureConfig& config) : GameObject(config)
 	{
 		

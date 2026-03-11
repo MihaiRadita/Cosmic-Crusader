@@ -84,6 +84,8 @@ namespace ratchet
 		Animator* m_characterAnimator;
 		sf::Texture m_creatureFallingTexture;
 
+		float m_fallingTriggerCount = 0.0f;
+
 		bool m_isFallingWithoutJumping;
 
 		//Constructors

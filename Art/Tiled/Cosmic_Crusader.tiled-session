@@ -1,13 +1,21 @@
 {
     "activeFile": "LevelMap1/Level Map.tmx",
     "expandedProjectPaths": [
-        "LevelMap1",
-        "."
+        ".",
+        "LevelMap1"
     ],
     "fileStates": {
         "": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "LevelMap1/Action Trigger.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "LevelMap1/Action Triggers.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
         },
         "LevelMap1/Back  col_Button.tsx": {
             "dynamicWrapping": false,
@@ -40,16 +48,17 @@
         },
         "LevelMap1/Level Map.tmx": {
             "expandedObjectLayers": [
-                3,
+                20,
                 2,
+                3,
                 4,
                 13
             ],
-            "scale": 0.33,
-            "selectedLayer": 9,
+            "scale": 0.125,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 17884.848484848484,
-                "y": 200
+                "x": 24416,
+                "y": 1192
             }
         },
         "LevelMap1/Level Map.tmx#Main Menu": {
@@ -65,7 +74,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 32,
-                "y": 31.5
+                "y": 31
             }
         },
         "LevelMap1/Main Menu.tmx#Main Menu": {
@@ -106,14 +115,17 @@
         }
     },
     "last.exportedFilePath": "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes",
-    "last.imagePath": "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Tileset",
+    "last.imagePath": "D:/Media/Downloads/Special Triggers",
     "map.lastUsedExportFilter": "All Files (*)",
     "openFiles": [
         "LevelMap1/Level Map.tmx",
-        "LevelMap1/Main Menu.tmx"
+        "LevelMap1/Main Menu.tmx",
+        "LevelMap1/Action Trigger.tsx",
+        "LevelMap1/Action Trigger.tsx"
     ],
     "project": "Cosmic_Crusader.tiled-project",
     "recentFiles": [
+        "LevelMap1/Action Trigger.tsx",
         "LevelMap1/Main Menu.tmx",
         "LevelMap1/Level Map.tmx",
         "LevelMap1/CraftpixSciFi.tsx",
@@ -124,7 +136,11 @@
         "LevelMap1/Weapons.tsx",
         "LevelMap1/Main Menu.tsx",
         "LevelMap1/Back  col_Button.tsx",
-        "LevelMap1/Continue Button.tsx",
-        "LevelMap1/New Game Button.tsx"
-    ]
+        "LevelMap1/Continue Button.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 2560,
+        "width": 1280
+    }
 }

@@ -37,16 +37,19 @@ namespace ratchet
 	void ActionTrigger::OnSensorEnter(GameObject* obj)
 	{
 		auto* player = dynamic_cast<Player*>(obj);
+		if (!player) return;
 
-		if (player)
+		if (m_isObjectInside) return;
+
+		m_isObjectInside = true;
+
+		player->m_fallingTriggerCount++;
+
+		if (player->m_fallingTriggerCount == 1)
 		{
-			if (m_isActionTriggerInteracting == false)
+			if (!player->m_isDeath)
 			{
-				SceneManager::Get().m_isViewFollow = false;
-				
 				player->m_isDeath = true;
-					
-				m_isActionTriggerInteracting = true;
 			}
 		}
 	}
@@ -55,21 +58,20 @@ namespace ratchet
 	{
 		auto* player = dynamic_cast<Player*>(obj);
 
-		if (player)
-		{
-			if (m_isActionTriggerInteracting == true)
-			{
-				SceneManager::Get().m_gameOver = true;
-				SceneManager::Get().m_isViewFollow = true;
-				m_isActionTriggerInteracting = false;
-			}
-		}
-	}
-	void ActionTrigger::SetTarget()
-	{
-		for (auto* obj : s_gameObjects)
-		{
+		if (!player) return;
 
+		if (!m_isObjectInside) return;
+
+		m_isObjectInside = false;
+
+		player->m_fallingTriggerCount--;
+
+		if (player->m_fallingTriggerCount <= 0)
+		{
+			player->m_fallingTriggerCount = 0;
+
+			SceneManager::Get().m_gameOver = true;
+			SceneManager::Get().m_isViewFollow = true;
 		}
 	}
 }

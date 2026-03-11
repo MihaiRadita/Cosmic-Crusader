@@ -29,9 +29,9 @@ namespace ratchet
 		virtual void OnSensorEnter(GameObject* obj) override;
 		virtual void OnSensorExit(GameObject* obj) override;
 
-		void SetTarget();
-
 		sf::RectangleShape m_actionTriggerShape;
+
+		bool m_isObjectInside = false;
 
 	private:
 	};
