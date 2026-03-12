@@ -50,6 +50,7 @@ namespace ratchet
 			if (!player->m_isDeath)
 			{
 				player->m_isDeath = true;
+				SceneManager::Get().m_isViewFollow = false;
 			}
 		}
 	}

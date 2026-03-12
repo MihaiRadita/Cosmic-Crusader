@@ -116,4 +116,13 @@ namespace ratchet
 
 		m_UIText.setString(m_TextValue);
 	}
+	void UIText::setTextValue(std::string& value)
+	{
+		std::ostringstream ss;
+
+		ss << value;
+		m_TextValue = ss.str();
+
+		m_UIText.setString(m_TextValue);
+	}
 }

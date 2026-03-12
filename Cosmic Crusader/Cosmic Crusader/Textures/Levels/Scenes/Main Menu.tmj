@@ -507,7 +507,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1183,20 +1183,20 @@
                         {
                          "name":"textUIYOffset",
                          "type":"float",
-                         "value":-53
+                         "value":-45
                         }, 
                         {
                          "name":"textValue",
                          "type":"string",
-                         "value":"0.0"
+                         "value":"1280x720"
                         }],
                  "rotation":0,
                  "text":
                     {
                      "color":"#fdffaa00",
                      "halign":"center",
-                     "pixelsize":50,
-                     "text":"0.0",
+                     "pixelsize":25,
+                     "text":"1280x720",
                      "valign":"center",
                      "wrap":true
                     },
@@ -2078,7 +2078,7 @@
                         {
                          "name":"sliderMaxValue",
                          "type":"float",
-                         "value":0
+                         "value":3
                         },
                     
                         {
@@ -2089,7 +2089,7 @@
                         {
                          "name":"sliderValueIncrease",
                          "type":"float",
-                         "value":0
+                         "value":1
                         }, 
                         {
                          "name":"sliderValueText",
@@ -2105,7 +2105,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 

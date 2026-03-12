@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="21" height="21" tilewidth="64" tileheight="64" infinite="1" nextlayerid="8" nextobjectid="47">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="21" height="21" tilewidth="64" tileheight="64" infinite="1" nextlayerid="8" nextobjectid="49">
  <editorsettings>
-  <export target="../../LevelMaps/Main Menu12.tmj" format="json"/>
+  <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Main Menu.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="PlatformsTile.tsx"/>
  <tileset firstgid="33" source="Back  col_Button.tsx"/>
@@ -304,10 +304,10 @@
     <property name="textFontPath" value="Fonts/UI Font.ttf"/>
     <property name="textType" type="int" value="2"/>
     <property name="textUIXOffset" type="float" value="286"/>
-    <property name="textUIYOffset" type="float" value="-53"/>
-    <property name="textValue" value="0.0"/>
+    <property name="textUIYOffset" type="float" value="-45"/>
+    <property name="textValue" value="1280x720"/>
    </properties>
-   <text pixelsize="50" wrap="1" color="#fdffaa00" halign="center" valign="center">0.0</text>
+   <text pixelsize="25" wrap="1" color="#fdffaa00" halign="center" valign="center">1280x720</text>
   </object>
   <object id="26" name="Slider Text Value" x="128" y="384" width="192" height="64">
    <properties>
@@ -494,9 +494,9 @@
     <property name="movementType" type="int" value="0"/>
     <property name="objectType" type="int" value="2"/>
     <property name="plusButton" type="object" value="35"/>
-    <property name="sliderMaxValue" type="float" value="0"/>
+    <property name="sliderMaxValue" type="float" value="3"/>
     <property name="sliderTitle" type="object" value="28"/>
-    <property name="sliderValueIncrease" type="float" value="0"/>
+    <property name="sliderValueIncrease" type="float" value="1"/>
     <property name="sliderValueText" type="object" value="31"/>
    </properties>
    <point/>
@@ -514,6 +514,13 @@
   <object id="15" name="Scene Object Dimension" x="0" y="62.6667">
    <properties>
     <property name="tileToGameScale" type="float" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="47" name="Scene Resolution" x="0" y="64">
+   <properties>
+    <property name="resolutionX" value="1280"/>
+    <property name="resolutionY" value="720"/>
    </properties>
    <point/>
   </object>

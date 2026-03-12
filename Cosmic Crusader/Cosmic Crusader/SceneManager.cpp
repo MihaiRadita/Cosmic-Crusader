@@ -44,6 +44,7 @@ namespace ratchet
 	{
 		LoadCombinedScenes();
 		LoadSceneBasicFeatures();
+		SetResolutionList();
 		LoadSceneGameObjects();
 
 		AwakeSceneObjects();
@@ -154,6 +155,17 @@ namespace ratchet
 		m_characters_destroyed_index.clear();
 	}
 
+	void SceneManager::SetResolutionList()
+	{
+		m_resolutions[Resolution::HD] = { "1280X720", 1280, 720 };
+		m_resolutions[Resolution::FullHD] = { "1920X1080", 1920, 1080 };
+		m_resolutions[Resolution::DoubleK] = { "2560X1440", 2560, 1440 };
+		m_resolutions[Resolution::ForthK] = { "3840X2160", 3840, 2160 };
+		
+
+		m_currenResolution = Resolution::HD;
+	}
+
 	sf::View SceneManager::GetWorldView()
 	{
 		return m_worldView;
@@ -162,6 +174,11 @@ namespace ratchet
 	sf::View SceneManager::GetUIView()
 	{
 		return m_uiView;
+	}
+
+	Resolution& SceneManager::GetCurrentResolution()
+	{
+		return m_currenResolution;
 	}
 
 	std::map<SceneType, std::string> SceneManager::GetSceneFiles()

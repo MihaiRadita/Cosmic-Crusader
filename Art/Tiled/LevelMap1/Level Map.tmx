@@ -56,7 +56,6 @@
  <tileset firstgid="67" source="New Game Button.tsx"/>
  <tileset firstgid="68" source="Continue Button.tsx"/>
  <tileset firstgid="69" source="Action Trigger.tsx"/>
- <tileset firstgid="73" source="Action Trigger.tsx"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
   <object id="3830" name="PathPoint" x="640" y="576">
    <point/>
@@ -62252,7 +62251,7 @@
   </object>
  </objectgroup>
  <objectgroup id="20" name="Action Triggers">
-  <object id="5182" name="Action Trigger" gid="73" x="3584" y="3264" width="1280" height="2560">
+  <object id="5182" name="Action Trigger" gid="69" x="3584" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62270,7 +62269,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5183" name="Action Trigger" gid="73" x="4864" y="3264" width="1280" height="2560">
+  <object id="5183" name="Action Trigger" gid="69" x="4864" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62288,7 +62287,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5184" name="Action Trigger" gid="73" x="6144" y="3264" width="1280" height="2560">
+  <object id="5184" name="Action Trigger" gid="69" x="6144" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62306,7 +62305,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5185" name="Action Trigger" gid="73" x="7424" y="3264" width="1280" height="2560">
+  <object id="5185" name="Action Trigger" gid="69" x="7424" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62324,7 +62323,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5186" name="Action Trigger" gid="73" x="8704" y="3264" width="1280" height="2560">
+  <object id="5186" name="Action Trigger" gid="69" x="8704" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62342,7 +62341,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5187" name="Action Trigger" gid="73" x="9984" y="3264" width="1280" height="2560">
+  <object id="5187" name="Action Trigger" gid="69" x="9984" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62360,7 +62359,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5188" name="Action Trigger" gid="73" x="19008" y="3264" width="1280" height="2560">
+  <object id="5188" name="Action Trigger" gid="69" x="19008" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62378,7 +62377,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5198" name="Action Trigger" gid="73" x="17728" y="3264" width="1280" height="2560">
+  <object id="5198" name="Action Trigger" gid="69" x="17728" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62396,7 +62395,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5189" name="Action Trigger" gid="73" x="20288" y="3264" width="1280" height="2560">
+  <object id="5189" name="Action Trigger" gid="69" x="20288" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62414,7 +62413,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5190" name="Action Trigger" gid="73" x="21568" y="3264" width="1280" height="2560">
+  <object id="5190" name="Action Trigger" gid="69" x="21568" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62432,7 +62431,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5191" name="Action Trigger" gid="73" x="22848" y="3264" width="1280" height="2560">
+  <object id="5191" name="Action Trigger" gid="69" x="22848" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62450,7 +62449,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5192" name="Action Trigger" gid="73" x="24768" y="3264" width="1280" height="2560">
+  <object id="5192" name="Action Trigger" gid="69" x="24768" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62468,7 +62467,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5194" name="Action Trigger" gid="73" x="29632" y="3584" width="1280" height="2560">
+  <object id="5194" name="Action Trigger" gid="69" x="29632" y="3584" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62486,7 +62485,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5195" name="Action Trigger" gid="73" x="30912" y="3584" width="1280" height="2560">
+  <object id="5195" name="Action Trigger" gid="69" x="30912" y="3584" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62504,7 +62503,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5196" name="Action Trigger" gid="73" x="32192" y="3584" width="1280" height="2560">
+  <object id="5196" name="Action Trigger" gid="69" x="32192" y="3584" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62522,7 +62521,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5197" name="Action Trigger" gid="73" x="33472" y="3584" width="1280" height="2560">
+  <object id="5197" name="Action Trigger" gid="69" x="33472" y="3584" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62540,7 +62539,7 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
-  <object id="5193" name="Action Trigger" gid="73" x="24128" y="3264" width="1280" height="2560">
+  <object id="5193" name="Action Trigger" gid="69" x="24128" y="3264" width="1280" height="2560">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
@@ -62825,9 +62824,9 @@
     <property name="movementType" type="int" value="0"/>
     <property name="objectType" type="int" value="2"/>
     <property name="plusButton" type="object" value="5147"/>
-    <property name="sliderMaxValue" type="float" value="20"/>
+    <property name="sliderMaxValue" type="float" value="3"/>
     <property name="sliderTitle" type="object" value="5144"/>
-    <property name="sliderValueIncrease" type="float" value="5"/>
+    <property name="sliderValueIncrease" type="float" value="1"/>
     <property name="sliderValueText" type="object" value="5146"/>
    </properties>
    <point/>
@@ -62861,10 +62860,10 @@
     <property name="textFontPath" value="Fonts/UI Font.ttf"/>
     <property name="textType" type="int" value="2"/>
     <property name="textUIXOffset" type="float" value="286"/>
-    <property name="textUIYOffset" type="float" value="-53"/>
-    <property name="textValue" value="0.0"/>
+    <property name="textUIYOffset" type="float" value="-45"/>
+    <property name="textValue" value="1280x720"/>
    </properties>
-   <text pixelsize="50" wrap="1" color="#ffaa00" halign="center">0.0</text>
+   <text pixelsize="25" wrap="1" color="#ffaa00" halign="center">0.0</text>
   </object>
   <object id="5139" name="Slider Text Value" x="-64" y="64" width="192" height="64">
    <properties>

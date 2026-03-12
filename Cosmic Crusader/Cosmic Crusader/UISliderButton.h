@@ -34,7 +34,7 @@ namespace ratchet
 		UIText m_UITextValue;
 		//ButtonNameAction m_nameAction;
 
-		float getSliderValueModified();
+		float& getSliderValueModified();
 
 	private:
 

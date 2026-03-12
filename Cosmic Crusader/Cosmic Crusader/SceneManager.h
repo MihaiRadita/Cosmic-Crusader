@@ -34,6 +34,21 @@ namespace ratchet
 		Pause
 	};
 
+	enum class Resolution
+	{ 
+		HD = 0, 
+		FullHD,
+		DoubleK,
+		ForthK
+	};
+
+	struct ResolutionInfo
+	{
+		std::string name;
+		int width;
+		int height;
+	};
+
 	class SceneManager
 	{
 	public:
@@ -110,8 +125,13 @@ namespace ratchet
 
 		void SetGameScenePauseState();
 
+
+		void SetResolutionList();
+
 		sf::View GetWorldView();
 		sf::View GetUIView();
+
+		Resolution& GetCurrentResolution();
 
 		std::map<SceneType, std::string> GetSceneFiles();
 
@@ -124,10 +144,13 @@ namespace ratchet
 
 		void RestartLevel();
 
+		std::map<Resolution, ResolutionInfo> m_resolutions;
+
 	private:
 
 		SceneManager();
 
+		Resolution m_currentResolution;
 		std::map<SceneType, std::string> m_sceneFiles;
 		SceneType m_currentScene;
 
@@ -143,6 +166,9 @@ namespace ratchet
 		int m_sceneIndex;
 
 		bool m_cameraDirty;
+
+		Resolution m_currenResolution;
+
 
 
 		SceneGameState m_currentGameSceneState;

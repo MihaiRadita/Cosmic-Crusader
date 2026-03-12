@@ -34,6 +34,7 @@ namespace ratchet
 		bool checkNumberIfDifferent(float& value);
 
 		void setNumberValue(float& value);
+		void setTextValue(std::string& value);
 
 		float m_uiTextOffsetX;
 		float m_uiTextOffsetY;

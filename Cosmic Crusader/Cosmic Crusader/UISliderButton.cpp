@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "UISliderButton.h"
 
-
+#include "SceneManager.h"
 
 namespace ratchet
 {
@@ -14,6 +14,7 @@ namespace ratchet
 		m_currentSliderValue = config.m_currentSliderValue;
 		m_sliderValueIncreasse = config.m_sliderValueIncreasse;
 		m_sliderMaxValue = config.m_sliderMaxValue;
+		auto& action = m_nameAction;
 
 	}
 	UISliderButton::~UISliderButton()
@@ -33,17 +34,32 @@ namespace ratchet
 		m_plusButton.update();
 		m_UITextValue.update();
 
-		float volume;
+		
 
 		switch (m_nameAction)
 		{
 		case ButtonNameAction::MusicVolume:
-			volume = getSliderValueModified();
+		{
+			float& volume = getSliderValueModified();
+			m_UITextValue.setNumberValue(m_currentSliderValue);
 			break;
+		}
+
+		case ButtonNameAction::Resolution:
+		{
+			auto& currentResolution = SceneManager::Get().GetCurrentResolution();
+			currentResolution = static_cast<Resolution>((int)getSliderValueModified());
+			std::string& textResolution = SceneManager::Get().m_resolutions[currentResolution].name;
+
+			m_UITextValue.setTextValue(textResolution);
+
+			break;
+		}
 
 		default:
+		{
 			break;
-
+		}
 		}
 
 		if (m_plusButton.m_isButtonEventTirggered)
@@ -114,7 +130,7 @@ namespace ratchet
 		m_minusButton.SetActiveRenderer(active);
 	}
 
-	float UISliderButton::getSliderValueModified()
+	float& UISliderButton::getSliderValueModified()
 	{
 		{
 			if (m_plusButton.m_isButtonEventTirggered)
@@ -126,7 +142,7 @@ namespace ratchet
 					m_currentSliderValue = m_sliderMaxValue;
 				}
 
-				m_UITextValue.setNumberValue(m_currentSliderValue);
+				
 			}
 			else if (m_minusButton.m_isButtonEventTirggered)
 			{
@@ -137,7 +153,6 @@ namespace ratchet
 					m_currentSliderValue = 0.0f;
 				}
 
-				m_UITextValue.setNumberValue(m_currentSliderValue);
 			}
 		}
 
