@@ -48,17 +48,16 @@
         },
         "LevelMap1/Level Map.tmx": {
             "expandedObjectLayers": [
-                20,
-                2,
-                3,
                 4,
-                13
+                16,
+                13,
+                3
             ],
-            "scale": 0.125,
-            "selectedLayer": 10,
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 24416,
-                "y": 1192
+                "x": 17754,
+                "y": -402
             }
         },
         "LevelMap1/Level Map.tmx#Main Menu": {
@@ -67,14 +66,15 @@
         },
         "LevelMap1/Main Menu.tmx": {
             "expandedObjectLayers": [
+                5,
                 7,
                 2
             ],
             "scale": 1,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 32,
-                "y": 31
+                "x": 0,
+                "y": 64
             }
         },
         "LevelMap1/Main Menu.tmx#Main Menu": {
@@ -120,10 +120,10 @@
     "openFiles": [
         "LevelMap1/Level Map.tmx",
         "LevelMap1/Main Menu.tmx",
-        "LevelMap1/Action Trigger.tsx",
         "LevelMap1/Action Trigger.tsx"
     ],
     "project": "Cosmic_Crusader.tiled-project",
+    "property.type": "int",
     "recentFiles": [
         "LevelMap1/Action Trigger.tsx",
         "LevelMap1/Main Menu.tmx",

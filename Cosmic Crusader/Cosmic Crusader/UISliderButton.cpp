@@ -51,6 +51,8 @@ namespace ratchet
 			currentResolution = static_cast<Resolution>((int)getSliderValueModified());
 			std::string& textResolution = SceneManager::Get().m_resolutions[currentResolution].name;
 
+			auto& resolution = SceneManager::Get().m_resolutions[currentResolution];
+
 			m_UITextValue.setTextValue(textResolution);
 
 			break;

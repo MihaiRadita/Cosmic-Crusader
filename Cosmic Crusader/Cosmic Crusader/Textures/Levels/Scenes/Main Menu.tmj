@@ -507,7 +507,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2105,7 +2105,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -2159,6 +2159,24 @@
                  "width":0,
                  "x":0,
                  "y":62.6667
+                }, 
+                {
+                 "height":0,
+                 "id":47,
+                 "name":"Scene Resolution",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"resolution",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":0,
+                 "y":64
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2167,7 +2185,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":47,
+ "nextobjectid":49,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

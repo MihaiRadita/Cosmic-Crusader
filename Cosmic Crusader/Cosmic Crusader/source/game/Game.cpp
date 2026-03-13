@@ -99,6 +99,13 @@ namespace ratchet
 				SceneManager::Get().LoadNextScene();
 			}
 
+			if (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::R)
+			{
+				auto& sceneManager = SceneManager::Get();
+				const auto& resolution = sceneManager.m_resolutions[SceneManager::Get().GetCurrentResolution()];
+				SceneManager::Get().SetWindowResolution(sf::Vector2u(resolution.width, resolution.height));
+			}
+
 			for (const auto& obj : GameObject::s_gameObjects)
 			{
 				if (auto uiButton = dynamic_cast<UIClickButton*>(obj))

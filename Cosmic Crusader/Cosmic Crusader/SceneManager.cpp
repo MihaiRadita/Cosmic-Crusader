@@ -66,6 +66,8 @@ namespace ratchet
 		sf::Vector2f uiSizeView = sf::Vector2f(m_uiView.getSize().x, m_uiView.getSize().y);
 		m_uiView.setCenter(sf::Vector2f(m_uiViewSize.x / 2.0f, m_uiViewSize.y / 2.0f));
 
+		SetWindowResolution(WindowManager::Get()->getSize());
+
 		for (auto* obj : GameObject::s_gameObjects)
 		{
 
@@ -155,15 +157,55 @@ namespace ratchet
 		m_characters_destroyed_index.clear();
 	}
 
+	void SceneManager::SetWindowResolution(const sf::Vector2u& newResolution)
+	{
+		if (m_currenResolution != m_initialResolution)
+		{
+			WindowManager::Get()->setSize(newResolution);
+
+			sf::Vector2u windowSize = newResolution;
+
+			sf::FloatRect worldViewport = GetAspectRatio(windowSize, m_worldView.getSize());
+
+			sf::FloatRect uiViewport = GetAspectRatio(windowSize, m_uiViewSize);
+
+			m_worldView.setViewport(worldViewport);
+			m_uiView.setViewport(uiViewport);
+			
+			m_initialResolution = m_currenResolution;
+		}
+	}
+
+	sf::FloatRect SceneManager::GetAspectRatio(sf::Vector2u windowSize, sf::Vector2f viewSize)
+	{
+		float windowRatio = (float)windowSize.x / (float)windowSize.y;
+		float viewRatio = viewSize.x / viewSize.y;
+
+		float sizeX = 1.f;
+		float sizeY = 1.f;
+		float posX = 0.f;
+		float posY = 0.f;
+
+		if (windowRatio > viewRatio)
+		{
+			sizeX = viewRatio / windowRatio;
+			posX = (1.f - sizeX) / 2.f;
+		}
+		else
+		{
+			sizeY = windowRatio / viewRatio;
+			posY = (1.f - sizeY) / 2.f;
+		}
+
+		return sf::FloatRect(posX, posY, sizeX, sizeY);
+	}
+
 	void SceneManager::SetResolutionList()
 	{
 		m_resolutions[Resolution::HD] = { "1280X720", 1280, 720 };
 		m_resolutions[Resolution::FullHD] = { "1920X1080", 1920, 1080 };
 		m_resolutions[Resolution::DoubleK] = { "2560X1440", 2560, 1440 };
 		m_resolutions[Resolution::ForthK] = { "3840X2160", 3840, 2160 };
-		
-
-		m_currenResolution = Resolution::HD;
 	}
 
 	sf::View SceneManager::GetWorldView()
@@ -515,61 +557,50 @@ namespace ratchet
 
 	void SceneManager::renderSceneObjects(sf::RenderTarget& target)
 	{
+		Player* player = nullptr;
+
+		for (auto* obj : GameObject::s_gameObjects)
 		{
-			Player* player = nullptr;
+			if ((player = dynamic_cast<Player*>(obj)))
+				break;
+		}
 
-			for (auto* obj : GameObject::s_gameObjects)
+		// Update camera
+		if (player && m_isViewFollow)
+		{
+			m_worldView.setCenter(
+				player->getCollider()->getBody()->GetPosition().x,
+				player->getCollider()->getBody()->GetPosition().y
+			);
+		}
+
+		// WORLD RENDER
+		target.setView(m_worldView);
+
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			if (obj && obj->m_objectType == ObjectType::World)
 			{
-				if ((player = dynamic_cast<Player*>(obj)))
-					break;
-			}
-
-			if (player)
-			{
-				if (m_isViewFollow)
-				{
-					target.setView(m_worldView);
-					m_worldView = target.getView();
-
-					sf::Vector2f size = m_worldView.getSize();
-					m_worldView.setCenter(
-						player->getCollider()->getBody()->GetPosition().x,
-						player->getCollider()->getBody()->GetPosition().y
-					);
-				}
-			}
-
-			for (auto* obj : GameObject::s_gameObjects)
-			{
-				if (obj)
-				{
-					if (obj->m_objectType == ObjectType::World)
-					{
-						target.setView(m_worldView);
-						obj->render(target);
-					}
-				}
-			}
-
-			target.setView(m_uiView);
-			if (m_currentScene == SceneType::Level1)
-			{
-				target.draw(m_uiTestShape);
-			}
-
-			for (auto* obj : GameObject::s_gameObjects)
-			{
-				if (obj)
-				{
-					if (obj->m_objectType == ObjectType::UI)
-					{
-						target.setView(m_uiView);
-						obj->render(target);
-					}
-
-				}
+				obj->render(target);
 			}
 		}
+
+		// UI RENDER
+		target.setView(m_uiView);
+
+		if (m_currentScene == SceneType::Level1)
+		{
+			target.draw(m_uiTestShape);
+		}
+
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			if (obj && obj->m_objectType == ObjectType::UI)
+			{
+				obj->render(target);
+			}
+		}
+	
 	}
 
 	void SceneManager::LoadScene(SceneType scene)
@@ -879,6 +910,20 @@ namespace ratchet
 							if (propertyName == "tileToGameScale")
 							{
 								sc_tiledToGameScale = propertyValue.get<float>();
+							}
+						}
+					}
+					if (obj["name"] == "Scene Resolution")
+					{
+						for (const auto& prop : obj["properties"])
+						{
+							const auto& propertyName = prop["name"].get<std::string>();
+							const auto& propertyValue = prop["value"];
+
+							if (propertyName == "resolution")
+							{
+								m_currenResolution = static_cast<Resolution>(propertyValue.get<int>());
+								m_initialResolution = m_currenResolution;
 							}
 						}
 					}

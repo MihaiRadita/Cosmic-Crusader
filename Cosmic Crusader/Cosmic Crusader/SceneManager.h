@@ -86,6 +86,10 @@ namespace ratchet
 
 		void ClearDestroyedCharactersLists();
 
+		void SetWindowResolution(const sf::Vector2u& newResolution);
+
+		sf::FloatRect GetAspectRatio(sf::Vector2u windowSize, sf::Vector2f viewSize);
+
 
 		//Getters
 		static SceneManager& Get();
@@ -109,6 +113,7 @@ namespace ratchet
 		sf::Vector2f m_uiCenter;
 
 		sf::Vector2f m_uiViewSize;
+		sf::Vector2f m_worldViewSize;
 
 		bool m_isViewFollow;
 
@@ -151,6 +156,7 @@ namespace ratchet
 		SceneManager();
 
 		Resolution m_currentResolution;
+		Resolution m_initialResolution;
 		std::map<SceneType, std::string> m_sceneFiles;
 		SceneType m_currentScene;
 

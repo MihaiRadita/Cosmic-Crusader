@@ -519,8 +519,7 @@
   </object>
   <object id="47" name="Scene Resolution" x="0" y="64">
    <properties>
-    <property name="resolutionX" value="1280"/>
-    <property name="resolutionY" value="720"/>
+    <property name="resolution" type="int" value="0"/>
    </properties>
    <point/>
   </object>
