@@ -139,6 +139,8 @@
   </object>
   <object id="5121" name="Scene Camera" x="0" y="0">
    <properties>
+    <property name="cameraDimensionX" type="float" value="1280"/>
+    <property name="cameraDimensionY" type="float" value="720"/>
     <property name="cameraZoom" type="float" value="0.02"/>
     <property name="uiCenterX" type="float" value="0"/>
     <property name="uiCenterY" type="float" value="0"/>
@@ -62845,6 +62847,7 @@
     <property name="colliderType" type="int" value="0"/>
     <property name="movementType" type="int" value="0"/>
     <property name="objectType" type="int" value="2"/>
+    <property name="textConnectedActionObject" type="int" value="1"/>
     <property name="textConnectedObject" type="int" value="5"/>
     <property name="textFontPath" value="Fonts/UI Font.ttf"/>
     <property name="textType" type="int" value="2"/>
@@ -62862,6 +62865,7 @@
     <property name="colliderType" type="int" value="0"/>
     <property name="movementType" type="int" value="0"/>
     <property name="objectType" type="int" value="2"/>
+    <property name="textConnectedActionObject" type="int" value="3"/>
     <property name="textConnectedObject" type="int" value="5"/>
     <property name="textFontPath" value="Fonts/UI Font.ttf"/>
     <property name="textType" type="int" value="2"/>
@@ -62879,6 +62883,7 @@
     <property name="colliderType" type="int" value="0"/>
     <property name="movementType" type="int" value="0"/>
     <property name="objectType" type="int" value="2"/>
+    <property name="textConnectedActionObject" type="int" value="2"/>
     <property name="textConnectedObject" type="int" value="5"/>
     <property name="textFontPath" value="Fonts/UI Font.ttf"/>
     <property name="textType" type="int" value="2"/>

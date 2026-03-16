@@ -53,20 +53,30 @@ namespace ratchet
 
 	void SceneManager::StartSceneObjects()
 	{
+
 		m_isViewFollow = true;
 
-		m_worldView.setSize(sf::Vector2f(WindowManager::Get()->getSize().x * sc_defaultZoom, 
-										 WindowManager::Get()->getSize().y * sc_defaultZoom));
-		m_worldView.setCenter(sf::Vector2f(m_worldCenter));
+		m_worldView.setSize(
+			m_cameraDiemsnions.x * sc_defaultZoom,
+			m_cameraDiemsnions.y * sc_defaultZoom
+		);
 
-		sf::Vector2f windowSize = sf::Vector2f(WindowManager::Get()->getSize().x, WindowManager::Get()->getSize().y);
+		m_worldView.setCenter(m_worldCenter);
 
-		m_uiViewSize = sf::Vector2f(1280, 720);
-		m_uiView.setSize(sf::Vector2f(m_uiViewSize.x, m_uiViewSize.y));
-		sf::Vector2f uiSizeView = sf::Vector2f(m_uiView.getSize().x, m_uiView.getSize().y);
-		m_uiView.setCenter(sf::Vector2f(m_uiViewSize.x / 2.0f, m_uiViewSize.y / 2.0f));
+		m_uiViewSize = m_cameraDiemsnions;
 
-		SetWindowResolution(WindowManager::Get()->getSize());
+		m_uiView.setSize(m_uiViewSize);
+		m_uiView.setCenter(
+			m_uiViewSize.x / 2.f,
+			m_uiViewSize.y / 2.f
+		);
+
+		SetWindowResolution(
+			sf::Vector2u(
+				m_resolutions[m_currentResolution].width,
+				m_resolutions[m_currentResolution].height
+			)
+		);
 
 		for (auto* obj : GameObject::s_gameObjects)
 		{
@@ -159,21 +169,21 @@ namespace ratchet
 
 	void SceneManager::SetWindowResolution(const sf::Vector2u& newResolution)
 	{
-		if (m_currenResolution != m_initialResolution)
-		{
-			WindowManager::Get()->setSize(newResolution);
+	
+		WindowManager::Get()->setSize(newResolution);
 
-			sf::Vector2u windowSize = newResolution;
+		sf::Vector2u windowSize = newResolution;
 
-			sf::FloatRect worldViewport = GetAspectRatio(windowSize, m_worldView.getSize());
+		sf::FloatRect worldViewport = GetAspectRatio(windowSize, m_worldView.getSize());
+		sf::FloatRect uiViewport = GetAspectRatio(windowSize, m_uiView.getSize());
 
-			sf::FloatRect uiViewport = GetAspectRatio(windowSize, m_uiViewSize);
+		m_worldView.setViewport(worldViewport);
+		m_uiView.setViewport(uiViewport);
 
-			m_worldView.setViewport(worldViewport);
-			m_uiView.setViewport(uiViewport);
-			
-			m_initialResolution = m_currenResolution;
-		}
+		m_initialResolution = m_currentResolution;
+
+		SaveSettings();
+
 	}
 
 	sf::FloatRect SceneManager::GetAspectRatio(sf::Vector2u windowSize, sf::Vector2f viewSize)
@@ -220,7 +230,7 @@ namespace ratchet
 
 	Resolution& SceneManager::GetCurrentResolution()
 	{
-		return m_currenResolution;
+		return m_currentResolution;
 	}
 
 	std::map<SceneType, std::string> SceneManager::GetSceneFiles()
@@ -730,6 +740,103 @@ namespace ratchet
 
 	}
 
+	void SceneManager::SaveSettings()
+	{
+
+		if (!m_allScenes.contains("scenes")) {
+			std::cout << "ERROR: GameScenes.json does not contain 'scenes' key\n";
+			return;
+		}
+
+		auto& scenesNode = m_allScenes["scenes"];
+
+		for (auto& [sceneName, sceneJson] : scenesNode.items())
+		{
+			if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
+				std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+				continue;
+			}
+
+			for (auto& layer : sceneJson["layers"])
+			{
+				std::string layerName = layer["name"];
+
+				if (layerName == "Scene Features")
+				{
+					for (auto& obj : layer["objects"])
+					{
+						std::string objName = obj["name"];
+
+						if (objName == "Scene Resolution")
+						{
+							for (auto& prop : obj["properties"])
+							{
+								std::string propName = prop["name"];
+
+								if (propName == "resolution")
+								{
+									prop["value"] = static_cast<int>(m_currentResolution);
+								}
+							}
+						}
+					}
+				}
+
+				if (layerName == "Pause Menu Slider Buttons" || layerName =="Slider Buttons")
+				{
+					for (auto& obj : layer["objects"])
+					{
+						std::string objName = obj["name"];
+
+						if (objName == "Slider Text Value")
+						{
+							for (auto& prop : obj["properties"])
+							{
+								if (prop["name"] == "textConnectedActionObject")
+								{
+									TextConnectedActionObject  actionConnected = static_cast<TextConnectedActionObject>(prop["value"].get<int>());
+
+									for (auto* object : GameObject::s_gameObjects)
+									{
+										if (auto* uiSlider = dynamic_cast<UISliderButton*>(object))
+										{
+											if (uiSlider->m_UITextValue.m_textConnectedActionObject == actionConnected)
+											{
+
+												for (auto& prop : obj["properties"])
+												{
+													if (prop["name"] == "textValue")
+													{
+														prop["value"] = static_cast<std::string>(uiSlider->m_UITextValue.m_TextValue);
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		std::string combinedPath = m_baseScenePath + "GameScenes.json";
+
+		if (!fs::exists(combinedPath))
+		{
+			std::cout << "ERROR! File does not exists!" << std::endl;
+			return;
+		}
+
+		std::ofstream out(combinedPath);
+
+		out << m_allScenes;
+
+		std::cout << "The Scene File has been created with scuccess!" << std::endl;
+
+	}
+
 	void SceneManager::SetNewGame()
 	{
 		for (auto& [type, fileName] : m_sceneFiles)
@@ -899,6 +1006,15 @@ namespace ratchet
 							{
 								m_uiCenter.y = propertyValue.get<float>();
 							}
+
+							if (propertyName == "cameraDimensionX")
+							{
+								m_cameraDiemsnions.x = propertyValue.get<int>();
+							}
+							if (propertyName == "cameraDimensionY")
+							{
+								m_cameraDiemsnions.y = propertyValue.get<int>();
+							}
 						}
 					}
 					if (obj["name"] == "Scene Object Dimension")
@@ -922,8 +1038,8 @@ namespace ratchet
 
 							if (propertyName == "resolution")
 							{
-								m_currenResolution = static_cast<Resolution>(propertyValue.get<int>());
-								m_initialResolution = m_currenResolution;
+								m_currentResolution = static_cast<Resolution>(propertyValue.get<int>());
+								m_initialResolution = m_currentResolution;
 							}
 						}
 					}

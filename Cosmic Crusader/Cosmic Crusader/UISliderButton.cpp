@@ -47,13 +47,16 @@ namespace ratchet
 
 		case ButtonNameAction::Resolution:
 		{
-			auto& currentResolution = SceneManager::Get().GetCurrentResolution();
-			currentResolution = static_cast<Resolution>((int)getSliderValueModified());
-			std::string& textResolution = SceneManager::Get().m_resolutions[currentResolution].name;
+			float sliderValue = getSliderValueModified();
 
-			auto& resolution = SceneManager::Get().m_resolutions[currentResolution];
+			if (m_plusButton.m_isButtonEventTirggered || m_minusButton.m_isButtonEventTirggered)
+			{
+				auto& currentResolution = SceneManager::Get().GetCurrentResolution();
+				currentResolution = static_cast<Resolution>((int)sliderValue);
 
-			m_UITextValue.setTextValue(textResolution);
+				std::string& textResolution = SceneManager::Get().m_resolutions[currentResolution].name;
+				m_UITextValue.setTextValue(textResolution);
+			}
 
 			break;
 		}
@@ -91,6 +94,8 @@ namespace ratchet
 
 	void UISliderButton::Start()
 	{
+		m_UITextValue.m_textConnetedToActionObject = m_nameAction;
+
 		m_UITitle.Start();
 		m_minusButton.Start();
 		m_plusButton.Start();

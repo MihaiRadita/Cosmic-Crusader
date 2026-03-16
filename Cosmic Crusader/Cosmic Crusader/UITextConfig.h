@@ -15,6 +15,11 @@ namespace ratchet
 		Back, Quit, Exit
 	};
 
+	enum class TextConnectedActionObject {
+		None = 0, MusicVolume, SoundEffectVo1lume,
+		Resolution
+	};
+
 	struct UITextConfig : public GameObjectConfig
 	{
 		UITextType m_TextType;
@@ -25,11 +30,14 @@ namespace ratchet
 
 		TextConnectedObject m_textConnectedObject;
 
+
 		float m_XUnit = 64.f;
 		float m_YUnit = 64.f;
 
 		float m_uiTextOffsetX;
 		float m_uiTextOffsetY;
+
+		TextConnectedActionObject m_textConnectedActionObject;
 
 		UITextConfig();
 		~UITextConfig();

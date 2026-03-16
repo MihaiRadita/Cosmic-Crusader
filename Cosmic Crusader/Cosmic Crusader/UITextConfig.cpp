@@ -11,6 +11,8 @@ namespace ratchet
 	{
 		m_uiTextOffsetX = 0.0f;
 		m_uiTextOffsetY = 0.0f;
+
+		m_textConnectedActionObject = TextConnectedActionObject::None;
 	}
 
 	UITextConfig::~UITextConfig()
@@ -141,6 +143,11 @@ namespace ratchet
 				if (propertyName == "textUIYOffset")
 				{
 					m_uiTextOffsetY = propertyValue.get<float>();
+				}
+
+				if (propertyName == "textConnectedActionObject")
+				{
+					m_textConnectedActionObject = static_cast<TextConnectedActionObject>(propertyValue.get<int>());
 				}
 
 				if (propertyName == "textConnectedObject")

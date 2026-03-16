@@ -16,6 +16,8 @@ namespace ratchet
 		float m_sliderValueIncreasse;
 		float m_sliderMaxValue;
 
+		std::string m_sliderTextValue;
+
 		void update() override;
 		void render(sf::RenderTarget& target) override;
 

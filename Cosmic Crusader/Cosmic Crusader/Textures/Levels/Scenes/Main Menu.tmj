@@ -1080,6 +1080,11 @@
                          "value":2
                         }, 
                         {
+                         "name":"textConnectedActionObject",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
                          "name":"textConnectedObject",
                          "type":"int",
                          "value":5
@@ -1161,6 +1166,11 @@
                          "value":2
                         }, 
                         {
+                         "name":"textConnectedActionObject",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
                          "name":"textConnectedObject",
                          "type":"int",
                          "value":5
@@ -1238,6 +1248,11 @@
                         }, 
                         {
                          "name":"objectType",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"textConnectedActionObject",
                          "type":"int",
                          "value":2
                         }, 
@@ -2120,6 +2135,16 @@
                  "name":"Scene Camera",
                  "point":true,
                  "properties":[
+                        {
+                         "name":"cameraDimensionX",
+                         "type":"float",
+                         "value":1280
+                        }, 
+                        {
+                         "name":"cameraDimensionY",
+                         "type":"float",
+                         "value":720
+                        }, 
                         {
                          "name":"cameraZoom",
                          "type":"float",

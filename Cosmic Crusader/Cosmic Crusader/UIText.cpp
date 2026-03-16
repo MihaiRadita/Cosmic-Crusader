@@ -13,6 +13,7 @@ namespace ratchet
 		m_TextValue = config.m_TextValue;
 		m_textFontPath = config.m_textFontPath;
 		m_textConnectedObject = config.m_textConnectedObject;
+		m_textConnectedActionObject = config.m_textConnectedActionObject;
 
 		if (m_textFont.loadFromFile(m_textFontPath) == false)
 		{
@@ -57,6 +58,8 @@ namespace ratchet
 		m_UIText.setOrigin(textOrgin);
 		m_UIText.setPosition(sf::Vector2f(SceneManager::Get().GetUIView().getCenter().x + m_uiTextOffsetX,
 										  SceneManager::Get().GetUIView().getCenter().y + m_uiTextOffsetY));
+
+		m_UIText.setString(m_TextValue);
 	}
 	void UIText::update()
 	{

@@ -70,6 +70,7 @@ namespace ratchet
 		void IncreaseSceneIndex();
 
 		void SaveGame();
+		void SaveSettings();
 
 		void SetNewGame();
 
@@ -136,6 +137,8 @@ namespace ratchet
 		sf::View GetWorldView();
 		sf::View GetUIView();
 
+		sf::Vector2f m_cameraDiemsnions;
+
 		Resolution& GetCurrentResolution();
 
 		std::map<SceneType, std::string> GetSceneFiles();
@@ -172,8 +175,6 @@ namespace ratchet
 		int m_sceneIndex;
 
 		bool m_cameraDirty;
-
-		Resolution m_currenResolution;
 
 
 

@@ -17,7 +17,7 @@ namespace ratchet
 		sf::Font m_textFont;
 
 		TextConnectedObject m_textConnectedObject;
-
+		TextConnectedActionObject m_textConnectedActionObject;
 
 		sf::Text m_UIText;
 
@@ -38,6 +38,8 @@ namespace ratchet
 
 		float m_uiTextOffsetX;
 		float m_uiTextOffsetY;
+
+		ButtonNameAction m_textConnetedToActionObject;
 
 	private:
 	};
