@@ -42,7 +42,7 @@ namespace ratchet
 
 	void Game::initWindow()
 	{
-		m_window.create(sf::VideoMode(1280, 720), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+		m_window.create(sf::VideoMode(1280, 720), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
 
 		WindowManager::create(&m_window);
 		// m_window.setFramerateLimit(60);
@@ -66,11 +66,50 @@ namespace ratchet
 	void Game::handleEvents()
 	{
 		sf::Event sfEvent;
+
 		while (m_window.pollEvent(sfEvent))
 		{
 			if (sfEvent.type == sf::Event::Closed)
 			{
 				m_window.close();
+			}
+
+			if (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::F1)
+			{
+				WindowManager::DestroyWindow();
+				m_window.close();
+
+				auto& isFullScreen = SceneManager::Get().m_isFullScreen;
+				auto& isInitialFullScreen = SceneManager::Get().m_isInitialFullScreen;
+
+				isFullScreen = !isFullScreen;
+
+
+
+				if (isFullScreen)
+				{
+					sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+
+					m_window.create(fullscreenMode, "Cosmic Crusader", sf::Style::Fullscreen);
+					WindowManager::create(&m_window);
+
+					SceneManager::Get().SaveSettings();
+
+				}
+				else
+				{
+					sf::Vector2u resolution(
+						SceneManager::Get().m_resolutions[SceneManager::Get().GetCurrentResolution()].width,
+						SceneManager::Get().m_resolutions[SceneManager::Get().GetCurrentResolution()].height
+					);
+
+					m_window.create(sf::VideoMode(resolution.x, resolution.y), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+					WindowManager::create(&m_window);
+
+					SceneManager::Get().SetWindowResolution(resolution);
+				}
+
+				isInitialFullScreen = isFullScreen;
 			}
 
 			if (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::Escape)
@@ -161,9 +200,50 @@ namespace ratchet
 
 	void Game::start()
 	{
-		spawnObjects();
+		SceneManager::Get().StartSceneManager();
+		
 		//applySceneView();
 		SceneManager::Get().StartSceneObjects();
+		startWindow();
+	}
+
+	sf::VideoMode Game::GetFullScreenMode()
+	{
+		return fullscreenMode;
+	}
+
+	bool Game::GetIsFullScreen()
+	{
+		return m_isFullScreen;
+	}
+
+	void Game::startWindow()
+	{
+
+		auto& isFullScreen = SceneManager::Get().m_isFullScreen;
+
+
+
+		if (isFullScreen)
+		{
+			sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+
+			m_window.create(fullscreenMode, "Cosmic Crusader", sf::Style::Fullscreen);
+			WindowManager::create(&m_window);
+
+		}
+		else
+		{
+			sf::Vector2u resolution(
+				SceneManager::Get().m_resolutions[SceneManager::Get().GetCurrentResolution()].width,
+				SceneManager::Get().m_resolutions[SceneManager::Get().GetCurrentResolution()].height
+			);
+
+			m_window.create(sf::VideoMode(resolution.x, resolution.y), "Cosmic Crusader", sf::Style::Titlebar | sf::Style::Close);
+			WindowManager::create(&m_window);
+
+			SceneManager::Get().SetWindowResolution(resolution);
+		}
 	}
 
 	void Game::render()
@@ -175,5 +255,6 @@ namespace ratchet
 		m_window.display();
 
 	}
+
 
 }

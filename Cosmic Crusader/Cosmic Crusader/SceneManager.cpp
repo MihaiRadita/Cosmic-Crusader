@@ -2,6 +2,8 @@
 #include "SceneManager.h"
 #include "Weapon.h"
 
+#include "game/Game.h"
+
 namespace ratchet
 {
 	ratchet::SceneManager::SceneManager()
@@ -169,6 +171,11 @@ namespace ratchet
 
 	void SceneManager::SetWindowResolution(const sf::Vector2u& newResolution)
 	{
+
+		if (m_isFullScreen)
+		{
+			return;
+		}
 	
 		WindowManager::Get()->setSize(newResolution);
 
@@ -773,9 +780,19 @@ namespace ratchet
 							{
 								std::string propName = prop["name"];
 
+								
+								
 								if (propName == "resolution")
 								{
 									prop["value"] = static_cast<int>(m_currentResolution);
+								}
+								
+								if (propName == "isFullScreen")
+								{
+									if(m_isFullScreen != m_isInitialFullScreen)
+									{
+										prop["value"] = static_cast<bool>(m_isFullScreen);
+									}
 								}
 							}
 						}
@@ -1040,6 +1057,13 @@ namespace ratchet
 							{
 								m_currentResolution = static_cast<Resolution>(propertyValue.get<int>());
 								m_initialResolution = m_currentResolution;
+							}
+
+							if (propertyName == "isFullScreen")
+							{
+								m_isFullScreen = propertyValue.get<bool>();
+								
+								m_isInitialFullScreen = m_isFullScreen;
 							}
 						}
 					}

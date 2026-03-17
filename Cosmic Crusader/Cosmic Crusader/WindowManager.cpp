@@ -16,5 +16,21 @@ namespace ratchet
 		m_window = nullptr;
 	}
 
+	void WindowManager::DestroyWindow()
+	{
+		m_window = nullptr;
+	}
+
+	void WindowManager::SetFullScreen(const bool& fullScreen)
+	{
+		m_fullscreen = fullScreen;
+	}
+
+	bool WindowManager::getFullScreen()
+	{
+		return m_fullscreen;
+	}
+
 	sf::RenderWindow* WindowManager::m_window;
+	bool WindowManager::m_fullscreen = false;
 }

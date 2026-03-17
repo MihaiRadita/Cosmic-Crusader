@@ -162,6 +162,7 @@
   </object>
   <object id="5199" name="Scene Resolution" x="0" y="0">
    <properties>
+    <property name="isFullScreen" type="bool" value="false"/>
     <property name="resolution" type="int" value="0"/>
    </properties>
    <point/>

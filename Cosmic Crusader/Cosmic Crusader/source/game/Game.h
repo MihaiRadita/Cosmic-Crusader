@@ -30,6 +30,10 @@ namespace ratchet
 
 		sf::Vector2i currenmousePosition = sf::Vector2i(0,0);
 
+		bool m_isFullScreen;
+
+		sf::VideoMode fullscreenMode = sf::VideoMode::getDesktopMode();
+
 	public:
 		//Constructors
 		Game();
@@ -53,6 +57,11 @@ namespace ratchet
 		void awake();
 		void start();
 
+		sf::VideoMode GetFullScreenMode();
+
+		void startWindow();
+
+		bool GetIsFullScreen();
 
 		//Spawner
 		void spawnObjects();

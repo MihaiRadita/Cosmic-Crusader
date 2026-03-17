@@ -2192,6 +2192,11 @@
                  "point":true,
                  "properties":[
                         {
+                         "name":"isFullScreen",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"resolution",
                          "type":"int",
                          "value":0

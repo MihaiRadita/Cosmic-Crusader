@@ -110,6 +110,10 @@ namespace ratchet
 
 		bool m_isPaused = false;
 
+
+		bool m_isFullScreen;
+		bool m_isInitialFullScreen;
+
 		sf::Vector2f m_worldCenter;
 		sf::Vector2f m_uiCenter;
 
