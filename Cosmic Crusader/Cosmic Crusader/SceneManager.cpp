@@ -163,6 +163,11 @@ namespace ratchet
 		}
 	}
 
+	float& SceneManager::GetMusicVolume()
+	{
+		return m_musicVolume;
+	}
+
 	void SceneManager::ClearDestroyedCharactersLists()
 	{
 		m_characters_destroyed_ID.clear();
@@ -188,8 +193,6 @@ namespace ratchet
 		m_uiView.setViewport(uiViewport);
 
 		m_initialResolution = m_currentResolution;
-
-		SaveSettings();
 
 	}
 
@@ -416,6 +419,54 @@ namespace ratchet
 		m_cameraDirty = false;
 	}
 
+	void SceneManager::UpdateMusicSoundtrack()
+	{
+		if (m_currentScene == SceneType::MainMenu)
+		{
+			if (m_sceneSoundtrack.getStatus() != sf::Music::Playing)
+			{
+				m_sceneSoundtrack.setVolume(m_musicVolume);
+				m_sceneSoundtrack.setLoop(true);
+				m_sceneSoundtrack.play();
+			}
+			else
+			{
+				if (m_initialMusicVolume != m_musicVolume)
+				{
+					m_sceneSoundtrack.setVolume(m_musicVolume);
+					m_initialMusicVolume = m_musicVolume;
+				}
+			}
+
+		}
+		else 
+		{
+			if (!m_isPaused)
+			{
+				if (m_sceneSoundtrack.getStatus() != sf::Music::Playing)
+				{
+					m_sceneSoundtrack.setVolume(m_musicVolume);
+					m_sceneSoundtrack.setLoop(true);
+					m_sceneSoundtrack.play();
+				}
+			}
+			else
+			{
+				if (m_sceneSoundtrack.getStatus() == sf::Music::Playing)
+				{
+					m_sceneSoundtrack.pause();
+
+					if (m_initialMusicVolume != m_musicVolume)
+					{
+						m_sceneSoundtrack.setVolume(m_musicVolume);
+						m_initialMusicVolume = m_musicVolume;
+					}
+				}
+			}
+		}
+		
+	}
+
 	void ratchet::SceneManager::CheckAndBuildScenes()
 	{
 		// #TODO: FOLOSESTE RELATIVE PATH IN LOC DE FULL PATH
@@ -512,8 +563,12 @@ namespace ratchet
 
 	void SceneManager::updateSceneObjects()
 	{
+		UpdateMusicSoundtrack();
+
 		if(!m_isPaused)
 		{
+			
+
 			float timeStep = 1.0f / 120.0f;
 			if (m_currentScene != SceneType::MainMenu)
 			{
@@ -796,6 +851,19 @@ namespace ratchet
 								}
 							}
 						}
+
+						if (objName == "Music Soundtrack")
+						{
+							for (auto& prop : obj["properties"])
+							{
+								std::string propName = prop["name"];
+
+								if (propName == "musicVolume")
+								{
+									prop["value"] = static_cast<float>(m_musicVolume);
+								}
+							}
+						}
 					}
 				}
 
@@ -1067,8 +1135,33 @@ namespace ratchet
 							}
 						}
 					}
+					if (obj["name"] == "Music Soundtrack")
+					{
+						for (const auto& prop : obj["properties"])
+						{
+							const auto& propertyName = prop["name"].get<std::string>();
+							const auto& propertyValue = prop["value"];
+
+							if (propertyName == "musicSoundtrackPath")
+							{
+								m_musicSoundtrackPath = propertyValue.get<std::string>();
+							}
+
+							if (propertyName == "musicVolume")
+							{
+								m_musicVolume = propertyValue.get<float>();
+								m_initialMusicVolume = m_musicVolume;
+							}
+						}
+					}
 				}
 			}
+		}
+
+		//m_sceneSoundtrack.stop();
+		if (!m_sceneSoundtrack.openFromFile(m_musicSoundtrackPath))
+		{
+			std::cout << "music could Not opened!" << std::endl;
 		}
 
 		m_currentGameSceneState = SceneGameState::Playing;
@@ -1082,6 +1175,11 @@ namespace ratchet
 		{
 			obj->Awake();
 		}
+	}
+
+	void SceneManager::StopSoundtrack()
+	{
+		m_sceneSoundtrack.stop();
 	}
 
 

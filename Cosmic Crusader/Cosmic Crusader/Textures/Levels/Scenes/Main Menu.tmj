@@ -507,7 +507,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -1874,7 +1874,7 @@
                         {
                          "name":"sliderMaxValue",
                          "type":"float",
-                         "value":20
+                         "value":50
                         },
                     
                         {
@@ -2120,7 +2120,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2207,6 +2207,29 @@
                  "width":0,
                  "x":0,
                  "y":64
+                }, 
+                {
+                 "height":0,
+                 "id":49,
+                 "name":"Music Soundtrack",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"musicSoundtrackPath",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Music\/Main Menu\/Main Menu.ogg"
+                        }, 
+                        {
+                         "name":"musicVolume",
+                         "type":"float",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":0,
+                 "y":64
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2215,7 +2238,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":49,
+ "nextobjectid":50,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

@@ -61,6 +61,7 @@ namespace ratchet
 
 			case ButtonNameState::Exit:
 				WindowManager::Get()->close();
+				SceneManager::Get().StopSoundtrack();
 				break;
 
 			case ButtonNameState::Options:

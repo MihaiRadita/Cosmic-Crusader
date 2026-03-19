@@ -6,10 +6,10 @@
 namespace ratchet
 {
 	UISliderButton::UISliderButton(const UISliderButtonConfig& config) : UIButton(config),
-					m_minusButton(config.m_minusButtonConfig),
-					m_plusButton(config.m_plusButtonConfig),
-					m_UITitle(config.m_UITitleConfig),
-					m_UITextValue(config.m_UITextValueConfig)
+		m_minusButton(config.m_minusButtonConfig),
+		m_plusButton(config.m_plusButtonConfig),
+		m_UITitle(config.m_UITitleConfig),
+		m_UITextValue(config.m_UITextValueConfig)
 	{
 		m_currentSliderValue = config.m_currentSliderValue;
 		m_sliderValueIncreasse = config.m_sliderValueIncreasse;
@@ -28,34 +28,60 @@ namespace ratchet
 		{
 			return;
 		}
-		
+
 		m_UITitle.update();
 		m_minusButton.update();
 		m_plusButton.update();
 		m_UITextValue.update();
 
-		
+
 
 		switch (m_nameAction)
 		{
 		case ButtonNameAction::MusicVolume:
 		{
-			float& volume = getSliderValueModified();
-			m_UITextValue.setNumberValue(m_currentSliderValue);
+			if (m_currentSliderValue != SceneManager::Get().GetMusicVolume())
+			{
+				m_currentSliderValue = SceneManager::Get().GetMusicVolume();
+				m_UITextValue.setNumberValue(m_currentSliderValue);
+			}
+
+			if (m_plusButton.m_isButtonEventTirggered || m_minusButton.m_isButtonEventTirggered)
+			{
+				float& value = getSliderValueModified();
+
+				auto& currentVolume = SceneManager::Get().GetMusicVolume();
+				currentVolume = value;
+
+				m_UITextValue.setNumberValue(currentVolume);
+			}
+
+
 			break;
 		}
 
 		case ButtonNameAction::Resolution:
 		{
-			float sliderValue = getSliderValueModified();
+			if (m_currentSliderValue != static_cast<float>(SceneManager::Get().GetCurrentResolution()))
+			{
+				m_currentSliderValue = static_cast<float>(SceneManager::Get().GetCurrentResolution());
+				m_UITextValue.setTextValue(
+					SceneManager::Get().m_resolutions[SceneManager::Get().GetCurrentResolution()].name
+				);
+			}
+
 
 			if (m_plusButton.m_isButtonEventTirggered || m_minusButton.m_isButtonEventTirggered)
 			{
-				auto& currentResolution = SceneManager::Get().GetCurrentResolution();
-				currentResolution = static_cast<Resolution>((int)sliderValue);
+				float& value = getSliderValueModified();
+				Resolution selectedResolution = static_cast<Resolution>((int)value);
 
-				std::string& textResolution = SceneManager::Get().m_resolutions[currentResolution].name;
-				m_UITextValue.setTextValue(textResolution);
+				auto& currentResolution = SceneManager::Get().GetCurrentResolution();
+				currentResolution = selectedResolution;
+
+				m_UITextValue.setTextValue(
+					SceneManager::Get().m_resolutions[selectedResolution].name
+				);
 			}
 
 			break;
@@ -76,7 +102,7 @@ namespace ratchet
 		{
 			m_minusButton.m_isButtonEventTirggered = false;
 		}
-		
+
 	}
 	void UISliderButton::render(sf::RenderTarget& target)
 	{
@@ -149,7 +175,7 @@ namespace ratchet
 					m_currentSliderValue = m_sliderMaxValue;
 				}
 
-				
+
 			}
 			else if (m_minusButton.m_isButtonEventTirggered)
 			{

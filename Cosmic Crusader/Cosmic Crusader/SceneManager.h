@@ -56,7 +56,7 @@ namespace ratchet
 
 		SceneManager(const SceneManager&) = delete;
 		SceneManager& operator=(const SceneManager&) = delete;
-		//~SceneManager();
+
 		void CheckAndBuildScenes();
 		void LoadCombinedScenes();
 
@@ -71,6 +71,10 @@ namespace ratchet
 
 		void SaveGame();
 		void SaveSettings();
+		void SaveSoundSettings();
+		void SaveResolutionSettings();
+
+		
 
 		void SetNewGame();
 
@@ -83,7 +87,11 @@ namespace ratchet
 		void StartSceneObjects();
 		void AwakeSceneObjects();
 
+		void StopSoundtrack();
+
 		void SetPauseMenuActive(bool active);
+
+		float& GetMusicVolume();
 
 		void ClearDestroyedCharactersLists();
 
@@ -124,6 +132,8 @@ namespace ratchet
 
 		bool IsCameraDirty();
 
+		void UpdateMusicSoundtrack();
+
 		void ClearCameraDirty();
 		nlohmann::json* FindObjectById(int id, const std::string& layerName);
 
@@ -144,6 +154,11 @@ namespace ratchet
 		sf::Vector2f m_cameraDiemsnions;
 
 		Resolution& GetCurrentResolution();
+
+		sf::Music m_sceneSoundtrack;
+		float m_musicVolume;
+		float m_initialMusicVolume;
+		std::string m_musicSoundtrackPath;
 
 		std::map<SceneType, std::string> GetSceneFiles();
 

@@ -107,6 +107,9 @@ namespace ratchet
 					WindowManager::create(&m_window);
 
 					SceneManager::Get().SetWindowResolution(resolution);
+
+					SceneManager::Get().SaveSettings();
+
 				}
 
 				isInitialFullScreen = isFullScreen;
@@ -143,6 +146,9 @@ namespace ratchet
 				auto& sceneManager = SceneManager::Get();
 				const auto& resolution = sceneManager.m_resolutions[SceneManager::Get().GetCurrentResolution()];
 				SceneManager::Get().SetWindowResolution(sf::Vector2u(resolution.width, resolution.height));
+
+				SceneManager::Get().SaveSettings();
+
 			}
 
 			for (const auto& obj : GameObject::s_gameObjects)
