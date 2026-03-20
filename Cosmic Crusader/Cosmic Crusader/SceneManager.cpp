@@ -823,35 +823,32 @@ namespace ratchet
 			{
 				std::string layerName = layer["name"];
 
-				if (layerName == "Scene Features")
+				for (auto& obj : layer["objects"])
 				{
-					for (auto& obj : layer["objects"])
-					{
-						std::string objName = obj["name"];
+					std::string objName = obj["name"];
 
+					if (layerName == "Scene Features")
+					{
 						if (objName == "Scene Resolution")
 						{
 							for (auto& prop : obj["properties"])
 							{
 								std::string propName = prop["name"];
 
-								
-								
 								if (propName == "resolution")
 								{
 									prop["value"] = static_cast<int>(m_currentResolution);
 								}
-								
+
 								if (propName == "isFullScreen")
 								{
-									if(m_isFullScreen != m_isInitialFullScreen)
+									if (m_isFullScreen != m_isInitialFullScreen)
 									{
 										prop["value"] = static_cast<bool>(m_isFullScreen);
 									}
 								}
 							}
 						}
-
 						if (objName == "Music Soundtrack")
 						{
 							for (auto& prop : obj["properties"])
@@ -865,39 +862,45 @@ namespace ratchet
 							}
 						}
 					}
-				}
-
-				if (layerName == "Pause Menu Slider Buttons" || layerName =="Slider Buttons")
-				{
-					for (auto& obj : layer["objects"])
+					else if (layerName ==  "Pause Menu Slider Buttons" || layerName == "Slider Buttons")
 					{
-						std::string objName = obj["name"];
-
 						if (objName == "Slider Text Value")
 						{
+							nlohmann::json* textConnectedActionObjectProperty = nullptr;
+							nlohmann::json* textValueProperty =nullptr;
+
+							bool foundAll = false;
+
 							for (auto& prop : obj["properties"])
 							{
 								if (prop["name"] == "textConnectedActionObject")
 								{
-									TextConnectedActionObject  actionConnected = static_cast<TextConnectedActionObject>(prop["value"].get<int>());
+									textConnectedActionObjectProperty = &prop;
+								}
+								else if (prop["name"] == "textValue")
+								{
+									textValueProperty = &prop;
+								}
 
-									for (auto* object : GameObject::s_gameObjects)
+								foundAll = (textConnectedActionObjectProperty != nullptr) && (textValueProperty != nullptr);
+
+								if (foundAll)
+								{
+									TextConnectedActionObject actionConnected =
+										static_cast<TextConnectedActionObject>((*textConnectedActionObjectProperty)["value"].get<int>());
+
+									for (auto& object : GameObject::s_gameObjects)
 									{
 										if (auto* uiSlider = dynamic_cast<UISliderButton*>(object))
 										{
 											if (uiSlider->m_UITextValue.m_textConnectedActionObject == actionConnected)
 											{
-
-												for (auto& prop : obj["properties"])
-												{
-													if (prop["name"] == "textValue")
-													{
-														prop["value"] = static_cast<std::string>(uiSlider->m_UITextValue.m_TextValue);
-													}
-												}
+												(*textValueProperty)["value"] = uiSlider->m_UITextValue.m_TextValue;
 											}
 										}
 									}
+
+									break; 
 								}
 							}
 						}

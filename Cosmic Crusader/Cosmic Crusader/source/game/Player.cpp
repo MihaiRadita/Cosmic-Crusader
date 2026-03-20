@@ -31,7 +31,7 @@ namespace ratchet
 
 	void Player::Start()
 	{
-		PostCosntructFixup();
+		Creature::Start();
 	}
 
 	void Player::handleEvent(sf::Event& event)

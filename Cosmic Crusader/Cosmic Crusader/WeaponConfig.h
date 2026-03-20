@@ -37,6 +37,10 @@ namespace ratchet
 		
 		sf::Vector2f m_characterStartPointShootingOffset;
 
+		//Sounds
+		std::string m_weaponSoundPath;
+		bool m_weaponSoundLoop;
+		float m_weaponSoundVolume;
 	};
 
 }

@@ -86,6 +86,11 @@ namespace ratchet
 			bulletObj->setBulletPositionCenter(position, direction, facingRight);
 
 			bulletObj->launchBullet(direction, bulletObj->m_bulletSpeed);
+
+			auto& volume = m_weaponSoundVolume;
+
+			m_weaponSound.play();
+
 			s_inUseBulletList[m_weaponType].push_back(bulletObj);
 
 		}

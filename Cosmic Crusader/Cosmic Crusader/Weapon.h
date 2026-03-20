@@ -39,7 +39,17 @@ namespace ratchet
 
 		static void ClearWeaponList();
 		static void ClearBulletList();
-		
+
+
+		//Weapon Sounds
+		sf::SoundBuffer m_weaponSoundBuffer;
+		sf::Sound m_weaponSound;
+
+		float m_weaponSoundVolume;
+		bool m_weaponSoundLoop;
+
+
+		//Functions
 		void Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight);
 		static void releaseBullet(Bullet* bulletToRelease);
 

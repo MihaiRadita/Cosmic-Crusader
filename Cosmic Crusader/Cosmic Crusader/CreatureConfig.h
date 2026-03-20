@@ -39,6 +39,15 @@ namespace ratchet
 		float m_bodShoulderOffset;
 
 
+		//Sounds
+		bool m_creatureSoundLoop;
+		float m_creatureSoundVolume;
+
+		std::string m_creatureHurtSoundPath;
+		std::string m_creatureDeathSoundPath;
+		std::string m_creatureDeathFallSoundPath;
+
+
 		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
 		std::vector <Weapon::TYPE> m_weaponTypeList;
 

@@ -348,6 +348,31 @@ namespace ratchet
 					m_usableWeaponTypeList[weaponType] = isUsable;
 				}
 			}
+
+			if (propertyName == "creatureSoundLoop")
+			{
+				m_creatureSoundLoop = propertyValue.get<bool>();
+			}
+
+			if (propertyName == "creatureSoundVolume")
+			{
+				m_creatureSoundVolume = propertyValue.get<float>();
+			}
+
+			if (propertyName == "creatureHurtSoundPath")
+			{
+				m_creatureHurtSoundPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "creatureDeathSoundPath")
+			{
+				m_creatureDeathSoundPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "creatureDeathFallSoundPath")
+			{
+				m_creatureDeathFallSoundPath = propertyValue.get<std::string>();
+			}
 		}
 
 		for (const auto& jsonProperty : jsonFile["properties"])

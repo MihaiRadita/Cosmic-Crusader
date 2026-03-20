@@ -251,6 +251,21 @@ namespace ratchet
 				m_isWeaponAccessible = propertyValue.get<bool>();
 			}
 
+			if (propertyName == "weaponShootSoundPath")
+			{
+				m_weaponSoundPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "weaponSoundLoop")
+			{
+				m_weaponSoundLoop = propertyValue.get<bool>();
+			}
+
+			if (propertyName == "weaponsoundVolume")
+			{
+				m_weaponSoundVolume = propertyValue.get<float>();
+			}
+
 		}
 
 		return true;

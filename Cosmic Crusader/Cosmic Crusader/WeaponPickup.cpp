@@ -50,6 +50,10 @@ namespace ratchet
 
 		m_weaponDamage = config.m_damage;
 
+		m_weaponSoundPath = config.m_weaponSoundPath;
+		m_weaponSoundLoop = config.m_weaponSoundLoop;
+		m_weaponSoundVolume = config.m_weaponSoundVolume;
+
 		
 		if (m_weaponConfig.has_value())
 		{
@@ -63,6 +67,10 @@ namespace ratchet
 			m_shootingOffsetAngleMinus45 = m_weaponConfig->m_shootingOffsetAngleMinus45;
 			m_weaponConfig->m_bulletPoolIncrementation = config.m_bulletPoolIncrementation;
 			m_weaponConfig->m_damage = config.m_damage;
+
+			m_weaponConfig->m_weaponSoundPath = config.m_weaponSoundPath;
+			m_weaponConfig->m_weaponSoundLoop = config.m_weaponSoundLoop;
+			m_weaponConfig->m_weaponSoundVolume = config.m_weaponSoundVolume;
 
 		}
 		m_IsWeaponAccessible = config.m_isWeaponAccessible;

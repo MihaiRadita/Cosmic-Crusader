@@ -89,6 +89,16 @@ namespace ratchet
 			TRACE_CHANNEL("GAMEOBJECT_INIT", "Character Failed");
 		}
 
+
+		//Sounds
+		m_creatureSoundLoop = config.m_creatureSoundLoop;
+		m_creatureSoundVolume = config.m_creatureSoundVolume;
+
+		m_creatureHurtSoundPath = config.m_creatureHurtSoundPath;
+		m_creatureDeathSoundPath = config.m_creatureDeathSoundPath;
+		m_creatureDeathFallSoundPath = config.m_creatureDeathFallSoundPath;
+
+
 		for (auto config : m_initialWeaponConfigList)
 		{
 
@@ -743,6 +753,39 @@ namespace ratchet
 	void Creature::Start()
 	{
 		PostCosntructFixup();
+
+		if (!m_hurtSoundBuffer.loadFromFile(m_creatureHurtSoundPath))
+		{
+			std::cout << "Sound did not load!" << std::endl;
+		}
+
+		if (!m_deathSoundBuffer.loadFromFile(m_creatureDeathSoundPath))
+		{
+			std::cout << "Sound did not load!" << std::endl;
+		}
+
+		if (!m_deathFallSoundBuffer.loadFromFile(m_creatureDeathFallSoundPath))
+		{
+			std::cout << "Sound did not load!" << std::endl;
+		}
+
+
+		m_hurtSound = sf::Sound();
+		m_hurtSound.setBuffer(m_hurtSoundBuffer);
+		m_hurtSound.setLoop(m_creatureSoundLoop);
+		m_hurtSound.setVolume(m_creatureSoundVolume);
+
+
+		m_deathSound = sf::Sound();
+		m_deathSound.setBuffer(m_deathSoundBuffer);
+		m_deathSound.setLoop(m_creatureSoundLoop);
+		m_deathSound.setVolume(m_creatureSoundVolume);
+
+		m_deathFallSound = sf::Sound();
+		m_deathFallSound.setBuffer(m_deathFallSoundBuffer);
+		m_deathFallSound.setLoop(m_creatureSoundLoop);
+		m_deathFallSound.setVolume(m_creatureSoundVolume);
+
 	}
 
 	void Creature::switchAnimation()
@@ -771,9 +814,15 @@ namespace ratchet
 		{
 			m_health = 0.0f;
 
+			m_deathSound.play();
+
 			m_isDeath = true;
 
 			std::cout << "Character is Death!" << std::endl;
+		}
+		else
+		{
+			m_hurtSound.play();
 		}
 	}
 
@@ -831,6 +880,24 @@ namespace ratchet
 			newWeapon->m_WeaponID = config->m_objectID;
 			newWeapon->m_bulletID = config->m_bulletID;
 			newWeapon->m_bulletPoolIncrementation = config->m_bulletPoolIncrementation;
+
+			if (!newWeapon->m_weaponSoundBuffer.loadFromFile(config->m_weaponSoundPath))
+			{
+				std::cout << "Weapon sound did not load!" << std::endl;
+			}
+			
+			newWeapon->m_weaponSound = sf::Sound();
+			newWeapon->m_weaponSound.setBuffer(newWeapon->m_weaponSoundBuffer);
+
+
+			newWeapon->m_weaponSoundVolume = config->m_weaponSoundVolume;
+
+			newWeapon->m_weaponSoundLoop = config->m_weaponSoundLoop;
+
+			newWeapon->m_weaponSound.setVolume(newWeapon->m_weaponSoundVolume);
+
+			newWeapon->m_weaponSound.setLoop(newWeapon->m_weaponSoundLoop);
+
 
 		}
 

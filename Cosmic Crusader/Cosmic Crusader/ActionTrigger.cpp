@@ -39,6 +39,8 @@ namespace ratchet
 		auto* player = dynamic_cast<Player*>(obj);
 		if (!player) return;
 
+		player->m_deathFallSound.play();
+
 		if (m_isObjectInside) return;
 
 		m_isObjectInside = true;

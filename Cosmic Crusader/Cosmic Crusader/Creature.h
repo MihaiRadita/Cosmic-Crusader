@@ -88,6 +88,22 @@ namespace ratchet
 
 		bool m_isFallingWithoutJumping;
 
+		//Sounds
+		bool m_creatureSoundLoop;
+		float m_creatureSoundVolume;
+
+		std::string m_creatureHurtSoundPath;
+		std::string m_creatureDeathSoundPath;
+		std::string m_creatureDeathFallSoundPath;
+
+
+		sf::SoundBuffer m_hurtSoundBuffer;
+		sf::Sound m_hurtSound;
+		sf::SoundBuffer m_deathSoundBuffer;
+		sf::Sound m_deathSound;
+		sf::SoundBuffer m_deathFallSoundBuffer;
+		sf::Sound m_deathFallSound;
+
 		//Constructors
 		Creature(const CreatureConfig& config);
 

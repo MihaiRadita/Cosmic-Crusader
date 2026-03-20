@@ -32,6 +32,13 @@ namespace ratchet
 		sf::Vector2f m_shootingOffsetAngleMinus45;
 
 
+		sf::SoundBuffer m_weaponSoundBuffer;
+		sf::Sound m_weaponSound;
+
+		std::string m_weaponSoundPath;
+		bool m_weaponSoundLoop;
+		float m_weaponSoundVolume;
+
 		void PostCosntructFixup() override;
 		void Start() override;
 
