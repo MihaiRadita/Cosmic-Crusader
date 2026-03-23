@@ -22,6 +22,11 @@ namespace ratchet
 
 		bool checkIsButtonActive() override;
 
+		
+
+		void Start() override;
+
+
 	private:
 
 	};

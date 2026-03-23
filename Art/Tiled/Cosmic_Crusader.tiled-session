@@ -1,5 +1,5 @@
 {
-    "activeFile": "LevelMap1/Level Map.tmx",
+    "activeFile": "LevelMap1/Main Menu.tmx",
     "expandedProjectPaths": [
         ".",
         "LevelMap1"
@@ -49,15 +49,16 @@
         "LevelMap1/Level Map.tmx": {
             "expandedObjectLayers": [
                 4,
+                3,
+                15,
                 16,
-                13,
-                3
+                13
             ],
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "scale": 0.33,
+            "selectedLayer": 12,
             "viewCenter": {
-                "x": 17754,
-                "y": -402
+                "x": -1.5151515151515014,
+                "y": 160.60606060606074
             }
         },
         "LevelMap1/Level Map.tmx#Main Menu": {
@@ -67,14 +68,13 @@
         "LevelMap1/Main Menu.tmx": {
             "expandedObjectLayers": [
                 5,
-                7,
                 2
             ],
             "scale": 1,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 0,
-                "y": 64
+                "x": 801.5,
+                "y": 440
             }
         },
         "LevelMap1/Main Menu.tmx#Main Menu": {
@@ -123,11 +123,11 @@
         "LevelMap1/Action Trigger.tsx"
     ],
     "project": "Cosmic_Crusader.tiled-project",
-    "property.type": "int",
+    "property.type": "string",
     "recentFiles": [
+        "LevelMap1/Level Map.tmx",
         "LevelMap1/Action Trigger.tsx",
         "LevelMap1/Main Menu.tmx",
-        "LevelMap1/Level Map.tmx",
         "LevelMap1/CraftpixSciFi.tsx",
         "LevelMap1/PlatformsTile.tsx",
         "LevelMap1/Player.tsx",

@@ -205,6 +205,8 @@ namespace ratchet
 	{
 		PostCosntructFixup();
 		SetTarget(m_faction);
+
+		Creature::Start();
 	}
 
 	void SelfControlledCreature::handleEvent()

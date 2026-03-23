@@ -56,6 +56,27 @@ namespace ratchet
 	void SceneManager::StartSceneObjects()
 	{
 
+		if (!m_pauseMenuSoundOffBuffer.loadFromFile(m_pauseMenuSoundOffPath))
+		{
+			std::cout << "Sund not loaded!" << std::endl;
+		}
+
+		if (!m_pauseMenuSoundOnBuffer.loadFromFile(m_pauseMenuSoundOnPath))
+		{
+			std::cout << "Sund not loaded!" << std::endl;
+		}
+
+		m_pauseMenuSoundOn = sf::Sound();
+
+		m_pauseMenuSoundOn.setBuffer(m_pauseMenuSoundOnBuffer);
+		m_pauseMenuSoundOff.setBuffer(m_pauseMenuSoundOffBuffer);
+
+		m_pauseMenuSoundOn.setVolume(5.F);
+		m_pauseMenuSoundOff.setVolume(5.f);
+
+		m_pauseMenuSoundOn.setLoop(false);
+		m_pauseMenuSoundOff.setLoop(false);
+
 		m_isViewFollow = true;
 
 		m_worldView.setSize(
@@ -124,6 +145,15 @@ namespace ratchet
 		m_isPaused = !m_isPaused;
 
 		SetPauseMenuActive(m_isPaused);
+
+		if (m_isPaused)
+		{
+			m_pauseMenuSoundOn.play();
+		}
+		else
+		{
+			m_pauseMenuSoundOff.play();
+		}
 	}
 
 	void SceneManager::SetPauseMenuActive(bool active)
@@ -1117,6 +1147,26 @@ namespace ratchet
 							}
 						}
 					}
+
+					if (obj["name"] == "Pause Menu Sounds")
+					{
+						for (const auto& prop : obj["properties"])
+						{
+							const auto& propertyName = prop["name"].get<std::string>();
+							const auto& propertyValue = prop["value"];
+
+							if (propertyName == "pauseMenuOff")
+							{
+								m_pauseMenuSoundOffPath = propertyValue.get<std::string>();
+							}
+
+							if (propertyName == "pauseMenuOn")
+							{
+								m_pauseMenuSoundOnPath = propertyValue.get<std::string>();
+							}
+						}
+					}
+
 					if (obj["name"] == "Scene Resolution")
 					{
 						for (const auto& prop : obj["properties"])

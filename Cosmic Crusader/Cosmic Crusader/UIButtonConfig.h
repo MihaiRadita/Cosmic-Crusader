@@ -39,6 +39,9 @@ namespace ratchet
 
 		float m_uiButtonOffsetX;
 		float m_uiButtonOffsetY;
+
+		std::string m_uiButtonInteractSoundPath;
+		std::string m_uiButtonPressedSoundPath;
 		
 	};
 

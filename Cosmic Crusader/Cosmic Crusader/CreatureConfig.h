@@ -46,6 +46,9 @@ namespace ratchet
 		std::string m_creatureHurtSoundPath;
 		std::string m_creatureDeathSoundPath;
 		std::string m_creatureDeathFallSoundPath;
+		std::string m_creatureJumpSoundPath;
+		std::string m_creatureLandingSoundPath;
+		std::string m_creatureWalkSoundPath;
 
 
 		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;

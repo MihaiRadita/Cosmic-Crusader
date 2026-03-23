@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="21" nextobjectid="5201">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="21" nextobjectid="5202">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -171,6 +171,13 @@
    <properties>
     <property name="musicSoundtrackPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Music/Levels/Level1.ogg"/>
     <property name="musicVolume" type="float" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="5201" name="Pause Menu Sounds" x="-64" y="-192">
+   <properties>
+    <property name="pauseMenuOff" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Pause Menu Off.wav"/>
+    <property name="pauseMenuOn" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Pause Menu On.wav"/>
    </properties>
    <point/>
   </object>
@@ -62244,6 +62251,7 @@
     <property name="colliderRadius" type="float" value="0.25"/>
     <property name="colliderRestitution" type="float" value="0"/>
     <property name="colliderType" type="int" value="2"/>
+    <property name="creatureHurtSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Hurt.wav"/>
     <property name="currentAngle" type="int" value="0"/>
     <property name="currentAnimationState" type="int" value="0"/>
     <property name="currentState" type="int" value="0"/>
@@ -62601,8 +62609,11 @@
     <property name="creatureDeathFallSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Player/Player Die Fall.wav"/>
     <property name="creatureDeathSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Player/Player Die.wav"/>
     <property name="creatureHurtSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Player/Player Hurt.wav"/>
+    <property name="creatureJumpSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Player/Player Jump.wav"/>
+    <property name="creatureLandingSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Player/Player Landing.wav"/>
     <property name="creatureSoundLoop" type="bool" value="false"/>
     <property name="creatureSoundVolume" type="float" value="5"/>
+    <property name="creatureWalkSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Player/Player Walk.wav"/>
     <property name="currentAngle" type="int" value="0"/>
     <property name="currentAnimationState" type="int" value="0"/>
     <property name="currentState" type="int" value="0"/>
@@ -62637,6 +62648,8 @@
   <object id="5122" name="Resume Button" gid="39" x="-96" y="-128" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonBackSection" type="int" value="0"/>
@@ -62655,6 +62668,8 @@
   <object id="5123" name="Options Button" gid="43" x="-96" y="0" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonBackSection" type="int" value="0"/>
@@ -62673,6 +62688,8 @@
   <object id="5124" name="Quit Button" gid="46" x="-96" y="128" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonBackSection" type="int" value="0"/>
@@ -62693,6 +62710,8 @@
   <object id="5130" name="Next Value Button" gid="63" x="128" y="-64" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonNameAction" type="int" value="1"/>
@@ -62709,6 +62728,8 @@
   <object id="5147" name="Next Value Button" gid="63" x="704" y="-64" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonNameAction" type="int" value="3"/>
@@ -62725,6 +62746,8 @@
   <object id="5140" name="Next Value Button" gid="63" x="128" y="128" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonNameAction" type="int" value="2"/>
@@ -62741,6 +62764,8 @@
   <object id="5131" name="Back Value Button" gid="64" x="-128" y="-64" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonNameAction" type="int" value="1"/>
@@ -62757,6 +62782,8 @@
   <object id="5145" name="Back Value Button" gid="64" x="448" y="-64" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonNameAction" type="int" value="3"/>
@@ -62773,6 +62800,8 @@
   <object id="5138" name="Back Value Button" gid="64" x="-128" y="128" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonNameAction" type="int" value="2"/>
@@ -63000,6 +63029,8 @@
   <object id="5149" name="Back Button" gid="50" x="576" y="256" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
+    <property name="UIButtonInteractSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>
+    <property name="UIButtonPressedSound" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Pause  Menu/Menu Button Pressed.wav"/>
     <property name="activeObject" type="bool" value="false"/>
     <property name="activeRenderer" type="bool" value="false"/>
     <property name="buttonBackSection" type="int" value="1"/>

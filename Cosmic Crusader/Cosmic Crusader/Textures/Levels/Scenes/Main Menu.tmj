@@ -19,6 +19,16 @@
                          "value":0
                         }, 
                         {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
+                        }, 
+                        {
                          "name":"activeObject",
                          "type":"bool",
                          "value":true
@@ -100,6 +110,16 @@
                          "name":"Faction",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
                         }, 
                         {
                          "name":"activeObject",
@@ -185,6 +205,16 @@
                          "value":0
                         }, 
                         {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
+                        }, 
+                        {
                          "name":"activeObject",
                          "type":"bool",
                          "value":true
@@ -266,6 +296,16 @@
                          "name":"Faction",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
                         }, 
                         {
                          "name":"activeObject",
@@ -351,6 +391,16 @@
                          "value":0
                         }, 
                         {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
+                        }, 
+                        {
                          "name":"activeObject",
                          "type":"bool",
                          "value":false
@@ -434,6 +484,16 @@
                          "value":0
                         }, 
                         {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
+                        }, 
+                        {
                          "name":"activeObject",
                          "type":"bool",
                          "value":false
@@ -507,7 +567,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -526,6 +586,16 @@
                          "name":"Faction",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
                         }, 
                         {
                          "name":"activeObject",
@@ -591,7 +661,8 @@
                          "name":"objectType",
                          "type":"int",
                          "value":2
-                        }, 
+                        },
+                    
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
@@ -614,6 +685,16 @@
                          "name":"Faction",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
                         }, 
                         {
                          "name":"activeObject",
@@ -679,7 +760,8 @@
                          "name":"objectType",
                          "type":"int",
                          "value":2
-                        }, 
+                        },
+                    
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
@@ -702,6 +784,16 @@
                          "name":"Faction",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
                         }, 
                         {
                          "name":"activeObject",
@@ -767,7 +859,8 @@
                          "name":"objectType",
                          "type":"int",
                          "value":2
-                        }, 
+                        },
+                    
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
@@ -790,6 +883,16 @@
                          "name":"Faction",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
                         }, 
                         {
                          "name":"activeObject",
@@ -855,7 +958,8 @@
                          "name":"objectType",
                          "type":"int",
                          "value":2
-                        }, 
+                        },
+                    
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
@@ -878,6 +982,16 @@
                          "name":"Faction",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
                         }, 
                         {
                          "name":"activeObject",
@@ -943,7 +1057,8 @@
                          "name":"objectType",
                          "type":"int",
                          "value":2
-                        }, 
+                        },
+                    
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
@@ -966,6 +1081,16 @@
                          "name":"Faction",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
                         }, 
                         {
                          "name":"activeObject",
@@ -1031,7 +1156,8 @@
                          "name":"objectType",
                          "type":"int",
                          "value":2
-                        }, 
+                        },
+                    
                         {
                          "name":"startSpriteTexturePath",
                          "type":"string",
@@ -1719,6 +1845,16 @@
                          "value":0
                         }, 
                         {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
+                        }, 
+                        {
                          "name":"activeObject",
                          "type":"bool",
                          "value":false
@@ -2120,7 +2256,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 

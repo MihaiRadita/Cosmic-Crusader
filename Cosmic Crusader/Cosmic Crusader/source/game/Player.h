@@ -69,6 +69,8 @@ namespace ratchet
 
 		void serialise(nlohmann::json& jsonFile) override;
 
+		void OnCollisionEnter(GameObject* obj) override;
+
 		//Render
 
 		//Destructor

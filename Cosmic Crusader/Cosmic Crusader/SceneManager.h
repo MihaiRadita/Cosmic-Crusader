@@ -160,6 +160,14 @@ namespace ratchet
 		float m_initialMusicVolume;
 		std::string m_musicSoundtrackPath;
 
+		sf::SoundBuffer m_pauseMenuSoundOnBuffer;
+		sf::SoundBuffer m_pauseMenuSoundOffBuffer;
+		sf::Sound m_pauseMenuSoundOn;
+		sf::Sound m_pauseMenuSoundOff;
+
+		std::string m_pauseMenuSoundOnPath;
+		std::string m_pauseMenuSoundOffPath;
+
 		std::map<SceneType, std::string> GetSceneFiles();
 
 		std::vector<int>m_characters_destroyed_index;

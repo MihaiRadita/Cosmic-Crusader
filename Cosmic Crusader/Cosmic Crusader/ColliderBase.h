@@ -72,6 +72,8 @@ namespace ratchet
 		b2Body* m_body = nullptr;
 		b2MassData m_massData;
 
+		PhysicsLayer m_layer;
+
 		bool isColliderSetDestroy = false;
 
 		float m_massValue = 0.f;

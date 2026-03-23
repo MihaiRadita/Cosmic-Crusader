@@ -51,6 +51,21 @@ namespace ratchet
 		float m_uiButtonOffsetX;
 		float m_uiButtonOffsetY;
 
+
+		std::string m_uiButtonInteractSoundPath;
+		std::string m_uiButtonPressedSoundPath;
+
+		sf::SoundBuffer m_uiButtonInteractSoundBuffer;
+		sf::Sound m_uiButtonInteractSound;
+
+		sf::SoundBuffer m_uiButtonPressedSoundBuffer;
+		sf::Sound m_uiButtonPressedSound;
+
+		bool m_skipedUpdate;
+		static bool m_skipInteractionThisFrame;
+
+
+
 	protected:
 
 

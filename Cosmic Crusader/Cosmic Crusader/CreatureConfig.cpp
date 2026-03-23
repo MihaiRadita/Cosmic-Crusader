@@ -373,6 +373,21 @@ namespace ratchet
 			{
 				m_creatureDeathFallSoundPath = propertyValue.get<std::string>();
 			}
+
+			if (propertyName == "creatureJumpSoundPath")
+			{
+				m_creatureJumpSoundPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "creatureLandingSoundPath")
+			{
+				m_creatureLandingSoundPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "creatureWalkSoundPath")
+			{
+				m_creatureWalkSoundPath = propertyValue.get<std::string>();
+			}
 		}
 
 		for (const auto& jsonProperty : jsonFile["properties"])

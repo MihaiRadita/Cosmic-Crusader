@@ -65,8 +65,12 @@ namespace ratchet
 		float m_tangentHalfBase;
 		float m_tangentx3HalfBase; 
 
+		bool m_isLanding = false;
+
 		float m_checkPointOffsetX;
 		float m_checkPointOffsetY;
+
+		Timer m_walkTimerSound;
 
 		//Charater boby areas points
 		sf::Vector2f m_bodyShoulderPosition;
@@ -95,6 +99,9 @@ namespace ratchet
 		std::string m_creatureHurtSoundPath;
 		std::string m_creatureDeathSoundPath;
 		std::string m_creatureDeathFallSoundPath;
+		std::string m_creatureJumpSoundPath;
+		std::string m_creatureLandingSoundPath;
+		std::string m_creatureWalkSoundPath;
 
 
 		sf::SoundBuffer m_hurtSoundBuffer;
@@ -103,6 +110,12 @@ namespace ratchet
 		sf::Sound m_deathSound;
 		sf::SoundBuffer m_deathFallSoundBuffer;
 		sf::Sound m_deathFallSound;
+		sf::SoundBuffer m_jumpSoundBuffer;
+		sf::Sound m_jumpSound;
+		sf::SoundBuffer m_landingSoundBuffer;
+		sf::Sound m_landingSound;
+		sf::SoundBuffer m_walkSoundBuffer;
+		sf::Sound m_walkSound;
 
 		//Constructors
 		Creature(const CreatureConfig& config);

@@ -97,6 +97,9 @@ namespace ratchet
 		m_creatureHurtSoundPath = config.m_creatureHurtSoundPath;
 		m_creatureDeathSoundPath = config.m_creatureDeathSoundPath;
 		m_creatureDeathFallSoundPath = config.m_creatureDeathFallSoundPath;
+		m_creatureJumpSoundPath = config.m_creatureJumpSoundPath;
+		m_creatureLandingSoundPath = config.m_creatureLandingSoundPath;
+		m_creatureWalkSoundPath = config.m_creatureWalkSoundPath;
 
 
 		for (auto config : m_initialWeaponConfigList)
@@ -769,6 +772,20 @@ namespace ratchet
 			std::cout << "Sound did not load!" << std::endl;
 		}
 
+		if (!m_jumpSoundBuffer.loadFromFile(m_creatureJumpSoundPath))
+		{
+			std::cout << "Sound did not load!" << std::endl;
+		}
+
+		if (!m_landingSoundBuffer.loadFromFile(m_creatureLandingSoundPath))
+		{
+			std::cout << "Sound did not load!" << std::endl;
+		}
+
+		if (!m_walkSoundBuffer.loadFromFile(m_creatureWalkSoundPath))
+		{
+			std::cout << "Sound did not load!" << std::endl;
+		}
 
 		m_hurtSound = sf::Sound();
 		m_hurtSound.setBuffer(m_hurtSoundBuffer);
@@ -785,6 +802,24 @@ namespace ratchet
 		m_deathFallSound.setBuffer(m_deathFallSoundBuffer);
 		m_deathFallSound.setLoop(m_creatureSoundLoop);
 		m_deathFallSound.setVolume(m_creatureSoundVolume);
+
+		m_jumpSound = sf::Sound();
+		m_jumpSound.setBuffer(m_jumpSoundBuffer);
+		m_jumpSound.setLoop(m_creatureSoundLoop);
+		m_jumpSound.setVolume(m_creatureSoundVolume);
+
+		m_landingSound = sf::Sound();
+		m_landingSound.setBuffer(m_landingSoundBuffer);
+		m_landingSound.setLoop(m_creatureSoundLoop);
+		m_landingSound.setVolume(10.f);
+
+		m_walkSound = sf::Sound();
+		m_walkSound.setBuffer(m_walkSoundBuffer);
+		m_walkSound.setLoop(m_creatureSoundLoop);
+		m_walkSound.setVolume(m_creatureSoundVolume);
+
+	
+
 
 	}
 

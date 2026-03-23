@@ -18,6 +18,8 @@ namespace ratchet
 #endif
 
 		m_checkTopPlatformsDirectionX = 1.f;
+
+		m_layer = config.m_layer;
 	}
 
 

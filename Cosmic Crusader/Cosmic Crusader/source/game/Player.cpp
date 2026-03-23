@@ -429,7 +429,10 @@ namespace ratchet
 
 	void Player::updateMovement()
 	{
-		//sf::Vector2f position = m_sprite.getPosition();
+		if (!isGrounded())
+		{
+			m_isLanding = false;
+		}
 
 		m_movementType = MovementType::MOVEMENTTYPE_UNKNOWN;
 		m_isMoving = false;
@@ -452,10 +455,25 @@ namespace ratchet
 			m_isMoving = true;
 			changeX = true;
 			xVelocity = m_movementSpeed * m_input.x;
+
+			if (m_isGround)
+			{
+				if (m_walkTimerSound.GetElapsed().asSeconds() >= 0.3f)
+				{
+					m_walkSound.play();
+					m_walkTimerSound.Restart();
+				}
+			}
+			else
+			{
+				m_walkTimerSound.Restart();
+			}
+
 		}
 		
 		if (m_input.isJump && isGrounded())
 		{
+			m_jumpSound.play();
 			m_isMoving = true;
 			changeY = true;
 			yVelocity = m_jumpImpulse;
@@ -499,6 +517,24 @@ namespace ratchet
 	void Player::serialise(nlohmann::json& jsonFile)
 	{
 		Creature::serialise(jsonFile);
+	}
+
+	void Player::OnCollisionEnter(GameObject* obj)
+	{
+	
+		if (auto* tile = dynamic_cast<Tile*>(obj))
+		{
+			auto* tileCollider = tile->m_collider;
+			if (tileCollider->m_layer == PhysicsLayer::Platforms)
+			{
+				if (!m_isLanding)
+				{
+					m_landingSound.play();
+					m_isLanding = true;
+				}
+				
+			}
+		}
 	}
 
 	Player::~Player() 

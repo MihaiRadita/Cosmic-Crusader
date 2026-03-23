@@ -121,6 +121,16 @@ namespace ratchet
 			{
 				m_nameAction = static_cast<ButtonNameAction>(propertyValue.get<int>());
 			}
+
+			if (propertyName == "UIButtonInteractSound")
+			{
+				m_uiButtonInteractSoundPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "UIButtonPressedSound")
+			{
+				m_uiButtonPressedSoundPath = propertyValue.get<std::string>();
+			}
 		}
 
 		return true;
