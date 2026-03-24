@@ -74,7 +74,6 @@ namespace ratchet
 				break;
 
 			case ButtonNameState::Options:
-				m_skipInteractionThisFrame = true;
 				m_uiButtonPressedSound.play();
 				setButtonsSectionActive(true);
 				break;
@@ -92,7 +91,6 @@ namespace ratchet
 
 			case ButtonNameState::Back:
 				setButtonsSectionActive(false);
-				m_skipInteractionThisFrame = true;
 				m_uiButtonPressedSound.play();
 				break;
 
@@ -129,11 +127,11 @@ namespace ratchet
 		{
 			m_isEventAllreadyActive = !active;
 			m_isButtonInteracting = !active;
-	
+
+			m_skipInteractionThisFrame = this->checkUIButtonInteractionRaw();
 			this->setButtonActive(!active);
 			m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
 
-			
 
 		}
 		else if(active != this->checkIsButtonActive())
@@ -141,11 +139,11 @@ namespace ratchet
 			m_isEventAllreadyActive = active;
 			m_isButtonInteracting = active;
 			m_isButtonEventTirggered = false;
+
 			this->setButtonActive(active);
 			m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
 
-			m_uiButtonPressedSound.stop();
-			m_uiButtonInteractSound.stop();
+			m_skipInteractionThisFrame = this->checkUIButtonInteractionRaw();
 		}
 
 		for (auto& obj : s_gameObjects)
@@ -166,73 +164,46 @@ namespace ratchet
 			{
 				if (obj == this)
 				{
-					m_skipedUpdate = active;
 					continue;
 				}
 				if (auto* ui = dynamic_cast<UIClickButton*>(obj))
 				{
 					if (active)
 					{
+						auto& name = ui->m_nameState;
 
-						if (ui->m_nameState != ButtonNameState::Back ||
-							ui->m_nameState != ButtonNameState::Options)
-						{
-							ui->m_skipInteractionThisFrame = true;
-						}
-						else
-						{
-							ui->m_skipInteractionThisFrame = false;
-						}
-
-						if (ui->m_nameState != ButtonNameState::Back &&
-							ui->m_nameState != ButtonNameState::Options)
-						{
-							ui->m_skipInteractionThisFrame = true;
-						}
-						
+					
 						if (ui->m_nameSection == m_nameSection)
 						{
-							m_isButtonInteracting = !active;
-							m_isEventAllreadyActive = !active;
-							ui->setButtonActive(!active);
+							ui->setButtonActive(false);
 							ui->m_isButtonEventTirggered = false;
+							ui->m_skipInteractionThisFrame = false; 
 						}
 						else if (ui->m_nameSection == m_NextNameSection)
 						{
-							m_isEventAllreadyActive = active;
-							m_isButtonInteracting = active;
-							ui->setButtonActive(active);
-							ui->m_isButtonEventTirggered = false;
+							bool isHoveringUI = ui->checkUIButtonInteractionRaw();
+							ui->m_skipInteractionThisFrame = isHoveringUI;
 
+							ui->setButtonActive(true);
+							ui->m_isButtonEventTirggered = false;
 						}
 					}
 					else
 					{
-						ui->m_skipInteractionThisFrame = false;
-						m_skipedUpdate = active;
-						ui->m_skipInteractionThisFrame = false;
-						m_uiButtonPressedSound.stop();
-						m_uiButtonInteractSound.stop();
+						auto& name = ui->m_nameState;
 						if (ui->m_nameSection == m_nameSection)
 						{
-							m_isButtonInteracting = active;
-							m_isEventAllreadyActive = active;
-							ui->setButtonActive(active);
-
+							ui->setButtonActive(false);
 							ui->m_isButtonEventTirggered = false;
-
-							ui->m_skipedUpdate = active;
+							ui->m_skipInteractionThisFrame = false; 
 						}
 						else if (ui->m_nameSection == m_BackNameSection)
 						{
-							m_isEventAllreadyActive = !active;
-							m_isButtonInteracting = !active;
-							ui->setButtonActive(!active);
+							bool isHoveringUI = ui->checkUIButtonInteractionRaw();
+							ui->m_skipInteractionThisFrame = isHoveringUI;
+
+							ui->setButtonActive(true);
 							ui->m_isButtonEventTirggered = false;
-
-							ui->m_skipedUpdate = active;
-
-
 						}
 					}
 	
@@ -241,65 +212,36 @@ namespace ratchet
 				{
 					if (active)
 					{
-						if (ui->m_nameState != ButtonNameState::Back ||
-							ui->m_nameState != ButtonNameState::Options)
-						{
-							ui->m_skipInteractionThisFrame = true;
-						}
-						else
-						{
-							ui->m_skipInteractionThisFrame = false;
-						}
-
-						m_skipedUpdate = active;
-						if (ui->m_nameState != ButtonNameState::Back &&
-							ui->m_nameState != ButtonNameState::Options)
-						{
-							ui->m_skipInteractionThisFrame = true;
-						}
-
 						if (ui->m_nameSection == m_nameSection)
 						{
-							m_isButtonInteracting = !active;
-							m_isEventAllreadyActive = !active;
-							ui->setButtonActive(!active);
+							ui->setButtonActive(false);
+							ui->m_isButtonEventTirggered = false;
+							ui->m_skipInteractionThisFrame = false;
 						}
 						else if (ui->m_nameSection == m_NextNameSection)
 						{
-							m_isEventAllreadyActive = active;
-							m_isButtonInteracting = active;
-							ui->setButtonActive(active);
+							bool isHoveringUI = ui->checkUIButtonInteractionRaw();
+							ui->m_skipInteractionThisFrame = isHoveringUI;
+
+							ui->setButtonActive(true);
 							ui->m_isButtonEventTirggered = false;
-
-							ui->m_skipedUpdate = active;
-
 						}
 					}
 					else
 					{
-						ui->m_skipInteractionThisFrame = false;
-
-						m_skipedUpdate = active;
-						ui->m_skipInteractionThisFrame = false;
-						m_uiButtonPressedSound.stop();
-						m_uiButtonInteractSound.stop();
 						if (ui->m_nameSection == m_nameSection)
 						{
-							m_isButtonInteracting = active;
-							m_isEventAllreadyActive = active;
-							ui->setButtonActive(active);
+							ui->setButtonActive(false);
 							ui->m_isButtonEventTirggered = false;
-							ui->m_skipedUpdate = active;
-
+							ui->m_skipInteractionThisFrame = false;
 						}
 						else if (ui->m_nameSection == m_BackNameSection)
 						{
-							m_isEventAllreadyActive = !active;
-							m_isButtonInteracting = !active;
-							ui->setButtonActive(!active);
-							ui->m_isButtonEventTirggered = false;
-							ui->m_skipedUpdate = active;
+							bool isHoveringUI = ui->checkUIButtonInteractionRaw();
+							ui->m_skipInteractionThisFrame = isHoveringUI;
 
+							ui->setButtonActive(true);
+							ui->m_isButtonEventTirggered = false;
 						}
 					}
 				}

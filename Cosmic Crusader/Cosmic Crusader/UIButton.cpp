@@ -38,29 +38,32 @@ namespace ratchet
 	void UIButton::update()
 	{
 
-
-		bool wasButtonIteracting = m_isButtonInteracting;
+		wasButtonIteracting = m_isButtonInteracting;
 		m_isButtonInteracting = checkUIButtonInteraction();
 
-		if (wasButtonIteracting != m_isButtonInteracting)
+		if (m_isButtonInteracting)
 		{
-			if (m_isButtonInteracting && !m_isButtonEventTirggered)
+
+			auto& name = m_nameState;
+			m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 255));
+			if (m_skipInteractionThisFrame)
 			{
-				if (!m_skipedUpdate && !m_skipInteractionThisFrame)
+				m_skipInteractionThisFrame = false;
+				return;
+			}
+			else if(!m_skipInteractionThisFrame)
+			{
+				if (wasButtonIteracting != m_isButtonInteracting)
 				{
 					m_uiButtonInteractSound.play();
 				}
-				m_skipedUpdate = false;
-				m_skipInteractionThisFrame = false;
-
-				m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 255));
-			}
-			else
-			{
-				m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
 			}
 		}
-	
+		else
+		{
+			m_sprite.setColor(sf::Color(m_sprite.getColor().r, m_sprite.getColor().g, m_sprite.getColor().b, 150));
+		}
+		
 	}
 
 	void UIButton::render(sf::RenderTarget& target)
@@ -106,16 +109,29 @@ namespace ratchet
 
 	bool UIButton::checkUIButtonInteraction()
 	{
-		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
-		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition, SceneManager::Get().GetUIView());
-
-		if ((mouseWorldPosition.x >= m_sprite.getPosition().x && mouseWorldPosition.x <= (m_sprite.getPosition().x + m_sprite.getGlobalBounds().width))
-			&& (mouseWorldPosition.y >= m_sprite.getPosition().y && mouseWorldPosition.y <= (m_sprite.getPosition().y + m_sprite.getGlobalBounds().height)))
+		if (!checkIsButtonActive())
 		{
-			return true;
+			return false;
 		}
 
-		return false;
+		return checkUIButtonInteractionRaw();
+	}
+
+	bool UIButton::checkUIButtonInteractionRaw()
+	{
+		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
+		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(
+			mousePosition,
+			SceneManager::Get().GetUIView()
+		);
+
+		return (
+			mouseWorldPosition.x >= m_sprite.getPosition().x &&
+			mouseWorldPosition.x <= (m_sprite.getPosition().x + m_sprite.getGlobalBounds().width) &&
+			mouseWorldPosition.y >= m_sprite.getPosition().y &&
+			mouseWorldPosition.y <= (m_sprite.getPosition().y + m_sprite.getGlobalBounds().height)
+			);
+
 	}
 
 
@@ -188,8 +204,5 @@ namespace ratchet
 	{
 		return m_isButtonEventTirggered;
 	}
-
-
-	bool UIButton::m_skipInteractionThisFrame = false;
 
 }

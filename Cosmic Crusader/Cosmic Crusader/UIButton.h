@@ -19,6 +19,7 @@ namespace ratchet
 		void handleUIEvent(sf::Event& event);
 
 		bool checkUIButtonInteraction();
+		bool checkUIButtonInteractionRaw();
 
 		virtual void setButtonsSectionActive(bool active);
 		virtual void setButtonActive(bool active);
@@ -30,6 +31,7 @@ namespace ratchet
 		virtual bool checkIsButtonActive();
 
 		bool m_isButtonInteracting = false;
+		bool wasButtonIteracting = false;
 		bool m_isButtonEventTirggered = false;
 
 		ButtonNameState getButtonNameState();
@@ -62,7 +64,7 @@ namespace ratchet
 		sf::Sound m_uiButtonPressedSound;
 
 		bool m_skipedUpdate;
-		static bool m_skipInteractionThisFrame;
+		bool m_skipInteractionThisFrame;
 
 
 
