@@ -92,6 +92,8 @@ namespace ratchet
 
 		bool m_isFallingWithoutJumping;
 
+		bool m_deathSoundPlayed = false;
+
 		//Sounds
 		bool m_creatureSoundLoop;
 		float m_creatureSoundVolume;
@@ -197,9 +199,10 @@ namespace ratchet
 		float m_currentFireRotationRadians;
 		float m_currentFireRoationDegrees;
 		sf::Vector2f m_currenFireDirectionNorm;
+
+		std::vector<Weapon*> m_ownedWeaponList; 
  
 		std::vector<std::pair<Weapon::TYPE, std::optional<WeaponConfig>>> m_initialWeaponConfigList; 
-		std::vector<Weapon*> m_ownedWeaponList; 
 		std::vector <Weapon::TYPE> m_weaponTypeList;
 		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
 

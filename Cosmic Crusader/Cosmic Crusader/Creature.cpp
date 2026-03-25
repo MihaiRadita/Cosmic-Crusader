@@ -790,33 +790,33 @@ namespace ratchet
 		m_hurtSound = sf::Sound();
 		m_hurtSound.setBuffer(m_hurtSoundBuffer);
 		m_hurtSound.setLoop(m_creatureSoundLoop);
-		m_hurtSound.setVolume(m_creatureSoundVolume);
+		m_hurtSound.setVolume(m_objectSoundEffectVolume);
 
 
 		m_deathSound = sf::Sound();
 		m_deathSound.setBuffer(m_deathSoundBuffer);
 		m_deathSound.setLoop(m_creatureSoundLoop);
-		m_deathSound.setVolume(m_creatureSoundVolume);
+		m_deathSound.setVolume(m_objectSoundEffectVolume);
 
 		m_deathFallSound = sf::Sound();
 		m_deathFallSound.setBuffer(m_deathFallSoundBuffer);
 		m_deathFallSound.setLoop(m_creatureSoundLoop);
-		m_deathFallSound.setVolume(m_creatureSoundVolume);
+		m_deathFallSound.setVolume(m_objectSoundEffectVolume);
 
 		m_jumpSound = sf::Sound();
 		m_jumpSound.setBuffer(m_jumpSoundBuffer);
 		m_jumpSound.setLoop(m_creatureSoundLoop);
-		m_jumpSound.setVolume(m_creatureSoundVolume);
+		m_jumpSound.setVolume(m_objectSoundEffectVolume);
 
 		m_landingSound = sf::Sound();
 		m_landingSound.setBuffer(m_landingSoundBuffer);
 		m_landingSound.setLoop(m_creatureSoundLoop);
-		m_landingSound.setVolume(10.f);
+		m_landingSound.setVolume(m_objectSoundEffectVolume);
 
 		m_walkSound = sf::Sound();
 		m_walkSound.setBuffer(m_walkSoundBuffer);
 		m_walkSound.setLoop(m_creatureSoundLoop);
-		m_walkSound.setVolume(m_creatureSoundVolume);
+		m_walkSound.setVolume(m_objectSoundEffectVolume);
 
 	
 
@@ -849,14 +849,18 @@ namespace ratchet
 		{
 			m_health = 0.0f;
 
-			m_deathSound.play();
-
 			m_isDeath = true;
 
 			std::cout << "Character is Death!" << std::endl;
 		}
 		else
 		{
+			float volume = m_hurtSound.getVolume();
+
+			volume = SceneManager::Get().GetSoundEffectsVolume();
+
+			m_hurtSound.setVolume(volume);
+
 			m_hurtSound.play();
 		}
 	}
@@ -925,7 +929,7 @@ namespace ratchet
 			newWeapon->m_weaponSound.setBuffer(newWeapon->m_weaponSoundBuffer);
 
 
-			newWeapon->m_weaponSoundVolume = config->m_weaponSoundVolume;
+			newWeapon->m_weaponSoundVolume = SceneManager::Get().m_soundEffectsVolume;
 
 			newWeapon->m_weaponSoundLoop = config->m_weaponSoundLoop;
 

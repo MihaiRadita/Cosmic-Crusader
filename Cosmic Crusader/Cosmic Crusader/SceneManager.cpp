@@ -198,6 +198,11 @@ namespace ratchet
 		return m_musicVolume;
 	}
 
+	float& SceneManager::GetSoundEffectsVolume()
+	{
+		return m_soundEffectsVolume;
+	}
+
 	void SceneManager::ClearDestroyedCharactersLists()
 	{
 		m_characters_destroyed_ID.clear();
@@ -891,6 +896,19 @@ namespace ratchet
 								}
 							}
 						}
+
+						if (objName == "Sound Effects")
+						{
+							for (auto& prop : obj["properties"])
+							{
+								std::string propName = prop["name"];
+
+								if (propName == "soundEffectsVolume")
+								{
+									prop["value"] = static_cast<float>(m_soundEffectsVolume);
+								}
+							}
+						}
 					}
 					else if (layerName ==  "Pause Menu Slider Buttons" || layerName == "Slider Buttons")
 					{
@@ -935,6 +953,7 @@ namespace ratchet
 							}
 						}
 					}
+					
 				}
 			}
 		}
@@ -1207,11 +1226,24 @@ namespace ratchet
 							}
 						}
 					}
+
+					if (obj["name"] == "Sound Effects")
+					{
+						for (const auto& prop : obj["properties"])
+						{
+							const auto& propertyName = prop["name"].get<std::string>();
+							const auto& propertyValue = prop["value"];
+
+							if (propertyName == "soundEffectsVolume")
+							{
+								m_soundEffectsVolume = propertyValue.get<float>();
+							}
+						}
+					}
 				}
 			}
 		}
 
-		//m_sceneSoundtrack.stop();
 		if (!m_sceneSoundtrack.openFromFile(m_musicSoundtrackPath))
 		{
 			std::cout << "music could Not opened!" << std::endl;

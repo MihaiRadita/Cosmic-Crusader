@@ -39,7 +39,16 @@ namespace ratchet
 		auto* player = dynamic_cast<Player*>(obj);
 		if (!player) return;
 
+
+		float volume = player->m_deathFallSound.getVolume();
+
+		volume = SceneManager::Get().GetSoundEffectsVolume();
+
+		player->m_deathFallSound.setVolume(volume);
+
 		player->m_deathFallSound.play();
+		
+		player->m_isDeathFall = true;
 
 		if (m_isObjectInside) return;
 

@@ -87,7 +87,11 @@ namespace ratchet
 
 			bulletObj->launchBullet(direction, bulletObj->m_bulletSpeed);
 
-			auto& volume = m_weaponSoundVolume;
+			float volume = m_weaponSound.getVolume();
+
+			volume = SceneManager::Get().GetSoundEffectsVolume();
+
+			m_weaponSound.setVolume(volume);
 
 			m_weaponSound.play();
 

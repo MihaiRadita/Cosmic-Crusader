@@ -3,6 +3,8 @@
 
 #include "UIClickButton.h"
 
+#include "SceneManager.h"
+
 
 namespace ratchet
 {
@@ -41,6 +43,11 @@ namespace ratchet
 		return m_collider;
 	}
 
+
+	void GameObject::SetSoundEffectsVolume(float& volume)
+	{
+		m_objectSoundEffectVolume = volume;
+	}
 
 	GameObject* GameObject::findGameObject(const b2Body* body)
 	{
@@ -88,6 +95,8 @@ namespace ratchet
 		m_activeGameObject = config.m_activeObject;
 		m_activeRenderer = config.m_activeRenderer;
 		m_startSpritePath = config.startSpriteTexturePath;
+
+		m_objectSoundEffectVolume = SceneManager::Get().m_soundEffectsVolume;
 
 		//Sprites and Terxtures
 
@@ -346,6 +355,17 @@ namespace ratchet
 		delete this; 
 
 		TRACE_CHANNEL("GAMEOBJECT_INIT", "The Object HAS BEEN DESTROYED!");
+	}
+
+	void GameObject::DestroyCollider()
+	{
+		if (m_collider == nullptr)
+		{
+			return;
+		}
+
+		delete m_collider;
+		m_collider = nullptr;
 	}
 
 	void GameObject::RemoveGameObjectFromList()

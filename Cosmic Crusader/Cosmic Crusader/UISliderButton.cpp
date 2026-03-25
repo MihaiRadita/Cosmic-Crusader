@@ -87,6 +87,25 @@ namespace ratchet
 			break;
 		}
 
+		case ButtonNameAction::SoundEffectVolume:
+		{
+			if (m_currentSliderValue != static_cast<float>(SceneManager::Get().GetSoundEffectsVolume()))
+			{
+				m_currentSliderValue = SceneManager::Get().GetSoundEffectsVolume();
+				m_UITextValue.setNumberValue(m_currentSliderValue);
+			}
+
+			if (m_plusButton.m_isButtonEventTirggered || m_minusButton.m_isButtonEventTirggered)
+			{
+				float& value = getSliderValueModified();
+
+				auto& currentVolume = SceneManager::Get().GetSoundEffectsVolume();
+				currentVolume = value;
+
+				m_UITextValue.setNumberValue(currentVolume);
+			}
+		}
+
 		default:
 		{
 			break;

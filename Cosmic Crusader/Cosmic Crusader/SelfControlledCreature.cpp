@@ -356,17 +356,33 @@ namespace ratchet
 	{
 		if (m_isDeath)
 		{
-			for (size_t i = 0; i < GameObject::s_gameObjects.size(); i++)
+			GameObject::DestroyCollider();
+			if (!m_deathSoundPlayed)
 			{
-				if (GameObject::s_gameObjects[i] == this)
+				m_isAttacking = false;
+
+				float volume = m_deathFallSound.getVolume();
+				volume = SceneManager::Get().GetSoundEffectsVolume();
+				m_deathSound.setVolume(volume);
+
+				m_deathSound.play();
+				m_deathSoundPlayed = true;
+				for (size_t i = 0; i < GameObject::s_gameObjects.size(); i++)
 				{
-					SceneManager::Get().m_characters_destroyed_ID.push_back(m_objectId);
-					SceneManager::Get().m_characters_destroyed_index.push_back(i);
-					break;
+					if (GameObject::s_gameObjects[i] == this)
+					{
+						SceneManager::Get().m_characters_destroyed_ID.push_back(m_objectId);
+						SceneManager::Get().m_characters_destroyed_index.push_back(i);
+						break;
+					}
 				}
 			}
 
-			GameObject::DestroyGameObject();
+			if (m_deathSound.getStatus() == sf::Sound::Stopped)
+			{
+				GameObject::DestroyGameObject();
+			}
+
 			return;
 		}
 
@@ -412,6 +428,25 @@ namespace ratchet
 			m_isMoving = true;
 			changeX = true;
 			xVelocity = m_movementSpeed * m_input.x;
+
+			if (m_isGround)
+			{
+				if (m_walkTimerSound.GetElapsed().asSeconds() >= 0.3f)
+				{
+					float volume = m_walkSound.getVolume();
+
+					volume = SceneManager::Get().GetSoundEffectsVolume();
+
+					m_walkSound.setVolume(volume);
+
+					m_walkSound.play();
+					m_walkTimerSound.Restart();
+				}
+			}
+			else
+			{
+				m_walkTimerSound.Restart();
+			}
 		}
 
 		if (m_input.isJump && isGrounded())

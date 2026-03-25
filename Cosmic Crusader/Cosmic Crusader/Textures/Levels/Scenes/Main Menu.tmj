@@ -567,7 +567,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -2120,7 +2120,7 @@
                         {
                          "name":"sliderMaxValue",
                          "type":"float",
-                         "value":0
+                         "value":50
                         },
                     
                         {
@@ -2131,7 +2131,7 @@
                         {
                          "name":"sliderValueIncrease",
                          "type":"float",
-                         "value":0
+                         "value":5
                         }, 
                         {
                          "name":"sliderValueText",
@@ -2256,7 +2256,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2366,6 +2366,24 @@
                  "width":0,
                  "x":0,
                  "y":64
+                }, 
+                {
+                 "height":0,
+                 "id":50,
+                 "name":"Sound Effects",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"soundEffectsVolume",
+                         "type":"float",
+                         "value":5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":0,
+                 "y":64
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2374,7 +2392,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":50,
+ "nextobjectid":51,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",

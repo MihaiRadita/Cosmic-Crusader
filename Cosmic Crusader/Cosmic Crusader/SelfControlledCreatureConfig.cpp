@@ -406,6 +406,18 @@ namespace ratchet
 				m_creatureHurtSoundPath = propertyValue.get<std::string>();
 			}
 
+			if (propertyName == "creatureWalkSoundPath")
+			{
+				m_creatureWalkSoundPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "creatureDeathSoundPath")
+			{
+				m_creatureDeathSoundPath = propertyValue.get<std::string>();
+			}
+
+
+
 			if (propertyName == "usableWeaponTypeListMask")
 			{
 				EnumMask<Weapon::TYPE> weaponTypeMask;

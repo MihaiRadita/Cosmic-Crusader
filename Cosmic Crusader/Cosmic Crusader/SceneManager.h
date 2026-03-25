@@ -92,6 +92,7 @@ namespace ratchet
 		void SetPauseMenuActive(bool active);
 
 		float& GetMusicVolume();
+		float& GetSoundEffectsVolume();
 
 		void ClearDestroyedCharactersLists();
 
@@ -159,6 +160,9 @@ namespace ratchet
 		float m_musicVolume;
 		float m_initialMusicVolume;
 		std::string m_musicSoundtrackPath;
+
+
+		float m_soundEffectsVolume = 0.0f;
 
 		sf::SoundBuffer m_pauseMenuSoundOnBuffer;
 		sf::SoundBuffer m_pauseMenuSoundOffBuffer;

@@ -298,10 +298,6 @@ namespace ratchet
 
 	void Player::computeAimBulletRotation()
 	{
-		if (m_isDeath)
-		{
-			return;
-		}
 
 		sf::Vector2f firePoint = m_currentFirePoint;
 		sf::Vector2i mousePos = sf::Mouse::getPosition(*WindowManager::Get());
@@ -397,6 +393,25 @@ namespace ratchet
 
 	void Player::update()
 	{
+
+		if (m_isDeath)
+		{
+			if (!m_isDeathFall)
+			{
+
+				float volume = m_deathSound.getVolume();
+				volume = SceneManager::Get().GetSoundEffectsVolume();
+				m_deathSound.setVolume(volume);
+
+				m_deathSound.play();
+
+			}
+		}
+		else
+		{
+			m_isDeathFall = false;
+		}
+	
 		float health = m_health;
 
 		if (!m_activeGameObject) return;
@@ -460,6 +475,12 @@ namespace ratchet
 			{
 				if (m_walkTimerSound.GetElapsed().asSeconds() >= 0.3f)
 				{
+					float volume = m_walkSound.getVolume();
+
+					volume = SceneManager::Get().GetSoundEffectsVolume();
+
+					m_walkSound.setVolume(volume);
+
 					m_walkSound.play();
 					m_walkTimerSound.Restart();
 				}
@@ -473,6 +494,12 @@ namespace ratchet
 		
 		if (m_input.isJump && isGrounded())
 		{
+			float volume = m_jumpSound.getVolume();
+
+			volume = SceneManager::Get().GetSoundEffectsVolume();
+
+			m_jumpSound.setVolume(volume);
+
 			m_jumpSound.play();
 			m_isMoving = true;
 			changeY = true;
@@ -529,6 +556,12 @@ namespace ratchet
 			{
 				if (!m_isLanding)
 				{
+					float volume = m_landingSound.getVolume();
+
+					volume = SceneManager::Get().GetSoundEffectsVolume();
+
+					m_landingSound.setVolume(volume);
+
 					m_landingSound.play();
 					m_isLanding = true;
 				}

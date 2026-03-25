@@ -70,6 +70,10 @@ namespace ratchet
 		sf::Vector2f m_colliderScaleMultipier;
 		ColliderBase* m_collider = nullptr;
 
+		float m_objectSoundEffectVolume = 0.0f;
+
+		void SetSoundEffectsVolume(float& volume);
+
 
 		static std::vector<GameObject*> s_gameObjects;
 		static std::queue<GameObject*> s_gameObjectsToDestroy;
@@ -134,6 +138,7 @@ namespace ratchet
 
 		 //Destory functions
 		 void DestroyGameObject();
+		 void DestroyCollider();
 		 void RemoveGameObjectFromList();
 		 static void clearQueuedObjectsToDestroy();
 
