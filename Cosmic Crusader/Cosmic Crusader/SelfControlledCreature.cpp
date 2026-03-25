@@ -57,6 +57,34 @@ namespace ratchet
 			m_fireCooldown.Resume();
 		}
 	}
+
+	void SelfControlledCreature::Die()
+	{
+		if (m_shouldPlayDeathSound)
+			return;
+
+		m_isAttacking = false;
+
+		float volume = SceneManager::Get().GetSoundEffectsVolume();
+		m_deathSound.setVolume(volume);
+		m_deathSound.play();
+
+		m_shouldPlayDeathSound = true; 
+
+
+		GameObject::DestroyCollider();
+
+		// statistici
+		for (size_t i = 0; i < GameObject::s_gameObjects.size(); i++)
+		{
+			if (GameObject::s_gameObjects[i] == this)
+			{
+				SceneManager::Get().m_characters_destroyed_ID.push_back(m_objectId);
+				SceneManager::Get().m_characters_destroyed_index.push_back(i);
+				break;
+			}
+		}
+	}
 	void SelfControlledCreature::canJumpOver()
 	{
 		if (m_collider && !m_collider->m_skipRaycastThisFrame)
@@ -354,64 +382,34 @@ namespace ratchet
 	}
 	void SelfControlledCreature::update()
 	{
-		if (m_isDeath)
-		{
-			GameObject::DestroyCollider();
-			if (!m_deathSoundPlayed)
-			{
-				m_isAttacking = false;
-
-				float volume = m_deathFallSound.getVolume();
-				volume = SceneManager::Get().GetSoundEffectsVolume();
-				m_deathSound.setVolume(volume);
-
-				m_deathSound.play();
-				m_deathSoundPlayed = true;
-				for (size_t i = 0; i < GameObject::s_gameObjects.size(); i++)
-				{
-					if (GameObject::s_gameObjects[i] == this)
-					{
-						SceneManager::Get().m_characters_destroyed_ID.push_back(m_objectId);
-						SceneManager::Get().m_characters_destroyed_index.push_back(i);
-						break;
-					}
-				}
-			}
-
-			if (m_deathSound.getStatus() == sf::Sound::Stopped)
-			{
-				GameObject::DestroyGameObject();
-			}
-
-			return;
-		}
-
-		if (SceneManager::Get().m_isPaused)
-		{
-			m_fireCooldown.Freeze();
-		}
-		else if (!SceneManager::Get().m_isPaused)
-		{
-			m_fireCooldown.Resume();
-		}
 
 		if (!m_activeGameObject) return;
 
+		if (SceneManager::Get().m_isPaused)
+			m_fireCooldown.Freeze();
+		else
+			m_fireCooldown.Resume();
+
 		if (m_collider && !m_collider->m_skipRaycastThisFrame)
-		{
 			m_isGround = m_collider->performGroundRayCast(m_sprite);
-		}
 		else
 		{
 			m_isGround = false;
-			m_collider->m_skipRaycastThisFrame = false;
+			if (m_collider)
+				m_collider->m_skipRaycastThisFrame = false;
 		}
-
-		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
 
 		handleEvent();
 
-		Creature::update();
+
+		Creature::update(); 
+
+		if (m_isDeath && m_shouldPlayDeathSound &&
+			m_deathSound.getStatus() == sf::Sound::Stopped)
+		{
+			GameObject::DestroyGameObject();
+			return;
+		}
 	}
 
 	void SelfControlledCreature::updateMovement()
@@ -456,17 +454,28 @@ namespace ratchet
 			yVelocity = m_jumpImpulse;
 		}
 
-		m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
+		if (m_collider)
+		{
+			if (m_collider)
+			{
+				m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
+			}
+		}
 
-		auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-		m_sprite.setPosition(position);
 
-		// Sync sprite rotation with collider
-		m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-		m_sprite.setRotation(m_rotation);
+		if (m_collider)
+		{
+			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+			m_sprite.setPosition(position);
 
-		auto aiCharacterPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-		setPosition(aiCharacterPosition);
+			// Sync sprite rotation with collider
+			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+			m_sprite.setRotation(m_rotation);
+
+			auto aiCharacterPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+			setPosition(aiCharacterPosition);
+		}
+		
 	}
 	void SelfControlledCreature::detectTarget(Creature* target)
 	{

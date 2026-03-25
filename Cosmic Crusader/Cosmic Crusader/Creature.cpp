@@ -219,7 +219,9 @@ namespace ratchet
 	{
 		if (!m_activeGameObject) return;
 
+
 		checkCharacterGameOverTurned();
+		updateDie();
 
 		updateWeaponSelection();
 		updateMovement();
@@ -230,6 +232,7 @@ namespace ratchet
 		updateAnimations();
 		updateShooting();
 		updatePhysics();
+
 		
 	}
 
@@ -412,11 +415,15 @@ namespace ratchet
 
 
 			// Sync sprite position with collider
-			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
-			// Sync sprite rotation with collider
-			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-			m_sprite.setRotation(m_rotation);
+			if (m_collider)
+			{
+				auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+
+				// Sync sprite rotation with collider
+				m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+				m_sprite.setRotation(m_rotation);
+			}
 
 		}
 		else if (m_faction == Faction::TEAM_1)
@@ -511,11 +518,14 @@ namespace ratchet
 
 			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
 
-			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+			if (m_collider)
+			{
+				auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
-			// Sync sprite rotation with collider
-			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-			m_sprite.setRotation(m_rotation);
+				// Sync sprite rotation with collider
+				m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+				m_sprite.setRotation(m_rotation);
+			}
 		}
 	}
 	void Creature::updateJump()
@@ -691,6 +701,8 @@ namespace ratchet
 				{
 					SceneManager::Get().RestartLevel();
 					player->m_isDeath = false;
+					player->m_shouldPlayDeathSound = false;
+					player->m_isDeathFall = false;
 
 					std::vector<Bullet*> bulletsToDestroy;
 
@@ -746,11 +758,33 @@ namespace ratchet
 		}
 	}
 
+	void Creature::Die()
+	{
+
+	}
+
 	void Creature::PostCosntructFixup()
 	{
 		if (m_collider) {
 			m_collider->SetOwner(this); // now it's really Creature*
 		}
+	}
+
+	void Creature::updateDie()
+	{
+		if (m_isDeath)
+		{
+			if (auto* player = dynamic_cast<Player*>(this))
+			{
+				player->Die();
+			}
+			else if (auto* enemy = dynamic_cast<SelfControlledCreature*>(this))
+			{
+				enemy->Die();
+			}
+		}
+		
+		
 	}
 
 	void Creature::Start()
@@ -844,14 +878,14 @@ namespace ratchet
 		m_health -= damage;
 
 		std::cout << "Charcter has life remained : " << m_health << std::endl;
-
 		if (m_health <= 0.0f)
 		{
 			m_health = 0.0f;
 
-			m_isDeath = true;
-
-			std::cout << "Character is Death!" << std::endl;
+			if (!m_isDeath) 
+			{
+				m_isDeath = true;
+			}
 		}
 		else
 		{

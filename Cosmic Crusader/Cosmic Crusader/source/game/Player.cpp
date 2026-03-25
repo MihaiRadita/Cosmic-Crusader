@@ -34,6 +34,36 @@ namespace ratchet
 		Creature::Start();
 	}
 
+	void Player::Die()
+	{
+		if (m_shouldPlayDeathSound)
+		{
+			return;
+		}
+
+		if (!m_isDeathFall)
+		{
+			float volume = SceneManager::Get().GetSoundEffectsVolume();
+			m_deathSound.setVolume(volume);
+
+			if (m_isGround)
+			{
+				m_deathSound.play();
+				m_shouldPlayDeathSound = true;
+			}
+		}
+		else
+		{
+			float volume = SceneManager::Get().GetSoundEffectsVolume();
+			m_deathFallSound.setVolume(volume);
+
+			m_deathFallSound.play();
+
+			m_isDeathFall = false;
+			m_shouldPlayDeathSound = true;
+		}
+	}
+
 	void Player::handleEvent(sf::Event& event)
 	{
 		if (SceneManager::Get().m_isPaused)
@@ -394,24 +424,6 @@ namespace ratchet
 	void Player::update()
 	{
 
-		if (m_isDeath)
-		{
-			if (!m_isDeathFall)
-			{
-
-				float volume = m_deathSound.getVolume();
-				volume = SceneManager::Get().GetSoundEffectsVolume();
-				m_deathSound.setVolume(volume);
-
-				m_deathSound.play();
-
-			}
-		}
-		else
-		{
-			m_isDeathFall = false;
-		}
-	
 		float health = m_health;
 
 		if (!m_activeGameObject) return;
@@ -512,14 +524,21 @@ namespace ratchet
 
 		if (m_isDeath == false)
 		{
-			m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
+			if (m_collider)
+			{
+				m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
+			}
 		}
 
-		auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+		if (m_collider)
+		{
+			auto playerPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
-		setPosition(playerPosition);
+			setPosition(playerPosition);
 
-		TRACE_CHANNEL("PHYSICS", "[PLAYER] AFTER", " Velocity ", " X: ", m_collider->m_body->GetLinearVelocity().x, ", Y: ", m_collider->m_body->GetLinearVelocity().y);
+			TRACE_CHANNEL("PHYSICS", "[PLAYER] AFTER", " Velocity ", " X: ", m_collider->m_body->GetLinearVelocity().x, ", Y: ", m_collider->m_body->GetLinearVelocity().y);
+		}
+
 	}
 
 	void Player::updateRotation()

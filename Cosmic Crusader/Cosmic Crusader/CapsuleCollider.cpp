@@ -15,7 +15,7 @@ namespace ratchet
 	void CapsuleCollider::initVariables(sf::Sprite& sprite, const CapsuleColliderConfig& config)
 	{
 		
-		isColliderSetDestroy = false;
+		m_isColliderSetDestroy = false;
 		
 
 		m_JumpOverBottomRaycastOffsetX = config.m_JumpOverBottomRaycastOffsetX;

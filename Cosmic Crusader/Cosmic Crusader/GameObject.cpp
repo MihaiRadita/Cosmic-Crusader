@@ -308,7 +308,7 @@ namespace ratchet
 	{
 		if (m_collider)
 		{
-			m_collider->isColliderSetDestroy = true;
+			m_collider->m_isColliderSetDestroy = true;
 		}
 	}
 

@@ -37,6 +37,8 @@ namespace ratchet
 		void PostCosntructFixup() override;
 
 		void Start() override;
+
+		void Die() override;
 	
 
 		//Prints

@@ -38,6 +38,8 @@ namespace ratchet
 
 		void handleSelfCreatureEvent();
 
+		void Die() override;
+
 		bool m_isTargetDetected = false;
 		bool m_isTagetBehindCharacter = false;
 

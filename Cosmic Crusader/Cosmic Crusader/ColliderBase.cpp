@@ -6,6 +6,10 @@
 
 namespace ratchet
 {
+	bool ColliderBase::isColliderToDestroy()
+	{
+		return m_isColliderSetDestroy;
+	}
 	ColliderBase::ColliderBase(const ColliderBaseConfig& config)
 	{
 		m_body = nullptr;

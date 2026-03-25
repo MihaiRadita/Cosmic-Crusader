@@ -74,7 +74,7 @@ namespace ratchet
 
 		PhysicsLayer m_layer;
 
-		bool isColliderSetDestroy = false;
+		bool m_isColliderSetDestroy = false;
 
 		float m_massValue = 0.f;
 
@@ -99,6 +99,8 @@ namespace ratchet
 
 
 		float m_checkTopPlatformsDirectionX;
+
+		bool isColliderToDestroy();
 
 
 		GameObject* m_obj;

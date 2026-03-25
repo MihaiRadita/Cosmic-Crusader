@@ -43,6 +43,9 @@ namespace ratchet
 		bool m_isDeath = false;
 		bool m_isDeathFall = false;
 
+		bool m_shouldPlayDeathSound = false;
+
+		//target detect distance 
 		//target detect distance 
 		float m_targetMaxDistanceDetectionX;
 		float m_targetMaxDistanceDetectionY;
@@ -150,8 +153,12 @@ namespace ratchet
 
 		void checkCharacterGameOverTurned();
 
+		virtual void Die();
+
 
 		void PostCosntructFixup() override;
+
+		void updateDie();
 
 		void Start() override;
 

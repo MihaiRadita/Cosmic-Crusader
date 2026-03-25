@@ -40,13 +40,13 @@ namespace ratchet
 	void RectAngleCollider::initVariables(sf::Sprite& sprite, const RectAngleColliderConfig& config)
 	{
 
-		isColliderSetDestroy = false;
+		m_isColliderSetDestroy = false;
 
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
 		m_offset = b2Vec2(20.0f, 0.0f);
-
+		
 		m_scaleX = sprite.getScale().x;
 		m_scaleY = sprite.getScale().y;
 

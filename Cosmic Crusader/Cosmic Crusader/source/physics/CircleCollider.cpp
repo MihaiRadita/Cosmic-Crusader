@@ -13,7 +13,7 @@ namespace ratchet
 
 	void CircleCollider::initVariables(sf::Sprite& sprite, const CircleColliderConfig& config)
 	{
-		isColliderSetDestroy = false;
+		m_isColliderSetDestroy = false;
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
