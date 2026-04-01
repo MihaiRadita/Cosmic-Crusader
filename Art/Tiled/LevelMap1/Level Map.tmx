@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="21" nextobjectid="5203">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="22" nextobjectid="5207">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -56,6 +56,7 @@
  <tileset firstgid="67" source="New Game Button.tsx"/>
  <tileset firstgid="68" source="Continue Button.tsx"/>
  <tileset firstgid="69" source="Action Trigger.tsx"/>
+ <tileset firstgid="70" source="Enemy2.tsx"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
   <object id="3830" name="PathPoint" x="640" y="576">
    <point/>
@@ -62146,6 +62147,34 @@
     <property name="weaponsoundVolume" type="float" value="5"/>
    </properties>
   </object>
+  <object id="5205" name="Blaster" gid="33" x="16000" y="-768" width="95" height="95">
+   <properties>
+    <property name="Bullet" type="object" value="5206"/>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="ammo" type="int" value="51"/>
+    <property name="bulletIncrementation" type="int" value="5"/>
+    <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
+    <property name="characterStartPointShootingOffsetY" type="float" value="0.1"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="damage" type="int" value="5"/>
+    <property name="isWeaponAccesible" type="bool" value="true"/>
+    <property name="layer" value="Super Launcher Enemy"/>
+    <property name="movementType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="shootingOffsetAngle0X" type="float" value="0.75"/>
+    <property name="shootingOffsetAngle0Y" type="float" value="0.05"/>
+    <property name="startSpriteTexturePath" value="Textures/Objects/Weapons/Player/Blaster1.png"/>
+    <property name="weaponDamage" type="float" value="5"/>
+    <property name="weaponShootSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy Blaster Shoot.wav"/>
+    <property name="weaponSoundLoop" type="bool" value="false"/>
+    <property name="weaponType" type="int" value="4"/>
+    <property name="weaponsoundVolume" type="float" value="5"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="19" name="Check Points">
   <object id="5150" name="Check Point" type="Check Point Flag" gid="66" x="20032" y="-576" width="128" height="128">
@@ -62198,6 +62227,31 @@
    </properties>
   </object>
   <object id="5117" name="Blaster Bullet" gid="34" x="18465.7" y="-297.333" width="19" height="8">
+   <properties>
+    <property name="Faction" type="int" value="2"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bulletLifeLimit" type="float" value="1"/>
+    <property name="bulletMovementType" type="int" value="2"/>
+    <property name="bulletPoolIncrementation" type="int" value="5"/>
+    <property name="bulletScaleX" type="float" value="1"/>
+    <property name="bulletScaleY" type="float" value="1"/>
+    <property name="bulletSpeed" type="float" value="5"/>
+    <property name="bulletStartSpriteTexturePath" value="Textures/Objects/Weapons/Player/Bullet Blaster1.png"/>
+    <property name="colliderBulletAngularDamping" type="float" value="0"/>
+    <property name="colliderBulletDensity" type="float" value="0"/>
+    <property name="colliderBulletFixedRotation" type="bool" value="false"/>
+    <property name="colliderBulletFriction" type="float" value="0"/>
+    <property name="colliderBulletGravityScale" type="float" value="0"/>
+    <property name="colliderBulletIsSensor" type="bool" value="true"/>
+    <property name="colliderBulletLayer" type="int" value="5"/>
+    <property name="colliderBulletLinearDamping" type="float" value="0"/>
+    <property name="colliderBulletRestitution" type="float" value="0"/>
+    <property name="colliderBulletType" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="5206" name="Blaster Bullet" gid="34" x="16193.3" y="-808" width="19" height="8">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -62595,7 +62649,69 @@
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
    </properties>
   </object>
+  <object id="5204" gid="70" x="15680" y="-768" width="192" height="100">
+   <properties>
+    <property name="Faction" type="int" value="2"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="angleBase" type="float" value="45"/>
+    <property name="animationStateListMask" type="int" value="55"/>
+    <property name="bodyShoulderOffset" type="float" value="0.4"/>
+    <property name="characterAnglesMask" type="int" value="1"/>
+    <property name="colliderAngularDamping" type="float" value="0"/>
+    <property name="colliderBullet" type="bool" value="true"/>
+    <property name="colliderCheckFallingRiskRaycastEndOffsetY" type="float" value="1.8"/>
+    <property name="colliderCheckFallingRiskRaycastStartOffsetX" type="float" value="0.9"/>
+    <property name="colliderCheckFallingRiskRaycastStartOffsetY" type="float" value="0.05"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0"/>
+    <property name="colliderGravityScale" type="float" value="1"/>
+    <property name="colliderHeight" type="float" value="1.13"/>
+    <property name="colliderIsGroundRaycastOffset" type="float" value="0.02"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderJumpOverBottomRaycastOffsetX" type="float" value="1.1"/>
+    <property name="colliderJumpOverBottomRaycastOffsetY" type="float" value="0.05"/>
+    <property name="colliderJumpOverTopRaycastOffsetX" type="float" value="1.1"/>
+    <property name="colliderJumpOverTopRaycastOffsetY" type="float" value="0.05"/>
+    <property name="colliderLayer" type="int" value="2"/>
+    <property name="colliderLinearDamping" type="float" value="0"/>
+    <property name="colliderMassValue" type="float" value="1500"/>
+    <property name="colliderRadius" type="float" value="0.25"/>
+    <property name="colliderRestitution" type="float" value="0"/>
+    <property name="colliderType" type="int" value="2"/>
+    <property name="creatureDeathSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Die.wav"/>
+    <property name="creatureHurtSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Hurt.wav"/>
+    <property name="creatureWalkSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Walk.wav"/>
+    <property name="currentAngle" type="int" value="0"/>
+    <property name="currentAnimationState" type="int" value="0"/>
+    <property name="currentState" type="int" value="0"/>
+    <property name="currentWeaponIndex" type="int" value="0"/>
+    <property name="currentWeaponType" type="int" value="4"/>
+    <property name="fallingSpeed" type="float" value="7000"/>
+    <property name="fireRate" type="float" value="0.7"/>
+    <property name="health" type="float" value="10"/>
+    <property name="initialWeapon_0" type="object" value="5205"/>
+    <property name="jumpImpulse" type="float" value="-5"/>
+    <property name="movementType" type="int" value="1"/>
+    <property name="movingSpeed" type="float" value="5"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="recoilTime" type="float" value="0.1"/>
+    <property name="spriteTexturePath" value="Textures/EnemiesTextures/Enemy1Textures/"/>
+    <property name="startSpriteTexturePath" value="Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Enemy1Blaster/Angle0/Aim/Idle1.png"/>
+    <property name="targetMaxDistanceAttackX" type="float" value="2"/>
+    <property name="targetMaxDistanceAttackY" type="float" value="1.5"/>
+    <property name="targetMaxDistanceDetectionX" type="float" value="3.5"/>
+    <property name="targetMaxDistanceDetectionY" type="float" value="1.5"/>
+    <property name="targetMaxDistanceLoseX" type="float" value="3.5"/>
+    <property name="targetMaxDistanceLoseY" type="float" value="3.5"/>
+    <property name="usableWeaponCheckListMask" type="int" value="16"/>
+    <property name="usableWeaponTypeListMask" type="int" value="16"/>
+    <property name="weaponTypeListMask" type="int" value="16"/>
+   </properties>
+  </object>
  </objectgroup>
+ <objectgroup id="21" name="Object Layer 15"/>
  <objectgroup id="13" name="Player">
   <object id="5110" name="Player" gid="35" x="17280" y="-256" width="128" height="128">
    <properties>
