@@ -102,7 +102,7 @@ namespace ratchet
 
 		bool isColliderToDestroy();
 
-
+		short m_userDataName;
 		GameObject* m_obj;
 
 

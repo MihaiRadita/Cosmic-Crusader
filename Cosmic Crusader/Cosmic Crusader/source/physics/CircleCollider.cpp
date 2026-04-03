@@ -49,9 +49,9 @@ namespace ratchet
 		m_userDataName = static_cast<short>(config.m_layer);
 
 		// Circle Shape
-		m_shape.m_radius = getGlobalRadius();
-		m_shape.m_p.Set(m_origin.x, m_origin.y);
-		m_fixtureDef.shape = &m_shape;
+		m_circleShape.m_radius = getGlobalRadius();
+		m_circleShape.m_p.Set(m_origin.x, m_origin.y);
+		m_fixtureDef.shape = &m_circleShape;
 		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
 		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 		m_body->CreateFixture(&m_fixtureDef);
@@ -90,6 +90,56 @@ namespace ratchet
 		target.draw(colliderOutline);
 	}
 
+	void CircleCollider::printBodyPositionRotation()
+	{
+		TRACE_CHANNEL("COLLISION",getCircleColliderPosition().x, " x axis ",getCircleColliderPosition().y, " y axis ");
+		TRACE_CHANNEL("COLLISION", m_body->GetAngle(), " degrees ");
+	}
+
+	void CircleCollider::printSpriteColliderPosition(sf::Sprite& sprite, int bodyState)
+	{
+		if (!m_body)
+		{
+			return;
+		}
+
+		if (bodyState == STATIC)
+		{
+			TRACE_CHANNEL("COLLISION", "Static position is ", m_body->GetTransform().p.x, " , ", m_body->GetTransform().p.y, " VS Sprite position ",
+				sprite.getPosition().x, " , ", sprite.getPosition().y);
+		}
+		else if (bodyState == DYNAMIC)
+		{
+			TRACE_CHANNEL("COLLISION", "Dynamic position is ", m_body->GetTransform().p.x, " , ", m_body->GetTransform().p.y, " VS Sprite position ",
+				sprite.getPosition().x, " , ", sprite.getPosition().y);
+		}
+	}
+
+	void CircleCollider::debugRender(sf::RenderTarget& target)
+	{
+		if (!m_body)
+			return;
+
+		b2Vec2 bodyPos = m_body->GetPosition();
+
+		b2Vec2 offset = m_circleShape.m_p;
+
+		float radius = m_circleShape.m_radius;
+		float x = bodyPos.x + offset.x;
+		float y = bodyPos.y + offset.y;
+
+		sf::CircleShape circle(radius);
+		circle.setFillColor(sf::Color::Transparent);
+		circle.setOutlineColor(sf::Color::Green);
+		circle.setOutlineThickness(0.02f);
+
+		circle.setOrigin(radius, radius);
+
+		circle.setPosition(x, y);
+
+		target.draw(circle);
+	}
+
 	CircleCollider::~CircleCollider()
 	{
 		if (s_physicsWorld)
@@ -122,6 +172,15 @@ namespace ratchet
 		return m_fixtureDef;;
 	}
 
+
+	b2Vec2 CircleCollider::getCircleColliderPosition()
+	{
+		if (!m_body)
+		{
+			return b2Vec2_zero;
+		}
+		return m_circleShape.m_p;
+	}
 
 	void CircleCollider::setColliderPosition(sf::Sprite& sprite)
 	{

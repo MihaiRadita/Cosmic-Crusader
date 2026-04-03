@@ -40,6 +40,8 @@ namespace ratchet
 		bool m_activeObject;
 		bool m_canJumpOver;
 
+		std::string m_objectLayerName;
+
 		//Physics
 		ColliderBaseConfig* m_colliderConfig = nullptr;
 

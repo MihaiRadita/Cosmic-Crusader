@@ -429,103 +429,114 @@ namespace ratchet
 		else if (m_faction == Faction::TEAM_1)
 		{
 
-			if (m_input.x != 0.0f)
+			if (m_movementType == MovementType::GROUND)
 			{
-				m_isMoving = true;
-				if (m_movementType == MovementType::GROUND)
+				if (m_input.x != 0.0f)
 				{
-					if (isGrounded())
+					m_isMoving = true;
+					if (m_movementType == MovementType::GROUND)
 					{
-						m_isFallingWithoutJumping = false;
-						if (m_isMoving)
+						if (isGrounded())
 						{
-							if (m_currentAnimationState != MOVING)
+							m_isFallingWithoutJumping = false;
+							if (m_isMoving)
 							{
-								m_currentAnimationState = MOVING;
-								switchAnimation();
+								if (m_currentAnimationState != MOVING)
+								{
+									m_currentAnimationState = MOVING;
+									switchAnimation();
+								}
 							}
 						}
 					}
 				}
-			}
 
-			if (!isGrounded())
-			{
-				if (m_currentAnimationState != JUMP && m_currentAnimationState != JUMP_RUNNING)
+				if (!isGrounded())
 				{
-					if (m_currentAnimationState != FALL)
+					if (m_currentAnimationState != JUMP && m_currentAnimationState != JUMP_RUNNING)
 					{
-						m_currentAnimationState = FALL;
-						switchAnimation();
-					}
-				}
-			}
-
-			if (m_input.isJump && isGrounded() && m_isMoving == true)
-			{
-				if (m_currentAnimationState == MOVING)
-				{
-					if (m_currentAnimationState != JUMP)
-					{
-						m_currentAnimationState = JUMP;
-						switchAnimation();
-					}
-				}
-			}
-
-			if (isNoControlActive() && isGrounded() && m_isMoving == false && !m_isDeath)
-			{
-#ifdef IS_RATCHET_DEBUG
-				TRACE_CHANNEL("ANIMATION", "Idle");
-				TRACE_CHANNEL("ANIMATION", m_currentAnimationState);
-#endif			
-				m_isMoving = false;
-				m_currentAnimationState = ANIMATION_STATE::IDLE;
-				switchAnimation();
-			}
-
-			if (m_currentWeaponType != Weapon::TYPE::None)
-			{
-				bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
-				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_recoilTime;
-
-				if (justPassedRecoilTime)
-				{
-					m_currentCharacterState = WeaponAnimation::STATE::Aim;
-					isOnRecoil = false;
-				}
-
-				if (m_input.m_isFiring)
-				{
-					if (isOnRecoil == false)
-					{
-						const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
-						const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate;
-						if (isReadyToFire)
+						if (m_currentAnimationState != FALL)
 						{
-							m_fireCooldown.m_clock.restart();
-							m_currentCharacterState = WeaponAnimation::STATE::Recoil;
-#ifdef IS_RATCHET_DEBUG
-							TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");
-#endif	
-							m_mustSpawnBullet = true;
-
-							m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
+							m_currentAnimationState = FALL;
+							switchAnimation();
 						}
 					}
 				}
+
+				if (m_input.isJump && isGrounded() && m_isMoving == true)
+				{
+					if (m_currentAnimationState == MOVING)
+					{
+						if (m_currentAnimationState != JUMP)
+						{
+							m_currentAnimationState = JUMP;
+							switchAnimation();
+						}
+					}
+				}
+
+				if (isNoControlActive() && isGrounded() && m_isMoving == false && !m_isDeath)
+				{
+#ifdef IS_RATCHET_DEBUG
+					TRACE_CHANNEL("ANIMATION", "Idle");
+					TRACE_CHANNEL("ANIMATION", m_currentAnimationState);
+#endif			
+					m_isMoving = false;
+					m_currentAnimationState = ANIMATION_STATE::IDLE;
+					switchAnimation();
+				}
+
+				if (m_currentWeaponType != Weapon::TYPE::None)
+				{
+					bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
+					const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_recoilTime;
+
+					if (justPassedRecoilTime)
+					{
+						m_currentCharacterState = WeaponAnimation::STATE::Aim;
+						isOnRecoil = false;
+					}
+
+					if (m_input.m_isFiring)
+					{
+						if (isOnRecoil && m_isDeath)
+						{
+							isOnRecoil = false;
+							return;
+						}
+
+						if (isOnRecoil == false)
+						{
+							const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
+							const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate;
+							if (isReadyToFire)
+							{
+								m_fireCooldown.m_clock.restart();
+								m_currentCharacterState = WeaponAnimation::STATE::Recoil;
+#ifdef IS_RATCHET_DEBUG
+								TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");
+#endif	
+								m_mustSpawnBullet = true;
+
+								m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
+							}
+						}
+					}
+				}
+
+				m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
+
+				if (m_collider)
+				{
+					auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+
+					// Sync sprite rotation with collider
+					m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+					m_sprite.setRotation(m_rotation);
+				}
 			}
 
-			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
-
-			if (m_collider)
-			{
-				auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-
-				// Sync sprite rotation with collider
-				m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
-				m_sprite.setRotation(m_rotation);
-			}
+			
 		}
 	}
 	void Creature::updateJump()

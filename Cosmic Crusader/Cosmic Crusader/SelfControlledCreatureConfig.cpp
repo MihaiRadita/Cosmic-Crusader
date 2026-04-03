@@ -31,6 +31,9 @@ namespace ratchet
 		
 		GameObjectConfig::deserialise(jsonFile);
 
+
+		m_objectLayerName = jsonFile["name"];
+
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
@@ -50,8 +53,24 @@ namespace ratchet
 		startSpriteTexturePath = "";
 		startSpriteTexturePathAddition = "";
 
+		
+
+
+		std::string name = jsonFile["name"];
+
+		if (name == "Enemy")
+		{
+			m_colliderConfig = new CapsuleColliderConfig();
+		}
+		else if (name == "Enemy2")
+		{
+			m_colliderConfig = new CircleColliderConfig();
+		}
+
 		// Custom Properties
-		m_colliderConfig = new CapsuleColliderConfig();
+
+		
+
 
 		for (const auto& jsonProperty : jsonFile["properties"])
 		{
@@ -62,6 +81,11 @@ namespace ratchet
 			if (propertyName == "Faction")
 			{
 				m_Faction = static_cast<Faction>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "enemyType")
+			{
+				m_enemyType = static_cast<EnemyType>(propertyValue.get<int>());
 			}
 
 			if (propertyName == "objectType")
@@ -233,6 +257,10 @@ namespace ratchet
 					if (auto* capsule = dynamic_cast<CapsuleColliderConfig*>(m_colliderConfig))
 					{
 						capsule->m_radius = propertyValue.get<float>();
+					}
+					else if (auto* circleConfig = dynamic_cast<CircleColliderConfig*>(m_colliderConfig))
+					{
+						circleConfig->m_radius = propertyValue.get<float>();
 					}
 				}
 			}

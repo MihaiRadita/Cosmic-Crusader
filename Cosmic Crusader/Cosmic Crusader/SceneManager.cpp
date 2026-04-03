@@ -205,8 +205,7 @@ namespace ratchet
 
 	void SceneManager::ClearDestroyedCharactersLists()
 	{
-		m_characters_destroyed_ID.clear();
-		m_characters_destroyed_index.clear();
+		m_characters_destroyedID_index.clear();
 	}
 
 	void SceneManager::SetWindowResolution(const sf::Vector2u& newResolution)
@@ -348,95 +347,88 @@ namespace ratchet
 						player->RestartObjectFeatures();
 					}
 
-
 					if (enemy && !enemy->m_isDeath)
 					{
 						enemy->RestartObjectFeatures();
 					}
-					else if (!m_characters_destroyed_ID.empty())
+				}
+
+				if(!m_characters_destroyedID_index.empty())
+				{
+					const auto& sceneFiles = SceneManager::Get().GetSceneFiles();
+					std::string sceneName = SceneManager::Get().GetSceneFiles()[SceneManager::Get().GetCurrentScene()];
+					const auto& allScenes = SceneManager::Get().GetAllScenesFile();
+
+					if (sceneName == "Main Menu")
 					{
+						return;
+					}
+
+					if (!allScenes.contains("scenes")) {
+						std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+						return;
+					}
+
+					auto& scenesNode = allScenes["scenes"];
+					if (!scenesNode.contains(sceneName)) {
+						std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+						return;
+					}
+
+					auto& sceneJson = scenesNode[sceneName];
+
+					if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
+						std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+						return;
+					}
+
+					for (auto& layer : sceneJson["layers"])
+					{
+						const auto& validLayer = layer.contains("objects");
+						if (!validLayer) continue;
+
+						const auto& layerName = layer["name"].get<std::string>();
+
+						if (layerName == "Enemies")
 						{
-							const auto& sceneFiles = SceneManager::Get().GetSceneFiles();
-							std::string sceneName = SceneManager::Get().GetSceneFiles()[SceneManager::Get().GetCurrentScene()];
-							const auto& allScenes = SceneManager::Get().GetAllScenesFile();
-
-							if (sceneName == "Main Menu")
+							for (auto& obj : layer["objects"])
 							{
-								return;
-							}
+								std::string objName = obj["name"];
 
-							if (!allScenes.contains("scenes")) {
-								std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
-								return;
-							}
-
-							auto& scenesNode = allScenes["scenes"];
-							if (!scenesNode.contains(sceneName)) {
-								std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
-								return;
-							}
-
-							auto& sceneJson = scenesNode[sceneName];
-
-							if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
-								std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
-								return;
-							}
-
-							for (auto& layer : sceneJson["layers"])
-							{
-								const auto& validLayer = layer.contains("objects");
-								if (!validLayer) continue;
-
-								const auto& layerName = layer["name"].get<std::string>();
-
-								if (layerName == "Enemies")
+								if (objName == "Enemy" || objName =="Enemy2")
 								{
-									for (auto& obj : layer["objects"])
+									const auto& enemyID = obj["id"];
+
+									for (auto& detryedCharacters : m_characters_destroyedID_index)
 									{
-										const auto& objName = obj["name"];
-
-										if (objName == "Enemy")
+										if (enemyID == detryedCharacters.first)
 										{
-											const auto& enemyID = obj["id"];
+											auto& characterIndex = detryedCharacters.second;
 
-											for (auto& destroyedID : m_characters_destroyed_ID)
+											auto config = SelfControlledCreatureConfig();
+											auto* configPtr = &config;
+
+											if (config.deserialise(obj))
 											{
-												if (enemyID == destroyedID)
+												GameObject::s_gameObjects.insert(GameObject::s_gameObjects.begin() + characterIndex,
+													new SelfControlledCreature(config));
+
+												if (auto* enemy1 = dynamic_cast<SelfControlledCreature*>(GameObject::s_gameObjects[characterIndex]))
 												{
-													auto config = SelfControlledCreatureConfig();
-													auto* configPtr = &config;
-
-													if (config.deserialise(obj))
+													if (enemy1->m_objectId == enemyID)
 													{
-														for (auto& index : m_characters_destroyed_index)
-														{
-															for (int i = 0; i < GameObject::s_gameObjects.size(); i++)
-															{
-																if (i == index)
-																{
-																	GameObject::s_gameObjects.insert(GameObject::s_gameObjects.begin() + i,
-																									 new SelfControlledCreature(config));
-
-																	if (auto* enemy1 = dynamic_cast<SelfControlledCreature*>(GameObject::s_gameObjects[index]))
-																	{
-																		if (enemy1->m_objectId == enemyID)
-																		{
-																			enemy1->Start();
-																			enemy1->setDebugDraw(true);
-																		}
-																	}
-																}
-															}
-														}
+														enemy1->Start();
+														enemy1->setDebugDraw(true);
 													}
+
 												}
 											}
+											break;
 										}
 									}
-									SceneManager::Get().ClearDestroyedCharactersLists();
 								}
 							}
+							SceneManager::Get().ClearDestroyedCharactersLists();
 						}
 					}
 				}

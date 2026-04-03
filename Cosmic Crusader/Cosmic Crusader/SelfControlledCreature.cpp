@@ -16,7 +16,10 @@ namespace ratchet
 		m_targetMaxDistanceAttackX = config.m_targetMaxDistanceAttackX;
 		m_targetMaxDistanceAttackY = config.m_targetMaxDistanceAttackY;
 
+		m_enemyType = config.m_enemyType;
 		m_objectId = config.m_objectID;
+
+		m_objectLayerName = config.m_objectLayerName;
 	}
 	SelfControlledCreature::~SelfControlledCreature()
 	{
@@ -74,13 +77,11 @@ namespace ratchet
 
 		GameObject::DestroyCollider();
 
-		// statistici
 		for (size_t i = 0; i < GameObject::s_gameObjects.size(); i++)
 		{
 			if (GameObject::s_gameObjects[i] == this)
 			{
-				SceneManager::Get().m_characters_destroyed_ID.push_back(m_objectId);
-				SceneManager::Get().m_characters_destroyed_index.push_back(i);
+				SceneManager::Get().m_characters_destroyedID_index.insert({ m_objectId, i });
 				break;
 			}
 		}
@@ -191,11 +192,12 @@ namespace ratchet
 			{
 				for (auto& obj : layer["objects"])
 				{
-					const auto& objName = obj["name"];
+					std::string name = obj["name"];
 
-					if (objName == "Enemy")
+
+					if (name == m_objectLayerName)
 					{
-						const auto& objID = obj["id"];
+						int objID = obj["id"];
 
 						if (objID == m_objectId)
 						{
@@ -220,10 +222,9 @@ namespace ratchet
 
 									setPosition(sf::Vector2f(config.position.x, config.position.y));
 								}
-
 							}
-
 						}
+						break;
 					}
 				}
 			}

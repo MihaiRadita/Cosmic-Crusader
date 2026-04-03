@@ -175,7 +175,10 @@ namespace ratchet
 		std::map<SceneType, std::string> GetSceneFiles();
 
 		std::vector<int>m_characters_destroyed_index;
+
 		std::vector<int>m_characters_destroyed_ID;
+		
+		std::map<int, int>m_characters_destroyedID_index;
 
 		nlohmann::json GetAllScenesFile();
 

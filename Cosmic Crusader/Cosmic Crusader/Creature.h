@@ -213,10 +213,6 @@ namespace ratchet
 		std::vector <Weapon::TYPE> m_weaponTypeList;
 		std::map<Weapon::TYPE, bool> m_usableWeaponTypeList;
 
-
-
-
-
 		 WeaponAnimation::ANGLE m_currentCharacterAngle;
 		 WeaponAnimation::STATE m_currentCharacterState;
 		 std::vector<WeaponAnimation::ANGLE> m_characterAngles;

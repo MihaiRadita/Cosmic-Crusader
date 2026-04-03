@@ -10,6 +10,9 @@
 
 namespace ratchet
 {
+
+	enum class EnemyType{None =0 ,Ground , Flying};
+
 	struct SelfControlledCreatureConfig : public CreatureConfig
 	{
 
@@ -27,6 +30,9 @@ namespace ratchet
 		float m_targetMaxDistanceAttackX;
 		float m_targetMaxDistanceAttackY;
 
+		EnemyType m_enemyType;
+
+		std::string m_objectLayerName;
 
 		//Constructor
 		SelfControlledCreatureConfig();

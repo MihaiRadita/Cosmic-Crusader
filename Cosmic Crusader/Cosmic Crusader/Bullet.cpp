@@ -144,13 +144,14 @@ namespace ratchet
 	{
 		if (isActive() == false) return;
 
-		short* layerPTr = reinterpret_cast<short*> (obj->m_collider->m_fixtureDef.userData.pointer);
 
-		if (layerPTr && *layerPTr == static_cast<short>(PhysicsLayer::Platforms))
+		short layer = obj->m_collider->m_userDataName;
+
+		if (layer == static_cast<short>(PhysicsLayer::Platforms))
 		{
 			Weapon::releaseBullet(this);
 		}
-		else if (layerPTr && *layerPTr == static_cast<short>(PhysicsLayer::Creature))
+		else if (layer == static_cast<short>(PhysicsLayer::Creature))
 		{
 			if (obj->m_faction != this->m_faction)
 			{

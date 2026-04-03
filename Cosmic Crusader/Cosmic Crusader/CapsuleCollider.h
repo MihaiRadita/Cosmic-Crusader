@@ -43,8 +43,6 @@ namespace ratchet
 
 		void RestartColliderFeatures(sf::Sprite& sprite, const CapsuleColliderConfig& config);
 
-		short m_userDataName;
-
 #ifdef IS_RATCHET_DEBUG
 		void printBodyPositionRotation() override;
 		void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState) override;

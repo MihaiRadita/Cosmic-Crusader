@@ -42,7 +42,6 @@ namespace ratchet
 		b2FixtureDef* getFixtureDef();
 		b2Vec2 getOffset();
 		b2Vec2 getColliderPosition();
-		short m_userDataName;
 
 		//Checks
 #ifdef IS_RATCHET_DEBUG

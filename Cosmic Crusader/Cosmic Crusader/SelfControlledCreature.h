@@ -32,18 +32,22 @@ namespace ratchet
 		bool m_canJumpOver = false;
 		bool m_isFallingRisk = false;
 
+		EnemyType m_enemyType;
+
 
 		//Check Attack Target Function
 		void checkTargetToAttack(Creature* target);
 
 		void handleSelfCreatureEvent();
-
+		
 		void Die() override;
 
 		bool m_isTargetDetected = false;
 		bool m_isTagetBehindCharacter = false;
 
 		bool m_waitTostartAttack = false;
+
+		std::string m_objectLayerName;
 
 		void canJumpOver();
 		void isFallingRisk();

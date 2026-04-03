@@ -19,10 +19,10 @@ namespace ratchet
 		b2FixtureDef m_fixtureDef;
 		b2BodyDef m_bodyDef;
 		b2CircleShape m_circleShape;
-		b2Body* m_body = nullptr;
+		//b2Body* m_body = nullptr;
 		b2Vec2 m_origin;
 
-		short m_userDataName;
+		//short m_userDataName;
 		b2CircleShape m_shape;
 
 	public:
@@ -32,6 +32,13 @@ namespace ratchet
 		void initVariables(sf::Sprite& sprite, const CircleColliderConfig& config);
 
 		void drawColliderCenterBased(sf::RenderTarget& target) override;
+
+
+#ifdef IS_RATCHET_DEBUG
+		void printBodyPositionRotation() override;
+		void printSpriteColliderPosition(sf::Sprite& sprite, int bodyState) override;
+		void debugRender(sf::RenderTarget& target) override;
+#endif
 
 		//Destructors
 		~CircleCollider() override;
@@ -43,6 +50,8 @@ namespace ratchet
 		b2FixtureDef getFixtureDef();
 		float getLocalRadius() const { return m_radius; }
 		float getGlobalRadius() const { return m_radius * m_scaleX; }
+
+		b2Vec2 getCircleColliderPosition();
 
 		//Setters
 		void setColliderPosition(sf::Sprite& sprite);

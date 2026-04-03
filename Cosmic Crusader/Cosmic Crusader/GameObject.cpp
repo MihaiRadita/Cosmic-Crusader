@@ -98,6 +98,7 @@ namespace ratchet
 
 		m_objectSoundEffectVolume = SceneManager::Get().m_soundEffectsVolume;
 
+
 		//Sprites and Terxtures
 
 		if (m_spriteTexture.loadFromFile(m_startSpritePath) == false)

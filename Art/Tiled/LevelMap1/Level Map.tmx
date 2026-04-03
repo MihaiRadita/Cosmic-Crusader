@@ -62165,8 +62165,8 @@
     <property name="objectType" type="int" value="1"/>
     <property name="scaleX" type="float" value="1"/>
     <property name="scaleY" type="float" value="1"/>
-    <property name="shootingOffsetAngle0X" type="float" value="0.75"/>
-    <property name="shootingOffsetAngle0Y" type="float" value="0.05"/>
+    <property name="shootingOffsetAngle0X" type="float" value="1.7"/>
+    <property name="shootingOffsetAngle0Y" type="float" value="0.9"/>
     <property name="startSpriteTexturePath" value="Textures/Objects/Weapons/Player/Blaster1.png"/>
     <property name="weaponDamage" type="float" value="5"/>
     <property name="weaponShootSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy Blaster Shoot.wav"/>
@@ -62319,6 +62319,7 @@
     <property name="currentState" type="int" value="0"/>
     <property name="currentWeaponIndex" type="int" value="0"/>
     <property name="currentWeaponType" type="int" value="4"/>
+    <property name="enemyType" type="int" value="1"/>
     <property name="fallingSpeed" type="float" value="7000"/>
     <property name="fireRate" type="float" value="0.7"/>
     <property name="health" type="float" value="10"/>
@@ -62330,6 +62331,57 @@
     <property name="recoilTime" type="float" value="0.1"/>
     <property name="spriteTexturePath" value="Textures/EnemiesTextures/Enemy1Textures/"/>
     <property name="startSpriteTexturePath" value="Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Enemy1Blaster/Angle0/Aim/Idle1.png"/>
+    <property name="targetMaxDistanceAttackX" type="float" value="2"/>
+    <property name="targetMaxDistanceAttackY" type="float" value="1.5"/>
+    <property name="targetMaxDistanceDetectionX" type="float" value="3.5"/>
+    <property name="targetMaxDistanceDetectionY" type="float" value="1.5"/>
+    <property name="targetMaxDistanceLoseX" type="float" value="3.5"/>
+    <property name="targetMaxDistanceLoseY" type="float" value="3.5"/>
+    <property name="usableWeaponCheckListMask" type="int" value="16"/>
+    <property name="usableWeaponTypeListMask" type="int" value="16"/>
+    <property name="weaponTypeListMask" type="int" value="16"/>
+   </properties>
+  </object>
+  <object id="5204" name="Enemy2" gid="70" x="15680" y="-768" width="192" height="100">
+   <properties>
+    <property name="Faction" type="int" value="2"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="angleBase" type="float" value="45"/>
+    <property name="animationStateListMask" type="int" value="3"/>
+    <property name="bodyShoulderOffset" type="float" value="0.4"/>
+    <property name="characterAnglesMask" type="int" value="1"/>
+    <property name="colliderAngularDamping" type="float" value="0"/>
+    <property name="colliderBullet" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0"/>
+    <property name="colliderGravityScale" type="float" value="0"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="2"/>
+    <property name="colliderLinearDamping" type="float" value="0"/>
+    <property name="colliderMassValue" type="float" value="1500"/>
+    <property name="colliderRadius" type="float" value="0.5"/>
+    <property name="colliderRestitution" type="float" value="0"/>
+    <property name="colliderType" type="int" value="2"/>
+    <property name="creatureDeathSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Die.wav"/>
+    <property name="creatureHurtSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Hurt.wav"/>
+    <property name="creatureWalkSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Walk.wav"/>
+    <property name="currentAngle" type="int" value="0"/>
+    <property name="currentAnimationState" type="int" value="0"/>
+    <property name="currentState" type="int" value="0"/>
+    <property name="currentWeaponIndex" type="int" value="0"/>
+    <property name="currentWeaponType" type="int" value="4"/>
+    <property name="enemyType" type="int" value="2"/>
+    <property name="fireRate" type="float" value="0.7"/>
+    <property name="health" type="float" value="10"/>
+    <property name="initialWeapon_0" type="object" value="5205"/>
+    <property name="movementType" type="int" value="2"/>
+    <property name="movingSpeed" type="float" value="5"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="recoilTime" type="float" value="0.1"/>
+    <property name="spriteTexturePath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy2Textures/IdleTextures/Enemy2Blaster/Angle0/Aim/Idle1.png"/>
+    <property name="startSpriteTexturePath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy2Textures/IdleTextures/Enemy2Blaster/Angle0/Aim/Idle1.png"/>
     <property name="targetMaxDistanceAttackX" type="float" value="2"/>
     <property name="targetMaxDistanceAttackY" type="float" value="1.5"/>
     <property name="targetMaxDistanceDetectionX" type="float" value="3.5"/>
@@ -62647,67 +62699,6 @@
     <property name="scaleX" type="float" value="1"/>
     <property name="scaleY" type="float" value="1"/>
     <property name="startSpriteTexturePath" value="Textures/Shapes/Action Trigger.png"/>
-   </properties>
-  </object>
-  <object id="5204" gid="70" x="15680" y="-768" width="192" height="100">
-   <properties>
-    <property name="Faction" type="int" value="2"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="angleBase" type="float" value="45"/>
-    <property name="animationStateListMask" type="int" value="55"/>
-    <property name="bodyShoulderOffset" type="float" value="0.4"/>
-    <property name="characterAnglesMask" type="int" value="1"/>
-    <property name="colliderAngularDamping" type="float" value="0"/>
-    <property name="colliderBullet" type="bool" value="true"/>
-    <property name="colliderCheckFallingRiskRaycastEndOffsetY" type="float" value="1.8"/>
-    <property name="colliderCheckFallingRiskRaycastStartOffsetX" type="float" value="0.9"/>
-    <property name="colliderCheckFallingRiskRaycastStartOffsetY" type="float" value="0.05"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0"/>
-    <property name="colliderGravityScale" type="float" value="1"/>
-    <property name="colliderHeight" type="float" value="1.13"/>
-    <property name="colliderIsGroundRaycastOffset" type="float" value="0.02"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderJumpOverBottomRaycastOffsetX" type="float" value="1.1"/>
-    <property name="colliderJumpOverBottomRaycastOffsetY" type="float" value="0.05"/>
-    <property name="colliderJumpOverTopRaycastOffsetX" type="float" value="1.1"/>
-    <property name="colliderJumpOverTopRaycastOffsetY" type="float" value="0.05"/>
-    <property name="colliderLayer" type="int" value="2"/>
-    <property name="colliderLinearDamping" type="float" value="0"/>
-    <property name="colliderMassValue" type="float" value="1500"/>
-    <property name="colliderRadius" type="float" value="0.25"/>
-    <property name="colliderRestitution" type="float" value="0"/>
-    <property name="colliderType" type="int" value="2"/>
-    <property name="creatureDeathSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Die.wav"/>
-    <property name="creatureHurtSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Hurt.wav"/>
-    <property name="creatureWalkSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy 1 Walk.wav"/>
-    <property name="currentAngle" type="int" value="0"/>
-    <property name="currentAnimationState" type="int" value="0"/>
-    <property name="currentState" type="int" value="0"/>
-    <property name="currentWeaponIndex" type="int" value="0"/>
-    <property name="currentWeaponType" type="int" value="4"/>
-    <property name="fallingSpeed" type="float" value="7000"/>
-    <property name="fireRate" type="float" value="0.7"/>
-    <property name="health" type="float" value="10"/>
-    <property name="initialWeapon_0" type="object" value="5205"/>
-    <property name="jumpImpulse" type="float" value="-5"/>
-    <property name="movementType" type="int" value="1"/>
-    <property name="movingSpeed" type="float" value="5"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="recoilTime" type="float" value="0.1"/>
-    <property name="spriteTexturePath" value="Textures/EnemiesTextures/Enemy1Textures/"/>
-    <property name="startSpriteTexturePath" value="Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Enemy1Blaster/Angle0/Aim/Idle1.png"/>
-    <property name="targetMaxDistanceAttackX" type="float" value="2"/>
-    <property name="targetMaxDistanceAttackY" type="float" value="1.5"/>
-    <property name="targetMaxDistanceDetectionX" type="float" value="3.5"/>
-    <property name="targetMaxDistanceDetectionY" type="float" value="1.5"/>
-    <property name="targetMaxDistanceLoseX" type="float" value="3.5"/>
-    <property name="targetMaxDistanceLoseY" type="float" value="3.5"/>
-    <property name="usableWeaponCheckListMask" type="int" value="16"/>
-    <property name="usableWeaponTypeListMask" type="int" value="16"/>
-    <property name="weaponTypeListMask" type="int" value="16"/>
    </properties>
   </object>
  </objectgroup>
