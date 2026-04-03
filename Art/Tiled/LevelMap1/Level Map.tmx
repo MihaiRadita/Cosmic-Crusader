@@ -62286,7 +62286,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="angleBase" type="float" value="45"/>
-    <property name="animationStateListMask" type="int" value="55"/>
+    <property name="animationStateListMask" type="int" value="63"/>
     <property name="bodyShoulderOffset" type="float" value="0.4"/>
     <property name="characterAnglesMask" type="int" value="1"/>
     <property name="colliderAngularDamping" type="float" value="0"/>

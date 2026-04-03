@@ -63,8 +63,11 @@ namespace ratchet
 
 	void SelfControlledCreature::Die()
 	{
+
 		if (m_shouldPlayDeathSound)
+		{
 			return;
+		}
 
 		m_isAttacking = false;
 
@@ -72,7 +75,8 @@ namespace ratchet
 		m_deathSound.setVolume(volume);
 		m_deathSound.play();
 
-		m_shouldPlayDeathSound = true; 
+		m_shouldPlayDeathSound = true;
+	
 
 
 		GameObject::DestroyCollider();
@@ -391,13 +395,16 @@ namespace ratchet
 		else
 			m_fireCooldown.Resume();
 
-		if (m_collider && !m_collider->m_skipRaycastThisFrame)
-			m_isGround = m_collider->performGroundRayCast(m_sprite);
-		else
+		if (!m_isDeath)
 		{
-			m_isGround = false;
-			if (m_collider)
-				m_collider->m_skipRaycastThisFrame = false;
+			if (m_collider && !m_collider->m_skipRaycastThisFrame)
+				m_isGround = m_collider->performGroundRayCast(m_sprite);
+			else
+			{
+				m_isGround = false;
+				if (m_collider)
+					m_collider->m_skipRaycastThisFrame = false;
+			}
 		}
 
 		handleEvent();
@@ -405,11 +412,18 @@ namespace ratchet
 
 		Creature::update(); 
 
-		if (m_isDeath && m_shouldPlayDeathSound &&
-			m_deathSound.getStatus() == sf::Sound::Stopped)
+		if (m_isDeath && m_currentAnimationState == ANIMATION_STATE::DIE)
 		{
-			GameObject::DestroyGameObject();
-			return;
+
+			if (auto* deathAnimation = dynamic_cast<AnimationDeath*>(m_characterAnimator->getAbstractAnimation()))
+			{
+				if (deathAnimation->isAnimationEnd())
+				{
+					GameObject::DestroyGameObject();
+					return;
+				}
+			}
+
 		}
 	}
 

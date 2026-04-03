@@ -524,6 +524,18 @@ namespace ratchet
 					}
 				}
 
+				if (m_isDeath)
+				{
+					if (m_currentAnimationState != DIE)
+					{
+						m_currentAnimationState = DIE;
+
+						switchAnimation();
+
+						m_input.resetControls();
+					}
+				}
+
 				m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
 
 				if (m_collider)
@@ -535,8 +547,6 @@ namespace ratchet
 					m_sprite.setRotation(m_rotation);
 				}
 			}
-
-			
 		}
 	}
 	void Creature::updateJump()
