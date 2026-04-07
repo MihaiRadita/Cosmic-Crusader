@@ -62286,7 +62286,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="angleBase" type="float" value="45"/>
-    <property name="animationStateListMask" type="int" value="63"/>
+    <property name="animationStateListMask" type="int" value="55"/>
     <property name="bodyShoulderOffset" type="float" value="0.4"/>
     <property name="characterAnglesMask" type="int" value="1"/>
     <property name="colliderAngularDamping" type="float" value="0"/>
@@ -62342,13 +62342,13 @@
     <property name="weaponTypeListMask" type="int" value="16"/>
    </properties>
   </object>
-  <object id="5204" name="Enemy2" gid="70" x="15680" y="-768" width="192" height="100">
+  <object id="5204" name="Enemy2" gid="70" x="15681.3" y="-768" width="192" height="100">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="angleBase" type="float" value="45"/>
-    <property name="animationStateListMask" type="int" value="3"/>
+    <property name="animationStateListMask" type="int" value="35"/>
     <property name="bodyShoulderOffset" type="float" value="0.4"/>
     <property name="characterAnglesMask" type="int" value="1"/>
     <property name="colliderAngularDamping" type="float" value="0"/>
@@ -62371,7 +62371,7 @@
     <property name="currentAnimationState" type="int" value="0"/>
     <property name="currentState" type="int" value="0"/>
     <property name="currentWeaponIndex" type="int" value="0"/>
-    <property name="currentWeaponType" type="int" value="4"/>
+    <property name="currentWeaponType" type="int" value="5"/>
     <property name="enemyType" type="int" value="2"/>
     <property name="fireRate" type="float" value="0.7"/>
     <property name="health" type="float" value="10"/>
@@ -62380,7 +62380,7 @@
     <property name="movingSpeed" type="float" value="5"/>
     <property name="objectType" type="int" value="1"/>
     <property name="recoilTime" type="float" value="0.1"/>
-    <property name="spriteTexturePath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy2Textures/IdleTextures/Enemy2Blaster/Angle0/Aim/Idle1.png"/>
+    <property name="spriteTexturePath" value="Textures/EnemiesTextures/Enemy2Textures/"/>
     <property name="startSpriteTexturePath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy2Textures/IdleTextures/Enemy2Blaster/Angle0/Aim/Idle1.png"/>
     <property name="targetMaxDistanceAttackX" type="float" value="2"/>
     <property name="targetMaxDistanceAttackY" type="float" value="1.5"/>
@@ -62388,9 +62388,9 @@
     <property name="targetMaxDistanceDetectionY" type="float" value="1.5"/>
     <property name="targetMaxDistanceLoseX" type="float" value="3.5"/>
     <property name="targetMaxDistanceLoseY" type="float" value="3.5"/>
-    <property name="usableWeaponCheckListMask" type="int" value="16"/>
-    <property name="usableWeaponTypeListMask" type="int" value="16"/>
-    <property name="weaponTypeListMask" type="int" value="16"/>
+    <property name="usableWeaponCheckListMask" type="int" value="32"/>
+    <property name="usableWeaponTypeListMask" type="int" value="32"/>
+    <property name="weaponTypeListMask" type="int" value="32"/>
    </properties>
   </object>
  </objectgroup>

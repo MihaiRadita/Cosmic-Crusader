@@ -547,6 +547,42 @@ namespace ratchet
 					m_sprite.setRotation(m_rotation);
 				}
 			}
+			else if (m_movementType == MovementType::AIR)
+			{
+				if (isNoControlActive() && m_isMoving == false && !m_isDeath)
+				{
+#ifdef IS_RATCHET_DEBUG
+					TRACE_CHANNEL("ANIMATION", "Idle");
+					TRACE_CHANNEL("ANIMATION", m_currentAnimationState);
+#endif			
+					m_isMoving = false;
+					m_currentAnimationState = ANIMATION_STATE::IDLE;
+					switchAnimation();
+				}
+
+				if (m_isDeath)
+				{
+					if (m_currentAnimationState != DIE)
+					{
+						m_currentAnimationState = DIE;
+
+						switchAnimation();
+
+						m_input.resetControls();
+					}
+				}
+
+				m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
+
+				if (m_collider)
+				{
+					auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+
+					// Sync sprite rotation with collider
+					m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
+					m_sprite.setRotation(m_rotation);
+				}
+			}
 		}
 	}
 	void Creature::updateJump()
