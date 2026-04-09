@@ -38,13 +38,32 @@ namespace ratchet
 			m_targetAttackDistanceVector.x *= -1.f;
 		}
 
-		if (m_targetAttackDistanceVector.x <= m_targetMaxDistanceAttackX)
+		if (m_targetAttackDistanceVector.y < 0.0f)
 		{
-			m_isAttacking = true;
+			m_targetAttackDistanceVector.y *= -1.f;
 		}
-		else if (m_targetAttackDistanceVector.x > m_targetMaxDistanceAttackX)
+
+		if (m_enemyType == EnemyType::Ground)
 		{
-			m_isAttacking = false;
+			if (m_targetAttackDistanceVector.x <= m_targetMaxDistanceAttackX)
+			{
+				m_isAttacking = true;
+			}
+			else if (m_targetAttackDistanceVector.x > m_targetMaxDistanceAttackX)
+			{
+ 				m_isAttacking = false;
+			}
+		}
+		else if (m_enemyType == EnemyType::Flying)
+		{
+			if(m_targetAttackDistanceVector.x <= m_targetMaxDistanceAttackX && m_targetAttackDistanceVector.y <= m_targetMaxDistanceAttackY)
+			{
+				m_isAttacking = true;
+			}
+			else if (m_targetAttackDistanceVector.x >= m_targetMaxDistanceAttackX)
+			{
+				m_isAttacking = false;
+			}
 		}
 
 	}
@@ -142,6 +161,8 @@ namespace ratchet
 	}
 	void SelfControlledCreature::computeAimBulletRotation()
 	{
+		auto enemyType = m_enemyType;
+
 		sf::Vector2f firePoint = m_currentFirePoint;
 		sf::Vector2f targetPos = m_target->getPosition();
 
@@ -289,7 +310,30 @@ namespace ratchet
 				m_input.x = 0.f;
 				m_input.isJump = false;
 
-				if (m_isGround)
+
+				if (m_enemyType == EnemyType::Ground)
+				{
+					if (m_isGround)
+					{
+						if (!m_waitTostartAttack)
+						{
+							m_fireCooldown.m_clock.restart();
+							m_waitTostartAttack = true;
+							m_input.m_isFiring = false;
+
+						}
+						else
+						{
+							if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
+							{
+								m_input.m_isFiring = true;
+
+							}
+						}
+
+					}
+				}
+				else if (m_enemyType == EnemyType::Flying)
 				{
 					if (!m_waitTostartAttack)
 					{
@@ -303,10 +347,9 @@ namespace ratchet
 						if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
 						{
 							m_input.m_isFiring = true;
-						
-						}		
+
+						}
 					}
-					
 				}
 			}
 			else

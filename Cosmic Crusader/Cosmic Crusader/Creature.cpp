@@ -560,6 +560,46 @@ namespace ratchet
 					switchAnimation();
 				}
 
+
+
+				if (m_currentWeaponType != Weapon::TYPE::None)
+				{
+					bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
+					const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_recoilTime;
+
+					if (justPassedRecoilTime)
+					{
+						m_currentCharacterState = WeaponAnimation::STATE::Aim;
+						isOnRecoil = false;
+					}
+
+					if (m_input.m_isFiring)
+					{
+						if (isOnRecoil && m_isDeath)
+						{
+							isOnRecoil = false;
+							return;
+						}
+
+						if (isOnRecoil == false)
+						{
+							const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
+							const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate;
+							if (isReadyToFire)
+							{
+								m_fireCooldown.m_clock.restart();
+								m_currentCharacterState = WeaponAnimation::STATE::Recoil;
+#ifdef IS_RATCHET_DEBUG
+								TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");
+#endif	
+								m_mustSpawnBullet = true;
+
+								m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
+							}
+						}
+					}
+				}
+
 				if (m_isDeath)
 				{
 					if (m_currentAnimationState != DIE)
@@ -571,6 +611,7 @@ namespace ratchet
 						m_input.resetControls();
 					}
 				}
+
 
 				m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
 
@@ -1123,44 +1164,62 @@ namespace ratchet
 	{
 		if (m_currentWeaponType != Weapon::TYPE::None)
 		{
-
 			sf::Vector2f characterPointPositiion;
 			float dir = m_facingRight ? 1.f : -1.f;
 
-
 			if (dir < 0.f)
 			{
-				characterPointPositiion = sf::Vector2f(getPosition().x +  m_weaponsStartShootingPoint[m_currentWeaponType].x, getPosition().y - m_weaponsStartShootingPoint[m_currentWeaponType].y);
+
+
+				auto* drone = dynamic_cast<SelfControlledCreature*>(this);
+
+
+				if (drone && drone->m_enemyType == EnemyType::Flying)
+				{
+					
+				}
+
+				characterPointPositiion = sf::Vector2f(getPosition().x + m_weaponsStartShootingPoint[m_currentWeaponType].x, getPosition().y - m_weaponsStartShootingPoint[m_currentWeaponType].y);
+
+
 			}
 			else
 			{
-				characterPointPositiion = sf::Vector2f(getPosition().x - m_weaponsStartShootingPoint[m_currentWeaponType].x, 
-										  getPosition().y - m_weaponsStartShootingPoint[m_currentWeaponType].y);
+				auto* drone = dynamic_cast<SelfControlledCreature*>(this);
+
+
+				if (drone && drone->m_enemyType == EnemyType::Flying)
+				{
+					
+				}
+
+				characterPointPositiion = sf::Vector2f(getPosition().x - m_weaponsStartShootingPoint[m_currentWeaponType].x,
+					getPosition().y - m_weaponsStartShootingPoint[m_currentWeaponType].y);
 			}
-	
+
 
 			sf::Vector2f shootingPoint;
-	
+
 
 			switch (m_currentCharacterAngle) {
 			case WeaponAnimation::ANGLE::Angle0:
-				shootingPoint = {  characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, 
+				shootingPoint = { characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x,
 									characterPointPositiion.y + m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y };
 				break;
 			case WeaponAnimation::ANGLE::Angle45:
-				shootingPoint = { characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, 
-								characterPointPositiion.y - m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y};
+				shootingPoint = { characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x,
+								characterPointPositiion.y - m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y };
 				break;
 
 			case WeaponAnimation::ANGLE::Angle90:
 
 
-				shootingPoint = { characterPointPositiion.x, characterPointPositiion.y - m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y};
+				shootingPoint = { characterPointPositiion.x, characterPointPositiion.y - m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y };
 				break;
 			case WeaponAnimation::ANGLE::AngleMinus45:
 
-				shootingPoint = { characterPointPositiion.x +  dir* m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x, 
-								characterPointPositiion.y + m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y};
+				shootingPoint = { characterPointPositiion.x + dir * m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].x,
+								characterPointPositiion.y + m_shootingPointsOffsets[m_currentWeaponType][m_currentCharacterAngle].y };
 				break;
 			}
 
