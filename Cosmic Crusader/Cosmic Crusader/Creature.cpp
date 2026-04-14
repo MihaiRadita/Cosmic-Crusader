@@ -1167,6 +1167,11 @@ namespace ratchet
 			sf::Vector2f characterPointPositiion;
 			float dir = m_facingRight ? 1.f : -1.f;
 
+			if (m_movementType == MovementType::AIR)
+			{
+				dir;
+			}
+
 			if (dir < 0.f)
 			{
 

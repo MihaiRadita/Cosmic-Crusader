@@ -20,7 +20,6 @@ namespace ratchet
 		b2BodyDef m_bodyDef;
 		b2CircleShape m_circleShape;
 		//b2Body* m_body = nullptr;
-		b2Vec2 m_origin;
 
 		//short m_userDataName;
 		b2CircleShape m_shape;

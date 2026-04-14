@@ -62155,8 +62155,8 @@
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="ammo" type="int" value="51"/>
     <property name="bulletIncrementation" type="int" value="5"/>
-    <property name="characterStartPointShootingOffsetX" type="float" value="0.1"/>
-    <property name="characterStartPointShootingOffsetY" type="float" value="0.1"/>
+    <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
+    <property name="characterStartPointShootingOffsetY" type="float" value="0"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="damage" type="int" value="5"/>
     <property name="isWeaponAccesible" type="bool" value="true"/>
@@ -62165,8 +62165,8 @@
     <property name="objectType" type="int" value="1"/>
     <property name="scaleX" type="float" value="1"/>
     <property name="scaleY" type="float" value="1"/>
-    <property name="shootingOffsetAngle0X" type="float" value="1.7"/>
-    <property name="shootingOffsetAngle0Y" type="float" value="0.9"/>
+    <property name="shootingOffsetAngle0X" type="float" value="0.75"/>
+    <property name="shootingOffsetAngle0Y" type="float" value="0.3"/>
     <property name="startSpriteTexturePath" value="Textures/Objects/Weapons/Player/Blaster1.png"/>
     <property name="weaponDamage" type="float" value="5"/>
     <property name="weaponShootSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy Blaster Shoot.wav"/>
