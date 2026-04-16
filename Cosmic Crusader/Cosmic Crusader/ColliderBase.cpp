@@ -33,6 +33,15 @@ namespace ratchet
 
 		velocity.x = 0.0f;
 
+
+		if (auto* drone = dynamic_cast<SelfControlledCreature*>(m_obj))
+		{
+			if (drone->m_movementType == MovementType::AIR)
+			{
+				velocity.y = 0.0f;
+			}
+		}
+
 		if (changeX)
 		{
 			velocity.x = xVelocity;

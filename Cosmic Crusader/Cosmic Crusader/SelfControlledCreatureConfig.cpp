@@ -108,6 +108,11 @@ namespace ratchet
 				m_movingSpeed = propertyValue.get<float>();
 			}
 
+			if (propertyName == "flySpeed")
+			{
+				m_flySpeed = propertyValue.get<float>();
+			}
+
 			if (propertyName == "jumpImpulse")
 			{
 				m_jumpImpulse = propertyValue.get<float>();

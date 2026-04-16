@@ -20,6 +20,8 @@ namespace ratchet
 		m_objectId = config.m_objectID;
 
 		m_objectLayerName = config.m_objectLayerName;
+
+		m_flySpeed = config.m_flySpeed;
 	}
 	SelfControlledCreature::~SelfControlledCreature()
 	{
@@ -273,7 +275,7 @@ namespace ratchet
 
 		if (m_target->m_isDeath)
 		{
-			if (m_isAttacking == true)
+			if (m_isAttacking)
 			{
 				m_isAttacking = false;
 				m_input.m_isFiring = false;
@@ -284,144 +286,109 @@ namespace ratchet
 		handleSelfCreatureEvent();
 		detectTarget(m_target);
 
+
 		if (m_isTargetDetected)
 		{
 			TRACE_CHANNEL("AI_TARGETING", "Enemy detects target(PLAYER)!");
-			if (m_isTagetBehindCharacter == false)
-			{
-				m_facingRight = true;
 
-			}
-			else if (m_isTagetBehindCharacter == true)
-			{
-				m_facingRight = false;
-			}
-
+			m_facingRight = !m_isTagetBehindCharacter;
 			invertCharacterMovingSpriteScale(m_facingRight ? 1.0f : -1.0f);
 
 			checkTargetToAttack(m_target);
-
 			isFallingRisk();
-
 			canJumpOver();
 
 			if (m_isAttacking)
 			{
 				m_input.x = 0.f;
+
+				if (m_movementType == MovementType::AIR)
+				{
+					m_input.y = 0.f;
+				}
+
 				m_input.isJump = false;
 
-
-				if (m_enemyType == EnemyType::Ground)
+				if (!m_waitTostartAttack)
 				{
-					if (m_isGround)
-					{
-						if (!m_waitTostartAttack)
-						{
-							m_fireCooldown.m_clock.restart();
-							m_waitTostartAttack = true;
-							m_input.m_isFiring = false;
-
-						}
-						else
-						{
-							if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
-							{
-								m_input.m_isFiring = true;
-
-							}
-						}
-
-					}
+					m_fireCooldown.m_clock.restart();
+					m_waitTostartAttack = true;
+					m_input.m_isFiring = false;
 				}
-				else if (m_enemyType == EnemyType::Flying)
+				else if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
 				{
-					if (!m_waitTostartAttack)
-					{
-						m_fireCooldown.m_clock.restart();
-						m_waitTostartAttack = true;
-						m_input.m_isFiring = false;
-
-					}
-					else
-					{
-						if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
-						{
-							m_input.m_isFiring = true;
-
-						}
-					}
+					m_input.m_isFiring = true;
 				}
 			}
 			else
 			{
-				if (m_input.m_isFiring == true)
+				if (m_input.m_isFiring && m_currentCharacterState == WeaponAnimation::STATE::Recoil)
 				{
-
-					if (m_currentCharacterState == WeaponAnimation::STATE::Recoil)
-					{
-						m_currentCharacterState = WeaponAnimation::STATE::Aim;
-					}
+					m_currentCharacterState = WeaponAnimation::STATE::Aim;
 					m_input.m_isFiring = false;
 				}
+
 				m_waitTostartAttack = false;
-
 				m_fireCooldown.m_clock.restart();
-
-				if (m_canJumpOver)
+				if (m_movementType == MovementType::GROUND)
 				{
-					if (m_isGround)
+					if (m_canJumpOver)
 					{
-						m_input.isJump = true;
+						m_input.isJump = m_isGround;
+
 					}
 					else
 					{
 						m_input.isJump = false;
 					}
-				}
-				else
-				{
-					m_input.isJump = false;
-				}
 
-				if (m_isFallingRisk)
-				{
-					if (m_facingRight)
+					if (m_isFallingRisk)
 					{
-						m_input.x = 1.f;
+						m_input.x = m_facingRight ? -1.f : 1.f;
+
 					}
 					else
 					{
-						m_input.x = -1.f;
+						m_input.x = 0.f;
 					}
 				}
-				else
+				else if (m_movementType == MovementType::AIR)
 				{
-					m_input.x = 0.0f;
+					m_input.x = m_facingRight ? 1.f : -1.f;
+
+					
+					m_input.y = m_isTargetUppperOfCharacter ? -1.f : 1.f;
 				}
 			}
 		}
 		else
 		{
-			m_input.x = 0;
+			if (m_movementType == MovementType::GROUND)
+			{
+				m_input.x = 0.f;
+			}
+			else 
+			{
+				m_input.x = 0.f;
+				m_input.y = 0.f;
+			}
 
 			m_input.isJump = false;
 
-			if (m_input.m_isFiring == true)
+			if (m_input.m_isFiring && m_currentCharacterState == WeaponAnimation::STATE::Recoil)
 			{
-				if (m_currentCharacterState == WeaponAnimation::STATE::Recoil)
-				{
-					m_currentCharacterState = WeaponAnimation::STATE::Aim;
-				}
-				m_input.m_isFiring = false;
+				m_currentCharacterState = WeaponAnimation::STATE::Aim;
 			}
+
+			m_input.m_isFiring = false;
 			m_waitTostartAttack = false;
 			m_fireCooldown.m_clock.restart();
-
 		}
 
-		if (m_canJumpOver == true)
+		if (m_canJumpOver)
 		{
 			TRACE_CHANNEL("AI_JUMP_OVER_PLATFORMS", "ENEMY CAN JUMP OVER PLATFORMS!");
+
 		}
 		else
 		{
@@ -474,27 +441,73 @@ namespace ratchet
 	{
 
 		m_isMoving = false;
+
 		bool changeX = false;
-		float xVelocity = 0.0f;
 		bool changeY = false;
+
+		float xVelocity = 0.0f;
 		float yVelocity = 0.0f;
 
-		if (m_input.x != 0)
+		if (m_movementType == MovementType::GROUND)
 		{
-			m_isMoving = true;
-			changeX = true;
-			xVelocity = m_movementSpeed * m_input.x;
-
-			if (m_isGround)
+			//
+			if (m_input.x != 0.f)
 			{
+				m_isMoving = true;
+
+				changeX = true;
+				xVelocity = m_movementSpeed * m_input.x;
+
+				if (m_isGround)
+				{
+					if (m_walkTimerSound.GetElapsed().asSeconds() >= 0.3f)
+					{
+						float volume = SceneManager::Get().GetSoundEffectsVolume();
+						m_walkSound.setVolume(volume);
+						m_walkSound.play();
+						m_walkTimerSound.Restart();
+					}
+				}
+				else
+				{
+					m_walkTimerSound.Restart();
+				}
+			}
+
+			if (m_input.isJump && isGrounded())
+			{
+				m_isMoving = true;
+
+				changeY = true;
+				yVelocity = m_jumpImpulse;
+			}
+
+			if (m_collider)
+			{
+				m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
+			}
+		}
+		else if (m_movementType == MovementType::AIR)
+		{
+		
+
+			float xInput = m_input.x;
+			float yInput = m_input.y;
+
+			xVelocity = m_movementSpeed * xInput;
+			yVelocity = m_flySpeed * yInput;
+
+			changeX = (xInput != 0.f);
+			changeY = (yInput != 0.f);
+
+			if (changeX || changeY)
+			{
+				m_isMoving = true;
+
 				if (m_walkTimerSound.GetElapsed().asSeconds() >= 0.3f)
 				{
-					float volume = m_walkSound.getVolume();
-
-					volume = SceneManager::Get().GetSoundEffectsVolume();
-
+					float volume = SceneManager::Get().GetSoundEffectsVolume();
 					m_walkSound.setVolume(volume);
-
 					m_walkSound.play();
 					m_walkTimerSound.Restart();
 				}
@@ -503,73 +516,43 @@ namespace ratchet
 			{
 				m_walkTimerSound.Restart();
 			}
-		}
 
-		if (m_input.isJump && isGrounded())
-		{
-			m_isMoving = true;
-			changeY = true;
-			yVelocity = m_jumpImpulse;
-		}
-
-		if (m_collider)
-		{
 			if (m_collider)
 			{
 				m_collider->applyMovement(changeX, xVelocity, changeY, yVelocity);
 			}
 		}
 
-
+		
 		if (m_collider)
 		{
-			auto position = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-			m_sprite.setPosition(position);
+			b2Vec2 pos = m_collider->getBody()->GetPosition();
 
-			// Sync sprite rotation with collider
+			m_sprite.setPosition(pos.x, pos.y);
 			m_rotation = m_collider->getBody()->GetAngle() * (180.f / M_PI);
 			m_sprite.setRotation(m_rotation);
 
-			auto aiCharacterPosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
-			setPosition(aiCharacterPosition);
+			setPosition(sf::Vector2f(pos.x, pos.y));
 		}
 		
 	}
 	void SelfControlledCreature::detectTarget(Creature* target)
 	{
-		sf::Vector2f targetdistancevector = this->getPosition() - target->getPosition();
+		sf::Vector2f diff = target->getPosition() - this->getPosition();
 
-		if (targetdistancevector.x > 0.0f)
-		{
-			m_isTagetBehindCharacter = true;
-		}
-		else if (targetdistancevector.x < 0.0f)
-		{
-			m_isTagetBehindCharacter = false;
-			targetdistancevector.x *= -1.f;
-		}
+		float absX = std::abs(diff.x);
+		float absY = std::abs(diff.y);
 
-		if (targetdistancevector.y < 0.0f)
+		m_isTagetBehindCharacter = (diff.x < 0.0f);
+
+		if (m_movementType == MovementType::AIR)
 		{
-			targetdistancevector.y *= -1.f;
+			m_isTargetUppperOfCharacter = (diff.y < 0.0f);
 		}
 
-		if (targetdistancevector.y <= m_targetMaxDistanceDetectionY)
-		{
-			
-			if (targetdistancevector.x <= m_targetMaxDistanceDetectionX)
-			{
-				m_isTargetDetected = true;
-			}
-			else if (targetdistancevector.x > m_targetMaxDistanceDetectionX)
-			{
-				m_isTargetDetected = false;
-			}
-		}
-		else if (targetdistancevector.y > m_targetMaxDistanceDetectionY)
-		{
-			m_isTargetDetected = false;
-		}
+		m_isTargetDetected =
+			(absX <= m_targetMaxDistanceDetectionX &&
+				absY <= m_targetMaxDistanceDetectionY);
 	}
 
 	void SelfControlledCreature::render(sf::RenderTarget& target)

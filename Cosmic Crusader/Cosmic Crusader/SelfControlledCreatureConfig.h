@@ -30,6 +30,8 @@ namespace ratchet
 		float m_targetMaxDistanceAttackX;
 		float m_targetMaxDistanceAttackY;
 
+		float m_flySpeed;
+
 		EnemyType m_enemyType;
 
 		std::string m_objectLayerName;

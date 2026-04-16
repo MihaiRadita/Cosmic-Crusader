@@ -62353,7 +62353,6 @@
     <property name="characterAnglesMask" type="int" value="1"/>
     <property name="colliderAngularDamping" type="float" value="0"/>
     <property name="colliderBullet" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderGravityScale" type="float" value="0"/>
@@ -62374,6 +62373,7 @@
     <property name="currentWeaponType" type="int" value="5"/>
     <property name="enemyType" type="int" value="2"/>
     <property name="fireRate" type="float" value="0.7"/>
+    <property name="flySpeed" type="float" value="5"/>
     <property name="health" type="float" value="10"/>
     <property name="initialWeapon_0" type="object" value="5205"/>
     <property name="movementType" type="int" value="2"/>
