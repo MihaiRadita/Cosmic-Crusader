@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="22" nextobjectid="5207">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="22" nextobjectid="5207">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -62382,12 +62382,12 @@
     <property name="recoilTime" type="float" value="0.1"/>
     <property name="spriteTexturePath" value="Textures/EnemiesTextures/Enemy2Textures/"/>
     <property name="startSpriteTexturePath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy2Textures/IdleTextures/Enemy2Blaster/Angle0/Aim/Idle1.png"/>
-    <property name="targetMaxDistanceAttackX" type="float" value="5"/>
-    <property name="targetMaxDistanceAttackY" type="float" value="3"/>
+    <property name="targetMaxDistanceAttackX" type="float" value="3"/>
+    <property name="targetMaxDistanceAttackY" type="float" value="2"/>
     <property name="targetMaxDistanceDetectionX" type="float" value="6"/>
-    <property name="targetMaxDistanceDetectionY" type="float" value="4.5"/>
-    <property name="targetMaxDistanceLoseX" type="float" value="6.5"/>
-    <property name="targetMaxDistanceLoseY" type="float" value="6.5"/>
+    <property name="targetMaxDistanceDetectionY" type="float" value="5"/>
+    <property name="targetMaxDistanceLoseX" type="float" value="7"/>
+    <property name="targetMaxDistanceLoseY" type="float" value="7"/>
     <property name="usableWeaponCheckListMask" type="int" value="32"/>
     <property name="usableWeaponTypeListMask" type="int" value="32"/>
     <property name="weaponTypeListMask" type="int" value="32"/>

@@ -33,33 +33,15 @@ namespace ratchet
 	}
 	void SelfControlledCreature::checkTargetToAttack(Creature* target)
 	{
-		sf::Vector2f diff = target->getPosition() - this->getPosition();
-
-		float absX = std::abs(diff.x);
-		float absY = std::abs(diff.y);
-
+		float absX = std::abs(target->getPosition().x - getPosition().x);
 
 		if (m_enemyType == EnemyType::Ground)
 		{
-			if (absX <= m_targetMaxDistanceAttackX)
-			{
-				m_isAttacking = true;
-			}
-			else if (absX > m_targetMaxDistanceAttackX)
-			{
- 				m_isAttacking = false;
-			}
+			m_isAttacking = (absX <= m_targetMaxDistanceAttackX);
 		}
 		else if (m_enemyType == EnemyType::Flying)
 		{
-			if(absX <= m_targetMaxDistanceAttackX)
-			{
-				m_isAttacking = true;
-			}
-			else if (absX >= m_targetMaxDistanceAttackX)
-			{
-				m_isAttacking = false;
-			}
+			m_isAttacking = (absX <= m_targetMaxDistanceAttackX);
 		}
 
 	}
@@ -266,7 +248,6 @@ namespace ratchet
 			m_input.m_isFiring = false;
 			return;
 		}
-
 		if (m_target->m_isDeath)
 		{
 			if (m_isAttacking)
@@ -280,100 +261,130 @@ namespace ratchet
 		handleSelfCreatureEvent();
 		detectTarget(m_target);
 
-
 		if (m_isTargetDetected)
 		{
 			TRACE_CHANNEL("AI_TARGETING", "Enemy detects target(PLAYER)!");
-
 			m_facingRight = !m_isTagetBehindCharacter;
 			invertCharacterMovingSpriteScale(m_facingRight ? 1.0f : -1.0f);
-
 			checkTargetToAttack(m_target);
 			isFallingRisk();
 			canJumpOver();
 
-			if (m_isAttacking)
+			if (m_movementType == MovementType::GROUND)
 			{
-				m_input.x = 0.f;
-
-				if (m_movementType == MovementType::AIR)
+				if (m_isAttacking)
 				{
-					m_input.y = 0.f;
+					m_input.x = 0.f;
+					m_input.isJump = false;
+					if (!m_waitTostartAttack)
+					{
+						m_fireCooldown.m_clock.restart();
+						m_waitTostartAttack = true;
+						m_input.m_isFiring = false;
+					}
+					else if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
+					{
+						m_input.m_isFiring = true;
+					}
 				}
-
-				m_input.isJump = false;
-
-				if (!m_waitTostartAttack)
+				else
 				{
+					if (m_input.m_isFiring && m_currentCharacterState == WeaponAnimation::STATE::Recoil)
+					{
+						m_currentCharacterState = WeaponAnimation::STATE::Aim;
+						m_input.m_isFiring = false;
+					}
+					m_waitTostartAttack = false;
 					m_fireCooldown.m_clock.restart();
-					m_waitTostartAttack = true;
-					m_input.m_isFiring = false;
-				}
-				else if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
-				{
-					m_input.m_isFiring = true;
-				}
-			}
-			else
-			{
-				if (m_input.m_isFiring && m_currentCharacterState == WeaponAnimation::STATE::Recoil)
-				{
-					m_currentCharacterState = WeaponAnimation::STATE::Aim;
-					m_input.m_isFiring = false;
-				}
 
-				m_waitTostartAttack = false;
-				m_fireCooldown.m_clock.restart();
-				if (m_movementType == MovementType::GROUND)
-				{
 					if (m_canJumpOver)
 					{
 						m_input.isJump = m_isGround;
-
 					}
 					else
 					{
 						m_input.isJump = false;
 					}
-
 					if (m_isFallingRisk)
 					{
-						m_input.x = m_facingRight ? -1.f : 1.f;
-
+						m_input.x = m_facingRight ? 1.f : -1.f;
 					}
 					else
 					{
 						m_input.x = 0.f;
 					}
 				}
-				else if (m_movementType == MovementType::AIR)
-				{
-					m_input.x = m_facingRight ? 1.f : -1.f;
+			}
+			else if (m_movementType == MovementType::AIR)
+			{
+				float playerX = m_target->getPosition().x;
+				float playerY = m_target->getPosition().y;
+				float droneX = getPosition().x;
+				float droneY = getPosition().y;
 
-					
-					m_input.y = m_isTargetUppperOfCharacter ? -1.f : 1.f;
+				float diffX = playerX - droneX;
+				float targetHoverY = playerY - m_maxHeightAbovePlayer;
+				float diffY = targetHoverY - droneY;
+
+				bool needY = std::abs(diffY) > m_targetMaxDistanceAttackY;
+
+				if (needY)
+				{
+					m_input.y = (diffY > 0.f) ? 1.f : -1.f;
+					m_input.x = 0.f;
+				}
+				else
+				{
+					m_input.y = 0.f;
+					if (std::abs(diffX) > m_targetMaxDistanceAttackX)
+					{
+						m_input.x = (diffX > 0.f) ? 1.f : -1.f;
+						m_facingRight = (diffX > 0.f);
+					}
+					else
+					{
+						m_input.x = 0.f;
+					}
+				}
+
+				if (m_isAttacking)
+				{
+					if (needY)
+					{
+						m_input.m_isFiring = false;
+						m_waitTostartAttack = false;
+						m_fireCooldown.m_clock.restart();
+					}
+					else
+					{
+						if (!m_waitTostartAttack)
+						{
+							m_fireCooldown.m_clock.restart();
+							m_waitTostartAttack = true;
+							m_input.m_isFiring = false;
+						}
+						else if (m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate)
+						{
+							m_input.m_isFiring = true;
+						}
+					}
+				}
+				else
+				{
+					m_input.m_isFiring = false;
+					m_waitTostartAttack = false;
 				}
 			}
 		}
 		else
 		{
-			if (m_movementType == MovementType::GROUND)
-			{
-				m_input.x = 0.f;
-			}
-			else 
-			{
-				m_input.x = 0.f;
-				m_input.y = 0.f;
-			}
-
+			m_input.x = 0;
+			m_input.y = 0;
 			m_input.isJump = false;
-
 			if (m_input.m_isFiring && m_currentCharacterState == WeaponAnimation::STATE::Recoil)
 			{
 				m_currentCharacterState = WeaponAnimation::STATE::Aim;
 			}
-
 			m_input.m_isFiring = false;
 			m_waitTostartAttack = false;
 			m_fireCooldown.m_clock.restart();
@@ -382,7 +393,6 @@ namespace ratchet
 		if (m_canJumpOver)
 		{
 			TRACE_CHANNEL("AI_JUMP_OVER_PLATFORMS", "ENEMY CAN JUMP OVER PLATFORMS!");
-
 		}
 		else
 		{

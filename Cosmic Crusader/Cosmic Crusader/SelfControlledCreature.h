@@ -50,6 +50,8 @@ namespace ratchet
 
 		bool m_waitTostartAttack = false;
 
+
+		float m_maxHeightAbovePlayer = 0.5f;
 		std::string m_objectLayerName;
 
 		void canJumpOver();
