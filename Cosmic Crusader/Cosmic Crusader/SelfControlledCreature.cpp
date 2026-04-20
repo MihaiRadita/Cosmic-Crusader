@@ -33,36 +33,30 @@ namespace ratchet
 	}
 	void SelfControlledCreature::checkTargetToAttack(Creature* target)
 	{
-		sf::Vector2f m_targetAttackDistanceVector = this->getPosition() - target->getPosition();
+		sf::Vector2f diff = target->getPosition() - this->getPosition();
 
-		if (m_targetAttackDistanceVector.x < 0.0f)
-		{
-			m_targetAttackDistanceVector.x *= -1.f;
-		}
+		float absX = std::abs(diff.x);
+		float absY = std::abs(diff.y);
 
-		if (m_targetAttackDistanceVector.y < 0.0f)
-		{
-			m_targetAttackDistanceVector.y *= -1.f;
-		}
 
 		if (m_enemyType == EnemyType::Ground)
 		{
-			if (m_targetAttackDistanceVector.x <= m_targetMaxDistanceAttackX)
+			if (absX <= m_targetMaxDistanceAttackX)
 			{
 				m_isAttacking = true;
 			}
-			else if (m_targetAttackDistanceVector.x > m_targetMaxDistanceAttackX)
+			else if (absX > m_targetMaxDistanceAttackX)
 			{
  				m_isAttacking = false;
 			}
 		}
 		else if (m_enemyType == EnemyType::Flying)
 		{
-			if(m_targetAttackDistanceVector.x <= m_targetMaxDistanceAttackX && m_targetAttackDistanceVector.y <= m_targetMaxDistanceAttackY)
+			if(absX <= m_targetMaxDistanceAttackX)
 			{
 				m_isAttacking = true;
 			}
-			else if (m_targetAttackDistanceVector.x >= m_targetMaxDistanceAttackX)
+			else if (absX >= m_targetMaxDistanceAttackX)
 			{
 				m_isAttacking = false;
 			}
