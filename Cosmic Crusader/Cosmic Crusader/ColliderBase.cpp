@@ -290,8 +290,14 @@ namespace ratchet
 		if (body == m_ignoredBody)
 			return -1.0f;
 
+
 		const short* fixtureUserData =
 			reinterpret_cast<const short*>(fixture->GetUserData().pointer);
+
+		if (*fixtureUserData == static_cast<short>(PhysicsLayer::Projectiles))
+		{
+			return -1.0f;
+		}
 
 		if (!fixtureUserData)
 			return -1.0f;

@@ -571,9 +571,17 @@ namespace ratchet
 
 		m_isTagetBehindCharacter = (diff.x < 0.0f);
 
-		m_isTargetDetected =
-			(absX <= m_targetMaxDistanceDetectionX &&
-				absY <= m_targetMaxDistanceDetectionY);
+
+		if (absX <= m_targetMaxDistanceDetectionX && absY <= m_targetMaxDistanceDetectionY)
+		{
+			m_isTargetDetected = true;
+		}
+		else if (absX > m_targetMaxDistanceLoseX)
+		{
+			m_isTargetDetected = false;
+
+		}
+			
 	}
 
 	void SelfControlledCreature::render(sf::RenderTarget& target)
