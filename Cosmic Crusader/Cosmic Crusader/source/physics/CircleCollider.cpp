@@ -138,6 +138,30 @@ namespace ratchet
 		circle.setPosition(x, y);
 
 		target.draw(circle);
+
+
+		if (auto* enemy = dynamic_cast<SelfControlledCreature*>(m_obj))
+		{
+			auto* targetPlayer = enemy->m_target;
+
+			if (auto* player = dynamic_cast<Player*>(targetPlayer))
+			{
+				if (enemy->m_isTargetDetected)
+				{
+					sf::Vector2f startPoint = sf::Vector2f{};
+					sf::Vector2f endPoint = sf::Vector2f{};
+
+					startPoint = enemy->getPosition();
+					endPoint = player->getPosition();
+
+					sf::Vertex rayCast[] = { sf::Vertex(sf::Vector2f(startPoint.x, startPoint.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
+					target.draw(rayCast, 2, sf::Lines);
+				}
+
+				
+			}
+		}
+
 	}
 
 	CircleCollider::~CircleCollider()
@@ -187,6 +211,54 @@ namespace ratchet
 		m_body->SetTransform(b2Vec2((sprite.getPosition().x + (sprite.getGlobalBounds().width / 2.f)) / sc_metersScale,
 			(sprite.getPosition().y + (sprite.getGlobalBounds().height / 2.f)) / sc_metersScale), m_body->GetAngle());
 	}
+
+	bool CircleCollider::performFollowTargetRayCast(const sf::Vector2f& charaterPosition, const sf::Vector2f& targetPosition)
+	{
+		if (!m_body || !s_physicsWorld)
+		{
+			return false;
+		}
+
+		b2Vec2 startPoint(charaterPosition.x, charaterPosition.y);
+		b2Vec2 endPoint(targetPosition.x, targetPosition.y);
+
+
+		CheckFollowTargetRaycastCallBack followTarget(m_body);
+
+		s_physicsWorld->RayCast(&followTarget, startPoint, endPoint);
+
+		if (SelfControlledCreature* self = dynamic_cast<SelfControlledCreature*>(m_obj))
+		{
+			if (followTarget.m_hit)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	CheckFollowTargetRaycastCallBack::CheckFollowTargetRaycastCallBack(b2Body* ignoredBody)
+	{
+		m_hit = false;
+		m_fraction = 1.0f;
+
+		m_ignoredBody = ignoredBody;
+	}
+
+	void CircleCollider::getCheckFollowTargetRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction)
+	{
+		if (m_body)
+		{
+			return;
+		}
+
+		xStart = m_origin.x;
+		yStart = m_origin.y;
+
+
+	}
+
 	CircleColliderConfig::CircleColliderConfig()
 	{
 	}

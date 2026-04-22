@@ -157,6 +157,20 @@ namespace ratchet
 		return false;
 	}
 
+	void ColliderBase::getCheckFollowTargetRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction)
+	{
+		xStart = 0.0f;
+		yStart = 0.0f;
+		xEnd = 0.0f;
+		yEnd = 0.0f;
+		direction = 0.0f;
+	}
+
+	bool ColliderBase::performFollowTargetRayCast(const sf::Vector2f& charaterPosition, const sf::Vector2f& targetPosition)
+	{
+		return false;
+	}
+
 	void ColliderBase::getCheckFallingRiscRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
 	{
 		xStart = 0.0f;
@@ -262,6 +276,40 @@ namespace ratchet
 		m_hit = false;
 		return -1.0f;
 	}
+
+	float CheckFollowTargetRaycastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
+	{
+		if (!fixture)
+			return -1.0f;
+
+		b2Body* body = fixture->GetBody();
+
+		if (!body || !body->IsEnabled())
+			return -1.0f;
+
+		if (body == m_ignoredBody)
+			return -1.0f;
+
+		const short* fixtureUserData =
+			reinterpret_cast<const short*>(fixture->GetUserData().pointer);
+
+		if (!fixtureUserData)
+			return -1.0f;
+
+		if (*fixtureUserData == static_cast<short>(PhysicsLayer::Creature))
+		{
+			m_hit = true;
+			m_point = point;
+			m_normal = normal;
+			m_fraction = fraction;
+
+			return fraction; 
+		}
+
+		m_hit = false;
+		return 0.0f;
+	}
+	
 }
 
 

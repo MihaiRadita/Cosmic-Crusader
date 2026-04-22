@@ -142,6 +142,11 @@ namespace ratchet
 		virtual void getJumpOverPlatformsTopRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
 		virtual bool performJumpOverPlatformsRaycast(sf::Sprite& sprite, float& direction);
 
+		//Checks for Follow Target
+
+		virtual void getCheckFollowTargetRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction);
+		virtual bool performFollowTargetRayCast(const sf::Vector2f& charaterPosition, const sf::Vector2f& targetPosition);
+
 		//Check Falling Risk
 		virtual void getCheckFallingRiscRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
 		virtual bool performCheckFallingRiskRaycast(sf::Sprite& sprite, float& direction);
@@ -213,6 +218,20 @@ namespace ratchet
 	public:
 
 		CheckFallingRiskRaycastCallBack(b2Body* ignoredBody);
+
+		float ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction) override;
+
+		bool m_hit;
+		b2Vec2 m_point;
+		b2Vec2 m_normal;
+		float m_fraction;
+		b2Body* m_ignoredBody;
+	};
+
+	class CheckFollowTargetRaycastCallBack : public b2RayCastCallback
+	{
+	public:
+		CheckFollowTargetRaycastCallBack(b2Body* ignoredBody);
 
 		float ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction) override;
 

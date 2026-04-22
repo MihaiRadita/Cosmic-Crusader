@@ -34,6 +34,8 @@ namespace ratchet
 
 		float m_flySpeed = 0.0f;
 
+		float m_minFollowHeightOffset = 3.0f;
+
 		EnemyType m_enemyType;
 
 

@@ -56,5 +56,10 @@ namespace ratchet
 		void setColliderPosition(sf::Sprite& sprite);
 
 		//Checks
+
+		bool performFollowTargetRayCast(const sf::Vector2f& charaterPosition, const sf::Vector2f& targetPosition) override;
+		void getCheckFollowTargetRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) override;
+
+
 	};
 }

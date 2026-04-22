@@ -34,6 +34,7 @@ namespace ratchet
 	void SelfControlledCreature::checkTargetToAttack(Creature* target)
 	{
 		float absX = std::abs(target->getPosition().x - getPosition().x);
+		float absY = std::abs(target->getPosition().y - getPosition().y);
 
 		if (m_enemyType == EnemyType::Ground)
 		{
@@ -317,46 +318,19 @@ namespace ratchet
 			}
 			else if (m_movementType == MovementType::AIR)
 			{
-				float playerX = m_target->getPosition().x;
-				float playerY = m_target->getPosition().y;
-				float droneX = getPosition().x;
-				float droneY = getPosition().y;
+				
 
-				float diffX = playerX - droneX;
-				float targetHoverY = playerY - m_maxHeightAbovePlayer;
-				float diffY = targetHoverY - droneY;
-
-				bool needY = std::abs(diffY) > m_targetMaxDistanceAttackY;
-
-				if (needY)
+				if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
 				{
-					m_input.y = (diffY > 0.f) ? 1.f : -1.f;
-					m_input.x = 0.f;
-				}
-				else
-				{
-					m_input.y = 0.f;
-					if (std::abs(diffX) > m_targetMaxDistanceAttackX)
-					{
-						m_input.x = (diffX > 0.f) ? 1.f : -1.f;
-						m_facingRight = (diffX > 0.f);
-					}
-					else
+
+					const sf::Vector2f& targetPosition = m_target->getPosition();
+
+		
+					if (m_isAttacking)
 					{
 						m_input.x = 0.f;
-					}
-				}
+						m_input.y = 0.f;
 
-				if (m_isAttacking)
-				{
-					if (needY)
-					{
-						m_input.m_isFiring = false;
-						m_waitTostartAttack = false;
-						m_fireCooldown.m_clock.restart();
-					}
-					else
-					{
 						if (!m_waitTostartAttack)
 						{
 							m_fireCooldown.m_clock.restart();
@@ -367,12 +341,60 @@ namespace ratchet
 						{
 							m_input.m_isFiring = true;
 						}
+
+						return;
 					}
-				}
-				else
-				{
-					m_input.m_isFiring = false;
+
+					if (m_input.m_isFiring &&
+						m_currentCharacterState == WeaponAnimation::STATE::Recoil)
+					{
+						m_currentCharacterState = WeaponAnimation::STATE::Aim;
+						m_input.m_isFiring = false;
+					}
+
 					m_waitTostartAttack = false;
+					m_fireCooldown.m_clock.restart();
+
+					bool canSeePlayer =
+						circleCollider->performFollowTargetRayCast(m_position, targetPosition);
+
+					if (!canSeePlayer)
+					{
+						m_input.x = 0.f;
+						m_input.y = 0.f;
+						return;
+					}
+
+
+					sf::Vector2f toTarget = targetPosition - m_position;
+
+					float moveX = toTarget.x;
+
+					float minY = targetPosition.y + m_minFollowHeightOffset;
+
+					float moveY = 0.f;
+
+					
+					if (m_position.y > minY)
+					{
+						moveY = -1.f;
+					}
+					else if (m_position.y < targetPosition.y - m_minFollowHeightOffset)
+					{
+						moveY = 1.f;
+					}
+
+
+					sf::Vector2f direction(moveX, moveY);
+
+					float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+					if (length != 0.f)
+						direction /= length;
+
+					m_input.x = direction.x;
+					m_input.y = direction.y;
+			
 				}
 			}
 		}
@@ -548,11 +570,6 @@ namespace ratchet
 		float absY = std::abs(diff.y);
 
 		m_isTagetBehindCharacter = (diff.x < 0.0f);
-
-		if (m_movementType == MovementType::AIR)
-		{
-			m_isTargetUppperOfCharacter = (diff.y < 0.0f);
-		}
 
 		m_isTargetDetected =
 			(absX <= m_targetMaxDistanceDetectionX &&
