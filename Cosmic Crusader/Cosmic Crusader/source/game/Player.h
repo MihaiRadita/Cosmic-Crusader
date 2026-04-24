@@ -39,6 +39,8 @@ namespace ratchet
 		void Start() override;
 
 		void Die() override;
+
+		void uptadeTrace() override;
 	
 
 		//Prints

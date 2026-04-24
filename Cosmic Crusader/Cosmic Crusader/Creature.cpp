@@ -196,6 +196,7 @@ namespace ratchet
 		m_isRightNoWeapon = true;
 
 		PostCosntructFixup();
+
 	}
 
 	Creature::~Creature()
@@ -667,6 +668,11 @@ namespace ratchet
 			m_mustSpawnBullet = false;
 
 		}
+	}
+
+	void Creature::uptadeTrace()
+	{
+
 	}
 
 	void Creature::RestartObjectFeatures()

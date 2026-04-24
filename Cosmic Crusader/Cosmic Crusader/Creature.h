@@ -122,6 +122,18 @@ namespace ratchet
 		sf::SoundBuffer m_walkSoundBuffer;
 		sf::Sound m_walkSound;
 
+
+
+		const int m_maxTracePoints = 10;
+		std::vector<sf::Vector2f> m_tracePointsList;
+		std::vector<sf::CircleShape>m_traceRnederedPoints;
+		float m_maxDistancePointX = 1.f;
+		float m_maxDistancePointY = 1.f;
+		sf::Vector2f m_previousTracePoiintPos;
+
+		int m_currenIndexTrace = 0;
+
+
 		//Constructors
 		Creature(const CreatureConfig& config);
 
@@ -139,6 +151,9 @@ namespace ratchet
 		void updateWeaponSelection() override;
 		void updateShooting();
 
+
+		//Trace functions
+		virtual void uptadeTrace();
 
 		void RestartObjectFeatures() override;
 
