@@ -318,15 +318,14 @@ namespace ratchet
 			}
 			else if (m_movementType == MovementType::AIR)
 			{
-				
-
+			
 				if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
 				{
 
 					const sf::Vector2f& targetPosition = m_target->getPosition();
 
 		
-					if (m_isAttacking)
+					if (m_isAttacking && m_canSeePlayer)
 					{
 						m_input.x = 0.f;
 						m_input.y = 0.f;
@@ -355,45 +354,108 @@ namespace ratchet
 					m_waitTostartAttack = false;
 					m_fireCooldown.m_clock.restart();
 
-					bool canSeePlayer =
+					m_canSeePlayer =
 						circleCollider->performFollowTargetRayCast(m_position, targetPosition);
 
-					if (!canSeePlayer)
+					/*if (!canSeePlayer)
 					{
 						m_input.x = 0.f;
 						m_input.y = 0.f;
 						return;
+					}*/
+
+					if (m_canSeePlayer)
+					{
+						if (!m_targetPointsFollow.empty())
+						{
+							m_targetPointsFollow.clear();
+						}
+
+						sf::Vector2f toTarget = targetPosition - m_position;
+
+						float moveX = toTarget.x;
+
+						float minY = targetPosition.y + m_minFollowHeightOffset;
+
+						float moveY = 0.f;
+
+
+						if (m_position.y > minY)
+						{
+							moveY = -1.f;
+						}
+						else if (m_position.y < targetPosition.y - m_minFollowHeightOffset)
+						{
+							moveY = 1.f;
+						}
+
+
+						sf::Vector2f direction(moveX, moveY);
+
+						float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+						if (length != 0.f)
+							direction /= length;
+
+						m_input.x = direction.x;
+						m_input.y = direction.y;
 					}
+					else
+					{
+						auto* player = dynamic_cast<Player*>(m_target);
+
+						if (player)
+						{
+							if (m_targetCurrentIndex != player->m_currenIndexTrace)
+							{
+								if (!m_targetPointsFollow.empty())
+								{
+									m_targetPointsFollow.clear();
+								}
+								
+								for (size_t i = 0; i < player->m_tracePointsList.size(); i++)
+								{
+									size_t index = (player->m_currenIndexTrace + i) % player->m_tracePointsList.size();
+									sf::Vector2f point = player->m_tracePointsList[index];
+									m_targetPointsFollow.push_back(point);
+								}
+								m_targetCurrentIndex = player->m_currenIndexTrace;
+								m_currentTargetPointIndex = 0;
+							}
 
 
-					sf::Vector2f toTarget = targetPosition - m_position;
+							if (!m_targetPointsFollow.empty())
+							{
+								sf::Vector2f toTarget = m_targetPointsFollow[m_currentTargetPointIndex] - m_position;
+								
+								float dist = std::sqrt(toTarget.x * toTarget.x + toTarget.y * toTarget.y);
+								
+								if (dist <= 0.01f)
+								{
+									if (m_currentTargetPointIndex < m_targetPointsFollow.size() - 1)
+									{
+										m_currentTargetPointIndex++;
+									}
+								}
 
-					float moveX = toTarget.x;
+								float moveX = toTarget.x;
+								float moveY = toTarget.y;
 
-					float minY = targetPosition.y + m_minFollowHeightOffset;
+								sf::Vector2f direction(moveX, moveY);
 
-					float moveY = 0.f;
+								float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
+								if (length != 0.f)
+									direction /= length;
+
+								m_input.x = direction.x;
+								m_input.y = direction.y;
+
+							}
+							
+						}
+					}
 					
-					if (m_position.y > minY)
-					{
-						moveY = -1.f;
-					}
-					else if (m_position.y < targetPosition.y - m_minFollowHeightOffset)
-					{
-						moveY = 1.f;
-					}
-
-
-					sf::Vector2f direction(moveX, moveY);
-
-					float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-
-					if (length != 0.f)
-						direction /= length;
-
-					m_input.x = direction.x;
-					m_input.y = direction.y;
 			
 				}
 			}

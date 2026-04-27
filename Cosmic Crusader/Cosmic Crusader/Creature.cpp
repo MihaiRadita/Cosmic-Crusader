@@ -10,7 +10,10 @@
 
 namespace ratchet
 {
-	
+	std::vector<sf::Vector2f> Creature::GetTracePointsList()
+	{
+		return m_tracePointsList;
+	}
 	Creature::Creature(const CreatureConfig& config) : GameObject(config)
 	{
 		
@@ -63,6 +66,8 @@ namespace ratchet
 		m_currentCharacterState = config.m_currentState;
 
 		m_isFallingWithoutJumping = false;
+
+		m_previousIndexTrace = m_currenIndexTrace;
 
 		if (m_creatureFallingTexture.loadFromFile(creatureFallingTexturePath) == false)
 		{

@@ -39,6 +39,15 @@ namespace ratchet
 			m_origin = b2Vec2(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f);
 		}
 
+		if (m_massValue != 0.0f)
+		{
+			m_massData.mass = m_massValue;
+
+			m_body->SetMassData(&m_massData);
+		}
+
+
+		
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
@@ -54,6 +63,11 @@ namespace ratchet
 		m_fixtureDef.shape = &m_circleShape;
 		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
 		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
+
+		m_fixtureDef.density = 1.f;
+		m_fixtureDef.friction = config.m_fixtureDef.friction;
+		m_fixtureDef.restitution = config.m_fixtureDef.restitution;
+
 		m_body->CreateFixture(&m_fixtureDef);
 
 		if (m_bodyDef.type == b2_staticBody)

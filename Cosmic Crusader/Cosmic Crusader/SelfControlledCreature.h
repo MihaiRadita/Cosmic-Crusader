@@ -36,7 +36,14 @@ namespace ratchet
 
 		float m_minFollowHeightOffset = 3.0f;
 
+		std::vector<sf::Vector2f> m_targetPointsFollow;
+
+		int m_targetCurrentIndex;
+		int m_currentTargetPointIndex = 0;
+
 		EnemyType m_enemyType;
+
+		bool m_canSeePlayer = false;
 
 
 		//Check Attack Target Function

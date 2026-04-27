@@ -51,17 +51,17 @@
         },
         "LevelMap1/Level Map.tmx": {
             "expandedObjectLayers": [
-                13,
-                4,
-                3,
                 15,
+                13,
+                3,
+                4,
                 16
             ],
             "scale": 0.75,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 16093.333333333332,
-                "y": -914.6666666666666
+                "x": 15888,
+                "y": -660
             }
         },
         "LevelMap1/Level Map.tmx#Main Menu": {
@@ -126,7 +126,7 @@
         "LevelMap1/Action Trigger.tsx"
     ],
     "project": "Cosmic_Crusader.tiled-project",
-    "property.type": "string",
+    "property.type": "float",
     "recentFiles": [
         "LevelMap1/Action Trigger.tsx",
         "LevelMap1/Main Menu.tmx",

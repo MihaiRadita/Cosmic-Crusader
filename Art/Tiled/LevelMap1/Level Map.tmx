@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="22" nextobjectid="5207">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="22" nextobjectid="5207">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -62353,6 +62353,7 @@
     <property name="characterAnglesMask" type="int" value="1"/>
     <property name="colliderAngularDamping" type="float" value="0"/>
     <property name="colliderBullet" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderGravityScale" type="float" value="0"/>

@@ -131,7 +131,11 @@ namespace ratchet
 		float m_maxDistancePointY = 1.f;
 		sf::Vector2f m_previousTracePoiintPos;
 
+		std::vector<sf::Vector2f>GetTracePointsList();
+
 		int m_currenIndexTrace = 0;
+		int m_previousIndexTrace = 0;
+
 
 
 		//Constructors
