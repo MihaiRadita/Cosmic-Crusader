@@ -80,7 +80,7 @@ namespace ratchet
 
 			sf::CircleShape circle(0.02f);
 			circle.setPosition(playerPos);
-			circle.setFillColor(sf::Color::Blue);
+			circle.setFillColor(sf::Color::Magenta);
 
 			m_traceRnederedPoints.push_back(circle);
 
@@ -103,7 +103,7 @@ namespace ratchet
 
 			sf::CircleShape circle(0.02);
 			circle.setPosition(playerPos);
-			circle.setFillColor(sf::Color::Blue);
+			circle.setFillColor(sf::Color::Magenta);
 
 			m_traceRnederedPoints.push_back(circle);
 		}
