@@ -226,6 +226,18 @@ namespace ratchet
 
 									setPosition(sf::Vector2f(config.position.x, config.position.y));
 								}
+								else if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
+								{
+									auto* configColliderPtr = config.m_colliderConfig;
+
+									circleCollider->m_body->SetTransform(b2Vec2(config.position.x, config.position.y), 0.0f);
+
+									circleCollider->m_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+									circleCollider->m_body->SetAngularVelocity(0.0f);
+
+									setPosition(sf::Vector2f(config.position.x, config.position.y));
+
+								}
 							}
 						}
 						break;
@@ -322,10 +334,46 @@ namespace ratchet
 				if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
 				{
 
-					const sf::Vector2f& targetPosition = m_target->getPosition();
+
+
+					auto* player = dynamic_cast<Player*>(m_target);
+
+					if (!player)
+					{
+						return;
+					}
+
+
+					sf::Vector2f baseTarget = player->getPosition();
+
+					sf::Vector2f diff = baseTarget - m_position;
+
+					float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+
+
+					sf::Vector2f direction(0.f, 0.f);
+
+					if (length != 0.f)
+					{
+						direction = diff / length;
+					}
+
+					sf::Vector2f perp(-direction.y, direction.x);
+
+					float radius = circleCollider->getGlobalRadius();
+
+					sf::Vector2f centerStart = m_position;
+					sf::Vector2f rightStart = m_position + perp * radius;
+					sf::Vector2f leftStart = m_position - perp * radius;
+
+
+
+					m_canSeePlayerCenter = circleCollider->performFollowTargetRayCast(centerStart, baseTarget);
+					m_canSeeRightSide = circleCollider->performFollowTargetRayCast(rightStart, baseTarget);
+					m_canSeeLeftSide = circleCollider->performFollowTargetRayCast(leftStart, baseTarget);
 
 		
-					if (m_isAttacking && m_canSeePlayer)
+					if (m_isAttacking && m_canSeePlayerCenter && m_canSeeRightSide && m_canSeeLeftSide)
 					{
 						m_input.x = 0.f;
 						m_input.y = 0.f;
@@ -354,55 +402,40 @@ namespace ratchet
 					m_waitTostartAttack = false;
 					m_fireCooldown.m_clock.restart();
 
-					m_canSeePlayer =
-						circleCollider->performFollowTargetRayCast(m_position, targetPosition);
-
-					/*if (!canSeePlayer)
-					{
-						m_input.x = 0.f;
-						m_input.y = 0.f;
-						return;
-					}*/
-
-					if (m_canSeePlayer)
+					if (m_canSeePlayerCenter && m_canSeeRightSide && m_canSeeLeftSide)
 					{
 						if (!m_targetPointsFollow.empty())
 						{
 							m_targetPointsFollow.clear();
 						}
 
-						sf::Vector2f toTarget = targetPosition - m_position;
+						sf::Vector2f target = baseTarget;
 
-						float moveX = toTarget.x;
+						float bottomLimit = player->getPosition().y - m_minFollowHeightOffset;
 
-						float minY = targetPosition.y + m_minFollowHeightOffset;
+						sf::Vector2f finalDiff = target - m_position;
 
-						float moveY = 0.f;
+						float finalLength = std::sqrt(finalDiff.x * finalDiff.x + finalDiff.y * finalDiff.y);
 
+						sf::Vector2f finalDirection(0.f, 0.f);
 
-						if (m_position.y > minY)
+						if (finalLength != 0.f)
 						{
-							moveY = -1.f;
-						}
-						else if (m_position.y < targetPosition.y - m_minFollowHeightOffset)
-						{
-							moveY = 1.f;
+							finalDirection.x = finalDiff.x / finalLength;
+							finalDirection.y = finalDiff.y / finalLength;
 						}
 
+						if (std::abs(m_position.y) <= std::abs(bottomLimit))
+						{
+							finalDirection.y = 0.f;
+						}
 
-						sf::Vector2f direction(moveX, moveY);
 
-						float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-
-						if (length != 0.f)
-							direction /= length;
-
-						m_input.x = direction.x;
-						m_input.y = direction.y;
+						m_input.x = finalDirection.x;
+						m_input.y = finalDirection.y;
 					}
-					else
+					else if(!m_canSeePlayerCenter || !m_canSeeRightSide || !m_canSeeLeftSide)
 					{
-						auto* player = dynamic_cast<Player*>(m_target);
 
 						if (player)
 						{
@@ -437,16 +470,6 @@ namespace ratchet
 										m_currentTargetPointIndex++;
 									}
 								}
-
-								float moveX = toTarget.x;
-								float moveY = toTarget.y;
-
-								sf::Vector2f direction(moveX, moveY);
-
-								float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-
-								if (length != 0.f)
-									direction /= length;
 
 								m_input.x = direction.x;
 								m_input.y = direction.y;

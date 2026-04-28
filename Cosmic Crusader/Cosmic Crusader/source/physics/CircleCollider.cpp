@@ -162,14 +162,46 @@ namespace ratchet
 			{
 				if (enemy->m_isTargetDetected)
 				{
-					sf::Vector2f startPoint = sf::Vector2f{};
+					sf::Vector2f startPointCenter = sf::Vector2f{};
+					sf::Vector2f startPointLeftSide = sf::Vector2f{};
+					sf::Vector2f startPointRightSide = sf::Vector2f{};
 					sf::Vector2f endPoint = sf::Vector2f{};
 
-					startPoint = enemy->getPosition();
+					sf::Vector2f baseTarget = player->getPosition();
+
+					sf::Vector2f direction(0.f, 0.f);
+
+					sf::Vector2f diff = baseTarget - enemy->getPosition();
+
+					float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+
+					if (length != 0.f)
+					{
+						direction = diff / length;
+					}
+
+					// perpendicular
+					sf::Vector2f perp(-direction.y, direction.x);
+
+					float radius = getGlobalRadius();
+
+
+					startPointCenter = enemy->getPosition();
+					startPointLeftSide =enemy->getPosition() - perp * radius;
+					startPointRightSide = enemy->getPosition() + perp * radius;
+
+
 					endPoint = player->getPosition();
 
-					sf::Vertex rayCast[] = { sf::Vertex(sf::Vector2f(startPoint.x, startPoint.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
-					target.draw(rayCast, 2, sf::Lines);
+					sf::Vertex rayCastCener[] = { sf::Vertex(sf::Vector2f(startPointCenter.x, startPointCenter.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
+					target.draw(rayCastCener, 2, sf::Lines);
+
+					sf::Vertex raycastLeftSide[] = { sf::Vertex(sf::Vector2f(startPointLeftSide.x, startPointLeftSide.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
+					target.draw(raycastLeftSide, 2, sf::Lines);
+
+					sf::Vertex raycastRightSide[] = { sf::Vertex(sf::Vector2f(startPointRightSide.x, startPointRightSide.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
+					target.draw(raycastRightSide, 2, sf::Lines);
+
 				}
 
 				

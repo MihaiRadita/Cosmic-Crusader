@@ -43,7 +43,9 @@ namespace ratchet
 
 		EnemyType m_enemyType;
 
-		bool m_canSeePlayer = false;
+		bool m_canSeePlayerCenter = false;
+		bool m_canSeeRightSide = false;
+		bool m_canSeeLeftSide = false;
 
 
 		//Check Attack Target Function
