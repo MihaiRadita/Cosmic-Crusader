@@ -124,12 +124,16 @@ namespace ratchet
 
 
 
-		const int m_maxTracePoints = 10;
+		const int m_maxTracePoints = 30;
 		std::vector<sf::Vector2f> m_tracePointsList;
 		std::vector<sf::CircleShape>m_traceRnederedPoints;
+		std::vector<bool> m_tracePointIsAccessible;
 		float m_maxDistancePointX = 1.f;
 		float m_maxDistancePointY = 1.f;
 		sf::Vector2f m_previousTracePoiintPos;
+		sf::Vector2f m_previousTraceDirection;
+
+		bool m_traceCache = false;
 
 		std::vector<sf::Vector2f>GetTracePointsList();
 

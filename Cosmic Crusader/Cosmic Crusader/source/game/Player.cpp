@@ -66,15 +66,70 @@ namespace ratchet
 
 	void Player::uptadeTrace()
 	{
+		m_traceCache = false;
+
+		const sf::Vector2f playerPos = getPosition();
+		sf::Vector2f delta = playerPos - m_previousTracePoiintPos;
+
+		float maxComponent = std::max(std::abs(delta.x), std::abs(delta.y));
+
+		bool directionChanged = false;
+
+		if (m_tracePointsList.size() > 1)
+		{
+			sf::Vector2f lastDir = m_previousTraceDirection;
+			sf::Vector2f currentDir = (maxComponent > 0.f) ? delta / maxComponent : sf::Vector2f(0.f, 0.f);
+
+			float dot = lastDir.x * currentDir.x + lastDir.y * currentDir.y;
+
+			if (dot <0.7f)
+			{
+				directionChanged = true;
+			}
+		}
+
 		if (!m_isMoving && m_isGround)
 		{
-			m_previousTracePoiintPos = getPosition();
+			m_previousTracePoiintPos = playerPos;
+			m_previousTraceDirection = sf::Vector2f(0.f, 0.f);
 			return;
 		}
 
-		const auto& playerPos = getPosition();
+		if (directionChanged)
+		{
+			m_tracePointsList.clear();
+			m_traceRnederedPoints.clear();
+			m_tracePointIsAccessible.clear();
+			m_currenIndexTrace = 0;
+		}
 
 		if (m_tracePointsList.empty())
+		{
+			m_tracePointsList.push_back(playerPos);
+
+			sf::CircleShape circle(0.001f);
+			circle.setPosition(playerPos);
+			circle.setFillColor(sf::Color::Magenta);
+
+			m_traceRnederedPoints.push_back(circle);
+			m_tracePointIsAccessible.push_back(false);
+
+			m_previousTracePoiintPos = playerPos;
+			m_previousTraceDirection = sf::Vector2f(0.f, 0.f);
+
+			m_traceCache = true;
+			return;
+		}
+
+		if (maxComponent < m_maxDistancePointX)
+		{
+			return;
+		}
+
+		sf::Vector2f currentDir = (maxComponent > 0.f) ? delta / maxComponent : sf::Vector2f(0.f, 0.f);
+		m_previousTraceDirection = currentDir;
+
+		if (m_tracePointsList.size() < m_maxTracePoints)
 		{
 			m_tracePointsList.push_back(playerPos);
 
@@ -83,29 +138,9 @@ namespace ratchet
 			circle.setFillColor(sf::Color::Magenta);
 
 			m_traceRnederedPoints.push_back(circle);
+			m_tracePointIsAccessible.push_back(false);
 
-			m_previousTracePoiintPos = playerPos;
-			return;
-		}
-
-		sf::Vector2f distanceTrace = playerPos - m_previousTracePoiintPos;
-
-		float maxComponent = std::max(std::abs(distanceTrace.x), std::abs(distanceTrace.y));
-
-		if (maxComponent < m_maxDistancePointX)
-		{
-			return;
-		}
-
-		if (m_tracePointsList.size() < m_maxTracePoints)
-		{
-			m_tracePointsList.push_back(playerPos);
-
-			sf::CircleShape circle(0.02);
-			circle.setPosition(playerPos);
-			circle.setFillColor(sf::Color::Magenta);
-
-			m_traceRnederedPoints.push_back(circle);
+			m_traceCache = true;
 		}
 		else
 		{
@@ -113,6 +148,8 @@ namespace ratchet
 			m_traceRnederedPoints[m_currenIndexTrace].setPosition(playerPos);
 
 			m_currenIndexTrace = (m_currenIndexTrace + 1) % m_maxTracePoints;
+
+			m_traceCache = true;
 		}
 
 		m_previousTracePoiintPos = playerPos;

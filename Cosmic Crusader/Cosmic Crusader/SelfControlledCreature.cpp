@@ -407,6 +407,7 @@ namespace ratchet
 						if (!m_targetPointsFollow.empty())
 						{
 							m_targetPointsFollow.clear();
+							m_currentTargetPointIndex = 0;
 						}
 
 						sf::Vector2f target = baseTarget;
@@ -439,47 +440,94 @@ namespace ratchet
 
 						if (player)
 						{
-							if (m_targetCurrentIndex != player->m_currenIndexTrace)
+							float minDist = std::numeric_limits<float>::max();
+
+							sf::Vector2f startPathPoint{};
+							size_t startPointIndex = 0;
+							bool found = false;
+
+							std::fill(
+								player->m_tracePointIsAccessible.begin(),
+								player->m_tracePointIsAccessible.end(),
+								false
+							);
+
+							const auto& trace = player->m_tracePointsList;
+							const size_t traceSize = trace.size();
+
+							for (size_t i = 0; i < traceSize; ++i)
 							{
-								if (!m_targetPointsFollow.empty())
+								size_t index = traceSize - 1 - i;
+								sf::Vector2f targetPoint = trace[index];
+
+								bool blocked =
+									circleCollider->performFollowTargetRayCast(centerStart, targetPoint) ||
+									circleCollider->performFollowTargetRayCast(rightStart, targetPoint) ||
+									circleCollider->performFollowTargetRayCast(leftStart, targetPoint);
+
+								if (blocked)
 								{
-									m_targetPointsFollow.clear();
+									player->m_tracePointIsAccessible[index] = false;
+									continue;
 								}
-								
-								for (size_t i = 0; i < player->m_tracePointsList.size(); i++)
+
+								player->m_tracePointIsAccessible[index] = true;
+
+								sf::Vector2f diffPoint = targetPoint - m_position;
+								float lengthPoint = std::sqrt(diffPoint.x * diffPoint.x + diffPoint.y * diffPoint.y);
+
+								if (lengthPoint < minDist)
 								{
-									size_t index = (player->m_currenIndexTrace + i) % player->m_tracePointsList.size();
-									sf::Vector2f point = player->m_tracePointsList[index];
-									m_targetPointsFollow.push_back(point);
+									minDist = lengthPoint;
+									startPathPoint = targetPoint;
+									startPointIndex = index;
+									found = true;
 								}
-								m_targetCurrentIndex = player->m_currenIndexTrace;
+							}
+
+							if (found && (m_targetPointsFollow.empty() || player->m_traceCache))
+							{
+								m_targetPointsFollow.clear();
+
+								for (size_t i = startPointIndex; i < traceSize; ++i)
+								{
+									m_targetPointsFollow.push_back(trace[i]);
+								}
+
 								m_currentTargetPointIndex = 0;
 							}
 
-
 							if (!m_targetPointsFollow.empty())
 							{
-								sf::Vector2f toTarget = m_targetPointsFollow[m_currentTargetPointIndex] - m_position;
-								
-								float dist = std::sqrt(toTarget.x * toTarget.x + toTarget.y * toTarget.y);
-								
-								if (dist <= 0.01f)
+								sf::Vector2f pointTarget = m_targetPointsFollow[m_currentTargetPointIndex];
+
+								sf::Vector2f diffPoint = pointTarget - m_position;
+								float lengthPoint = std::sqrt(diffPoint.x * diffPoint.x + diffPoint.y * diffPoint.y);
+
+								sf::Vector2f direction(0.f, 0.f);
+
+								if (lengthPoint > 0.0001f)
 								{
-									if (m_currentTargetPointIndex < m_targetPointsFollow.size() - 1)
-									{
-										m_currentTargetPointIndex++;
-									}
+									direction = diffPoint / lengthPoint;
 								}
 
 								m_input.x = direction.x;
 								m_input.y = direction.y;
 
+								if (lengthPoint <= circleCollider->getGlobalRadius())
+								{
+									m_currentTargetPointIndex++;
+
+									if (m_currentTargetPointIndex >= m_targetPointsFollow.size())
+									{
+										m_targetPointsFollow.clear();
+										m_currentTargetPointIndex = 0;
+									}
+								}
 							}
-							
 						}
 					}
 					
-			
 				}
 			}
 		}
