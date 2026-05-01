@@ -193,6 +193,16 @@ namespace ratchet
 				m_activeRenderer = propertyValue.get<bool>();
 			}
 
+			if (propertyName == "minFollowHeightOffset")
+			{
+				m_minFollowHeightOffset = propertyValue.get<float>();
+			}
+			if (propertyName == "minCeilingDistance")
+			{
+				m_minCeilingDistance = propertyValue.get<float>();
+			}
+
+
 			if (propertyName == "colliderLayer")
 			{
 				if (m_colliderConfig)

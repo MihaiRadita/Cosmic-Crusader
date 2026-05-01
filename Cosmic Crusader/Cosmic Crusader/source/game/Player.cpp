@@ -12,6 +12,7 @@ namespace ratchet
 
 	Player::Player(const CreatureConfig& config) : Creature(config)
 	{
+		m_isInvulnerable = true;
 		initVariables();
 	}
 
@@ -64,29 +65,14 @@ namespace ratchet
 		}
 	}
 
-	void Player::uptadeTrace()
+	void Player::updateTrace()
 	{
-		m_traceCache = false;
 
 		const sf::Vector2f playerPos = getPosition();
 		sf::Vector2f delta = playerPos - m_previousTracePoiintPos;
 
 		float maxComponent = std::max(std::abs(delta.x), std::abs(delta.y));
 
-		bool directionChanged = false;
-
-		if (m_tracePointsList.size() > 1)
-		{
-			sf::Vector2f lastDir = m_previousTraceDirection;
-			sf::Vector2f currentDir = (maxComponent > 0.f) ? delta / maxComponent : sf::Vector2f(0.f, 0.f);
-
-			float dot = lastDir.x * currentDir.x + lastDir.y * currentDir.y;
-
-			if (dot <0.7f)
-			{
-				directionChanged = true;
-			}
-		}
 
 		if (!m_isMoving && m_isGround)
 		{
@@ -95,27 +81,17 @@ namespace ratchet
 			return;
 		}
 
-		if (directionChanged)
-		{
-			m_tracePointsList.clear();
-			m_traceRnederedPoints.clear();
-			m_tracePointIsAccessible.clear();
-			m_currenIndexTrace = 0;
-		}
-
 		if (m_tracePointsList.empty())
 		{
 			m_tracePointsList.push_back(playerPos);
 
-			sf::CircleShape circle(0.001f);
+			sf::CircleShape circle(0.03f);
 			circle.setPosition(playerPos);
 			circle.setFillColor(sf::Color::Magenta);
 
-			m_traceRnederedPoints.push_back(circle);
-			m_tracePointIsAccessible.push_back(false);
+			m_traceRenderedPoints.push_back(circle);
 
 			m_previousTracePoiintPos = playerPos;
-			m_previousTraceDirection = sf::Vector2f(0.f, 0.f);
 
 			m_traceCache = true;
 			return;
@@ -125,32 +101,23 @@ namespace ratchet
 		{
 			return;
 		}
+	
 
-		sf::Vector2f currentDir = (maxComponent > 0.f) ? delta / maxComponent : sf::Vector2f(0.f, 0.f);
-		m_previousTraceDirection = currentDir;
-
-		if (m_tracePointsList.size() < m_maxTracePoints)
+		while (m_tracePointsList.size() >= m_maxTracePoints)
 		{
-			m_tracePointsList.push_back(playerPos);
-
-			sf::CircleShape circle(0.02f);
-			circle.setPosition(playerPos);
-			circle.setFillColor(sf::Color::Magenta);
-
-			m_traceRnederedPoints.push_back(circle);
-			m_tracePointIsAccessible.push_back(false);
-
-			m_traceCache = true;
+			m_tracePointsList.pop_front();
+			m_traceRenderedPoints.erase(m_traceRenderedPoints.begin());
 		}
-		else
-		{
-			m_tracePointsList[m_currenIndexTrace] = playerPos;
-			m_traceRnederedPoints[m_currenIndexTrace].setPosition(playerPos);
 
-			m_currenIndexTrace = (m_currenIndexTrace + 1) % m_maxTracePoints;
+		
+		m_tracePointsList.push_back(playerPos);
 
-			m_traceCache = true;
-		}
+		sf::CircleShape circle(0.03f);
+		circle.setPosition(playerPos);
+		circle.setFillColor(sf::Color::Magenta);
+
+		m_traceRenderedPoints.push_back(circle);
+		
 
 		m_previousTracePoiintPos = playerPos;
 	}
@@ -543,7 +510,7 @@ namespace ratchet
 
 		Creature::update();
 
-		uptadeTrace();
+		updateTrace();
 	}
 
 
@@ -709,9 +676,9 @@ namespace ratchet
 				}
 			}
 
-			if (!m_traceRnederedPoints.empty())
+			if (!m_traceRenderedPoints.empty())
 			{
-				for (auto circlePoints : m_traceRnederedPoints)
+				for (auto circlePoints : m_traceRenderedPoints)
 				{
 					target.draw(circlePoints);
 				}

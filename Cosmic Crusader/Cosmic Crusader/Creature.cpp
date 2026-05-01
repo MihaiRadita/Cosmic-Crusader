@@ -10,7 +10,7 @@
 
 namespace ratchet
 {
-	std::vector<sf::Vector2f> Creature::GetTracePointsList()
+	std::list<sf::Vector2f> Creature::GetTracePointsList()
 	{
 		return m_tracePointsList;
 	}
@@ -675,7 +675,7 @@ namespace ratchet
 		}
 	}
 
-	void Creature::uptadeTrace()
+	void Creature::updateTrace()
 	{
 
 	}
@@ -984,7 +984,10 @@ namespace ratchet
 	}
 	void Creature::TakeDamage(float& damage)
 	{
-		m_health -= damage;
+		if (m_isInvulnerable == false)
+		{
+			m_health -= damage;
+		}
 
 		std::cout << "Charcter has life remained : " << m_health << std::endl;
 		if (m_health <= 0.0f)

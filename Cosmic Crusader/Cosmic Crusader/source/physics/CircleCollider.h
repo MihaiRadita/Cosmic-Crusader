@@ -59,6 +59,9 @@ namespace ratchet
 
 		bool performFollowTargetRayCast(const sf::Vector2f& charaterPosition, const sf::Vector2f& targetPosition) override;
 		void getCheckFollowTargetRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) override;
+		bool performUpPlatformRayCast(sf::Sprite& sprite) override;
+		bool performGroundRayCast(sf::Sprite& sprite) override;
+		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const override;
 
 
 	};

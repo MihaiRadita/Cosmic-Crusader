@@ -22,6 +22,9 @@ namespace ratchet
 		m_objectLayerName = config.m_objectLayerName;
 
 		m_flySpeed = config.m_flySpeed;
+
+		m_minFollowHeightOffset = config.m_minFollowHeightOffset;
+		m_minCeilingDistance = config.m_minCeilingDistance;
 	}
 	SelfControlledCreature::~SelfControlledCreature()
 	{
@@ -42,7 +45,14 @@ namespace ratchet
 		}
 		else if (m_enemyType == EnemyType::Flying)
 		{
-			m_isAttacking = (absX <= m_targetMaxDistanceAttackX);
+			sf::Vector2f diff = target->getPosition() - this->getPosition();
+			float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+
+			m_isAttacking = false;
+			if (length <= m_targetMaxDistanceAttackX)
+			{
+				m_isAttacking = true;
+			}
 		}
 
 	}
@@ -330,12 +340,8 @@ namespace ratchet
 			}
 			else if (m_movementType == MovementType::AIR)
 			{
-			
 				if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
 				{
-
-
-
 					auto* player = dynamic_cast<Player*>(m_target);
 
 					if (!player)
@@ -345,32 +351,42 @@ namespace ratchet
 
 
 					sf::Vector2f baseTarget = player->getPosition();
+					auto getPerpendicular = [&](sf::Vector2f tar) { 
+						sf::Vector2f diff = tar - m_position;
+						float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+						sf::Vector2f direction(0.f, 0.f);
+						if (length != 0.f)
+						{
+							direction = diff / length;
+						}
+						return sf::Vector2f(-direction.y, direction.x); // perpendicular
+					};
 
-					sf::Vector2f diff = baseTarget - m_position;
+					auto baseTargetPerpendicular = getPerpendicular(baseTarget);
+					float selfRadius = circleCollider->getGlobalRadius();
+					float playerRadius = selfRadius;
 
-					float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
-
-
-					sf::Vector2f direction(0.f, 0.f);
-
-					if (length != 0.f)
+					if (auto* playerCollider = player->m_collider)
 					{
-						direction = diff / length;
+						if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(playerCollider))
+						{
+							playerRadius = capsuleCollider->getGlobalRadius();
+						}
 					}
-
-					sf::Vector2f perp(-direction.y, direction.x);
-
-					float radius = circleCollider->getGlobalRadius();
+					float minRadius = std::min(selfRadius, playerRadius);
 
 					sf::Vector2f centerStart = m_position;
-					sf::Vector2f rightStart = m_position + perp * radius;
-					sf::Vector2f leftStart = m_position - perp * radius;
+					sf::Vector2f rightStart = m_position + baseTargetPerpendicular * minRadius;
+					sf::Vector2f leftStart = m_position - baseTargetPerpendicular * minRadius;
+
+					sf::Vector2f centerEnd = baseTarget;
+					sf::Vector2f rightEnd = baseTarget + baseTargetPerpendicular * minRadius;
+					sf::Vector2f leftEnd = baseTarget - baseTargetPerpendicular * minRadius;
 
 
-
-					m_canSeePlayerCenter = circleCollider->performFollowTargetRayCast(centerStart, baseTarget);
-					m_canSeeRightSide = circleCollider->performFollowTargetRayCast(rightStart, baseTarget);
-					m_canSeeLeftSide = circleCollider->performFollowTargetRayCast(leftStart, baseTarget);
+					m_canSeePlayerCenter = circleCollider->performFollowTargetRayCast(centerStart, centerEnd);
+					m_canSeeRightSide = circleCollider->performFollowTargetRayCast(rightStart, rightEnd);
+					m_canSeeLeftSide = circleCollider->performFollowTargetRayCast(leftStart, leftEnd);
 
 		
 					if (m_isAttacking && m_canSeePlayerCenter && m_canSeeRightSide && m_canSeeLeftSide)
@@ -412,117 +428,158 @@ namespace ratchet
 
 						sf::Vector2f target = baseTarget;
 
-						float bottomLimit = player->getPosition().y - m_minFollowHeightOffset;
-
-						sf::Vector2f finalDiff = target - m_position;
-
-						float finalLength = std::sqrt(finalDiff.x * finalDiff.x + finalDiff.y * finalDiff.y);
-
-						sf::Vector2f finalDirection(0.f, 0.f);
-
-						if (finalLength != 0.f)
+						// Swap target to favoured spot above the player if possible.
+						auto isTooCloseToCeiling = circleCollider->performUpPlatformRayCast(m_sprite);
+						if (!isTooCloseToCeiling)
 						{
-							finalDirection.x = finalDiff.x / finalLength;
-							finalDirection.y = finalDiff.y / finalLength;
+							auto favouredSpot = sf::Vector2f(baseTarget.x, baseTarget.y - m_minFollowHeightOffset);
+
+							auto targetPerpendicular = getPerpendicular(baseTarget);
+							sf::Vector2f targetCenterEnd = baseTarget;
+							sf::Vector2f targetRightEnd = baseTarget + targetPerpendicular * selfRadius;
+							sf::Vector2f targetLeftEnd = baseTarget - targetPerpendicular * selfRadius;
+
+							sf::Vector2f favouredSpotCenterEnd = favouredSpot;
+							sf::Vector2f favouredSpotRightEnd = favouredSpot + targetPerpendicular * selfRadius;
+							sf::Vector2f favouredSpotLeftEnd = favouredSpot - targetPerpendicular * selfRadius;
+
+							bool favouredSpotIsInLoSOfPlayer =
+								circleCollider->performFollowTargetRayCast(targetCenterEnd, favouredSpotCenterEnd) ||
+								circleCollider->performFollowTargetRayCast(targetRightEnd, favouredSpotRightEnd) ||
+								circleCollider->performFollowTargetRayCast(targetLeftEnd, favouredSpotLeftEnd);
+
+							if (favouredSpotIsInLoSOfPlayer)
+							{
+								sf::Vector2f potentialCeilingCenterEnd = favouredSpotCenterEnd + sf::Vector2f(0.0f, -1.0f) * m_minFollowHeightOffset;
+								sf::Vector2f potentialCeilingRightEnd = favouredSpotCenterEnd + sf::Vector2f(1.0f, 0.0f) * selfRadius + sf::Vector2f(0.0f, -1.0f) * m_minFollowHeightOffset;
+								sf::Vector2f potentialCeilingLeftEnd = favouredSpotCenterEnd - sf::Vector2f(1.0f, 0.0f) * selfRadius + sf::Vector2f(0.0f, -1.0f) * m_minFollowHeightOffset;
+
+								bool favouredSpotIsTooCloseToCeiling =
+									circleCollider->performFollowTargetRayCast(favouredSpotCenterEnd, potentialCeilingCenterEnd) ||
+									circleCollider->performFollowTargetRayCast(favouredSpotRightEnd, potentialCeilingRightEnd) ||
+									circleCollider->performFollowTargetRayCast(favouredSpotLeftEnd, potentialCeilingLeftEnd);
+
+								if (!favouredSpotIsTooCloseToCeiling)
+								{
+									target = favouredSpot;
+								}
+							}
 						}
 
-						if (std::abs(m_position.y) <= std::abs(bottomLimit))
+						sf::Vector2f directDiffToPlayer = target - m_position;
+
+						float directLengthToPlayer = std::sqrt(directDiffToPlayer.x * directDiffToPlayer.x + directDiffToPlayer.y * directDiffToPlayer.y);
+
+						sf::Vector2f directDirToPlayer(0.f, 0.f);
+
+						if (directLengthToPlayer != 0.f)
 						{
-							finalDirection.y = 0.f;
+							directDirToPlayer.x = directDiffToPlayer.x / directLengthToPlayer;
+							directDirToPlayer.y = directDiffToPlayer.y / directLengthToPlayer;
 						}
 
-
-						m_input.x = finalDirection.x;
-						m_input.y = finalDirection.y;
+						m_input.x = directDirToPlayer.x;
+						m_input.y = directDirToPlayer.y;
 					}
-					else if(!m_canSeePlayerCenter || !m_canSeeRightSide || !m_canSeeLeftSide)
+					else 
 					{
-
 						if (player)
 						{
-							float minDist = std::numeric_limits<float>::max();
-
-							sf::Vector2f startPathPoint{};
-							size_t startPointIndex = 0;
-							bool found = false;
-
-							std::fill(
-								player->m_tracePointIsAccessible.begin(),
-								player->m_tracePointIsAccessible.end(),
-								false
-							);
-
-							const auto& trace = player->m_tracePointsList;
-							const size_t traceSize = trace.size();
-
-							for (size_t i = 0; i < traceSize; ++i)
+							if (m_targetPointsFollow.empty())
 							{
-								size_t index = traceSize - 1 - i;
-								sf::Vector2f targetPoint = trace[index];
+								sf::Vector2f startPathPoint{};
+								size_t startPointIndex = 0;
+								bool found = false;
 
-								bool blocked =
-									circleCollider->performFollowTargetRayCast(centerStart, targetPoint) ||
-									circleCollider->performFollowTargetRayCast(rightStart, targetPoint) ||
-									circleCollider->performFollowTargetRayCast(leftStart, targetPoint);
+								const auto& trace = player->m_tracePointsList;
 
-								if (blocked)
+								if (trace.empty())
 								{
-									player->m_tracePointIsAccessible[index] = false;
-									continue;
+									return;
 								}
 
-								player->m_tracePointIsAccessible[index] = true;
 
-								sf::Vector2f diffPoint = targetPoint - m_position;
-								float lengthPoint = std::sqrt(diffPoint.x * diffPoint.x + diffPoint.y * diffPoint.y);
+								const size_t traceSize = trace.size();
 
-								if (lengthPoint < minDist)
-								{
-									minDist = lengthPoint;
-									startPathPoint = targetPoint;
-									startPointIndex = index;
-									found = true;
-								}
-							}
-
-							if (found && (m_targetPointsFollow.empty() || player->m_traceCache))
-							{
 								m_targetPointsFollow.clear();
-
-								for (size_t i = startPointIndex; i < traceSize; ++i)
+								for (auto it = trace.rbegin(); it != trace.rend(); ++it)
 								{
-									m_targetPointsFollow.push_back(trace[i]);
+									sf::Vector2f targetPoint = *it;
+									auto targetPointPerpendicular = getPerpendicular(targetPoint);
+									sf::Vector2f targetPointCenterEnd = targetPoint;
+									sf::Vector2f targetPointRightEnd = targetPoint + targetPointPerpendicular * selfRadius;
+									sf::Vector2f targetPointLeftEnd = targetPoint - targetPointPerpendicular * selfRadius;
+
+									m_targetPointsFollow.push_back(targetPoint);
+
+									bool blocked =
+										circleCollider->performFollowTargetRayCast(centerStart, targetPointCenterEnd) ||
+										circleCollider->performFollowTargetRayCast(rightStart, targetPointRightEnd) ||
+										circleCollider->performFollowTargetRayCast(leftStart, targetPointLeftEnd);
+
+									if (blocked)
+									{
+										continue;
+									}
+									else
+									{
+										std::reverse(m_targetPointsFollow.begin(), m_targetPointsFollow.end());
+										m_currentTargetPointIndex = 0;
+										break;
+									}
+							
 								}
-
-								m_currentTargetPointIndex = 0;
 							}
-
-							if (!m_targetPointsFollow.empty())
+							else
 							{
 								sf::Vector2f pointTarget = m_targetPointsFollow[m_currentTargetPointIndex];
 
-								sf::Vector2f diffPoint = pointTarget - m_position;
-								float lengthPoint = std::sqrt(diffPoint.x * diffPoint.x + diffPoint.y * diffPoint.y);
 
-								sf::Vector2f direction(0.f, 0.f);
+								auto pointTargetPerpendicular = getPerpendicular(pointTarget);
+								sf::Vector2f pointTargetCenterEnd = pointTarget;
+								sf::Vector2f pointTargetRightEnd = pointTarget + pointTargetPerpendicular * selfRadius;
+								sf::Vector2f pointTargetLeftEnd = pointTarget - pointTargetPerpendicular * selfRadius;
 
-								if (lengthPoint > 0.0001f)
+								bool blocked =
+									circleCollider->performFollowTargetRayCast(centerStart, pointTargetCenterEnd) ||
+									circleCollider->performFollowTargetRayCast(rightStart, pointTargetRightEnd) ||
+									circleCollider->performFollowTargetRayCast(leftStart, pointTargetLeftEnd);
+
+								bool reset = false;
+								if (blocked)
 								{
-									direction = diffPoint / lengthPoint;
+									reset = true;
+								}
+								else
+								{
+									sf::Vector2f diffPoint = pointTarget - m_position;
+									float lengthPoint = std::sqrt(diffPoint.x * diffPoint.x + diffPoint.y * diffPoint.y);
+
+									sf::Vector2f direction(0.f, 0.f);
+
+									if (lengthPoint > 0.0001f)
+									{
+										direction = diffPoint / lengthPoint;
+									}
+
+									m_input.x = direction.x;
+									m_input.y = direction.y;
+
+									if (lengthPoint <= circleCollider->getGlobalRadius())
+									{
+										m_currentTargetPointIndex++;
+
+										if (m_currentTargetPointIndex >= m_targetPointsFollow.size())
+										{
+											reset = true;
+										}
+									}
 								}
 
-								m_input.x = direction.x;
-								m_input.y = direction.y;
-
-								if (lengthPoint <= circleCollider->getGlobalRadius())
+								if (reset)
 								{
-									m_currentTargetPointIndex++;
-
-									if (m_currentTargetPointIndex >= m_targetPointsFollow.size())
-									{
-										m_targetPointsFollow.clear();
-										m_currentTargetPointIndex = 0;
-									}
+									m_targetPointsFollow.clear();
+									m_currentTargetPointIndex = 0;
 								}
 							}
 						}
@@ -536,6 +593,9 @@ namespace ratchet
 			m_input.x = 0;
 			m_input.y = 0;
 			m_input.isJump = false;
+			m_targetPointsFollow.clear();
+			m_currentTargetPointIndex = 0;
+
 			if (m_input.m_isFiring && m_currentCharacterState == WeaponAnimation::STATE::Recoil)
 			{
 				m_currentCharacterState = WeaponAnimation::STATE::Aim;
@@ -704,17 +764,13 @@ namespace ratchet
 
 		m_isTagetBehindCharacter = (diff.x < 0.0f);
 
+		float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
 
-		if (absX <= m_targetMaxDistanceDetectionX && absY <= m_targetMaxDistanceDetectionY)
+		m_isTargetDetected = false;
+		if (length <= m_targetMaxDistanceDetectionX)
 		{
 			m_isTargetDetected = true;
 		}
-		else if (absX > m_targetMaxDistanceLoseX)
-		{
-			m_isTargetDetected = false;
-
-		}
-			
 	}
 
 	void SelfControlledCreature::render(sf::RenderTarget& target)
@@ -723,5 +779,40 @@ namespace ratchet
 		target.draw(m_characterShootingPosition);
 		target.draw(m_shootingPointDynamic);
 		target.draw(m_shooitngPointCenter);
+
+
+		size_t index = 0ull;
+		for (auto it = m_targetPointsFollow.begin(), prevIt = m_targetPointsFollow.begin(); it != m_targetPointsFollow.end(); it++)
+		{
+			bool drawLineFromOldToCurrentPoint = false;
+
+			sf::CircleShape circle(0.1f);
+			circle.setPosition(*it);
+			if (index == m_currentTargetPointIndex)
+			{
+				circle.setFillColor(sf::Color::Cyan);
+			}
+			else
+			{
+				circle.setFillColor(sf::Color::Yellow);
+			}
+
+			if (prevIt != it)
+			{
+				drawLineFromOldToCurrentPoint = true;
+			}
+
+			if (drawLineFromOldToCurrentPoint)
+			{
+				sf::Vertex line[] = { sf::Vertex(*prevIt, sf::Color::Cyan), sf::Vertex(*it, sf::Color::Cyan)};
+				target.draw(line, 2, sf::Lines);
+
+				prevIt++;
+			}
+
+			target.draw(circle);
+			index++;
+		}
+
 	}
 }

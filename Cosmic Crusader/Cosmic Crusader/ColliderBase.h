@@ -136,6 +136,7 @@ namespace ratchet
 		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual void getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual bool performGroundRayCast(sf::Sprite& sprite);
+		virtual bool performUpPlatformRayCast(sf::Sprite& sprite);
 
 		//Checks for Jump Over Platforms
 		virtual void getJumpOverPlatformsBottomRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;

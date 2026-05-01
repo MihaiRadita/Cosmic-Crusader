@@ -122,20 +122,21 @@ namespace ratchet
 		sf::SoundBuffer m_walkSoundBuffer;
 		sf::Sound m_walkSound;
 
+		float m_minCeilingDistance;
 
+		bool m_isInvulnerable = false;
 
 		const int m_maxTracePoints = 30;
-		std::vector<sf::Vector2f> m_tracePointsList;
-		std::vector<sf::CircleShape>m_traceRnederedPoints;
-		std::vector<bool> m_tracePointIsAccessible;
-		float m_maxDistancePointX = 1.f;
-		float m_maxDistancePointY = 1.f;
+		std::list<sf::Vector2f> m_tracePointsList;
+		std::list<sf::CircleShape>m_traceRenderedPoints;
+		float m_maxDistancePointX = 0.3f;
+		float m_maxDistancePointY = 0.3f;
 		sf::Vector2f m_previousTracePoiintPos;
 		sf::Vector2f m_previousTraceDirection;
 
 		bool m_traceCache = false;
 
-		std::vector<sf::Vector2f>GetTracePointsList();
+		std::list<sf::Vector2f>GetTracePointsList();
 
 		int m_currenIndexTrace = 0;
 		int m_previousIndexTrace = 0;
@@ -161,7 +162,7 @@ namespace ratchet
 
 
 		//Trace functions
-		virtual void uptadeTrace();
+		virtual void updateTrace();
 
 		void RestartObjectFeatures() override;
 
@@ -255,6 +256,7 @@ namespace ratchet
 		 sf::CircleShape m_shooitngPointCenter;
 
 		 bool m_isGround;
+		 bool m_isTouchingUpPlatform;
 
 	private:
 	};

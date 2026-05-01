@@ -31,21 +31,29 @@ namespace ratchet
 		bool m_isAttacking = false;
 		bool m_canJumpOver = false;
 		bool m_isFallingRisk = false;
+		bool m_isTouchingHighPlatform = false;
 
+		bool m_isClimbingY;
 		float m_flySpeed = 0.0f;
 
-		float m_minFollowHeightOffset = 3.0f;
+		float m_minFollowHeightOffset = 3.f;
 
 		std::vector<sf::Vector2f> m_targetPointsFollow;
 
 		int m_targetCurrentIndex;
 		int m_currentTargetPointIndex = 0;
 
+		float minDist = 0.03f;
+		float maxDist = 0.03f;
+
+
 		EnemyType m_enemyType;
 
 		bool m_canSeePlayerCenter = false;
 		bool m_canSeeRightSide = false;
 		bool m_canSeeLeftSide = false;
+
+
 
 
 		//Check Attack Target Function

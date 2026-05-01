@@ -40,7 +40,7 @@ namespace ratchet
 
 		void Die() override;
 
-		void uptadeTrace() override;
+		void updateTrace() override;
 	
 
 		//Prints

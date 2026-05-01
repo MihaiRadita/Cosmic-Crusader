@@ -162,10 +162,10 @@ namespace ratchet
 			{
 				if (enemy->m_isTargetDetected)
 				{
-					sf::Vector2f startPointCenter = sf::Vector2f{};
-					sf::Vector2f startPointLeftSide = sf::Vector2f{};
-					sf::Vector2f startPointRightSide = sf::Vector2f{};
-					sf::Vector2f endPoint = sf::Vector2f{};
+					sf::Vector2f enemyPointCenter = sf::Vector2f{};
+					sf::Vector2f enemyPointLeftSide = sf::Vector2f{};
+					sf::Vector2f enemyPointRightSide = sf::Vector2f{};
+					sf::Vector2f playerPoint = sf::Vector2f{};
 
 					sf::Vector2f baseTarget = player->getPosition();
 
@@ -183,25 +183,40 @@ namespace ratchet
 					// perpendicular
 					sf::Vector2f perp(-direction.y, direction.x);
 
-					float radius = getGlobalRadius();
+					float selfRadius = getGlobalRadius();
+					float playerRadius = selfRadius;
+					if (auto* playerCollider = player->m_collider)
+					{
+						if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(playerCollider))
+						{
+							playerRadius = capsuleCollider->getGlobalRadius();
+						}
+					}
+					float minRadius = std::min(selfRadius, playerRadius);
 
+					enemyPointCenter = enemy->getPosition();
+					enemyPointLeftSide = enemy->getPosition() - perp * minRadius;
+					enemyPointRightSide = enemy->getPosition() + perp * minRadius;
 
-					startPointCenter = enemy->getPosition();
-					startPointLeftSide =enemy->getPosition() - perp * radius;
-					startPointRightSide = enemy->getPosition() + perp * radius;
+					playerPoint = player->getPosition();
 
+					sf::Vector2f playerPointCenter = playerPoint;
+					sf::Vector2f playerPointLeftSide = playerPoint - perp * minRadius;
+					sf::Vector2f playerPointRightSide = playerPoint + perp * minRadius;
 
-					endPoint = player->getPosition();
-
-					sf::Vertex rayCastCener[] = { sf::Vertex(sf::Vector2f(startPointCenter.x, startPointCenter.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
+					sf::Vertex rayCastCener[] = { sf::Vertex(enemyPointCenter, sf::Color::Green), sf::Vertex(playerPointCenter, sf::Color::Green) };
 					target.draw(rayCastCener, 2, sf::Lines);
 
-					sf::Vertex raycastLeftSide[] = { sf::Vertex(sf::Vector2f(startPointLeftSide.x, startPointLeftSide.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
+					sf::Vertex raycastLeftSide[] = { sf::Vertex(enemyPointLeftSide, sf::Color::Green), sf::Vertex(playerPointLeftSide, sf::Color::Green) };
 					target.draw(raycastLeftSide, 2, sf::Lines);
 
-					sf::Vertex raycastRightSide[] = { sf::Vertex(sf::Vector2f(startPointRightSide.x, startPointRightSide.y), sf::Color::Green), sf::Vertex(sf::Vector2f(endPoint.x, endPoint.y), sf::Color::Green) };
+					sf::Vertex raycastRightSide[] = { sf::Vertex(enemyPointRightSide, sf::Color::Green), sf::Vertex(playerPointRightSide, sf::Color::Green)};
 					target.draw(raycastRightSide, 2, sf::Lines);
 
+					sf::Vertex rayCastUpPlatform[] = { sf::Vertex(sf::Vector2f(enemyPointCenter.x, enemyPointCenter.y), sf::Color::Yellow), sf::Vertex(sf::Vector2f(enemyPointCenter.x, enemyPointCenter.y - 2.f), sf::Color::Yellow) };
+					target.draw(rayCastUpPlatform, 2, sf::Lines);
+					sf::Vertex rayCastGround[] = { sf::Vertex(sf::Vector2f(enemyPointCenter.x, enemyPointCenter.y), sf::Color::Red), sf::Vertex(sf::Vector2f(enemyPointCenter.x, enemyPointCenter.y + 2.f), sf::Color::Red) };
+					target.draw(rayCastGround, 2, sf::Lines);
 				}
 
 				
@@ -239,7 +254,7 @@ namespace ratchet
 
 	b2FixtureDef CircleCollider::getFixtureDef()
 	{
-		return m_fixtureDef;;
+		return m_fixtureDef;
 	}
 
 
@@ -302,6 +317,76 @@ namespace ratchet
 		xStart = m_origin.x;
 		yStart = m_origin.y;
 
+
+	}
+
+	bool CircleCollider::performUpPlatformRayCast(sf::Sprite& sprite)
+	{
+		if (!m_body || !s_physicsWorld)
+		{
+			return false;
+		}
+
+		b2Vec2 startPointMiddle = b2Vec2{};
+		b2Vec2 endPointMiddle = b2Vec2{};
+
+		startPointMiddle = b2Vec2(m_obj->getPosition().x, m_obj->getPosition().y);
+		endPointMiddle = b2Vec2(startPointMiddle.x, startPointMiddle.y - 2.f);
+
+		GroundRayCastCallBack callbackMiddle(m_body);
+
+		s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
+
+		if (SelfControlledCreature* self = dynamic_cast<SelfControlledCreature*>(m_obj))
+		{
+			bool canTouchHighPlatform = self->m_isTouchingHighPlatform;
+		}
+
+		if (callbackMiddle.m_fraction <= 1.0f && callbackMiddle.m_hit)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	bool CircleCollider::performGroundRayCast(sf::Sprite& sprite)
+	{
+		if (!m_body || !s_physicsWorld)
+		{
+			return false;
+		}
+
+		b2Vec2 startPointMiddle = b2Vec2{};
+		b2Vec2 endPointMiddle = b2Vec2{};
+		
+		startPointMiddle = b2Vec2(m_obj->getPosition().x, m_obj->getPosition().y);
+		endPointMiddle = b2Vec2(startPointMiddle.x, startPointMiddle.y + 2.f);
+
+		GroundRayCastCallBack callbackMiddle(m_body);
+
+		s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
+
+		if (SelfControlledCreature* self = dynamic_cast<SelfControlledCreature*>(m_obj))
+		{
+			float speed = self->m_movementSpeed;
+			bool canJumpOver = self->m_canJumpOver;
+		}
+		else if (Player* pl = dynamic_cast<Player*>(m_obj))
+		{
+			float  angledeg = pl->m_movementSpeed;
+		}
+
+		if (callbackMiddle.m_fraction <= 1.0f && callbackMiddle.m_hit)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	void CircleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
+	{
 
 	}
 

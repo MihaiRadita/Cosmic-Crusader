@@ -30,6 +30,9 @@ namespace ratchet
 		float m_targetMaxDistanceAttackX;
 		float m_targetMaxDistanceAttackY;
 
+		float m_minFollowHeightOffset;
+		float m_minCeilingDistance;
+
 		float m_flySpeed;
 
 		EnemyType m_enemyType;

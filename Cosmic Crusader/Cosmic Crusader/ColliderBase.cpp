@@ -134,6 +134,11 @@ namespace ratchet
 		return false;
 	}
 
+	bool ColliderBase::performUpPlatformRayCast(sf::Sprite& sprite)
+	{
+		return false;
+	}
+
 	void ColliderBase::getJumpOverPlatformsBottomRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
 	{
 		xStart = 0.0f;
