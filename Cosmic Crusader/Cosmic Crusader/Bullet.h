@@ -20,6 +20,7 @@ namespace ratchet
 		void invertCharacterMovingSpriteScale(int direction) override;
 
 		void launchBullet(const sf::Vector2f& direction, const float& speed);
+		void launchBomb(const sf::Vector2f& direction, const float& speed);
 
 		void bulletHandleEvents();
 
@@ -43,6 +44,7 @@ namespace ratchet
 
 
 		Timer m_bulletTimer;
+
 
 	private:
 

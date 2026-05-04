@@ -14,8 +14,8 @@ namespace ratchet
 		m_targetMaxDistanceDetectionY = 0.0f;
 		m_targetMaxDistanceLoseX = 0.0f;
 		m_targetMaxDistanceLoseY = 0.0f;
-		m_targetMaxDistanceAttackX = 0.0f;
-		m_targetMaxDistanceAttackY = 0.0f;
+		m_targetMaxDistanceAttack = 0.0f;
+		m_targetMaxDistanceAttack2 = 0.0f;
 	}
 
 	SelfControlledCreatureConfig::~SelfControlledCreatureConfig()
@@ -66,11 +66,6 @@ namespace ratchet
 		{
 			m_colliderConfig = new CircleColliderConfig();
 		}
-
-		// Custom Properties
-
-		
-
 
 		for (const auto& jsonProperty : jsonFile["properties"])
 		{
@@ -163,15 +158,16 @@ namespace ratchet
 				m_targetMaxDistanceLoseY = propertyValue.get<float>();
 			}
 
-			if (propertyName == "targetMaxDistanceAttackX")
+			if (propertyName == "targetMaxDistanceAttack")
 			{
-				m_targetMaxDistanceAttackX = propertyValue.get<float>();
+				m_targetMaxDistanceAttack = propertyValue.get<float>();
 			}
 
-			if (propertyName == "targetMaxDistanceAttackY")
+			if (propertyName == "targetDistanceAttack2")
 			{
-				m_targetMaxDistanceAttackY = propertyValue.get<float>();
+				m_targetMaxDistanceAttack2 = propertyValue.get<float>();
 			}
+
 
 			if (propertyName == "startSpriteTexturePath")
 			{
@@ -407,6 +403,11 @@ namespace ratchet
 			{
 				m_currentState = static_cast<WeaponAnimation::STATE>(propertyValue.get<int>());
 
+			}
+
+			if (propertyName == "enemyAttackType")
+			{
+				m_enemyAttackType = static_cast<EnemyAttackType>(propertyValue.get<int>());
 			}
 
 			if (propertyName == "characterAnglesMask")

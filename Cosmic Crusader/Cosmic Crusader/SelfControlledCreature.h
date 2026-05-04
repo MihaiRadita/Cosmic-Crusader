@@ -24,14 +24,15 @@ namespace ratchet
 		float m_targetMaxDistanceLoseY;
 
 		//target attack distance
-		float m_targetMaxDistanceAttackX;
-		float m_targetMaxDistanceAttackY;
+		float m_targetMaxDistanceAttack;
+		float m_targetMaxDistanceAttack2;
 
 		//AI Checks
 		bool m_isAttacking = false;
 		bool m_canJumpOver = false;
 		bool m_isFallingRisk = false;
 		bool m_isTouchingHighPlatform = false;
+		bool m_isAttackingDeeper = false;
 
 		bool m_isClimbingY;
 		float m_flySpeed = 0.0f;
@@ -48,6 +49,7 @@ namespace ratchet
 
 
 		EnemyType m_enemyType;
+		EnemyAttackType m_enemyAttackType;
 
 		bool m_canSeePlayerCenter = false;
 		bool m_canSeeRightSide = false;
@@ -58,6 +60,7 @@ namespace ratchet
 
 		//Check Attack Target Function
 		void checkTargetToAttack(Creature* target);
+		void checkTargetDeeperToAttack(Creature* target);
 
 		void handleSelfCreatureEvent();
 		

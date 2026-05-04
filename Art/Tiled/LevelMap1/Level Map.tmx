@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="22" nextobjectid="5207">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="23" nextobjectid="5212">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -57,6 +57,10 @@
  <tileset firstgid="68" source="Continue Button.tsx"/>
  <tileset firstgid="69" source="Action Trigger.tsx"/>
  <tileset firstgid="70" source="Enemy2.tsx"/>
+ <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="121" columns="11">
+  <image source="D:/Media/Downloads/Bomb Sprite.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="192" source="Bomb Launcher Bullet.tsx"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
   <object id="3830" name="PathPoint" x="640" y="576">
    <point/>
@@ -50299,7 +50303,7 @@
     <property name="weaponDamage" type="float" value="5"/>
     <property name="weaponShootSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy Blaster Shoot.wav"/>
     <property name="weaponSoundLoop" type="bool" value="false"/>
-    <property name="weaponType" type="int" value="4"/>
+    <property name="weaponType" type="int" value="5"/>
     <property name="weaponsoundVolume" type="float" value="5"/>
    </properties>
   </object>
@@ -50327,11 +50331,40 @@
     <property name="weaponDamage" type="float" value="5"/>
     <property name="weaponShootSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy Blaster Shoot.wav"/>
     <property name="weaponSoundLoop" type="bool" value="false"/>
-    <property name="weaponType" type="int" value="5"/>
+    <property name="weaponType" type="int" value="6"/>
+    <property name="weaponsoundVolume" type="float" value="5"/>
+   </properties>
+  </object>
+  <object id="5211" name="Blaster" gid="33" x="15648" y="-672" width="95" height="95">
+   <properties>
+    <property name="Bullet" type="object" value="5208"/>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="ammo" type="int" value="51"/>
+    <property name="bulletIncrementation" type="int" value="3"/>
+    <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
+    <property name="characterStartPointShootingOffsetY" type="float" value="0"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="damage" type="int" value="10"/>
+    <property name="isWeaponAccesible" type="bool" value="true"/>
+    <property name="layer" value="Bomb Launcher Enemy"/>
+    <property name="movementType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="shootingOffsetAngle0X" type="float" value="0"/>
+    <property name="shootingOffsetAngle0Y" type="float" value="-0.5"/>
+    <property name="startSpriteTexturePath" value="Textures/Objects/Weapons/Player/Blaster1.png"/>
+    <property name="weaponDamage" type="float" value="10"/>
+    <property name="weaponShootSoundPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Sounds/Sound Effects/Enemies/Enemy1/Enemy Blaster Shoot.wav"/>
+    <property name="weaponSoundLoop" type="bool" value="false"/>
+    <property name="weaponType" type="int" value="8"/>
     <property name="weaponsoundVolume" type="float" value="5"/>
    </properties>
   </object>
  </objectgroup>
+ <objectgroup id="22" name="Object Layer 16"/>
  <objectgroup id="19" name="Check Points">
   <object id="5150" name="Check Point" type="Check Point Flag" gid="66" x="20032" y="-576" width="128" height="128">
    <properties>
@@ -50432,6 +50465,31 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
+  <object id="5208" gid="192" x="15773" y="-659.667" width="30" height="30">
+   <properties>
+    <property name="Faction" type="int" value="2"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bulletLifeLimit" type="float" value="1"/>
+    <property name="bulletMovementType" type="int" value="2"/>
+    <property name="bulletPoolIncrementation" type="int" value="5"/>
+    <property name="bulletScaleX" type="float" value="1"/>
+    <property name="bulletScaleY" type="float" value="1"/>
+    <property name="bulletSpeed" type="float" value="5"/>
+    <property name="bulletStartSpriteTexturePath" value="Textures/Objects/Weapons/Player/Bullet Bomb Launcher1.png"/>
+    <property name="colliderBulletAngularDamping" type="float" value="0"/>
+    <property name="colliderBulletDensity" type="float" value="0"/>
+    <property name="colliderBulletFixedRotation" type="bool" value="false"/>
+    <property name="colliderBulletFriction" type="float" value="0"/>
+    <property name="colliderBulletGravityScale" type="float" value="0.5"/>
+    <property name="colliderBulletIsSensor" type="bool" value="true"/>
+    <property name="colliderBulletLayer" type="int" value="5"/>
+    <property name="colliderBulletLinearDamping" type="float" value="0"/>
+    <property name="colliderBulletRestitution" type="float" value="0"/>
+    <property name="colliderBulletType" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="11" name="Items"/>
  <objectgroup id="4" name="Map Devices"/>
@@ -50475,6 +50533,7 @@
     <property name="currentState" type="int" value="0"/>
     <property name="currentWeaponIndex" type="int" value="0"/>
     <property name="currentWeaponType" type="int" value="4"/>
+    <property name="enemyAttackType" type="int" value="1"/>
     <property name="enemyType" type="int" value="1"/>
     <property name="fallingSpeed" type="float" value="7000"/>
     <property name="fireRate" type="float" value="0.7"/>
@@ -50487,15 +50546,14 @@
     <property name="recoilTime" type="float" value="0.1"/>
     <property name="spriteTexturePath" value="Textures/EnemiesTextures/Enemy1Textures/"/>
     <property name="startSpriteTexturePath" value="Textures/EnemiesTextures/Enemy1Textures/IdleTextures/Enemy1Blaster/Angle0/Aim/Idle1.png"/>
-    <property name="targetMaxDistanceAttackX" type="float" value="2"/>
-    <property name="targetMaxDistanceAttackY" type="float" value="1.5"/>
+    <property name="targetMaxDistanceAttack" type="float" value="2"/>
     <property name="targetMaxDistanceDetectionX" type="float" value="3.5"/>
     <property name="targetMaxDistanceDetectionY" type="float" value="1.5"/>
     <property name="targetMaxDistanceLoseX" type="float" value="3.5"/>
     <property name="targetMaxDistanceLoseY" type="float" value="3.5"/>
-    <property name="usableWeaponCheckListMask" type="int" value="16"/>
-    <property name="usableWeaponTypeListMask" type="int" value="16"/>
-    <property name="weaponTypeListMask" type="int" value="16"/>
+    <property name="usableWeaponCheckListMask" type="int" value="32"/>
+    <property name="usableWeaponTypeListMask" type="int" value="32"/>
+    <property name="weaponTypeListMask" type="int" value="32"/>
    </properties>
   </object>
   <object id="5204" name="Enemy2" gid="70" x="15681.3" y="-768" width="192" height="100">
@@ -50528,11 +50586,13 @@
     <property name="currentState" type="int" value="0"/>
     <property name="currentWeaponIndex" type="int" value="0"/>
     <property name="currentWeaponType" type="int" value="5"/>
+    <property name="enemyAttackType" type="int" value="1"/>
     <property name="enemyType" type="int" value="2"/>
     <property name="fireRate" type="float" value="0.7"/>
     <property name="flySpeed" type="float" value="5"/>
     <property name="health" type="float" value="10"/>
     <property name="initialWeapon_0" type="object" value="5205"/>
+    <property name="initialWeapon_1" type="object" value="5211"/>
     <property name="minCeilingDistance" type="float" value="0.5"/>
     <property name="minFollowHeightOffset" type="float" value="2"/>
     <property name="movementType" type="int" value="2"/>
@@ -50541,15 +50601,15 @@
     <property name="recoilTime" type="float" value="0.1"/>
     <property name="spriteTexturePath" value="Textures/EnemiesTextures/Enemy2Textures/"/>
     <property name="startSpriteTexturePath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/EnemiesTextures/Enemy2Textures/IdleTextures/Enemy2Blaster/Angle0/Aim/Idle1.png"/>
-    <property name="targetMaxDistanceAttackX" type="float" value="3"/>
-    <property name="targetMaxDistanceAttackY" type="float" value="3"/>
+    <property name="targetDistanceAttack2" type="float" value="1.8"/>
+    <property name="targetMaxDistanceAttack" type="float" value="3"/>
     <property name="targetMaxDistanceDetectionX" type="float" value="6"/>
     <property name="targetMaxDistanceDetectionY" type="float" value="6"/>
     <property name="targetMaxDistanceLoseX" type="float" value="10"/>
     <property name="targetMaxDistanceLoseY" type="float" value="10"/>
-    <property name="usableWeaponCheckListMask" type="int" value="32"/>
-    <property name="usableWeaponTypeListMask" type="int" value="32"/>
-    <property name="weaponTypeListMask" type="int" value="32"/>
+    <property name="usableWeaponCheckListMask" type="int" value="320"/>
+    <property name="usableWeaponTypeListMask" type="int" value="320"/>
+    <property name="weaponTypeListMask" type="int" value="320"/>
    </properties>
   </object>
  </objectgroup>
@@ -50913,8 +50973,8 @@
     <property name="spriteTexturePath" value="Textures/PlayerTextures/Player1Textures/"/>
     <property name="startSpriteTexturePath" value="Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png"/>
     <property name="usableWeaponCheckListMask" type="int" value="1"/>
-    <property name="usableWeaponTypeListMask" type="int" value="15"/>
-    <property name="weaponTypeListMask" type="int" value="15"/>
+    <property name="usableWeaponTypeListMask" type="int" value="31"/>
+    <property name="weaponTypeListMask" type="int" value="31"/>
    </properties>
   </object>
  </objectgroup>

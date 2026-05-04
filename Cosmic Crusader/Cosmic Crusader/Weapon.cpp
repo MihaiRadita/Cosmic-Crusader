@@ -85,7 +85,15 @@ namespace ratchet
 		{
 			bulletObj->setBulletPositionCenter(position, direction, facingRight);
 
-			bulletObj->launchBullet(direction, bulletObj->m_bulletSpeed);
+
+			if (m_weaponType == TYPE::Enemy1Blaster || m_weaponType == TYPE::Enemy2Blaster || m_weaponType == TYPE::Blaster)
+			{
+				bulletObj->launchBullet(direction, bulletObj->m_bulletSpeed);
+			}
+			else if (m_weaponType == TYPE::Enemy1BombLauncher || m_weaponType == TYPE::Enemy2BombLauncher)
+			{
+				std::cout << "Launch Bomb" << std::endl;
+			}
 
 			float volume = m_weaponSound.getVolume();
 

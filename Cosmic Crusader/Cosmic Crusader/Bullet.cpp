@@ -111,9 +111,14 @@ namespace ratchet
 	}
 	void Bullet::launchBullet(const sf::Vector2f& direction, const float& speed)
 	{
+
 		b2Vec2 velocity(direction.x * speed, direction.y * speed);
 
 		m_collider->getBody()->SetLinearVelocity(velocity);
+	}
+	void Bullet::launchBomb(const sf::Vector2f& direction, const float& speed)
+	{
+		std::cout << "Bomb Launched!" << std::endl;
 	}
 	void Bullet::bulletHandleEvents()
 	{

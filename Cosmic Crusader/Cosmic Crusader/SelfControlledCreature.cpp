@@ -13,8 +13,8 @@ namespace ratchet
 		m_targetMaxDistanceDetectionY = config.m_targetMaxDistanceDetectionY;
 		m_targetMaxDistanceLoseX = config.m_targetMaxDistanceLoseX;
 		m_targetMaxDistanceLoseY = config.m_targetMaxDistanceLoseY;
-		m_targetMaxDistanceAttackX = config.m_targetMaxDistanceAttackX;
-		m_targetMaxDistanceAttackY = config.m_targetMaxDistanceAttackY;
+		m_targetMaxDistanceAttack = config.m_targetMaxDistanceAttack;
+		m_targetMaxDistanceAttack2 = config.m_targetMaxDistanceAttack2;
 
 		m_enemyType = config.m_enemyType;
 		m_objectId = config.m_objectID;
@@ -25,6 +25,8 @@ namespace ratchet
 
 		m_minFollowHeightOffset = config.m_minFollowHeightOffset;
 		m_minCeilingDistance = config.m_minCeilingDistance;
+
+		m_enemyAttackType = config.m_enemyAttackType;
 	}
 	SelfControlledCreature::~SelfControlledCreature()
 	{
@@ -41,7 +43,7 @@ namespace ratchet
 
 		if (m_enemyType == EnemyType::Ground)
 		{
-			m_isAttacking = (absX <= m_targetMaxDistanceAttackX);
+			m_isAttacking = (absX <= m_targetMaxDistanceAttack);
 		}
 		else if (m_enemyType == EnemyType::Flying)
 		{
@@ -49,10 +51,11 @@ namespace ratchet
 			float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
 
 			m_isAttacking = false;
-			if (length <= m_targetMaxDistanceAttackX)
+			if (length <= m_targetMaxDistanceAttack)
 			{
 				m_isAttacking = true;
 			}
+
 		}
 
 	}
@@ -148,6 +151,36 @@ namespace ratchet
 			m_collider->SetOwner(this);
 		}
 	}
+	void SelfControlledCreature::checkTargetDeeperToAttack(Creature* target)
+	{
+
+		float absX = std::abs(target->getPosition().x - getPosition().x);
+		float absY = std::abs(target->getPosition().y - getPosition().y);
+
+		if (m_enemyType == EnemyType::Flying)
+		{
+			if (m_isAttacking)
+			{
+				sf::Vector2f diff = target->getPosition() - this->getPosition();
+				float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+
+				if (length <= m_targetMaxDistanceAttack2)
+				{
+					m_isAttackingDeeper = true;
+				}
+				else
+				{
+					m_isAttackingDeeper = false;
+				}
+			}
+			else
+			{
+				m_isAttackingDeeper = false;
+			}
+	
+		}
+	}
+
 	void SelfControlledCreature::computeAimBulletRotation()
 	{
 		auto enemyType = m_enemyType;
@@ -222,8 +255,6 @@ namespace ratchet
 							{
 								m_currentAnimationState = ANIMATION_STATE::IDLE;
 								m_health = config.m_health;
-								//m_position = sf::Vector2f(config.position.x, config.position.y);
-
 
 								if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(m_collider))
 								{
@@ -290,6 +321,7 @@ namespace ratchet
 			m_facingRight = !m_isTagetBehindCharacter;
 			invertCharacterMovingSpriteScale(m_facingRight ? 1.0f : -1.0f);
 			checkTargetToAttack(m_target);
+			checkTargetDeeperToAttack(m_target);
 			isFallingRisk();
 			canJumpOver();
 
@@ -391,8 +423,50 @@ namespace ratchet
 		
 					if (m_isAttacking && m_canSeePlayerCenter && m_canSeeRightSide && m_canSeeLeftSide)
 					{
+
 						m_input.x = 0.f;
 						m_input.y = 0.f;
+
+						if (m_isAttackingDeeper)
+						{
+							if (!m_ownedWeaponList.empty())
+							{
+								if (m_currentWeaponType != Weapon::TYPE::Enemy2BombLauncher)
+								{
+									m_input.x = 0.f;
+									m_input.y = 0.f;
+									m_currentWeaponType = Weapon::TYPE::Enemy2BombLauncher;
+
+									for (int i = 0; i < m_ownedWeaponList.size(); i++)
+									{
+										if (m_ownedWeaponList[i]->m_weaponType == m_currentWeaponType)
+										{
+											setWeapon(i);
+											break;
+										}
+									}
+								}
+							}
+						}
+						else
+						{
+							if (!m_ownedWeaponList.empty())
+							{
+								if (m_currentWeaponType != Weapon::TYPE::Enemy2Blaster)
+								{
+									m_currentWeaponType = Weapon::TYPE::Enemy2Blaster;
+
+									for (int i = 0; i < m_ownedWeaponList.size(); i++)
+									{
+										if (m_ownedWeaponList[i]->m_weaponType == m_currentWeaponType)
+										{
+											setWeapon(i);
+											break;
+										}
+									}
+								}
+							}
+						}
 
 						if (!m_waitTostartAttack)
 						{

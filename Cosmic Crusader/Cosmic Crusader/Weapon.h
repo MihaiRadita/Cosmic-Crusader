@@ -8,7 +8,7 @@ namespace ratchet
 	class Weapon 
 	{
 	public:
-		enum class TYPE { None = 0, Blaster, FireLauncher, RocketLauncher,Enemy1Blaster,Enemy2Blaster, Count };
+		enum class TYPE { None = 0, Blaster, FireLauncher,BombLauncher, RocketLauncher,Enemy1Blaster,Enemy2Blaster,Enemy1BombLauncher,Enemy2BombLauncher, Count };
 
 		static const char*  getWeaponTypeString(TYPE type)
 		{
@@ -21,6 +21,7 @@ namespace ratchet
 			case TYPE::Count: return "";
 			case TYPE::Enemy1Blaster: return "Enemy1Blaster";
 			case TYPE::Enemy2Blaster: return "Enemy2Blaster";
+			case TYPE::Enemy2BombLauncher: return "Enemy2BombLauncher";
 			}
 		}
 

@@ -12,6 +12,7 @@ namespace ratchet
 {
 
 	enum class EnemyType{None =0 ,Ground , Flying};
+	enum class EnemyAttackType{None = 0, Shoot, BombThrow};
 
 	struct SelfControlledCreatureConfig : public CreatureConfig
 	{
@@ -27,8 +28,8 @@ namespace ratchet
 		float m_targetMaxDistanceLoseY;
 
 		//target distance to attack
-		float m_targetMaxDistanceAttackX;
-		float m_targetMaxDistanceAttackY;
+		float m_targetMaxDistanceAttack;
+		float m_targetMaxDistanceAttack2;
 
 		float m_minFollowHeightOffset;
 		float m_minCeilingDistance;
@@ -36,6 +37,7 @@ namespace ratchet
 		float m_flySpeed;
 
 		EnemyType m_enemyType;
+		EnemyAttackType m_enemyAttackType;
 
 		std::string m_objectLayerName;
 

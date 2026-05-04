@@ -49,6 +49,11 @@ namespace ratchet
         enemy2Blaster2Weapon->m_weaponType = Weapon::TYPE::Enemy2Blaster;
         m_weaponList.push_back(enemy2Blaster2Weapon);
 
+        Weapon* enemy2BombLauncher = new Weapon();
+        enemy2BombLauncher->m_weaponType = Weapon::TYPE::Enemy2BombLauncher;
+        m_weaponList.push_back(enemy2BombLauncher);
+
+
     }
 
 }
