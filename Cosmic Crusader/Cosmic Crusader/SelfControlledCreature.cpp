@@ -412,8 +412,8 @@ namespace ratchet
 					sf::Vector2f leftStart = m_position - baseTargetPerpendicular * minRadius;
 
 					sf::Vector2f centerEnd = baseTarget;
-					sf::Vector2f rightEnd = baseTarget + baseTargetPerpendicular * minRadius;
-					sf::Vector2f leftEnd = baseTarget - baseTargetPerpendicular * minRadius;
+					sf::Vector2f rightEnd = baseTarget + baseTargetPerpendicular * minRadius *0.2f;
+					sf::Vector2f leftEnd = baseTarget - baseTargetPerpendicular * minRadius *0.2f;
 
 
 					m_canSeePlayerCenter = circleCollider->performFollowTargetRayCast(centerStart, centerEnd);
