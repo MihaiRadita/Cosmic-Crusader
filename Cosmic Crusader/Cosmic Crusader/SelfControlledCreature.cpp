@@ -162,15 +162,22 @@ namespace ratchet
 			if (m_isAttacking)
 			{
 				sf::Vector2f diff = target->getPosition() - this->getPosition();
-				float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+				//float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
 
-				if (length <= m_targetMaxDistanceAttack2)
+				if (diff.y < 0.f)
 				{
-					m_isAttackingDeeper = true;
+					m_isAttackingDeeper = false;
 				}
 				else
 				{
-					m_isAttackingDeeper = false;
+					if (std::abs(diff.x) <= 0.8f)
+					{
+						m_isAttackingDeeper = true;
+					}
+					else
+					{
+						m_isAttackingDeeper = false;
+					}
 				}
 			}
 			else
@@ -441,7 +448,8 @@ namespace ratchet
 									{
 										if (m_ownedWeaponList[i]->m_weaponType == m_currentWeaponType)
 										{
-											setWeapon(i);
+											setWeaponIndex(i);
+											setWeapon(m_currentEquippedWeaponIndex);
 											break;
 										}
 									}
@@ -460,7 +468,9 @@ namespace ratchet
 									{
 										if (m_ownedWeaponList[i]->m_weaponType == m_currentWeaponType)
 										{
-											setWeapon(i);
+											
+											setWeaponIndex(i);
+											setWeapon(m_currentEquippedWeaponIndex);
 											break;
 										}
 									}
