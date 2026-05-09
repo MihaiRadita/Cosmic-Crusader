@@ -50342,7 +50342,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="ammo" type="int" value="51"/>
-    <property name="bulletIncrementation" type="int" value="3"/>
+    <property name="bulletIncrementation" type="int" value="7"/>
     <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
     <property name="characterStartPointShootingOffsetY" type="float" value="0"/>
     <property name="colliderType" type="int" value="0"/>
@@ -50402,6 +50402,7 @@
     <property name="bulletScaleY" type="float" value="1"/>
     <property name="bulletSpeed" type="float" value="8"/>
     <property name="bulletStartSpriteTexturePath" value="Textures/Objects/Weapons/Player/Bullet Blaster1.png"/>
+    <property name="bulletType" type="int" value="1"/>
     <property name="colliderBulletAngularDamping" type="float" value="0"/>
     <property name="colliderBulletDensity" type="float" value="0"/>
     <property name="colliderBulletFixedRotation" type="bool" value="false"/>
@@ -50427,6 +50428,7 @@
     <property name="bulletScaleY" type="float" value="1"/>
     <property name="bulletSpeed" type="float" value="5"/>
     <property name="bulletStartSpriteTexturePath" value="Textures/Objects/Weapons/Player/Bullet Blaster1.png"/>
+    <property name="bulletType" type="int" value="1"/>
     <property name="colliderBulletAngularDamping" type="float" value="0"/>
     <property name="colliderBulletDensity" type="float" value="0"/>
     <property name="colliderBulletFixedRotation" type="bool" value="false"/>
@@ -50452,6 +50454,7 @@
     <property name="bulletScaleY" type="float" value="1"/>
     <property name="bulletSpeed" type="float" value="5"/>
     <property name="bulletStartSpriteTexturePath" value="Textures/Objects/Weapons/Player/Bullet Blaster1.png"/>
+    <property name="bulletType" type="int" value="1"/>
     <property name="colliderBulletAngularDamping" type="float" value="0"/>
     <property name="colliderBulletDensity" type="float" value="0"/>
     <property name="colliderBulletFixedRotation" type="bool" value="false"/>
@@ -50470,6 +50473,7 @@
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bulletExplosionAnimationPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Objects/Weapons/Player/Explosion Bullet Bomb Launcher1"/>
     <property name="bulletLifeLimit" type="float" value="1"/>
     <property name="bulletMovementType" type="int" value="2"/>
     <property name="bulletPoolIncrementation" type="int" value="5"/>
@@ -50477,6 +50481,7 @@
     <property name="bulletScaleY" type="float" value="1"/>
     <property name="bulletSpeed" type="float" value="5"/>
     <property name="bulletStartSpriteTexturePath" value="Textures/Objects/Weapons/Player/Bullet Bomb Launcher1.png"/>
+    <property name="bulletType" type="int" value="2"/>
     <property name="colliderBulletAngularDamping" type="float" value="0"/>
     <property name="colliderBulletDensity" type="float" value="0"/>
     <property name="colliderBulletFixedRotation" type="bool" value="false"/>

@@ -78,6 +78,8 @@ namespace ratchet
 
 		float m_massValue = 0.f;
 
+		float m_gravityScale;
+
 		bool m_skipRaycastThisFrame = false;
 
 		float m_collierFacingDirectionX;

@@ -28,10 +28,16 @@ namespace ratchet
 
 		void render(sf::RenderTarget& target) override;
 
+		void buildExplosionAnimation();
+		void playExplosionAnimation(sf::Sprite& sprite);
+
 
 		// Bullet Collision 
 		virtual void OnSensorEnter(GameObject* obj) override;
 		virtual void OnSensorExit(GameObject* obj) override;
+
+
+		void resetForReuse();
 		
 		float m_damage;
 		float m_ammo;
@@ -40,11 +46,30 @@ namespace ratchet
 
 		float m_bulletDamage = 0.0f;
 
+		bool m_explosionAnimationSwitch;
+
 		bool m_bulletTimerShouldReset = false;
+
+
+		bool getExplosionAnimationSwitch();
 
 
 		Timer m_bulletTimer;
 
+		BulletType m_bulletType;
+		std::string m_bulletExplosionPath;
+		sf::Texture m_bulletBasicTexture;
+
+		std::vector<sf::Texture>m_bulletExplosionAnimation;
+		Timer m_explosionAnimationTimer;
+		float m_explosionAnimationTimeLimit = 0.05;
+		bool m_repeatExplosionAnimation;
+		int m_currenExplosionIndex;
+		bool m_isExpplosionAnimationTrasition;
+		bool m_endExplosionAnimation;
+		sf::Sprite m_currenExplosionAnimationSprite;
+
+		bool m_isBulletExploding;
 
 	private:
 

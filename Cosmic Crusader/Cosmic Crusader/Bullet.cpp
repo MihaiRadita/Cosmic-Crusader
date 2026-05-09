@@ -16,9 +16,35 @@ namespace ratchet
 		m_bulletSpeed = config.m_BulletSpeed;
 		m_bulletLifeLimit = config.m_bulletLifeLimit;
 
+		if (m_bulletBasicTexture.loadFromFile(m_startSpritePath) == false)
+		{
+#ifdef IS_RATCHET_DEBUG
+			TRACE_CHANNEL("GAMEOBJECT_INIT", "ERROR::PLAYER COULD NOT LOAD THE TEXTURE SHEET");
+#endif
+		}
+
+
+
+		m_bulletType = config.m_bulletType;
+		m_bulletExplosionPath = config.m_bulletExplosionPath;
+		m_isBulletExploding = false;
+		m_isExpplosionAnimationTrasition = true;
+		m_currenExplosionIndex = 0;
+		m_endExplosionAnimation = false;
+
 		m_bulletTimer.Restart();
 
+		m_explosionAnimationTimer.Restart();
 		setOrignAtCenter();
+
+		if (m_bulletType == BulletType::Explosive)
+		{
+			m_currenExplosionAnimationSprite.setPosition(m_position.x, m_position.y);
+			m_currenExplosionAnimationSprite.setRotation(m_rotation);
+			m_currenExplosionAnimationSprite.setScale(m_scale.x, m_scale.y);
+		}
+
+		buildExplosionAnimation();
 	}
 
 	Bullet::~Bullet()
@@ -38,12 +64,41 @@ namespace ratchet
 
 		if (!m_activeGameObject)
 		{
+
+			if (m_bulletType == BulletType::Explosive)
+			{
+				auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+		
+				m_currenExplosionAnimationSprite.setPosition(spritePosition);
+
+				int size = m_bulletExplosionAnimation.size();
+
+				if (!m_isBulletExploding)
+				{
+					return;
+				}
+				else
+				{
+					if (m_endExplosionAnimation == false)
+					{
+						playExplosionAnimation(m_currenExplosionAnimationSprite);
+					}
+					else
+					{
+						m_isBulletExploding = false;
+						m_currenExplosionIndex = 0;
+
+						Weapon::releaseBullet(this);
+					}
+				}
+			}
 			return;
 		}
 
 		auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
 		m_sprite.setPosition(spritePosition);
+		
 
 
 		if (m_bulletTimer.GetElapsed().asSeconds() >= m_bulletLifeLimit)
@@ -52,7 +107,6 @@ namespace ratchet
 
 			Weapon::releaseBullet(this);
 		}
-
 	}
 
 	void Bullet::setBulletPositionCenter(const sf::Vector2f& position, const sf::Vector2f& direction, const bool& facingRight)
@@ -140,10 +194,145 @@ namespace ratchet
 	void Bullet::render(sf::RenderTarget& target)
 	{
 
+		if (m_isBulletExploding)
+		{
+
+			if (m_currenExplosionAnimationSprite.getTexture() == nullptr)
+			{
+				std::cout << "NO TEXTURE\n";
+			}
+
+			target.draw(m_currenExplosionAnimationSprite);
+		}
 		m_collider->drawColliderCenterBased(target);
 
 		GameObject::render(target);
 
+
+	}
+	void Bullet::buildExplosionAnimation()
+	{
+
+		if (m_bulletType != BulletType::Explosive)
+		{
+			return;
+		}
+
+	
+		bool imageValid = false;
+		do 
+		{
+
+			int imgIndex = m_bulletExplosionAnimation.size();
+			int strImgIndex = imgIndex + 1;
+
+			std::stringstream ss;
+			ss << m_bulletExplosionPath;
+			ss << "/";
+
+			ss << "Explosion";
+			ss << strImgIndex;
+			ss << ".png";
+
+			std::string path = ss.str();
+			ss.clear();
+
+			const auto* texture = ResourceManager::getInstance()->findOrFetchTexture(path);
+			imageValid = texture != nullptr;
+
+			if (imageValid)
+			{
+				m_bulletExplosionAnimation.push_back(*texture);
+			}
+
+		} while (imageValid);
+
+	}
+	void Bullet::playExplosionAnimation(sf::Sprite& sprite)
+	{
+		if (m_bulletExplosionAnimation.empty())
+		{
+			return;
+		}
+
+		if (m_currenExplosionIndex == 0)
+		{
+			if (m_isExpplosionAnimationTrasition)
+			{
+				m_isExpplosionAnimationTrasition = false;
+
+				sf::Vector2u texSize = m_bulletExplosionAnimation[m_currenExplosionIndex].getSize();
+				sprite.setTexture(m_bulletExplosionAnimation[m_currenExplosionIndex]);
+				sprite.setTextureRect(sf::IntRect(0, 0, texSize.x, texSize.y));
+
+				sprite.setOrigin(
+					texSize.x / 2.f,
+					texSize.y / 2.f
+				);
+
+			}
+
+			if (m_explosionAnimationTimer.GetElapsed().asSeconds() >= m_explosionAnimationTimeLimit || getExplosionAnimationSwitch())
+			{
+				m_isExpplosionAnimationTrasition = true;
+
+				bool increaseFrameIndex = true;
+				if (m_currenExplosionIndex >= m_bulletExplosionAnimation.size() - 1)
+				{
+					increaseFrameIndex = false;
+					if (m_repeatExplosionAnimation)
+					{
+						m_currenExplosionIndex = 0;
+					}
+					else
+					{
+						m_endExplosionAnimation = true;
+					}
+				}
+				if (increaseFrameIndex)
+				{
+					m_currenExplosionIndex++;
+				}
+
+				m_explosionAnimationTimer.Restart();
+			}
+		}
+		else if (m_currenExplosionIndex > 0)
+		{
+			if (m_isExpplosionAnimationTrasition)
+			{
+				m_isExpplosionAnimationTrasition = false;
+
+				sf::Vector2u texSize = m_bulletExplosionAnimation[m_currenExplosionIndex].getSize();
+				sprite.setTexture(m_bulletExplosionAnimation[m_currenExplosionIndex]);
+				sprite.setTextureRect(sf::IntRect(0, 0, texSize.x, texSize.y));
+			}
+
+			if (m_explosionAnimationTimer.GetElapsed().asSeconds() >= m_explosionAnimationTimeLimit || getExplosionAnimationSwitch())
+			{
+				m_isExpplosionAnimationTrasition = true;
+
+				bool increaseFrameIndex = true;
+				if (m_currenExplosionIndex >= m_bulletExplosionAnimation.size() - 1)
+				{
+					increaseFrameIndex = false;
+					if (m_repeatExplosionAnimation)
+					{
+						m_currenExplosionIndex = 0;
+					}
+					else
+					{
+						m_endExplosionAnimation = true;
+					}
+				}
+				if (increaseFrameIndex)
+				{
+					m_currenExplosionIndex++;
+				}
+
+				m_explosionAnimationTimer.Restart();
+			}
+		}
 	}
 	void Bullet::OnSensorEnter(GameObject* obj)
 	{
@@ -154,7 +343,35 @@ namespace ratchet
 
 		if (layer == static_cast<short>(PhysicsLayer::Platforms))
 		{
-			Weapon::releaseBullet(this);
+			if (m_bulletType == BulletType::Explosive)
+			{
+				m_isBulletExploding = true;
+
+				m_activeGameObject = false;
+				m_collider->getBody()->SetGravityScale(0.f);
+
+				m_endExplosionAnimation = false;
+				m_isExpplosionAnimationTrasition = true;
+				m_currenExplosionIndex = 0;
+
+
+				m_explosionAnimationTimer.Restart();
+
+				if (m_collider)
+				{
+					if (auto* body = m_collider->getBody())
+					{
+						body->SetAwake(false);
+
+						body->SetGravityScale(0.0f);
+					}
+				}
+
+			}
+			else
+			{
+				Weapon::releaseBullet(this);
+			}
 		}
 		else if (layer == static_cast<short>(PhysicsLayer::Creature))
 		{
@@ -162,17 +379,53 @@ namespace ratchet
 			{
 				if (auto* creature = dynamic_cast<Creature*>(obj))
 				{
-					if (creature->m_isDeath)
+					if (m_bulletType == BulletType::Explosive)
 					{
-						return;
+						if (creature->m_isDeath)
+						{
+							return;
+						}
+						else
+						{
+							creature->TakeDamage(m_damage);
+						}
+
+						m_isBulletExploding = true;
+
+						m_activeGameObject = false;
+						m_collider->getBody()->SetGravityScale(0.f);
+
+						m_endExplosionAnimation = false;
+						m_isExpplosionAnimationTrasition = true;
+						m_currenExplosionIndex = 0;
+
+
+						m_explosionAnimationTimer.Restart();
+
+						if (m_collider)
+						{
+							if (auto* body = m_collider->getBody())
+							{
+								body->SetAwake(false);
+
+								body->SetGravityScale(0.0f);
+							}
+						}
+
 					}
 					else
 					{
-						creature->TakeDamage(m_damage);
-						Weapon::releaseBullet(this);
+						if (creature->m_isDeath)
+						{
+							return;
+						}
+						else
+						{
+							creature->TakeDamage(m_damage);
+							Weapon::releaseBullet(this);
 
+						}
 					}
-
 				}
 
 			}
@@ -182,6 +435,29 @@ namespace ratchet
 	void Bullet::OnSensorExit(GameObject* obj)
 	{
 		if (isActive() == false) return;
+	}
+
+	void Bullet::resetForReuse()
+	{
+		if (m_collider)
+		{
+			if (auto* body = m_collider->getBody())
+			{
+				body->SetGravityScale(m_collider->m_gravityScale);
+			}
+		}
+	}
+
+	bool Bullet::getExplosionAnimationSwitch()
+	{
+		bool anim_switch = m_explosionAnimationSwitch;
+
+		if (m_explosionAnimationSwitch)
+		{
+			m_explosionAnimationSwitch = false;
+		}
+
+		return anim_switch;
 	}
 }
 

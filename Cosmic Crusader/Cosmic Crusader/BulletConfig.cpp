@@ -91,6 +91,15 @@ namespace ratchet
 				m_colliderType = static_cast<ColliderType>(propertyValue.get<int>());
 			}
 
+			if (propertyName == "bulletType")
+			{
+				m_bulletType = static_cast<BulletType>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "bulletExplosionAnimationPath")
+			{
+				m_bulletExplosionPath = propertyValue.get<std::string>();
+			}
 
 			if (propertyName == "colliderBulletLayer")
 			{

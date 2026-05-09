@@ -12,7 +12,7 @@ namespace ratchet
 
 	Player::Player(const CreatureConfig& config) : Creature(config)
 	{
-		m_isInvulnerable = true;
+		m_isInvulnerable = false;
 		initVariables();
 	}
 

@@ -4,6 +4,8 @@
 
 namespace ratchet
 {
+	enum class BulletType{None =0, Hit, Explosive};
+
 	class BulletConfig : public GameObjectConfig
 	{
 	public:
@@ -21,6 +23,9 @@ namespace ratchet
 		float m_BulletSpeed;
 
 		std::string m_configLayer;
+
+		BulletType m_bulletType;
+		std::string m_bulletExplosionPath;
 
 	private:
 	};

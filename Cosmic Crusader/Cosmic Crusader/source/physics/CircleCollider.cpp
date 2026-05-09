@@ -51,6 +51,8 @@ namespace ratchet
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
+		m_gravityScale = config.m_gravityScale;
+
 		m_body->SetGravityScale(config.m_gravityScale);
 		m_body->SetLinearDamping(config.m_linearDamping);
 		m_body->SetAngularDamping(config.m_angularDamping);

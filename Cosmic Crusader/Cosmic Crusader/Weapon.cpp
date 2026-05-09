@@ -135,15 +135,10 @@ namespace ratchet
 			availableBullet->setPositionRotationOrientation(position, rotationDegrees, orientation);
 			s_availableBulletList[m_weaponType].pop();
 
+
 			auto& bulletList = s_inUseBulletList[m_weaponType];
 
-			for (auto& bullet : bulletList)
-			{
-				if (auto* buletobj = dynamic_cast<Bullet*>(bullet))
-				{
-					float dmamage = buletobj->m_damage;
-				}
-			}
+			availableBullet->resetForReuse();
 
 			return availableBullet;
 		}
