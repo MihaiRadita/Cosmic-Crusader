@@ -22,6 +22,8 @@ namespace ratchet
 
 		float m_BulletSpeed;
 
+		float m_explosionPositionOffset;
+
 		std::string m_configLayer;
 
 		BulletType m_bulletType;

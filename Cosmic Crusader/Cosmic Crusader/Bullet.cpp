@@ -26,11 +26,14 @@ namespace ratchet
 
 
 		m_bulletType = config.m_bulletType;
+		m_explosionPositionOffset = config.m_explosionPositionOffset;
 		m_bulletExplosionPath = config.m_bulletExplosionPath;
 		m_isBulletExploding = false;
 		m_isExpplosionAnimationTrasition = true;
 		m_currenExplosionIndex = 0;
 		m_endExplosionAnimation = false;
+		m_explosionHasDamaged = false;
+		m_explosioTochTarget = false;
 
 		m_bulletTimer.Restart();
 
@@ -69,7 +72,7 @@ namespace ratchet
 			{
 				auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 		
-				m_currenExplosionAnimationSprite.setPosition(spritePosition);
+				m_currenExplosionAnimationSprite.setPosition(sf::Vector2f(spritePosition.x, spritePosition.y - m_explosionPositionOffset));
 
 				int size = m_bulletExplosionAnimation.size();
 
@@ -82,9 +85,52 @@ namespace ratchet
 					if (m_endExplosionAnimation == false)
 					{
 						playExplosionAnimation(m_currenExplosionAnimationSprite);
+
+						if (m_explosioTochTarget)
+						{
+							const auto& center = b2Vec2(
+								spritePosition.x,
+								spritePosition.y - m_explosionPositionOffset);
+
+							auto damagedObjects =
+								m_collider->performOverlapCircle(center, 0.8f);
+
+							for (auto* damagedObj : damagedObjects)
+							{
+								b2Body* body = damagedObj->GetBody();
+
+								ColliderBase* collider =
+									reinterpret_cast<ColliderBase*>(body->GetUserData().pointer);
+
+								if (!collider)
+									continue;
+
+								GameObject* object = collider->m_obj;
+
+								if (!object)
+									continue;
+
+								if (auto* creature = dynamic_cast<Creature*>(object))
+								{
+									if (creature->m_faction != this->m_faction)
+									{
+										if (m_hitCreatures.find(creature) != m_hitCreatures.end())
+											continue;
+
+										m_hitCreatures.insert(creature);
+
+										creature->TakeDamage(m_damage);
+									}
+								}
+							}
+						}
+						
 					}
 					else
 					{
+						m_hitCreatures.clear();
+						
+						m_explosioTochTarget = false;
 						m_isBulletExploding = false;
 						m_currenExplosionIndex = 0;
 
@@ -347,7 +393,10 @@ namespace ratchet
 			{
 				m_isBulletExploding = true;
 
+				m_explosioTochTarget = true;
+
 				m_activeGameObject = false;
+				m_activeRenderer = false;
 				m_collider->getBody()->SetGravityScale(0.f);
 
 				m_endExplosionAnimation = false;
@@ -393,6 +442,7 @@ namespace ratchet
 						m_isBulletExploding = true;
 
 						m_activeGameObject = false;
+						m_activeRenderer = false;
 						m_collider->getBody()->SetGravityScale(0.f);
 
 						m_endExplosionAnimation = false;

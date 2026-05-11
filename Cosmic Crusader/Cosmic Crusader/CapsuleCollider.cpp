@@ -70,6 +70,7 @@ namespace ratchet
 			return;
 		}
 
+		m_bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 		if (m_massValue != 0.0f)
@@ -83,6 +84,7 @@ namespace ratchet
 		m_body->SetLinearDamping(config.m_linearDamping);
 		m_body->SetAngularDamping(config.m_angularDamping);
 
+		m_layer = config.m_layer;
 		m_userDataName = static_cast<short>(config.m_layer);
 
 		// Bottom Circle

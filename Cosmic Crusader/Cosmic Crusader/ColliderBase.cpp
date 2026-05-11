@@ -191,6 +191,19 @@ namespace ratchet
 		return false;
 	}
 
+	std::vector<b2Fixture*>ColliderBase::performOverlapCircle(const b2Vec2& center, float radius)
+	{
+		b2AABB aabb;
+		aabb.lowerBound = center - b2Vec2(radius, radius);
+		aabb.upperBound = center + b2Vec2(radius, radius);
+
+		CircleOverlapCallBack callback(m_body,center, radius);
+
+		s_physicsWorld->QueryAABB(&callback, aabb);
+
+		return callback.found;
+	}
+
 	float GroundRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
  	{
 		if (fixture)
@@ -321,6 +334,36 @@ namespace ratchet
 		return 0.0f;
 	}
 	
+	CircleOverlapCallBack::CircleOverlapCallBack(b2Body* ingnoredBody, const b2Vec2& c, float r)
+	{
+		m_ignoredBody = ingnoredBody;
+		center = c;
+		radius = r;
+	}
+
+	bool CircleOverlapCallBack::ReportFixture(b2Fixture* fixture)
+	{
+		b2Body* body = fixture->GetBody();
+
+		if (body == m_ignoredBody)
+		{
+			return true;
+		}
+
+		b2Vec2 pos = body->GetPosition();
+
+		float dx = pos.x - center.x;
+		float dy = pos.y - center.y;
+
+		if (dx * dx + dy * dy <= radius * radius)
+		{
+			found.push_back(fixture);
+		}
+
+		return true;
+
+	}
+
 }
 
 

@@ -10,6 +10,7 @@ namespace ratchet
 	{
 		m_ammo = 0.0f;
 		m_damage = 0.0f;
+		m_explosionPositionOffset = 0.0f;
 
 		m_configLayer = "";
 	}
@@ -89,6 +90,11 @@ namespace ratchet
 			if (propertyName == "colliderBulletType")
 			{
 				m_colliderType = static_cast<ColliderType>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "explosionPositionOffset")
+			{
+				m_explosionPositionOffset = propertyValue.get<float>();
 			}
 
 			if (propertyName == "bulletType")

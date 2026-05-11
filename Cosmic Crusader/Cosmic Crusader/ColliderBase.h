@@ -154,6 +154,10 @@ namespace ratchet
 		virtual void getCheckFallingRiscRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const;
 		virtual bool performCheckFallingRiskRaycast(sf::Sprite& sprite, float& direction);
 
+		//Check OverlapCircle
+		std::vector<b2Fixture*> performOverlapCircle(const b2Vec2& center, float radius);
+
+
 	protected:
 		b2Vec2 m_origin;
 		float m_scaleX = 1.0f;
@@ -243,6 +247,26 @@ namespace ratchet
 		b2Vec2 m_normal;
 		float m_fraction;
 		b2Body* m_ignoredBody;
+	};
+
+	class CircleOverlapCallBack : public b2QueryCallback
+	{
+	public:
+
+		b2Body* m_ignoredBody;
+		b2Vec2 center;
+		float radius;
+
+		std::vector<b2Fixture*> found;
+
+		CircleOverlapCallBack(b2Body* ingnoredBody, const b2Vec2& c, float r);
+
+
+		bool ReportFixture(b2Fixture* fixture) override;
+
+
+
+	private:
 	};
 
 }

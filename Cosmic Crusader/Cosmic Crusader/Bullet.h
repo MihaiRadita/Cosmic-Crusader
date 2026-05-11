@@ -6,6 +6,7 @@
 
 namespace ratchet
 {
+	class Creature;
 	class Bullet : public GameObject
 	{
 	public:
@@ -49,6 +50,14 @@ namespace ratchet
 		bool m_explosionAnimationSwitch;
 
 		bool m_bulletTimerShouldReset = false;
+
+		float m_explosionPositionOffset;
+
+		bool m_explosionHasDamaged = false;
+
+		bool m_explosioTochTarget = false;
+
+		std::unordered_set<Creature*> m_hitCreatures;
 
 
 		bool getExplosionAnimationSwitch();

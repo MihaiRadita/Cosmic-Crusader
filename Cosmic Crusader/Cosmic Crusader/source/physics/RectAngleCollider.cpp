@@ -77,6 +77,8 @@ namespace ratchet
 			m_body = nullptr;
 			return;
 		}
+
+		m_bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 
@@ -96,6 +98,7 @@ namespace ratchet
 		m_fixtureDef.restitution = config.m_fixtureDef.restitution;
 		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
 
+		m_layer = config.m_layer;
 		m_userDataName = static_cast<short>(config.m_layer);
 		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
 

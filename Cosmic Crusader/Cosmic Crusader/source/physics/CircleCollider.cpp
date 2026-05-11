@@ -49,6 +49,7 @@ namespace ratchet
 
 		
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
+		m_bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 
 		m_gravityScale = config.m_gravityScale;
@@ -56,6 +57,8 @@ namespace ratchet
 		m_body->SetGravityScale(config.m_gravityScale);
 		m_body->SetLinearDamping(config.m_linearDamping);
 		m_body->SetAngularDamping(config.m_angularDamping);
+
+		m_layer = config.m_layer;
 
 		m_userDataName = static_cast<short>(config.m_layer);
 
