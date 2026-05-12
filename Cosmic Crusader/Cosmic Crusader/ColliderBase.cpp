@@ -70,6 +70,7 @@ namespace ratchet
 		return m_origin; 
 	}
 
+#ifdef IS_RATCHET_DEBUG
 	void ColliderBase::printBodyPositionRotation()
 	{
 	}
@@ -84,6 +85,8 @@ namespace ratchet
 		if (!m_debugDraw) return;
 #endif
 	}
+
+#endif
 
 	void ColliderBase::drawColliderCenterBased(sf::RenderTarget& target)
 	{

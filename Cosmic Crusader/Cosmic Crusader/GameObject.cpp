@@ -396,6 +396,7 @@ namespace ratchet
 		}
 	}
 
+#ifdef IS_RATCHET_DEBUG
 	void GameObject::setDebugDraw(bool value)
 	{
 		m_debugDraw = value;
@@ -405,6 +406,7 @@ namespace ratchet
 	{
 		return m_debugDraw;
 	}
+#endif
 
 	void GameObject::addGameObjectoDestory(GameObject* object)
 	{

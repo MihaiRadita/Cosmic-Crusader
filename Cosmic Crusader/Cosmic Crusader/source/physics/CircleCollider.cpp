@@ -109,6 +109,7 @@ namespace ratchet
 		target.draw(colliderOutline);
 	}
 
+#ifdef IS_RATCHET_DEBUG
 	void CircleCollider::printBodyPositionRotation()
 	{
 		TRACE_CHANNEL("COLLISION",getCircleColliderPosition().x, " x axis ",getCircleColliderPosition().y, " y axis ");
@@ -229,6 +230,7 @@ namespace ratchet
 		}
 
 	}
+#endif
 
 	CircleCollider::~CircleCollider()
 	{

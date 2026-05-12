@@ -173,6 +173,8 @@ namespace ratchet
 		}
 		return m_body->GetTransform().p;
 	}
+
+#ifdef IS_RATCHET_DEBUG
 	void RectAngleCollider::printBodyPositionRotation()
 	{
 		if (!m_body)
@@ -292,6 +294,7 @@ namespace ratchet
 		target.draw(outline);
 		//target.draw(bodyPosition);
 	}
+#endif
 
 	void RectAngleCollider::drawColliderCenterBased(sf::RenderTarget& target)
 	{

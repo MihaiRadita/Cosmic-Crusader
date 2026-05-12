@@ -418,7 +418,9 @@ namespace ratchet
 													if (enemy1->m_objectId == enemyID)
 													{
 														enemy1->Start();
+#ifdef IS_RATCHET_DEBUG
 														enemy1->setDebugDraw(true);
+#endif
 													}
 
 												}

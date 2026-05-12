@@ -211,7 +211,7 @@ namespace ratchet
 	}
 
 
-//#ifdef IS_RATCHET_DEBUG
+#ifdef IS_RATCHET_DEBUG
 	void CapsuleCollider::printBodyPositionRotation()
 	{
 		TRACE_CHANNEL("COLLISION", getColliderPosition().x, " x axis ", getColliderPosition().y, " y axis ");
@@ -346,7 +346,8 @@ namespace ratchet
 		sf::Vertex raycastCheckFallingRisk[] = { sf::Vertex(sf::Vector2f(sartPointCheckFallingRisk.x,sartPointCheckFallingRisk.y), sf::Color::Blue) , sf::Vertex(sf::Vector2f(sartPointCheckFallingRisk.x,endPointCheckFallingRisk.y), sf::Color::Blue) };
 		target.draw(raycastCheckFallingRisk, 2, sf::Lines);
 	}
-//#endif
+#endif
+
 		void CapsuleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
 		{
 			if (!m_body)
