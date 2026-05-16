@@ -80,6 +80,16 @@ namespace ratchet
 			m_body->SetMassData(&m_massData);
 		}
 
+		if (m_colliderOffsetX != 0)
+		{
+			m_colliderOffsetX = config.m_colliderOffsetX;
+		}
+
+		if (m_colliderOffsetY != 0)
+		{
+			m_colliderOffsetY = config.m_colliderOffsetY;
+		}
+
 		m_body->SetGravityScale(config.m_gravityScale);
 		m_body->SetLinearDamping(config.m_linearDamping);
 		m_body->SetAngularDamping(config.m_angularDamping);

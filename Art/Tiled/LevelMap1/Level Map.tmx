@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="23" nextobjectid="5212">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="24" nextobjectid="5213">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -61,6 +61,7 @@
   <image source="D:/Media/Downloads/Bomb Sprite.png" width="256" height="256"/>
  </tileset>
  <tileset firstgid="71" source="Bomb Launcher Bullet.tsx"/>
+ <tileset firstgid="72" source="Cutter.tsx"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
   <object id="3830" name="PathPoint" x="640" y="576">
    <point/>
@@ -50238,6 +50239,31 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup id="23" name="Obstacles">
+  <object id="5212" gid="72" x="18880" y="-256" width="192" height="64">
+   <properties>
+    <property name="Faction" type="int" value="2"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="animationActiveTimePass" type="float" value="2"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0"/>
+    <property name="colliderIsSensor" type="bool" value="true"/>
+    <property name="colliderLayer" type="int" value="6"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0.5"/>
+    <property name="colliderRadius" type="float" value="0.8"/>
+    <property name="colliderRestitution" type="float" value="0"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="damage" type="float" value="10"/>
+    <property name="isAnimationPlaying" type="bool" value="false"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="spriteTexturePath" value="Textures/Objects/Obstacles/Cutter/"/>
+    <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="12" name="Weapons">
   <object id="3903" name="Blaster" type="Weapon Pickup" gid="33" x="16960" y="-256" width="95" height="95">
    <properties>
@@ -50376,7 +50402,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="6"/>
+    <property name="colliderLayer" type="int" value="7"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="flagGreenTexture" value="Textures/Objects/Check Points/Green Flag.png"/>
     <property name="flagRedTexture" value="Textures/Objects/Check Points/Red Flag.png"/>
@@ -50629,7 +50655,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50647,7 +50673,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50665,7 +50691,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50683,7 +50709,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50701,7 +50727,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50719,7 +50745,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50737,7 +50763,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50755,7 +50781,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50773,7 +50799,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50791,7 +50817,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50809,7 +50835,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50827,7 +50853,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50845,7 +50871,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50863,7 +50889,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50881,7 +50907,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50899,7 +50925,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>
@@ -50917,7 +50943,7 @@
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="7"/>
+    <property name="colliderLayer" type="int" value="8"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="isActionTriggerInteracting" type="bool" value="false"/>
     <property name="objectType" type="int" value="1"/>

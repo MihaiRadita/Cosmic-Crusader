@@ -179,6 +179,12 @@
     <ClCompile Include="ActionTriggerConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -277,5 +283,7 @@
     <ClInclude Include="AnimationDeath.h" />
     <ClInclude Include="ActionTrigger.h" />
     <ClInclude Include="ActionTriggerConfig.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="ObstacleConfig.h" />
   </ItemGroup>
 </Project>

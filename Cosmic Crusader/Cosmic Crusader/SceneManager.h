@@ -9,6 +9,7 @@
 #include "UISliderButton.h"
 #include "Checkpoint.h"
 #include "ActionTrigger.h"
+#include "Obstacle.h"
 
 #include "physics/Physics.h"
 

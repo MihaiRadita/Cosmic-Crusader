@@ -78,6 +78,16 @@ namespace ratchet
 			return;
 		}
 
+		if (m_colliderOffsetX != 0)
+		{
+			m_colliderOffsetX = config.m_colliderOffsetX;
+		}
+
+		if (m_colliderOffsetY != 0)
+		{
+			m_colliderOffsetY = config.m_colliderOffsetY;
+		}
+
 		m_bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);
 

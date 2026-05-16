@@ -1365,6 +1365,16 @@ namespace ratchet
 						succeeded = true;
 					}
 				}
+				else if (layerName == "Obstacles")
+				{
+					auto config = ObstacleConfig();
+					if (config.deserialise(obj))
+					{
+						GameObject::s_gameObjects.push_back(new Obstacle(config));
+					}
+
+					succeeded = true;
+				}
 				else if (layerName == "Click Buttons" || layerName == "Pause Menu Click Buttons")
 				{
 					auto config = UIButtonConfig();

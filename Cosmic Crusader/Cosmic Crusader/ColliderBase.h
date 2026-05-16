@@ -12,6 +12,7 @@ namespace ratchet
 		Player,
 		Items, 
 		Projectiles,
+		Obstacles,
 		CheckPoints,
 		DeathFallTrigger
 	};
@@ -51,6 +52,9 @@ namespace ratchet
 
 		float m_checkFallingRiskRaycastEndOffsetX;
 		float m_checkFallingRiskRaycastEndOffsetY;
+
+		float m_colliderOffsetX = 0.f;
+		float m_colliderOffsetY =0.f;
 
 		std::optional<b2Vec2> m_origin = std::nullopt;
 
@@ -98,6 +102,9 @@ namespace ratchet
 
 		float m_checkFallingRiskRaycastEndOffsetX;
 		float m_checkFallingRiskRaycastEndOffsetY;
+
+		float m_colliderOffsetX = 0.f;
+		float m_colliderOffsetY = 0.f;
 
 
 		float m_checkTopPlatformsDirectionX;

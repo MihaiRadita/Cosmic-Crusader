@@ -3,6 +3,7 @@
 
 #include "game/Player.h"
 #include "SelfControlledCreature.h"
+#include "Obstacle.h"
 
 namespace ratchet
 {
@@ -46,6 +47,12 @@ namespace ratchet
 			m_body->SetMassData(&m_massData);
 		}
 
+		
+		m_colliderOffsetX = config.m_colliderOffsetX;
+		
+		m_colliderOffsetY = config.m_colliderOffsetY;
+		
+
 
 		
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
@@ -64,7 +71,7 @@ namespace ratchet
 
 		// Circle Shape
 		m_circleShape.m_radius = getGlobalRadius();
-		m_circleShape.m_p.Set(m_origin.x, m_origin.y);
+		m_circleShape.m_p.Set(m_origin.x + m_colliderOffsetX, m_origin.y + m_colliderOffsetY);
 		m_fixtureDef.shape = &m_circleShape;
 		m_fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(&m_userDataName);
 		m_fixtureDef.isSensor = config.m_fixtureDef.isSensor;
@@ -97,15 +104,24 @@ namespace ratchet
 	void CircleCollider::drawColliderCenterBased(sf::RenderTarget& target)
 	{
 		auto colliderOutline = sf::CircleShape(getGlobalRadius());
+
 		colliderOutline.setFillColor(sf::Color::Transparent);
 		colliderOutline.setOutlineColor(sf::Color::Green);
 		colliderOutline.setOutlineThickness(0.01f);
-		colliderOutline.setOrigin(colliderOutline.getRadius(), colliderOutline.getRadius());
+
+		colliderOutline.setOrigin(
+			colliderOutline.getRadius(),
+			colliderOutline.getRadius());
+
+		b2Vec2 worldPos = m_body->GetWorldPoint(m_circleShape.m_p);
 
 		colliderOutline.setPosition(
-			getBody()->GetPosition().x,
-			getBody()->GetPosition().y);
-		colliderOutline.setRotation(getBody()->GetAngle() * (180.f / M_PI));
+			worldPos.x,
+			worldPos.y);
+
+		colliderOutline.setRotation(
+			m_body->GetAngle() * (180.f / M_PI));
+
 		target.draw(colliderOutline);
 	}
 
@@ -227,6 +243,10 @@ namespace ratchet
 
 				
 			}
+		}
+		else if (auto* obstacle = dynamic_cast<Obstacle*>(m_obj))
+		{
+
 		}
 
 	}
