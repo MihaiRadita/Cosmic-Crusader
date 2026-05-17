@@ -1,7 +1,8 @@
 #pragma once
 
 #include "GameObject.h"
-
+#include "Timer.h"
+#include "animations/Animator.h"
 
 namespace ratchet
 {
@@ -18,11 +19,19 @@ namespace ratchet
 		float m_colliderOffsetY;
 		bool m_isAnimationPlaying;
 
+		Animator* m_obstacleAnimator = nullptr;
+
+		AnimationObstacle* m_obstacleAnimation;
+
 		void update() override;
 		void render(sf::RenderTarget& target) override;
 
 		virtual void OnSensorEnter(GameObject* obj) override;
 		virtual void OnSensorExit(GameObject* obj) override;
+
+		void updateObstacleAnimations();
+
+		Timer m_animationPlayInterval;
 
 	private:
 	

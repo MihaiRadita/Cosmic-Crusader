@@ -38,6 +38,7 @@ namespace ratchet
 		virtual std::vector<sf::Texture> addAnimationFrames(std::string& texturePath, Weapon::TYPE weaponType, const char* aimingAngle, const char* state);
 
 		virtual void playAnimation(sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state);
+		virtual void playAnimation(sf::Sprite& sprite);
 		virtual int getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state);
 		virtual int getCurrentAnimIndex();
 		virtual void resetCurrentAnimIndex();

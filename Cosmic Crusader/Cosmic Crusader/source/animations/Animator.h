@@ -4,6 +4,7 @@
 #include "animations/AnimationIdle.h"
 #include "animations/AnimationRun.h"
 #include "animations/AnimationJumpRun.h"
+#include "AnimationObstacle.h"
 #include "Weapon.h"
 
 
@@ -30,6 +31,7 @@ namespace ratchet
 
 		//Play Animation
 		void play(AnimationBase* playAnim, sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state);
+		void play(AnimationBase* playAnim, sf::Sprite& sprite);
 
 		void invertAnimation(AnimationBase* anim, Weapon::TYPE& weaponUsed);
 

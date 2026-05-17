@@ -79,4 +79,9 @@ namespace ratchet
 		TRACE_CHANNEL("ANIMATION", "Abstract Animation");
 #endif
 	}
+
+	void AnimationBase::playAnimation(sf::Sprite& sprite)
+	{
+
+	}
 }

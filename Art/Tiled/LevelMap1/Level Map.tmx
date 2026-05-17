@@ -50257,9 +50257,9 @@
     <property name="colliderRestitution" type="float" value="0"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="damage" type="float" value="10"/>
-    <property name="isAnimationPlaying" type="bool" value="false"/>
+    <property name="isAnimationPlaying" type="bool" value="true"/>
     <property name="objectType" type="int" value="1"/>
-    <property name="spriteTexturePath" value="Textures/Objects/Obstacles/Cutter/"/>
+    <property name="spriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter"/>
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>

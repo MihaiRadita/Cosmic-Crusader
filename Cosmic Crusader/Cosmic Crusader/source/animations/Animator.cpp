@@ -40,6 +40,11 @@ namespace ratchet
 		anim->playAnimation(sprite, weaponUsed, angle, state);
 	}
 
+	void Animator::play(AnimationBase* playAnim, sf::Sprite& sprite)
+	{
+		playAnim->playAnimation(sprite);
+	}
+
 	void Animator::invertAnimation(AnimationBase* anim, Weapon::TYPE& weaponUsed)
 	{
 		anim->invertAnimationFramesList(weaponUsed);
