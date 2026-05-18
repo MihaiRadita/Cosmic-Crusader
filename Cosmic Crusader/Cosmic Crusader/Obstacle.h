@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObject.h"
+#include "Creature.h"
 #include "Timer.h"
 #include "animations/Animator.h"
 
@@ -31,7 +31,15 @@ namespace ratchet
 
 		void updateObstacleAnimations();
 
+		void Start() override;
+
 		Timer m_animationPlayInterval;
+
+		Creature* m_target =nullptr;
+
+		void SetTarget(Faction& faction);
+
+		void updateDamage();
 
 	private:
 	

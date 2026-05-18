@@ -125,6 +125,7 @@ namespace ratchet
 		float m_minCeilingDistance;
 
 		bool m_isInvulnerable = false;
+		bool m_isInvlunerbleForTesting = false;
 
 		const int m_maxTracePoints = 30;
 		std::list<sf::Vector2f> m_tracePointsList;

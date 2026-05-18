@@ -22,12 +22,19 @@ namespace ratchet
 		// Variables
 		float m_gravity;
 
+		Timer m_timeBeingInvulnerable;
+
+		float m_timeLimitInvulnerable = 1.f;
+
 		std::vector<sf::Event> m_playerEvents;
 	public:
 		float m_curreNAgleDeg = 0.0f;
 
 		//Constructors
 		Player(const CreatureConfig& config);
+
+		Timer GettimeBeingInvulnerable();
+		float GetTImeLimitBeingInvulnerable();
 
 		int m_playerCheckPointID = 0;
 
@@ -41,6 +48,8 @@ namespace ratchet
 		void Die() override;
 
 		void updateTrace() override;
+
+		void updateInvulnerability();
 	
 
 		//Prints

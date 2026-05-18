@@ -48,6 +48,8 @@ namespace ratchet
 		ColliderBase* getCollider();
 		bool m_markedForDestruction = false;
 
+		bool m_onSensorStay = false;
+
 		
 		//GameObject* m_target;
 

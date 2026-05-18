@@ -984,29 +984,35 @@ namespace ratchet
 	}
 	void Creature::TakeDamage(float& damage)
 	{
-		if (m_isInvulnerable == false)
+		if (m_isInvlunerbleForTesting)
+			return;
+
+		if (m_isInvulnerable)
+			return;
+		m_health -= damage;
+
+		std::cout << "Character health: " << m_health << std::endl;
+
+		if (auto* player = dynamic_cast<Player*>(this))
 		{
-			m_health -= damage;
+			m_isInvulnerable = true;
+			player->GettimeBeingInvulnerable().Restart();
 		}
 
-		std::cout << "Charcter has life remained : " << m_health << std::endl;
 		if (m_health <= 0.0f)
 		{
 			m_health = 0.0f;
 
-			if (!m_isDeath) 
+			if (!m_isDeath)
 			{
 				m_isDeath = true;
+				m_isInvulnerable = false;
 			}
 		}
 		else
 		{
-			float volume = m_hurtSound.getVolume();
-
-			volume = SceneManager::Get().GetSoundEffectsVolume();
-
+			float volume = SceneManager::Get().GetSoundEffectsVolume();
 			m_hurtSound.setVolume(volume);
-
 			m_hurtSound.play();
 		}
 	}

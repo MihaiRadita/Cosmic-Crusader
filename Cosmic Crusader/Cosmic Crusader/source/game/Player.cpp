@@ -16,6 +16,16 @@ namespace ratchet
 		initVariables();
 	}
 
+	Timer Player::GettimeBeingInvulnerable()
+	{
+		return m_timeBeingInvulnerable;
+	}
+
+	float Player::GetTImeLimitBeingInvulnerable()
+	{
+		return m_timeLimitInvulnerable;
+	}
+
 	void Player::initVariables()
 	{
 		m_gravity = 0.090f;
@@ -120,6 +130,20 @@ namespace ratchet
 		
 
 		m_previousTracePoiintPos = playerPos;
+	}
+
+	void Player::updateInvulnerability()
+	{
+		if (!m_isInvulnerable)
+		{
+			m_timeBeingInvulnerable.Restart();
+			return;
+		}
+		if (m_timeBeingInvulnerable.GetElapsed().asSeconds() >= m_timeLimitInvulnerable)
+		{
+			m_isInvulnerable = false;
+			return; 
+		}
 	}
 	
 
@@ -508,9 +532,12 @@ namespace ratchet
 
 		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
 
+		updateInvulnerability();
+
 		Creature::update();
 
 		updateTrace();
+
 	}
 
 

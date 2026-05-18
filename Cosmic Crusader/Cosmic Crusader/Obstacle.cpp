@@ -29,6 +29,7 @@ ratchet::Obstacle::~Obstacle()
 void ratchet::Obstacle::update()
 {
 	updateObstacleAnimations();
+	updateDamage();
 }
 
 void ratchet::Obstacle::render(sf::RenderTarget& target)
@@ -39,15 +40,27 @@ void ratchet::Obstacle::render(sf::RenderTarget& target)
 
 void ratchet::Obstacle::OnSensorEnter(GameObject* obj)
 {
- 	if (auto* player = dynamic_cast<Player*>(obj))
+	
+	if (m_onSensorStay == false)
 	{
-		std::cout << "Player HIT OBSTACLE!" << std::endl;
+		m_onSensorStay = true;
 	}
+
+	std::cout << "Player HIT OBSTACLE!" << std::endl;
+
+	if (m_isAnimationPlaying)
+	{
+		m_target->TakeDamage(m_damage);
+	}
+	
 }
 
 void ratchet::Obstacle::OnSensorExit(GameObject* obj)
 {
-
+	if (m_onSensorStay == true)
+	{
+		m_onSensorStay = false;
+	}
 }
 
 void ratchet::Obstacle::updateObstacleAnimations()
@@ -80,4 +93,39 @@ void ratchet::Obstacle::updateObstacleAnimations()
 			m_animationPlayInterval.Restart();
 		}
 	}
+}
+
+void ratchet::Obstacle::Start()
+{
+	PostCosntructFixup();
+	SetTarget(m_faction);
+}
+
+void ratchet::Obstacle::SetTarget(Faction& faction)
+{
+	for (auto* obj : s_gameObjects)
+	{
+		if (obj != this)
+		{
+			if (faction != Faction::FACTION_UNKNOWN && obj->m_faction != Faction::FACTION_UNKNOWN)
+			{
+				if (faction != obj->m_faction)
+				{
+					m_target = (Creature*)obj;
+					break;
+				}
+			}
+		}
+	}
+}
+
+void ratchet::Obstacle::updateDamage()
+{
+	if (!m_onSensorStay)
+		return;
+
+	if (!m_isAnimationPlaying)
+		return;
+
+	m_target->TakeDamage(m_damage);
 }
