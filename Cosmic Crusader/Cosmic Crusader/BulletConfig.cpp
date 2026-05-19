@@ -179,7 +179,15 @@ namespace ratchet
 				{
 					m_colliderConfig->m_angularDamping = propertyValue.get<float>();
 				}
-			}		
+			}
+
+			if (propertyName == "useCenterBody")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_useCenterredBody = propertyValue.get<bool>();
+				}
+			}
 		}
 
 		return true;

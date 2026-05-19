@@ -11,6 +11,8 @@ namespace ratchet
 
 	enum class ObjectType{None = 0, World, UI, HUD};
 
+	enum class ColliderShapeType{None =0, Rectangle, Circle, Capsule};
+
 	struct GameObjectConfig : public ISerialisableItem
 	{
 #ifdef IS_RATCHET_DEBUG
@@ -39,6 +41,7 @@ namespace ratchet
 		bool m_activeRenderer;
 		bool m_activeObject;
 		bool m_canJumpOver;
+		ColliderShapeType m_colliderShapeType;
 
 		std::string m_objectLayerName;
 

@@ -460,7 +460,13 @@ namespace ratchet
 				m_creatureDeathSoundPath = propertyValue.get<std::string>();
 			}
 
-
+			if (propertyName == "useCenterBody")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_useCenterredBody = propertyValue.get<bool>();
+				}
+			}
 
 			if (propertyName == "usableWeaponTypeListMask")
 			{

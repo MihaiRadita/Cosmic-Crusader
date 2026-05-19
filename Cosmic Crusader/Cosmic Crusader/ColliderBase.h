@@ -56,6 +56,8 @@ namespace ratchet
 		float m_colliderOffsetX = 0.f;
 		float m_colliderOffsetY =0.f;
 
+		bool m_useCenterredBody = false;
+
 		std::optional<b2Vec2> m_origin = std::nullopt;
 
 
@@ -77,6 +79,8 @@ namespace ratchet
 		b2MassData m_massData;
 
 		PhysicsLayer m_layer;
+
+		bool m_useCenterredBody = false;
 
 		bool m_isColliderSetDestroy = false;
 

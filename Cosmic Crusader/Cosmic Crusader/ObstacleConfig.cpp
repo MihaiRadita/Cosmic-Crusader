@@ -29,6 +29,8 @@ namespace ratchet
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
+		std::string m_objectName = jsonFile["name"];
+
 		scale = sf::Vector2f(1.0f, 1.0f) * SceneManager::sc_tiledToGameScale;
 		positionXOffset = 0.f;
 		positionYOffset = -tileHeight * scale.y;
@@ -45,7 +47,15 @@ namespace ratchet
 
 
 		// Custom Properties
-		m_colliderConfig = new CircleColliderConfig();
+		if (m_objectName == "Cutter")
+		{
+			m_colliderConfig = new CircleColliderConfig();
+		}
+		
+		if (m_objectName == "Flame")
+		{
+			m_colliderConfig = new RectAngleColliderConfig();
+		}
 
 		for (const auto& jsonProperty : jsonFile["properties"])
 		{
@@ -154,6 +164,14 @@ namespace ratchet
 			if (propertyName == "startSpriteTexturePath")
 			{
 				startSpriteTexturePath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "useCenterBody")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_useCenterredBody = propertyValue.get<bool>();
+				}
 			}
 		}
 

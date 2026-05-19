@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="24" nextobjectid="5213">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="24" nextobjectid="5216">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -57,11 +57,12 @@
  <tileset firstgid="68" source="Continue Button.tsx"/>
  <tileset firstgid="69" source="Action Trigger.tsx"/>
  <tileset firstgid="70" source="Enemy2.tsx"/>
- <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="0" columns="11">
+ <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="121" columns="11">
   <image source="D:/Media/Downloads/Bomb Sprite.png" width="256" height="256"/>
  </tileset>
- <tileset firstgid="71" source="Bomb Launcher Bullet.tsx"/>
- <tileset firstgid="72" source="Cutter.tsx"/>
+ <tileset firstgid="192" source="Bomb Launcher Bullet.tsx"/>
+ <tileset firstgid="193" source="Cutter.tsx"/>
+ <tileset firstgid="194" source="Flame.tsx"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
   <object id="3830" name="PathPoint" x="640" y="576">
    <point/>
@@ -50240,7 +50241,7 @@
   </object>
  </objectgroup>
  <objectgroup id="23" name="Obstacles">
-  <object id="5212" gid="72" x="18880" y="-256" width="192" height="64">
+  <object id="5212" name="Cutter" gid="193" x="18880" y="-256" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -50255,12 +50256,37 @@
     <property name="colliderOffsetY" type="float" value="0.5"/>
     <property name="colliderRadius" type="float" value="0.8"/>
     <property name="colliderRestitution" type="float" value="0"/>
+    <property name="colliderShapeType" type="int" value="2"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="damage" type="float" value="10"/>
     <property name="isAnimationPlaying" type="bool" value="true"/>
     <property name="objectType" type="int" value="1"/>
     <property name="spriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter"/>
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
+    <property name="useCenterBody" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="5214" name="Flame" gid="194" x="19712" y="-576" width="64" height="128">
+   <properties>
+    <property name="Faction" type="int" value="2"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="animationActiveTimePass" type="float" value="2"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0"/>
+    <property name="colliderIsSensor" type="bool" value="true"/>
+    <property name="colliderLayer" type="int" value="6"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0"/>
+    <property name="colliderShapeType" type="int" value="1"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="damage" type="float" value="10"/>
+    <property name="isAnimationPlaying" type="bool" value="true"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="spriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame"/>
+    <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
  </objectgroup>
@@ -50440,6 +50466,7 @@
     <property name="colliderBulletRestitution" type="float" value="0"/>
     <property name="colliderBulletType" type="int" value="2"/>
     <property name="objectType" type="int" value="1"/>
+    <property name="useCenterBody" type="bool" value="true"/>
    </properties>
   </object>
   <object id="5117" name="Blaster Bullet" gid="34" x="18465.7" y="-297.333" width="19" height="8">
@@ -50466,6 +50493,7 @@
     <property name="colliderBulletRestitution" type="float" value="0"/>
     <property name="colliderBulletType" type="int" value="2"/>
     <property name="objectType" type="int" value="1"/>
+    <property name="useCenterBody" type="bool" value="true"/>
    </properties>
   </object>
   <object id="5206" name="Blaster Bullet" gid="34" x="16193.3" y="-808" width="19" height="8">
@@ -50492,9 +50520,10 @@
     <property name="colliderBulletRestitution" type="float" value="0"/>
     <property name="colliderBulletType" type="int" value="2"/>
     <property name="objectType" type="int" value="1"/>
+    <property name="useCenterBody" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="5208" name="Bomb Launcher Bullet" gid="71" x="15773" y="-659.667" width="30" height="30">
+  <object id="5208" name="Bomb Launcher Bullet" gid="192" x="15773" y="-659.667" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -50520,6 +50549,7 @@
     <property name="colliderBulletType" type="int" value="2"/>
     <property name="explosionPositionOffset" type="float" value="0.35"/>
     <property name="objectType" type="int" value="1"/>
+    <property name="useCenterBody" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>
@@ -50641,6 +50671,7 @@
     <property name="targetMaxDistanceLoseY" type="float" value="10"/>
     <property name="usableWeaponCheckListMask" type="int" value="320"/>
     <property name="usableWeaponTypeListMask" type="int" value="320"/>
+    <property name="useCenterBody" type="bool" value="false"/>
     <property name="weaponTypeListMask" type="int" value="320"/>
    </properties>
   </object>

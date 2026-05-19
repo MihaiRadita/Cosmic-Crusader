@@ -18,6 +18,8 @@ namespace ratchet
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
+		m_useCenterredBody = config.m_useCenterredBody;
+
 		m_scaleX = 1.0f;
 		m_scaleY = 1.0f;
 
@@ -35,10 +37,18 @@ namespace ratchet
 		{
 			m_origin = config.m_origin.value();
 		}
+		else if(m_useCenterredBody)
+		{
+		
+			m_origin = b2Vec2(0.0f, 0.0f);
+		}
 		else
 		{
-			m_origin = b2Vec2(sprite.getGlobalBounds().width / 2.0f, sprite.getGlobalBounds().height / 2.0f);
+			m_origin = m_origin = b2Vec2(
+				sprite.getGlobalBounds().width / 2.0f,
+				sprite.getGlobalBounds().height / 2.0f);
 		}
+
 
 		if (m_massValue != 0.0f)
 		{

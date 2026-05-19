@@ -63,9 +63,9 @@ namespace ratchet
 		// General
 		float m_width;
 		float m_height;
+		b2PolygonShape m_boxShape;
 
 		//Physics
-		b2PolygonShape m_boxShape;
 		b2Vec2 m_offset;
 		b2Vec2 m_vs[4];
 		static int cooliderTypeIndexCount;
