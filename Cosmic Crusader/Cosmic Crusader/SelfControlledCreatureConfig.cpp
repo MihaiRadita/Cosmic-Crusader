@@ -460,14 +460,6 @@ namespace ratchet
 				m_creatureDeathSoundPath = propertyValue.get<std::string>();
 			}
 
-			if (propertyName == "useCenterBody")
-			{
-				if (m_colliderConfig)
-				{
-					m_colliderConfig->m_useCenterredBody = propertyValue.get<bool>();
-				}
-			}
-
 			if (propertyName == "usableWeaponTypeListMask")
 			{
 				EnumMask<Weapon::TYPE> weaponTypeMask;
@@ -522,6 +514,14 @@ namespace ratchet
 				{
 					TRACE_CHANNEL("GAMEOBJECT_INIT", "Loading the same weapon type more than once - this should never happen!");
 					it->second = weaponConfig;
+				}
+			}
+
+			if (propertyName == "bodyAligment")
+			{
+				if (m_colliderConfig)
+				{
+					m_colliderConfig->m_bodyAlignment = static_cast<BodyAlignment>(propertyValue.get<int>());
 				}
 			}
 		}

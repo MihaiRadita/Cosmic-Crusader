@@ -19,6 +19,8 @@ namespace ratchet
 		float m_colliderOffsetY;
 		bool m_isAnimationPlaying;
 
+		int m_frameIndexContinueAnimationFrom;
+
 		Animator* m_obstacleAnimator = nullptr;
 
 		AnimationObstacle* m_obstacleAnimation;

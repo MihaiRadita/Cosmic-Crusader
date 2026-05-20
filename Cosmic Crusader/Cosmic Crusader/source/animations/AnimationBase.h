@@ -47,10 +47,12 @@ namespace ratchet
 		virtual void setAnimationSwitch(bool animSwitch);
 		virtual bool isCurrentAnimationIndexValue();
 		virtual void invertAnimationFramesList(Weapon::TYPE& weaponused);
+		virtual void resetAnimationFrame(sf::Sprite& sprite);
 
 		bool isAnimationEnd();
 
 		void SetAnimationEnd(bool end);
+
 
 	protected:
 		float m_animTimeLimit;

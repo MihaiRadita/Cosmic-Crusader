@@ -16,12 +16,14 @@ namespace ratchet
 		void initVariables() override;
 		void resetPlayerAnimTimer() override;
 		void resetCurrentAnimIndex() override;
+		void resetAnimationFrame(sf::Sprite& sprite) override;
 
 		int getAnimSize();
 		int getCurrentAnimIndex() override;
 
 		bool isAnimationReachedEnd();
 
+		int m_frameIndexContinueAnimationFrom;
 
 		std::vector<sf::Texture> addAnimationFrames(std::string& texturePath);
 

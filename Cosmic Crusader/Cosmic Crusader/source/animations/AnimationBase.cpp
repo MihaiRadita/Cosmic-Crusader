@@ -63,6 +63,11 @@ namespace ratchet
 #endif
 	}
 
+	void AnimationBase::resetAnimationFrame(sf::Sprite& sprite)
+	{
+
+	}
+
 	bool AnimationBase::isAnimationEnd()
 	{
 		return m_endAnimation;

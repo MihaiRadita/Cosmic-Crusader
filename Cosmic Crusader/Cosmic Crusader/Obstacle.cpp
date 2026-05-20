@@ -10,6 +10,7 @@ ratchet::Obstacle::Obstacle(ObstacleConfig& config) : GameObject(config)
 	m_animationActiveTimePass = config.m_animationActiveTimePass;
 	m_isAnimationPlaying = config.m_isAnimationPlaying;
 	m_spritePath = config.spriteTexturePath;
+	m_frameIndexContinueAnimationFrom = config.m_frameIndexContinueAnimationFrom;
 
 	m_obstacleAnimator = new Animator();
 
@@ -18,6 +19,9 @@ ratchet::Obstacle::Obstacle(ObstacleConfig& config) : GameObject(config)
 	m_obstacleAnimator->setAnimation(m_obstacleAnimation);
 
 	m_animationPlayInterval.Restart();
+
+
+
 }
 
 ratchet::Obstacle::~Obstacle()
@@ -40,19 +44,20 @@ void ratchet::Obstacle::render(sf::RenderTarget& target)
 
 void ratchet::Obstacle::OnSensorEnter(GameObject* obj)
 {
-	
-	if (m_onSensorStay == false)
+	if (obj == m_target)
 	{
-		m_onSensorStay = true;
-	}
+		if (m_onSensorStay == false)
+		{
+			m_onSensorStay = true;
+		}
 
-	std::cout << "Player HIT OBSTACLE!" << std::endl;
+		std::cout << "Player HIT OBSTACLE!" << std::endl;
 
-	if (m_isAnimationPlaying)
-	{
-		m_target->TakeDamage(m_damage);
+		if (m_isAnimationPlaying)
+		{
+			m_target->TakeDamage(m_damage);
+		}
 	}
-	
 }
 
 void ratchet::Obstacle::OnSensorExit(GameObject* obj)
@@ -84,6 +89,8 @@ void ratchet::Obstacle::updateObstacleAnimations()
 	}
 	else
 	{
+		m_obstacleAnimation->resetAnimationFrame(m_sprite);
+		
 		AnimationBase* animation = m_obstacleAnimator->getAbstractAnimation();
 		if (m_animationPlayInterval.GetElapsed().asSeconds() >= m_animationActiveTimePass)
 		{
@@ -97,6 +104,7 @@ void ratchet::Obstacle::updateObstacleAnimations()
 
 void ratchet::Obstacle::Start()
 {
+	m_obstacleAnimation->m_frameIndexContinueAnimationFrom = m_frameIndexContinueAnimationFrom;
 	PostCosntructFixup();
 	SetTarget(m_faction);
 }

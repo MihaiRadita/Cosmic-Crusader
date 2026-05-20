@@ -17,6 +17,8 @@ namespace ratchet
 		float m_colliderOffsetY;
 		bool m_isAnimationPlaying;
 
+		int m_frameIndexContinueAnimationFrom;
+
 	};
 }
 

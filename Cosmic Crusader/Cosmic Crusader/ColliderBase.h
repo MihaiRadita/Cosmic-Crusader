@@ -17,6 +17,8 @@ namespace ratchet
 		DeathFallTrigger
 	};
 
+	enum class BodyAlignment{None = 0, TopLeft, Center};
+
 	enum ColliderType { COLLIDERTYPE_UNKNOWN = 0, STATIC, DYNAMIC };
 
 	struct ColliderBaseConfig
@@ -25,6 +27,7 @@ namespace ratchet
 		virtual ~ColliderBaseConfig() = default;
 
 		PhysicsLayer m_layer;
+		BodyAlignment m_bodyAlignment;
 
 		b2FixtureDef m_fixtureDef;
 		b2BodyDef m_bodyDef;
@@ -56,8 +59,6 @@ namespace ratchet
 		float m_colliderOffsetX = 0.f;
 		float m_colliderOffsetY =0.f;
 
-		bool m_useCenterredBody = false;
-
 		std::optional<b2Vec2> m_origin = std::nullopt;
 
 
@@ -79,8 +80,8 @@ namespace ratchet
 		b2MassData m_massData;
 
 		PhysicsLayer m_layer;
+		BodyAlignment m_bodyAlignment;
 
-		bool m_useCenterredBody = false;
 
 		bool m_isColliderSetDestroy = false;
 

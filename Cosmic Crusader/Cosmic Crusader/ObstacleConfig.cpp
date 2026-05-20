@@ -90,6 +90,11 @@ namespace ratchet
 				m_animationActiveTimePass = propertyValue.get<float>();
 			}
 
+			if (propertyName == "frameIndexContinueAnimtionFrom")
+			{
+				m_frameIndexContinueAnimationFrom = propertyValue.get<int>();
+			}
+
 			if (propertyName == "colliderDensity")
 			{
 				m_colliderConfig->m_fixtureDef.density = propertyValue.get<float>();
@@ -166,11 +171,11 @@ namespace ratchet
 				startSpriteTexturePath = propertyValue.get<std::string>();
 			}
 
-			if (propertyName == "useCenterBody")
+			if (propertyName == "bodyAligment")
 			{
 				if (m_colliderConfig)
 				{
-					m_colliderConfig->m_useCenterredBody = propertyValue.get<bool>();
+					m_colliderConfig->m_bodyAlignment = static_cast<BodyAlignment>(propertyValue.get<int>());
 				}
 			}
 		}

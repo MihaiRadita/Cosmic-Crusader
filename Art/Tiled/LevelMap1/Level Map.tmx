@@ -50247,6 +50247,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="animationActiveTimePass" type="float" value="2"/>
+    <property name="bodyAligment" type="int" value="1"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
@@ -50259,11 +50260,11 @@
     <property name="colliderShapeType" type="int" value="2"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="damage" type="float" value="10"/>
+    <property name="frameIndexContinueAnimtionFrom" type="int" value="0"/>
     <property name="isAnimationPlaying" type="bool" value="true"/>
     <property name="objectType" type="int" value="1"/>
     <property name="spriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter"/>
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
-    <property name="useCenterBody" type="bool" value="false"/>
    </properties>
   </object>
   <object id="5214" name="Flame" gid="194" x="19712" y="-576" width="64" height="128">
@@ -50272,6 +50273,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="animationActiveTimePass" type="float" value="2"/>
+    <property name="bodyAligment" type="int" value="1"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
@@ -50283,6 +50285,7 @@
     <property name="colliderShapeType" type="int" value="1"/>
     <property name="colliderType" type="int" value="0"/>
     <property name="damage" type="float" value="10"/>
+    <property name="frameIndexContinueAnimtionFrom" type="int" value="3"/>
     <property name="isAnimationPlaying" type="bool" value="true"/>
     <property name="objectType" type="int" value="1"/>
     <property name="spriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame"/>
@@ -50447,6 +50450,7 @@
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bodyAligment" type="int" value="2"/>
     <property name="bulletLifeLimit" type="float" value="1"/>
     <property name="bulletMovementType" type="int" value="2"/>
     <property name="bulletPoolIncrementation" type="int" value="5"/>
@@ -50466,7 +50470,6 @@
     <property name="colliderBulletRestitution" type="float" value="0"/>
     <property name="colliderBulletType" type="int" value="2"/>
     <property name="objectType" type="int" value="1"/>
-    <property name="useCenterBody" type="bool" value="true"/>
    </properties>
   </object>
   <object id="5117" name="Blaster Bullet" gid="34" x="18465.7" y="-297.333" width="19" height="8">
@@ -50474,6 +50477,7 @@
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bodyAligment" type="int" value="2"/>
     <property name="bulletLifeLimit" type="float" value="1"/>
     <property name="bulletMovementType" type="int" value="2"/>
     <property name="bulletPoolIncrementation" type="int" value="5"/>
@@ -50493,7 +50497,6 @@
     <property name="colliderBulletRestitution" type="float" value="0"/>
     <property name="colliderBulletType" type="int" value="2"/>
     <property name="objectType" type="int" value="1"/>
-    <property name="useCenterBody" type="bool" value="true"/>
    </properties>
   </object>
   <object id="5206" name="Blaster Bullet" gid="34" x="16193.3" y="-808" width="19" height="8">
@@ -50501,6 +50504,7 @@
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bodyAligment" type="int" value="2"/>
     <property name="bulletLifeLimit" type="float" value="1"/>
     <property name="bulletMovementType" type="int" value="2"/>
     <property name="bulletPoolIncrementation" type="int" value="5"/>
@@ -50520,7 +50524,6 @@
     <property name="colliderBulletRestitution" type="float" value="0"/>
     <property name="colliderBulletType" type="int" value="2"/>
     <property name="objectType" type="int" value="1"/>
-    <property name="useCenterBody" type="bool" value="true"/>
    </properties>
   </object>
   <object id="5208" name="Bomb Launcher Bullet" gid="192" x="15773" y="-659.667" width="30" height="30">
@@ -50528,6 +50531,7 @@
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bodyAligment" type="int" value="2"/>
     <property name="bulletExplosionAnimationPath" value="F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Objects/Weapons/Player/Explosion Bullet Bomb Launcher1"/>
     <property name="bulletLifeLimit" type="float" value="2.5"/>
     <property name="bulletMovementType" type="int" value="2"/>
@@ -50549,7 +50553,6 @@
     <property name="colliderBulletType" type="int" value="2"/>
     <property name="explosionPositionOffset" type="float" value="0.35"/>
     <property name="objectType" type="int" value="1"/>
-    <property name="useCenterBody" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>
@@ -50625,6 +50628,7 @@
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="angleBase" type="float" value="45"/>
     <property name="animationStateListMask" type="int" value="35"/>
+    <property name="bodyAligment" type="int" value="1"/>
     <property name="bodyShoulderOffset" type="float" value="0.4"/>
     <property name="characterAnglesMask" type="int" value="1"/>
     <property name="colliderAngularDamping" type="float" value="0"/>

@@ -181,11 +181,11 @@ namespace ratchet
 				}
 			}
 
-			if (propertyName == "useCenterBody")
+			if (propertyName == "bodyAligment")
 			{
 				if (m_colliderConfig)
 				{
-					m_colliderConfig->m_useCenterredBody = propertyValue.get<bool>();
+					m_colliderConfig->m_bodyAlignment = static_cast<BodyAlignment>(propertyValue.get<int>());
 				}
 			}
 		}

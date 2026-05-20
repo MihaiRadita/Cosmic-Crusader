@@ -18,7 +18,6 @@ namespace ratchet
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
-		m_useCenterredBody = config.m_useCenterredBody;
 
 		m_scaleX = 1.0f;
 		m_scaleY = 1.0f;
@@ -32,17 +31,18 @@ namespace ratchet
 			m_radius = std::max(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height) / 2.0f;
 		}
 
+		m_bodyAlignment = config.m_bodyAlignment;
 
 		if (config.m_origin.has_value())
 		{
 			m_origin = config.m_origin.value();
 		}
-		else if(m_useCenterredBody)
+		else if(m_bodyAlignment == BodyAlignment::Center)
 		{
 		
 			m_origin = b2Vec2(0.0f, 0.0f);
 		}
-		else
+		else if(m_bodyAlignment == BodyAlignment::TopLeft)
 		{
 			m_origin = m_origin = b2Vec2(
 				sprite.getGlobalBounds().width / 2.0f,
@@ -57,14 +57,12 @@ namespace ratchet
 			m_body->SetMassData(&m_massData);
 		}
 
-		
+
 		m_colliderOffsetX = config.m_colliderOffsetX;
 		
 		m_colliderOffsetY = config.m_colliderOffsetY;
 		
 
-
-		
 		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
 		m_bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 		m_body = s_physicsWorld->CreateBody(&m_bodyDef);

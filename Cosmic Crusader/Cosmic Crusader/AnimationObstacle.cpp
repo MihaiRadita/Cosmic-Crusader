@@ -73,13 +73,22 @@ namespace ratchet
 				m_isAnimTransition = true;
 
 				bool increaseFrameIndex = true;
+
 				if (m_currentFrameIndex >= getAnimSize() - 1)
 				{
 					increaseFrameIndex = false;
 
 					if (m_repeatAnimation)
 					{
-						m_currentFrameIndex = 0;
+						if (m_frameIndexContinueAnimationFrom != 0)
+						{
+							m_currentFrameIndex = m_frameIndexContinueAnimationFrom;
+						}
+						else
+						{
+							m_currentFrameIndex = 0;
+
+						}
 					}
 				}
 
@@ -114,6 +123,13 @@ namespace ratchet
 	void AnimationObstacle::resetCurrentAnimIndex()
 	{
 		m_currentFrameIndex = 0;
+	}
+
+	void AnimationObstacle::resetAnimationFrame(sf::Sprite& sprite)
+	{
+		sf::Vector2u texSize = m_animationFrames[0].getSize();
+		sprite.setTexture(m_animationFrames[0]);
+		sprite.setTextureRect(sf::IntRect(0, 0, texSize.x, texSize.y));
 	}
 
 	int AnimationObstacle::getAnimSize()
