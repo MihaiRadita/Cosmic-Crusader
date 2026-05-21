@@ -8,9 +8,10 @@ namespace ratchet
 	WeaponConfig::WeaponConfig(int ammo, int damage, bool isWeaponAccessible) : GameObjectConfig()
 	{
 		m_MaxAmmo = ammo;
+		m_infiniteAmmo = false;
 		m_damage = damage;
 		m_isWeaponAccessible = isWeaponAccessible;
-
+		m_ammoDecrease = 0.0f;
 
 		//Weapon Shooting Points Offsets
 		
@@ -22,6 +23,8 @@ namespace ratchet
 		m_shootingOffsetAngle45 = sf::Vector2f(0.0f, 0.0f);
 		m_shootingOffsetAngle90 = sf::Vector2f(0.0f, 0.0f);
 		m_shootingOffsetAngleMinus45 = sf::Vector2f(0.0f, 0.0f);
+
+
 
 
 	}
@@ -95,6 +98,18 @@ namespace ratchet
 			{
 				m_MaxAmmo = propertyValue.get<float>();
 			}
+
+			if (propertyName == "ammoDecrease")
+			{
+				m_ammoDecrease = propertyValue.get<int>();
+			}
+
+			if (propertyName == "ammoInfinite")
+			{
+				m_infiniteAmmo = propertyValue.get<bool>();
+			}
+
+
 			if (propertyName == "bulletIncrementation")
 			{
 				m_bulletPoolIncrementation = propertyValue.get<int>();

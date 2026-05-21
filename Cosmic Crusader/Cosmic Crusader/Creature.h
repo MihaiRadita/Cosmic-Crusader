@@ -43,6 +43,7 @@ namespace ratchet
 		bool m_isDeath = false;
 		bool m_isDeathFall = false;
 
+
 		bool m_shouldPlayDeathSound = false;
 
 		//target detect distance 
@@ -58,6 +59,7 @@ namespace ratchet
 		float m_targetMaxDistanceLoseY;
 
 		float m_health = 0.0f;
+		float m_maxHealth = 0.0f;
 
 		sf::Vector2f currentMousePositiion = sf::Vector2f(0.0f,0.0f);
 
@@ -141,6 +143,9 @@ namespace ratchet
 
 		int m_currenIndexTrace = 0;
 		int m_previousIndexTrace = 0;
+
+		virtual void increaseHealth(float& health);
+		virtual void increaseAmmo(float& ammo, int& weponID);
 
 
 

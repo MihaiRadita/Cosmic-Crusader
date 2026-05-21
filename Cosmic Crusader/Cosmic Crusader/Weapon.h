@@ -31,6 +31,9 @@ namespace ratchet
 
 		TYPE m_weaponType;
 		int m_currentAmmo;
+		int m_maxAmmo;
+		bool m_infiniteAmmo;
+		int m_ammoDecrease;
 		int m_WeaponID;
 		int m_bulletID;
 
@@ -42,6 +45,7 @@ namespace ratchet
 		static void ClearWeaponList();
 		static void ClearBulletList();
 
+		void DecreaseAmmo();
 
 		//Weapon Sounds
 		sf::SoundBuffer m_weaponSoundBuffer;

@@ -18,6 +18,8 @@ namespace ratchet
 		int m_damage;
 		int m_MaxAmmo;
 		bool m_isWeaponAccessible;
+		bool m_infiniteAmmo;
+		int m_ammoDecrease;
 
 		int m_bulletID = -1;
 

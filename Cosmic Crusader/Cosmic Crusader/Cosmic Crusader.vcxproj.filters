@@ -188,6 +188,12 @@
     <ClCompile Include="AnimationObstacle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -289,5 +295,7 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleConfig.h" />
     <ClInclude Include="AnimationObstacle.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemConfig.h" />
   </ItemGroup>
 </Project>

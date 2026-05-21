@@ -160,6 +160,8 @@
     <ClCompile Include="EnumMask.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectConfig.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemConfig.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleConfig.cpp" />
     <ClCompile Include="PrefabAssets.cpp" />
@@ -222,6 +224,8 @@
     <ClInclude Include="EnumMask.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectConfig.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemConfig.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleConfig.h" />
     <ClInclude Include="PrefabAssets.h" />

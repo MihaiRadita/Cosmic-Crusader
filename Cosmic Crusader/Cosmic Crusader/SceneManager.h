@@ -10,6 +10,7 @@
 #include "Checkpoint.h"
 #include "ActionTrigger.h"
 #include "Obstacle.h"
+#include "Item.h"
 
 #include "physics/Physics.h"
 

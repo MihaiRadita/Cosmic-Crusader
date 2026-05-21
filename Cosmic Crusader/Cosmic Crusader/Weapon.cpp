@@ -73,6 +73,14 @@ namespace ratchet
 		s_availableBulletList.clear();
 	}
 
+	void Weapon::DecreaseAmmo()
+	{
+		if (m_currentAmmo > 0)
+		{
+			m_currentAmmo -= m_ammoDecrease;
+		}
+	}
+
 	void Weapon::Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight)
 	{
 	#ifdef IS_RATCHET_DEBUG

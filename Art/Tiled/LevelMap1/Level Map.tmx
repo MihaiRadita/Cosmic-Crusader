@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="24" nextobjectid="5216">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="25" nextobjectid="5218">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -57,12 +57,14 @@
  <tileset firstgid="68" source="Continue Button.tsx"/>
  <tileset firstgid="69" source="Action Trigger.tsx"/>
  <tileset firstgid="70" source="Enemy2.tsx"/>
- <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="121" columns="11">
+ <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="0" columns="11">
   <image source="D:/Media/Downloads/Bomb Sprite.png" width="256" height="256"/>
  </tileset>
- <tileset firstgid="192" source="Bomb Launcher Bullet.tsx"/>
- <tileset firstgid="193" source="Cutter.tsx"/>
- <tileset firstgid="194" source="Flame.tsx"/>
+ <tileset firstgid="71" source="Bomb Launcher Bullet.tsx"/>
+ <tileset firstgid="72" source="Cutter.tsx"/>
+ <tileset firstgid="73" source="Flame.tsx"/>
+ <tileset firstgid="74" source="Health.tsx"/>
+ <tileset firstgid="75" source="Ammo.tsx"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
   <object id="3830" name="PathPoint" x="640" y="576">
    <point/>
@@ -50241,7 +50243,7 @@
   </object>
  </objectgroup>
  <objectgroup id="23" name="Obstacles">
-  <object id="5212" name="Cutter" gid="193" x="18880" y="-256" width="192" height="64">
+  <object id="5212" name="Cutter" gid="72" x="18880" y="-256" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -50267,7 +50269,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5214" name="Flame" gid="194" x="19712" y="-576" width="64" height="128">
+  <object id="5214" name="Flame" gid="73" x="19712" y="-576" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -50293,6 +50295,56 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup id="24" name="Items">
+  <object id="5216" name="Health" gid="74" x="16488" y="-348" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bodyAligment" type="int" value="1"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0"/>
+    <property name="colliderIsSensor" type="bool" value="true"/>
+    <property name="colliderLayer" type="int" value="4"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="itemContentValue" type="float" value="10"/>
+    <property name="itemType" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
+   </properties>
+  </object>
+  <object id="5217" name="Ammo" gid="75" x="17166" y="-286" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bodyAligment" type="int" value="1"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0"/>
+    <property name="colliderIsSensor" type="bool" value="true"/>
+    <property name="colliderLayer" type="int" value="4"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRadius" type="float" value="0.3"/>
+    <property name="colliderRestitution" type="float" value="0"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="itemContentValue" type="float" value="20"/>
+    <property name="itemRefferdID" type="int" value="3903"/>
+    <property name="itemType" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="12" name="Weapons">
   <object id="3903" name="Blaster" type="Weapon Pickup" gid="33" x="16960" y="-256" width="95" height="95">
    <properties>
@@ -50300,7 +50352,9 @@
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
-    <property name="ammo" type="int" value="51"/>
+    <property name="ammo" type="int" value="30"/>
+    <property name="ammoDecrease" type="int" value="1"/>
+    <property name="ammoInfinite" type="bool" value="false"/>
     <property name="bulletIncrementation" type="int" value="5"/>
     <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
     <property name="characterStartPointShootingOffsetY" type="float" value="0.1"/>
@@ -50341,6 +50395,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="ammo" type="int" value="51"/>
+    <property name="ammoInfinite" type="bool" value="true"/>
     <property name="bulletIncrementation" type="int" value="5"/>
     <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
     <property name="characterStartPointShootingOffsetY" type="float" value="0.1"/>
@@ -50369,6 +50424,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="ammo" type="int" value="51"/>
+    <property name="ammoInfinite" type="bool" value="true"/>
     <property name="bulletIncrementation" type="int" value="5"/>
     <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
     <property name="characterStartPointShootingOffsetY" type="float" value="0"/>
@@ -50397,6 +50453,7 @@
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="ammo" type="int" value="51"/>
+    <property name="ammoInfinite" type="bool" value="true"/>
     <property name="bulletIncrementation" type="int" value="7"/>
     <property name="characterStartPointShootingOffsetX" type="float" value="0.08"/>
     <property name="characterStartPointShootingOffsetY" type="float" value="0"/>
@@ -50526,7 +50583,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5208" name="Bomb Launcher Bullet" gid="192" x="15773" y="-659.667" width="30" height="30">
+  <object id="5208" name="Bomb Launcher Bullet" gid="71" x="15773" y="-659.667" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -50605,6 +50662,7 @@
     <property name="health" type="float" value="10"/>
     <property name="initialWeapon_0" type="object" value="5116"/>
     <property name="jumpImpulse" type="float" value="-5"/>
+    <property name="maxHealth" type="float" value="10"/>
     <property name="movementType" type="int" value="1"/>
     <property name="movingSpeed" type="float" value="5"/>
     <property name="objectType" type="int" value="1"/>
@@ -50659,6 +50717,7 @@
     <property name="health" type="float" value="10"/>
     <property name="initialWeapon_0" type="object" value="5205"/>
     <property name="initialWeapon_1" type="object" value="5211"/>
+    <property name="maxHealth" type="float" value="10"/>
     <property name="minCeilingDistance" type="float" value="0.5"/>
     <property name="minFollowHeightOffset" type="float" value="2"/>
     <property name="movementType" type="int" value="2"/>
@@ -51032,6 +51091,7 @@
     <property name="isSensor" type="bool" value="false"/>
     <property name="jumpImpulse" type="float" value="-10"/>
     <property name="massValue" type="float" value="100"/>
+    <property name="maxHealth" type="float" value="15"/>
     <property name="movementType" type="int" value="1"/>
     <property name="movingSpeed" type="float" value="7"/>
     <property name="objectType" type="int" value="1"/>

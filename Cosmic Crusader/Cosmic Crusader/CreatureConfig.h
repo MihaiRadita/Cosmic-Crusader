@@ -29,6 +29,7 @@ namespace ratchet
 		float m_recoilTime;
 
 		float m_health;
+		float m_maxHealth;
 	
 		//Anlges
 		float m_AngleBase;

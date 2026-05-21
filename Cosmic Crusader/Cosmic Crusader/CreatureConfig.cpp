@@ -22,6 +22,7 @@ namespace ratchet
 		m_fireRate = 0.0f;
 
 		m_health = 0.0f;
+		m_maxHealth = 0.0f;
 	}
 
 	bool CreatureConfig::deserialise(const nlohmann::json& jsonFile)
@@ -174,6 +175,12 @@ namespace ratchet
 			if (propertyName == "health")
 			{
 				m_health = propertyValue.get<float>();
+			}
+
+
+			if (propertyName == "maxHealth")
+			{
+				m_maxHealth = propertyValue.get<float>();
 			}
 
 			if (propertyName == "isGroundRaycastOffset")

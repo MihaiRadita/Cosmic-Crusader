@@ -1375,6 +1375,15 @@ namespace ratchet
 
 					succeeded = true;
 				}
+				else if (layerName == "Items")
+				{
+					auto config = ItemConfig();
+					if (config.deserialise(obj))
+					{
+						GameObject::s_gameObjects.push_back(new Item(config));
+					}
+
+				}
 				else if (layerName == "Click Buttons" || layerName == "Pause Menu Click Buttons")
 				{
 					auto config = UIButtonConfig();

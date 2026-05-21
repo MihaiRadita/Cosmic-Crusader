@@ -13,6 +13,7 @@
 #include "CheckpointConfig.h"
 #include "ActionTriggerConfig.h"
 #include "ObstacleConfig.h"
+#include "ItemConfig.h"
 
 
 

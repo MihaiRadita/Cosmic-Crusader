@@ -25,6 +25,7 @@ namespace ratchet
 		m_bodShoulderOffset = config.m_bodShoulderOffset;
 
 		m_health = config.m_health;
+		m_maxHealth = config.m_maxHealth;
 
 		m_checkPointOffsetX = 0.0f;
 		m_checkPointOffsetY = 0.0f;
@@ -666,11 +667,28 @@ namespace ratchet
 
 		if (m_mustSpawnBullet)
 		{
-			m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
+
+			if (m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_infiniteAmmo == false)
+			{
+				if (m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_currentAmmo != 0)
+				{
+					m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
 #ifdef IS_RATCHET_DEBUG
-			TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
+					TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
 #endif	
-			m_mustSpawnBullet = false;
+
+					m_ownedWeaponList[m_currentEquippedWeaponIndex]->DecreaseAmmo();
+				}
+				m_mustSpawnBullet = false;
+			}
+			else
+			{
+				m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
+#ifdef IS_RATCHET_DEBUG
+				TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
+#endif	
+				m_mustSpawnBullet = false;
+			}
 
 		}
 	}
@@ -872,6 +890,37 @@ namespace ratchet
 
 	}
 
+	void Creature::increaseHealth(float& health)
+	{
+		m_health += health;
+
+		if (m_health > m_maxHealth)
+		{
+			m_health = m_maxHealth;
+		}
+	}
+
+	void Creature::increaseAmmo(float& ammo, int& weponID)
+	{
+		for (auto* weapon : m_ownedWeaponList)
+		{
+			if (weapon->m_WeaponID == weponID)
+			{
+
+				if (weapon->m_infiniteAmmo == false)
+				{
+					weapon->m_currentAmmo += ammo;
+
+					if (weapon->m_currentAmmo > weapon->m_maxAmmo)
+					{
+						weapon->m_currentAmmo = weapon->m_maxAmmo;
+					}
+				}
+				break;
+			}
+		}
+	}
+
 	void Creature::PostCosntructFixup()
 	{
 		if (m_collider) {
@@ -1064,7 +1113,10 @@ namespace ratchet
 
 		if (config.has_value())
 		{
+			newWeapon->m_maxAmmo = config->m_MaxAmmo;
 			newWeapon->m_currentAmmo = config->m_MaxAmmo;
+			newWeapon->m_infiniteAmmo = config->m_infiniteAmmo;
+			newWeapon->m_ammoDecrease = config->m_ammoDecrease;
 			newWeapon->m_weaponDamage = config->m_damage;
 			shootingPointXOffset = config->m_weaponShootPointOffsetX;
 			shootingPointYOffset = config->m_weaponShootPointOffsetY;

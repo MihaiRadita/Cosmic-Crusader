@@ -19,9 +19,6 @@ ratchet::Obstacle::Obstacle(ObstacleConfig& config) : GameObject(config)
 	m_obstacleAnimator->setAnimation(m_obstacleAnimation);
 
 	m_animationPlayInterval.Restart();
-
-
-
 }
 
 ratchet::Obstacle::~Obstacle()
