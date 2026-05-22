@@ -25,14 +25,16 @@ namespace ratchet
 	private:
 		sf::RenderWindow m_window;
 
-		sf::Clock gameTime;
-		float timeLastFrame = 0;
+		
 
 		sf::Vector2i currenmousePosition = sf::Vector2i(0,0);
 
 		bool m_isFullScreen;
 
 		sf::VideoMode fullscreenMode = sf::VideoMode::getDesktopMode();
+
+		static float s_deltaTime;
+
 
 	public:
 		//Constructors
@@ -53,6 +55,8 @@ namespace ratchet
 		//Update functions
 		void update();
 		void updatePhysics();
+
+		float acumulator = 0;
 		
 		void awake();
 		void start();
@@ -70,5 +74,8 @@ namespace ratchet
 
 		//Render functions
 		void render();
+
+		static float getDeltaTime();
+		
 	};
 }

@@ -103,7 +103,7 @@ namespace ratchet
 
 	void AnimationObstacle::initVariables()
 	{
-		m_animTimeLimit = 0.035f;
+		m_animTimeLimit = 0.1f;
 
 		m_currentFrameIndex = 0;
 		m_isAnimTransition = true;

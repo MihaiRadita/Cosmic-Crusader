@@ -51,14 +51,18 @@ namespace ratchet
 		s_physicsWorld = nullptr;
 	}
 
-	void Physics::simulatePhysics(float& deltaTime)
+	void Physics::simulatePhysics(float deltaTime)
 	{
 		if (!s_physicsWorld || !s_simulationEnabled)
-		{
 			return;
-		}
 
-		s_physicsWorld->Step(sc_timeStep, sc_velocityIterations, sc_positionIterations);
+		m_accumulator += deltaTime;
+
+		while (m_accumulator >= sc_timeStep)
+		{
+			s_physicsWorld->Step(sc_timeStep, sc_velocityIterations, sc_positionIterations);
+			m_accumulator -= sc_timeStep;
+		}
 	}
 
 	void Physics::SetSimulationEnabled(bool enabled)
@@ -72,7 +76,7 @@ namespace ratchet
 	}
 
 
-	void Physics::update(float& deltatime)
+	void Physics::update(float deltatime)
 	{
 		simulatePhysics(deltatime);
 	}
@@ -83,5 +87,5 @@ namespace ratchet
 
 	ContactListener* Physics::s_contactListener;
 	bool Physics::s_simulationEnabled = false;
-
+	float Physics::m_accumulator = 0.0f;
 }

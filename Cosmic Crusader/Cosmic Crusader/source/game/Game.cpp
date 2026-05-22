@@ -190,15 +190,11 @@ namespace ratchet
 	}
 	void Game::update()
 	{
+		static sf::Clock clock;
+		s_deltaTime = clock.restart().asSeconds();
+
 		handleEvents();
 
-		if (SceneManager::Get().IsCameraDirty())
-		{
-			applySceneView();
-			SceneManager::Get().ClearCameraDirty();
-
-		}
-		
 		SceneManager::Get().updateSceneObjects();
 	}
 
@@ -265,5 +261,10 @@ namespace ratchet
 
 	}
 
+	float Game::getDeltaTime()
+	{
+		return s_deltaTime;
+	}
 
+	float Game::s_deltaTime = 0.016f;
 }

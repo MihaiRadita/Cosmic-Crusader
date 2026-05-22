@@ -4,6 +4,8 @@
 #include "game/Player.h"
 #include "SelfControlledCreature.h"
 
+#include "game/Game.h"
+
 namespace ratchet
 {
 	bool ColliderBase::isColliderToDestroy()
@@ -52,7 +54,7 @@ namespace ratchet
 		}
 		m_body->SetAwake(true);
 
-		m_body->SetLinearVelocity(velocity);
+		m_body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 	}
 
 	void ColliderBase::SetOwner(GameObject* obj)

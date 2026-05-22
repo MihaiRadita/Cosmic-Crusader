@@ -597,15 +597,13 @@ namespace ratchet
 		if(!m_isPaused)
 		{
 			
-
-			float timeStep = 1.0f / 120.0f;
 			if (m_currentScene != SceneType::MainMenu)
 			{
 				if (!Physics::IsSimulationEnabled())
 				{
 					Physics::SetSimulationEnabled(true);
 				}
-				Physics::update(timeStep);
+				Physics::update(Game::getDeltaTime());
 			}
 			else
 			{

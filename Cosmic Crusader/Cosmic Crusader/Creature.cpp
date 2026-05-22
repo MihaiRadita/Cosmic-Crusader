@@ -20,7 +20,6 @@ namespace ratchet
 
 		//Character Features
 		m_movementSpeed = config.m_movingSpeed;
-		m_fallingSpeed = config.m_fallingSpeed;
 		m_jumpImpulse = config.m_jumpImpulse;
 		m_bodShoulderOffset = config.m_bodShoulderOffset;
 
