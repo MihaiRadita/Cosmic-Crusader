@@ -147,7 +147,10 @@ namespace ratchet
 		virtual void increaseHealth(float& health);
 		virtual void increaseAmmo(float& ammo, int& weponID);
 
+		virtual void restoreMaxHealth();
+		virtual void restoreMaxWeaponsAmmo();
 
+		bool checkAnyWeaponAmmoNeedsRestore();
 
 		//Constructors
 		Creature(const CreatureConfig& config);

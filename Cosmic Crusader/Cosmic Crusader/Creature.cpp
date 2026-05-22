@@ -921,6 +921,47 @@ namespace ratchet
 		}
 	}
 
+	void Creature::restoreMaxHealth()
+	{
+		if (m_health < m_maxHealth)
+		{
+			m_health = m_maxHealth;
+		}
+	}
+
+	void Creature::restoreMaxWeaponsAmmo()
+	{
+		for (auto* weapon : m_ownedWeaponList)
+		{
+			if (weapon->m_weaponType == Weapon::TYPE::None)
+			{
+				continue;
+			}
+
+			if (weapon->m_currentAmmo < weapon->m_maxAmmo)
+			{
+				weapon->m_currentAmmo = weapon->m_maxAmmo;
+			}
+		}
+	}
+
+	bool Creature::checkAnyWeaponAmmoNeedsRestore()
+	{
+		for (auto* weapon : m_ownedWeaponList)
+		{
+			if (weapon->m_weaponType == Weapon::TYPE::None)
+			{
+				continue;
+			}
+
+			if (weapon->m_currentAmmo < weapon->m_maxAmmo)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	void Creature::PostCosntructFixup()
 	{
 		if (m_collider) {

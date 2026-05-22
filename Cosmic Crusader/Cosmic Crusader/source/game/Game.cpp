@@ -156,7 +156,6 @@ namespace ratchet
 				if (auto uiButton = dynamic_cast<UIClickButton*>(obj))
 				{
 					uiButton->handleUIEvent(sfEvent);
-
 				}
 				else if (auto uiSlider = dynamic_cast<UISliderButton*>(obj))
 				{
@@ -173,6 +172,10 @@ namespace ratchet
 				else if (auto checkPoint = dynamic_cast<Checkpoint*>(obj))
 				{
 					checkPoint->handleCheckPointEvent(sfEvent);
+				}
+				else if (auto item = dynamic_cast<Item*>(obj))
+				{
+					item->handleItemtEvent(sfEvent);
 				}
 			}
 		}

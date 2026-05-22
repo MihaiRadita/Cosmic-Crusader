@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Creature.h"
+
 #include "game/Player.h"
 
 
@@ -14,6 +14,20 @@ namespace ratchet
 		float m_itemContenntValue;
 		bool m_isPickup = false;
 		int m_itemRefferdId;
+		float m_itemDisableTimePass;
+		Timer m_itemDisabledTimer;
+		bool m_isItemInteracting = false;
+		bool m_isItemUsed = false;
+
+		void handleItemtEvent(sf::Event& event);
+
+		Creature* m_target;
+
+		std::string m_spriteTextureOnPath = "";
+		std::string m_spriteTextureOffPath = "";
+
+		sf::Texture m_spriteTextureOn;
+		sf::Texture m_spriteTextureOff;
 
 		Item(ItemConfig& config);
 		~Item();
@@ -21,10 +35,13 @@ namespace ratchet
 		void update() override;
 		void render(sf::RenderTarget& target) override;
 
+		void SetFriendTarget(Faction& faction);
+
 		virtual void OnSensorEnter(GameObject* obj) override;
 		virtual void OnSensorExit(GameObject* obj) override;
 
 		void Start() override;
+
 
 		void pickUpItem(Creature* creatureThatPickedUpTheItem);
 

@@ -50,6 +50,11 @@ namespace ratchet
 			m_colliderConfig = new RectAngleColliderConfig();
 		}
 
+		if (m_objectName == "Health Recharger" || m_objectName =="Ammo Recharger")
+		{
+			m_colliderConfig = new RectAngleColliderConfig();
+		}
+
 		if (m_objectName == "Ammo")
 		{
 			m_colliderConfig = new CircleColliderConfig();
@@ -144,6 +149,16 @@ namespace ratchet
 				m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
 			}
 
+			if (propertyName == "isItemInteracting")
+			{
+				m_isItemInteracting = propertyValue.get<bool>();
+			}
+
+			if (propertyName == "isItemUsed")
+			{
+				m_isItemUsed = propertyValue.get<bool>();
+			}
+
 			if (propertyName == "itemType")
 			{
 				m_itemType = static_cast<ItemType>(propertyValue.get<int>());
@@ -154,9 +169,24 @@ namespace ratchet
 				m_itemContenntValue = propertyValue.get<float>();
 			}
 
+			if (propertyName == "itemDisabledTimePass")
+			{
+				m_itemDisableTimePass = propertyValue.get<float>();
+			}
+
 			if (propertyName == "startSpriteTexturePath")
 			{
 				startSpriteTexturePath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "spriteTextureOnPath")
+			{
+				m_spriteTextureOnPath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "spriteTextureOffPath")
+			{
+				m_spriteTextureOffPath = propertyValue.get<std::string>();
 			}
 
 			if (propertyName == "bodyAligment")

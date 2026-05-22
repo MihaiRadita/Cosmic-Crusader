@@ -137,8 +137,13 @@ namespace ratchet
 				{
 					if (faction != obj->m_faction)
 					{
-						m_target = (Creature*)obj;
-						break;
+						auto* player = dynamic_cast<Player*>(obj);
+						if (player)
+						{
+							m_target = (Creature*)obj;
+							break;
+						}
+					
 					}
 				}
 			}
