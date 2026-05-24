@@ -25,6 +25,16 @@ namespace ratchet
 		return 0;
 	}
 
+	float AnimationBase::getAnimTimeLimit()
+	{
+		return 0.0f;
+	}
+
+	void AnimationBase::SetAnimTimeLimit(float value)
+	{
+
+	}
+
 	void AnimationBase::resetCurrentAnimIndex()
 	{
 #ifdef IS_RATCHET_DEBUG

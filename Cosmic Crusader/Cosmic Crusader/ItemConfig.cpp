@@ -8,6 +8,7 @@ namespace ratchet
 	ItemConfig::ItemConfig()
 	{
 		m_itemContenntValue = 0.0f;
+		m_isItemAccessible = false;
 	}
 
 	bool ItemConfig::serialise(nlohmann::json& jsonFile)
@@ -22,7 +23,7 @@ namespace ratchet
 		float tileWidth = jsonFile["width"];
 		float tileHeight = jsonFile["height"];
 
-		std::string m_objectName = jsonFile["name"];
+		m_objectName = jsonFile["name"];
 
 		scale = sf::Vector2f(1.0f, 1.0f) * SceneManager::sc_tiledToGameScale;
 		positionXOffset = 0.f;
@@ -147,6 +148,11 @@ namespace ratchet
 			if (propertyName == "colliderType")
 			{
 				m_colliderConfig->m_bodyDef.type = static_cast<b2BodyType>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "isItemAccessible")
+			{
+				m_isItemAccessible = propertyValue.get<bool>();
 			}
 
 			if (propertyName == "isItemInteracting")

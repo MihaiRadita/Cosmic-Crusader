@@ -16,7 +16,10 @@ namespace ratchet
 		float m_itemContenntValue;
 		int m_itemRefferdId;
 		float m_itemDisableTimePass;
+		bool m_isItemAccessible;
 
+		std::string m_objectName;
+		
 		bool m_isItemInteracting = false;
 		bool m_isItemUsed = false;
 

@@ -14,6 +14,7 @@ namespace ratchet
 		m_colliderOffsetX = 0.0f;
 		m_colliderOffsetY = 0.0f;
 		m_isAnimationPlaying = false;
+		m_animtionTimeLimit = 0;
 	}
 
 	bool ObstacleConfig::serialise(nlohmann::json& jsonFile)
@@ -88,6 +89,11 @@ namespace ratchet
 			if (propertyName == "animationActiveTimePass")
 			{
 				m_animationActiveTimePass = propertyValue.get<float>();
+			}
+
+			if (propertyName == "animationTimeLimit")
+			{
+				m_animtionTimeLimit = propertyValue.get<float>();
 			}
 
 			if (propertyName == "frameIndexContinueAnimtionFrom")

@@ -18,6 +18,7 @@ namespace ratchet
 		Timer m_itemDisabledTimer;
 		bool m_isItemInteracting = false;
 		bool m_isItemUsed = false;
+		bool m_isItemAccessible = false;
 
 		void handleItemtEvent(sf::Event& event);
 
@@ -40,7 +41,11 @@ namespace ratchet
 		virtual void OnSensorEnter(GameObject* obj) override;
 		virtual void OnSensorExit(GameObject* obj) override;
 
+		void serialise(nlohmann::json& jsonFile) override;
+
 		void Start() override;
+
+		void AddItemDestroyedID();
 
 
 		void pickUpItem(Creature* creatureThatPickedUpTheItem);

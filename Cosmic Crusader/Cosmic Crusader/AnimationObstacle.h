@@ -23,6 +23,9 @@ namespace ratchet
 
 		bool isAnimationReachedEnd();
 
+		float getAnimTimeLimit() override;
+		void SetAnimTimeLimit(float value) override;
+
 		int m_frameIndexContinueAnimationFrom;
 
 		std::vector<sf::Texture> addAnimationFrames(std::string& texturePath);

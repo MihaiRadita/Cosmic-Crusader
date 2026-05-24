@@ -41,6 +41,8 @@ namespace ratchet
 		virtual void playAnimation(sf::Sprite& sprite);
 		virtual int getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state);
 		virtual int getCurrentAnimIndex();
+		virtual float getAnimTimeLimit();
+		virtual void SetAnimTimeLimit(float value);
 		virtual void resetCurrentAnimIndex();
 		virtual void resetPlayerAnimTimer();
 		virtual bool getAnimationSwitch();

@@ -97,6 +97,7 @@ namespace ratchet
 		float& GetSoundEffectsVolume();
 
 		void ClearDestroyedCharactersLists();
+		void ClearDestroyedItemsList();
 
 		void SetWindowResolution(const sf::Vector2u& newResolution);
 
@@ -181,6 +182,7 @@ namespace ratchet
 		std::vector<int>m_characters_destroyed_ID;
 		
 		std::map<int, int>m_characters_destroyedID_index;
+		std::map<int, int>m_items_destroyedID_index;
 
 		nlohmann::json GetAllScenesFile();
 

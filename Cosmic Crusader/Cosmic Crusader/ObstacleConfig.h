@@ -16,6 +16,7 @@ namespace ratchet
 		float m_colliderOffsetX;
 		float m_colliderOffsetY;
 		bool m_isAnimationPlaying;
+		float m_animtionTimeLimit;
 
 		int m_frameIndexContinueAnimationFrom;
 

@@ -11,6 +11,7 @@ ratchet::Obstacle::Obstacle(ObstacleConfig& config) : GameObject(config)
 	m_isAnimationPlaying = config.m_isAnimationPlaying;
 	m_spritePath = config.spriteTexturePath;
 	m_frameIndexContinueAnimationFrom = config.m_frameIndexContinueAnimationFrom;
+	m_animtionTimeLimit = config.m_animtionTimeLimit;
 
 	m_obstacleAnimator = new Animator();
 
@@ -102,6 +103,7 @@ void ratchet::Obstacle::updateObstacleAnimations()
 void ratchet::Obstacle::Start()
 {
 	m_obstacleAnimation->m_frameIndexContinueAnimationFrom = m_frameIndexContinueAnimationFrom;
+	m_obstacleAnimation->SetAnimTimeLimit(m_animtionTimeLimit);
 	PostCosntructFixup();
 	SetTarget(m_faction);
 }

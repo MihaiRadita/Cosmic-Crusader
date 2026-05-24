@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Item.h"
 
+#include "SceneManager.h"
+
 namespace ratchet
 {
    
@@ -14,6 +16,7 @@ namespace ratchet
         m_spriteTextureOffPath = config.m_spriteTextureOffPath;
         m_isItemInteracting = config.m_isItemInteracting;
         m_isItemUsed = config.m_isItemUsed;
+        //m_isItemAccessible = config.m_isItemAccessible;
 
         if (!m_spriteTextureOn.loadFromFile(m_spriteTextureOnPath))
         {
@@ -150,6 +153,8 @@ namespace ratchet
                                 m_isPickup = true;
                                 pickUpItem(player);
 
+
+                                AddItemDestroyedID();
                                 GameObject::addGameObjectoDestory(this);
                             }
 
@@ -163,6 +168,7 @@ namespace ratchet
                         m_isPickup = true;
                         pickUpItem(player);
 
+                        AddItemDestroyedID();
                         GameObject::addGameObjectoDestory(this);
                     }
                 }
@@ -179,6 +185,44 @@ namespace ratchet
         }
     }
 
+    void Item::serialise(nlohmann::json& jsonFile)
+    {
+        GameObject::serialise(jsonFile);
+
+        auto& propID = jsonFile["id"];
+
+
+        for (auto& prop : jsonFile["properties"])
+        {
+            auto& propName = prop["name"];
+            auto& proValue = prop["value"];
+           
+
+         
+            if (propName == "isItemAccessible")
+            {
+
+                if (!SceneManager::Get().m_items_destroyedID_index.empty())
+                {
+                    auto& map = SceneManager::Get().m_items_destroyedID_index;
+
+                    for (auto it = map.begin(); it != map.end(); )
+                    {
+                        if (it->first == propID)
+                        {
+                            proValue = false;
+                            it = map.erase(it);
+                        }
+                        else
+                        {
+                            ++it;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     void Item::Start()
     {
         if (m_itemType == ItemType::HealthRecharger)
@@ -186,6 +230,21 @@ namespace ratchet
             m_sprite.setTexture(m_spriteTextureOn);
         }
         SetFriendTarget(m_faction);
+    }
+
+    void Item::AddItemDestroyedID()
+    {
+
+        //GameObject::DestroyCollider();
+
+        for (size_t i = 0; i < GameObject::s_gameObjects.size(); i++)
+        {
+            if (GameObject::s_gameObjects[i] == this)
+            {
+                SceneManager::Get().m_items_destroyedID_index.insert({ m_objectId, i });
+                break;
+            }
+        }
     }
 
     void Item::pickUpItem(Creature* creatureThatPickedUpItem)

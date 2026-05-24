@@ -208,6 +208,11 @@ namespace ratchet
 		m_characters_destroyedID_index.clear();
 	}
 
+	void SceneManager::ClearDestroyedItemsList()
+	{
+		m_items_destroyedID_index.clear();
+	}
+
 	void SceneManager::SetWindowResolution(const sf::Vector2u& newResolution)
 	{
 
@@ -353,7 +358,7 @@ namespace ratchet
 					}
 				}
 
-				if(!m_characters_destroyedID_index.empty())
+				if(!m_characters_destroyedID_index.empty() || !m_items_destroyedID_index.empty())
 				{
 					const auto& sceneFiles = SceneManager::Get().GetSceneFiles();
 					std::string sceneName = SceneManager::Get().GetSceneFiles()[SceneManager::Get().GetCurrentScene()];
@@ -431,6 +436,49 @@ namespace ratchet
 								}
 							}
 							SceneManager::Get().ClearDestroyedCharactersLists();
+						}
+						else if (layerName == "Items")
+						{
+							for (auto& obj : layer["objects"])
+							{
+								std::string objName = obj["name"];
+
+								if (objName == "Health" || objName == "Ammo")
+								{
+									const auto& itemID = obj["id"];
+
+									for (auto& destroyedItems : m_items_destroyedID_index)
+									{
+										if (itemID == destroyedItems.first)
+										{
+											auto& itemIndex = destroyedItems.second;
+
+											auto config = ItemConfig();
+											auto* configPtr = &config;
+
+											if (config.deserialise(obj))
+											{
+												GameObject::s_gameObjects.insert(GameObject::s_gameObjects.begin() + itemIndex,
+													new Item(config));
+
+												if (auto* item1 = dynamic_cast<Item*>(GameObject::s_gameObjects[itemIndex]))
+												{
+													if (item1->m_objectId == itemID)
+													{
+														item1->Start();
+#ifdef IS_RATCHET_DEBUG
+														item1->setDebugDraw(true);
+#endif
+													}
+
+												}
+											}
+											break;
+										}
+									}
+								}
+							}
+							SceneManager::Get().ClearDestroyedItemsList();
 						}
 					}
 				}
@@ -810,6 +858,26 @@ namespace ratchet
 					}
 				}
 			}
+			if (layerName == "Items")
+			{
+				for (auto& obj : layer["objects"])
+				{
+					if (obj["name"] == "Health" || obj["name"] == "Ammo")
+					{
+						auto& itemData = obj;
+
+						for (auto& object : GameObject::s_gameObjects)
+						{
+							auto* item = dynamic_cast<Item*>(object);
+
+							if (item)
+							{
+								item->serialise(itemData);
+							}
+						}
+					}
+				}
+			}
 		}
 
 		std::string combinedPath = m_baseScenePath + "GameScenes.json";
@@ -1020,11 +1088,11 @@ namespace ratchet
 
 					const auto& layerName = layer["name"].get<std::string>();
 
-					if (layerName == "Player" || layerName == "Weapons")
+					if (layerName == "Player" || layerName == "Weapons" || layerName == "Items")
 					{
 						for (auto& obj : layer["objects"])
 						{
-							if (obj["name"] == "Player" || obj["name"] == "Blaster")
+							if (obj["name"] == "Player" || obj["name"] == "Blaster" ||obj["name"] == "Health" || obj["name"] == "Ammo")
 							{
 								if (!originalSceneJson.contains("layers"))
 								{
@@ -1378,7 +1446,10 @@ namespace ratchet
 					auto config = ItemConfig();
 					if (config.deserialise(obj))
 					{
-						GameObject::s_gameObjects.push_back(new Item(config));
+						if (config.m_isItemAccessible)
+						{
+							GameObject::s_gameObjects.push_back(new Item(config));
+						}
 					}
 
 				}

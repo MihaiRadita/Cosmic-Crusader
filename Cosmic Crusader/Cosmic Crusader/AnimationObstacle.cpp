@@ -103,8 +103,6 @@ namespace ratchet
 
 	void AnimationObstacle::initVariables()
 	{
-		m_animTimeLimit = 0.1f;
-
 		m_currentFrameIndex = 0;
 		m_isAnimTransition = true;
 
@@ -148,6 +146,16 @@ namespace ratchet
 		{
 			return true;
 		}
+	}
+
+	float AnimationObstacle::getAnimTimeLimit()
+	{
+		return m_animTimeLimit;
+	}
+
+	void AnimationObstacle::SetAnimTimeLimit(float value)
+	{
+		m_animTimeLimit = value;
 	}
 
 	std::vector<sf::Texture> AnimationObstacle::addAnimationFrames(std::string& texturePath)
