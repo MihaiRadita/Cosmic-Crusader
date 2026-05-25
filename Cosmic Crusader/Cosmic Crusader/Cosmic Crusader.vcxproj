@@ -148,6 +148,7 @@
     <ClCompile Include="ActionTrigger.cpp" />
     <ClCompile Include="ActionTriggerConfig.cpp" />
     <ClCompile Include="AnimationDeath.cpp" />
+    <ClCompile Include="AnimationItem.cpp" />
     <ClCompile Include="AnimationObstacle.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletConfig.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="ActionTrigger.h" />
     <ClInclude Include="ActionTriggerConfig.h" />
     <ClInclude Include="AnimationDeath.h" />
+    <ClInclude Include="AnimationItem.h" />
     <ClInclude Include="AnimationObstacle.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletConfig.h" />

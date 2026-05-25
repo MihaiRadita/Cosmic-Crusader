@@ -26,6 +26,9 @@ namespace ratchet
 
 		float m_timeLimitInvulnerable = 1.f;
 
+		bool m_isOnSpring = false;
+
+
 		std::vector<sf::Event> m_playerEvents;
 	public:
 		float m_curreNAgleDeg = 0.0f;
@@ -36,12 +39,16 @@ namespace ratchet
 		Timer GettimeBeingInvulnerable();
 		float GetTImeLimitBeingInvulnerable();
 
+		bool getIsOnSpring();
+
 		int m_playerCheckPointID = 0;
 
 		//Init functions
 		void initVariables();
 
 		void PostCosntructFixup() override;
+
+		void applyUpforce(b2Vec2 force);
 
 		void Start() override;
 

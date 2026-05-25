@@ -194,6 +194,9 @@
     <ClCompile Include="ItemConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -297,5 +300,6 @@
     <ClInclude Include="AnimationObstacle.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemConfig.h" />
+    <ClInclude Include="AnimationItem.h" />
   </ItemGroup>
 </Project>

@@ -16,19 +16,37 @@ namespace ratchet
         m_spriteTextureOffPath = config.m_spriteTextureOffPath;
         m_isItemInteracting = config.m_isItemInteracting;
         m_isItemUsed = config.m_isItemUsed;
+        m_springForce = config.m_springForce;
+        m_animationTimeLimit = config.m_animationTimeLimit;
+        m_isAnimationPlaying = config.m_isAnimationPlaying;
+        m_spritePath = config.spriteTexturePath;
         //m_isItemAccessible = config.m_isItemAccessible;
 
-        if (!m_spriteTextureOn.loadFromFile(m_spriteTextureOnPath))
+
+        if (m_itemType == ItemType::AmmoRecharger || m_itemType == ItemType::HealthRecharger)
         {
-            std::cout << "Texture On Culd not load!" << std::endl;
+            if (!m_spriteTextureOn.loadFromFile(m_spriteTextureOnPath))
+            {
+                std::cout << "Texture On Culd not load!" << std::endl;
+            }
+
+            if (!m_spriteTextureOff.loadFromFile(m_spriteTextureOffPath))
+            {
+                std::cout << "Texture Off Culd not load!" << std::endl;
+            }
         }
 
-        if (!m_spriteTextureOff.loadFromFile(m_spriteTextureOffPath))
-        {
-            std::cout << "Texture Off Culd not load!" << std::endl;
-        }
 
+        if (m_itemType == ItemType::Spring)
+        {
+            m_itemAnimator = new Animator();
+
+            m_itemAnimation = new AnimationItem(m_spritePath);
+
+            m_itemAnimator->setAnimation(m_itemAnimation);
+        }
         m_itemDisabledTimer.Restart();
+ 
     }
 
     Item::~Item()
@@ -97,12 +115,59 @@ namespace ratchet
                 }
             }
         }
+        else if (m_itemType == ItemType::Spring)
+        {
+
+            updateItemsAnimations();
+            Player* player = dynamic_cast<Player*>(m_target);
+            if (player)
+            {
+                if (player->getIsOnSpring())
+                {
+                    player->m_collider->aaplyForce(b2Vec2(0.f, -1), m_springForce);
+                }
+            }
+        }
     }
 
     void Item::render(sf::RenderTarget& target)
     {
         GameObject::render(target);
-        m_collider->drawColliderCenterBased(target);
+        //m_collider->drawColliderCenterBased(target);
+    }
+
+    void Item::updateItemsAnimations()
+    {
+        if (m_itemType == ItemType::Spring)
+        {
+            if (!m_itemAnimator && !m_itemAnimation)
+            {
+                return;
+            }
+
+            if (m_itemAnimation->isAnimationReachedEnd())
+            {
+
+                m_isAnimationPlaying = false;
+                m_itemAnimation->resetAnimationFrame(m_sprite);
+                m_itemAnimation->resetPlayerAnimTimer();
+                m_itemAnimation->resetCurrentAnimIndex();
+        
+            }
+
+            if (auto* player = dynamic_cast<Player*>(m_target))
+            {
+                if (player->getIsOnSpring())
+                {
+                    m_isAnimationPlaying = true;
+                }
+            }
+
+            if (m_isAnimationPlaying)
+            {
+                m_itemAnimator->play(m_itemAnimator->getAbstractAnimation(), m_sprite);
+            }
+        }
     }
 
     void Item::SetFriendTarget(Faction& faction)
@@ -174,7 +239,16 @@ namespace ratchet
                 }
             }
            
+            if (m_itemType == ItemType::Spring)
+            {
+                if (player->getIsOnSpring())
+                {
+                    player->m_collider->aaplyForce(b2Vec2(0.f, -1), m_springForce);
+                    
+                }
+            }
         }
+
     }
 
     void Item::OnSensorExit(GameObject* obj)
@@ -183,6 +257,19 @@ namespace ratchet
         {
            m_isItemInteracting = false;
         }
+    }
+
+    void Item::OnCollisionEnter(GameObject* obj)
+    {
+
+        
+
+      
+    }
+
+    void Item::OnCollisionExit(GameObject* obj)
+    {
+    
     }
 
     void Item::serialise(nlohmann::json& jsonFile)
@@ -229,6 +316,14 @@ namespace ratchet
         {
             m_sprite.setTexture(m_spriteTextureOn);
         }
+
+        if (m_itemType == ItemType::Spring)
+        {
+            m_itemAnimation->SetAnimTimeLimit(m_animationTimeLimit);
+        
+            PostCosntructFixup();
+        }
+
         SetFriendTarget(m_faction);
     }
 

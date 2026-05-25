@@ -5,6 +5,7 @@
 #include "animations/AnimationRun.h"
 #include "animations/AnimationJumpRun.h"
 #include "AnimationObstacle.h"
+#include "AnimationItem.h"
 #include "Weapon.h"
 
 

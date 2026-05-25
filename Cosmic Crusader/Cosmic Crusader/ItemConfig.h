@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObjectConfig.h"
 
-enum class ItemType{None =0, Health, Ammo, HealthRecharger, AmmoRecharger};
+enum class ItemType{None =0, Health, Ammo, HealthRecharger, AmmoRecharger,Spring};
 
 namespace ratchet
 {
@@ -17,6 +17,10 @@ namespace ratchet
 		int m_itemRefferdId;
 		float m_itemDisableTimePass;
 		bool m_isItemAccessible;
+		float m_animationTimeLimit;
+		float m_springForce;
+
+		bool m_isAnimationPlaying;
 
 		std::string m_objectName;
 		

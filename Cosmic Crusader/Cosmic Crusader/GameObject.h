@@ -49,7 +49,7 @@ namespace ratchet
 		bool m_markedForDestruction = false;
 
 		bool m_onSensorStay = false;
-
+		bool m_oncollisionStay = false;
 		
 		//GameObject* m_target;
 

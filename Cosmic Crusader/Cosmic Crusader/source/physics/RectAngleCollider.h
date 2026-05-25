@@ -13,7 +13,8 @@ namespace ratchet
 			m_width(other.m_width),
 			m_height(other.m_height)
 		{
-
+			m_colliderOffsetX = other.m_colliderOffsetX;
+			m_colliderOffsetY = other.m_colliderOffsetY;
 		}
 
 		std::optional<float> m_width = std::nullopt;

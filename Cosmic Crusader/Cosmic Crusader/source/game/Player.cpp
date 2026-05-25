@@ -26,6 +26,11 @@ namespace ratchet
 		return m_timeLimitInvulnerable;
 	}
 
+	bool Player::getIsOnSpring()
+	{
+		return m_isOnSpring;
+	}
+
 	void Player::initVariables()
 	{
 		m_gravity = 0.090f;
@@ -38,6 +43,11 @@ namespace ratchet
 		{
 			m_collider->SetOwner(this);
 		}
+	}
+
+	void Player::applyUpforce(b2Vec2 force)
+	{
+
 	}
 
 	void Player::Start()
@@ -528,6 +538,26 @@ namespace ratchet
 		{
 			m_isGround = false;
 			m_collider->m_skipRaycastThisFrame = false;
+		}
+
+		if (m_isGround == false)
+		{
+			if (m_collider && !m_collider->m_skipRaycastThisFrame)
+			{
+				m_isOnSpring = m_collider->performSpringRayCast(m_sprite);
+			}
+			else
+			{
+				m_isGround = false;
+				m_collider->m_skipRaycastThisFrame = false;
+			}
+		}
+
+		bool isSpring = m_isOnSpring;
+
+		if (m_isOnSpring == true)
+		{
+			bool isSpring = m_isOnSpring;
 		}
 
 		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);

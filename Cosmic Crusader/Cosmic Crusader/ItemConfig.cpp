@@ -9,6 +9,8 @@ namespace ratchet
 	{
 		m_itemContenntValue = 0.0f;
 		m_isItemAccessible = false;
+		m_springForce = 0.0f;
+		m_isAnimationPlaying = false;
 	}
 
 	bool ItemConfig::serialise(nlohmann::json& jsonFile)
@@ -51,7 +53,7 @@ namespace ratchet
 			m_colliderConfig = new RectAngleColliderConfig();
 		}
 
-		if (m_objectName == "Health Recharger" || m_objectName =="Ammo Recharger")
+		if (m_objectName == "Health Recharger" || m_objectName =="Ammo Recharger" || m_objectName == "Spring")
 		{
 			m_colliderConfig = new RectAngleColliderConfig();
 		}
@@ -60,6 +62,7 @@ namespace ratchet
 		{
 			m_colliderConfig = new CircleColliderConfig();
 		}
+
 
 		for (const auto& jsonProperty : jsonFile["properties"])
 		{
@@ -87,6 +90,11 @@ namespace ratchet
 			if (propertyName == "activeRenderer")
 			{
 				m_activeRenderer = propertyValue.get<bool>();
+			}
+
+			if (propertyName == "animationTimeLimit")
+			{
+				 m_animationTimeLimit = propertyValue.get<float>();
 			}
 
 			if (propertyName == "itemRefferdID")
@@ -127,6 +135,30 @@ namespace ratchet
 			if (propertyName == "colliderOffsetY")
 			{
 				m_colliderConfig->m_colliderOffsetY = propertyValue.get<float>();
+			}
+
+
+			if (propertyName == "colliderWidth")
+			{
+				if (auto* rectAngleConfig = dynamic_cast<RectAngleColliderConfig*>(m_colliderConfig))
+				{
+					rectAngleConfig->m_width = propertyValue.get<float>();
+
+				}
+			}
+
+			if (propertyName == "colliderHeight")
+			{
+				if (auto* rectAngleConfig = dynamic_cast<RectAngleColliderConfig*>(m_colliderConfig))
+				{
+					rectAngleConfig->m_height = propertyValue.get<float>();
+
+				}
+			}
+
+			if (propertyName == "isAnimationPlaying")
+			{
+				m_isAnimationPlaying = propertyValue.get<bool>();
 			}
 
 			if (propertyName == "colliderRadius")
@@ -170,6 +202,11 @@ namespace ratchet
 				m_itemType = static_cast<ItemType>(propertyValue.get<int>());
 			}
 
+			if (propertyName == "jumpForce")
+			{
+				m_springForce = propertyValue.get<float>();
+			}
+
 			if (propertyName == "itemContentValue")
 			{
 				m_itemContenntValue = propertyValue.get<float>();
@@ -183,6 +220,11 @@ namespace ratchet
 			if (propertyName == "startSpriteTexturePath")
 			{
 				startSpriteTexturePath = propertyValue.get<std::string>();
+			}
+
+			if (propertyName == "spriteTexturePath")
+			{
+				spriteTexturePath = propertyValue.get<std::string>();
 			}
 
 			if (propertyName == "spriteTextureOnPath")

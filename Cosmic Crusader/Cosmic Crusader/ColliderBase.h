@@ -14,7 +14,8 @@ namespace ratchet
 		Projectiles,
 		Obstacles,
 		CheckPoints,
-		DeathFallTrigger
+		DeathFallTrigger,
+		Springs
 	};
 
 	enum class BodyAlignment{None = 0, TopLeft, Center};
@@ -125,6 +126,7 @@ namespace ratchet
 		virtual ~ColliderBase() = default;
 
 		void applyMovement(const bool& changeX, const float& xVelocity, const bool& changeY, const float& yVelocity);
+		void aaplyForce(b2Vec2 direction, float force);
 
 		void SetOwner(GameObject* obj);
 
@@ -150,6 +152,7 @@ namespace ratchet
 		virtual void getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual void getRightPointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const;
 		virtual bool performGroundRayCast(sf::Sprite& sprite);
+		virtual bool performSpringRayCast(sf::Sprite& sprite);
 		virtual bool performUpPlatformRayCast(sf::Sprite& sprite);
 
 		//Checks for Jump Over Platforms
@@ -214,6 +217,22 @@ namespace ratchet
 		b2Vec2 m_normal;
 		float m_fraction;
 		b2Body* m_ignoredBody;
+
+	};
+
+	class SpringRayCastCallBack : public b2RayCastCallback
+	{
+	public:
+		SpringRayCastCallBack(b2Body* ingnoedBody);
+
+		float ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction) override;
+
+		bool m_hit;
+		b2Vec2 m_point;
+		b2Vec2 m_normal;
+		float m_fraction;
+		b2Body* m_ignoredBody;
+
 
 	};
 

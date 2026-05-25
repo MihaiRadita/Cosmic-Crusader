@@ -146,6 +146,7 @@ namespace ratchet
 		{
 			return true;
 		}
+		return false;
 	}
 
 	float AnimationObstacle::getAnimTimeLimit()

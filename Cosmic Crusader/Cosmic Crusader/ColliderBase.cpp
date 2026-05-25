@@ -57,6 +57,29 @@ namespace ratchet
 		m_body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 	}
 
+	void ColliderBase::aaplyForce(b2Vec2 direction, float force)
+	{
+		if (!m_body)
+		{
+			return;
+		}
+
+		b2Vec2 dir = direction;
+
+		if (dir.LengthSquared() > 0.0f)
+		{
+			dir.Normalize();
+		}
+
+		b2Vec2 velocity = m_body->GetLinearVelocity();
+		velocity.y = 0.0f;
+
+		b2Vec2 impulse(dir.x * force, dir.y * force);
+
+	
+		m_body->SetLinearVelocity(impulse);
+	}
+
 	void ColliderBase::SetOwner(GameObject* obj)
 	{
 		m_obj = obj;
@@ -135,6 +158,11 @@ namespace ratchet
 	}
 
 	bool ColliderBase::performGroundRayCast(sf::Sprite& sprite)
+	{
+		return false;
+	}
+
+	bool ColliderBase::performSpringRayCast(sf::Sprite& sprite)
 	{
 		return false;
 	}
@@ -367,6 +395,44 @@ namespace ratchet
 
 		return true;
 
+	}
+
+	float SpringRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
+	{
+		if (fixture)
+		{
+			b2Body* body = fixture->GetBody();
+
+			if (!body || !body->IsEnabled())
+			{
+				return -1.0f;
+			}
+
+			if (body == m_ignoredBody)
+			{
+				return -1.0f;
+			}
+			const short* fixtureUserData = reinterpret_cast<const short*>(fixture->GetUserData().pointer);
+			if (fixtureUserData && *fixtureUserData == static_cast<short>(PhysicsLayer::Springs))
+			{
+				m_hit = true;
+				m_point = point;
+				m_normal = normal;
+				m_fraction = fraction;
+				return fraction;
+			}
+		}
+
+		m_hit = false;
+		return -1.0f;
+	}
+
+	SpringRayCastCallBack::SpringRayCastCallBack(b2Body* ingnoedBody)
+	{
+		m_hit = false;
+		m_fraction = 1.0f;
+
+		m_ignoredBody = ingnoedBody;
 	}
 
 }

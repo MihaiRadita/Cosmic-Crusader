@@ -453,6 +453,29 @@ namespace ratchet
 			return false;
 		}
 
+		bool CapsuleCollider::performSpringRayCast(sf::Sprite& sprite)
+		{
+			if (!m_body || !s_physicsWorld)
+			{
+				return false;
+			}
+
+			b2Vec2 startPointMiddle = b2Vec2{};
+			b2Vec2 endPointMiddle = b2Vec2{};
+			getMiddlePointsForRaycast(startPointMiddle.x, startPointMiddle.y, endPointMiddle.x, endPointMiddle.y);
+
+			SpringRayCastCallBack callbackMiddle(m_body);
+
+			s_physicsWorld->RayCast(&callbackMiddle, startPointMiddle, endPointMiddle);
+
+			if (callbackMiddle.m_fraction <= 1.0f && callbackMiddle.m_hit)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		bool CapsuleCollider::performJumpOverPlatformsRaycast(sf::Sprite& sprite, float& direction)
 		{
 

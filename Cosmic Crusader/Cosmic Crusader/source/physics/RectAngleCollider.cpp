@@ -42,6 +42,9 @@ namespace ratchet
 
 		m_isColliderSetDestroy = false;
 
+		m_colliderOffsetX = config.m_colliderOffsetX;
+		m_colliderOffsetY = config.m_colliderOffsetY;
+
 		m_bodyDef.type = config.m_bodyDef.type;
 		m_bodyDef.fixedRotation = config.m_bodyDef.fixedRotation;
 
@@ -70,7 +73,7 @@ namespace ratchet
 			m_origin = b2Vec2(getGlobalWidth() / 2.0f, getGlobalHeight() / 2.0f);
 		}
 
-		m_bodyDef.position.Set(sprite.getPosition().x, sprite.getPosition().y);
+		m_bodyDef.position.Set(sprite.getPosition().x + m_colliderOffsetX, sprite.getPosition().y + m_colliderOffsetY);
 
 		if (!s_physicsWorld)
 		{
