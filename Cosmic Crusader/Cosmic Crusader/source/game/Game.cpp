@@ -50,7 +50,7 @@ namespace ratchet
 
 	void Game::initPhysics()
 	{
-
+		
 	}
 
 	void Game::initWeaponManager()

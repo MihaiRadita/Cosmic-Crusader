@@ -20,8 +20,7 @@ namespace ratchet
         m_animationTimeLimit = config.m_animationTimeLimit;
         m_isAnimationPlaying = config.m_isAnimationPlaying;
         m_spritePath = config.spriteTexturePath;
-        //m_isItemAccessible = config.m_isItemAccessible;
-
+ 
 
         if (m_itemType == ItemType::AmmoRecharger || m_itemType == ItemType::HealthRecharger)
         {
@@ -238,22 +237,13 @@ namespace ratchet
                     }
                 }
             }
-           
-            if (m_itemType == ItemType::Spring)
-            {
-                if (player->getIsOnSpring())
-                {
-                    player->m_collider->aaplyForce(b2Vec2(0.f, -1), m_springForce);
-                    
-                }
-            }
         }
 
     }
 
     void Item::OnSensorExit(GameObject* obj)
     {
-        if (m_itemType == ItemType::HealthRecharger || m_itemType == ItemType::AmmoRecharger)
+        if (m_itemType == ItemType::HealthRecharger || m_itemType == ItemType::AmmoRecharger || m_itemType == ItemType::Spring)
         {
            m_isItemInteracting = false;
         }
@@ -262,14 +252,18 @@ namespace ratchet
     void Item::OnCollisionEnter(GameObject* obj)
     {
 
-        
-
-      
+        if (m_itemType == ItemType::Spring)
+        {
+            m_isItemInteracting = true;
+        }
     }
 
     void Item::OnCollisionExit(GameObject* obj)
     {
-    
+        if (m_itemType == ItemType::Spring)
+        {
+            m_isItemInteracting = false;
+        }
     }
 
     void Item::serialise(nlohmann::json& jsonFile)

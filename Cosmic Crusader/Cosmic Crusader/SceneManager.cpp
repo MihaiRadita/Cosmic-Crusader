@@ -44,10 +44,16 @@ namespace ratchet
 
 	void SceneManager::StartSceneManager()
 	{
+
 		LoadCombinedScenes();
 		LoadSceneBasicFeatures();
 		SetResolutionList();
+
+
+	
+
 		LoadSceneGameObjects();
+	
 
 		AwakeSceneObjects();
 		StartSceneObjects();
@@ -782,6 +788,11 @@ namespace ratchet
 		m_isUpdating = false;
 
 		LoadSceneBasicFeatures();
+
+		if (m_currentScene != SceneType::MainMenu)
+		{
+			Physics::initPhysics();
+		}
 
 		LoadSceneGameObjects();
 

@@ -385,9 +385,9 @@ namespace ratchet
 		if (isActive() == false) return;
 
 
-		short layer = obj->m_collider->m_userDataName;
+		PhysicsLayer layer = static_cast<PhysicsLayer>(obj->m_collider->m_userDataName);
 
-		if (layer == static_cast<short>(PhysicsLayer::Platforms))
+		if (layer == PhysicsLayer::Platforms)
 		{
 			if (m_bulletType == BulletType::Explosive)
 			{
@@ -422,7 +422,7 @@ namespace ratchet
 				Weapon::releaseBullet(this);
 			}
 		}
-		else if (layer == static_cast<short>(PhysicsLayer::Creature))
+		else if (layer == PhysicsLayer::Creature)
 		{
 			if (obj->m_faction != this->m_faction)
 			{

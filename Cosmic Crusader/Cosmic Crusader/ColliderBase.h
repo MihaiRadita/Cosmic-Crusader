@@ -4,18 +4,19 @@
 
 namespace ratchet
 {
-	enum class PhysicsLayer
+	enum class PhysicsLayer 
 	{
 		None = 0,
-		Platforms,
-		Creature, 
+		Platforms, 
+		Creature,
 		Player,
 		Items, 
-		Projectiles,
-		Obstacles,
-		CheckPoints,
-		DeathFallTrigger,
-		Springs
+		Projectile,
+		Obstacles, 
+		CheckPoint,
+		DeathFall,
+		Springs,
+		Enemy,
 	};
 
 	enum class BodyAlignment{None = 0, TopLeft, Center};
@@ -111,6 +112,8 @@ namespace ratchet
 
 		float m_colliderOffsetX = 0.f;
 		float m_colliderOffsetY = 0.f;
+
+		inline uint16_t Layer(PhysicsLayer layer);
 
 
 		float m_checkTopPlatformsDirectionX;
@@ -295,6 +298,16 @@ namespace ratchet
 
 		bool ReportFixture(b2Fixture* fixture) override;
 
+
+
+	private:
+	};
+
+	class ContactFilter : public b2ContactFilter
+	{
+	public:
+
+		bool ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB) override;
 
 
 	private:

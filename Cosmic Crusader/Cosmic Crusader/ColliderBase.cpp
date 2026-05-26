@@ -17,7 +17,7 @@ namespace ratchet
 		m_body = nullptr;
 
 		m_obj = nullptr;
-		
+
 
 #ifdef IS_RATCHET_DEBUG
 		m_debugDraw = config.m_debugDraw;
@@ -76,7 +76,7 @@ namespace ratchet
 
 		b2Vec2 impulse(dir.x * force, dir.y * force);
 
-	
+
 		m_body->SetLinearVelocity(impulse);
 	}
 
@@ -90,9 +90,9 @@ namespace ratchet
 		return m_body;
 	}
 
-	b2Vec2 ColliderBase::getColliderOrigin() const 
-	{ 
-		return m_origin; 
+	b2Vec2 ColliderBase::getColliderOrigin() const
+	{
+		return m_origin;
 	}
 
 #ifdef IS_RATCHET_DEBUG
@@ -181,7 +181,7 @@ namespace ratchet
 		direction = 0.0f;
 	}
 
-	void ColliderBase::getJumpOverPlatformsTopRaycastPoints( float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
+	void ColliderBase::getJumpOverPlatformsTopRaycastPoints(float& xStart, float& yStart, float& xEnd, float& yEnd, float direction) const
 	{
 		xStart = 0.0f;
 		yStart = 0.0f;
@@ -230,7 +230,7 @@ namespace ratchet
 		aabb.lowerBound = center - b2Vec2(radius, radius);
 		aabb.upperBound = center + b2Vec2(radius, radius);
 
-		CircleOverlapCallBack callback(m_body,center, radius);
+		CircleOverlapCallBack callback(m_body, center, radius);
 
 		s_physicsWorld->QueryAABB(&callback, aabb);
 
@@ -238,7 +238,7 @@ namespace ratchet
 	}
 
 	float GroundRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
- 	{
+	{
 		if (fixture)
 		{
 			b2Body* body = fixture->GetBody();
@@ -268,6 +268,7 @@ namespace ratchet
 	}
 	ColliderBaseConfig::ColliderBaseConfig()
 	{
+
 	}
 	float JumpOverPlatformsRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
 	{
@@ -345,7 +346,7 @@ namespace ratchet
 		const short* fixtureUserData =
 			reinterpret_cast<const short*>(fixture->GetUserData().pointer);
 
-		if (*fixtureUserData == static_cast<short>(PhysicsLayer::Projectiles))
+		if (*fixtureUserData == static_cast<short>(PhysicsLayer::Projectile))
 		{
 			return -1.0f;
 		}
@@ -360,13 +361,13 @@ namespace ratchet
 			m_normal = normal;
 			m_fraction = fraction;
 
-			return fraction; 
+			return fraction;
 		}
 
 		m_hit = false;
 		return 0.0f;
 	}
-	
+
 	CircleOverlapCallBack::CircleOverlapCallBack(b2Body* ingnoredBody, const b2Vec2& c, float r)
 	{
 		m_ignoredBody = ingnoredBody;
@@ -433,6 +434,69 @@ namespace ratchet
 		m_fraction = 1.0f;
 
 		m_ignoredBody = ingnoedBody;
+	}
+
+	bool ContactFilter::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB)
+	{
+		PhysicsLayer* dataA = (PhysicsLayer*)fixtureA->GetUserData().pointer;
+		PhysicsLayer* dataB = (PhysicsLayer*)fixtureB->GetUserData().pointer;
+
+		if ((*dataA == PhysicsLayer::Creature && *dataB == PhysicsLayer::Springs) ||
+			(*dataB == PhysicsLayer::Creature && *dataA == PhysicsLayer::Springs))
+		{
+			if (*dataA == PhysicsLayer::Creature)
+			{
+				b2Body* bodyA = fixtureA->GetBody();
+				ColliderBase* colliderA = (ColliderBase*)bodyA->GetUserData().pointer;
+				GameObject* objectA = colliderA->m_obj;
+
+				b2Body* bodyB = fixtureB->GetBody();
+				ColliderBase* colliderB = (ColliderBase*)bodyB->GetUserData().pointer;
+				GameObject* objectB = colliderB->m_obj;
+
+				if (auto* creatureA = dynamic_cast<Creature*>(objectA))
+				{
+					if (creatureA->m_faction != objectB->m_faction)
+					{
+						return false;
+					}
+				}
+				else if (auto* creatureB = dynamic_cast<Creature*>(objectB))
+				{
+					if (creatureB->m_faction != objectA->m_faction)
+					{
+						return true;
+					}
+				}
+			}
+			else if (*dataB == PhysicsLayer::Creature)
+			{
+				b2Body* bodyB = fixtureB->GetBody();
+				ColliderBase* colliderB = (ColliderBase*)bodyB->GetUserData().pointer;
+				GameObject* objectB = colliderB->m_obj;
+
+				b2Body* bodyA = fixtureA->GetBody();
+				ColliderBase* colliderA = (ColliderBase*)bodyA->GetUserData().pointer;
+				GameObject* objectA = colliderA->m_obj;
+
+
+				if (auto* creatureB = dynamic_cast<Creature*>(objectB))
+				{
+					if (creatureB->m_faction != objectA->m_faction)
+					{
+						return false;
+					}
+				}
+				else if (auto* creatureA = dynamic_cast<Creature*>(objectA))
+				{
+					if (creatureA->m_faction != objectB->m_faction)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 }

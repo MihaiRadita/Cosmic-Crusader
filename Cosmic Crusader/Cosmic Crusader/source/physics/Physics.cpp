@@ -5,6 +5,7 @@
 
 #include "ContactListener.h"
 
+#include "ColliderBase.h"
 
 
 namespace ratchet
@@ -13,20 +14,7 @@ namespace ratchet
 	const float Physics::sc_timeStep = 1.0f / 60.0f;
 	const int32 Physics::sc_velocityIterations = 6;
 	const int32 Physics::sc_positionIterations  = 2;
-	Physics::Physics()
-	{
-		if (!s_physicsWorld)
-		{
-			s_physicsWorld = new b2World(b2Vec2(0.0f, 9.81f));
-		}
-		m_accumulator = 0.f;
 
-		if (!s_contactListener)
-		{
-			s_contactListener = new ContactListener();
-		}
-		s_physicsWorld->SetContactListener(s_contactListener);
-	}
 
 	Physics::~Physics()
 	{
@@ -75,6 +63,29 @@ namespace ratchet
 		return s_simulationEnabled;
 	}
 
+	void Physics::initPhysics()
+	{
+		if (!s_physicsWorld)
+		{
+			s_physicsWorld = new b2World(b2Vec2(0.0f, 9.81f));
+		}
+		m_accumulator = 0.f;
+
+		if (!s_contactListener)
+		{
+			s_contactListener = new ContactListener();
+
+		}
+
+		if (!m_contactFilter)
+		{
+			m_contactFilter = new ContactFilter();
+		}
+		s_physicsWorld->SetContactListener(s_contactListener);
+
+		s_physicsWorld->SetContactFilter(m_contactFilter);
+	}
+
 
 	void Physics::update(float deltatime)
 	{
@@ -86,6 +97,7 @@ namespace ratchet
 
 
 	ContactListener* Physics::s_contactListener;
+	ContactFilter* Physics::m_contactFilter;
 	bool Physics::s_simulationEnabled = false;
 	float Physics::m_accumulator = 0.0f;
 }

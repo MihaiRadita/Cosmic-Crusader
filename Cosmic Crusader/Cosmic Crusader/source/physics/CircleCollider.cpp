@@ -394,7 +394,7 @@ namespace ratchet
 
 		b2Vec2 startPointMiddle = b2Vec2{};
 		b2Vec2 endPointMiddle = b2Vec2{};
-		
+
 		startPointMiddle = b2Vec2(m_obj->getPosition().x, m_obj->getPosition().y);
 		endPointMiddle = b2Vec2(startPointMiddle.x, startPointMiddle.y + 2.f);
 
@@ -419,6 +419,8 @@ namespace ratchet
 
 		return false;
 	}
+	
+
 
 	void CircleCollider::getMiddlePointsForRaycast(float& xStart, float& yStart, float& xEnd, float& yEnd) const
 	{

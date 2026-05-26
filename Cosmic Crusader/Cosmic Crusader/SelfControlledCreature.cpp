@@ -293,7 +293,6 @@ namespace ratchet
 								}
 							}
 						}
-						break;
 					}
 				}
 			}
@@ -473,7 +472,6 @@ namespace ratchet
 									{
 										if (m_ownedWeaponList[i]->m_weaponType == m_currentWeaponType)
 										{
-											
 											setWeaponIndex(i);
 											setWeapon(m_currentEquippedWeaponIndex);
 											break;

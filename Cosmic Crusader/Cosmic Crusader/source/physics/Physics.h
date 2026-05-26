@@ -2,7 +2,8 @@
 
 namespace ratchet
 {
-	class ContactListener; 
+	class ContactListener;
+	class ContactFilter;
 	//class b2World;
 
 	enum BodyType {
@@ -17,7 +18,7 @@ namespace ratchet
 	private:
 
 	public:
-		Physics();
+		
 		~Physics();
 		bool isSimulatingPhysics = false;
 
@@ -26,12 +27,15 @@ namespace ratchet
 
 		static void DestroyPhysicsInstance();
 
+
 		//Simulation Physics
 		static void simulatePhysics(float deltaTime);
 
 		static void SetSimulationEnabled(bool enabled);
 
 		static bool IsSimulationEnabled();
+
+		static void initPhysics();
 
 		//Update Function
 		static void update(static float deltaTime);
@@ -43,6 +47,7 @@ namespace ratchet
 	protected:
 		static b2World* s_physicsWorld;
 		static ContactListener* s_contactListener;
+		static ContactFilter* m_contactFilter;
 
 		static const float sc_timeStep;
 		static const int32 sc_velocityIterations;
