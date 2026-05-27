@@ -46,7 +46,6 @@ namespace ratchet
 		//Init functions
 		void initVariables();
 
-		void PostCosntructFixup() override;
 
 		void applyUpforce(b2Vec2 force);
 

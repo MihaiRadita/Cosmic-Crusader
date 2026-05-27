@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="25" nextobjectid="5414">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="25" nextobjectid="5414">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -57,17 +57,17 @@
  <tileset firstgid="68" source="Continue Button.tsx"/>
  <tileset firstgid="69" source="Action Trigger.tsx"/>
  <tileset firstgid="70" source="Enemy2.tsx"/>
- <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="121" columns="11">
+ <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="0" columns="11">
   <image source="D:/Media/Downloads/Bomb Sprite.png" width="256" height="256"/>
  </tileset>
- <tileset firstgid="192" source="Bomb Launcher Bullet.tsx"/>
- <tileset firstgid="193" source="Cutter.tsx"/>
- <tileset firstgid="194" source="Flame.tsx"/>
- <tileset firstgid="195" source="Health.tsx"/>
- <tileset firstgid="196" source="Ammo.tsx"/>
- <tileset firstgid="197" source="Health Recharger.tsx"/>
- <tileset firstgid="198" source="Ammo Recharger.tsx"/>
- <tileset firstgid="199" source="Spring.tsx"/>
+ <tileset firstgid="71" source="Bomb Launcher Bullet.tsx"/>
+ <tileset firstgid="72" source="Cutter.tsx"/>
+ <tileset firstgid="73" source="Flame.tsx"/>
+ <tileset firstgid="74" source="Health.tsx"/>
+ <tileset firstgid="75" source="Ammo.tsx"/>
+ <tileset firstgid="76" source="Health Recharger.tsx"/>
+ <tileset firstgid="77" source="Ammo Recharger.tsx"/>
+ <tileset firstgid="78" source="Spring.tsx"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
   <object id="3830" name="PathPoint" x="640" y="576">
    <point/>
@@ -55806,7 +55806,7 @@
   </object>
  </objectgroup>
  <objectgroup id="23" name="Obstacles">
-  <object id="5212" name="Cutter" gid="193" x="18880" y="-256" width="192" height="64">
+  <object id="5212" name="Cutter" gid="72" x="18880" y="-256" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -55818,7 +55818,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0.5"/>
     <property name="colliderRadius" type="float" value="0.8"/>
@@ -55833,7 +55833,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5353" name="Cutter" gid="193" x="21120" y="-576" width="192" height="64">
+  <object id="5353" name="Cutter" gid="72" x="21120" y="-576" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -55845,7 +55845,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0.5"/>
     <property name="colliderRadius" type="float" value="0.8"/>
@@ -55860,7 +55860,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5376" name="Cutter" gid="193" x="24000" y="-576" width="192" height="64">
+  <object id="5376" name="Cutter" gid="72" x="24000" y="-576" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -55872,7 +55872,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0.5"/>
     <property name="colliderRadius" type="float" value="0.8"/>
@@ -55887,7 +55887,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5377" name="Cutter" gid="193" x="25600" y="-576" width="192" height="64">
+  <object id="5377" name="Cutter" gid="72" x="25600" y="-576" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -55899,7 +55899,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0.5"/>
     <property name="colliderRadius" type="float" value="0.8"/>
@@ -55914,7 +55914,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5398" name="Cutter" gid="193" x="27136" y="-832" width="192" height="64">
+  <object id="5398" name="Cutter" gid="72" x="27136" y="-832" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -55926,7 +55926,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0.5"/>
     <property name="colliderRadius" type="float" value="0.8"/>
@@ -55941,7 +55941,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5214" name="Flame" gid="194" x="19712" y="-576" width="64" height="128">
+  <object id="5214" name="Flame" gid="73" x="19712" y="-576" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -55953,7 +55953,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0"/>
     <property name="colliderRestitution" type="float" value="0"/>
@@ -55967,7 +55967,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="5354" name="Flame" gid="194" x="20864" y="-896" width="64" height="128">
+  <object id="5354" name="Flame" gid="73" x="20864" y="-896" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -55979,7 +55979,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0"/>
     <property name="colliderRestitution" type="float" value="0"/>
@@ -55993,7 +55993,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="5355" name="Flame" gid="194" x="21824" y="-576" width="64" height="128">
+  <object id="5355" name="Flame" gid="73" x="21824" y="-576" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56005,7 +56005,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0"/>
     <property name="colliderRestitution" type="float" value="0"/>
@@ -56019,7 +56019,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="5356" name="Flame" gid="194" x="26176" y="-512" width="64" height="128">
+  <object id="5356" name="Flame" gid="73" x="26176" y="-512" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56031,7 +56031,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0"/>
     <property name="colliderRestitution" type="float" value="0"/>
@@ -56045,7 +56045,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="5357" name="Flame" gid="194" x="26304" y="-512" width="64" height="128">
+  <object id="5357" name="Flame" gid="73" x="26304" y="-512" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56057,7 +56057,7 @@
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderFriction" type="float" value="0"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
-    <property name="colliderLayer" type="int" value="5"/>
+    <property name="colliderLayer" type="int" value="6"/>
     <property name="colliderOffsetX" type="float" value="0"/>
     <property name="colliderOffsetY" type="float" value="0"/>
     <property name="colliderRestitution" type="float" value="0"/>
@@ -56073,7 +56073,7 @@
   </object>
  </objectgroup>
  <objectgroup id="24" name="Items">
-  <object id="5216" name="Health" gid="195" x="16442" y="-346" width="64" height="64">
+  <object id="5216" name="Health" gid="74" x="16442" y="-346" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56097,7 +56097,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="5408" name="Health" gid="195" x="22528" y="-604" width="64" height="64">
+  <object id="5408" name="Health" gid="74" x="22528" y="-604" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56121,7 +56121,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="5409" name="Health" gid="195" x="26398" y="-536" width="64" height="64">
+  <object id="5409" name="Health" gid="74" x="26398" y="-536" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56145,7 +56145,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="5217" name="Ammo" gid="196" x="17166" y="-286" width="64" height="64">
+  <object id="5217" name="Ammo" gid="75" x="17166" y="-286" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56171,7 +56171,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5405" name="Ammo" gid="196" x="19888" y="-594" width="64" height="64">
+  <object id="5405" name="Ammo" gid="75" x="19888" y="-594" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56197,7 +56197,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5406" name="Ammo" gid="196" x="21600" y="-598" width="64" height="64">
+  <object id="5406" name="Ammo" gid="75" x="21600" y="-598" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56223,7 +56223,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5407" name="Ammo" gid="196" x="25138" y="-664" width="64" height="64">
+  <object id="5407" name="Ammo" gid="75" x="25138" y="-664" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56249,7 +56249,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5220" name="Health Recharger" gid="197" x="21184" y="-896" width="64" height="128">
+  <object id="5220" name="Health Recharger" gid="76" x="21184" y="-896" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56278,7 +56278,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health Recharger On.png"/>
    </properties>
   </object>
-  <object id="5221" name="Ammo Recharger" gid="198" x="22976" y="-640" width="64" height="128">
+  <object id="5221" name="Ammo Recharger" gid="77" x="22976" y="-640" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56307,7 +56307,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo Recharger On.png"/>
    </properties>
   </object>
-  <object id="5397" name="Spring" gid="199" x="15872" y="64" width="128" height="128">
+  <object id="5397" name="Spring" gid="78" x="15872" y="64" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56339,7 +56339,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5410" name="Spring" gid="199" x="16576" y="-320" width="128" height="128">
+  <object id="5410" name="Spring" gid="78" x="16576" y="-320" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56371,7 +56371,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5411" name="Spring" gid="199" x="19328" y="-256" width="128" height="128">
+  <object id="5411" name="Spring" gid="78" x="19328" y="-256" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56403,7 +56403,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5412" name="Spring" gid="199" x="20480" y="-576" width="128" height="128">
+  <object id="5412" name="Spring" gid="78" x="20480" y="-576" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -56435,7 +56435,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5413" name="Spring" gid="199" x="27584" y="-512" width="128" height="128">
+  <object id="5413" name="Spring" gid="78" x="27584" y="-512" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -57245,7 +57245,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5208" name="Bomb Launcher Bullet" gid="192" x="15773" y="-659.667" width="30" height="30">
+  <object id="5208" name="Bomb Launcher Bullet" gid="71" x="15773" y="-659.667" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -57274,7 +57274,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5227" name="Bomb Launcher Bullet" gid="192" x="19260.9" y="-441.485" width="30" height="30">
+  <object id="5227" name="Bomb Launcher Bullet" gid="71" x="19260.9" y="-441.485" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -57303,7 +57303,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5241" name="Bomb Launcher Bullet" gid="192" x="21509.4" y="-999.061" width="30" height="30">
+  <object id="5241" name="Bomb Launcher Bullet" gid="71" x="21509.4" y="-999.061" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -57332,7 +57332,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5258" name="Bomb Launcher Bullet" gid="192" x="24701" y="-683.667" width="30" height="30">
+  <object id="5258" name="Bomb Launcher Bullet" gid="71" x="24701" y="-683.667" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -58325,7 +58325,7 @@
     <property name="fireRate" type="float" value="0.2"/>
     <property name="fixedRotation" type="bool" value="true"/>
     <property name="friction" type="float" value="0"/>
-    <property name="health" type="float" value="15"/>
+    <property name="health" type="float" value="60000"/>
     <property name="initialWeapon_0" type="object" value="0"/>
     <property name="initialWeapon_1" type="object" value="3903"/>
     <property name="isGroundRaycastOffset" type="float" value="0.02"/>

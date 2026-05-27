@@ -57,11 +57,21 @@ namespace ratchet
 
 		bool m_explosioTochTarget = false;
 
+		b2Vec2 m_explosionCenter = b2Vec2(0.0f, 0.0f);
+
 		std::unordered_set<Creature*> m_hitCreatures;
+
+		sf::Vector2f m_explosionCirclePos = sf::Vector2f(0.0f, 0.0f);
+
+		float m_explosionAreaSize = 1.5f;
 
 
 		bool getExplosionAnimationSwitch();
 
+
+		void PostCosntructFixup() override;
+
+		void drawExplosionArea(sf::Vector2f& position, float& m_radius, sf::RenderTarget& target);
 
 		Timer m_bulletTimer;
 

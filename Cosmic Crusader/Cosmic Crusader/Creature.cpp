@@ -200,7 +200,7 @@ namespace ratchet
 
 		m_isRightNoWeapon = true;
 
-		PostCosntructFixup();
+	
 
 	}
 

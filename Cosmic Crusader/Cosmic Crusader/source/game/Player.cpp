@@ -37,14 +37,6 @@ namespace ratchet
 		m_isMoving = false;
 	}
 
-	void Player::PostCosntructFixup()
-	{
-		if (m_collider)
-		{
-			m_collider->SetOwner(this);
-		}
-	}
-
 	void Player::applyUpforce(b2Vec2 force)
 	{
 

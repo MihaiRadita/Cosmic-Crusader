@@ -268,7 +268,6 @@ namespace ratchet
 	}
 	ColliderBaseConfig::ColliderBaseConfig()
 	{
-
 	}
 	float JumpOverPlatformsRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
 	{
@@ -346,7 +345,9 @@ namespace ratchet
 		const short* fixtureUserData =
 			reinterpret_cast<const short*>(fixture->GetUserData().pointer);
 
-		if (*fixtureUserData == static_cast<short>(PhysicsLayer::Projectile))
+		if (*fixtureUserData == static_cast<short>(PhysicsLayer::Projectile) || *fixtureUserData == static_cast<short>(PhysicsLayer::Items)||
+			*fixtureUserData == static_cast<short>(PhysicsLayer::Springs) || *fixtureUserData == static_cast<short>(PhysicsLayer::CheckPoint) ||
+			*fixtureUserData == static_cast<short>(PhysicsLayer::Obstacles))
 		{
 			return -1.0f;
 		}
@@ -435,6 +436,7 @@ namespace ratchet
 
 		m_ignoredBody = ingnoedBody;
 	}
+
 
 	bool ContactFilter::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB)
 	{
