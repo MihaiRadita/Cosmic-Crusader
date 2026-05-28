@@ -114,7 +114,7 @@ namespace ratchet
 		// Center Box
 		const auto centerBoxHeight = std::abs(m_bottomCircleShape.m_p.y - m_topCircleShape.m_p.y);
 		const auto centerBoxHalfHeight = centerBoxHeight / 2.0f;
-		m_boxShape.SetAsBox(getGlobalRadius(), centerBoxHalfHeight, m_origin, m_body->GetAngle());
+		m_boxShape.SetAsBox(getGlobalRadius() - getGlobalRadius() * 0.01, centerBoxHalfHeight, m_origin, m_body->GetAngle());
 		m_fixtureDef.shape = &m_boxShape;
 		m_fixtureDef.density = config.m_fixtureDef.density;
 		m_fixtureDef.friction = config.m_fixtureDef.friction;

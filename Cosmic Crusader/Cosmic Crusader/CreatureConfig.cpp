@@ -164,7 +164,7 @@ namespace ratchet
 				}
 			}
 
-			if (propertyName == "friction")
+			if (propertyName == "colliderFriction")
 			{
 				if (m_colliderConfig)
 				{

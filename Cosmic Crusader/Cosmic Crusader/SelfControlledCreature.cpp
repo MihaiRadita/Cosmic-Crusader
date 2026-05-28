@@ -649,8 +649,16 @@ namespace ratchet
 										direction = diffPoint / lengthPoint;
 									}
 
-									m_input.x = direction.x;
-									m_input.y = direction.y;
+									if (!m_isAttacking && !m_isAttackingDeeper)
+									{
+										m_input.x = direction.x;
+										m_input.y = direction.y;
+									}
+									else
+									{
+										m_input.x = 0.f;
+										m_input.y = 0.f;
+									}
 
 									if (lengthPoint <= circleCollider->getGlobalRadius())
 									{

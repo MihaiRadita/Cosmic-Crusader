@@ -29,6 +29,10 @@ namespace ratchet
 
 		posY += positionYOffset;
 
+		std::string name = jsonFile["name"].get<std::string>();
+
+		
+
 		position = sf::Vector2f(posX, posY);
 		rotation = jsonFile["rotation"];
 		startSpriteTexturePath = "";
