@@ -23,7 +23,7 @@ namespace ratchet
 
 	void ActionTrigger::render(sf::RenderTarget& target)
 	{
-		GameObject::render(target);
+		//GameObject::render(target);
 	}
 
 	void ActionTrigger::OnCollisionEnter(GameObject* obj)

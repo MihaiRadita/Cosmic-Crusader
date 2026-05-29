@@ -184,7 +184,7 @@ namespace ratchet
 
 		setWeapon(m_currentEquippedWeaponIndex);
 
-		m_characterShootingPosition = sf::CircleShape(0.05);
+		/*m_characterShootingPosition = sf::CircleShape(0.05);
 		m_characterShootingPosition.setFillColor(sf::Color::Yellow);
 		m_characterShootingPosition.setPosition(getPosition().x, getPosition().y);
 
@@ -196,7 +196,7 @@ namespace ratchet
 		m_shooitngPointCenter = sf::CircleShape(0.02f);
 		m_shooitngPointCenter.setFillColor(sf::Color::Red);
 		m_shooitngPointCenter.setOrigin(m_shooitngPointCenter.getRadius(), m_shooitngPointCenter.getRadius());
-		m_shooitngPointCenter.setPosition(m_shootingPointDynamic.getPosition().x, m_shootingPointDynamic.getPosition().y);
+		m_shooitngPointCenter.setPosition(m_shootingPointDynamic.getPosition().x, m_shootingPointDynamic.getPosition().y);*/
 
 		m_isRightNoWeapon = true;
 

@@ -113,13 +113,6 @@ namespace ratchet
 			obj->Start();
 		}
 
-		if (m_currentScene == SceneType::Level1)
-		{
-			m_uiTestShape.setSize(sf::Vector2f(20.f, 20.f));
-			m_uiTestShape.setScale(sf::Vector2f(1.0f, 1.0f));
-			m_uiTestShape.setFillColor(sf::Color::Green);
-			m_uiTestShape.setPosition(sf::Vector2f(m_uiView.getCenter().x, m_uiView.getCenter().y));
-		}
 	}
 
 	std::string SceneManager::GetLayerNameObjectByID(int& id)

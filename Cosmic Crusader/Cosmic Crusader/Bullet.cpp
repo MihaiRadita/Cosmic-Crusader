@@ -272,7 +272,7 @@ namespace ratchet
 	{
 
 		GameObject::render(target);
-		m_collider->drawColliderCenterBased(target);
+		//m_collider->drawColliderCenterBased(target);
 
 		if (m_isBulletExploding)
 		{
@@ -284,7 +284,7 @@ namespace ratchet
 
 			target.draw(m_currenExplosionAnimationSprite);
 
-			drawExplosionArea(m_explosionCirclePos, m_explosionAreaSize, target);
+			//drawExplosionArea(m_explosionCirclePos, m_explosionAreaSize, target);
 		}
 
 

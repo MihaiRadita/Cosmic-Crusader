@@ -116,16 +116,20 @@ namespace ratchet
         }
         else if (m_itemType == ItemType::Spring)
         {
-
-            updateItemsAnimations();
             Player* player = dynamic_cast<Player*>(m_target);
             if (player)
             {
-                if (player->getIsOnSpring())
+                if (m_isItemInteracting)
                 {
-                    player->m_collider->aaplyForce(b2Vec2(0.f, -1), m_springForce);
+                    if (player->getIsOnSpring())
+                    {
+                        m_isAnimationPlaying = true;
+                        player->m_collider->aaplyForce(b2Vec2(0.f, -1), m_springForce);
+                    }
+
                 }
             }
+              updateItemsAnimations();
         }
     }
 
@@ -144,27 +148,20 @@ namespace ratchet
                 return;
             }
 
-            if (m_itemAnimation->isAnimationReachedEnd())
-            {
-
-                m_isAnimationPlaying = false;
-                m_itemAnimation->resetAnimationFrame(m_sprite);
-                m_itemAnimation->resetPlayerAnimTimer();
-                m_itemAnimation->resetCurrentAnimIndex();
-        
-            }
-
-            if (auto* player = dynamic_cast<Player*>(m_target))
-            {
-                if (player->getIsOnSpring())
-                {
-                    m_isAnimationPlaying = true;
-                }
-            }
 
             if (m_isAnimationPlaying)
             {
                 m_itemAnimator->play(m_itemAnimator->getAbstractAnimation(), m_sprite);
+
+                if (m_itemAnimation->isAnimationReachedEnd())
+                {
+
+                    m_isAnimationPlaying = false;
+                    m_itemAnimation->resetAnimationFrame(m_sprite);
+                    m_itemAnimation->resetPlayerAnimTimer();
+                    m_itemAnimation->resetCurrentAnimIndex();
+        
+                }
             }
         }
     }
@@ -237,6 +234,8 @@ namespace ratchet
                     }
                 }
             }
+
+
         }
 
     }
@@ -254,7 +253,16 @@ namespace ratchet
 
         if (m_itemType == ItemType::Spring)
         {
-            m_isItemInteracting = true;
+            if (m_isAnimationPlaying)
+            {
+                return;
+            }
+
+            if (auto* player =dynamic_cast<Player*>(obj))
+            {
+                m_isItemInteracting = true;
+
+            }
         }
     }
 
@@ -262,7 +270,10 @@ namespace ratchet
     {
         if (m_itemType == ItemType::Spring)
         {
-            m_isItemInteracting = false;
+            if (dynamic_cast<Player*>(obj))
+            {
+                m_isItemInteracting = false;
+            }
         }
     }
 

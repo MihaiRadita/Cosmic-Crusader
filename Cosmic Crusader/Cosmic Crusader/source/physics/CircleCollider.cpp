@@ -32,6 +32,7 @@ namespace ratchet
 		}
 
 		m_bodyAlignment = config.m_bodyAlignment;
+		m_bodyAlignment = config.m_bodyAlignment;
 
 		if (config.m_origin.has_value())
 		{

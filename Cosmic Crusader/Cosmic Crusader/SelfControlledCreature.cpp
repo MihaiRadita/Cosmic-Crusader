@@ -871,12 +871,12 @@ namespace ratchet
 	void SelfControlledCreature::render(sf::RenderTarget& target)
 	{
 		GameObject::render(target);
-		target.draw(m_characterShootingPosition);
-		target.draw(m_shootingPointDynamic);
-		target.draw(m_shooitngPointCenter);
+		//target.draw(m_characterShootingPosition);
+		//target.draw(m_shootingPointDynamic);
+		//target.draw(m_shooitngPointCenter);
 
 
-		size_t index = 0ull;
+		/*size_t index = 0ull;
 		for (auto it = m_targetPointsFollow.begin(), prevIt = m_targetPointsFollow.begin(); it != m_targetPointsFollow.end(); it++)
 		{
 			bool drawLineFromOldToCurrentPoint = false;
@@ -907,7 +907,7 @@ namespace ratchet
 
 			target.draw(circle);
 			index++;
-		}
+		}*/
 
 	}
 }

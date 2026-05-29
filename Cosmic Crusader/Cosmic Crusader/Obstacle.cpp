@@ -37,7 +37,7 @@ void ratchet::Obstacle::update()
 void ratchet::Obstacle::render(sf::RenderTarget& target)
 {
 	GameObject::render(target);
-	m_collider->drawColliderCenterBased(target);
+	//m_collider->drawColliderCenterBased(target);
 }
 
 void ratchet::Obstacle::OnSensorEnter(GameObject* obj)

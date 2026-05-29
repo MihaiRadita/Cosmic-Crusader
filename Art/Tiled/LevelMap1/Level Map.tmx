@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="25" nextobjectid="5452">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="25" nextobjectid="5486">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -111,7 +111,7 @@
   <object id="3835" name="PathPoint" x="8704" y="256">
    <point/>
   </object>
-  <object id="3836" name="PathPoint" x="9344" y="256">
+  <object id="3836" name="PathPoint" x="9528.85" y="259.03">
    <point/>
   </object>
   <object id="3837" name="PathPoint" x="14272" y="320">
@@ -895,166 +895,6 @@
    </properties>
   </object>
   <object id="1279" name="Tile" gid="9" x="11200" y="704" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1195" name="Tile" gid="6" x="8320" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1194" name="Tile" gid="6" x="8384" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1193" name="Tile" gid="6" x="8448" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1192" name="Tile" gid="6" x="8512" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1191" name="Tile" gid="6" x="8576" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1190" name="Tile" gid="6" x="8640" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1189" name="Tile" gid="6" x="8704" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1264" name="Tile" gid="6" x="9536" y="320" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -9854,26 +9694,6 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
    </properties>
   </object>
-  <object id="1117" name="Tile" gid="6" x="6720" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
   <object id="1119" name="Tile" gid="6" x="6016" y="384" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
@@ -10414,26 +10234,6 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
    </properties>
   </object>
-  <object id="1116" name="Tile" gid="12" x="6784" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
   <object id="1120" name="Tile" gid="12" x="6080" y="384" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
@@ -10475,26 +10275,6 @@
    </properties>
   </object>
   <object id="1103" name="Tile" gid="6" x="5376" y="384" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1115" name="Tile" gid="6" x="6848" y="316" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -10574,26 +10354,6 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
    </properties>
   </object>
-  <object id="1114" name="Tile" gid="12" x="6912" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
   <object id="1122" name="Tile" gid="12" x="6208" y="384" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
@@ -10635,26 +10395,6 @@
    </properties>
   </object>
   <object id="1101" name="Tile" gid="6" x="5504" y="384" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1113" name="Tile" gid="6" x="6976" y="316" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -10734,26 +10474,6 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
    </properties>
   </object>
-  <object id="1112" name="Tile" gid="12" x="7040" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
   <object id="1124" name="Tile" gid="12" x="6336" y="384" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
@@ -10795,26 +10515,6 @@
    </properties>
   </object>
   <object id="1099" name="Tile" gid="6" x="5632" y="384" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1111" name="Tile" gid="6" x="7104" y="316" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -10894,26 +10594,6 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
    </properties>
   </object>
-  <object id="1110" name="Tile" gid="12" x="7168" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
   <object id="1126" name="Tile" gid="12" x="6464" y="384" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
@@ -10955,26 +10635,6 @@
    </properties>
   </object>
   <object id="1097" name="Tile" gid="6" x="5760" y="384" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1109" name="Tile" gid="6" x="7232" y="316" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -11054,26 +10714,6 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
    </properties>
   </object>
-  <object id="1108" name="Tile" gid="6" x="7296" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
   <object id="1092" name="Tile" gid="12" x="4992" y="448" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
@@ -11114,26 +10754,6 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
    </properties>
   </object>
-  <object id="1107" name="Tile" gid="12" x="7360" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
   <object id="1093" name="Tile" gid="6" x="5056" y="448" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
@@ -11155,246 +10775,6 @@
    </properties>
   </object>
   <object id="1094" name="Tile" gid="6" x="5952" y="384" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1140" name="Tile" gid="6" x="7424" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1141" name="Tile" gid="12" x="7488" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1142" name="Tile" gid="6" x="7552" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1145" name="Tile" gid="12" x="7616" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1146" name="Tile" gid="6" x="7680" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1147" name="Tile" gid="12" x="7744" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1148" name="Tile" gid="6" x="7808" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1149" name="Tile" gid="6" x="7872" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1150" name="Tile" gid="12" x="7936" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1151" name="Tile" gid="6" x="8000" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1152" name="Tile" gid="6" x="8064" y="316" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1153" name="Tile" gid="12" x="8128" y="316" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -13515,646 +12895,6 @@
    </properties>
   </object>
   <object id="1394" name="Tile" gid="9" x="13952" y="448" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1263" name="Tile" gid="6" x="9600" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1262" name="Tile" gid="12" x="9664" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1261" name="Tile" gid="6" x="9728" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1260" name="Tile" gid="12" x="9792" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1259" name="Tile" gid="6" x="9856" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1222" name="Tile" gid="12" x="9280" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1258" name="Tile" gid="12" x="9920" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1223" name="Tile" gid="6" x="9344" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1257" name="Tile" gid="6" x="9984" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1224" name="Tile" gid="12" x="9408" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1256" name="Tile" gid="12" x="10048" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1225" name="Tile" gid="6" x="9472" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1255" name="Tile" gid="6" x="10112" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1227" name="Tile" gid="3" x="8768" y="256" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1228" name="Tile" gid="3" x="8832" y="256" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1229" name="Tile" gid="3" x="8896" y="256" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1230" name="Tile" gid="3" x="8960" y="256" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1231" name="Tile" gid="3" x="9024" y="256" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1232" name="Tile" gid="3" x="9088" y="256" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1233" name="Tile" gid="3" x="9152" y="256" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1234" name="Tile" gid="3" x="9216" y="256" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1265" name="Tile" gid="6" x="10304" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1266" name="Tile" gid="12" x="10368" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1267" name="Tile" gid="6" x="10432" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1268" name="Tile" gid="12" x="10496" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1269" name="Tile" gid="6" x="10560" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1270" name="Tile" gid="12" x="10624" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1271" name="Tile" gid="6" x="10688" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1272" name="Tile" gid="12" x="10752" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1273" name="Tile" gid="6" x="10816" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1274" name="Tile" gid="12" x="10880" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="1275" name="Tile" gid="6" x="10944" y="320" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -29575,166 +28315,6 @@
    </properties>
   </object>
   <object id="4004" name="Tile" gid="9" x="9536" y="512" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="4005" name="Tile" gid="9" x="8896" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="4006" name="Tile" gid="9" x="8768" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="4007" name="Tile" gid="9" x="8832" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="4008" name="Tile" gid="9" x="8960" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="4009" name="Tile" gid="9" x="9024" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="4010" name="Tile" gid="9" x="9216" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="4011" name="Tile" gid="9" x="9152" y="320" width="64" height="64">
-   <properties>
-    <property name="Faction" type="int" value="0"/>
-    <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
-    <property name="colliderDensity" type="float" value="0"/>
-    <property name="colliderFixedRotation" type="bool" value="true"/>
-    <property name="colliderFriction" type="float" value="0.6"/>
-    <property name="colliderIsSensor" type="bool" value="false"/>
-    <property name="colliderLayer" type="int" value="1"/>
-    <property name="colliderOffsetX" type="float" value="0"/>
-    <property name="colliderOffsetY" type="float" value="0"/>
-    <property name="colliderRestitution" type="float" value="0.01"/>
-    <property name="colliderType" type="int" value="0"/>
-    <property name="objectType" type="int" value="1"/>
-    <property name="scaleX" type="float" value="1"/>
-    <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
-   </properties>
-  </object>
-  <object id="4012" name="Tile" gid="9" x="9088" y="320" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -48891,7 +47471,7 @@
     <property name="objectType" type="int" value="1"/>
     <property name="scaleX" type="float" value="1"/>
     <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platforrm5.png"/>
    </properties>
   </object>
   <object id="5442" name="Tile" gid="83" x="29120" y="-256" width="384" height="64">
@@ -48911,7 +47491,7 @@
     <property name="objectType" type="int" value="1"/>
     <property name="scaleX" type="float" value="1"/>
     <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platforrm5.png"/>
    </properties>
   </object>
   <object id="5441" name="Tile" gid="83" x="28352" y="-384" width="384" height="64">
@@ -48931,7 +47511,7 @@
     <property name="objectType" type="int" value="1"/>
     <property name="scaleX" type="float" value="1"/>
     <property name="scaleY" type="float" value="1"/>
-    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platforrm5.png"/>
    </properties>
   </object>
   <object id="5449" name="Wall" gid="89" x="26048" y="832" width="64" height="1280">
@@ -48974,7 +47554,7 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Wall1.png"/>
    </properties>
   </object>
-  <object id="5451" name="Wall" gid="89" x="11264" y="320" width="64" height="1280">
+  <object id="5485" name="Wall" gid="89" x="11264" y="320" width="64" height="1280">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -48992,6 +47572,626 @@
     <property name="scaleX" type="float" value="1"/>
     <property name="scaleY" type="float" value="1"/>
     <property name="startSpriteTexturePath" value="Textures/Tileset/Wall1.png"/>
+   </properties>
+  </object>
+  <object id="5452" name="Tile" gid="87" x="10304" y="320" width="704" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platfform9.png"/>
+   </properties>
+  </object>
+  <object id="5453" name="Tile" gid="87" x="9472" y="320" width="704" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platfform9.png"/>
+   </properties>
+  </object>
+  <object id="5454" name="Tile" gid="87" x="8768" y="256" width="704" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platfform9.png"/>
+   </properties>
+  </object>
+  <object id="5455" name="Tile" gid="87" x="8768" y="320" width="704" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platfform9.png"/>
+   </properties>
+  </object>
+  <object id="5456" name="Tile" gid="87" x="8064" y="320" width="704" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platfform9.png"/>
+   </properties>
+  </object>
+  <object id="5457" name="Tile" gid="9" x="8128" y="640" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5458" name="Tile" gid="9" x="8064" y="640" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5459" name="Tile" gid="9" x="8192" y="640" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5460" name="Tile" gid="9" x="8256" y="640" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5461" name="Tile" gid="9" x="8064" y="576" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5462" name="Tile" gid="9" x="8064" y="512" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5463" name="Tile" gid="9" x="8064" y="448" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5464" name="Tile" gid="9" x="8064" y="384" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5465" name="Tile" gid="9" x="8128" y="576" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5466" name="Tile" gid="9" x="8192" y="576" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5467" name="Tile" gid="9" x="8256" y="576" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5468" name="Tile" gid="9" x="8128" y="448" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5469" name="Tile" gid="9" x="8192" y="448" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5470" name="Tile" gid="9" x="8256" y="448" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5471" name="Tile" gid="9" x="8128" y="384" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5472" name="Tile" gid="9" x="8192" y="384" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5473" name="Tile" gid="9" x="8256" y="384" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5474" name="Tile" gid="9" x="8128" y="512" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5475" name="Tile" gid="9" x="8192" y="512" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5476" name="Tile" gid="9" x="8256" y="512" width="64" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
+   </properties>
+  </object>
+  <object id="5477" name="Tile" gid="79" x="5248" y="-448" width="2624" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platform1.png"/>
+   </properties>
+  </object>
+  <object id="5478" name="Tile" gid="83" x="7488" y="-576" width="384" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platforrm5.png"/>
+   </properties>
+  </object>
+  <object id="5480" name="Tile" gid="84" x="4672" y="-384" width="3200" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platform6.png"/>
+   </properties>
+  </object>
+  <object id="5481" name="Tile" gid="85" x="6720" y="320" width="448" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platform7.png"/>
+   </properties>
+  </object>
+  <object id="5482" name="Tile" gid="87" x="7168" y="-512" width="704" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platfform9.png"/>
+   </properties>
+  </object>
+  <object id="5483" name="Tile" gid="87" x="7168" y="320" width="704" height="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="colliderDensity" type="float" value="0"/>
+    <property name="colliderFixedRotation" type="bool" value="true"/>
+    <property name="colliderFriction" type="float" value="0.6"/>
+    <property name="colliderIsSensor" type="bool" value="false"/>
+    <property name="colliderLayer" type="int" value="1"/>
+    <property name="colliderOffsetX" type="float" value="0"/>
+    <property name="colliderOffsetY" type="float" value="0"/>
+    <property name="colliderRestitution" type="float" value="0.01"/>
+    <property name="colliderType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/Tileset/Platfform9.png"/>
    </properties>
   </object>
  </objectgroup>
@@ -49413,7 +48613,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5407" name="Ammo" gid="75" x="25138" y="-664" width="64" height="64">
+  <object id="5407" name="Ammo" gid="75" x="26944" y="-832" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -49468,7 +48668,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health Recharger On.png"/>
    </properties>
   </object>
-  <object id="5221" name="Ammo Recharger" gid="77" x="22976" y="-640" width="64" height="128">
+  <object id="5221" name="Ammo Recharger" gid="77" x="24960" y="-640" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -49659,7 +48859,7 @@
   </object>
  </objectgroup>
  <objectgroup id="12" name="Weapons">
-  <object id="3903" name="Blaster" type="Weapon Pickup" gid="33" x="16960" y="-256" width="95" height="95">
+  <object id="3903" name="Blaster" type="Weapon Pickup" gid="33" x="16146" y="-266" width="95" height="95">
    <properties>
     <property name="Bullet" type="object" value="5108"/>
     <property name="Faction" type="int" value="0"/>
@@ -50138,7 +49338,7 @@
   </object>
  </objectgroup>
  <objectgroup id="14" name="Weapons Bullets">
-  <object id="5108" name="Blaster Bullet" gid="34" x="17099" y="-294" width="19" height="8">
+  <object id="5108" name="Blaster Bullet" gid="34" x="16285" y="-304" width="19" height="8">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -51176,7 +50376,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51194,7 +50394,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51212,7 +50412,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51230,7 +50430,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51248,7 +50448,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51266,7 +50466,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51284,7 +50484,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51302,7 +50502,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51320,7 +50520,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51338,7 +50538,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51356,7 +50556,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51374,7 +50574,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51392,7 +50592,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51410,7 +50610,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51428,7 +50628,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51446,7 +50646,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51464,7 +50664,7 @@
     <property name="Faction" type="int" value="0"/>
     <property name="actionTriggerName" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
-    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="false"/>
     <property name="colliderDensity" type="float" value="0"/>
     <property name="colliderFixedRotation" type="bool" value="true"/>
     <property name="colliderIsSensor" type="bool" value="true"/>
@@ -51480,7 +50680,7 @@
  </objectgroup>
  <objectgroup id="21" name="Object Layer 15"/>
  <objectgroup id="13" name="Player">
-  <object id="5110" name="Player" gid="35" x="17280" y="-256" width="128" height="128">
+  <object id="5110" name="Player" gid="35" x="11392" y="320" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -51516,14 +50716,14 @@
     <property name="fireRate" type="float" value="0.2"/>
     <property name="fixedRotation" type="bool" value="true"/>
     <property name="friction" type="float" value="0"/>
-    <property name="health" type="float" value="60000"/>
+    <property name="health" type="float" value="30"/>
     <property name="initialWeapon_0" type="object" value="0"/>
     <property name="initialWeapon_1" type="object" value="3903"/>
     <property name="isGroundRaycastOffset" type="float" value="0.02"/>
     <property name="isSensor" type="bool" value="false"/>
     <property name="jumpImpulse" type="float" value="-6"/>
     <property name="massValue" type="float" value="100"/>
-    <property name="maxHealth" type="float" value="15"/>
+    <property name="maxHealth" type="float" value="30"/>
     <property name="movementType" type="int" value="1"/>
     <property name="movingSpeed" type="float" value="7"/>
     <property name="objectType" type="int" value="1"/>
