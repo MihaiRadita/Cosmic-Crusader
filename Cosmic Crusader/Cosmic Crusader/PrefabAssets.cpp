@@ -36,6 +36,14 @@ namespace ratchet
 		m_bulletConfigs[id] = copy;
 	}
 
+	void PrefabAssets::RegisterUIBarConfig(int& id, UIBarConfig* config)
+	{
+		UIBarConfig* copy = new UIBarConfig(*config);
+
+		m_UIBarConfigs[id] = copy;
+	}
+
+
 	bool PrefabAssets::isCreatureConfigExists(int& id)
 	{
 		auto it = m_creatureConfigs.find(id);
@@ -84,6 +92,21 @@ namespace ratchet
 		return false;
 	}
 
+	bool PrefabAssets::isUIBarConfigExists(int& id)
+	{
+		auto it = m_UIBarConfigs.find(id);
+
+		if (it != m_UIBarConfigs.end())
+		{
+			return true;
+		}
+
+
+		return false;
+	}
+
+
+
 	GameObjectConfig* PrefabAssets::GetGameObjectConfig(const int& id)
 	{
 		auto it = m_gameObjectConfigs.find(id);
@@ -124,6 +147,18 @@ namespace ratchet
 		return nullptr;
 	}
 
+	UIBarConfig* PrefabAssets::GetUIBarConfig(const int& id)
+	{
+		auto it = m_UIBarConfigs.find(id);
+
+		if (it != m_UIBarConfigs.end())
+		{
+			return it->second;
+		}
+
+		return nullptr;
+	}
+
 	void PrefabAssets::DestroyPrefabAssets()
 	{
 		DestroyPrefabConfigs();
@@ -157,6 +192,11 @@ namespace ratchet
 		m_bulletConfigs.clear();
 
 		for (auto& [id, ptr] : m_colliderConfigs)
+		{
+			delete ptr;
+		}
+
+		for (auto& [id, ptr] : m_UIBarConfigs)
 		{
 			delete ptr;
 		}

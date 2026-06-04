@@ -20,6 +20,8 @@
 
 #include "Bullet.h"
 
+#include "UIBar.h"
+
 namespace ratchet
 {
 	class Creature : public GameObject
@@ -137,12 +139,19 @@ namespace ratchet
 		sf::Vector2f m_previousTracePoiintPos;
 		sf::Vector2f m_previousTraceDirection;
 
+
+		UIBar* m_uiHealthBar = nullptr;
+
 		bool m_traceCache = false;
 
 		std::list<sf::Vector2f>GetTracePointsList();
 
 		int m_currenIndexTrace = 0;
 		int m_previousIndexTrace = 0;
+
+		int m_HealthBarId;
+
+		
 
 		virtual void increaseHealth(float& health);
 		virtual void increaseAmmo(float& ammo, int& weponID);

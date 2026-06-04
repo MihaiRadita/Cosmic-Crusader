@@ -395,6 +395,14 @@ namespace ratchet
 			{
 				m_creatureWalkSoundPath = propertyValue.get<std::string>();
 			}
+
+			if (propertyName == "uiHealthBar")
+			{
+				if (propertyValue.is_number_integer())
+				{
+					m_healthBarID = propertyValue.get<int>();
+				}
+			}
 		}
 
 		for (const auto& jsonProperty : jsonFile["properties"])

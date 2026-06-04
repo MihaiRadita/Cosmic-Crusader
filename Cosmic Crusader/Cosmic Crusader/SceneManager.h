@@ -130,6 +130,7 @@ namespace ratchet
 		sf::Vector2f m_uiCenter;
 
 		sf::Vector2f m_uiViewSize;
+		sf::Vector2f m_hudViewSize;
 		sf::Vector2f m_worldViewSize;
 
 		bool m_isViewFollow;
@@ -154,6 +155,7 @@ namespace ratchet
 
 		sf::View GetWorldView();
 		sf::View GetUIView();
+		sf::View GetHUDView();
 
 		sf::Vector2f m_cameraDiemsnions;
 
@@ -209,6 +211,7 @@ namespace ratchet
 
 		sf::View m_worldView;
 		sf::View m_uiView;
+		sf::View m_hudView;
 
 		int m_sceneIndex;
 

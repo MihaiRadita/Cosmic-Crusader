@@ -91,8 +91,14 @@ namespace ratchet
 		);
 
 		m_worldView.setCenter(m_worldCenter);
+		
+		m_hudViewSize = m_cameraDiemsnions;
+		m_hudView.setSize(m_hudViewSize);
+		m_hudView.setCenter(m_hudViewSize.x / 2.f,
+							m_hudViewSize.y / 2.f);
 
 		m_uiViewSize = m_cameraDiemsnions;
+
 
 		m_uiView.setSize(m_uiViewSize);
 		m_uiView.setCenter(
@@ -226,8 +232,10 @@ namespace ratchet
 
 		sf::FloatRect worldViewport = GetAspectRatio(windowSize, m_worldView.getSize());
 		sf::FloatRect uiViewport = GetAspectRatio(windowSize, m_uiView.getSize());
+		sf::FloatRect hudViewport = GetAspectRatio(windowSize, m_hudView.getSize());
 
 		m_worldView.setViewport(worldViewport);
+		m_hudView.setViewport(hudViewport);
 		m_uiView.setViewport(uiViewport);
 
 		m_initialResolution = m_currentResolution;
@@ -274,6 +282,11 @@ namespace ratchet
 	sf::View SceneManager::GetUIView()
 	{
 		return m_uiView;
+	}
+
+	sf::View SceneManager::GetHUDView()
+	{
+		return m_hudView;
 	}
 
 	Resolution& SceneManager::GetCurrentResolution()
@@ -732,6 +745,7 @@ namespace ratchet
 		}
 
 		// UI RENDER
+		target.setView(m_hudView);
 		target.setView(m_uiView);
 
 		if (m_currentScene == SceneType::Level1)
@@ -741,7 +755,7 @@ namespace ratchet
 
 		for (auto* obj : GameObject::s_gameObjects)
 		{
-			if (obj && obj->m_objectType == ObjectType::UI)
+			if ((obj && obj->m_objectType == ObjectType::UI) || (obj && obj->m_objectType == ObjectType::HUD))
 			{
 				obj->render(target);
 			}
@@ -1413,6 +1427,22 @@ namespace ratchet
 							PrefabAssets::Get().RegisterBulletConfig(config.m_objectID, &config);
 						}
 						succeeded = true;
+					}
+				}
+				else if (layerName == "HUD")
+				{
+					if (obj["name"] == "HUDBar")
+					{
+						auto config = UIBarConfig();
+
+						if (config.deserialise(obj))
+						{
+							if (!PrefabAssets::Get().isUIBarConfigExists(config.m_objectID))
+							{
+								PrefabAssets::Get().RegisterUIBarConfig(config.m_objectID, &config);
+							}
+							succeeded = true;
+						}
 					}
 				}
 				else if (layerName == "Weapons")

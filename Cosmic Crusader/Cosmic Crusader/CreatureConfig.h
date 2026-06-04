@@ -30,6 +30,7 @@ namespace ratchet
 
 		float m_health;
 		float m_maxHealth;
+		int m_healthBarID;
 	
 		//Anlges
 		float m_AngleBase;

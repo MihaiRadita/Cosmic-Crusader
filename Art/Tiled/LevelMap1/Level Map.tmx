@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="25" nextobjectid="5486">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="26" nextobjectid="5487">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -50679,6 +50679,32 @@
   </object>
  </objectgroup>
  <objectgroup id="21" name="Object Layer 15"/>
+ <objectgroup id="25" name="HUD">
+  <object id="5486" name="HUDBar" x="11328" y="64">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="false"/>
+    <property name="activeRenderer" type="bool" value="false"/>
+    <property name="bBackColor" type="float" value="128"/>
+    <property name="bColor" type="float" value="0"/>
+    <property name="barOffsetX" type="float" value="-544"/>
+    <property name="barOffsetY" type="float" value="-352"/>
+    <property name="barSizeX" type="float" value="120"/>
+    <property name="barSizeY" type="float" value="64"/>
+    <property name="barSpriteTexturePath" value="Textures/UI/UI Sprite/Player/UISprite.png"/>
+    <property name="barTargetID" type="int" value="5110"/>
+    <property name="gBackColor" type="float" value="128"/>
+    <property name="gColor" type="float" value="0"/>
+    <property name="movementType" type="int" value="0"/>
+    <property name="objectType" type="int" value="3"/>
+    <property name="rBackColor" type="float" value="128"/>
+    <property name="rColor" type="float" value="255"/>
+    <property name="spriteBarOffsetX" type="float" value="-64"/>
+    <property name="spriteBarOffsetY" type="float" value="0"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="13" name="Player">
   <object id="5110" name="Player" gid="35" x="11392" y="320" width="128" height="128">
    <properties>
@@ -50731,6 +50757,7 @@
     <property name="restitution" type="float" value="0"/>
     <property name="spriteTexturePath" value="Textures/PlayerTextures/Player1Textures/"/>
     <property name="startSpriteTexturePath" value="Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png"/>
+    <property name="uiHealthBar" type="object" value="5486"/>
     <property name="usableWeaponCheckListMask" type="int" value="1"/>
     <property name="usableWeaponTypeListMask" type="int" value="31"/>
     <property name="weaponTypeListMask" type="int" value="31"/>

@@ -25,6 +25,7 @@ namespace ratchet
 
 		m_health = config.m_health;
 		m_maxHealth = config.m_maxHealth;
+		m_HealthBarId = config.m_healthBarID;
 
 		m_checkPointOffsetX = 0.0f;
 		m_checkPointOffsetY = 0.0f;
@@ -987,6 +988,16 @@ namespace ratchet
 
 	void Creature::Start()
 	{
+
+		auto* uiBarConfig = PrefabAssets::Get().GetUIBarConfig(m_HealthBarId);
+
+		if (uiBarConfig)
+		{
+			m_uiHealthBar = new UIBar(*uiBarConfig);
+			s_gameObjects.push_back(m_uiHealthBar);
+			m_uiHealthBar->Start();
+		}
+
 		PostCosntructFixup();
 
 		if (!m_hurtSoundBuffer.loadFromFile(m_creatureHurtSoundPath))

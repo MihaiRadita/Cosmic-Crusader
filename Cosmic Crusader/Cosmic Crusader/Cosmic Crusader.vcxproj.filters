@@ -197,6 +197,12 @@
     <ClCompile Include="AnimationItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UIBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBarConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -301,5 +307,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemConfig.h" />
     <ClInclude Include="AnimationItem.h" />
+    <ClInclude Include="UIBar.h" />
+    <ClInclude Include="UIBarConfig.h" />
   </ItemGroup>
 </Project>

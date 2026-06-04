@@ -10,6 +10,8 @@
 
 #include "Creature.h"
 
+
+
 namespace ratchet
 {
 	class Player : public Creature

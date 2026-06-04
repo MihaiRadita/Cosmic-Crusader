@@ -196,6 +196,8 @@
     </ClCompile>
     <ClCompile Include="TileConfig.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="UIBar.cpp" />
+    <ClCompile Include="UIBarConfig.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIButtonConfig.cpp" />
     <ClCompile Include="UIClickButton.cpp" />
@@ -256,6 +258,8 @@
     <ClInclude Include="TileConfig.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TraceChannels.h" />
+    <ClInclude Include="UIBar.h" />
+    <ClInclude Include="UIBarConfig.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIButtonConfig.h" />
     <ClInclude Include="UIClickButton.h" />

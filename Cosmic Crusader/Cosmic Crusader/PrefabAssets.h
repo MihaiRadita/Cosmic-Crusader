@@ -14,6 +14,7 @@
 #include "ActionTriggerConfig.h"
 #include "ObstacleConfig.h"
 #include "ItemConfig.h"
+#include "UIBarConfig.h"
 
 
 
@@ -31,6 +32,7 @@ namespace ratchet
 		std::map<int, CreatureConfig*> m_creatureConfigs;
 		std::map<int, WeaponConfig*> m_weaponConfigs;
 		std::map<int, BulletConfig*> m_bulletConfigs;
+		std::map<int, UIBarConfig*> m_UIBarConfigs;
 
 		//List of collder prefab configs
 		std::map<int, ColliderBaseConfig*> m_colliderConfigs;
@@ -40,17 +42,20 @@ namespace ratchet
 		void RegisterCreatureConfig(int &id,CreatureConfig& config);
 		void RegisterWeaponConfig(int& id,WeaponConfig* config);
 		void RegisterBulletConfig(int& id,BulletConfig* config);
+		void RegisterUIBarConfig(int& id, UIBarConfig* config);
 
 		bool isCreatureConfigExists(int& id);
 		bool isWeaponConfigExists(int& id);
 		bool isGameObjectConfigExists(int& id);
 		bool isBulletConfigExists(int& id);
+		bool isUIBarConfigExists(int& id);
 
 		//Getters Configs
 		GameObjectConfig* GetGameObjectConfig(const int& id);
 		CreatureConfig* GetCreatureConfig(const int& id);
 		WeaponConfig* GetWeaponConfig(const int& id);
 		BulletConfig* GetBulletConfig(const int& id);
+		UIBarConfig* GetUIBarConfig(const int& id);
 
 		//Destrucotrs
 		void DestroyPrefabAssets();
