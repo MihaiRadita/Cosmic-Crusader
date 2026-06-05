@@ -32,9 +32,12 @@ namespace ratchet
 		void setUITextActive(bool active);
 
 		bool checkNumberIfDifferent(float& value);
+		bool checkIntegerNumberIfDifferent(int& value);
 
 		void setNumberValue(float& value);
 		void setTextValue(std::string& value);
+
+		void setNumberIntegerValue(int& value);
 
 		float m_uiTextOffsetX;
 		float m_uiTextOffsetY;

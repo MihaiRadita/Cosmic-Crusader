@@ -22,6 +22,8 @@
 
 #include "UIBar.h"
 
+#include "UIFractionText.h"
+
 namespace ratchet
 {
 	class Creature : public GameObject
@@ -141,6 +143,7 @@ namespace ratchet
 
 
 		UIBar* m_uiHealthBar = nullptr;
+		UIFractionText* m_ammoWeaponText = nullptr;
 
 		bool m_traceCache = false;
 
@@ -150,6 +153,7 @@ namespace ratchet
 		int m_previousIndexTrace = 0;
 
 		int m_HealthBarId;
+		int m_UIAmmoFractionTextId;
 
 		
 

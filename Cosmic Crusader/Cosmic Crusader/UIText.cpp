@@ -100,6 +100,31 @@ namespace ratchet
 		return value != currentValue;
 
 	}
+
+	bool UIText::checkIntegerNumberIfDifferent(int& value)
+	{
+		if (m_TextType != UITextType::Number)
+			return false;
+
+		float currentValue = 0.f;
+		try
+		{
+			size_t pos = 0;
+			currentValue = std::stof(m_TextValue, &pos);
+
+			if (pos != m_TextValue.size())
+			{
+				return false;
+			}
+		}
+		catch (...)
+		{
+
+			return false;
+		}
+
+		return value != currentValue;
+	}
 	void UIText::setNumberValue(float& value)
 	{
 		if (m_TextType != UITextType::Number)
@@ -124,6 +149,25 @@ namespace ratchet
 		std::ostringstream ss;
 
 		ss << value;
+		m_TextValue = ss.str();
+
+		m_UIText.setString(m_TextValue);
+	}
+	void UIText::setNumberIntegerValue(int& value)
+	{
+		if (m_TextType != UITextType::Number)
+		{
+			return;
+		}
+
+		if (!checkIntegerNumberIfDifferent(value))
+		{
+			return;
+		}
+
+		std::ostringstream ss;
+		ss << std::fixed << std::setprecision(1) << value;
+
 		m_TextValue = ss.str();
 
 		m_UIText.setString(m_TextValue);

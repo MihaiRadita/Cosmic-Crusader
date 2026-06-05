@@ -58,7 +58,7 @@ namespace ratchet
 		{
 			float volume = SceneManager::Get().GetSoundEffectsVolume();
 			m_deathSound.setVolume(volume);
-
+			
 			if (m_isGround)
 			{
 				m_deathSound.play();
@@ -490,6 +490,10 @@ namespace ratchet
 								if (m_uiHealthBar)
 								{
 									m_uiHealthBar->resetValueX(m_maxHealth);
+								}
+								if (m_ammoWeaponText)
+								{
+									m_ammoWeaponText->setActive(false);
 								}
 								
 								if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(m_collider))

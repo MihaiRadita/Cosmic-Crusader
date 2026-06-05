@@ -26,6 +26,9 @@ namespace ratchet
 		m_health = config.m_health;
 		m_maxHealth = config.m_maxHealth;
 		m_HealthBarId = config.m_healthBarID;
+		m_UIAmmoFractionTextId = config.m_UIAmmoFractionTextId;
+
+		m_UIAmmoFractionTextId = config.m_UIAmmoFractionTextId;
 
 		m_checkPointOffsetX = 0.0f;
 		m_checkPointOffsetY = 0.0f;
@@ -678,6 +681,11 @@ namespace ratchet
 #endif	
 
 					m_ownedWeaponList[m_currentEquippedWeaponIndex]->DecreaseAmmo();
+
+					if (m_ammoWeaponText)
+					{
+						m_ammoWeaponText->SetCurrentValue(m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_currentAmmo);
+					}
 				}
 				m_mustSpawnBullet = false;
 			}
@@ -990,6 +998,7 @@ namespace ratchet
 	{
 
 		auto* uiBarConfig = PrefabAssets::Get().GetUIBarConfig(m_HealthBarId);
+		auto* uiAmmoFractionConfig = PrefabAssets::Get().GetUIFractionTextConfig(m_UIAmmoFractionTextId);
 
 		if (uiBarConfig)
 		{
@@ -997,6 +1006,14 @@ namespace ratchet
 			s_gameObjects.push_back(m_uiHealthBar);
 			m_uiHealthBar->Start();
 		}
+
+		if (uiAmmoFractionConfig)
+		{
+			m_ammoWeaponText = new UIFractionText(*uiAmmoFractionConfig);
+			s_gameObjects.push_back(m_ammoWeaponText);
+			m_ammoWeaponText->Start();
+		}
+
 
 		PostCosntructFixup();
 
@@ -1116,7 +1133,10 @@ namespace ratchet
 			m_hurtSound.play();
 		}
 
-		m_uiHealthBar->setBarValueX(m_health, m_maxHealth);
+		if (m_uiHealthBar)
+		{
+			m_uiHealthBar->setBarValueX(m_health, m_maxHealth);
+		}
 	}
 
 	void Creature::detectTarget(GameObject* target)
@@ -1223,9 +1243,26 @@ namespace ratchet
 			{
 				m_currentWeaponType = weapon->m_weaponType;
 				m_characterAnimator->setWeapon(m_currentWeaponType);
+				m_equippedWeaponIndex = weaponIndex;
+		
+
+				if (m_ammoWeaponText)
+				{
+					if (m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_weaponType != Weapon::TYPE::None)
+					{
+						m_ammoWeaponText->setActive(true);
+						m_ammoWeaponText->SetMaxValue(m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_maxAmmo);
+						m_ammoWeaponText->SetCurrentValue(m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_currentAmmo);
+					}
+					else
+					{
+						m_ammoWeaponText->SetMaxValue(0);
+						m_ammoWeaponText->SetCurrentValue(0);
+						m_ammoWeaponText->setActive(false);
+					}
+				}
+
 			}
-
-
 		}
 		else
 		{

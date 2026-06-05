@@ -201,6 +201,8 @@
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIButtonConfig.cpp" />
     <ClCompile Include="UIClickButton.cpp" />
+    <ClCompile Include="UIFractionText.cpp" />
+    <ClCompile Include="UIFractionTextConfig.cpp" />
     <ClCompile Include="UISliderButton.cpp" />
     <ClCompile Include="UISliderButtonConfig.cpp" />
     <ClCompile Include="UIText.cpp" />
@@ -263,6 +265,8 @@
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIButtonConfig.h" />
     <ClInclude Include="UIClickButton.h" />
+    <ClInclude Include="UIFractionText.h" />
+    <ClInclude Include="UIFractionTextConfig.h" />
     <ClInclude Include="UISliderButton.h" />
     <ClInclude Include="UISliderButtonConfig.h" />
     <ClInclude Include="UIText.h" />

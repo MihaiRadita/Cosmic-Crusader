@@ -43,6 +43,13 @@ namespace ratchet
 		m_UIBarConfigs[id] = copy;
 	}
 
+	void PrefabAssets::RegisterUIFractionTextConfig(int& id, UIFractionTextConfig* config)
+	{
+		UIFractionTextConfig* copy = new UIFractionTextConfig(*config);
+
+		m_UIFractionTextConfigs[id] = copy;
+	}
+
 
 	bool PrefabAssets::isCreatureConfigExists(int& id)
 	{
@@ -105,6 +112,19 @@ namespace ratchet
 		return false;
 	}
 
+	bool PrefabAssets::isUIFractionTextConfigExists(int& id)
+	{
+
+		auto it = m_UIFractionTextConfigs.find(id);
+
+		if (it != m_UIFractionTextConfigs.end())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 
 
 	GameObjectConfig* PrefabAssets::GetGameObjectConfig(const int& id)
@@ -152,6 +172,18 @@ namespace ratchet
 		auto it = m_UIBarConfigs.find(id);
 
 		if (it != m_UIBarConfigs.end())
+		{
+			return it->second;
+		}
+
+		return nullptr;
+	}
+
+	UIFractionTextConfig* PrefabAssets::GetUIFractionTextConfig(const int& id)
+	{
+		auto it = m_UIFractionTextConfigs.find(id);
+
+		if (it != m_UIFractionTextConfigs.end())
 		{
 			return it->second;
 		}

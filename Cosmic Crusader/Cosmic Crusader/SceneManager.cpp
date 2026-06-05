@@ -327,7 +327,7 @@ namespace ratchet
 	{
 		for (auto* object : GameObject::s_gameObjects)
 		{
-			if (object->m_objectType != ObjectType::UI)
+			if (object->m_objectType != ObjectType::UI || object->m_objectType != ObjectType::HUD)
 			{
 				object->m_activeRenderer = false;
 			}
@@ -1441,6 +1441,20 @@ namespace ratchet
 							{
 								PrefabAssets::Get().RegisterUIBarConfig(config.m_objectID, &config);
 							}
+							succeeded = true;
+						}
+					}
+					else if (obj["name"] == "HUDFractionText")
+					{
+						auto config = UIFractionTextConfig();
+
+						if (config.deserialise(obj))
+						{
+							if (!PrefabAssets::Get().isUIFractionTextConfigExists(config.m_objectID))
+							{
+								PrefabAssets::Get().RegisterUIFractionTextConfig(config.m_objectID, &config);
+							}
+
 							succeeded = true;
 						}
 					}

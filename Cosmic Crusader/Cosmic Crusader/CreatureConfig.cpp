@@ -403,6 +403,14 @@ namespace ratchet
 					m_healthBarID = propertyValue.get<int>();
 				}
 			}
+
+			if (propertyName == "ammoUItext")
+			{
+				if (propertyValue.is_number_integer())
+				{
+					m_UIAmmoFractionTextId = propertyValue.get<int>();
+				}
+			}
 		}
 
 		for (const auto& jsonProperty : jsonFile["properties"])
