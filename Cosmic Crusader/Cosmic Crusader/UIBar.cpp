@@ -40,6 +40,44 @@ namespace ratchet
 		target.draw(m_hudBarSprite);
 	}
 
+	void UIBar::setBarValueX(float& currentValue, float& maxValue)
+	{
+		m_maxValueX = maxValue;
+		m_currentValueX = currentValue;
+
+		if (m_currentValueX < 0.0f)
+		{
+			m_currentValueX = 0.0f;
+		}
+
+		if (m_currentValueX > m_maxValueX)
+		{
+			m_currentValueX = m_maxValueX;
+		}
+
+		float ratio = m_currentValueX / m_maxValueX;
+
+		float newWidth = ratio * m_barSizeX;
+
+		m_hudBar.setSize(sf::Vector2f(newWidth, m_barSizeY));
+
+	}
+
+	void UIBar::resetValueX(float& maxValue)
+	{
+
+		m_currentValueX = maxValue;
+		m_maxValueX = maxValue;
+
+		if (m_maxValueX <= 0.0f)
+		{
+			m_hudBar.setSize(sf::Vector2f(0.0f, m_barSizeY));
+			return;
+		}
+
+		m_hudBar.setSize(sf::Vector2f(m_barSizeX, m_barSizeY));
+	}
+
 	void UIBar::Start()
 	{
 	

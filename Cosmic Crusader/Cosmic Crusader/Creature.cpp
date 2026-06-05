@@ -1115,6 +1115,8 @@ namespace ratchet
 			m_hurtSound.setVolume(volume);
 			m_hurtSound.play();
 		}
+
+		m_uiHealthBar->setBarValueX(m_health, m_maxHealth);
 	}
 
 	void Creature::detectTarget(GameObject* target)

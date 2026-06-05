@@ -34,6 +34,9 @@ namespace ratchet
 		float m_spriteBarOffsetX;
 		float m_spriteBarOffsetY;
 
+		float m_currentValueX;
+		float m_maxValueX;
+
 		std::string m_barSpriteTexturePath;
 		sf::Texture m_barSpriteTexture;
 
@@ -43,6 +46,9 @@ namespace ratchet
 
 		int m_hudBarTargetId;
 
+		void setBarValueX(float& currentValue, float& maxValue);
+		void resetValueX(float& maxValue);
+	
 
 		void Start() override;
 

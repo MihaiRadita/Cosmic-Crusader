@@ -485,6 +485,12 @@ namespace ratchet
 							{
 								m_currentAnimationState = ANIMATION_STATE::IDLE;
 								m_health = config.m_health;
+								m_maxHealth = config.m_maxHealth;
+
+								if (m_uiHealthBar)
+								{
+									m_uiHealthBar->resetValueX(m_maxHealth);
+								}
 								
 								if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(m_collider))
 								{
