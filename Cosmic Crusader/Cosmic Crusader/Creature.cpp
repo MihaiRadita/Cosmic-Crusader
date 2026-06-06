@@ -410,8 +410,12 @@ namespace ratchet
 					{
 						m_currentWeaponType = Weapon::TYPE::None;
 						int index = static_cast<int>(m_currentWeaponType);
+						m_currentEquippedWeaponIndex = index;
 
-						setWeapon(index);
+						
+						setWeapon(m_currentEquippedWeaponIndex);
+						m_input.weaponInputIndex = m_currentEquippedWeaponIndex;
+						
 					}
 
 
@@ -654,10 +658,24 @@ namespace ratchet
 			return;
 		}
 
+		if (m_currentWeaponType == Weapon::TYPE::None)
+		{
+			if (m_ammoWeaponText)
+			{
+				m_ammoWeaponText->setActive(false);
+			}
+		}
+		else
+		{
+			if (m_ammoWeaponText)
+			{
+				m_ammoWeaponText->setActive(true);
+			}
+		}
+
 		if (m_currentEquippedWeaponIndex != m_input.weaponInputIndex)
 		{
-			m_currentEquippedWeaponIndex = m_input.weaponInputIndex;
-			setWeapon(m_currentEquippedWeaponIndex);
+			setWeapon(m_input.weaponInputIndex);
 		}
 	}
 
@@ -1234,40 +1252,44 @@ namespace ratchet
 	}
 	void Creature::setWeapon(int& weaponIndex)
 	{
-		if (0 <= weaponIndex && weaponIndex < m_ownedWeaponList.size())
-		{
-			
-			Weapon* weapon = m_ownedWeaponList[weaponIndex];
-
-			if (isWeaponAccessible(weapon->m_weaponType))
-			{
-				m_currentWeaponType = weapon->m_weaponType;
-				m_characterAnimator->setWeapon(m_currentWeaponType);
-				m_equippedWeaponIndex = weaponIndex;
-		
-
-				if (m_ammoWeaponText)
-				{
-					if (m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_weaponType != Weapon::TYPE::None)
-					{
-						m_ammoWeaponText->setActive(true);
-						m_ammoWeaponText->SetMaxValue(m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_maxAmmo);
-						m_ammoWeaponText->SetCurrentValue(m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_currentAmmo);
-					}
-					else
-					{
-						m_ammoWeaponText->SetMaxValue(0);
-						m_ammoWeaponText->SetCurrentValue(0);
-						m_ammoWeaponText->setActive(false);
-					}
-				}
-
-			}
-		}
-		else
+		if (weaponIndex < 0 || weaponIndex >= static_cast<int>(m_ownedWeaponList.size()))
 		{
 			weaponIndex = 0;
-			m_characterAnimator->setWeapon(Weapon::TYPE::None);
+		}
+
+		Weapon* weapon = m_ownedWeaponList[weaponIndex];
+
+		if (!weapon)
+			return;
+
+		if (!isWeaponAccessible(weapon->m_weaponType))
+			return;
+
+		m_currentEquippedWeaponIndex = weaponIndex;
+		m_currentWeaponType = weapon->m_weaponType;
+
+		m_characterAnimator->setWeapon(m_currentWeaponType);
+
+		if (m_ammoWeaponText)
+		{
+			if (m_currentWeaponType == Weapon::TYPE::None)
+			{
+				if (m_ammoWeaponText->m_activeGameObject && m_ammoWeaponText->m_activeRenderer)
+				{
+					m_ammoWeaponText->SetMaxValue(0);
+					m_ammoWeaponText->SetCurrentValue(0);
+					m_ammoWeaponText->setActive(false);
+				}
+			}
+			else
+			{
+				if (!m_ammoWeaponText->m_activeGameObject && !m_ammoWeaponText->m_activeRenderer)
+				{
+					m_ammoWeaponText->setActive(true);
+					m_ammoWeaponText->SetMaxValue(weapon->m_maxAmmo);
+					m_ammoWeaponText->SetCurrentValue(weapon->m_currentAmmo);
+				}
+			}
 		}
 	}
 	void Creature::setWeaponAccessible(Weapon::TYPE& weaponType, bool isAccessible)

@@ -63,6 +63,7 @@ namespace ratchet
 			{
 				m_deathSound.play();
 				m_shouldPlayDeathSound = true;
+				setWeaponIndex(m_currentEquippedWeaponIndex);
 			}
 		}
 		else
@@ -74,6 +75,7 @@ namespace ratchet
 
 			m_isDeathFall = false;
 			m_shouldPlayDeathSound = true;
+
 		}
 	}
 

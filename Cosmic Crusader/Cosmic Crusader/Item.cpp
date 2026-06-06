@@ -55,7 +55,6 @@ namespace ratchet
 
     void Item::handleItemtEvent(sf::Event& event)
     {
-
         if (event.type == sf::Event::KeyPressed)
         {
             if (event.key.code == sf::Keyboard::E)
@@ -71,6 +70,11 @@ namespace ratchet
                                 m_target->restoreMaxHealth();
                                 m_itemDisabledTimer.Restart();
                                 m_isItemUsed = true;
+
+                                if (m_target->m_uiHealthBar)
+                                {
+                                    m_target->m_uiHealthBar->setBarValueX(m_target->m_health, m_target->m_maxHealth);
+                                }
                             }
                         }
                         else if (m_itemType == ItemType::AmmoRecharger)
@@ -80,6 +84,14 @@ namespace ratchet
                                 m_target->restoreMaxWeaponsAmmo();
                                 m_itemDisabledTimer.Restart();
                                 m_isItemUsed = true;
+
+                                if (m_target->m_currentWeaponType != Weapon::TYPE::None)
+                                {
+                                    if (m_target->m_ammoWeaponText)
+                                    {
+                                        m_target->m_ammoWeaponText->SetCurrentValue(m_target->m_ownedWeaponList[m_target->m_currentEquippedWeaponIndex]->m_maxAmmo);
+                                    }
+                                }
                             }
                         }
                     }
@@ -358,9 +370,9 @@ namespace ratchet
         else if (m_itemType == ItemType::Ammo)
         {
             creatureThatPickedUpItem->increaseAmmo(m_itemContenntValue, m_itemRefferdId);
-            if (creatureThatPickedUpItem->m_ownedWeaponList[creatureThatPickedUpItem->m_equippedWeaponIndex]->m_weaponType != Weapon::TYPE::None)
+            if (creatureThatPickedUpItem->m_ownedWeaponList[creatureThatPickedUpItem->m_currentEquippedWeaponIndex]->m_weaponType != Weapon::TYPE::None)
             {
-                creatureThatPickedUpItem->m_ammoWeaponText->SetCurrentValue(creatureThatPickedUpItem->m_ownedWeaponList[creatureThatPickedUpItem->m_equippedWeaponIndex]->m_currentAmmo);
+                creatureThatPickedUpItem->m_ammoWeaponText->SetCurrentValue(creatureThatPickedUpItem->m_ownedWeaponList[creatureThatPickedUpItem->m_currentEquippedWeaponIndex]->m_currentAmmo);
             }
                                                                   
         }
