@@ -108,6 +108,28 @@ namespace ratchet
 					m_colliderConfig->m_fixtureDef.isSensor = propertyValue.get<bool>();
 				}
 			}
+
+			if (propertyName == "colliderGroupType")
+			{
+				m_colliderGroupType = static_cast<ColliderGroupType>(propertyValue.get<int>());
+			}
+
+			if (propertyName == "colliderWidth")
+			{
+				if (auto* rectAngleConfig = dynamic_cast<RectAngleColliderConfig*>(m_colliderConfig))
+				{
+					rectAngleConfig->m_width = propertyValue.get<float>();
+				}
+			}
+
+			if (propertyName == "colliderHeight")
+			{
+				if (auto* rectAngleConfig = dynamic_cast<RectAngleColliderConfig*>(m_colliderConfig))
+				{
+					rectAngleConfig->m_height = propertyValue.get<float>();
+				}
+			}
+
 		}
 
 		return true;

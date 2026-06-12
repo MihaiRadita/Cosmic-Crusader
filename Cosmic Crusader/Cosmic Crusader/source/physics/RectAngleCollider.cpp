@@ -14,6 +14,8 @@ namespace ratchet
 		m_fraction = 1.0f;
 
 		m_ignoredBody = ignoredBody;
+
+	
 	}
 
 	JumpOverPlatformsRayCastCallBack::JumpOverPlatformsRayCastCallBack(b2Body* ingnoreddBoy)
@@ -53,15 +55,15 @@ namespace ratchet
 		m_scaleX = sprite.getScale().x;
 		m_scaleY = sprite.getScale().y;
 
-		if (config.m_width.has_value() && config.m_height.has_value())
+		m_width = sprite.getLocalBounds().width;
+		m_height = sprite.getLocalBounds().height;
+
+		if (config.m_width && config.m_height &&
+			config.m_width.value() > 0.0f &&
+			config.m_height.value() > 0.0f)
 		{
-			m_width = config.m_width.value();
-			m_height = config.m_height.value();
-		}
-		else
-		{
-			m_width = sprite.getLocalBounds().width;
-			m_height = sprite.getLocalBounds().height;
+			m_width = *config.m_width;
+			m_height = *config.m_height;
 		}
 
 		if (config.m_origin.has_value())

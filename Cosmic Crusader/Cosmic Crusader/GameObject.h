@@ -20,6 +20,7 @@ namespace ratchet
 		MovementType m_movementType;
 		ColliderType m_colliderType;
 		ObjectType m_objectType;
+		ColliderGroupType m_colliderGroupType;
 
 		//Transforms
 		sf::Vector2f m_position;

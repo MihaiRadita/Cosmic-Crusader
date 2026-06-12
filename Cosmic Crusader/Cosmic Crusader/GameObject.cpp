@@ -84,6 +84,7 @@ namespace ratchet
 		m_colliderType = config.m_colliderType;
 		m_movementType = config.m_movementType;
 		m_objectType = config.m_objectType;
+		m_colliderGroupType = config.m_colliderGroupType;
 
 		m_objectId = config.m_objectID;
 
@@ -114,6 +115,7 @@ namespace ratchet
 		m_sprite.setRotation(m_rotation);
 		m_sprite.setScale(m_scale.x, m_scale.y);
 
+
 		if (m_objectType == ObjectType::World)
 		{
 			if (config.m_colliderConfig)
@@ -140,7 +142,11 @@ namespace ratchet
 				}		
 				else if (const auto* rectangleConfig = dynamic_cast<RectAngleColliderConfig*>(config.m_colliderConfig))
 				{
-					m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
+					if (m_colliderGroupType != ColliderGroupType::None)
+					{
+						m_collider = new ratchet::RectAngleCollider(m_sprite, *rectangleConfig);
+					}
+
 				}
 			}
 		}
@@ -226,6 +232,14 @@ namespace ratchet
 #endif
 
 		target.draw(m_sprite);
+
+		if (auto* rectCollider = dynamic_cast<RectAngleCollider*>(m_collider))
+		{
+			if (m_colliderGroupType == ColliderGroupType::Group)
+			{
+				rectCollider->debugRender(target);
+			}
+		}
 	}
 
 	GameObject* GameObject::findGameObjectByBody(const b2Body* body)

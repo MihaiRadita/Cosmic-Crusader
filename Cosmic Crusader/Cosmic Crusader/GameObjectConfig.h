@@ -13,6 +13,8 @@ namespace ratchet
 
 	enum class ColliderShapeType{None =0, Rectangle, Circle, Capsule};
 
+	enum class ColliderGroupType{None = 0, Single, Group};
+
 	struct GameObjectConfig : public ISerialisableItem
 	{
 #ifdef IS_RATCHET_DEBUG
@@ -24,6 +26,7 @@ namespace ratchet
 		MovementType m_movementType;
 		ColliderType m_colliderType;
 		ObjectType m_objectType;
+		ColliderGroupType m_colliderGroupType = ColliderGroupType::Single;
 
 		//Transforms
 		sf::Vector2f position;

@@ -23,6 +23,7 @@ namespace ratchet
 
 	enum ColliderType { COLLIDERTYPE_UNKNOWN = 0, STATIC, DYNAMIC };
 
+
 	struct ColliderBaseConfig
 	{
 		ColliderBaseConfig();
@@ -83,7 +84,6 @@ namespace ratchet
 
 		PhysicsLayer m_layer;
 		BodyAlignment m_bodyAlignment;
-
 
 		bool m_isColliderSetDestroy = false;
 
