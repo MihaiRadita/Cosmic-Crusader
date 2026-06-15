@@ -4,6 +4,7 @@
 #include "game/Player.h"
 #include "SelfControlledCreature.h"
 #include "Obstacle.h"
+#include "SceneManager.h"
 
 namespace ratchet
 {
@@ -132,6 +133,16 @@ namespace ratchet
 			m_body->GetAngle() * (180.f / M_PI));
 
 		target.draw(colliderOutline);
+	}
+
+	b2Vec2 CircleCollider::GetTopLeftPoint()const
+	{
+		return m_body->GetPosition();
+	}
+
+	b2Vec2 CircleCollider::GetBottomRightPoint()const
+	{
+		return b2Vec2(m_body->GetPosition().x + m_radius * 2.0f * SceneManager::sc_tiledToGameScale, m_body->GetPosition().y + m_radius * 2.0f * SceneManager::sc_tiledToGameScale);
 	}
 
 #ifdef IS_RATCHET_DEBUG

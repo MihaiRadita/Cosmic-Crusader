@@ -115,6 +115,10 @@ namespace ratchet
 
 		inline uint16_t Layer(PhysicsLayer layer);
 
+		virtual b2Vec2 GetTopLeftPoint() const = 0;
+		virtual b2Vec2 GetBottomRightPoint() const= 0;
+
+
 
 		float m_checkTopPlatformsDirectionX;
 

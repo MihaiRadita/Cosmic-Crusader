@@ -32,6 +32,10 @@ namespace ratchet
 
 		void drawColliderCenterBased(sf::RenderTarget& target) override;
 
+		b2Vec2 GetTopLeftPoint() const override;
+		b2Vec2 GetBottomRightPoint() const override;
+
+
 
 #ifdef IS_RATCHET_DEBUG
 		void printBodyPositionRotation() override;

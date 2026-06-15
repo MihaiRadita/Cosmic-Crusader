@@ -41,6 +41,9 @@ namespace ratchet
 		float getTopCircleRadius();
 		float getBottomCircleRadius();
 
+		b2Vec2 GetTopLeftPoint() const override;
+		b2Vec2 GetBottomRightPoint() const override;
+
 		void RestartColliderFeatures(sf::Sprite& sprite, const CapsuleColliderConfig& config);
 
 #ifdef IS_RATCHET_DEBUG

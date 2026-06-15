@@ -3,6 +3,7 @@
 
 #include "game/Player.h"
 #include "SelfControlledCreature.h"
+#include "SceneManager.h"
 
 namespace ratchet
 {
@@ -202,6 +203,16 @@ namespace ratchet
 	float CapsuleCollider::getBottomCircleRadius()
 	{
 		return m_bottomCircleShape.m_radius;
+	}
+
+	b2Vec2 CapsuleCollider::GetTopLeftPoint() const
+	{
+		return m_body->GetPosition();
+	}
+
+	b2Vec2 CapsuleCollider::GetBottomRightPoint() const
+	{
+		return b2Vec2(m_body->GetPosition().x + m_radius * 2.0f * SceneManager::sc_tiledToGameScale, m_body->GetPosition().y + m_height * SceneManager::sc_tiledToGameScale);
 	}
 
 	void CapsuleCollider::RestartColliderFeatures(sf::Sprite& sprite, const CapsuleColliderConfig& config)

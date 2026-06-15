@@ -3,6 +3,7 @@
 
 #include "game/Player.h"
 #include "SelfControlledCreature.h"
+#include "SceneManager.h"
 
 
 namespace ratchet
@@ -187,6 +188,16 @@ namespace ratchet
 			return b2Vec2_zero;
 		}
 		return m_body->GetTransform().p;
+	}
+
+	b2Vec2 RectAngleCollider::GetTopLeftPoint() const
+	{
+		return m_body->GetPosition();
+	}
+
+	b2Vec2 RectAngleCollider::GetBottomRightPoint() const
+	{
+		return b2Vec2(m_body->GetPosition().x + m_width * SceneManager::sc_tiledToGameScale, m_body->GetPosition().y + m_height * SceneManager::sc_tiledToGameScale);
 	}
 
 #ifdef IS_RATCHET_DEBUG

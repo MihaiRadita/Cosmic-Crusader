@@ -93,6 +93,11 @@ namespace ratchet
 		m_rotation = config.rotation;
 		m_scale = config.scale;
 
+		if (m_colliderGroupType == ColliderGroupType::Group)
+		{
+			std::cout << "Grouped!" << std::endl;
+		}
+
 		m_activeGameObject = config.m_activeObject;
 		m_activeRenderer = config.m_activeRenderer;
 		m_startSpritePath = config.startSpriteTexturePath;

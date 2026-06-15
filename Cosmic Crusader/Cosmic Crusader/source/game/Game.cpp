@@ -197,9 +197,19 @@ namespace ratchet
 
 
 		SceneManager::Get().updateSceneObjects();
+		static float timePassed = 0.0f;
 		if (SceneManager::Get().GetCurrentScene() != SceneType::MainMenu)
 		{
-			updatePhysicsSystem();
+			timePassed += s_deltaTime;
+
+			if (timePassed > 2.0f)
+			{
+				updatePhysicsSystem();
+			}
+		}
+		else
+		{
+			timePassed = 0.0f;
 		}
 
 	}
@@ -235,7 +245,15 @@ namespace ratchet
 			if (!body)
 				continue;
 
-			sf::Vector2f pos = obj->getPosition();
+
+			const auto* collider = obj->m_collider;
+			const auto topLeftPoint = collider->GetTopLeftPoint();
+			const auto bottomRightPoint = collider->GetBottomRightPoint();
+			const auto closestPointWithinColliderRectangleX = std::max(topLeftPoint.x, std::min(center.x, bottomRightPoint.x));
+			const auto closestPointWithinColliderRectangleY = std::max(topLeftPoint.y, std::min(center.y, bottomRightPoint.y));
+
+			const auto pos = sf::Vector2f(closestPointWithinColliderRectangleX, closestPointWithinColliderRectangleY);
+		
 
 			float dx = pos.x - center.x;
 			float dy = pos.y - center.y;
@@ -275,11 +293,28 @@ namespace ratchet
 				{
 					bool i = inside;
 				}
+				else
+				{
+					bool t = inside;
+				}
 			}
 
-			if (body->IsAwake() != inside)
+			if (obj->m_objectId == 5112)
 			{
-				body->SetAwake(inside);
+				if (!inside)
+				{
+					bool i = inside;
+				}
+				else
+				{
+					bool t = inside;
+				}
+			}
+			
+
+			if (body->IsEnabled() != inside)
+			{
+				body->SetEnabled(inside);
 			}
 
 			if(obj->m_activeGameObject != inside)
@@ -352,6 +387,8 @@ namespace ratchet
 		m_window.clear(sf::Color::Black);
 
 		SceneManager::Get().renderSceneObjects(m_window);
+
+		
 
 		m_window.display();
 

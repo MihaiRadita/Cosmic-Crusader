@@ -741,6 +741,92 @@ namespace ratchet
 			if (obj && obj->m_objectType == ObjectType::World)
 			{
 				obj->render(target);
+
+				if (obj->m_colliderGroupType == ColliderGroupType::Group)
+				{
+					bool i = true;
+				}
+
+				
+			}
+		}
+
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			if (obj->m_colliderGroupType == ColliderGroupType::Group)
+			{
+				sf::Vector2f topLeftPointPosition = sf::Vector2f(obj->m_collider->GetTopLeftPoint().x, obj->m_collider->GetTopLeftPoint().y);
+				sf::Vector2f bottomRightPointPosition = sf::Vector2f(obj->m_collider->GetBottomRightPoint().x, obj->m_collider->GetBottomRightPoint().y);
+
+				sf::CircleShape topLeftPoint;
+				topLeftPoint.setPosition(topLeftPointPosition.x, topLeftPointPosition.y);
+				topLeftPoint.setRadius(0.15f);
+				topLeftPoint.setRotation(0.0f);
+				topLeftPoint.setFillColor(sf::Color::Yellow);
+
+				sf::CircleShape bottomRightPoint;
+				bottomRightPoint.setPosition(bottomRightPointPosition.x, bottomRightPointPosition.y);
+				bottomRightPoint.setRadius(0.15f);
+				bottomRightPoint.setRotation(0.0f);
+				bottomRightPoint.setFillColor(sf::Color::Red);
+
+				target.draw(topLeftPoint);
+				target.draw(bottomRightPoint);
+
+				{
+					static auto s_dynamicPos = sf::Vector2f(0.0f, 0.0f);
+					static auto s_progress = 0.0f;
+					static auto s_progressSign = 1.0f;
+					static const auto sc_speed = 0.5f;
+					s_progress = s_progress + s_progressSign * sc_speed * Game::getDeltaTime();
+					if (s_progress > 100.0f)
+					{
+						s_progress = 100.0f;
+						s_progressSign = -1.0f;
+					}
+					else if (s_progress < 0.0f)
+					{
+						s_progress = 0.0f;
+						s_progressSign = 1.0f;
+					}
+
+					auto remapValue = [](auto value, auto rangeMin1, auto rangeMax1, auto rangeMin2, auto rangeMax2) {
+						return (value - rangeMin1) / (rangeMax1 - rangeMin1) * (rangeMax2 - rangeMin2) + rangeMin2;
+						};
+
+					s_dynamicPos = sf::Vector2f(
+						remapValue(s_progress, 0.0f, 100.0f, topLeftPointPosition.x, bottomRightPointPosition.x),
+						remapValue(s_progress, 0.0f, 100.0f, topLeftPointPosition.y, bottomRightPointPosition.y)
+					);
+
+					sf::CircleShape dynamicPoint;
+					dynamicPoint.setPosition(s_dynamicPos.x, s_dynamicPos.y);
+					dynamicPoint.setRadius(0.075f);
+					dynamicPoint.setRotation(0.0f);
+					dynamicPoint.setFillColor(sf::Color::Cyan);
+
+					target.draw(dynamicPoint);
+				}
+				
+				{
+					const auto& worldView = SceneManager::Get().GetWorldView();
+					sf::Vector2f center = worldView.getCenter();
+					const auto* collider = obj->m_collider;
+					const auto topLeftPoint = collider->GetTopLeftPoint();
+					const auto bottomRightPoint = collider->GetBottomRightPoint();
+					const auto closestPointWithinColliderRectangleX = std::max(topLeftPoint.x, std::min(center.x, bottomRightPoint.x));
+					const auto closestPointWithinColliderRectangleY = std::max(topLeftPoint.y, std::min(center.y, bottomRightPoint.y));
+
+					const auto pos = sf::Vector2f(closestPointWithinColliderRectangleX, closestPointWithinColliderRectangleY);
+
+					sf::CircleShape closestPointToCameraCenter;
+					closestPointToCameraCenter.setPosition(pos.x, pos.y);
+					closestPointToCameraCenter.setRadius(0.075f);
+					closestPointToCameraCenter.setRotation(0.0f);
+					closestPointToCameraCenter.setFillColor(sf::Color::Magenta);
+
+					target.draw(closestPointToCameraCenter);
+				}
 			}
 		}
 
@@ -760,7 +846,7 @@ namespace ratchet
 				obj->render(target);
 			}
 		}
-	
+
 	}
 
 	void SceneManager::LoadScene(SceneType scene)

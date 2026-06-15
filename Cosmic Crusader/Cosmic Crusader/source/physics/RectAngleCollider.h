@@ -44,6 +44,9 @@ namespace ratchet
 		b2Vec2 getOffset();
 		b2Vec2 getColliderPosition();
 
+		b2Vec2 GetTopLeftPoint()const override;
+		b2Vec2 GetBottomRightPoint() const override;
+
 		//Checks
 #ifdef IS_RATCHET_DEBUG
 		void printBodyPositionRotation() override;
