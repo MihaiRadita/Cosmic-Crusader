@@ -185,6 +185,19 @@ namespace ratchet
 	void ratchet::GameObject::render(sf::RenderTarget& target)
 	{
 		//if (!m_activeGameObject) return;
+
+		if (auto* tile = dynamic_cast<Tile*>(this))
+		{
+			if (!m_activeRenderer)
+			{
+ 				bool no = m_activeRenderer;
+			}
+			else
+			{
+				bool yes = m_activeRenderer;
+			}
+		}
+
 		if (!m_activeRenderer) return;
 
 #ifdef IS_RATCHET_DEBUG
@@ -461,6 +474,7 @@ namespace ratchet
 
 	void ratchet::GameObject::updatePhysics()
 	{
+	
 	}
 
 	void ratchet::GameObject::updateRotation()

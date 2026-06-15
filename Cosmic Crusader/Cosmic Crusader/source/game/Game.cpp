@@ -195,7 +195,103 @@ namespace ratchet
 
 		handleEvents();
 
+
 		SceneManager::Get().updateSceneObjects();
+		if (SceneManager::Get().GetCurrentScene() != SceneType::MainMenu)
+		{
+			updatePhysicsSystem();
+		}
+
+	}
+
+	void Game::updatePhysicsSystem()
+	{
+		const auto& worldView = SceneManager::Get().GetWorldView();
+
+		sf::FloatRect view = worldView.getViewport(); // NU asta
+		sf::Vector2f center = worldView.getCenter();
+		sf::Vector2f size = worldView.getSize();
+
+		float halfW = size.x * 0.8;
+		float halfH = size.y * 0.8;
+
+
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			if (!obj || !obj->m_collider)
+				continue;
+
+			if (obj->m_objectType == ObjectType::UI ||
+				obj->m_objectType == ObjectType::HUD)
+				continue;
+
+			if (dynamic_cast<Player*>(obj))
+				continue;
+			if (dynamic_cast<Bullet*>(obj))
+				continue;
+
+
+			b2Body* body = obj->m_collider->getBody();
+			if (!body)
+				continue;
+
+			sf::Vector2f pos = obj->getPosition();
+
+			float dx = pos.x - center.x;
+			float dy = pos.y - center.y;
+
+			bool inside =
+				std::abs(dx) <= halfW &&
+				std::abs(dy) <= halfH;
+
+			if (obj->m_objectId == 5625)
+			{
+				if (!inside)
+				{
+					bool i = inside;
+				}
+			}
+
+			if (obj->m_objectId == 5536)
+			{
+				if (!inside)
+				{
+					bool i = inside;
+				}
+			}
+
+
+			if (obj->m_objectId == 5397)
+			{
+				if (!inside)
+				{
+					bool i = inside;
+				}
+			}
+
+			if (obj->m_objectId == 5204)
+			{
+				if (!inside)
+				{
+					bool i = inside;
+				}
+			}
+
+			if (body->IsAwake() != inside)
+			{
+				body->SetAwake(inside);
+			}
+
+			if(obj->m_activeGameObject != inside)
+			{
+				obj->m_activeGameObject = inside;
+			}
+
+			if (obj->m_activeRenderer != inside)
+			{
+				obj->m_activeRenderer = inside;
+			}
+		}
 	}
 
 	void Game::awake()

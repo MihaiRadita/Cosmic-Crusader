@@ -728,8 +728,8 @@ namespace ratchet
 		if (player && m_isViewFollow)
 		{
 			m_worldView.setCenter(
-				player->getCollider()->getBody()->GetPosition().x,
-				player->getCollider()->getBody()->GetPosition().y
+				player->getPosition().x,
+				player->getPosition().y
 			);
 		}
 

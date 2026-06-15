@@ -20,6 +20,8 @@ namespace ratchet
 
 		float scalscale = SceneManager::sc_tiledToGameScale;
 
+		m_objectID = jsonFile["id"];
+
 		scale = sf::Vector2f(1.0f, 1.0f) * SceneManager::sc_tiledToGameScale;
 		positionXOffset = 0.f;
 		positionYOffset = -tileHeight * scale.y;

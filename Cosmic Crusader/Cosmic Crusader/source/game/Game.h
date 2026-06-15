@@ -54,7 +54,7 @@ namespace ratchet
 
 		//Update functions
 		void update();
-		void updatePhysics();
+		void updatePhysicsSystem();
 
 		float acumulator = 0;
 		
