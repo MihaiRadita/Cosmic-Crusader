@@ -45,6 +45,7 @@ namespace ratchet
 	void Player::Start()
 	{
 		Creature::Start();
+		m_isInvlunerbleForTesting = true;
 	}
 
 	void Player::Die()

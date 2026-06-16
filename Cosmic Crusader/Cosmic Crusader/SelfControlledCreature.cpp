@@ -60,6 +60,42 @@ namespace ratchet
 
 	}
 
+	void SelfControlledCreature::checkSelfCreatureTooFarFromStart()
+	{
+		float dx = m_startPosition.x - getPosition().x;
+		float dy = m_startPosition.y - getPosition().y;
+
+		float distance = std::sqrt(dx * dx + dy * dy);
+
+		float dxFromStart = getPosition().x - m_startPosition.x;
+
+		m_tooFarFromStart =
+			(distance > m_maxDistanceFrommStart) &&
+			(
+				(dxFromStart > 0.f && m_facingRight) ||
+				(dxFromStart < 0.f && !m_facingRight)
+				);
+
+	}
+
+	void SelfControlledCreature::checkTargetVeryFarFromSlefCreature()
+	{
+		float dx = m_target->getPosition().x - getPosition().x;
+		float dy = m_target->getPosition().y - getPosition().y;
+
+		float distance = std::sqrt(dx * dx + dy * dy);
+
+		bool isTooFar = (distance > m_targetFarDistance);
+
+		if (isTooFar && !m_wasTargetTooFar)
+		{
+			m_isSelfCreatureReturning = true;
+			m_selfCreatureAlreadyReturned = false;
+		}
+
+		m_wasTargetTooFar = isTooFar;
+	}
+
 	void SelfControlledCreature::handleSelfCreatureEvent()
 	{
 		if (SceneManager::Get().m_isPaused)
@@ -304,6 +340,8 @@ namespace ratchet
 		SetTarget(m_faction);
 
 		Creature::Start();
+
+		m_startPosition = this->getPosition();
 	}
 
 	void SelfControlledCreature::handleEvent()
@@ -326,21 +364,32 @@ namespace ratchet
 		handleSelfCreatureEvent();
 		detectTarget(m_target);
 
+
 		if (m_isTargetDetected)
 		{
+
+
+			if (m_objectId == 5995)
+			{
+				bool i = true;
+			}
+
 			TRACE_CHANNEL("AI_TARGETING", "Enemy detects target(PLAYER)!");
 			m_facingRight = !m_isTagetBehindCharacter;
 			invertCharacterMovingSpriteScale(m_facingRight ? 1.0f : -1.0f);
+
 			checkTargetToAttack(m_target);
+			checkSelfCreatureTooFarFromStart();
 			checkTargetDeeperToAttack(m_target);
 			isFallingRisk();
 			canJumpOver();
 
+			m_selfCreatureAlreadyReturned = false;
+
 			if (m_movementType == MovementType::GROUND)
 			{
 				if (m_isAttacking)
-				{
-					m_input.x = 0.f;
+				{					m_input.x = 0.f;
 					m_input.isJump = false;
 					if (!m_waitTostartAttack)
 					{
@@ -355,6 +404,15 @@ namespace ratchet
 				}
 				else
 				{
+					if (m_tooFarFromStart)
+					{
+						m_input.x = 0.0f;
+						m_input.isJump = false;
+						m_input.m_isFiring = false;
+						return;
+						
+					}
+
 					if (m_input.m_isFiring && m_currentCharacterState == WeaponAnimation::STATE::Recoil)
 					{
 						m_currentCharacterState = WeaponAnimation::STATE::Aim;
@@ -507,6 +565,17 @@ namespace ratchet
 
 					if (m_canSeePlayerCenter && m_canSeeRightSide && m_canSeeLeftSide)
 					{
+
+						if (m_tooFarFromStart)
+						{
+							m_input.x = 0.0f;
+							m_input.y = 0.0f;
+							m_input.isJump = false;
+							m_input.m_isFiring = false;
+							return;
+						
+						}
+
 						if (!m_targetPointsFollow.empty())
 						{
 							m_targetPointsFollow.clear();
@@ -619,6 +688,16 @@ namespace ratchet
 							}
 							else
 							{
+								if (m_tooFarFromStart)
+								{
+									m_input.x = 0.0f;
+									m_input.y = 0.0f;
+									m_input.isJump = false;
+									m_input.m_isFiring = false;
+									return;
+									
+								}
+
 								sf::Vector2f pointTarget = m_targetPointsFollow[m_currentTargetPointIndex];
 
 
@@ -698,6 +777,42 @@ namespace ratchet
 			m_input.m_isFiring = false;
 			m_waitTostartAttack = false;
 			m_fireCooldown.m_clock.restart();
+
+			//checkTargetVeryFarFromSlefCreature();
+
+			checkTargetVeryFarFromSlefCreature();
+
+			if (m_isSelfCreatureReturning)
+			{
+				if (auto* capsuleCollider = dynamic_cast<CapsuleCollider*>(m_collider))
+				{
+					capsuleCollider->m_body->SetTransform(
+						b2Vec2(m_startPosition.x, m_startPosition.y),
+						0.0f
+					);
+
+					capsuleCollider->m_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+					capsuleCollider->m_body->SetAngularVelocity(0.0f);
+
+					setPosition(sf::Vector2f(m_startPosition.x, m_startPosition.y));
+				}
+				else if (auto* circleCollider = dynamic_cast<CircleCollider*>(m_collider))
+				{
+					circleCollider->m_body->SetTransform(
+						b2Vec2(m_startPosition.x, m_startPosition.y),
+						0.0f
+					);
+
+					circleCollider->m_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+					circleCollider->m_body->SetAngularVelocity(0.0f);
+
+					setPosition(sf::Vector2f(m_startPosition.x, m_startPosition.y));
+				}
+
+				m_selfCreatureAlreadyReturned = true;
+				m_isSelfCreatureReturning = false;
+			}
+
 		}
 
 		if (m_canJumpOver)
@@ -708,6 +823,8 @@ namespace ratchet
 		{
 			TRACE_CHANNEL("AI_JUMP_OVER_PLATFORMS", "ENEMY CAN NOT JUMP OVER PLATFORMS!");
 		}
+
+
 	}
 	void SelfControlledCreature::update()
 	{
@@ -908,6 +1025,14 @@ namespace ratchet
 			target.draw(circle);
 			index++;
 		}*/
+
+		sf::CircleShape startPosition;
+		startPosition.setRadius(0.5f);
+		startPosition.setPosition(m_startPosition);
+		startPosition.setRotation(0.0f);
+		startPosition.setFillColor(sf::Color::Blue);
+
+		target.draw(startPosition);
 
 	}
 }

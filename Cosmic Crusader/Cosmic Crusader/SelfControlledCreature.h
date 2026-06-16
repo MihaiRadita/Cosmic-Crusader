@@ -23,6 +23,8 @@ namespace ratchet
 		float m_targetMaxDistanceLoseX;
 		float m_targetMaxDistanceLoseY;
 
+		float m_targetVeryFarDistance = 20.0f;
+
 		//target attack distance
 		float m_targetMaxDistanceAttack;
 		float m_targetMaxDistanceAttack2;
@@ -55,12 +57,24 @@ namespace ratchet
 		bool m_canSeeRightSide = false;
 		bool m_canSeeLeftSide = false;
 
+		sf::Vector2f m_startPosition;
+		float m_maxDistanceFrommStart = 10.f;
+		bool m_tooFarFromStart = false;
 
+		float m_targetFarDistance = 15.f;
+		bool m_isSelfCreatureReturning = false;
+		bool m_selfCreatureAlreadyReturned = false;
+
+		bool m_wasTargetTooFar = false;
 
 
 		//Check Attack Target Function
 		void checkTargetToAttack(Creature* target);
 		void checkTargetDeeperToAttack(Creature* target);
+
+
+		void checkSelfCreatureTooFarFromStart();
+		void checkTargetVeryFarFromSlefCreature();
 
 		void handleSelfCreatureEvent();
 		

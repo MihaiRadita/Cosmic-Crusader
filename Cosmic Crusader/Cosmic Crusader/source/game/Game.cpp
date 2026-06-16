@@ -287,6 +287,14 @@ namespace ratchet
 				}
 			}
 
+			if (obj->m_objectId == 6023)
+			{
+				if (!inside)
+				{
+					bool i = inside;
+				}
+			}
+
 			if (obj->m_objectId == 5204)
 			{
 				if (!inside)
