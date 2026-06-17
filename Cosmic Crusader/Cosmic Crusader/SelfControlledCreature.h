@@ -113,6 +113,12 @@ namespace ratchet
 
 		void render(sf::RenderTarget& target) override;
 
+		Timer m_targetDetectedProvokedTime;
+		float m_targetDetectedProvokedMaxTime = 0.8f;
+
+		bool m_isSelfCreatureProvoked = false;
+		bool m_isTargetDetectedTimereRestarted = false;
+
 		//Detect target function
 		void detectTarget(Creature* target);
 

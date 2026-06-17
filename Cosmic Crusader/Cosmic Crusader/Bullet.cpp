@@ -507,6 +507,16 @@ namespace ratchet
 						else
 						{
 							creature->TakeDamage(m_damage);
+
+							if (auto* selfControlledCreature = dynamic_cast<SelfControlledCreature*>(creature))
+							{
+								selfControlledCreature->m_isSelfCreatureProvoked = true;
+
+								selfControlledCreature->m_targetDetectedProvokedTime.Restart();
+
+								selfControlledCreature->m_isTargetDetectedTimereRestarted = true;
+							}
+
 							Weapon::releaseBullet(this);
 
 						}

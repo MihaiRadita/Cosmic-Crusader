@@ -969,20 +969,41 @@ namespace ratchet
 	}
 	void SelfControlledCreature::detectTarget(Creature* target)
 	{
-		sf::Vector2f diff = target->getPosition() - this->getPosition();
+		sf::Vector2f diff = target->getPosition() - getPosition();
 
-		float absX = std::abs(diff.x);
-		float absY = std::abs(diff.y);
+		float distance =
+			std::sqrt(diff.x * diff.x + diff.y * diff.y);
 
-		m_isTagetBehindCharacter = (diff.x < 0.0f);
+		bool distanceDetected =
+			distance <= m_targetMaxDistanceDetectionX;
 
-		float length = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+		bool provokeDetected = false;
 
-		m_isTargetDetected = false;
-		if (length <= m_targetMaxDistanceDetectionX)
+		if (m_isSelfCreatureProvoked)
 		{
-			m_isTargetDetected = true;
+			if (!m_isTargetDetectedTimereRestarted)
+			{
+				m_targetDetectedProvokedTime.Restart();
+				m_isTargetDetectedTimereRestarted = true;
+			}
+
+			if (m_targetDetectedProvokedTime.GetElapsed().asSeconds()
+				< m_targetDetectedProvokedMaxTime)
+			{
+				provokeDetected = true;
+			}
+			else
+			{
+				m_isSelfCreatureProvoked = false;
+				m_isTargetDetectedTimereRestarted = false;
+			}
 		}
+
+		m_isTargetDetected =
+			distanceDetected || provokeDetected;
+
+		m_isTagetBehindCharacter =
+			(diff.x < 0.f);
 	}
 
 	void SelfControlledCreature::render(sf::RenderTarget& target)
