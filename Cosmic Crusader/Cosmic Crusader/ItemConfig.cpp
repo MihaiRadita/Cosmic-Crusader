@@ -53,6 +53,11 @@ namespace ratchet
 			m_colliderConfig = new RectAngleColliderConfig();
 		}
 
+		if (m_objectName == "Teleporter")
+		{
+			m_colliderConfig = new RectAngleColliderConfig();
+		}
+
 		if (m_objectName == "Health Recharger" || m_objectName =="Ammo Recharger" || m_objectName == "Spring")
 		{
 			m_colliderConfig = new RectAngleColliderConfig();

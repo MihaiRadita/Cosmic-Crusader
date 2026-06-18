@@ -124,8 +124,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":16368.4848484848,
-                 "y":-368.121212121212
+                 "x":16368.5,
+                 "y":-368.121
                 }, 
                 {
                  "height":0,
@@ -308525,6 +308525,145 @@
                  "width":128,
                  "x":41906,
                  "y":-328
+                }, 
+                {
+                 "gid":90,
+                 "height":192,
+                 "id":6043,
+                 "name":"Teleporter",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"animationTimeLimit",
+                         "type":"float",
+                         "value":0.1
+                        }, 
+                        {
+                         "name":"bodyAligment",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"colliderDensity",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderFixedRotation",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"colliderFriction",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderGroupType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"colliderHeight",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderIsSensor",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"colliderLayer",
+                         "type":"int",
+                         "value":11
+                        }, 
+                        {
+                         "name":"colliderOffsetX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderOffsetY",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderRestitution",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderType",
+                         "type":"int",
+                         "value":0
+                        },
+                    
+                        {
+                         "name":"colliderWidth",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"isAnimationPlaying",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isItemAccessible",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"itemType",
+                         "type":"int",
+                         "value":6
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/Objects\/Items\/Teleporter\/Teleporter"
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/Objects\/Items\/Teleporter\/Teleporter1.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":42816,
+                 "y":-576
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -308764,8 +308903,8 @@
                  "type":"Weapon Pickup",
                  "visible":true,
                  "width":95,
-                 "x":11556.2424242424,
-                 "y":312.545454545455
+                 "x":42276.2,
+                 "y":-579.455
                 }, 
                 {
                  "gid":33,
@@ -308903,8 +309042,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":18331.2727272727,
-                 "y":-265.090909090909
+                 "x":18331.3,
+                 "y":-265.091
                 }, 
                 {
                  "gid":33,
@@ -309042,8 +309181,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":13728.5727272727,
-                 "y":306.423909090909
+                 "x":13728.6,
+                 "y":306.424
                 }, 
                 {
                  "gid":33,
@@ -309181,8 +309320,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":12864.9363636364,
-                 "y":315.514818181818
+                 "x":12864.9,
+                 "y":315.515
                 }, 
                 {
                  "gid":33,
@@ -309320,8 +309459,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":9934.39090909091,
-                 "y":245.454212121212
+                 "x":9934.39,
+                 "y":245.454
                 }, 
                 {
                  "gid":33,
@@ -309459,8 +309598,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":7889.78484848485,
-                 "y":241.696636363636
+                 "x":7889.78,
+                 "y":241.697
                 }, 
                 {
                  "gid":33,
@@ -309737,8 +309876,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":2139.11818181818,
-                 "y":559.02996969697
+                 "x":2139.12,
+                 "y":559.03
                 }, 
                 {
                  "gid":33,
@@ -312948,8 +313087,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":11695.2424242424,
-                 "y":274.545454545455
+                 "x":42415.2,
+                 "y":-617.455
                 }, 
                 {
                  "gid":34,
@@ -313077,8 +313216,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":18492.9727272727,
-                 "y":-306.423909090909
+                 "x":18493,
+                 "y":-306.424
                 }, 
                 {
                  "gid":34,
@@ -313206,8 +313345,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":13890.2727272727,
-                 "y":265.090909090909
+                 "x":13890.3,
+                 "y":265.091
                 }, 
                 {
                  "gid":34,
@@ -313335,8 +313474,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":13026.6363636364,
-                 "y":274.181818181818
+                 "x":13026.6,
+                 "y":274.182
                 }, 
                 {
                  "gid":34,
@@ -313464,8 +313603,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":10096.0909090909,
-                 "y":204.121212121212
+                 "x":10096.1,
+                 "y":204.121
                 }, 
                 {
                  "gid":34,
@@ -313593,8 +313732,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":8051.48484848485,
-                 "y":200.363636363636
+                 "x":8051.48,
+                 "y":200.364
                 }, 
                 {
                  "gid":34,
@@ -313851,8 +313990,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":2300.81818181818,
-                 "y":517.69696969697
+                 "x":2300.82,
+                 "y":517.697
                 }, 
                 {
                  "gid":34,
@@ -314883,8 +315022,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":11060.9363636364,
-                 "y":70.060606060606
+                 "x":11060.9,
+                 "y":70.0606
                 },
             
                 {
@@ -316985,8 +317124,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":18215.4272727273,
-                 "y":-365.818515151515
+                 "x":18215.4,
+                 "y":-365.819
                 }, 
                 {
                  "gid":36,
@@ -317296,8 +317435,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":13467.2727272727,
-                 "y":311.756909090909
+                 "x":13467.3,
+                 "y":311.757
                 }, 
                 {
                  "gid":36,
@@ -317607,8 +317746,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":12603.6363636364,
-                 "y":320.847818181818
+                 "x":12603.6,
+                 "y":320.848
                 }, 
                 {
                  "gid":36,
@@ -317918,8 +318057,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":9673.09090909091,
-                 "y":250.787212121212
+                 "x":9673.09,
+                 "y":250.787
                 }, 
                 {
                  "gid":36,
@@ -318229,8 +318368,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":7628.48484848485,
-                 "y":247.029636363636
+                 "x":7628.48,
+                 "y":247.03
                 }, 
                 {
                  "gid":36,
@@ -318851,8 +318990,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":1877.81818181818,
-                 "y":564.36296969697
+                 "x":1877.82,
+                 "y":564.363
                 }, 
                 {
                  "gid":36,
@@ -324561,8 +324700,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":11328,
-                 "y":64
+                 "x":42048,
+                 "y":-828
                 }, 
                 {
                  "height":0,
@@ -324619,8 +324758,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":11394,
-                 "y":-4
+                 "x":42114,
+                 "y":-896
                 }, 
                 {
                  "height":128,
@@ -324698,8 +324837,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":11520,
-                 "y":0
+                 "x":42240,
+                 "y":-892
                 }, 
                 {
                  "height":128,
@@ -324777,8 +324916,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":11776,
-                 "y":0
+                 "x":42496,
+                 "y":-892
                 }, 
                 {
                  "height":128,
@@ -324856,8 +324995,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":11648,
-                 "y":0
+                 "x":42368,
+                 "y":-892
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -325154,8 +325293,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":11349.5757575758,
-                 "y":313.939393939394
+                 "x":42069.6,
+                 "y":-578.061
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -327585,7 +327724,7 @@
          "y":0
         }],
  "nextlayerid":26,
- "nextobjectid":6043,
+ "nextobjectid":6044,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -327915,6 +328054,19 @@
          "tilecount":1,
          "tileheight":1280,
          "tilewidth":64
+        }, 
+        {
+         "columns":1,
+         "firstgid":90,
+         "image":"..\/..\/Objects\/Items\/Teleporter\/Teleporter1.png",
+         "imageheight":192,
+         "imagewidth":128,
+         "margin":0,
+         "name":"Teleporter",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":192,
+         "tilewidth":128
         }],
  "tilewidth":64,
  "type":"map",

@@ -20,6 +20,8 @@ namespace ratchet
         m_animationTimeLimit = config.m_animationTimeLimit;
         m_isAnimationPlaying = config.m_isAnimationPlaying;
         m_spritePath = config.spriteTexturePath;
+
+        
  
 
         if (m_itemType == ItemType::AmmoRecharger || m_itemType == ItemType::HealthRecharger)
@@ -44,6 +46,15 @@ namespace ratchet
 
             m_itemAnimator->setAnimation(m_itemAnimation);
         }
+        else if (m_itemType == ItemType::Teleporter)
+        {
+            m_itemAnimator = new Animator();
+
+            m_itemAnimation = new AnimationItem(m_spritePath);
+
+            m_itemAnimator->setAnimation(m_itemAnimation);
+        }
+
         m_itemDisabledTimer.Restart();
  
     }
@@ -100,8 +111,29 @@ namespace ratchet
         }
     }
 
+    void Item::updateItemAction()
+    {
+        if (m_itemType == ItemType::Teleporter)
+        {
+            if (m_isItemInteracting)
+            {
+                m_target->m_activeGameObject = false;
+                m_target->m_activeRenderer = false;
+                if (m_itemActionTimer.GetElapsed().asSeconds() > 0.5)
+                {
+
+                    m_itemActionTimer.Restart();
+
+                    m_isItemInteracting = false;
+
+                }
+            }
+        }
+    }
+
     void Item::update()
     {
+
         if (m_itemType == ItemType::HealthRecharger || m_itemType == ItemType::AmmoRecharger)
         {
             if (!m_isItemUsed)
@@ -143,6 +175,49 @@ namespace ratchet
             }
               updateItemsAnimations();
         }
+        else if (m_itemType == ItemType::Teleporter)
+        {
+
+            Player* player = dynamic_cast<Player*>(m_target);
+            if (player)
+            {
+                if (m_isItemInteracting)
+                {
+                    if (m_itemActionTimer.GetElapsed().asSeconds() > 1.5f)
+                    {
+                        player->m_activeGameObject = false;
+                        player->m_activeRenderer = false;
+
+                        player->m_isVictory = true;
+
+                        m_itemActionTimer.Restart();
+
+                        m_isItemInteracting = false;
+                    }
+                }
+                else if (player->m_isVictory)
+                {
+                    if (!m_itemActionFinished)
+                    {
+                        m_itemActionTimer.Restart();
+                        m_itemActionFinished = true;
+                    }
+
+                    if (m_itemActionTimer.GetElapsed().asSeconds() > 1.5f)
+                    {
+                        m_itemActionFinished = false;
+                        player->m_isVictory = false;
+                        player->m_collider->m_body->SetEnabled(false);
+
+                        SceneManager::Get().LoadNextScene();
+
+                    }
+                }
+            }
+      
+            updateItemsAnimations();
+        }
+
     }
 
     void Item::render(sf::RenderTarget& target)
@@ -160,7 +235,6 @@ namespace ratchet
                 return;
             }
 
-
             if (m_isAnimationPlaying)
             {
                 m_itemAnimator->play(m_itemAnimator->getAbstractAnimation(), m_sprite);
@@ -174,6 +248,18 @@ namespace ratchet
                     m_itemAnimation->resetCurrentAnimIndex();
         
                 }
+            }
+        }
+        else if (m_itemType == ItemType::Teleporter)
+        {
+            if (!m_itemAnimator && !m_itemAnimation)
+            {
+                return;
+            }
+
+            if (m_isAnimationPlaying)
+            {
+                m_itemAnimator->play(m_itemAnimator->getAbstractAnimation(), m_sprite);
             }
         }
     }
@@ -205,6 +291,13 @@ namespace ratchet
         Player* player = dynamic_cast<Player*>(obj);
         if (player && m_isPickup == false)
         {
+
+            if (m_itemType == ItemType::Teleporter)
+            {
+                m_isItemInteracting = true;
+                m_itemActionTimer.Restart();
+                m_isPickup = true;
+            }
 
             if (m_itemType == ItemType::HealthRecharger || m_itemType == ItemType::AmmoRecharger)
             {
@@ -254,7 +347,7 @@ namespace ratchet
 
     void Item::OnSensorExit(GameObject* obj)
     {
-        if (m_itemType == ItemType::HealthRecharger || m_itemType == ItemType::AmmoRecharger || m_itemType == ItemType::Spring)
+        if (m_itemType == ItemType::HealthRecharger || m_itemType == ItemType::AmmoRecharger || m_itemType == ItemType::Spring || m_itemType == ItemType::Teleporter)
         {
            m_isItemInteracting = false;
         }
@@ -339,6 +432,18 @@ namespace ratchet
             m_itemAnimation->SetAnimTimeLimit(m_animationTimeLimit);
         
             PostCosntructFixup();
+        }
+
+        if (m_itemType == ItemType::Teleporter)
+        {
+            m_itemAnimation->SetAnimTimeLimit(m_animationTimeLimit);
+
+            PostCosntructFixup();
+        }
+
+        if (m_itemType == ItemType::Teleporter)
+        {
+            bool i = true;
         }
 
         SetFriendTarget(m_faction);

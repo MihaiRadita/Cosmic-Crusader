@@ -18,11 +18,14 @@ namespace ratchet
 		int m_itemRefferdId;
 		float m_itemDisableTimePass;
 		Timer m_itemDisabledTimer;
+		Timer m_itemActionTimer;
 		bool m_isItemInteracting = false;
 		bool m_isItemUsed = false;
 		bool m_isItemAccessible = false;
 		bool m_isAnimationPlaying;
 		bool m_isOnItem = false;
+
+		bool m_itemActionFinished = false;
 
 		float m_springForce =0.0f;
 
@@ -30,6 +33,8 @@ namespace ratchet
 		AnimationItem* m_itemAnimation;
 
 		void handleItemtEvent(sf::Event& event);
+
+		void updateItemAction();
 
 		Creature* m_target;
 

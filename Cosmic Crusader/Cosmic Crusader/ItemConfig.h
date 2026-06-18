@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObjectConfig.h"
 
-enum class ItemType{None =0, Health, Ammo, HealthRecharger, AmmoRecharger,Spring};
+enum class ItemType{None =0, Health, Ammo, HealthRecharger, AmmoRecharger,Spring, Teleporter};
 
 namespace ratchet
 {

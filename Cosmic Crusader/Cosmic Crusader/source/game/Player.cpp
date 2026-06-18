@@ -163,7 +163,7 @@ namespace ratchet
 			m_fireCooldown.Resume();
 		}
 
-		if (m_isDeath)
+		if (m_isDeath || m_isVictory)
 		{
 			m_input.m_isFiring = false;
 			return;

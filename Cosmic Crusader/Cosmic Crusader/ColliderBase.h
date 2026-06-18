@@ -17,6 +17,7 @@ namespace ratchet
 		DeathFall,
 		Springs,
 		Enemy,
+		Teleporter
 	};
 
 	enum class BodyAlignment{None = 0, TopLeft, Center};
