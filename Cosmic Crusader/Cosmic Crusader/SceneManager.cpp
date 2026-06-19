@@ -1617,6 +1617,15 @@ namespace ratchet
 							GameObject::s_gameObjects.push_back(new UIClickButton(config));
 						}
 					}
+					else if (obj["name"] == "Refresh Button")
+					{
+						auto config = UIButtonConfig();
+						if (config.deserialise(obj))
+						{
+							GameObject::s_gameObjects.push_back(new UIClickButton(config));
+						}
+
+					}
 					else if (obj["name"] == "UI Text")
 					{
 						auto config = UITextConfig();

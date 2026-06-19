@@ -7,7 +7,7 @@ namespace ratchet
 		None = 0, Play,NewGame,Continue,Resume, Options,Slider,
 		Back_Value,Next_Value,
 		Swicther_On, Switcher_Off,
-		Back,Quit, Exit
+		Back,Quit, Exit, Refresh
 	};
 
 	enum class ButtonNameSection
@@ -18,7 +18,7 @@ namespace ratchet
 	enum class ButtonNameAction
 	{
 		None = 0, MusicVolume, SoundEffectVolume, 
-		Resolution
+		Resolution, Refresh
 	};
 
 	struct UIButtonConfig : public GameObjectConfig

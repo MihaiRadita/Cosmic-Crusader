@@ -110,6 +110,13 @@ namespace ratchet
 				m_isButtonEventTirggered = false;
 				SceneManager::Get().ClearDestroyedCharactersLists();
 				SceneManager::Get().LoadNextScene();
+
+			case ButtonNameState::Refresh:
+				auto& sceneManager = SceneManager::Get();
+				const auto& resolution = sceneManager.m_resolutions[SceneManager::Get().GetCurrentResolution()];
+				SceneManager::Get().SetWindowResolution(sf::Vector2u(resolution.width, resolution.height));
+
+				SceneManager::Get().SaveSettings();
 			}
 		}
 	}

@@ -95,7 +95,7 @@
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":192,
                  "x":64,
                  "y":192
@@ -188,7 +188,7 @@
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":192,
                  "x":64,
                  "y":320
@@ -281,7 +281,7 @@
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":192,
                  "x":64,
                  "y":449
@@ -2253,10 +2253,109 @@
                  "width":0,
                  "x":512,
                  "y":192
+                }, 
+                {
+                 "gid":64,
+                 "height":64,
+                 "id":51,
+                 "name":"Refresh Button",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"UIButtonInteractSound",
+                         "type":"string",
+                         "value":"Sounds\/Sound Effects\/Pause  Menu\/Menu Button Interact.wav"
+                        }, 
+                        {
+                         "name":"UIButtonPressedSound",
+                         "type":"string",
+                         "value":"Sounds\/Sound Effects\/Pause  Menu\/Menu Button Pressed.wav"
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"buttonBackSection",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"buttonNameAction",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"buttonNameState",
+                         "type":"int",
+                         "value":14
+                        }, 
+                        {
+                         "name":"buttonNextSection",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"buttonParentNameState",
+                         "type":"int",
+                         "value":5
+                        }, 
+                        {
+                         "name":"buttonSection",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
+                         "name":"buttonUIXOffset",
+                         "type":"float",
+                         "value":256
+                        }, 
+                        {
+                         "name":"buttonUIYOffset",
+                         "type":"float",
+                         "value":256
+                        }, 
+                        {
+                         "name":"colliderType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"movementType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":2
+                        },
+                    
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/UI\/UI Buttons\/Colored Large Buttons\/Refresh Button.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":704,
+                 "y":704
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2392,7 +2491,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":51,
+ "nextobjectid":52,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -2512,6 +2611,19 @@
         {
          "firstgid":63,
          "source":"..\/..\/..\/..\/..\/Art\/Tiled\/LevelMap1\/New Game Button.tsx"
+        }, 
+        {
+         "columns":1,
+         "firstgid":64,
+         "image":"..\/..\/UI\/UI Buttons\/Pause Colored Large Buttons\/Refresh Button.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "margin":0,
+         "name":"Refresh Button",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":64
         }],
  "tilewidth":64,
  "type":"map",
