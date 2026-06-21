@@ -65207,7 +65207,7 @@
   </object>
  </objectgroup>
  <objectgroup id="12" name="Weapons">
-  <object id="3903" name="Blaster" type="Weapon Pickup" gid="33" x="42276.2" y="-579.455" width="95" height="95">
+  <object id="3903" name="Blaster" type="Weapon Pickup" gid="33" x="11620.2" y="316.545" width="95" height="95">
    <properties>
     <property name="Bullet" type="object" value="5108"/>
     <property name="Faction" type="int" value="0"/>
@@ -66098,7 +66098,7 @@
   </object>
  </objectgroup>
  <objectgroup id="14" name="Weapons Bullets">
-  <object id="5108" name="Blaster Bullet" gid="34" x="42415.2" y="-617.455" width="19" height="8">
+  <object id="5108" name="Blaster Bullet" gid="34" x="11759.2" y="278.545" width="19" height="8">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68491,7 +68491,7 @@
  </objectgroup>
  <objectgroup id="21" name="Object Layer 15"/>
  <objectgroup id="25" name="HUD">
-  <object id="5486" name="HUDBar" x="42048" y="-828">
+  <object id="5486" name="HUDBar" x="11392" y="68">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="false"/>
@@ -68515,7 +68515,7 @@
    </properties>
    <point/>
   </object>
-  <object id="5488" name="HUDFractionText" x="42114" y="-896">
+  <object id="5488" name="HUDFractionText" x="11458" y="0">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="false"/>
@@ -68529,7 +68529,7 @@
    </properties>
    <point/>
   </object>
-  <object id="5487" name="CurrentValueText" x="42240" y="-892" width="128" height="128">
+  <object id="5487" name="CurrentValueText" x="11584" y="4" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68546,7 +68546,7 @@
    </properties>
    <text pixelsize="30" wrap="1" color="#ffb027">0</text>
   </object>
-  <object id="5489" name="MaxValueText" x="42496" y="-892" width="128" height="128">
+  <object id="5489" name="MaxValueText" x="11840" y="4" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68563,7 +68563,7 @@
    </properties>
    <text pixelsize="30" wrap="1" color="#ffb027">0</text>
   </object>
-  <object id="5490" name="FractionSeparator" x="42368" y="-892" width="128" height="128">
+  <object id="5490" name="FractionSeparator" x="11712" y="4" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68582,7 +68582,7 @@
   </object>
  </objectgroup>
  <objectgroup id="13" name="Player">
-  <object id="5110" name="Player" gid="35" x="42069.6" y="-578.061" width="128" height="128">
+  <object id="5110" name="Player" gid="35" x="11413.6" y="317.939" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
