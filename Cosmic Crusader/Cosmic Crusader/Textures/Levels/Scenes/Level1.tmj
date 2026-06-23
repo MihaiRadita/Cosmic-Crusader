@@ -312798,6 +312798,110 @@
                  "width":95,
                  "x":24576,
                  "y":-696
+                }, 
+                {
+                 "height":0,
+                 "id":6045,
+                 "name":"MeleePunch",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"characterStartPointMeleeOffsetX",
+                         "type":"float",
+                         "value":0.08
+                        }, 
+                        {
+                         "name":"characterStartPointMeleeOffsetY",
+                         "type":"float",
+                         "value":0.1
+                        }, 
+                        {
+                         "name":"colliderLayer",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"damage",
+                         "type":"int",
+                         "value":5
+                        }, 
+                        {
+                         "name":"isSensor",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isWeaponAccesible",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"layer",
+                         "type":"string",
+                         "value":"MeleeFist"
+                        }, 
+                        {
+                         "name":"meleeOffsetAngle0X",
+                         "type":"float",
+                         "value":0.75
+                        }, 
+                        {
+                         "name":"meleeOffsetAngle0Y",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"movementType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        },
+                    
+                        {
+                         "name":"weaponDamage",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"weaponType",
+                         "type":"int",
+                         "value":9
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":11328,
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -317124,8 +317228,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":18215.4,
-                 "y":-365.819
+                 "x":18176,
+                 "y":-256
                 }, 
                 {
                  "gid":36,
@@ -325044,7 +325148,7 @@
                         {
                          "name":"animationStateListMask",
                          "type":"int",
-                         "value":63
+                         "value":127
                         }, 
                         {
                          "name":"bodyShoulderOffset",
@@ -325206,6 +325310,11 @@
                         {
                          "name":"initialWeapon_1",
                          "type":"object",
+                         "value":6045
+                        }, 
+                        {
+                         "name":"initialWeapon_2",
+                         "type":"object",
                          "value":3903
                         }, 
                         {
@@ -325252,13 +325361,13 @@
                          "name":"recoilTime",
                          "type":"float",
                          "value":0.1
-                        }, 
+                        },
+                    
                         {
                          "name":"restitution",
                          "type":"float",
                          "value":0
-                        },
-                    
+                        }, 
                         {
                          "name":"spriteTexturePath",
                          "type":"string",
@@ -325277,17 +325386,17 @@
                         {
                          "name":"usableWeaponCheckListMask",
                          "type":"int",
-                         "value":1
+                         "value":513
                         }, 
                         {
                          "name":"usableWeaponTypeListMask",
                          "type":"int",
-                         "value":31
+                         "value":543
                         }, 
                         {
                          "name":"weaponTypeListMask",
                          "type":"int",
-                         "value":31
+                         "value":543
                         }],
                  "rotation":0,
                  "type":"",
@@ -327823,7 +327932,7 @@
          "y":0
         }],
  "nextlayerid":26,
- "nextobjectid":6045,
+ "nextobjectid":6046,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

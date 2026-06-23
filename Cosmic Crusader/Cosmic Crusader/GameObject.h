@@ -174,6 +174,7 @@ namespace ratchet
 			bool isJump = false;
 			int weaponInputIndex = -1;
 			bool m_isFiring = false;
+			bool m_isMeleeHit = false;
 
 			void resetMovementControls();
 			

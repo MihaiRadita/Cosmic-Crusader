@@ -10,6 +10,7 @@
 #include "animations/AnimationFall.h"
 #include "animations/AnimationJumpRun.h"
 #include "AnimationDeath.h"
+#include "AnimationMelee.h"
 
 #include "animations/Animator.h"
 #include "WeaponManager.h"
@@ -44,6 +45,7 @@ namespace ratchet
 		float m_recoilTime; // Recoil animation duration
 		int m_lastFiredWeaponIndex = -1;
 		bool m_mustSpawnBullet = false;
+		bool m_mustSapwnMeleeStrike = false;
 		bool m_isDeath = false;
 		bool m_isVictory = false;
 		bool m_isDeathFall = false;
@@ -182,6 +184,7 @@ namespace ratchet
 		void updateRunningJump() override;
 		void updateWeaponSelection() override;
 		void updateShooting();
+		void updateMelee();
 
 
 		//Trace functions

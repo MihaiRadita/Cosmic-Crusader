@@ -1558,6 +1558,11 @@ namespace ratchet
 							}
 						}
 
+						if (config.m_objectID == 6045)
+						{
+							bool i = true;
+						}
+
 						if (!PrefabAssets::Get().isWeaponConfigExists(config.m_objectID))
 						{
 							PrefabAssets::Get().RegisterWeaponConfig(config.m_objectID, &config);

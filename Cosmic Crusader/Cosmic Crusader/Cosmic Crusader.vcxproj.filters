@@ -209,6 +209,9 @@
     <ClCompile Include="UIFractionText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationMelee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -317,5 +320,6 @@
     <ClInclude Include="UIBarConfig.h" />
     <ClInclude Include="UIFractionTextConfig.h" />
     <ClInclude Include="UIFractionText.h" />
+    <ClInclude Include="AnimationMelee.h" />
   </ItemGroup>
 </Project>

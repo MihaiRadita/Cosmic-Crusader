@@ -8,7 +8,7 @@ namespace ratchet
 	class Weapon 
 	{
 	public:
-		enum class TYPE { None = 0, Blaster, FireLauncher,BombLauncher, RocketLauncher,Enemy1Blaster,Enemy2Blaster,Enemy1BombLauncher,Enemy2BombLauncher, Count };
+		enum class TYPE { None = 0, Blaster, FireLauncher,BombLauncher, RocketLauncher,Enemy1Blaster,Enemy2Blaster,Enemy1BombLauncher,Enemy2BombLauncher,MeleeFist, Count };
 
 		static const char*  getWeaponTypeString(TYPE type)
 		{
@@ -16,12 +16,13 @@ namespace ratchet
 			{
 			case TYPE::None: return "None";
 			case TYPE::Blaster: return "Blaster";
+			case TYPE::MeleeFist: return "Strike";
 			case TYPE::FireLauncher: return "FireLauncher";
 			case TYPE::RocketLauncher: return "RocketLauncher";
-			case TYPE::Count: return "";
 			case TYPE::Enemy1Blaster: return "Enemy1Blaster";
 			case TYPE::Enemy2Blaster: return "Enemy2Blaster";
 			case TYPE::Enemy2BombLauncher: return "Enemy2BombLauncher";
+			case TYPE::Count: return "";
 			}
 		}
 
@@ -57,6 +58,7 @@ namespace ratchet
 
 		//Functions
 		void Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight);
+		void MeeleeHit(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight);
 		static void releaseBullet(Bullet* bulletToRelease);
 
 	private:
@@ -69,13 +71,14 @@ namespace ratchet
 	class WeaponAnimation
 	{
 	public:
-		enum class STATE { Aim = 0, Recoil /*a.k.a. shoot*/, Count };
+		enum class STATE { Aim = 0, Recoil /*a.k.a. shoot*/, Hit, Count };
 		static const char* getWeaponStateString(STATE state)
 		{
 			switch (state)
 			{
 			case STATE::Aim: return "Aim";
 			case STATE::Recoil: return "Recoil";
+			case STATE::Hit: return "Strike";
 			case STATE::Count: return "";
 			}
 		}

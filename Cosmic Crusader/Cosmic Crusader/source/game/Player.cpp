@@ -314,6 +314,8 @@ namespace ratchet
 				{
 					if (!m_input.m_isFiring)
 						m_input.m_isFiring = true;
+					if (!m_input.m_isMeleeHit)
+						m_input.m_isMeleeHit = true;
 				}
 			}
 			
@@ -326,6 +328,9 @@ namespace ratchet
 			{
 				if (m_input.m_isFiring)
 					m_input.m_isFiring = false;
+
+				if (m_input.m_isMeleeHit)
+					m_input.m_isMeleeHit = false;
 			}
 			break;
 		}

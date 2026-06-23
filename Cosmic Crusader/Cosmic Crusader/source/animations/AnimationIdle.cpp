@@ -18,6 +18,7 @@ namespace ratchet
 				for (int weaponAnimationAngleIndex = 0; weaponAnimationAngleIndex < (int)WeaponAnimation::ANGLE::Count; weaponAnimationAngleIndex++)
 				{
 					auto animationAngle = (WeaponAnimation::ANGLE)weaponAnimationAngleIndex;
+
 					for (int weaponAnimationStateIndex = 0; weaponAnimationStateIndex < (int)WeaponAnimation::STATE::Count; weaponAnimationStateIndex++)
 					{
 						auto animationState = (WeaponAnimation::STATE)weaponAnimationStateIndex;
@@ -253,6 +254,8 @@ namespace ratchet
 		{
 			return m_animationFrames.size();
 		}
+
+		int size = m_weaponAnimationFramesMap[type][angle][state].size();
 		return m_weaponAnimationFramesMap[type][angle][state].size();
 	}
 

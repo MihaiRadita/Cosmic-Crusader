@@ -116,6 +116,11 @@ namespace ratchet
 		}
 	}
 
+	void Weapon::MeeleeHit(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight)
+	{
+
+	}
+
 	void Weapon::releaseBullet(Bullet* bulletToRelease)
 	{
 		for (int weaponTypeIndex = 0; weaponTypeIndex < static_cast<int>(Weapon::TYPE::Count); weaponTypeIndex++)

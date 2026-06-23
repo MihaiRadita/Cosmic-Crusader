@@ -181,6 +181,10 @@ namespace ratchet
 			case ANIMATION_STATE::DIE:
 				m_animationList.emplace(ANIMATION_STATE::DIE, new AnimationDeath(m_spritePath, m_weaponTypeList));
 				break;
+
+			//case ANIMATION_STATE::Fist:
+			//	m_animationList.emplace(ANIMATION_STATE::Fist, new AnimationMelee(m_spritePath, m_weaponTypeList));
+			//	break;
 			}
 		}
 
@@ -373,32 +377,52 @@ namespace ratchet
 				bool isOnRecoil = m_currentCharacterState == WeaponAnimation::STATE::Recoil;
 				const auto justPassedRecoilTime = isOnRecoil && m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_recoilTime;
 
-				if (justPassedRecoilTime)
+				if (justPassedRecoilTime && !m_mustSapwnMeleeStrike)
 				{
 					m_currentCharacterState = WeaponAnimation::STATE::Aim;
 					isOnRecoil = false;
 				}
 
-				if (m_input.m_isFiring)
+				if(m_currentWeaponType== Weapon::TYPE::MeleeFist)
 				{
-					if (isOnRecoil == false)
+					if (!m_mustSapwnMeleeStrike)
 					{
-						const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
-						const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate;
-						if (isReadyToFire)
+						if (m_input.m_isMeleeHit)
 						{
-							m_fireCooldown.m_clock.restart();
+							m_mustSapwnMeleeStrike = true;
 							m_currentCharacterState = WeaponAnimation::STATE::Recoil;
-#ifdef IS_RATCHET_DEBUG
-							TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");
-#endif	
-							m_mustSpawnBullet = true;
+							m_characterAnimator->getAbstractAnimation()->resetCurrentAnimIndex();
 
-							m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
+							const int& index = m_characterAnimator->getAbstractAnimation()->getCurrentAnimIndex();
+
+							int i = index;
 						}
 					}
 				}
-			}
+				else
+				{
+					if (m_input.m_isFiring)
+					{
+						if (isOnRecoil == false)
+						{
+							const auto firstTimeFiringThisWeapon = m_lastFiredWeaponIndex != m_currentEquippedWeaponIndex;
+							const auto isReadyToFire = firstTimeFiringThisWeapon || m_fireCooldown.m_clock.getElapsedTime().asSeconds() >= m_fireRate;
+							if (isReadyToFire)
+							{
+								m_fireCooldown.m_clock.restart();
+								m_currentCharacterState = WeaponAnimation::STATE::Recoil;
+#ifdef IS_RATCHET_DEBUG
+								TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = true");
+#endif	
+								m_mustSpawnBullet = true;
+
+								m_lastFiredWeaponIndex = m_currentEquippedWeaponIndex;
+							}
+						}
+					}
+				}
+				}
+			
 
 			if (m_isDeath && isGrounded())
 			{
@@ -425,8 +449,27 @@ namespace ratchet
 				}
 			}
 
+
 			m_characterAnimator->play(m_characterAnimator->getAbstractAnimation(), m_sprite, m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
 
+			if (m_currentWeaponType == Weapon::TYPE::MeleeFist)
+			{
+				if (m_mustSapwnMeleeStrike)
+				{
+
+					const int& index = m_characterAnimator->getAbstractAnimation()->getCurrentAnimIndex();
+					const int& size = m_characterAnimator->getAbstractAnimation()->getAnimSize(m_currentWeaponType, m_currentCharacterAngle, m_currentCharacterState);
+
+					int i = index;
+
+					if (index >= size - 1)
+					{
+						m_mustSapwnMeleeStrike = false;
+						m_characterAnimator->getAbstractAnimation()->resetCurrentAnimIndex();
+						m_currentCharacterState = WeaponAnimation::STATE::Aim;
+					}
+				}
+			}
 
 			// Sync sprite position with collider
 
@@ -686,36 +729,52 @@ namespace ratchet
 			return;
 		}
 
-		if (m_mustSpawnBullet)
-		{
 
-			if (m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_infiniteAmmo == false)
+		if (m_currentWeaponType != Weapon::TYPE::MeleeFist)
+		{
+			if (m_mustSpawnBullet)
 			{
-				if (m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_currentAmmo != 0)
+
+				if (m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_infiniteAmmo == false)
+				{
+					if (m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_currentAmmo != 0)
+					{
+						m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
+#ifdef IS_RATCHET_DEBUG
+						TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
+#endif	
+
+						m_ownedWeaponList[m_currentEquippedWeaponIndex]->DecreaseAmmo();
+
+						if (m_ammoWeaponText)
+						{
+							m_ammoWeaponText->SetCurrentValue(m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_currentAmmo);
+						}
+					}
+					m_mustSpawnBullet = false;
+				}
+				else
 				{
 					m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
 #ifdef IS_RATCHET_DEBUG
 					TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
 #endif	
-
-					m_ownedWeaponList[m_currentEquippedWeaponIndex]->DecreaseAmmo();
-
-					if (m_ammoWeaponText)
-					{
-						m_ammoWeaponText->SetCurrentValue(m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_currentAmmo);
-					}
+					m_mustSpawnBullet = false;
 				}
-				m_mustSpawnBullet = false;
-			}
-			else
-			{
-				m_ownedWeaponList[m_currentEquippedWeaponIndex]->Fire(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
-#ifdef IS_RATCHET_DEBUG
-				TRACE_CHANNEL("WEAPON_FIRE", "Must Spawn Bullet = false");
-#endif	
-				m_mustSpawnBullet = false;
-			}
 
+			}
+		}
+		
+	}
+
+	void Creature::updateMelee()
+	{
+		if (m_currentWeaponType == Weapon::TYPE::MeleeFist)
+		{
+			if (m_mustSapwnMeleeStrike)
+			{
+				m_ownedWeaponList[m_currentEquippedWeaponIndex]->MeeleeHit(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
+			}
 		}
 	}
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="26" nextobjectid="6045">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="26" nextobjectid="6046">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -66066,6 +66066,29 @@
     <property name="weaponsoundVolume" type="float" value="5"/>
    </properties>
   </object>
+  <object id="6045" name="MeleePunch" x="11328" y="128">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="characterStartPointMeleeOffsetX" type="float" value="0.08"/>
+    <property name="characterStartPointMeleeOffsetY" type="float" value="0.1"/>
+    <property name="colliderLayer" type="int" value="4"/>
+    <property name="damage" type="int" value="5"/>
+    <property name="isSensor" type="bool" value="true"/>
+    <property name="isWeaponAccesible" type="bool" value="true"/>
+    <property name="layer" value="MeleeFist"/>
+    <property name="meleeOffsetAngle0X" type="float" value="0.75"/>
+    <property name="meleeOffsetAngle0Y" type="float" value="0.05"/>
+    <property name="movementType" type="int" value="0"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="weaponDamage" type="float" value="5"/>
+    <property name="weaponType" type="int" value="9"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="22" name="Object Layer 16"/>
  <objectgroup id="19" name="Check Points">
@@ -66901,7 +66924,7 @@
  <objectgroup id="11" name="Items"/>
  <objectgroup id="4" name="Map Devices"/>
  <objectgroup id="3" name="Enemies">
-  <object id="5112" name="Enemy" gid="36" x="18215.4" y="-365.819" width="128" height="128">
+  <object id="5112" name="Enemy" gid="36" x="18176" y="-256" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68589,7 +68612,7 @@
     <property name="activeRenderer" type="bool" value="true"/>
     <property name="ammoUItext" type="object" value="5488"/>
     <property name="angleBase" type="float" value="45"/>
-    <property name="animationStateListMask" type="int" value="63"/>
+    <property name="animationStateListMask" type="int" value="127"/>
     <property name="bodyShoulderOffset" type="float" value="0.4"/>
     <property name="characterAnglesMask" type="int" value="15"/>
     <property name="colliderAngularDamping" type="float" value="0"/>
@@ -68621,7 +68644,8 @@
     <property name="friction" type="float" value="0"/>
     <property name="health" type="float" value="30"/>
     <property name="initialWeapon_0" type="object" value="0"/>
-    <property name="initialWeapon_1" type="object" value="3903"/>
+    <property name="initialWeapon_1" type="object" value="6045"/>
+    <property name="initialWeapon_2" type="object" value="3903"/>
     <property name="isGroundRaycastOffset" type="float" value="0.02"/>
     <property name="isSensor" type="bool" value="false"/>
     <property name="jumpImpulse" type="float" value="-6"/>
@@ -68635,9 +68659,9 @@
     <property name="spriteTexturePath" value="Textures/PlayerTextures/Player1Textures/"/>
     <property name="startSpriteTexturePath" value="Textures/PlayerTextures/Player1Textures/IdleTextures/None/Idle1.png"/>
     <property name="uiHealthBar" type="object" value="5486"/>
-    <property name="usableWeaponCheckListMask" type="int" value="1"/>
-    <property name="usableWeaponTypeListMask" type="int" value="31"/>
-    <property name="weaponTypeListMask" type="int" value="31"/>
+    <property name="usableWeaponCheckListMask" type="int" value="513"/>
+    <property name="usableWeaponTypeListMask" type="int" value="543"/>
+    <property name="weaponTypeListMask" type="int" value="543"/>
    </properties>
   </object>
  </objectgroup>

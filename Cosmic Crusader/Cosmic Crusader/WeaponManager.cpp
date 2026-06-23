@@ -41,6 +41,11 @@ namespace ratchet
         playerBlaster1Weapon->m_weaponType = Weapon::TYPE::Blaster;
         m_weaponList.push_back(playerBlaster1Weapon);
 
+        Weapon* playerBlaster2Weapon = new Weapon();
+        playerBlaster2Weapon->m_weaponType = Weapon::TYPE::MeleeFist;
+        m_weaponList.push_back(playerBlaster2Weapon);
+
+
         Weapon* enemy1Blaster1Weapon = new Weapon();
         enemy1Blaster1Weapon->m_weaponType = Weapon::TYPE::Enemy1Blaster;
         m_weaponList.push_back(enemy1Blaster1Weapon);
