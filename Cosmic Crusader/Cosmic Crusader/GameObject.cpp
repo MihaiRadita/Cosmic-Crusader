@@ -207,7 +207,7 @@ namespace ratchet
 		{
 			if (m_collider)
 			{
-				m_collider->debugRender(target);
+				//m_collider->debugRender(target);
 			}
 		}
 
@@ -250,7 +250,7 @@ namespace ratchet
 		{
 			if (m_colliderGroupType == ColliderGroupType::Group)
 			{
-				rectCollider->debugRender(target);
+				//rectCollider->debugRender(target);
 			}
 		}
 	}
