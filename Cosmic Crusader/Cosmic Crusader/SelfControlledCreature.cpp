@@ -1008,7 +1008,7 @@ namespace ratchet
 
 	void SelfControlledCreature::render(sf::RenderTarget& target)
 	{
-		GameObject::render(target);
+		Creature::render(target);
 		//target.draw(m_characterShootingPosition);
 		//target.draw(m_shootingPointDynamic);
 		//target.draw(m_shooitngPointCenter);

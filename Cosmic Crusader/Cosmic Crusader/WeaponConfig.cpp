@@ -277,6 +277,26 @@ namespace ratchet
 				m_weaponSoundVolume = propertyValue.get<float>();
 			}
 
+			if (propertyName == "characterStartPointMeleeOffsetX")
+			{
+				m_characterStartPointMeleeOffsetX = propertyValue.get<float>();
+			}
+
+			if (propertyName == "characterStartPointMeleeOffsetY")
+			{
+				m_characterStartPointMeleeOffsetY = propertyValue.get<float>();
+			}
+
+			if (propertyName == "weaponMeleeStartFrameIndex")
+			{
+				m_weaponMeleeStartFrameIndex = propertyValue.get<int>();
+			}
+
+			if (propertyName == "weaponMeleeRadius")
+			{
+				m_weponMeleeRadius = propertyValue.get<float>();
+			}
+
 		}
 
 		return true;

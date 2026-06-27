@@ -117,6 +117,7 @@ namespace ratchet
 	{
 	}
 
+
 	void ColliderBase::setColliderPosition(float x, float y)
 	{
 		float currentAngle = m_body->GetAngle();
@@ -227,8 +228,10 @@ namespace ratchet
 	std::vector<b2Fixture*>ColliderBase::performOverlapCircle(const b2Vec2& center, float radius)
 	{
 		b2AABB aabb;
-		aabb.lowerBound = center - b2Vec2(radius, radius);
-		aabb.upperBound = center + b2Vec2(radius, radius);
+		b2Vec2 extents(radius, radius);
+
+		aabb.lowerBound = b2Vec2(center.x - radius, center.y + radius);
+		aabb.upperBound = b2Vec2(center.x + radius, center.y - radius);
 
 		CircleOverlapCallBack callback(m_body, center, radius);
 
@@ -386,26 +389,24 @@ namespace ratchet
 	}
 
 	bool CircleOverlapCallBack::ReportFixture(b2Fixture* fixture)
-	{
+	{ 
 		b2Body* body = fixture->GetBody();
 
-		if (body == m_ignoredBody)
-		{
-			return true;
-		}
+        if (body == m_ignoredBody)
+            return true;
+		
 
-		b2Vec2 pos = body->GetPosition();
+        b2Vec2 pos = body->GetPosition();
 
-		float dx = pos.x - center.x;
-		float dy = pos.y - center.y;
+        float dx = pos.x - center.x;
+        float dy = pos.y - center.y;
 
-		if (dx * dx + dy * dy <= radius * radius)
-		{
-			found.push_back(fixture);
-		}
+        //if (dx * dx + dy * dy <= radius * radius)
+        {
+            found.push_back(fixture);
+        }
 
-		return true;
-
+        return true;
 	}
 
 	float SpringRayCastCallBack::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)

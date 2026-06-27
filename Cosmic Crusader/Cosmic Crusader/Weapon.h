@@ -4,6 +4,7 @@
 namespace ratchet
 {
 	class Bullet;
+	class Creature;
 
 	class Weapon 
 	{
@@ -55,17 +56,26 @@ namespace ratchet
 		float m_weaponSoundVolume;
 		bool m_weaponSoundLoop;
 
+		std::unordered_set<Creature*> m_meleeHitCreatures;
+
 
 		//Functions
 		void Fire(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight);
 		void MeeleeHit(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight);
 		static void releaseBullet(Bullet* bulletToRelease);
 
+		float m_characterStartPointMeleeOffsetX = 0.0f;
+		float m_characterStartPointMeleeOffsetY = 0.0f;
+
+		int m_weaponMeleeStartFrameIndex = 0;
+		float m_weponMeleeRadius = 0.0f;
+
 	private:
 		Bullet* findOrCreateBulletFromPool(const sf::Vector2f position, const float rotationDegrees, const bool orientation);
 
 		static std::map<Weapon::TYPE, std::queue<Bullet*>> s_availableBulletList;
 		static std::map<Weapon::TYPE, std::list<Bullet*>> s_inUseBulletList;
+
 	};
 
 	class WeaponAnimation

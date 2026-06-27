@@ -43,6 +43,13 @@ namespace ratchet
 		std::string m_weaponSoundPath;
 		bool m_weaponSoundLoop;
 		float m_weaponSoundVolume;
+
+
+		float m_characterStartPointMeleeOffsetX = 0.0f;
+		float m_characterStartPointMeleeOffsetY = 0.0f;
+
+		int m_weaponMeleeStartFrameIndex = 0;
+		float m_weponMeleeRadius = 0.0f;
 	};
 
 }

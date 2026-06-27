@@ -185,7 +185,11 @@ namespace ratchet
 		void updateWeaponSelection() override;
 		void updateShooting();
 		void updateMelee();
+		bool m_isMeleeedamage = false;
 
+#ifdef IS_RATCHET_DEBUG
+		void drawWeaponMeleeOverlapCirlce(sf::Vector2f position, float& radius, sf::RenderTarget& target);
+#endif
 
 		//Trace functions
 		virtual void updateTrace();
@@ -227,6 +231,8 @@ namespace ratchet
 		//Getters
 		int getWeaponListSize();
 
+		void render(sf::RenderTarget& target) override;
+
 		//Setters
 		void addWeapon(Weapon::TYPE &weaponType, std::optional<WeaponConfig> &config);
 		void setWeapon(int& weaponIndex);
@@ -250,6 +256,9 @@ namespace ratchet
 
 		int m_equippedWeaponIndex = 0;
 
+#ifdef IS_RATCHET_DEBUG
+		sf::Vector2f m_debugOverlpaDrawPosition = sf::Vector2f(0.0f, 0.0f);
+#endif
 
 		//Shootings
 		sf::Vector2f m_currentFirePoint;

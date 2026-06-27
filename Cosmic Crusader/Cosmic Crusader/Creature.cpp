@@ -245,6 +245,7 @@ namespace ratchet
 		computeShootingPoint();
 		updateAnimations();
 		updateShooting();
+		updateMelee();
 		updatePhysics();
 
 		
@@ -773,10 +774,140 @@ namespace ratchet
 		{
 			if (m_mustSapwnMeleeStrike)
 			{
-				m_ownedWeaponList[m_currentEquippedWeaponIndex]->MeeleeHit(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
+				if (m_characterAnimator->getAbstractAnimation()->getCurrentAnimIndex()
+					>= m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_weaponMeleeStartFrameIndex)
+				{
+					auto* weapon = m_ownedWeaponList[m_currentEquippedWeaponIndex];
+
+					b2Vec2 PositionOvelap;
+	
+					if (!m_facingRight)
+					{
+						PositionOvelap = b2Vec2(
+							getPosition().x - weapon->m_characterStartPointMeleeOffsetX,
+							getPosition().y + weapon->m_characterStartPointMeleeOffsetY
+						);
+					}
+					else
+					{
+						PositionOvelap = b2Vec2(
+							getPosition().x + weapon->m_characterStartPointMeleeOffsetX,
+							getPosition().y + weapon->m_characterStartPointMeleeOffsetY
+						);
+					}
+#ifdef IS_RATCHET_DEBUG
+					m_debugOverlpaDrawPosition = sf::Vector2f(PositionOvelap.x, PositionOvelap.y);
+#endif
+
+					float radius = weapon->m_weponMeleeRadius;
+
+					const b2Vec2 center(PositionOvelap.x, PositionOvelap.y);
+
+					auto damagedObjects = m_collider->performOverlapCircle(center, radius);
+
+					m_isMeleeedamage = true;
+
+					for (auto* damagedObj : damagedObjects)
+					{
+						b2Body* body = damagedObj->GetBody();
+						auto* collider = reinterpret_cast<ColliderBase*>(body->GetUserData().pointer);
+
+						if (!collider)
+							continue;
+
+						if (auto* capsule = dynamic_cast<CapsuleCollider*>(collider))
+						{
+							GameObject* object = capsule->m_obj;
+
+							if (!object)
+								continue;
+
+							if (auto* creature = dynamic_cast<Creature*>(object))
+							{
+								if (creature->m_faction == this->m_faction)
+									continue;
+
+								if (weapon->m_meleeHitCreatures.find(creature) != weapon->m_meleeHitCreatures.end())
+									continue;
+
+								weapon->m_meleeHitCreatures.insert(creature);
+
+								creature->TakeDamage(weapon->m_weaponDamage);
+							}
+						}
+						if (auto* circle = dynamic_cast<CircleCollider*>(collider))
+						{
+							GameObject* object = circle->m_obj;
+
+							if (!object)
+								continue;
+
+							if (auto* creature = dynamic_cast<Creature*>(object))
+							{
+								if (creature->m_faction == this->m_faction)
+									continue;
+
+								if (weapon->m_meleeHitCreatures.find(creature) != weapon->m_meleeHitCreatures.end())
+									continue;
+
+								weapon->m_meleeHitCreatures.insert(creature);
+
+								creature->TakeDamage(weapon->m_weaponDamage);
+							}
+						}
+					}
+				}
+				else
+				{
+					auto* weapon = m_ownedWeaponList[m_currentEquippedWeaponIndex];
+					weapon->m_meleeHitCreatures.clear();
+					m_isMeleeedamage = false;
+				}
+
+
+				//m_ownedWeaponList[m_currentEquippedWeaponIndex]->MeeleeHit(m_currentFirePoint, m_currentFireRoationDegrees, m_currenFireDirectionNorm, m_facingRight);
+			}
+			else
+			{
+				m_isMeleeedamage = false;
 			}
 		}
 	}
+
+
+
+	void Creature::render(sf::RenderTarget& target)
+	{
+		GameObject::render(target);
+
+#ifdef IS_RATCHET_DEBUG
+		if (m_isMeleeedamage)
+		{
+			float radius = m_ownedWeaponList[m_currentEquippedWeaponIndex]->m_weponMeleeRadius;
+
+			drawWeaponMeleeOverlapCirlce(m_debugOverlpaDrawPosition, radius, target);
+		}
+#endif
+	}
+
+#ifdef IS_RATCHET_DEBUG
+	void Creature::drawWeaponMeleeOverlapCirlce(sf::Vector2f position, float& radius, sf::RenderTarget& target)
+	{
+		sf::CircleShape colliderOutline(radius);
+
+		colliderOutline.setFillColor(sf::Color::Transparent);
+		colliderOutline.setOutlineColor(sf::Color::Red);
+		colliderOutline.setOutlineThickness(0.1f);
+
+		colliderOutline.setOrigin(
+			colliderOutline.getRadius(),
+			colliderOutline.getRadius());
+
+		colliderOutline.setPosition(position);
+
+		target.draw(colliderOutline);
+	}
+#endif
 
 	void Creature::updateTrace()
 	{
@@ -1260,6 +1391,7 @@ namespace ratchet
 		auto shootingPointXOffset = 0.0f;
 		auto shootingPointYOffset = 0.0f;
 
+		newWeapon->m_weaponType = weaponType;
 
 		if (config.has_value())
 		{
@@ -1273,6 +1405,14 @@ namespace ratchet
 			newWeapon->m_WeaponID = config->m_objectID;
 			newWeapon->m_bulletID = config->m_bulletID;
 			newWeapon->m_bulletPoolIncrementation = config->m_bulletPoolIncrementation;
+
+			if (newWeapon->m_weaponType == Weapon::TYPE::MeleeFist)
+			{
+				newWeapon->m_characterStartPointMeleeOffsetX = config->m_characterStartPointMeleeOffsetX;
+				newWeapon->m_characterStartPointMeleeOffsetY = config->m_characterStartPointMeleeOffsetY;
+				newWeapon->m_weaponMeleeStartFrameIndex = config->m_weaponMeleeStartFrameIndex;
+				newWeapon->m_weponMeleeRadius = config->m_weponMeleeRadius;
+			}
 
 			if (!newWeapon->m_weaponSoundBuffer.loadFromFile(config->m_weaponSoundPath))
 			{
@@ -1294,7 +1434,6 @@ namespace ratchet
 
 		}
 
-		newWeapon->m_weaponType = weaponType;
 
 		m_ownedWeaponList.push_back(newWeapon);
 

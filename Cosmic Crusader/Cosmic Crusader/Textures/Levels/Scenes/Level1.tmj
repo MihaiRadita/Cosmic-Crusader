@@ -312823,12 +312823,12 @@
                         {
                          "name":"characterStartPointMeleeOffsetX",
                          "type":"float",
-                         "value":0.08
+                         "value":0.4
                         }, 
                         {
                          "name":"characterStartPointMeleeOffsetY",
                          "type":"float",
-                         "value":0.1
+                         "value":-0.08
                         }, 
                         {
                          "name":"colliderLayer",
@@ -312889,6 +312889,16 @@
                         {
                          "name":"weaponDamage",
                          "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"weaponMeleeRadius",
+                         "type":"float",
+                         "value":0.3
+                        }, 
+                        {
+                         "name":"weaponMeleeStartFrameIndex",
+                         "type":"int",
                          "value":5
                         }, 
                         {

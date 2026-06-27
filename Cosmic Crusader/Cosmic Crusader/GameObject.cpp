@@ -221,6 +221,7 @@ namespace ratchet
 					circleShape.setFillColor(sf::Color::Transparent);
 					circleShape.setOutlineColor(sf::Color::Cyan);
 					circleShape.setOutlineThickness(0.03f);
+
 					const auto position = getPosition();
 					circleShape.setPosition(position.x - circleShape.getRadius(), position.y - circleShape.getRadius());
 					target.draw(circleShape);
@@ -253,6 +254,22 @@ namespace ratchet
 				//rectCollider->debugRender(target);
 			}
 		}
+
+	/*	if (auto* creature = dynamic_cast<Creature*>(this))
+		{
+			auto circleShape = sf::CircleShape(0.05f);
+			circleShape.setFillColor(sf::Color::Yellow);
+			circleShape.setOutlineColor(sf::Color::Cyan);
+			circleShape.setOutlineThickness(0.03f);
+
+			const auto position = sf::Vector2f(getPosition().x + creature->m_ownedWeaponList[creature->m_currentEquippedWeaponIndex]->m_characterStartPointMeleeOffsetX,
+											   getPosition().y + creature->m_ownedWeaponList[creature->m_currentEquippedWeaponIndex]->m_characterStartPointMeleeOffsetY);
+
+			circleShape.setPosition(position.x, position.y);
+			target.draw(circleShape);
+
+		}*/
+
 	}
 
 	GameObject* GameObject::findGameObjectByBody(const b2Body* body)

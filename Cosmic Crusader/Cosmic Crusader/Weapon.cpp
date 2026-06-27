@@ -118,7 +118,7 @@ namespace ratchet
 
 	void Weapon::MeeleeHit(const sf::Vector2f position, const float rotation, const sf::Vector2f direction, const bool facingRight)
 	{
-
+		
 	}
 
 	void Weapon::releaseBullet(Bullet* bulletToRelease)

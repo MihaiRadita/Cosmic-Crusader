@@ -66071,8 +66071,8 @@
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
     <property name="activeRenderer" type="bool" value="true"/>
-    <property name="characterStartPointMeleeOffsetX" type="float" value="0.08"/>
-    <property name="characterStartPointMeleeOffsetY" type="float" value="0.1"/>
+    <property name="characterStartPointMeleeOffsetX" type="float" value="0.4"/>
+    <property name="characterStartPointMeleeOffsetY" type="float" value="-0.08"/>
     <property name="colliderLayer" type="int" value="4"/>
     <property name="damage" type="int" value="5"/>
     <property name="isSensor" type="bool" value="true"/>
@@ -66085,6 +66085,8 @@
     <property name="scaleX" type="float" value="1"/>
     <property name="scaleY" type="float" value="1"/>
     <property name="weaponDamage" type="float" value="5"/>
+    <property name="weaponMeleeRadius" type="float" value="0.3"/>
+    <property name="weaponMeleeStartFrameIndex" type="int" value="5"/>
     <property name="weaponType" type="int" value="9"/>
    </properties>
    <point/>
