@@ -515,6 +515,11 @@ namespace ratchet
 								selfControlledCreature->m_targetDetectedProvokedTime.Restart();
 
 								selfControlledCreature->m_isTargetDetectedTimereRestarted = true;
+
+								selfControlledCreature->m_isMobilized = true;
+								selfControlledCreature->m_stopAttackTimer.Restart();
+								selfControlledCreature->m_fireCooldown.Freeze();
+									
 							}
 
 							Weapon::releaseBullet(this);

@@ -317,11 +317,21 @@ namespace ratchet
 			if (propertyName == "currentWeaponType")
 			{
 				m_currentWeaponType = static_cast<Weapon::TYPE>(propertyValue.get<int>());
+
+				if (m_currentWeaponType == Weapon::TYPE::MeleeFist)
+				{
+					bool i = true;
+				}
 			}
 
 			if (propertyName == "currentWeaponIndex")
 			{
 				m_currentlyEquippedWeaponIndex = propertyValue.get<int>();
+
+				if (m_currentlyEquippedWeaponIndex == 1)
+				{
+					bool i = true;
+				}
 			}
 
 			if (propertyName == "usableWeaponTypeListMask")
@@ -427,6 +437,12 @@ namespace ratchet
 
 				if (id > 0)
 				{
+					if (id == 6045)
+					{
+						bool i = true;
+					}
+
+
 					if (auto* weaponConfigPtr = PrefabAssets::Get().GetWeaponConfig(id))
 					{
 						if (m_usableWeaponTypeList[weaponConfigPtr->m_weaponType] == true)

@@ -122,6 +122,9 @@ namespace ratchet
 		//Detect target function
 		void detectTarget(Creature* target);
 
+		Timer m_stopAttackTimer;
+		bool m_isMobilized = false;
+
 	private:
 	};
 }

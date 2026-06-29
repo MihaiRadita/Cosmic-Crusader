@@ -65,7 +65,6 @@ namespace ratchet
 
 		creatureFallingTexturePath = config.fallingSpriteTexturePath;
 
-		m_currentWeaponType = config.m_currentWeaponType;
 		m_currentCharacterAngle = config.m_currentAngle;
 		m_currentCharacterState = config.m_currentState;
 
@@ -190,7 +189,19 @@ namespace ratchet
 
 		m_characterAnimSwitch = -1;
 
+		if (m_currentWeaponType == Weapon::TYPE::None)
+		{
+
+			if (m_ownedWeaponList.size() != 1)
+			{
+				m_currentEquippedWeaponIndex++;
+			}
+		}
+
+		setWeaponIndex(m_currentEquippedWeaponIndex);
 		setWeapon(m_currentEquippedWeaponIndex);
+		
+
 
 		/*m_characterShootingPosition = sf::CircleShape(0.05);
 		m_characterShootingPosition.setFillColor(sf::Color::Yellow);
@@ -232,7 +243,6 @@ namespace ratchet
 	void Creature::update()
 	{
 		if (!m_activeGameObject) return;
-
 
 		checkCharacterGameOverTurned();
 		updateDie();
@@ -315,6 +325,10 @@ namespace ratchet
 					m_isRightNoWeapon = isMovingRight;
 				}
 			}
+
+
+			Weapon::TYPE type = m_currentWeaponType;
+			int index = m_currentEquippedWeaponIndex;
 
 			if (!isGrounded())
 			{
@@ -422,7 +436,7 @@ namespace ratchet
 						}
 					}
 				}
-				}
+			}
 			
 
 			if (m_isDeath && isGrounded())
@@ -433,7 +447,7 @@ namespace ratchet
 
 					if (m_currentWeaponType != Weapon::TYPE::None)
 					{
-						m_currentWeaponType = Weapon::TYPE::None;
+						//m_currentWeaponType = Weapon::TYPE::None;
 						int index = static_cast<int>(m_currentWeaponType);
 						m_currentEquippedWeaponIndex = index;
 
@@ -702,7 +716,7 @@ namespace ratchet
 			return;
 		}
 
-		if (m_currentWeaponType == Weapon::TYPE::None)
+		if (m_currentWeaponType == Weapon::TYPE::None || m_currentWeaponType == Weapon::TYPE::MeleeFist)
 		{
 			if (m_ammoWeaponText)
 			{
@@ -833,6 +847,13 @@ namespace ratchet
 								weapon->m_meleeHitCreatures.insert(creature);
 
 								creature->TakeDamage(weapon->m_weaponDamage);
+
+								if (auto* enemy = dynamic_cast<SelfControlledCreature*>(creature))
+								{
+									enemy->m_isMobilized = true;
+									enemy->m_stopAttackTimer.Restart();
+									enemy->m_fireCooldown.Freeze();
+								}
 							}
 						}
 						if (auto* circle = dynamic_cast<CircleCollider*>(collider))
@@ -851,6 +872,13 @@ namespace ratchet
 									continue;
 
 								weapon->m_meleeHitCreatures.insert(creature);
+
+								if (auto* enemy = dynamic_cast<SelfControlledCreature*>(creature))
+								{
+									enemy->m_isMobilized = true;
+									enemy->m_stopAttackTimer.Restart();
+									enemy->m_fireCooldown.Freeze();
+								}
 
 								creature->TakeDamage(weapon->m_weaponDamage);
 							}
@@ -1205,6 +1233,12 @@ namespace ratchet
 	void Creature::Start()
 	{
 
+		if (m_currentWeaponType == Weapon::TYPE::None)
+		{
+			m_currentEquippedWeaponIndex++;
+			setWeapon(m_currentEquippedWeaponIndex);
+		}
+
 		auto* uiBarConfig = PrefabAssets::Get().GetUIBarConfig(m_HealthBarId);
 		auto* uiAmmoFractionConfig = PrefabAssets::Get().GetUIFractionTextConfig(m_UIAmmoFractionTextId);
 
@@ -1470,7 +1504,7 @@ namespace ratchet
 
 		if (m_ammoWeaponText)
 		{
-			if (m_currentWeaponType == Weapon::TYPE::None)
+			if (m_currentWeaponType == Weapon::TYPE::None || m_currentWeaponType == Weapon::TYPE::MeleeFist)
 			{
 				if (m_ammoWeaponText->m_activeGameObject && m_ammoWeaponText->m_activeRenderer)
 				{

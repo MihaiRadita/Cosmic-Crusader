@@ -45,7 +45,7 @@ namespace ratchet
 	void Player::Start()
 	{
 		Creature::Start();
-		m_isInvlunerbleForTesting = true;
+		//m_isInvlunerbleForTesting = true;
 	}
 
 	void Player::Die()
@@ -62,8 +62,17 @@ namespace ratchet
 			
 			if (m_isGround)
 			{
-				m_deathSound.play();
+			m_deathSound.play();
 				m_shouldPlayDeathSound = true;
+
+		/*		if (m_currentWeaponType == Weapon::TYPE::None)
+				{
+					if (m_ownedWeaponList.size() != 1)
+					{
+						m_currentEquippedWeaponIndex++;
+					}
+				}*/
+
 				setWeaponIndex(m_currentEquippedWeaponIndex);
 			}
 		}
@@ -296,11 +305,15 @@ namespace ratchet
 					int nextIndex = (index + direction * i + weaponCount) % weaponCount;
 
 					Weapon::TYPE type = m_ownedWeaponList[nextIndex]->m_weaponType;
-					if (isWeaponAccessible(type))
-					{
-						index = nextIndex;
-						break;
-					}
+
+					if (type == Weapon::TYPE::None)
+						continue;
+
+					if (!isWeaponAccessible(type))
+						continue;
+
+					index = nextIndex;
+					break;
 				}
 			}
 			break;
@@ -495,6 +508,29 @@ namespace ratchet
 								m_health = config.m_health;
 								m_maxHealth = config.m_maxHealth;
 
+								if (m_currentWeaponType == Weapon::TYPE::None)
+								{
+									if (m_ownedWeaponList.size() != 1)
+									{
+										m_currentEquippedWeaponIndex++;
+									}
+								}
+
+								setWeaponIndex(m_currentEquippedWeaponIndex);
+								setWeapon(m_currentEquippedWeaponIndex);
+								
+								if (m_currentWeaponType == Weapon::TYPE::None)
+								{
+									if (m_ownedWeaponList.size() != 1)
+									{
+										if (m_currentEquippedWeaponIndex == 0)
+										{
+											m_currentEquippedWeaponIndex++;
+											setWeapon(m_currentEquippedWeaponIndex);
+										}
+									}
+								}
+
 								if (m_uiHealthBar)
 								{
 									m_uiHealthBar->resetValueX(m_maxHealth);
@@ -530,6 +566,10 @@ namespace ratchet
 		float health = m_health;
 
 		if (!m_activeGameObject) return;
+
+
+		int index = m_currentEquippedWeaponIndex;
+		Weapon::TYPE type = m_currentWeaponType;
 
 		auto mousePosition = sf::Mouse::getPosition(*WindowManager::Get());
 		auto mouseWorldPosition = WindowManager::Get()->mapPixelToCoords(mousePosition);

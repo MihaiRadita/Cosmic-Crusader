@@ -388,6 +388,21 @@ namespace ratchet
 
 			if (m_movementType == MovementType::GROUND)
 			{
+
+				if (m_isMobilized)
+				{
+					if (m_stopAttackTimer.GetElapsed().asSeconds() >= 0.2f)
+					{
+						m_isMobilized = false;
+						m_fireCooldown.Resume();
+					}
+					else
+					{
+						return;
+					}
+				}
+
+
 				if (m_isAttacking)
 				{					m_input.x = 0.f;
 					m_input.isJump = false;
