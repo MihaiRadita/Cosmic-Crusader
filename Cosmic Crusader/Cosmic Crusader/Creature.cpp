@@ -296,7 +296,7 @@ namespace ratchet
 					}
 				}
 
-				if (m_currentWeaponType != Weapon::TYPE::None)
+				if (m_currentWeaponType != Weapon::TYPE::None && m_currentWeaponType != Weapon::TYPE::MeleeFist)
 				{
 					if (isGrounded())
 					{
@@ -323,6 +323,12 @@ namespace ratchet
 				{
 					invertCharacterMovingSpriteScale(isMovingRight ? 1 : -1);
 					m_isRightNoWeapon = isMovingRight;
+
+					if (m_currentWeaponType == Weapon::TYPE::MeleeFist)
+					{
+						bool i = true;
+					}
+					m_facingRight = isMovingRight;
 				}
 			}
 
@@ -449,9 +455,9 @@ namespace ratchet
 					{
 						//m_currentWeaponType = Weapon::TYPE::None;
 						int index = static_cast<int>(m_currentWeaponType);
-						m_currentEquippedWeaponIndex = index;
+						m_currentEquippedWeaponIndex = 0;
 
-						
+						setWeaponIndex(m_currentEquippedWeaponIndex);
 						setWeapon(m_currentEquippedWeaponIndex);
 						m_input.weaponInputIndex = m_currentEquippedWeaponIndex;
 						
@@ -784,6 +790,11 @@ namespace ratchet
 
 	void Creature::updateMelee()
 	{
+		if (m_isDeath)
+		{
+			return;
+		}
+
 		if (m_currentWeaponType == Weapon::TYPE::MeleeFist)
 		{
 			if (m_mustSapwnMeleeStrike)
@@ -1578,7 +1589,7 @@ namespace ratchet
 	}
 	void Creature::computeShootingPoint()
 	{
-		if (m_currentWeaponType != Weapon::TYPE::None)
+		if (m_currentWeaponType != Weapon::TYPE::None && m_currentWeaponType != Weapon::TYPE::MeleeFist)
 		{
 			sf::Vector2f characterPointPositiion;
 			float dir = m_facingRight ? 1.f : -1.f;
@@ -1650,6 +1661,11 @@ namespace ratchet
 		}
 		else
 		{
+			if (m_currentWeaponType == Weapon::TYPE::MeleeFist)
+			{
+				bool i = true;
+			}
+
 			sf::Vector2f characterPointPositiion;
 			float dir = m_isRightNoWeapon ? 1.f : -1.f;
 			if (dir < 0.f)

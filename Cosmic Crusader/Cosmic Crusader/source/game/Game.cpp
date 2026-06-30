@@ -196,7 +196,6 @@ namespace ratchet
 		handleEvents();
 
 
-		SceneManager::Get().updateSceneObjects();
 		static float timePassed = 0.0f;
 		if (SceneManager::Get().GetCurrentScene() != SceneType::MainMenu)
 		{
@@ -212,6 +211,7 @@ namespace ratchet
 			timePassed = 0.0f;
 		}
 
+		SceneManager::Get().updateSceneObjects();
 	}
 
 	void Game::updatePhysicsSystem()

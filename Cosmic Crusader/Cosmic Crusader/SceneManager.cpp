@@ -716,41 +716,6 @@ namespace ratchet
 
 	void SceneManager::renderSceneObjects(sf::RenderTarget& target)
 	{
-		Player* player = nullptr;
-
-		for (auto* obj : GameObject::s_gameObjects)
-		{
-			if ((player = dynamic_cast<Player*>(obj)))
-				break;
-		}
-
-		// Update camera
-		if (player && m_isViewFollow)
-		{
-			m_worldView.setCenter(
-				player->getPosition().x,
-				player->getPosition().y
-			);
-		}
-
-		// WORLD RENDER
-		target.setView(m_worldView);
-
-		for (auto* obj : GameObject::s_gameObjects)
-		{
-			if (obj && obj->m_objectType == ObjectType::World)
-			{
-				obj->render(target);
-
-				if (obj->m_colliderGroupType == ColliderGroupType::Group)
-				{
-					bool i = true;
-				}
-
-				
-			}
-		}
-
 		for (auto* obj : GameObject::s_gameObjects)
 		{
 			if (obj->m_colliderGroupType == ColliderGroupType::Group)
@@ -807,7 +772,7 @@ namespace ratchet
 
 					target.draw(dynamicPoint);
 				}
-				
+
 				{
 					const auto& worldView = SceneManager::Get().GetWorldView();
 					sf::Vector2f center = worldView.getCenter();
@@ -829,6 +794,44 @@ namespace ratchet
 				}
 			}
 		}
+
+
+
+		Player* player = nullptr;
+
+
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			if ((player = dynamic_cast<Player*>(obj)))
+				break;
+		}
+
+		// Update camera
+		if (player && m_isViewFollow)
+		{
+			m_worldView.setCenter(
+				player->getPosition().x,
+				player->getPosition().y
+			);
+		}
+
+		// WORLD RENDER
+		target.setView(m_worldView);
+
+		for (auto* obj : GameObject::s_gameObjects)
+		{
+			if (obj && obj->m_objectType == ObjectType::World)
+			{
+				obj->render(target);
+
+				if (obj->m_colliderGroupType == ColliderGroupType::Group)
+				{
+					bool i = true;
+				}
+
+			}
+		}
+
 
 		// UI RENDER
 		target.setView(m_hudView);

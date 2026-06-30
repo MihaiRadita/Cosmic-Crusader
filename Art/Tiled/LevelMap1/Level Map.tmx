@@ -68607,7 +68607,7 @@
   </object>
  </objectgroup>
  <objectgroup id="13" name="Player">
-  <object id="5110" name="Player" gid="35" x="11413.6" y="317.939" width="128" height="128">
+  <object id="5110" name="Player" gid="35" x="11401.6" y="301.939" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>

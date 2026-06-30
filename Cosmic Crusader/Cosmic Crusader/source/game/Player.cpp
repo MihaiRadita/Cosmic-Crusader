@@ -45,7 +45,7 @@ namespace ratchet
 	void Player::Start()
 	{
 		Creature::Start();
-		//m_isInvlunerbleForTesting = true;
+		m_isInvlunerbleForTesting = true;
 	}
 
 	void Player::Die()
@@ -78,6 +78,7 @@ namespace ratchet
 		}
 		else
 		{
+
 			float volume = SceneManager::Get().GetSoundEffectsVolume();
 			m_deathFallSound.setVolume(volume);
 
@@ -364,7 +365,7 @@ namespace ratchet
 			return;
 		}
 
-		if (m_currentWeaponType != Weapon::TYPE::None)
+		if (m_currentWeaponType != Weapon::TYPE::None && m_currentWeaponType != Weapon::TYPE::MeleeFist)
 		{
 			WeaponAnimation::ANGLE weaponAnimationAngle;
 			
@@ -544,12 +545,16 @@ namespace ratchet
 								{
 									auto* configColliderPtr = config.m_colliderConfig;
 
+									capsuleCollider->m_body->SetEnabled(true);
+
 									capsuleCollider->m_body->SetTransform(b2Vec2(config.position.x, config.position.y),0.0f);
 
 									capsuleCollider->m_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 									capsuleCollider->m_body->SetAngularVelocity(0.0f);
 									
 									setPosition(sf::Vector2f(config.position.x, config.position.y));
+
+
 								}
 
 							}

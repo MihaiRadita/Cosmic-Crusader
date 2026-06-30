@@ -231,21 +231,61 @@ namespace ratchet
 
 	void SelfControlledCreature::computeAimBulletRotation()
 	{
-		auto enemyType = m_enemyType;
+		if (m_enemyType == EnemyType::Ground)
+		{
+			if (m_target->m_isGround)
+			{
+				sf::Vector2f firePoint = m_currentFirePoint;
+				sf::Vector2f targetPos = m_target->getPosition();
 
-		sf::Vector2f firePoint = m_currentFirePoint;
-		sf::Vector2f targetPos = m_target->getPosition();
+				sf::Vector2f direction = targetPos - firePoint;
+				sf::Vector2f directionNormalised = sf::Vector2f(0.0f, 0.0f);
 
-		sf::Vector2f direction = targetPos - firePoint;
-		sf::Vector2f directionNormalised = sf::Vector2f(0.0f, 0.0f);
-		calculateNormalised(direction.x, direction.y, directionNormalised.x, directionNormalised.y);
+				calculateNormalised(
+					direction.x,
+					direction.y,
+					directionNormalised.x,
+					directionNormalised.y);
 
-		float angleRad = std::atan2(directionNormalised.y, directionNormalised.x);
-		float angleDeg = angleRad * 180.f / M_PI;
+				float angleRad = std::atan2(directionNormalised.y, directionNormalised.x);
+				float angleDeg = angleRad * 180.f / M_PI;
 
-		m_currentFireRotationRadians = angleRad;
-		m_currentFireRoationDegrees = angleDeg;
-		m_currenFireDirectionNorm = directionNormalised;
+				m_currentFireRotationRadians = angleRad;
+				m_currentFireRoationDegrees = angleDeg;
+				m_currenFireDirectionNorm = directionNormalised;
+			}
+			else
+			{
+				m_currentFireRotationRadians = 0.0f;
+				m_currentFireRoationDegrees = 0.0f;
+				
+				if (m_facingRight)
+				{
+					m_currenFireDirectionNorm = sf::Vector2f(1.0f, 0.0f);
+				}
+				else
+				{
+					m_currenFireDirectionNorm = sf::Vector2f(-1.0f, 0.0f);
+				}
+				
+			}
+		}
+		else if (m_enemyType == EnemyType::Flying)
+		{
+			sf::Vector2f firePoint = m_currentFirePoint;
+			sf::Vector2f targetPos = m_target->getPosition();
+
+			sf::Vector2f direction = targetPos - firePoint;
+			sf::Vector2f directionNormalised = sf::Vector2f(0.0f, 0.0f);
+			calculateNormalised(direction.x, direction.y, directionNormalised.x, directionNormalised.y);
+
+			float angleRad = std::atan2(directionNormalised.y, directionNormalised.x);
+			float angleDeg = angleRad * 180.f / M_PI;
+
+			m_currentFireRotationRadians = angleRad;
+			m_currentFireRoationDegrees = angleDeg;
+			m_currenFireDirectionNorm = directionNormalised;
+		}
 	}
 	void SelfControlledCreature::RestartObjectFeatures()
 	{
