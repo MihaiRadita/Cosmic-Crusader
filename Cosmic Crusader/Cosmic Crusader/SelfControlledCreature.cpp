@@ -883,6 +883,10 @@ namespace ratchet
 	}
 	void SelfControlledCreature::update()
 	{
+	/*	if (!m_activeGameObject && !m_activeRenderer)
+		{
+			bool i = false;
+		}*/
 
 		if (!m_activeGameObject) return;
 

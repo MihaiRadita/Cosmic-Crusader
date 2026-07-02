@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="30" nextobjectid="6193">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="33" nextobjectid="6194">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -131,39 +131,361 @@
  <tileset firstgid="100" name="Clouds" tilewidth="512" tileheight="320" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Clouds.png" width="512" height="320"/>
  </tileset>
- <objectgroup id="26" name="Level Background">
-  <object id="6146" name="Sky" gid="92" x="4096" y="640" width="4096" height="1920"/>
-  <object id="6153" name="Sky" gid="92" x="4096" y="-1280" width="4096" height="1920"/>
-  <object id="6145" name="Sky" gid="92" x="0" y="640" width="4096" height="1920"/>
-  <object id="6152" name="Sky" gid="92" x="0" y="-1280" width="4096" height="1920"/>
-  <object id="6144" name="Sky" gid="92" x="-4096" y="640" width="4096" height="1920"/>
-  <object id="6151" name="Sky" gid="92" x="-4096" y="-1280" width="4096" height="1920"/>
-  <object id="6147" name="Sky" gid="92" x="-4096" y="2560" width="4096" height="1920"/>
-  <object id="6148" name="Sky" gid="92" x="0" y="2560" width="4096" height="1920"/>
-  <object id="6149" name="Sky" gid="92" x="4096" y="2560" width="4096" height="1920"/>
+ <objectgroup id="26" name="Level Background"/>
+ <objectgroup id="31" name="Object Layer 25"/>
+ <objectgroup id="30" name="Sky">
+  <object id="6146" name="Sky" gid="92" x="4096" y="640" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
+  <object id="6153" name="Sky" gid="92" x="4096" y="-1280" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
+  <object id="6145" name="Sky" gid="92" x="0" y="640" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
+  <object id="6152" name="Sky" gid="92" x="0" y="-1280" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
+  <object id="6144" name="Sky" gid="92" x="-4096" y="640" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
+  <object id="6151" name="Sky" gid="92" x="-4096" y="-1280" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
+  <object id="6147" name="Sky" gid="92" x="-4096" y="2560" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
+  <object id="6148" name="Sky" gid="92" x="0" y="2560" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
+  <object id="6149" name="Sky" gid="92" x="4096" y="2560" width="4096" height="1920">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="1"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="27" name="Buildings">
-  <object id="6162" name="Building" gid="94" x="-2048" y="2240" width="2048" height="1600"/>
-  <object id="6163" name="Building" gid="94" x="0" y="2240" width="2048" height="1600"/>
-  <object id="6164" name="Building" gid="94" x="2048" y="2240" width="2048" height="1600"/>
-  <object id="6165" name="Building" gid="94" x="4096" y="2240" width="2048" height="1600"/>
-  <object id="6192" name="Building" gid="94" x="6144" y="2240" width="2048" height="1600"/>
-  <object id="6160" name="Building" gid="93" x="2048" y="640" width="2048" height="1600"/>
-  <object id="6161" name="Building" gid="93" x="4096" y="640" width="2048" height="1600"/>
-  <object id="6189" name="Building" gid="93" x="6144" y="640" width="2048" height="1600"/>
-  <object id="6159" name="Building" gid="93" x="-2048" y="640" width="2048" height="1600"/>
-  <object id="6182" name="Building" gid="98" x="0" y="2240" width="2048" height="1600"/>
-  <object id="6156" name="Building" gid="93" x="0" y="640" width="2048" height="1600"/>
-  <object id="6176" name="Building" gid="97" x="2048" y="640" width="2048" height="1600"/>
-  <object id="6188" name="Building" gid="97" x="4096" y="640" width="2048" height="1600"/>
-  <object id="6190" name="Building" gid="97" x="6144" y="640" width="2048" height="1600"/>
-  <object id="6175" name="Building" gid="97" x="0" y="640" width="2048" height="1600"/>
-  <object id="6180" name="Building" gid="97" x="-2048" y="640" width="2048" height="1600"/>
-  <object id="6181" name="Building" gid="98" x="-2048" y="2240" width="2048" height="1600"/>
-  <object id="6183" name="Building" gid="98" x="2048" y="2240" width="2048" height="1600"/>
-  <object id="6184" name="Building" gid="98" x="4096" y="2240" width="2048" height="1600"/>
-  <object id="6191" name="Building" gid="98" x="6144" y="2240" width="2048" height="1600"/>
+  <object id="6162" name="Building" gid="94" x="-2048" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6163" name="Building" gid="94" x="0" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6164" name="Building" gid="94" x="2048" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6165" name="Building" gid="94" x="4096" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6192" name="Building" gid="94" x="6144" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6160" name="Building" gid="93" x="2048" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
+   </properties>
+  </object>
+  <object id="6161" name="Building" gid="93" x="4096" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
+   </properties>
+  </object>
+  <object id="6189" name="Building" gid="93" x="6144" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
+   </properties>
+  </object>
+  <object id="6159" name="Building" gid="93" x="-2048" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
+   </properties>
+  </object>
+  <object id="6156" name="Building" gid="93" x="0" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="2"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
+   </properties>
+  </object>
+  <object id="6182" name="Building" gid="98" x="0" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6188" name="Building" gid="97" x="4096" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3.png"/>
+   </properties>
+  </object>
+  <object id="6176" name="Building" gid="97" x="2048" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3.png"/>
+   </properties>
+  </object>
+  <object id="6191" name="Building" gid="98" x="6144" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6190" name="Building" gid="97" x="6144" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3.png"/>
+   </properties>
+  </object>
+  <object id="6175" name="Building" gid="97" x="0" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3.png"/>
+   </properties>
+  </object>
+  <object id="6181" name="Building" gid="98" x="-2048" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6180" name="Building" gid="97" x="-2048" y="640" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3.png"/>
+   </properties>
+  </object>
+  <object id="6183" name="Building" gid="98" x="2048" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
+   </properties>
+  </object>
+  <object id="6184" name="Building" gid="98" x="4096" y="2240" width="2048" height="1600">
+   <properties>
+    <property name="Faction" type="int" value="0"/>
+    <property name="activeObject" type="bool" value="true"/>
+    <property name="activeRenderer" type="bool" value="true"/>
+    <property name="bacgroundLayerID" type="int" value="3"/>
+    <property name="objectType" type="int" value="1"/>
+    <property name="scaleX" type="float" value="1"/>
+    <property name="scaleY" type="float" value="1"/>
+    <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
+   </properties>
+  </object>
  </objectgroup>
+ <objectgroup id="32" name="Object Layer 26"/>
  <objectgroup id="29" name="Buildings2"/>
  <objectgroup id="28" name="Clouds"/>
  <objectgroup id="6" name="AI Move Points" offsetx="4" offsety="-8">
@@ -65177,7 +65499,7 @@
   </object>
  </objectgroup>
  <objectgroup id="12" name="Weapons">
-  <object id="3903" name="Blaster" type="Weapon Pickup" gid="33" x="11620.2" y="316.545" width="95" height="95">
+  <object id="3903" name="Blaster" type="Weapon Pickup" gid="33" x="860" y="500" width="95" height="95">
    <properties>
     <property name="Bullet" type="object" value="5108"/>
     <property name="Faction" type="int" value="0"/>
@@ -66036,7 +66358,7 @@
     <property name="weaponsoundVolume" type="float" value="5"/>
    </properties>
   </object>
-  <object id="6045" name="MeleePunch" x="11328" y="128">
+  <object id="6045" name="MeleePunch" x="320" y="320">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -66093,7 +66415,7 @@
   </object>
  </objectgroup>
  <objectgroup id="14" name="Weapons Bullets">
-  <object id="5108" name="Blaster Bullet" gid="34" x="11759.2" y="278.545" width="19" height="8">
+  <object id="5108" name="Blaster Bullet" gid="34" x="1088" y="448" width="19" height="8">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68486,7 +68808,7 @@
  </objectgroup>
  <objectgroup id="21" name="Object Layer 15"/>
  <objectgroup id="25" name="HUD">
-  <object id="5486" name="HUDBar" x="11392" y="68">
+  <object id="5486" name="HUDBar" x="384" y="260">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="false"/>
@@ -68510,7 +68832,7 @@
    </properties>
    <point/>
   </object>
-  <object id="5488" name="HUDFractionText" x="11458" y="0">
+  <object id="5488" name="HUDFractionText" x="450" y="192">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="false"/>
@@ -68524,7 +68846,7 @@
    </properties>
    <point/>
   </object>
-  <object id="5487" name="CurrentValueText" x="11584" y="4" width="128" height="128">
+  <object id="5487" name="CurrentValueText" x="576" y="196" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68541,7 +68863,7 @@
    </properties>
    <text pixelsize="30" wrap="1" color="#ffb027">0</text>
   </object>
-  <object id="5489" name="MaxValueText" x="11840" y="4" width="128" height="128">
+  <object id="5489" name="MaxValueText" x="832" y="196" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68558,7 +68880,7 @@
    </properties>
    <text pixelsize="30" wrap="1" color="#ffb027">0</text>
   </object>
-  <object id="5490" name="FractionSeparator" x="11712" y="4" width="128" height="128">
+  <object id="5490" name="FractionSeparator" x="704" y="196" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -68577,7 +68899,7 @@
   </object>
  </objectgroup>
  <objectgroup id="13" name="Player">
-  <object id="5110" name="Player" gid="35" x="11401.6" y="301.939" width="128" height="128">
+  <object id="5110" name="Player" gid="35" x="128" y="576" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>

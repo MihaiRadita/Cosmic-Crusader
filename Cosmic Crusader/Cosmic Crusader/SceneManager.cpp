@@ -1459,6 +1459,81 @@ namespace ratchet
 
 		for (const auto& layer : sceneJson["layers"])
 		{
+
+			const auto& validLayer = layer.contains("objects");
+			if (!validLayer) continue;
+
+			const auto& layerName = layer["name"].get<std::string>();
+			for (const auto& obj : layer["objects"])
+			{
+
+				bool succeeded = false;
+
+				if (layerName == "Sky")
+				{
+					auto config = BackgroundConfig();
+
+					if (config.deserialise(obj))
+					{
+						for (const auto& property : obj["properties"])
+						{
+							if (property["name"] == "bacgroundLayerID")
+							{
+
+								const auto& propertyValue = property["value"];
+								m_backgroundLayersId.push_back(propertyValue.get<int>());
+								GameObject::s_gameObjects.push_back(new Background(config));
+								break;
+							}
+						}
+					}
+
+					succeeded = true;
+				}
+				else if (layerName == "Buildings")
+				{
+					auto config = BackgroundConfig();
+
+					if (config.deserialise(obj))
+					{
+						for (const auto& property : obj["properties"])
+						{
+							if (property["name"] == "bacgroundLayerID")
+							{
+
+								const auto& propertyValue = property["value"];
+								m_backgroundLayersId.push_back(propertyValue.get<int>());
+								GameObject::s_gameObjects.push_back(new Background(config));
+								break;
+							}
+						}
+					}
+					succeeded = true;
+				}
+			}
+
+		}
+
+		std::sort(GameObject::s_gameObjects.begin(),
+			GameObject::s_gameObjects.end(),
+			[](GameObject* a, GameObject* b)
+			{
+				auto* ba = dynamic_cast<Background*>(a);
+				auto* bb = dynamic_cast<Background*>(b);
+
+				if (ba && bb)
+				{
+					return ba->m_backgroundId < bb->m_backgroundId;
+				}
+
+				if (ba && !bb) return true;
+				if (!ba && bb) return false;
+
+				return false;
+			});
+
+		for (const auto& layer : sceneJson["layers"])
+		{
 			const auto& validLayer = layer.contains("objects");
 			if (!validLayer) continue;
 
@@ -1615,6 +1690,8 @@ namespace ratchet
 						{
 							GameObject::s_gameObjects.push_back(new UISliderButton(config));
 						}
+
+
 					}
 					else if (obj["name"] == "Back Button")
 					{
@@ -1643,6 +1720,8 @@ namespace ratchet
 							GameObject::s_gameObjects.push_back(new UIText(config));
 						}
 					}
+
+					succeeded = true;
 				}
 				else if (layerName == "Check Points")
 				{
@@ -1652,6 +1731,8 @@ namespace ratchet
 					{
 						GameObject::s_gameObjects.push_back(new Checkpoint(config));
 					}
+
+					succeeded = true;
 				}
 				else if (layerName == "Action Triggers")
 				{
@@ -1661,8 +1742,8 @@ namespace ratchet
 					{
 						GameObject::s_gameObjects.push_back(new ActionTrigger(config));
 					}
+					succeeded = true;
 				}
-				succeeded = true;
 
 				if (!succeeded)
 				{

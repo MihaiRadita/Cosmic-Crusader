@@ -16,6 +16,7 @@
 #include "ItemConfig.h"
 #include "UIBarConfig.h"
 #include "UIFractionTextConfig.h"
+#include "BackgroundConfig.h"
 
 
 

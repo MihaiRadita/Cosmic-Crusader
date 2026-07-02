@@ -212,6 +212,12 @@
     <ClCompile Include="AnimationMelee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -321,5 +327,7 @@
     <ClInclude Include="UIFractionTextConfig.h" />
     <ClInclude Include="UIFractionText.h" />
     <ClInclude Include="AnimationMelee.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="BackgroundConfig.h" />
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@
 #include "ActionTrigger.h"
 #include "Obstacle.h"
 #include "Item.h"
+#include "Background.h"
 
 #include "physics/Physics.h"
 
@@ -206,6 +207,8 @@ namespace ratchet
 		nlohmann::json m_allScenes;
 
 		sf::RectangleShape m_uiTestShape;
+
+		std::vector<int> m_backgroundLayersId;
 
 		std::string m_baseScenePath;
 
