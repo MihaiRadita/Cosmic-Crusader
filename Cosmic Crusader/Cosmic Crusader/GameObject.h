@@ -7,6 +7,8 @@
 #include "ResourceManager.h"
 #include "PrefabAssets.h"
 
+#include "Timer.h"
+
 
 namespace ratchet
 {

@@ -13,6 +13,9 @@ namespace ratchet
 		virtual bool deserialise(const nlohmann::json& jsonFile) override;
 
 		int m_backgroundId = -1;
+		float m_backgroundSpeed = 0.0f;
+
+		float m_backgroundOffsetX = 0.0f;
 	};
 
 }

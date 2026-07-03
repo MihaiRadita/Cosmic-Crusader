@@ -80,6 +80,16 @@ namespace ratchet
 			{
 				startSpriteTexturePath = propertyValue.get<std::string>();
 			}
+
+			if (propertyName == "backgroundSpeed")
+			{
+				m_backgroundSpeed = propertyValue.get<float>();
+			}
+
+			if (propertyName == "backgroundOffsetX")
+			{
+				m_backgroundOffsetX = propertyValue.get<float>();
+			}
 		}
 
 		return true;

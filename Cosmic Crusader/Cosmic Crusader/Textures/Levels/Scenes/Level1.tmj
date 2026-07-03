@@ -32,112 +32,6 @@
                 {
                  "gid":92,
                  "height":1920,
-                 "id":6146,
-                 "name":"Sky",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":4096,
-                 "x":4096,
-                 "y":640
-                }, 
-                {
-                 "gid":92,
-                 "height":1920,
-                 "id":6153,
-                 "name":"Sky",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":4096,
-                 "x":4096,
-                 "y":-1280
-                }, 
-                {
-                 "gid":92,
-                 "height":1920,
                  "id":6145,
                  "name":"Sky",
                  "properties":[
@@ -162,57 +56,14 @@
                          "value":1
                         }, 
                         {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
+                         "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":1
+                         "value":300
                         }, 
                         {
-                         "name":"scaleY",
+                         "name":"backgroundSpeed",
                          "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":4096,
-                 "x":0,
-                 "y":640
-                }, 
-                {
-                 "gid":92,
-                 "height":1920,
-                 "id":6152,
-                 "name":"Sky",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":1
+                         "value":0.05
                         }, 
                         {
                          "name":"objectType",
@@ -239,7 +90,7 @@
                  "visible":true,
                  "width":4096,
                  "x":0,
-                 "y":-1280
+                 "y":640
                 }, 
                 {
                  "gid":92,
@@ -268,6 +119,16 @@
                          "value":1
                         }, 
                         {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
                          "name":"objectType",
                          "type":"int",
                          "value":1
@@ -297,59 +158,6 @@
                 {
                  "gid":92,
                  "height":1920,
-                 "id":6151,
-                 "name":"Sky",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":4096,
-                 "x":-4096,
-                 "y":-1280
-                }, 
-                {
-                 "gid":92,
-                 "height":1920,
                  "id":6147,
                  "name":"Sky",
                  "properties":[
@@ -372,6 +180,16 @@
                          "name":"bacgroundLayerID",
                          "type":"int",
                          "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
                         }, 
                         {
                          "name":"objectType",
@@ -427,6 +245,16 @@
                          "value":1
                         }, 
                         {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
                          "name":"objectType",
                          "type":"int",
                          "value":1
@@ -456,7 +284,7 @@
                 {
                  "gid":92,
                  "height":1920,
-                 "id":6149,
+                 "id":6195,
                  "name":"Sky",
                  "properties":[
                         {
@@ -478,6 +306,79 @@
                          "name":"bacgroundLayerID",
                          "type":"int",
                          "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":4096,
+                 "y":640
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6196,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
                         }, 
                         {
                          "name":"objectType",
@@ -505,10 +406,640 @@
                  "width":4096,
                  "x":4096,
                  "y":2560
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6201,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":0,
+                 "y":-1280
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6202,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":-4096,
+                 "y":-1280
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6203,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":4096,
+                 "y":-1280
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6204,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":-4096,
+                 "y":4480
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6205,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":0,
+                 "y":4480
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6206,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":4096,
+                 "y":4480
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6207,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":8192,
+                 "y":640
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6208,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":8192,
+                 "y":2560
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6209,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":8192,
+                 "y":-1280
+                }, 
+                {
+                 "gid":92,
+                 "height":1920,
+                 "id":6210,
+                 "name":"Sky",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.05
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Sky Bacground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4096,
+                 "x":8192,
+                 "y":4480
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -518,8 +1049,8 @@
          "name":"Buildings",
          "objects":[
                 {
-                 "gid":94,
-                 "height":1600,
+                 "gid":95,
+                 "height":3200,
                  "id":6162,
                  "name":"Building",
                  "properties":[
@@ -542,6 +1073,16 @@
                          "name":"bacgroundLayerID",
                          "type":"int",
                          "value":2
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.25
                         }, 
                         {
                          "name":"objectType",
@@ -568,11 +1109,11 @@
                  "visible":true,
                  "width":2048,
                  "x":-2048,
-                 "y":2240
+                 "y":3840
                 }, 
                 {
-                 "gid":94,
-                 "height":1600,
+                 "gid":95,
+                 "height":3200,
                  "id":6163,
                  "name":"Building",
                  "properties":[
@@ -595,6 +1136,16 @@
                          "name":"bacgroundLayerID",
                          "type":"int",
                          "value":2
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.25
                         }, 
                         {
                          "name":"objectType",
@@ -621,11 +1172,11 @@
                  "visible":true,
                  "width":2048,
                  "x":0,
-                 "y":2240
+                 "y":3840
                 }, 
                 {
-                 "gid":94,
-                 "height":1600,
+                 "gid":95,
+                 "height":3200,
                  "id":6164,
                  "name":"Building",
                  "properties":[
@@ -650,57 +1201,14 @@
                          "value":2
                         }, 
                         {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
+                         "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":1
+                         "value":500
                         }, 
                         {
-                         "name":"scaleY",
+                         "name":"backgroundSpeed",
                          "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Bulding1Rotated.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":2048,
-                 "y":2240
-                }, 
-                {
-                 "gid":94,
-                 "height":1600,
-                 "id":6165,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":2
+                         "value":0.25
                         }, 
                         {
                          "name":"objectType",
@@ -726,65 +1234,12 @@
                  "type":"",
                  "visible":true,
                  "width":2048,
-                 "x":4096,
-                 "y":2240
-                }, 
-                {
-                 "gid":94,
-                 "height":1600,
-                 "id":6192,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Bulding1Rotated.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":6144,
-                 "y":2240
+                 "x":2048,
+                 "y":3840
                 }, 
                 {
                  "gid":93,
-                 "height":1600,
+                 "height":3200,
                  "id":6160,
                  "name":"Building",
                  "properties":[
@@ -809,6 +1264,16 @@
                          "value":2
                         }, 
                         {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.25
+                        }, 
+                        {
                          "name":"objectType",
                          "type":"int",
                          "value":1
@@ -837,113 +1302,7 @@
                 }, 
                 {
                  "gid":93,
-                 "height":1600,
-                 "id":6161,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":4096,
-                 "y":640
-                }, 
-                {
-                 "gid":93,
-                 "height":1600,
-                 "id":6189,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":6144,
-                 "y":640
-                }, 
-                {
-                 "gid":93,
-                 "height":1600,
+                 "height":3200,
                  "id":6159,
                  "name":"Building",
                  "properties":[
@@ -966,6 +1325,16 @@
                          "name":"bacgroundLayerID",
                          "type":"int",
                          "value":2
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.25
                         }, 
                         {
                          "name":"objectType",
@@ -1021,6 +1390,16 @@
                          "value":2
                         }, 
                         {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.25
+                        }, 
+                        {
                          "name":"objectType",
                          "type":"int",
                          "value":1
@@ -1048,8 +1427,134 @@
                  "y":640
                 }, 
                 {
-                 "gid":98,
-                 "height":1600,
+                 "gid":95,
+                 "height":3200,
+                 "id":6197,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.25
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Bulding1Rotated.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2048,
+                 "x":4096,
+                 "y":3840
+                }, 
+                {
+                 "gid":93,
+                 "height":3200,
+                 "id":6198,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.25
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2048,
+                 "x":4096,
+                 "y":640
+                }, 
+                {
+                 "gid":101,
+                 "height":3200,
                  "id":6182,
                  "name":"Building",
                  "properties":[
@@ -1074,6 +1579,16 @@
                          "value":3
                         }, 
                         {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.5
+                        }, 
+                        {
                          "name":"objectType",
                          "type":"int",
                          "value":1
@@ -1098,64 +1613,11 @@
                  "visible":true,
                  "width":2048,
                  "x":0,
-                 "y":2240
+                 "y":3840
                 }, 
                 {
-                 "gid":97,
-                 "height":1600,
-                 "id":6188,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":4096,
-                 "y":640
-                }, 
-                {
-                 "gid":97,
-                 "height":1600,
+                 "gid":99,
+                 "height":3200,
                  "id":6176,
                  "name":"Building",
                  "properties":[
@@ -1180,6 +1642,16 @@
                          "value":3
                         }, 
                         {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.5
+                        }, 
+                        {
                          "name":"objectType",
                          "type":"int",
                          "value":1
@@ -1207,9 +1679,9 @@
                  "y":640
                 }, 
                 {
-                 "gid":98,
-                 "height":1600,
-                 "id":6191,
+                 "gid":99,
+                 "height":3200,
+                 "id":6180,
                  "name":"Building",
                  "properties":[
                         {
@@ -1233,57 +1705,14 @@
                          "value":3
                         }, 
                         {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
+                         "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":1
+                         "value":500
                         }, 
                         {
-                         "name":"scaleY",
+                         "name":"backgroundSpeed",
                          "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building3Rotated.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":6144,
-                 "y":2240
-                }, 
-                {
-                 "gid":97,
-                 "height":1600,
-                 "id":6190,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":3
+                         "value":0.5
                         }, 
                         {
                          "name":"objectType",
@@ -1309,12 +1738,75 @@
                  "type":"",
                  "visible":true,
                  "width":2048,
-                 "x":6144,
+                 "x":-2048,
                  "y":640
                 }, 
                 {
-                 "gid":97,
-                 "height":1600,
+                 "gid":101,
+                 "height":3200,
+                 "id":6181,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.5
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building3Rotated.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2048,
+                 "x":-2048,
+                 "y":3840
+                }, 
+                {
+                 "gid":99,
+                 "height":3200,
                  "id":6175,
                  "name":"Building",
                  "properties":[
@@ -1337,6 +1829,16 @@
                          "name":"bacgroundLayerID",
                          "type":"int",
                          "value":3
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.5
                         }, 
                         {
                          "name":"objectType",
@@ -1364,65 +1866,11 @@
                  "width":2048,
                  "x":0,
                  "y":640
-                },
-            
-                {
-                 "gid":98,
-                 "height":1600,
-                 "id":6181,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building3Rotated.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":-2048,
-                 "y":2240
                 }, 
                 {
-                 "gid":97,
-                 "height":1600,
-                 "id":6180,
+                 "gid":99,
+                 "height":3200,
+                 "id":6199,
                  "name":"Building",
                  "properties":[
                         {
@@ -1444,6 +1892,16 @@
                          "name":"bacgroundLayerID",
                          "type":"int",
                          "value":3
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.5
                         }, 
                         {
                          "name":"objectType",
@@ -1469,13 +1927,13 @@
                  "type":"",
                  "visible":true,
                  "width":2048,
-                 "x":-2048,
+                 "x":4096,
                  "y":640
                 }, 
                 {
-                 "gid":98,
-                 "height":1600,
-                 "id":6183,
+                 "gid":101,
+                 "height":3200,
+                 "id":6200,
                  "name":"Building",
                  "properties":[
                         {
@@ -1499,57 +1957,14 @@
                          "value":3
                         }, 
                         {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
+                         "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":1
+                         "value":500
                         }, 
                         {
-                         "name":"scaleY",
+                         "name":"backgroundSpeed",
                          "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building3Rotated.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":2048,
-                 "y":2240
-                }, 
-                {
-                 "gid":98,
-                 "height":1600,
-                 "id":6184,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":3
+                         "value":0.5
                         }, 
                         {
                          "name":"objectType",
@@ -1576,7 +1991,70 @@
                  "visible":true,
                  "width":2048,
                  "x":4096,
-                 "y":2240
+                 "y":3840
+                }, 
+                {
+                 "gid":101,
+                 "height":3200,
+                 "id":6211,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":500
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.5
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building3Rotated.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2048,
+                 "x":2048,
+                 "y":3840
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -329121,7 +329599,7 @@
          "y":0
         }],
  "nextlayerid":33,
- "nextobjectid":6194,
+ "nextobjectid":6212,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -329495,31 +329973,31 @@
          "columns":1,
          "firstgid":93,
          "image":"..\/..\/LevelsBackground\/Level1\/Building1.png",
-         "imageheight":1600,
+         "imageheight":3200,
          "imagewidth":2048,
          "margin":0,
          "name":"Building1",
          "spacing":0,
-         "tilecount":1,
-         "tileheight":1600,
-         "tilewidth":2048
-        }, 
-        {
-         "columns":1,
-         "firstgid":94,
-         "image":"..\/..\/LevelsBackground\/Level1\/Bulding1Rotated.png",
-         "imageheight":1600,
-         "imagewidth":2048,
-         "margin":0,
-         "name":"Building1Rotated",
-         "spacing":0,
-         "tilecount":1,
+         "tilecount":2,
          "tileheight":1600,
          "tilewidth":2048
         }, 
         {
          "columns":1,
          "firstgid":95,
+         "image":"..\/..\/LevelsBackground\/Level1\/Bulding1Rotated.png",
+         "imageheight":3200,
+         "imagewidth":2048,
+         "margin":0,
+         "name":"Building1Rotated",
+         "spacing":0,
+         "tilecount":2,
+         "tileheight":1600,
+         "tilewidth":2048
+        }, 
+        {
+         "columns":1,
+         "firstgid":97,
          "image":"..\/..\/LevelsBackground\/Level1\/Building2.png",
          "imageheight":1600,
          "imagewidth":2048,
@@ -329532,7 +330010,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":96,
+         "firstgid":98,
          "image":"..\/..\/LevelsBackground\/Level1\/Building2Rotated.png",
          "imageheight":1600,
          "imagewidth":2048,
@@ -329545,33 +330023,33 @@
         }, 
         {
          "columns":1,
-         "firstgid":97,
+         "firstgid":99,
          "image":"..\/..\/LevelsBackground\/Level1\/Building3.png",
-         "imageheight":1600,
+         "imageheight":3200,
          "imagewidth":2048,
          "margin":0,
          "name":"Building3",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":2,
          "tileheight":1600,
          "tilewidth":2048
         }, 
         {
          "columns":1,
-         "firstgid":98,
+         "firstgid":101,
          "image":"..\/..\/LevelsBackground\/Level1\/Building3Rotated.png",
-         "imageheight":1600,
+         "imageheight":3200,
          "imagewidth":2048,
          "margin":0,
          "name":"Building3Rotated",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":2,
          "tileheight":1600,
          "tilewidth":2048
         }, 
         {
          "columns":1,
-         "firstgid":99,
+         "firstgid":103,
          "image":"..\/..\/LevelsBackground\/Level1\/Building4.png",
          "imageheight":800,
          "imagewidth":1028,
@@ -329584,7 +330062,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":100,
+         "firstgid":104,
          "image":"..\/..\/LevelsBackground\/Level1\/Clouds.png",
          "imageheight":320,
          "imagewidth":512,
