@@ -1510,6 +1510,25 @@ namespace ratchet
 					}
 					succeeded = true;
 				}
+				else if (layerName == "MainMenBackground")
+				{
+					auto config = BackgroundConfig();
+
+					if (config.deserialise(obj))
+					{
+						for (const auto& property : obj["properties"])
+						{
+							if (property["name"] == "bacgroundLayerID")
+							{
+
+								const auto& propertyValue = property["value"];
+								m_backgroundLayersId.push_back(propertyValue.get<int>());
+								GameObject::s_gameObjects.push_back(new Background(config));
+								break;
+							}
+						}
+					}
+				}
 			}
 
 		}
@@ -1721,6 +1740,16 @@ namespace ratchet
 						}
 					}
 
+					succeeded = true;
+				}
+				else if (layerName == "Game Title")
+				{
+					auto config = UITextConfig();
+
+					if (config.deserialise(obj))
+					{
+						GameObject::s_gameObjects.push_back(new UIText(config));
+					}
 					succeeded = true;
 				}
 				else if (layerName == "Check Points")

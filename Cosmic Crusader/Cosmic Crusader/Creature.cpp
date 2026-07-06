@@ -531,7 +531,7 @@ namespace ratchet
 
 				if (!isGrounded())
 				{
-					if (m_currentAnimationState != JUMP && m_currentAnimationState != JUMP_RUNNING)
+					if (m_currentAnimationState != JUMP && m_currentAnimationState != JUMP_RUNNING && !m_isDeath)
 					{
 						if (m_currentAnimationState != FALL)
 						{

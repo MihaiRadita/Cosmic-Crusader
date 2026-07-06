@@ -4,6 +4,80 @@
  "layers":[
         {
          "draworder":"topdown",
+         "id":8,
+         "name":"MainMenBackground",
+         "objects":[
+                {
+                 "gid":65,
+                 "height":1080,
+                 "id":54,
+                 "name":"Background",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/MainMenu\/MainMenuBackground.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":1920,
+                 "x":-832,
+                 "y":704
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":2,
          "name":"Click Buttons",
          "objects":[
@@ -95,7 +169,7 @@
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":192,
                  "x":64,
                  "y":192
@@ -188,7 +262,7 @@
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":192,
                  "x":64,
                  "y":320
@@ -281,7 +355,7 @@
                         }],
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":192,
                  "x":64,
                  "y":449
@@ -1511,7 +1585,7 @@
                 }, 
                 {
                  "height":64,
-                 "id":23,
+                 "id":55,
                  "name":"UI Text",
                  "properties":[
                         {
@@ -2355,6 +2429,98 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":9,
+         "name":"Game Title",
+         "objects":[
+                {
+                 "height":64,
+                 "id":23,
+                 "name":"UI Text",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"colliderType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"movementType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"textConnectedObject",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"textFontPath",
+                         "type":"string",
+                         "value":"Fonts\/UI Font.ttf"
+                        }, 
+                        {
+                         "name":"textType",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"textUIXOffset",
+                         "type":"float",
+                         "value":-320
+                        }, 
+                        {
+                         "name":"textUIYOffset",
+                         "type":"float",
+                         "value":-256
+                        }, 
+                        {
+                         "name":"textValue",
+                         "type":"string",
+                         "value":"Cosmic Crusader"
+                        }],
+                 "rotation":0,
+                 "text":
+                    {
+                     "color":"#fdff0000",
+                     "halign":"center",
+                     "pixelsize":50,
+                     "text":"Cosmic Cursader",
+                     "valign":"center",
+                     "wrap":true
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":400,
+                 "x":64,
+                 "y":0
+                }],
+         "opacity":1,
+         "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
@@ -2490,8 +2656,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":52,
+ "nextlayerid":10,
+ "nextobjectid":56,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -2624,6 +2790,19 @@
          "tilecount":1,
          "tileheight":64,
          "tilewidth":64
+        }, 
+        {
+         "columns":1,
+         "firstgid":65,
+         "image":"..\/..\/LevelsBackground\/MainMenu\/MainMenuBackground.png",
+         "imageheight":1080,
+         "imagewidth":1920,
+         "margin":0,
+         "name":"MainMenuBackground",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":1080,
+         "tilewidth":1920
         }],
  "tilewidth":64,
  "type":"map",

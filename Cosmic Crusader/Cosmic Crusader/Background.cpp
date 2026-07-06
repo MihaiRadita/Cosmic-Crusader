@@ -26,39 +26,43 @@ namespace ratchet
 
 	void Background::update()
 	{
-		// Calculate new offset.
-        const auto& currentCameraCenter = SceneManager::Get().GetWorldView().getCenter();
-		const auto cameraDelta = currentCameraCenter - m_prevCameraCenter;
-
-		if (cameraDelta != sf::Vector2f(0.0f, 0.0f))
+		if (SceneManager::Get().GetCurrentScene() != SceneType::MainMenu)
 		{
-			m_offset += (-cameraDelta) * m_backgroundSpeed;
+			// Calculate new offset.
+			const auto& currentCameraCenter = SceneManager::Get().GetWorldView().getCenter();
+			const auto cameraDelta = currentCameraCenter - m_prevCameraCenter;
 
-			// Ensure the new offset is still within bounds.
-			if (m_offset.x < m_minOffset.x)
+			if (cameraDelta != sf::Vector2f(0.0f, 0.0f))
 			{
-				m_offset.x = m_maxOffset.x - (m_minOffset.x - m_offset.x);
-			}
-			if (m_offset.x > m_maxOffset.x)
-			{
-				m_offset.x = m_minOffset.x + (m_offset.x - m_maxOffset.x);
-			}
-			if (m_offset.y < m_minOffset.y)
-			{
-				m_offset.y = m_maxOffset.y - (m_minOffset.y - m_offset.y);
-			}
-			if (m_offset.y > m_maxOffset.y)
-			{
-				m_offset.y = m_minOffset.y + (m_offset.y - m_maxOffset.y);
-			}
+				m_offset += (-cameraDelta) * m_backgroundSpeed;
 
-			// Update new position
-			/*const auto& currentPosition = m_sprite.getPosition();*/
-			sf::Vector2f newPosition = currentCameraCenter + m_offset;
-			m_sprite.setPosition(newPosition.x, newPosition.y);
+				// Ensure the new offset is still within bounds.
+				if (m_offset.x < m_minOffset.x)
+				{
+					m_offset.x = m_maxOffset.x - (m_minOffset.x - m_offset.x);
+				}
+				if (m_offset.x > m_maxOffset.x)
+				{
+					m_offset.x = m_minOffset.x + (m_offset.x - m_maxOffset.x);
+				}
+				if (m_offset.y < m_minOffset.y)
+				{
+					m_offset.y = m_maxOffset.y - (m_minOffset.y - m_offset.y);
+				}
+				if (m_offset.y > m_maxOffset.y)
+				{
+					m_offset.y = m_minOffset.y + (m_offset.y - m_maxOffset.y);
+				}
+
+				// Update new position
+				/*const auto& currentPosition = m_sprite.getPosition();*/
+				sf::Vector2f newPosition = currentCameraCenter + m_offset;
+				m_sprite.setPosition(newPosition.x, newPosition.y);
+			}
+			// Keep track of camera position.
+			m_prevCameraCenter = currentCameraCenter;
 		}
-		// Keep track of camera position.
-		m_prevCameraCenter = currentCameraCenter;
+
 	}
 
 	void Background::render(sf::RenderTarget& target)

@@ -136,6 +136,11 @@ namespace ratchet
 				break;
 			}
 		}
+
+		if (m_characterAnimator->getAbstractAnimation()->isAnimationEnd())
+		{
+			GameObject::addGameObjectoDestory(this);
+		}
 	}
 	void SelfControlledCreature::canJumpOver()
 	{

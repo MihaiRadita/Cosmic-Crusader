@@ -1039,7 +1039,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1049,9 +1049,9 @@
          "name":"Buildings",
          "objects":[
                 {
-                 "gid":95,
+                 "gid":98,
                  "height":3200,
-                 "id":6162,
+                 "id":6233,
                  "name":"Building",
                  "properties":[
                         {
@@ -1077,12 +1077,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.25
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -1107,14 +1107,14 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":-2048,
-                 "y":3840
+                 "width":2688,
+                 "x":6656,
+                 "y":3456
                 }, 
                 {
-                 "gid":95,
+                 "gid":98,
                  "height":3200,
-                 "id":6163,
+                 "id":6232,
                  "name":"Building",
                  "properties":[
                         {
@@ -1140,12 +1140,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.25
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -1170,14 +1170,14 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":0,
-                 "y":3840
+                 "width":2688,
+                 "x":3968,
+                 "y":3456
                 }, 
                 {
-                 "gid":95,
+                 "gid":98,
                  "height":3200,
-                 "id":6164,
+                 "id":6231,
                  "name":"Building",
                  "properties":[
                         {
@@ -1203,12 +1203,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.25
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -1233,14 +1233,14 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":2048,
-                 "y":3840
+                 "width":2688,
+                 "x":1280,
+                 "y":3456
                 }, 
                 {
-                 "gid":93,
+                 "gid":98,
                  "height":3200,
-                 "id":6160,
+                 "id":6230,
                  "name":"Building",
                  "properties":[
                         {
@@ -1266,201 +1266,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.25
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":2048,
-                 "y":640
-                }, 
-                {
-                 "gid":93,
-                 "height":3200,
-                 "id":6159,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"backgroundOffsetX",
-                         "type":"float",
-                         "value":500
-                        }, 
-                        {
-                         "name":"backgroundSpeed",
-                         "type":"float",
-                         "value":0.25
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":-2048,
-                 "y":640
-                }, 
-                {
-                 "gid":93,
-                 "height":1600,
-                 "id":6156,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"backgroundOffsetX",
-                         "type":"float",
-                         "value":500
-                        }, 
-                        {
-                         "name":"backgroundSpeed",
-                         "type":"float",
-                         "value":0.25
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":0,
-                 "y":640
-                }, 
-                {
-                 "gid":95,
-                 "height":3200,
-                 "id":6197,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"backgroundOffsetX",
-                         "type":"float",
-                         "value":500
-                        }, 
-                        {
-                         "name":"backgroundSpeed",
-                         "type":"float",
-                         "value":0.25
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -1485,14 +1296,14 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":4096,
-                 "y":3840
+                 "width":2688,
+                 "x":-1408,
+                 "y":3456
                 }, 
                 {
-                 "gid":93,
+                 "gid":97,
                  "height":3200,
-                 "id":6198,
+                 "id":6229,
                  "name":"Building",
                  "properties":[
                         {
@@ -1518,12 +1329,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.25
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -1548,14 +1359,203 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":4096,
-                 "y":640
+                 "width":2688,
+                 "x":6656,
+                 "y":256
                 }, 
                 {
-                 "gid":101,
+                 "gid":97,
                  "height":3200,
-                 "id":6182,
+                 "id":6228,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.8
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2688,
+                 "x":3968,
+                 "y":256
+                }, 
+                {
+                 "gid":97,
+                 "height":3200,
+                 "id":6226,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.8
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2688,
+                 "x":1280,
+                 "y":256
+                }, 
+                {
+                 "gid":97,
+                 "height":3200,
+                 "id":6227,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.8
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building1.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2688,
+                 "x":-1408,
+                 "y":256
+                }, 
+                {
+                 "gid":100,
+                 "height":3200,
+                 "id":6241,
                  "name":"Building",
                  "properties":[
                         {
@@ -1581,12 +1581,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.5
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -1611,14 +1611,14 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":0,
-                 "y":3840
+                 "width":2688,
+                 "x":6656,
+                 "y":3456
                 }, 
                 {
-                 "gid":99,
+                 "gid":100,
                  "height":3200,
-                 "id":6176,
+                 "id":6240,
                  "name":"Building",
                  "properties":[
                         {
@@ -1644,138 +1644,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.5
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":2048,
-                 "y":640
-                }, 
-                {
-                 "gid":99,
-                 "height":3200,
-                 "id":6180,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"backgroundOffsetX",
-                         "type":"float",
-                         "value":500
-                        }, 
-                        {
-                         "name":"backgroundSpeed",
-                         "type":"float",
-                         "value":0.5
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":-2048,
-                 "y":640
-                }, 
-                {
-                 "gid":101,
-                 "height":3200,
-                 "id":6181,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"backgroundOffsetX",
-                         "type":"float",
-                         "value":500
-                        }, 
-                        {
-                         "name":"backgroundSpeed",
-                         "type":"float",
-                         "value":0.5
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -1800,14 +1674,14 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":-2048,
-                 "y":3840
+                 "width":2688,
+                 "x":3968,
+                 "y":3456
                 }, 
                 {
-                 "gid":99,
+                 "gid":100,
                  "height":3200,
-                 "id":6175,
+                 "id":6239,
                  "name":"Building",
                  "properties":[
                         {
@@ -1833,138 +1707,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.5
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":0,
-                 "y":640
-                }, 
-                {
-                 "gid":99,
-                 "height":3200,
-                 "id":6199,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"backgroundOffsetX",
-                         "type":"float",
-                         "value":500
-                        }, 
-                        {
-                         "name":"backgroundSpeed",
-                         "type":"float",
-                         "value":0.5
-                        }, 
-                        {
-                         "name":"objectType",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleX",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"scaleY",
-                         "type":"float",
-                         "value":1
-                        }, 
-                        {
-                         "name":"startSpriteTexturePath",
-                         "type":"string",
-                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":2048,
-                 "x":4096,
-                 "y":640
-                }, 
-                {
-                 "gid":101,
-                 "height":3200,
-                 "id":6200,
-                 "name":"Building",
-                 "properties":[
-                        {
-                         "name":"Faction",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"activeObject",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"activeRenderer",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"bacgroundLayerID",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"backgroundOffsetX",
-                         "type":"float",
-                         "value":500
-                        }, 
-                        {
-                         "name":"backgroundSpeed",
-                         "type":"float",
-                         "value":0.5
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -1989,14 +1737,14 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":4096,
-                 "y":3840
+                 "width":2688,
+                 "x":1280,
+                 "y":3456
                 }, 
                 {
-                 "gid":101,
+                 "gid":100,
                  "height":3200,
-                 "id":6211,
+                 "id":6238,
                  "name":"Building",
                  "properties":[
                         {
@@ -2022,12 +1770,12 @@
                         {
                          "name":"backgroundOffsetX",
                          "type":"float",
-                         "value":500
+                         "value":300
                         }, 
                         {
                          "name":"backgroundSpeed",
                          "type":"float",
-                         "value":0.5
+                         "value":0.8
                         }, 
                         {
                          "name":"objectType",
@@ -2052,9 +1800,261 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
-                 "x":2048,
-                 "y":3840
+                 "width":2688,
+                 "x":-1408,
+                 "y":3456
+                }, 
+                {
+                 "gid":99,
+                 "height":3200,
+                 "id":6237,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.8
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2688,
+                 "x":6656,
+                 "y":256
+                }, 
+                {
+                 "gid":99,
+                 "height":3200,
+                 "id":6236,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.8
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2688,
+                 "x":3968,
+                 "y":256
+                }, 
+                {
+                 "gid":99,
+                 "height":3200,
+                 "id":6235,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.8
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2688,
+                 "x":1280,
+                 "y":256
+                }, 
+                {
+                 "gid":99,
+                 "height":3200,
+                 "id":6234,
+                 "name":"Building",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bacgroundLayerID",
+                         "type":"int",
+                         "value":3
+                        }, 
+                        {
+                         "name":"backgroundOffsetX",
+                         "type":"float",
+                         "value":300
+                        }, 
+                        {
+                         "name":"backgroundSpeed",
+                         "type":"float",
+                         "value":0.8
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/LevelsBackground\/Level1\/Building3.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2688,
+                 "x":-1408,
+                 "y":256
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -329599,7 +329599,7 @@
          "y":0
         }],
  "nextlayerid":33,
- "nextobjectid":6212,
+ "nextobjectid":6242,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -329972,32 +329972,6 @@
         {
          "columns":1,
          "firstgid":93,
-         "image":"..\/..\/LevelsBackground\/Level1\/Building1.png",
-         "imageheight":3200,
-         "imagewidth":2048,
-         "margin":0,
-         "name":"Building1",
-         "spacing":0,
-         "tilecount":2,
-         "tileheight":1600,
-         "tilewidth":2048
-        }, 
-        {
-         "columns":1,
-         "firstgid":95,
-         "image":"..\/..\/LevelsBackground\/Level1\/Bulding1Rotated.png",
-         "imageheight":3200,
-         "imagewidth":2048,
-         "margin":0,
-         "name":"Building1Rotated",
-         "spacing":0,
-         "tilecount":2,
-         "tileheight":1600,
-         "tilewidth":2048
-        }, 
-        {
-         "columns":1,
-         "firstgid":97,
          "image":"..\/..\/LevelsBackground\/Level1\/Building2.png",
          "imageheight":1600,
          "imagewidth":2048,
@@ -330010,7 +329984,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":98,
+         "firstgid":94,
          "image":"..\/..\/LevelsBackground\/Level1\/Building2Rotated.png",
          "imageheight":1600,
          "imagewidth":2048,
@@ -330023,33 +329997,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":99,
-         "image":"..\/..\/LevelsBackground\/Level1\/Building3.png",
-         "imageheight":3200,
-         "imagewidth":2048,
-         "margin":0,
-         "name":"Building3",
-         "spacing":0,
-         "tilecount":2,
-         "tileheight":1600,
-         "tilewidth":2048
-        }, 
-        {
-         "columns":1,
-         "firstgid":101,
-         "image":"..\/..\/LevelsBackground\/Level1\/Building3Rotated.png",
-         "imageheight":3200,
-         "imagewidth":2048,
-         "margin":0,
-         "name":"Building3Rotated",
-         "spacing":0,
-         "tilecount":2,
-         "tileheight":1600,
-         "tilewidth":2048
-        }, 
-        {
-         "columns":1,
-         "firstgid":103,
+         "firstgid":95,
          "image":"..\/..\/LevelsBackground\/Level1\/Building4.png",
          "imageheight":800,
          "imagewidth":1028,
@@ -330062,7 +330010,7 @@
         }, 
         {
          "columns":1,
-         "firstgid":104,
+         "firstgid":96,
          "image":"..\/..\/LevelsBackground\/Level1\/Clouds.png",
          "imageheight":320,
          "imagewidth":512,
@@ -330072,6 +330020,58 @@
          "tilecount":1,
          "tileheight":320,
          "tilewidth":512
+        }, 
+        {
+         "columns":1,
+         "firstgid":97,
+         "image":"..\/..\/LevelsBackground\/Level1\/Building1.png",
+         "imageheight":3200,
+         "imagewidth":2688,
+         "margin":0,
+         "name":"Building1",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":3200,
+         "tilewidth":2688
+        }, 
+        {
+         "columns":1,
+         "firstgid":98,
+         "image":"..\/..\/LevelsBackground\/Level1\/Bulding1Rotated.png",
+         "imageheight":3200,
+         "imagewidth":2688,
+         "margin":0,
+         "name":"Bulding1Rotated",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":3200,
+         "tilewidth":2688
+        }, 
+        {
+         "columns":1,
+         "firstgid":99,
+         "image":"..\/..\/LevelsBackground\/Level1\/Building3.png",
+         "imageheight":3200,
+         "imagewidth":2688,
+         "margin":0,
+         "name":"Building3",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":3200,
+         "tilewidth":2688
+        }, 
+        {
+         "columns":1,
+         "firstgid":100,
+         "image":"..\/..\/LevelsBackground\/Level1\/Building3Rotated.png",
+         "imageheight":3200,
+         "imagewidth":2688,
+         "margin":0,
+         "name":"Building3Rotated",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":3200,
+         "tilewidth":2688
         }],
  "tilewidth":64,
  "type":"map",
