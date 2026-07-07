@@ -90,6 +90,8 @@ namespace ratchet
 
 		void serialise(nlohmann::json& jsonFile) override;
 
+		void serialiseColloctedItems(nlohmann::json& jsonFile);
+
 		void OnCollisionEnter(GameObject* obj) override;
 
 		//Render

@@ -76,7 +76,8 @@ namespace ratchet
 		void SaveSettings();
 		void SaveSoundSettings();
 		void SaveResolutionSettings();
-
+		void SaveBackLevelFeatures();
+		void SaveCharacterColloctedItems();
 		
 
 		void SetNewGame();

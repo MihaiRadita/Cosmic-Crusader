@@ -917,6 +917,7 @@ namespace ratchet
 		}
 	}
 
+
 	void SceneManager::SaveGame()
 	{
 		std::string sceneName = m_sceneFiles[m_currentScene];
@@ -962,10 +963,12 @@ namespace ratchet
 								player->serialise(playerData);
 							}
 						}
+
+						
 					}
 				}
 			}
-			if (layerName == "Items")
+			/*if (layerName == "Items")
 			{
 				for (auto& obj : layer["objects"])
 				{
@@ -984,8 +987,10 @@ namespace ratchet
 						}
 					}
 				}
-			}
+			}*/
 		}
+
+
 
 		std::string combinedPath = m_baseScenePath + "GameScenes.json";
 
@@ -1002,6 +1007,59 @@ namespace ratchet
 		std::cout << "The Scene File has been created with scuccess!" << std::endl;
 
 
+	}
+
+
+	void SceneManager::SaveCharacterColloctedItems()
+	{
+		std::string sceneName = m_sceneFiles[m_currentScene];
+
+		if (!m_allScenes.contains("scenes")) {
+			std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+			return;
+		}
+
+		auto& scenesNode = m_allScenes["scenes"];
+		if (!scenesNode.contains(sceneName)) {
+			std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+			return;
+		}
+
+		auto& sceneJson = scenesNode[sceneName];
+
+		if (!sceneJson.contains("layers") || !sceneJson["layers"].is_array()) {
+			std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+			return;
+		}
+
+		for (auto& layer : sceneJson["layers"])
+		{
+			const auto& validLayer = layer.contains("objects");
+			if (!validLayer) continue;
+
+			const auto& layerName = layer["name"].get<std::string>();
+
+			if (layerName == "Player")
+			{
+				for (auto& obj : layer["objects"])
+				{
+					if (obj["name"] == "Player")
+					{
+						auto& playerData = obj;
+
+						for (auto& object : GameObject::s_gameObjects)
+						{
+							auto* player = dynamic_cast<Player*>(object);
+
+							if (player)
+							{
+								player->serialiseColloctedItems(playerData);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	void SceneManager::SaveSettings()
@@ -1140,6 +1198,99 @@ namespace ratchet
 		std::cout << "The Scene File has been created with scuccess!" << std::endl;
 
 	}
+
+
+
+	void SceneManager::SaveBackLevelFeatures()
+	{
+		for (auto& [type, fileName] : m_sceneFiles)
+		{
+			if (type != SceneType::MainMenu)
+			{
+				if (type == m_currentScene)
+				{
+					std::string originalLevelPath = m_baseScenePath + fileName;
+
+					if (!fs::exists(originalLevelPath))
+					{
+						std::cout << "ERROR! File does not exists!" << std::endl;
+						return;
+					}
+
+					nlohmann::json originalSceneJson;
+
+					std::ifstream in(originalLevelPath);
+
+					in >> originalSceneJson;
+
+					std::string sceneName = fileName;
+
+					if (!m_allScenes.contains("scenes")) {
+						std::cout << "ERROR: GameScenes.json does not contain 'Scenes' key\n";
+						return;
+					}
+
+					auto& scenesNode = m_allScenes["scenes"];
+					if (!scenesNode.contains(sceneName)) {
+						std::cout << "ERROR: Scene not found in GameScenes.json: " << sceneName << "\n";
+						return;
+					}
+
+					auto& sceneJson = scenesNode[sceneName];
+
+					if (!sceneJson.contains("layers")) {
+						std::cout << "WARNING: Scene has no layers or layers is not an array: " << sceneName << "\n";
+						return;
+					}
+
+					if (!originalSceneJson.contains("layers"))
+					{
+						std::cout << "WARNING: Scene has no layers or layers is not an array: " << fileName << "\n";
+						return;
+					}
+
+
+					for (auto& layer : sceneJson["layers"])
+					{
+						const auto& validLayer = layer.contains("objects");
+						if (!validLayer) continue;
+
+						const auto& layerName = layer["name"].get<std::string>();
+
+						if (layerName == "Player")
+						{
+							for (auto& obj : layer["objects"])
+							{
+								if (obj["name"] == "Player")
+								{
+									for (auto& layer1 : originalSceneJson["layers"])
+									{
+										auto& layerName1 = layer1["name"];
+										if (layerName1 == layerName)
+										{
+											for (auto& obj1 : layer1["objects"])
+											{
+												if (obj1["name"] == obj["name"] && obj1["id"] == obj["id"])
+												{
+													obj["x"] = obj1["x"];
+													obj["y"] = obj1["y"];
+												}
+											}
+
+										}
+									}
+
+								
+								}
+							}
+						}
+					}
+					break;
+				}
+			}
+		}
+	}
+
 
 	void SceneManager::SetNewGame()
 	{

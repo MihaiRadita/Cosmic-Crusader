@@ -223,11 +223,11 @@ namespace ratchet
 		m_animationSwitch = animSwitch;
 	}
 
-	void AnimationIdle::invertAnimationFramesList(Weapon::TYPE& weaponuse)
+	void AnimationIdle::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 		if (m_repeatAnimation)
 		{
-			if (weaponuse != Weapon::TYPE::None)
+			if (weaponused != Weapon::TYPE::None)
 			{
 				for (auto& [weaponType, angleMap] : m_weaponAnimationFramesMap)
 				{

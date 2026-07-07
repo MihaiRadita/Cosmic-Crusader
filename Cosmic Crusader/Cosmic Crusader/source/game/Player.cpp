@@ -3,6 +3,8 @@
 
 #include "SceneManager.h"
 
+#include "EnumMask.h"
+
 namespace ratchet
 {
 	void Player::destroyPlayerAnimations()
@@ -736,6 +738,52 @@ namespace ratchet
 	void Player::serialise(nlohmann::json& jsonFile)
 	{
 		Creature::serialise(jsonFile);
+	}
+
+	void Player::serialiseColloctedItems(nlohmann::json& jsonFile)
+	{
+		GameObject::serialise(jsonFile);
+
+
+		EnumMask<Weapon::TYPE> saveMask;
+
+		for (auto& weapon : m_ownedWeaponList)
+		{
+
+			auto it = m_usableWeaponTypeList.find(weapon->m_weaponType);
+			if (it != m_usableWeaponTypeList.end() && it->second)
+			{
+				saveMask.addValue(weapon->m_weaponType);
+
+				auto* weaponObj = SceneManager::Get().FindObjectById(
+					weapon->m_WeaponID,
+					SceneManager::Get().GetLayerNameObjectByID(weapon->m_WeaponID)
+				);
+
+				if (weaponObj)
+				{
+					for (auto& prop : (*weaponObj)["properties"])
+					{
+						if (prop["name"] == "isWeaponAccesible")
+						{
+							auto& value = prop["value"];
+							value = false;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		for (auto& prop : jsonFile["properties"])
+		{
+			if (prop["name"] == "usableWeaponCheckListMask")
+			{
+				auto& value = prop["value"];
+				value = saveMask.getRawValue();
+				break;
+			}
+		}
 	}
 
 	void Player::OnCollisionEnter(GameObject* obj)

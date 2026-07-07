@@ -34,7 +34,7 @@ namespace ratchet
 		void play(AnimationBase* playAnim, sf::Sprite& sprite, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state);
 		void play(AnimationBase* playAnim, sf::Sprite& sprite);
 
-		void invertAnimation(AnimationBase* anim, Weapon::TYPE& weaponUsed);
+		void invertAnimation(AnimationBase* anim, Weapon::TYPE& weaponUsed, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state);
 
 		//Other functions
 		void resetAnimIndex(AnimationBase* anim);

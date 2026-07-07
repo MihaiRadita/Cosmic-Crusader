@@ -131,6 +131,12 @@ namespace ratchet
 		sf::SoundBuffer m_walkSoundBuffer;
 		sf::Sound m_walkSound;
 
+
+
+		WeaponAnimation::ANGLE m_lastInvertedAngle;
+		WeaponAnimation::STATE m_lastInvertedState;
+		Weapon::TYPE m_lastInvertedWeapon;
+
 		float m_minCeilingDistance;
 
 		bool m_isInvulnerable = false;

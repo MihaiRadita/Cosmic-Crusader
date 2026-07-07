@@ -49,7 +49,7 @@ namespace ratchet
 		virtual bool getAnimationSwitch();
 		virtual void setAnimationSwitch(bool animSwitch);
 		virtual bool isCurrentAnimationIndexValue();
-		virtual void invertAnimationFramesList(Weapon::TYPE& weaponused);
+		virtual void invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state);
 		virtual void resetAnimationFrame(sf::Sprite& sprite);
 
 		bool isAnimationEnd();
@@ -66,5 +66,6 @@ namespace ratchet
 		bool m_initialTexture;
 		bool m_repeatAnimation;
 		bool m_endAnimation;
+
 	};
 }

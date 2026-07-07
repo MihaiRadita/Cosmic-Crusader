@@ -209,6 +209,13 @@ namespace ratchet
                         player->m_isVictory = false;
                         player->m_collider->m_body->SetEnabled(false);
 
+                        SceneManager::Get().SaveBackLevelFeatures();
+                        SceneManager::Get().SaveCharacterColloctedItems();
+
+                        m_collider->m_body->SetEnabled(false);
+                        m_activeGameObject = false;
+                        m_activeRenderer = false;
+
                         SceneManager::Get().LoadNextScene();
 
                     }
@@ -228,6 +235,11 @@ namespace ratchet
 
     void Item::updateItemsAnimations()
     {
+        if (!m_activeGameObject && !m_activeRenderer)
+        {
+            return;
+        }
+
         if (m_itemType == ItemType::Spring)
         {
             if (!m_itemAnimator && !m_itemAnimation)

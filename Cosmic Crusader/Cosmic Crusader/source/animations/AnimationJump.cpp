@@ -233,7 +233,7 @@ namespace ratchet
 		m_animationSwitch = m_animationSwitch;
 	}
 
-	void AnimationJump::invertAnimationFramesList(Weapon::TYPE& weaponused)
+	void AnimationJump::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
 		if (m_repeatAnimation)
 		{

@@ -219,28 +219,39 @@ namespace ratchet
 		m_animationSwitch = m_animationSwitch;
 	}
 
-	void AnimationRun::invertAnimationFramesList(Weapon::TYPE& weaponused)
+	void AnimationRun::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
 	{
-		if (m_repeatAnimation)
-		{
-			if (weaponused != Weapon::TYPE::None)
-			{
-				for (auto& [weaponType, angleMap] : m_weaponAnimationFramesMap)
-				{
-					for (auto& [angle, stateMap] : angleMap)
-					{
-						for (auto& [state, textureVector] : stateMap)
-						{
-							std::reverse(textureVector.begin(), textureVector.end());
-						}
-					}
-				}
-			}
-			else
-			{
-				std::reverse(m_animationFrames.begin(), m_animationFrames.end());
-			}
-		}
+		if (!m_repeatAnimation)
+			return;
+
+		if (weaponused == Weapon::TYPE::None ||
+			weaponused == Weapon::TYPE::MeleeFist)
+			return;
+
+		auto weaponIt = m_weaponAnimationFramesMap.find(weaponused);
+
+		if (weaponIt == m_weaponAnimationFramesMap.end())
+			return;
+
+
+		auto angleIt = weaponIt->second.find(angle);
+
+		if (angleIt == weaponIt->second.end())
+			return;
+
+
+		auto stateIt = angleIt->second.find(state);
+
+		if (stateIt == angleIt->second.end())
+			return;
+
+
+		std::reverse(
+			stateIt->second.begin(),
+			stateIt->second.end()
+
+
+		);
 	}
 
 	//Getters Functions
