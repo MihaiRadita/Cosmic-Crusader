@@ -255,7 +255,15 @@ namespace ratchet
 			{
 				return -1.0f;
 			}
+			
 			const short* fixtureUserData = reinterpret_cast<const short*>(fixture->GetUserData().pointer);
+
+			if (*fixtureUserData == static_cast<short>(PhysicsLayer::Projectile) || *fixtureUserData == static_cast<short>(PhysicsLayer::Items) ||
+				*fixtureUserData == static_cast<short>(PhysicsLayer::Springs) || *fixtureUserData == static_cast<short>(PhysicsLayer::CheckPoint) ||
+				*fixtureUserData == static_cast<short>(PhysicsLayer::Obstacles))
+			{
+				return -1.0f;
+			}
 			if (fixtureUserData && *fixtureUserData == static_cast<short>(PhysicsLayer::Platforms))
 			{
 				m_hit = true;

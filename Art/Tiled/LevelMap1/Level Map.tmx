@@ -133,7 +133,7 @@
  </tileset>
  <objectgroup id="26" name="Level Background"/>
  <objectgroup id="31" name="Object Layer 25"/>
- <objectgroup id="30" name="Sky">
+ <objectgroup id="30" name="Sky" visible="0">
   <object id="6145" name="Sky" gid="92" x="0" y="640" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
@@ -359,7 +359,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="27" name="Buildings">
+ <objectgroup id="27" name="Buildings" visible="0">
   <object id="6233" name="Building" gid="98" x="6656" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>

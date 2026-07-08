@@ -98,7 +98,7 @@ namespace ratchet
 
 			if (m_bulletType == BulletType::Explosive)
 			{
-				auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
+				auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y -0.05);
 
 				m_explosionCirclePos = sf::Vector2f(spritePosition.x, spritePosition.y - m_explosionPositionOffset);
 		
@@ -120,7 +120,8 @@ namespace ratchet
 
 						if (m_explosioTochTarget)
 						{
-							const auto& center = b2Vec2(spritePosition.x, spritePosition.y -m_explosionPositionOffset);
+							auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y - 0.05);
+							const b2Vec2 center = b2Vec2(spritePosition.x, spritePosition.y);
 
 							auto damagedObjects =
 								m_collider->performOverlapCircle(center, m_explosionAreaSize);
@@ -284,7 +285,26 @@ namespace ratchet
 
 			target.draw(m_currenExplosionAnimationSprite);
 
-			//drawExplosionArea(m_explosionCirclePos, m_explosionAreaSize, target);
+
+
+			
+
+			drawExplosionArea(m_explosionCirclePos, m_explosionAreaSize, target);
+
+			auto position =sf::Vector2f(m_explosionCenter.x, m_explosionCenter.y -0.56);
+
+			sf::CircleShape shape;
+			float radius = 0.3f;
+
+			shape.setRadius(radius);
+			shape.setOrigin(radius, radius);
+			shape.setPosition(position);
+
+			shape.setFillColor(sf::Color::Transparent);
+			shape.setOutlineThickness(0.2f);
+			shape.setOutlineColor(sf::Color::Yellow);
+
+			target.draw(shape);
 		}
 
 
@@ -492,6 +512,7 @@ namespace ratchet
 							if (auto* body = m_collider->getBody())
 							{
 								body->SetAwake(false);
+								body->SetTransform(body->GetPosition(), body->GetAngle());
 
 								body->SetGravityScale(0.0f);
 							}

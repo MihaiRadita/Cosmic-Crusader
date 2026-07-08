@@ -23,17 +23,21 @@ namespace ratchet
 		void resetCurrentAnimIndex() override;
 		void resetPlayerAnimTimer() override;
 		void setAnimationSwitch(bool animSwitch) override;
-		void invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state) override;
+		void invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state, bool invert) override;
 
 		//Geters Functions	
 		int getAnimSize(Weapon::TYPE& type, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state) override;
 		int getCurrentAnimIndex() override;
 		bool getAnimationSwitch() override;
 
+		
+
+		
+
 	private:
 		// TODO: Foloseste ResourceManager asa cum am vorbit in loc de acest vector static.
 
-		std::map<Weapon::TYPE, std::map<WeaponAnimation::ANGLE, std::map<WeaponAnimation::STATE, std::vector<sf::Texture>>>> m_weaponAnimationFramesMap; // sa fie redenumit in m_weaponAnimationFramesMap
+		std::map<Weapon::TYPE, std::map<WeaponAnimation::ANGLE, std::map<WeaponAnimation::STATE, std::vector<sf::Texture>>>> m_weaponAnimationFramesMap;// sa fie redenumit in m_weaponAnimationFramesMap
 		std::vector<sf::Texture> m_animationFrames;
 	};
 }

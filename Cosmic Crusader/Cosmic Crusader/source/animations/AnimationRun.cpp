@@ -31,6 +31,8 @@ namespace ratchet
 								WeaponAnimation::getWeaponStateString(animationState)
 
 							);
+
+						m_weaponAnimationFramesInvertedMap[weaponType][animationAngle][animationState] = false;
 					}
 				}
 			}
@@ -219,39 +221,28 @@ namespace ratchet
 		m_animationSwitch = m_animationSwitch;
 	}
 
-	void AnimationRun::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
+	void AnimationRun::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state, bool invert)
 	{
 		if (!m_repeatAnimation)
 			return;
 
-		if (weaponused == Weapon::TYPE::None ||
-			weaponused == Weapon::TYPE::MeleeFist)
+
+		if (weaponused != Weapon::TYPE::None)
+		{
+		auto& needinvert = m_weaponAnimationFramesInvertedMap[weaponused][angle][state];
+
+		if (needinvert == invert)
 			return;
 
-		auto weaponIt = m_weaponAnimationFramesMap.find(weaponused);
-
-		if (weaponIt == m_weaponAnimationFramesMap.end())
-			return;
+			auto& frames =
+				m_weaponAnimationFramesMap[weaponused][angle][state];
 
 
-		auto angleIt = weaponIt->second.find(angle);
+			std::reverse(frames.begin(), frames.end());
 
-		if (angleIt == weaponIt->second.end())
-			return;
+			needinvert = invert;
+		}
 
-
-		auto stateIt = angleIt->second.find(state);
-
-		if (stateIt == angleIt->second.end())
-			return;
-
-
-		std::reverse(
-			stateIt->second.begin(),
-			stateIt->second.end()
-
-
-		);
 	}
 
 	//Getters Functions

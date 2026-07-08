@@ -221,7 +221,7 @@ namespace ratchet
 		m_animationSwitch = animSwitch;
 	}
 
-	void AnimationMelee::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
+	void AnimationMelee::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state, bool invert)
 	{
 		if (m_repeatAnimation)
 		{

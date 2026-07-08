@@ -63,7 +63,7 @@ namespace ratchet
 
 		sf::Vector2f m_explosionCirclePos = sf::Vector2f(0.0f, 0.0f);
 
-		float m_explosionAreaSize = 1.5f;
+		float m_explosionAreaSize = 0.8f;
 
 
 		bool getExplosionAnimationSwitch();

@@ -223,27 +223,26 @@ namespace ratchet
 		m_animationSwitch = animSwitch;
 	}
 
-	void AnimationIdle::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state)
+	void AnimationIdle::invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state, bool invert)
 	{
-		if (m_repeatAnimation)
+		if (!m_repeatAnimation)
+			return;
+
+
+		if (weaponused != Weapon::TYPE::None)
 		{
-			if (weaponused != Weapon::TYPE::None)
-			{
-				for (auto& [weaponType, angleMap] : m_weaponAnimationFramesMap)
-				{
-					for (auto& [angle, stateMap] : angleMap)
-					{
-						for (auto& [state, textureVector] : stateMap)
-						{
-							std::reverse(textureVector.begin(), textureVector.end());
-						}
-					}
-				}
-			}
-			else
-			{
-				std::reverse(m_animationFrames.begin(), m_animationFrames.end());
-			}
+			auto& needinvert = m_weaponAnimationFramesInvertedMap[weaponused][angle][state];
+
+			if (needinvert == invert)
+				return;
+
+			auto& frames =
+				m_weaponAnimationFramesMap[weaponused][angle][state];
+
+
+			std::reverse(frames.begin(), frames.end());
+
+			needinvert = invert;
 		}
 	}
 

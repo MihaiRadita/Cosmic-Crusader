@@ -298,54 +298,45 @@ namespace ratchet
 
 				if (m_currentWeaponType != Weapon::TYPE::None && m_currentWeaponType != Weapon::TYPE::MeleeFist)
 				{
-					if (isGrounded())
+					if (m_currentWeaponType != Weapon::TYPE::None && m_currentWeaponType != Weapon::TYPE::MeleeFist)
 					{
-						bool movingBackwards = (isMovingRight != m_facingRight);
-
-						if (movingBackwards)
+						if (isGrounded())
 						{
-							if (!m_isAnimationInverted &&
-								m_lastInvertedWeapon == m_currentWeaponType &&
-								m_lastInvertedAngle == m_currentCharacterAngle &&
-								m_lastInvertedState == m_currentCharacterState)
+							bool movingBackwards = (isMovingRight != m_facingRight);
+
+							if (movingBackwards)
 							{
-								m_characterAnimator->invertAnimation(
-									m_characterAnimator->getAbstractAnimation(),
-									m_currentWeaponType,
-									m_currentCharacterAngle,
-									m_currentCharacterState
-								);
+								if (!m_characterAnimator->getAbstractAnimation()->m_weaponAnimationFramesInvertedMap[m_currentWeaponType][m_currentCharacterAngle][m_currentCharacterState])
+								{
+									m_characterAnimator->invertAnimation(
+										m_characterAnimator->getAbstractAnimation(),
+										m_currentWeaponType,
+										m_currentCharacterAngle,
+										m_currentCharacterState,
+										true
+									);
+								}
 
 								m_lastInvertedWeapon = m_currentWeaponType;
 								m_lastInvertedAngle = m_currentCharacterAngle;
 								m_lastInvertedState = m_currentCharacterState;
-
-								m_isAnimationInverted = true;
 							}
 							else
 							{
-								m_isAnimationInverted = false;
-							}
-						}
-						else
-						{
-							if (m_isAnimationInverted &&
-								m_lastInvertedWeapon == m_currentWeaponType &&
-								m_lastInvertedAngle == m_currentCharacterAngle &&
-								m_lastInvertedState == m_currentCharacterState)
-							{
-								m_characterAnimator->invertAnimation(
-									m_characterAnimator->getAbstractAnimation(),
-									m_currentWeaponType,
-									m_currentCharacterAngle,
-									m_currentCharacterState
-								);
+								if (m_characterAnimator->getAbstractAnimation()->m_weaponAnimationFramesInvertedMap[m_currentWeaponType][m_currentCharacterAngle][m_currentCharacterState])
+								{
+									m_characterAnimator->invertAnimation(
+										m_characterAnimator->getAbstractAnimation(),
+										m_currentWeaponType,
+										m_currentCharacterAngle,
+										m_currentCharacterState,
+										false
+									);
+								}
 
-								m_isAnimationInverted = false;
-							}
-							else
-							{
-								m_isAnimationInverted = true;
+								m_lastInvertedWeapon = m_currentWeaponType;
+								m_lastInvertedAngle = m_currentCharacterAngle;
+								m_lastInvertedState = m_currentCharacterState;
 							}
 						}
 					}

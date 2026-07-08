@@ -49,12 +49,14 @@ namespace ratchet
 		virtual bool getAnimationSwitch();
 		virtual void setAnimationSwitch(bool animSwitch);
 		virtual bool isCurrentAnimationIndexValue();
-		virtual void invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state);
+		virtual void invertAnimationFramesList(Weapon::TYPE& weaponused, WeaponAnimation::ANGLE& angle, WeaponAnimation::STATE& state, bool invert);
 		virtual void resetAnimationFrame(sf::Sprite& sprite);
 
 		bool isAnimationEnd();
 
 		void SetAnimationEnd(bool end);
+
+		std::map<Weapon::TYPE, std::map<WeaponAnimation::ANGLE, std::map<WeaponAnimation::STATE, bool>>> m_weaponAnimationFramesInvertedMap;
 
 
 	protected:
@@ -66,6 +68,7 @@ namespace ratchet
 		bool m_initialTexture;
 		bool m_repeatAnimation;
 		bool m_endAnimation;
+		bool m_alreadyInverted;
 
 	};
 }
