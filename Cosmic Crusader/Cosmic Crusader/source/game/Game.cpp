@@ -22,6 +22,7 @@ namespace ratchet
 		initWindow();
 		initPhysics();
 		initWeaponManager();
+		initAudioManager();
 	}
 
 	Game::~Game()
@@ -56,6 +57,11 @@ namespace ratchet
 	void Game::initWeaponManager()
 	{
 		WeaponManager::instance()->addAllWeapons();
+	}
+
+	void Game::initAudioManager()
+	{
+		AudioManager::Initialize();
 	}
 
 	const sf::RenderWindow& Game::getWindow() const

@@ -218,6 +218,9 @@
     <ClCompile Include="BackgroundConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -329,5 +332,6 @@
     <ClInclude Include="AnimationMelee.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BackgroundConfig.h" />
+    <ClInclude Include="AudioManager.h" />
   </ItemGroup>
 </Project>

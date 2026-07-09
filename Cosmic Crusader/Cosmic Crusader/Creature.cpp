@@ -10,6 +10,10 @@
 
 namespace ratchet
 {
+
+	void Creature::LoadSound()
+	{
+	}
 	std::list<sf::Vector2f> Creature::GetTracePointsList()
 	{
 		return m_tracePointsList;
@@ -889,33 +893,6 @@ namespace ratchet
 								}
 							}
 						}
-						if (auto* circle = dynamic_cast<CircleCollider*>(collider))
-						{
-							GameObject* object = circle->m_obj;
-
-							if (!object)
-								continue;
-
-							if (auto* creature = dynamic_cast<Creature*>(object))
-							{
-								if (creature->m_faction == this->m_faction)
-									continue;
-
-								if (weapon->m_meleeHitCreatures.find(creature) != weapon->m_meleeHitCreatures.end())
-									continue;
-
-								weapon->m_meleeHitCreatures.insert(creature);
-
-								if (auto* enemy = dynamic_cast<SelfControlledCreature*>(creature))
-								{
-									enemy->m_isMobilized = true;
-									enemy->m_stopAttackTimer.Restart();
-									enemy->m_fireCooldown.Freeze();
-								}
-
-								creature->TakeDamage(weapon->m_weaponDamage);
-							}
-						}
 					}
 				}
 				else
@@ -1291,71 +1268,6 @@ namespace ratchet
 
 
 		PostCosntructFixup();
-
-		if (!m_hurtSoundBuffer.loadFromFile(m_creatureHurtSoundPath))
-		{
-			std::cout << "Sound did not load!" << std::endl;
-		}
-
-		if (!m_deathSoundBuffer.loadFromFile(m_creatureDeathSoundPath))
-		{
-			std::cout << "Sound did not load!" << std::endl;
-		}
-
-		if (!m_deathFallSoundBuffer.loadFromFile(m_creatureDeathFallSoundPath))
-		{
-			std::cout << "Sound did not load!" << std::endl;
-		}
-
-		if (!m_jumpSoundBuffer.loadFromFile(m_creatureJumpSoundPath))
-		{
-			std::cout << "Sound did not load!" << std::endl;
-		}
-
-		if (!m_landingSoundBuffer.loadFromFile(m_creatureLandingSoundPath))
-		{
-			std::cout << "Sound did not load!" << std::endl;
-		}
-
-		if (!m_walkSoundBuffer.loadFromFile(m_creatureWalkSoundPath))
-		{
-			std::cout << "Sound did not load!" << std::endl;
-		}
-
-		m_hurtSound = sf::Sound();
-		m_hurtSound.setBuffer(m_hurtSoundBuffer);
-		m_hurtSound.setLoop(m_creatureSoundLoop);
-		m_hurtSound.setVolume(m_objectSoundEffectVolume);
-
-
-		m_deathSound = sf::Sound();
-		m_deathSound.setBuffer(m_deathSoundBuffer);
-		m_deathSound.setLoop(m_creatureSoundLoop);
-		m_deathSound.setVolume(m_objectSoundEffectVolume);
-
-		m_deathFallSound = sf::Sound();
-		m_deathFallSound.setBuffer(m_deathFallSoundBuffer);
-		m_deathFallSound.setLoop(m_creatureSoundLoop);
-		m_deathFallSound.setVolume(m_objectSoundEffectVolume);
-
-		m_jumpSound = sf::Sound();
-		m_jumpSound.setBuffer(m_jumpSoundBuffer);
-		m_jumpSound.setLoop(m_creatureSoundLoop);
-		m_jumpSound.setVolume(m_objectSoundEffectVolume);
-
-		m_landingSound = sf::Sound();
-		m_landingSound.setBuffer(m_landingSoundBuffer);
-		m_landingSound.setLoop(m_creatureSoundLoop);
-		m_landingSound.setVolume(m_objectSoundEffectVolume);
-
-		m_walkSound = sf::Sound();
-		m_walkSound.setBuffer(m_walkSoundBuffer);
-		m_walkSound.setLoop(m_creatureSoundLoop);
-		m_walkSound.setVolume(m_objectSoundEffectVolume);
-
-	
-
-
 	}
 
 	void Creature::switchAnimation()
@@ -1404,8 +1316,11 @@ namespace ratchet
 		else
 		{
 			float volume = SceneManager::Get().GetSoundEffectsVolume();
-			m_hurtSound.setVolume(volume);
-			m_hurtSound.play();
+
+			AudioManager::PlaySound(
+				m_creatureHurtSoundPath,
+				volume
+			);
 		}
 
 		if (m_uiHealthBar)

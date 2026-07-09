@@ -119,8 +119,12 @@ namespace ratchet
 		m_isAttacking = false;
 
 		float volume = SceneManager::Get().GetSoundEffectsVolume();
-		m_deathSound.setVolume(volume);
-		m_deathSound.play();
+
+		AudioManager::PlaySound(
+			m_creatureDeathSoundPath,
+			volume
+		);
+
 
 		m_shouldPlayDeathSound = true;
 	
@@ -957,9 +961,14 @@ namespace ratchet
 				{
 					if (m_walkTimerSound.GetElapsed().asSeconds() >= 0.3f)
 					{
+
 						float volume = SceneManager::Get().GetSoundEffectsVolume();
-						m_walkSound.setVolume(volume);
-						m_walkSound.play();
+
+						AudioManager::PlaySound(
+							m_creatureWalkSoundPath,
+							volume
+						);
+
 						m_walkTimerSound.Restart();
 					}
 				}
@@ -1001,9 +1010,15 @@ namespace ratchet
 
 				if (m_walkTimerSound.GetElapsed().asSeconds() >= 0.3f)
 				{
+
 					float volume = SceneManager::Get().GetSoundEffectsVolume();
-					m_walkSound.setVolume(volume);
-					m_walkSound.play();
+
+					AudioManager::PlaySound(
+						m_creatureWalkSoundPath,
+						volume
+					);
+
+		
 					m_walkTimerSound.Restart();
 				}
 			}

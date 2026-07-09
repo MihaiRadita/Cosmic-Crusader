@@ -118,20 +118,22 @@ namespace ratchet
 		std::string m_creatureWalkSoundPath;
 
 
-		sf::SoundBuffer m_hurtSoundBuffer;
-		sf::Sound m_hurtSound;
-		sf::SoundBuffer m_deathSoundBuffer;
-		sf::Sound m_deathSound;
-		sf::SoundBuffer m_deathFallSoundBuffer;
-		sf::Sound m_deathFallSound;
-		sf::SoundBuffer m_jumpSoundBuffer;
-		sf::Sound m_jumpSound;
-		sf::SoundBuffer m_landingSoundBuffer;
-		sf::Sound m_landingSound;
-		sf::SoundBuffer m_walkSoundBuffer;
-		sf::Sound m_walkSound;
+		//sf::Sound m_hurtSound;
+		//sf::Sound m_deathSound;
+		//sf::Sound m_deathFallSound;
+		//sf::Sound m_jumpSound;
+		//sf::Sound m_landingSound;
+		//sf::Sound m_walkSound;
+
+/*		static sf::SoundBuffer hurt;
+		static sf::SoundBuffer death;
+		static sf::SoundBuffer deathFall;
+		static sf::SoundBuffer jump;
+		static sf::SoundBuffer landing;
+		static sf::SoundBuffer walk*/;
 
 
+		static void LoadSound();
 
 		WeaponAnimation::ANGLE m_lastInvertedAngle;
 		WeaponAnimation::STATE m_lastInvertedState;

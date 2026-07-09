@@ -47,6 +47,7 @@ namespace ratchet
 		void initWindow();
 		void initPhysics();
 		void initWeaponManager();
+		void initAudioManager();
 		//Geters
 		const sf::RenderWindow& getWindow() const;
 

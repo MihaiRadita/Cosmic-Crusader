@@ -60,11 +60,14 @@ namespace ratchet
 		if (!m_isDeathFall)
 		{
 			float volume = SceneManager::Get().GetSoundEffectsVolume();
-			m_deathSound.setVolume(volume);
+
 			
 			if (m_isGround)
 			{
-			m_deathSound.play();
+				AudioManager::PlaySound(
+					m_creatureDeathSoundPath,
+					volume
+				);
 				m_shouldPlayDeathSound = true;
 
 		/*		if (m_currentWeaponType == Weapon::TYPE::None)
@@ -82,9 +85,12 @@ namespace ratchet
 		{
 
 			float volume = SceneManager::Get().GetSoundEffectsVolume();
-			m_deathFallSound.setVolume(volume);
 
-			m_deathFallSound.play();
+			AudioManager::PlaySound(
+				m_creatureDeathSoundPath,
+				volume
+			);
+
 
 			m_isDeathFall = false;
 			m_shouldPlayDeathSound = true;
@@ -662,13 +668,13 @@ namespace ratchet
 			{
 				if (m_walkTimerSound.GetElapsed().asSeconds() >= 0.3f)
 				{
-					float volume = m_walkSound.getVolume();
+					float volume = SceneManager::Get().GetSoundEffectsVolume();
 
-					volume = SceneManager::Get().GetSoundEffectsVolume();
+					AudioManager::PlaySound(
+						m_creatureLandingSoundPath,
+						volume
+					);
 
-					m_walkSound.setVolume(volume);
-
-					m_walkSound.play();
 					m_walkTimerSound.Restart();
 				}
 			}
@@ -681,13 +687,14 @@ namespace ratchet
 		
 		if (m_input.isJump && isGrounded())
 		{
-			float volume = m_jumpSound.getVolume();
 
-			volume = SceneManager::Get().GetSoundEffectsVolume();
+			float volume = SceneManager::Get().GetSoundEffectsVolume();
 
-			m_jumpSound.setVolume(volume);
+			AudioManager::PlaySound(
+				m_creatureJumpSoundPath,
+				volume
+			);
 
-			m_jumpSound.play();
 			m_isMoving = true;
 			changeY = true;
 			yVelocity = m_jumpImpulse;
@@ -796,13 +803,15 @@ namespace ratchet
 			{
 				if (!m_isLanding)
 				{
-					float volume = m_landingSound.getVolume();
 
-					volume = SceneManager::Get().GetSoundEffectsVolume();
+					float volume = SceneManager::Get().GetSoundEffectsVolume();
 
-					m_landingSound.setVolume(volume);
+					AudioManager::PlaySound(
+						m_creatureLandingSoundPath,
+						volume
+					);
 
-					m_landingSound.play();
+			
 					m_isLanding = true;
 				}
 				

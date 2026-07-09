@@ -151,6 +151,7 @@
     <ClCompile Include="AnimationItem.cpp" />
     <ClCompile Include="AnimationMelee.cpp" />
     <ClCompile Include="AnimationObstacle.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BackgroundConfig.cpp" />
     <ClCompile Include="Bullet.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="AnimationItem.h" />
     <ClInclude Include="AnimationMelee.h" />
     <ClInclude Include="AnimationObstacle.h" />
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BackgroundConfig.h" />
     <ClInclude Include="Bullet.h" />
