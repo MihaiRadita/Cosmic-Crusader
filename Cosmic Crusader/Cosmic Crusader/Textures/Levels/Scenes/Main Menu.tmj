@@ -2618,7 +2618,7 @@
                         {
                          "name":"musicSoundtrackPath",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Music\/Main Menu\/Main Menu.ogg"
+                         "value":"Sounds\/Music\/Main Menu\/Main Menu.ogg"
                         }, 
                         {
                          "name":"musicVolume",

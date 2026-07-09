@@ -109,6 +109,7 @@ namespace ratchet
 				m_isButtonInteracting = false;
 				m_isButtonEventTirggered = false;
 				SceneManager::Get().ClearDestroyedCharactersLists();
+				SceneManager::Get().SaveCharacterColloctedItems();
 				SceneManager::Get().LoadNextScene();
 
 			case ButtonNameState::Refresh:

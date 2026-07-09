@@ -285,8 +285,10 @@ namespace ratchet
 			target.draw(m_currenExplosionAnimationSprite);
 
 
-
+#ifdef IS_RATCHET_DEBUG
 			drawExplosionArea(sf::Vector2f(m_explosionCenter.x, m_explosionCenter.y), m_explosionAreaSize, target);
+
+#endif
 		}
 
 

@@ -559,7 +559,7 @@ namespace ratchet
 	void ratchet::SceneManager::CheckAndBuildScenes()
 	{
 		// #TODO: FOLOSESTE RELATIVE PATH IN LOC DE FULL PATH
-		m_baseScenePath = "F:/Users/mihai/Documents/GitHub/Cosmic-Crusader/Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/";
+		m_baseScenePath = "Textures/Levels/Scenes/";
 
 		const std::string combinedPath = m_baseScenePath + "GameScenes.json";
 

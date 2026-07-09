@@ -70,14 +70,6 @@ namespace ratchet
 				);
 				m_shouldPlayDeathSound = true;
 
-		/*		if (m_currentWeaponType == Weapon::TYPE::None)
-				{
-					if (m_ownedWeaponList.size() != 1)
-					{
-						m_currentEquippedWeaponIndex++;
-					}
-				}*/
-
 				setWeaponIndex(m_currentEquippedWeaponIndex);
 			}
 		}
@@ -87,7 +79,7 @@ namespace ratchet
 			float volume = SceneManager::Get().GetSoundEffectsVolume();
 
 			AudioManager::PlaySound(
-				m_creatureDeathSoundPath,
+				m_creatureDeathFallSoundPath,
 				volume
 			);
 
@@ -671,7 +663,7 @@ namespace ratchet
 					float volume = SceneManager::Get().GetSoundEffectsVolume();
 
 					AudioManager::PlaySound(
-						m_creatureLandingSoundPath,
+						m_creatureWalkSoundPath,
 						volume
 					);
 

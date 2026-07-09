@@ -73,6 +73,7 @@ namespace ratchet
 			ss << texturePath;
 			ss << "IdleTextures/";
 			ss << Weapon::getWeaponTypeString(weaponType) << "/";
+
 			if (strlen(aimingAngle) > 0)
 			{
 				ss << aimingAngle << "/";

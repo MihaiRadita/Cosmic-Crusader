@@ -17,6 +17,7 @@ namespace ratchet
 			{
 			case TYPE::None: return "None";
 			case TYPE::Blaster: return "Blaster";
+			case TYPE::BombLauncher: return "BombLauncher";
 			case TYPE::MeleeFist: return "Strike";
 			case TYPE::FireLauncher: return "FireLauncher";
 			case TYPE::RocketLauncher: return "RocketLauncher";
