@@ -74,7 +74,7 @@ namespace ratchet
 		}
 	}
 
-	void Bullet::drawExplosionArea(sf::Vector2f& position, float& radius, sf::RenderTarget& target)
+	void Bullet::drawExplosionArea(sf::Vector2f position, float& radius, sf::RenderTarget& target)
 	{
 		sf::CircleShape shape;
 
@@ -98,7 +98,7 @@ namespace ratchet
 
 			if (m_bulletType == BulletType::Explosive)
 			{
-				auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y -0.05);
+				auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y);
 
 				m_explosionCirclePos = sf::Vector2f(spritePosition.x, spritePosition.y - m_explosionPositionOffset);
 		
@@ -120,8 +120,7 @@ namespace ratchet
 
 						if (m_explosioTochTarget)
 						{
-							auto spritePosition = sf::Vector2f(m_collider->getBody()->GetPosition().x, m_collider->getBody()->GetPosition().y - 0.05);
-							const b2Vec2 center = b2Vec2(spritePosition.x, spritePosition.y);
+							const auto& center = b2Vec2(spritePosition.x, spritePosition.y - m_explosionPositionOffset);
 
 							auto damagedObjects =
 								m_collider->performOverlapCircle(center, m_explosionAreaSize);
@@ -287,24 +286,7 @@ namespace ratchet
 
 
 
-			
-
-			drawExplosionArea(m_explosionCirclePos, m_explosionAreaSize, target);
-
-			auto position =sf::Vector2f(m_explosionCenter.x, m_explosionCenter.y -0.56);
-
-			sf::CircleShape shape;
-			float radius = 0.3f;
-
-			shape.setRadius(radius);
-			shape.setOrigin(radius, radius);
-			shape.setPosition(position);
-
-			shape.setFillColor(sf::Color::Transparent);
-			shape.setOutlineThickness(0.2f);
-			shape.setOutlineColor(sf::Color::Yellow);
-
-			target.draw(shape);
+			drawExplosionArea(sf::Vector2f(m_explosionCenter.x, m_explosionCenter.y), m_explosionAreaSize, target);
 		}
 
 
@@ -464,7 +446,7 @@ namespace ratchet
 				{
 					if (auto* body = m_collider->getBody())
 					{
-						m_explosionCenter = m_collider->getBody()->GetPosition();
+						m_explosionCenter = sf::Vector2f(m_collider->getBody()->GetPosition().x,(m_collider->getBody()->GetPosition().y - m_explosionPositionOffset));
 						body->SetAwake(false);
 
 						body->SetGravityScale(0.0f);
@@ -512,7 +494,6 @@ namespace ratchet
 							if (auto* body = m_collider->getBody())
 							{
 								body->SetAwake(false);
-								body->SetTransform(body->GetPosition(), body->GetAngle());
 
 								body->SetGravityScale(0.0f);
 							}

@@ -230,8 +230,8 @@ namespace ratchet
 		b2AABB aabb;
 		b2Vec2 extents(radius, radius);
 
-		aabb.lowerBound = b2Vec2(center.x - radius, center.y + radius);
-		aabb.upperBound = b2Vec2(center.x + radius, center.y - radius);
+		aabb.lowerBound = b2Vec2(center.x - radius, center.y - radius);
+		aabb.upperBound = b2Vec2(center.x + radius, center.y + radius);
 
 		CircleOverlapCallBack callback(m_body, center, radius);
 

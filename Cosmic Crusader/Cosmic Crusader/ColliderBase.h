@@ -308,6 +308,7 @@ namespace ratchet
 	private:
 	};
 
+
 	class ContactFilter : public b2ContactFilter
 	{
 	public:
