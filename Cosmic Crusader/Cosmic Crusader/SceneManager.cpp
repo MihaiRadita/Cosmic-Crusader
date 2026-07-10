@@ -877,6 +877,7 @@ namespace ratchet
 		Weapon::ClearBulletList();
 
 		StopUpdating();
+		StopRendering();
 
 		ClearSceneObjects();
 

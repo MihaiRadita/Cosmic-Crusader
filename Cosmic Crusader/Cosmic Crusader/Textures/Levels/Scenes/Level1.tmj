@@ -2542,12 +2542,12 @@
                         {
                          "name":"pauseMenuOff",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Pause Menu Off.wav"
+                         "value":"Sounds\/Sound Effects\/Pause  Menu\/Pause Menu Off.wav"
                         }, 
                         {
                          "name":"pauseMenuOn",
                          "type":"string",
-                         "value":"F:\/Users\/mihai\/Documents\/GitHub\/Cosmic-Crusader\/Cosmic Crusader\/Cosmic Crusader\/Sounds\/Sound Effects\/Pause  Menu\/Pause Menu On.wav"
+                         "value":"Sounds\/Sound Effects\/Pause  Menu\/Pause Menu On.wav"
                         }],
                  "rotation":0,
                  "type":"",
@@ -502989,6 +502989,160 @@
                  "y":768
                 }, 
                 {
+                 "gid":77,
+                 "height":128,
+                 "id":8430,
+                 "name":"Ammo Recharger",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"bodyAligment",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"colliderDensity",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderFixedRotation",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"colliderFriction",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderGroupType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"colliderHeight",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderIsSensor",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"colliderLayer",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"colliderOffsetX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderOffsetY",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderRestitution",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderWidth",
+                         "type":"float",
+                         "value":0
+                        },
+                    
+                        {
+                         "name":"isItemAccessible",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isItemInteracting",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isItemUsed",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"itemContentValue",
+                         "type":"float",
+                         "value":20
+                        }, 
+                        {
+                         "name":"itemDisabledTimePass",
+                         "type":"float",
+                         "value":6
+                        }, 
+                        {
+                         "name":"itemType",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spriteTextureOffPath",
+                         "type":"string",
+                         "value":"Textures\/Objects\/Items\/Ammo Recharger Off.png"
+                        }, 
+                        {
+                         "name":"spriteTextureOnPath",
+                         "type":"string",
+                         "value":"Textures\/Objects\/Items\/Ammo Recharger On.png"
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/Objects\/Items\/Ammo Recharger On.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":24896,
+                 "y":-640
+                }, 
+                {
                  "gid":78,
                  "height":128,
                  "id":5397,
@@ -503945,6 +504099,165 @@
                 {
                  "gid":78,
                  "height":128,
+                 "id":8429,
+                 "name":"Spring",
+                 "properties":[
+                        {
+                         "name":"Faction",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"activeObject",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"activeRenderer",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"animationActiveTimePass",
+                         "type":"float",
+                         "value":0.6
+                        }, 
+                        {
+                         "name":"animationTimeLimit",
+                         "type":"float",
+                         "value":0.3
+                        }, 
+                        {
+                         "name":"bodyAligment",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"colliderDensity",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderFixedRotation",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"colliderFriction",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderGroupType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"colliderHeight",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderIsSensor",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"colliderLayer",
+                         "type":"int",
+                         "value":9
+                        }, 
+                        {
+                         "name":"colliderOffsetX",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderOffsetY",
+                         "type":"float",
+                         "value":0.64
+                        }, 
+                        {
+                         "name":"colliderRestitution",
+                         "type":"float",
+                         "value":0
+                        },
+                    
+                        {
+                         "name":"colliderType",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"colliderWidth",
+                         "type":"float",
+                         "value":0
+                        }, 
+                        {
+                         "name":"isAnimationPlaying",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isItemAccessible",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"itemContentValue",
+                         "type":"float",
+                         "value":10
+                        }, 
+                        {
+                         "name":"itemType",
+                         "type":"int",
+                         "value":5
+                        }, 
+                        {
+                         "name":"jumpForce",
+                         "type":"float",
+                         "value":10
+                        }, 
+                        {
+                         "name":"maxItemAnimationEndTime",
+                         "type":"float",
+                         "value":0.03
+                        }, 
+                        {
+                         "name":"objectType",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleX",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"scaleY",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"spriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/Objects\/Items\/Spring\/Spring"
+                        }, 
+                        {
+                         "name":"startSpriteTexturePath",
+                         "type":"string",
+                         "value":"Textures\/Objects\/Items\/Spring\/Spring1.png"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":128,
+                 "x":27072,
+                 "y":768
+                }, 
+                {
+                 "gid":78,
+                 "height":128,
                  "id":5970,
                  "name":"Spring",
                  "properties":[
@@ -504577,7 +504890,8 @@
                  "width":128,
                  "x":39168,
                  "y":192
-                }, 
+                },
+            
                 {
                  "gid":78,
                  "height":128,
@@ -504895,8 +505209,7 @@
                  "width":128,
                  "x":41920,
                  "y":-320
-                },
-            
+                }, 
                 {
                  "gid":90,
                  "height":192,
@@ -505969,8 +506282,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":28400.5,
-                 "y":157.212
+                 "x":28068.4,
+                 "y":754.424
                 }, 
                 {
                  "gid":33,
@@ -506525,7 +506838,7 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":27675.3,
+                 "x":27867.3,
                  "y":169.333
                 }, 
                 {
@@ -506803,8 +507116,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":13728.6,
-                 "y":306.424
+                 "x":13893.3,
+                 "y":297.333
                 }, 
                 {
                  "gid":33,
@@ -506942,8 +507255,8 @@
                  "type":"",
                  "visible":true,
                  "width":95,
-                 "x":12864.9,
-                 "y":315.515
+                 "x":12485.3,
+                 "y":297.333
                 }, 
                 {
                  "gid":33,
@@ -512850,8 +513163,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":28634.9,
-                 "y":106.788
+                 "x":28302.8,
+                 "y":704
                 }, 
                 {
                  "gid":34,
@@ -513366,7 +513679,7 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":27837,
+                 "x":28029,
                  "y":128
                 }, 
                 {
@@ -513624,8 +513937,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":13890.3,
-                 "y":265.091
+                 "x":14055,
+                 "y":256
                 }, 
                 {
                  "gid":34,
@@ -513753,8 +514066,8 @@
                  "type":"",
                  "visible":true,
                  "width":19,
-                 "x":13026.6,
-                 "y":274.182
+                 "x":12647,
+                 "y":256
                 }, 
                 {
                  "gid":34,
@@ -519859,8 +520172,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":28236.1,
-                 "y":172.363
+                 "x":27904,
+                 "y":768
                 }, 
                 {
                  "gid":36,
@@ -521103,7 +521416,7 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":27520,
+                 "x":27712,
                  "y":178.424
                 }, 
                 {
@@ -521725,8 +522038,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":13467.3,
-                 "y":311.757
+                 "x":13632,
+                 "y":302.666
                 }, 
                 {
                  "gid":36,
@@ -522036,8 +522349,8 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":12603.6,
-                 "y":320.848
+                 "x":12224,
+                 "y":302.666
                 }, 
                 {
                  "gid":36,
@@ -533262,7 +533575,7 @@
          "y":0
         }],
  "nextlayerid":33,
- "nextobjectid":8429,
+ "nextobjectid":8431,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

@@ -69,6 +69,7 @@ namespace ratchet
 
 			case ButtonNameState::Exit:
 				m_uiButtonPressedSound.play();
+				SceneManager::Get().SaveGame();
 				WindowManager::Get()->close();
 				SceneManager::Get().StopSoundtrack();
 				break;

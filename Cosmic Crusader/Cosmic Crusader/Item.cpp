@@ -134,6 +134,11 @@ namespace ratchet
     void Item::update()
     {
 
+        if (!m_activeGameObject && !m_activeRenderer)
+        {
+            return;
+        }
+
         if (m_itemType == ItemType::HealthRecharger || m_itemType == ItemType::AmmoRecharger)
         {
             if (!m_isItemUsed)
@@ -217,12 +222,16 @@ namespace ratchet
                         m_activeRenderer = false;
 
                         SceneManager::Get().LoadNextScene();
+                        return;
 
                     }
                 }
             }
-      
-            updateItemsAnimations();
+            
+            if (m_activeGameObject && m_activeRenderer)
+            {
+                updateItemsAnimations();
+            }
         }
 
     }
@@ -235,6 +244,7 @@ namespace ratchet
 
     void Item::updateItemsAnimations()
     {
+       
         if (!m_activeGameObject && !m_activeRenderer)
         {
             return;
