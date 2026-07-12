@@ -6,6 +6,8 @@ namespace ratchet
 	void WindowManager::create(sf::RenderWindow* window)
 	{
 		m_window = window;
+		m_window->setVerticalSyncEnabled(true);
+		m_window->setFramerateLimit(60);
 	}
 	sf::RenderWindow* WindowManager::Get()
 	{
