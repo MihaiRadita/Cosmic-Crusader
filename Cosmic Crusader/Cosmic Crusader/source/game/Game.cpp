@@ -94,7 +94,7 @@ namespace ratchet
 				{
 					sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 
-					m_window.create(fullscreenMode, "Cosmic Crusader", sf::Style::None);
+					m_window.create(fullscreenMode, "Cosmic Crusader", sf::Style::Fullscreen);
 					WindowManager::create(&m_window);
 
 					SceneManager::Get().SaveSettings();
