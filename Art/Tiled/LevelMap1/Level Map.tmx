@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="33" nextobjectid="8431">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="64" infinite="1" nextlayerid="33" nextobjectid="8431">
  <editorsettings>
   <export target="../../../Cosmic Crusader/Cosmic Crusader/Textures/Levels/Scenes/Level1.tmj" format="json"/>
  </editorsettings>
@@ -57,84 +57,84 @@
  <tileset firstgid="68" source="Continue Button.tsx"/>
  <tileset firstgid="69" source="Action Trigger.tsx"/>
  <tileset firstgid="70" source="Enemy2.tsx"/>
- <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="0" columns="11">
+ <tileset firstgid="71" name="Bomb Launcher" tilewidth="22" tileheight="22" tilecount="121" columns="11">
   <image source="D:/Media/Downloads/Bomb Sprite.png" width="256" height="256"/>
  </tileset>
- <tileset firstgid="71" source="Bomb Launcher Bullet.tsx"/>
- <tileset firstgid="72" source="Cutter.tsx"/>
- <tileset firstgid="73" source="Flame.tsx"/>
- <tileset firstgid="74" source="Health.tsx"/>
- <tileset firstgid="75" source="Ammo.tsx"/>
- <tileset firstgid="76" source="Health Recharger.tsx"/>
- <tileset firstgid="77" source="Ammo Recharger.tsx"/>
- <tileset firstgid="78" source="Spring.tsx"/>
- <tileset firstgid="79" source="Platform1.tsx"/>
- <tileset firstgid="80" source="Platforms Collection.tsx"/>
- <tileset firstgid="81" name="Platforms Collection" tilewidth="1" tileheight="1" tilecount="0" columns="0"/>
- <tileset firstgid="81" name="Platform3" tilewidth="2304" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="192" source="Bomb Launcher Bullet.tsx"/>
+ <tileset firstgid="193" source="Cutter.tsx"/>
+ <tileset firstgid="194" source="Flame.tsx"/>
+ <tileset firstgid="195" source="Health.tsx"/>
+ <tileset firstgid="196" source="Ammo.tsx"/>
+ <tileset firstgid="197" source="Health Recharger.tsx"/>
+ <tileset firstgid="198" source="Ammo Recharger.tsx"/>
+ <tileset firstgid="199" source="Spring.tsx"/>
+ <tileset firstgid="200" source="Platform1.tsx"/>
+ <tileset firstgid="201" source="Platforms Collection.tsx"/>
+ <tileset firstgid="202" name="Platforms Collection" tilewidth="1" tileheight="1" tilecount="0" columns="0"/>
+ <tileset firstgid="202" name="Platform3" tilewidth="2304" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Platform3.png" width="2304" height="64"/>
  </tileset>
- <tileset firstgid="82" name="Platform4" tilewidth="3456" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="203" name="Platform4" tilewidth="3456" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Platform4.png" width="3456" height="64"/>
  </tileset>
- <tileset firstgid="83" name="Platform5" tilewidth="384" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="204" name="Platform5" tilewidth="384" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Platforrm5.png" width="384" height="64"/>
  </tileset>
- <tileset firstgid="84" name="Platform6" tilewidth="3200" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="205" name="Platform6" tilewidth="3200" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Platform6.png" width="3200" height="64"/>
  </tileset>
- <tileset firstgid="85" name="Platform7" tilewidth="448" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="206" name="Platform7" tilewidth="448" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Platform7.png" width="448" height="64"/>
  </tileset>
- <tileset firstgid="86" name="Platform8" tilewidth="832" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="207" name="Platform8" tilewidth="832" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Platform8.png" width="832" height="64"/>
  </tileset>
- <tileset firstgid="87" name="Platform9" tilewidth="704" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="208" name="Platform9" tilewidth="704" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Platfform9.png" width="704" height="64"/>
  </tileset>
- <tileset firstgid="88" name="Platform10" tilewidth="640" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="209" name="Platform10" tilewidth="640" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Platform10.png" width="640" height="64"/>
  </tileset>
- <tileset firstgid="89" name="Wall1" tilewidth="64" tileheight="1280" tilecount="1" columns="1">
+ <tileset firstgid="210" name="Wall1" tilewidth="64" tileheight="1280" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Tileset/Wall1.png" width="64" height="1280"/>
  </tileset>
- <tileset firstgid="90" name="Teleporter" tilewidth="128" tileheight="192" tilecount="1" columns="1">
+ <tileset firstgid="211" name="Teleporter" tilewidth="128" tileheight="192" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/Objects/Items/Teleporter/Teleporter1.png" width="128" height="192"/>
  </tileset>
- <tileset firstgid="91" name="Refresh Button" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+ <tileset firstgid="212" name="Refresh Button" tilewidth="64" tileheight="64" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/UI/UI Buttons/Pause Colored Large Buttons/Refresh Button.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="92" name="Sky Bacground" tilewidth="4096" tileheight="1920" tilecount="1" columns="1">
+ <tileset firstgid="213" name="Sky Bacground" tilewidth="4096" tileheight="1920" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Sky Bacground.png" width="4096" height="1920"/>
  </tileset>
- <tileset firstgid="93" name="Building2" tilewidth="2048" tileheight="1600" tilecount="1" columns="1">
+ <tileset firstgid="214" name="Building2" tilewidth="2048" tileheight="1600" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Building2.png" width="2048" height="1600"/>
  </tileset>
- <tileset firstgid="94" name="Building2Rotated" tilewidth="2048" tileheight="1600" tilecount="1" columns="1">
+ <tileset firstgid="215" name="Building2Rotated" tilewidth="2048" tileheight="1600" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Building2Rotated.png" width="2048" height="1600"/>
  </tileset>
- <tileset firstgid="95" name="Building4" tilewidth="1024" tileheight="800" tilecount="1" columns="1">
+ <tileset firstgid="216" name="Building4" tilewidth="1024" tileheight="800" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Building4.png" width="1028" height="800"/>
  </tileset>
- <tileset firstgid="96" name="Clouds" tilewidth="512" tileheight="320" tilecount="1" columns="1">
+ <tileset firstgid="217" name="Clouds" tilewidth="512" tileheight="320" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Clouds.png" width="512" height="320"/>
  </tileset>
- <tileset firstgid="97" name="Building1" tilewidth="2688" tileheight="3200" tilecount="1" columns="1">
+ <tileset firstgid="218" name="Building1" tilewidth="2688" tileheight="3200" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Building1.png" width="2688" height="3200"/>
  </tileset>
- <tileset firstgid="98" name="Bulding1Rotated" tilewidth="2688" tileheight="3200" tilecount="1" columns="1">
+ <tileset firstgid="219" name="Bulding1Rotated" tilewidth="2688" tileheight="3200" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Bulding1Rotated.png" width="2688" height="3200"/>
  </tileset>
- <tileset firstgid="99" name="Building3" tilewidth="2688" tileheight="3200" tilecount="1" columns="1">
+ <tileset firstgid="220" name="Building3" tilewidth="2688" tileheight="3200" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Building3.png" width="2688" height="3200"/>
  </tileset>
- <tileset firstgid="100" name="Building3Rotated" tilewidth="2688" tileheight="3200" tilecount="1" columns="1">
+ <tileset firstgid="221" name="Building3Rotated" tilewidth="2688" tileheight="3200" tilecount="1" columns="1">
   <image source="../../../Cosmic Crusader/Cosmic Crusader/Textures/LevelsBackground/Level1/Building3Rotated.png" width="2688" height="3200"/>
  </tileset>
  <objectgroup id="26" name="Level Background"/>
  <objectgroup id="31" name="Object Layer 25"/>
  <objectgroup id="30" name="Sky" visible="0">
-  <object id="6145" name="Sky" gid="92" x="0" y="640" width="4096" height="1920">
+  <object id="6145" name="Sky" gid="213" x="0" y="640" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -148,7 +148,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6144" name="Sky" gid="92" x="-4096" y="640" width="4096" height="1920">
+  <object id="6144" name="Sky" gid="213" x="-4096" y="640" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -162,7 +162,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6147" name="Sky" gid="92" x="-4096" y="2560" width="4096" height="1920">
+  <object id="6147" name="Sky" gid="213" x="-4096" y="2560" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -176,7 +176,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6148" name="Sky" gid="92" x="0" y="2560" width="4096" height="1920">
+  <object id="6148" name="Sky" gid="213" x="0" y="2560" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -190,7 +190,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6195" name="Sky" gid="92" x="4096" y="640" width="4096" height="1920">
+  <object id="6195" name="Sky" gid="213" x="4096" y="640" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -204,7 +204,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6196" name="Sky" gid="92" x="4096" y="2560" width="4096" height="1920">
+  <object id="6196" name="Sky" gid="213" x="4096" y="2560" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -218,7 +218,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6201" name="Sky" gid="92" x="0" y="-1280" width="4096" height="1920">
+  <object id="6201" name="Sky" gid="213" x="0" y="-1280" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -232,7 +232,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6202" name="Sky" gid="92" x="-4096" y="-1280" width="4096" height="1920">
+  <object id="6202" name="Sky" gid="213" x="-4096" y="-1280" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -246,7 +246,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6203" name="Sky" gid="92" x="4096" y="-1280" width="4096" height="1920">
+  <object id="6203" name="Sky" gid="213" x="4096" y="-1280" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -260,7 +260,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6204" name="Sky" gid="92" x="-4096" y="4480" width="4096" height="1920">
+  <object id="6204" name="Sky" gid="213" x="-4096" y="4480" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -274,7 +274,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6205" name="Sky" gid="92" x="0" y="4480" width="4096" height="1920">
+  <object id="6205" name="Sky" gid="213" x="0" y="4480" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -288,7 +288,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6206" name="Sky" gid="92" x="4096" y="4480" width="4096" height="1920">
+  <object id="6206" name="Sky" gid="213" x="4096" y="4480" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -302,7 +302,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6207" name="Sky" gid="92" x="8192" y="640" width="4096" height="1920">
+  <object id="6207" name="Sky" gid="213" x="8192" y="640" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -316,7 +316,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6208" name="Sky" gid="92" x="8192" y="2560" width="4096" height="1920">
+  <object id="6208" name="Sky" gid="213" x="8192" y="2560" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -330,7 +330,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6209" name="Sky" gid="92" x="8192" y="-1280" width="4096" height="1920">
+  <object id="6209" name="Sky" gid="213" x="8192" y="-1280" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -344,7 +344,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Sky Bacground.png"/>
    </properties>
   </object>
-  <object id="6210" name="Sky" gid="92" x="8192" y="4480" width="4096" height="1920">
+  <object id="6210" name="Sky" gid="213" x="8192" y="4480" width="4096" height="1920">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -360,7 +360,7 @@
   </object>
  </objectgroup>
  <objectgroup id="27" name="Buildings" visible="0">
-  <object id="6233" name="Building" gid="98" x="6656" y="3456" width="2688" height="3200">
+  <object id="6233" name="Building" gid="219" x="6656" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -374,7 +374,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
    </properties>
   </object>
-  <object id="6232" name="Building" gid="98" x="3968" y="3456" width="2688" height="3200">
+  <object id="6232" name="Building" gid="219" x="3968" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -388,7 +388,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
    </properties>
   </object>
-  <object id="6231" name="Building" gid="98" x="1280" y="3456" width="2688" height="3200">
+  <object id="6231" name="Building" gid="219" x="1280" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -402,7 +402,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
    </properties>
   </object>
-  <object id="6230" name="Building" gid="98" x="-1408" y="3456" width="2688" height="3200">
+  <object id="6230" name="Building" gid="219" x="-1408" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -416,7 +416,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Bulding1Rotated.png"/>
    </properties>
   </object>
-  <object id="6229" name="Building" gid="97" x="6656" y="256" width="2688" height="3200">
+  <object id="6229" name="Building" gid="218" x="6656" y="256" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -430,7 +430,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
    </properties>
   </object>
-  <object id="6228" name="Building" gid="97" x="3968" y="256" width="2688" height="3200">
+  <object id="6228" name="Building" gid="218" x="3968" y="256" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -444,7 +444,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
    </properties>
   </object>
-  <object id="6226" name="Building" gid="97" x="1280" y="256" width="2688" height="3200">
+  <object id="6226" name="Building" gid="218" x="1280" y="256" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -458,7 +458,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
    </properties>
   </object>
-  <object id="6227" name="Building" gid="97" x="-1408" y="256" width="2688" height="3200">
+  <object id="6227" name="Building" gid="218" x="-1408" y="256" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -472,7 +472,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building1.png"/>
    </properties>
   </object>
-  <object id="6241" name="Building" gid="100" x="6656" y="3456" width="2688" height="3200">
+  <object id="6241" name="Building" gid="221" x="6656" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -486,7 +486,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
    </properties>
   </object>
-  <object id="6240" name="Building" gid="100" x="3968" y="3456" width="2688" height="3200">
+  <object id="6240" name="Building" gid="221" x="3968" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -500,7 +500,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
    </properties>
   </object>
-  <object id="6239" name="Building" gid="100" x="1280" y="3456" width="2688" height="3200">
+  <object id="6239" name="Building" gid="221" x="1280" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -514,7 +514,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
    </properties>
   </object>
-  <object id="6238" name="Building" gid="100" x="-1408" y="3456" width="2688" height="3200">
+  <object id="6238" name="Building" gid="221" x="-1408" y="3456" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -528,7 +528,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3Rotated.png"/>
    </properties>
   </object>
-  <object id="6237" name="Building" gid="99" x="6656" y="256" width="2688" height="3200">
+  <object id="6237" name="Building" gid="220" x="6656" y="256" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -542,7 +542,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3.png"/>
    </properties>
   </object>
-  <object id="6236" name="Building" gid="99" x="3968" y="256" width="2688" height="3200">
+  <object id="6236" name="Building" gid="220" x="3968" y="256" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -556,7 +556,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3.png"/>
    </properties>
   </object>
-  <object id="6235" name="Building" gid="99" x="1280" y="256" width="2688" height="3200">
+  <object id="6235" name="Building" gid="220" x="1280" y="256" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -570,7 +570,7 @@
     <property name="startSpriteTexturePath" value="Textures/LevelsBackground/Level1/Building3.png"/>
    </properties>
   </object>
-  <object id="6234" name="Building" gid="99" x="-1408" y="256" width="2688" height="3200">
+  <object id="6234" name="Building" gid="220" x="-1408" y="256" width="2688" height="3200">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103206,7 +103206,7 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Tile9.png"/>
    </properties>
   </object>
-  <object id="5445" name="Tile" gid="83" x="16000" y="-128" width="384" height="64">
+  <object id="5445" name="Tile" gid="204" x="16000" y="-128" width="384" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103229,7 +103229,7 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Platforrm5.png"/>
    </properties>
   </object>
-  <object id="5446" name="Tile" gid="83" x="16000" y="-64" width="384" height="64">
+  <object id="5446" name="Tile" gid="204" x="16000" y="-64" width="384" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103252,7 +103252,7 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Platforrm5.png"/>
    </properties>
   </object>
-  <object id="5447" name="Tile" gid="83" x="16000" y="64" width="384" height="64">
+  <object id="5447" name="Tile" gid="204" x="16000" y="64" width="384" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103275,7 +103275,7 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Platforrm5.png"/>
    </properties>
   </object>
-  <object id="5448" name="Tile" gid="83" x="16000" y="0" width="384" height="64">
+  <object id="5448" name="Tile" gid="204" x="16000" y="0" width="384" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103298,7 +103298,7 @@
     <property name="startSpriteTexturePath" value="Textures/Tileset/Platforrm5.png"/>
    </properties>
   </object>
-  <object id="5449" name="Wall" gid="89" x="26048" y="832" width="64" height="1280">
+  <object id="5449" name="Wall" gid="210" x="26048" y="832" width="64" height="1280">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103783,7 +103783,7 @@
   </object>
  </objectgroup>
  <objectgroup id="23" name="Obstacles">
-  <object id="5212" name="Cutter" gid="72" x="18880" y="-256" width="192" height="64">
+  <object id="5212" name="Cutter" gid="193" x="18880" y="-256" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103810,7 +103810,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6019" name="Cutter" gid="72" x="17344" y="-256" width="192" height="64">
+  <object id="6019" name="Cutter" gid="193" x="17344" y="-256" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103837,7 +103837,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6020" name="Cutter" gid="72" x="12800" y="320" width="192" height="64">
+  <object id="6020" name="Cutter" gid="193" x="12800" y="320" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103864,7 +103864,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6021" name="Cutter" gid="72" x="12352" y="320" width="192" height="64">
+  <object id="6021" name="Cutter" gid="193" x="12352" y="320" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103891,7 +103891,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6022" name="Cutter" gid="72" x="10496" y="256" width="192" height="64">
+  <object id="6022" name="Cutter" gid="193" x="10496" y="256" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103918,7 +103918,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6023" name="Cutter" gid="72" x="9024" y="192" width="192" height="64">
+  <object id="6023" name="Cutter" gid="193" x="9024" y="192" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103945,7 +103945,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6024" name="Cutter" gid="72" x="5888" y="320" width="192" height="64">
+  <object id="6024" name="Cutter" gid="193" x="5888" y="320" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103972,7 +103972,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6025" name="Cutter" gid="72" x="5568" y="320" width="192" height="64">
+  <object id="6025" name="Cutter" gid="193" x="5568" y="320" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -103999,7 +103999,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6026" name="Cutter" gid="72" x="4608" y="384" width="192" height="64">
+  <object id="6026" name="Cutter" gid="193" x="4608" y="384" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104026,7 +104026,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5353" name="Cutter" gid="72" x="21120" y="-576" width="192" height="64">
+  <object id="5353" name="Cutter" gid="193" x="21120" y="-576" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104053,7 +104053,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5376" name="Cutter" gid="72" x="24000" y="-576" width="192" height="64">
+  <object id="5376" name="Cutter" gid="193" x="24000" y="-576" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104080,7 +104080,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5377" name="Cutter" gid="72" x="25600" y="-576" width="192" height="64">
+  <object id="5377" name="Cutter" gid="193" x="25600" y="-576" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104107,7 +104107,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5398" name="Cutter" gid="72" x="27136" y="-832" width="192" height="64">
+  <object id="5398" name="Cutter" gid="193" x="27136" y="-832" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104134,7 +104134,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6330" name="Cutter" gid="72" x="29056" y="-64" width="192" height="64">
+  <object id="6330" name="Cutter" gid="193" x="29056" y="-64" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104161,7 +104161,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6332" name="Cutter" gid="72" x="27904" y="192" width="192" height="64">
+  <object id="6332" name="Cutter" gid="193" x="27904" y="192" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104188,7 +104188,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6335" name="Cutter" gid="72" x="27648" y="768" width="192" height="64">
+  <object id="6335" name="Cutter" gid="193" x="27648" y="768" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104215,7 +104215,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6336" name="Cutter" gid="72" x="28032" y="768" width="192" height="64">
+  <object id="6336" name="Cutter" gid="193" x="28032" y="768" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104242,7 +104242,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6338" name="Cutter" gid="72" x="30656" y="768" width="192" height="64">
+  <object id="6338" name="Cutter" gid="193" x="30656" y="768" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104269,7 +104269,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6339" name="Cutter" gid="72" x="32384" y="768" width="192" height="64">
+  <object id="6339" name="Cutter" gid="193" x="32384" y="768" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104296,7 +104296,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6428" name="Cutter" gid="72" x="32640" y="768" width="192" height="64">
+  <object id="6428" name="Cutter" gid="193" x="32640" y="768" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104323,7 +104323,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6462" name="Cutter" gid="72" x="34368" y="448" width="192" height="64">
+  <object id="6462" name="Cutter" gid="193" x="34368" y="448" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104350,7 +104350,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6463" name="Cutter" gid="72" x="35072" y="448" width="192" height="64">
+  <object id="6463" name="Cutter" gid="193" x="35072" y="448" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104377,7 +104377,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6348" name="Cutter" gid="72" x="38528" y="192" width="192" height="64">
+  <object id="6348" name="Cutter" gid="193" x="38528" y="192" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104404,7 +104404,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6350" name="Cutter" gid="72" x="39744" y="-64" width="192" height="64">
+  <object id="6350" name="Cutter" gid="193" x="39744" y="-64" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104431,7 +104431,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6351" name="Cutter" gid="72" x="40896" y="-64" width="192" height="64">
+  <object id="6351" name="Cutter" gid="193" x="40896" y="-64" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104458,7 +104458,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6349" name="Cutter" gid="72" x="37696" y="192" width="192" height="64">
+  <object id="6349" name="Cutter" gid="193" x="37696" y="192" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104485,7 +104485,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="6331" name="Cutter" gid="72" x="29312" y="-64" width="192" height="64">
+  <object id="6331" name="Cutter" gid="193" x="29312" y="-64" width="192" height="64">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104512,7 +104512,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Cutter/Cutter1.png"/>
    </properties>
   </object>
-  <object id="5214" name="Flame" gid="73" x="19712" y="-576" width="64" height="128">
+  <object id="5214" name="Flame" gid="194" x="19712" y="-576" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104541,7 +104541,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6357" name="Flame" gid="73" x="20800" y="-896" width="64" height="128">
+  <object id="6357" name="Flame" gid="194" x="20800" y="-896" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104570,7 +104570,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6027" name="Flame" gid="73" x="15424" y="128" width="64" height="128">
+  <object id="6027" name="Flame" gid="194" x="15424" y="128" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104599,7 +104599,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6028" name="Flame" gid="73" x="15232" y="128" width="64" height="128">
+  <object id="6028" name="Flame" gid="194" x="15232" y="128" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104628,7 +104628,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6029" name="Flame" gid="73" x="15040" y="192" width="64" height="128">
+  <object id="6029" name="Flame" gid="194" x="15040" y="192" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104657,7 +104657,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6030" name="Flame" gid="73" x="14848" y="192" width="64" height="128">
+  <object id="6030" name="Flame" gid="194" x="14848" y="192" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104686,7 +104686,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6032" name="Flame" gid="73" x="14464" y="256" width="64" height="128">
+  <object id="6032" name="Flame" gid="194" x="14464" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104715,7 +104715,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6033" name="Flame" gid="73" x="11712" y="320" width="64" height="128">
+  <object id="6033" name="Flame" gid="194" x="11712" y="320" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104744,7 +104744,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6039" name="Flame" gid="73" x="8640" y="256" width="64" height="128">
+  <object id="6039" name="Flame" gid="194" x="8640" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104773,7 +104773,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6040" name="Flame" gid="73" x="8448" y="256" width="64" height="128">
+  <object id="6040" name="Flame" gid="194" x="8448" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104802,7 +104802,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6041" name="Flame" gid="73" x="7424" y="256" width="64" height="128">
+  <object id="6041" name="Flame" gid="194" x="7424" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104831,7 +104831,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6042" name="Flame" gid="73" x="7104" y="256" width="64" height="128">
+  <object id="6042" name="Flame" gid="194" x="7104" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104860,7 +104860,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6038" name="Flame" gid="73" x="9984" y="256" width="64" height="128">
+  <object id="6038" name="Flame" gid="194" x="9984" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104889,7 +104889,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6034" name="Flame" gid="73" x="11968" y="320" width="64" height="128">
+  <object id="6034" name="Flame" gid="194" x="11968" y="320" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104918,7 +104918,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6031" name="Flame" gid="73" x="14656" y="256" width="64" height="128">
+  <object id="6031" name="Flame" gid="194" x="14656" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104947,7 +104947,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="5354" name="Flame" gid="73" x="20928" y="-896" width="64" height="128">
+  <object id="5354" name="Flame" gid="194" x="20928" y="-896" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -104976,7 +104976,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="5355" name="Flame" gid="73" x="21824" y="-576" width="64" height="128">
+  <object id="5355" name="Flame" gid="194" x="21824" y="-576" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105005,7 +105005,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="5356" name="Flame" gid="73" x="26176" y="-512" width="64" height="128">
+  <object id="5356" name="Flame" gid="194" x="26176" y="-512" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105034,7 +105034,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6333" name="Flame" gid="73" x="26816" y="192" width="64" height="128">
+  <object id="6333" name="Flame" gid="194" x="26816" y="192" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105063,7 +105063,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6337" name="Flame" gid="73" x="29568" y="704" width="64" height="128">
+  <object id="6337" name="Flame" gid="194" x="29568" y="704" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105092,7 +105092,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6340" name="Flame" gid="73" x="31488" y="768" width="64" height="128">
+  <object id="6340" name="Flame" gid="194" x="31488" y="768" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105121,7 +105121,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6341" name="Flame" gid="73" x="31680" y="768" width="64" height="128">
+  <object id="6341" name="Flame" gid="194" x="31680" y="768" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105150,7 +105150,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6464" name="Flame" gid="73" x="34816" y="448" width="64" height="128">
+  <object id="6464" name="Flame" gid="194" x="34816" y="448" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105179,7 +105179,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6342" name="Flame" gid="73" x="36416" y="256" width="64" height="128">
+  <object id="6342" name="Flame" gid="194" x="36416" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105208,7 +105208,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6344" name="Flame" gid="73" x="37248" y="256" width="64" height="128">
+  <object id="6344" name="Flame" gid="194" x="37248" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105237,7 +105237,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6346" name="Flame" gid="73" x="38080" y="256" width="64" height="128">
+  <object id="6346" name="Flame" gid="194" x="38080" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105266,7 +105266,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6352" name="Flame" gid="73" x="40256" y="-64" width="64" height="128">
+  <object id="6352" name="Flame" gid="194" x="40256" y="-64" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105295,7 +105295,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6343" name="Flame" gid="73" x="36480" y="256" width="64" height="128">
+  <object id="6343" name="Flame" gid="194" x="36480" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105324,7 +105324,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6345" name="Flame" gid="73" x="37312" y="256" width="64" height="128">
+  <object id="6345" name="Flame" gid="194" x="37312" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105353,7 +105353,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6347" name="Flame" gid="73" x="38144" y="256" width="64" height="128">
+  <object id="6347" name="Flame" gid="194" x="38144" y="256" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105382,7 +105382,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6353" name="Flame" gid="73" x="40576" y="-64" width="64" height="128">
+  <object id="6353" name="Flame" gid="194" x="40576" y="-64" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105411,7 +105411,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6322" name="Flame" gid="73" x="26304" y="768" width="64" height="128">
+  <object id="6322" name="Flame" gid="194" x="26304" y="768" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105440,7 +105440,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6324" name="Flame" gid="73" x="28544" y="-448" width="64" height="128">
+  <object id="6324" name="Flame" gid="194" x="28544" y="-448" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105469,7 +105469,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6326" name="Flame" gid="73" x="28928" y="-384" width="64" height="128">
+  <object id="6326" name="Flame" gid="194" x="28928" y="-384" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105498,7 +105498,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6328" name="Flame" gid="73" x="29312" y="-320" width="64" height="128">
+  <object id="6328" name="Flame" gid="194" x="29312" y="-320" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105527,7 +105527,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6325" name="Flame" gid="73" x="28672" y="-448" width="64" height="128">
+  <object id="6325" name="Flame" gid="194" x="28672" y="-448" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105556,7 +105556,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6327" name="Flame" gid="73" x="29056" y="-384" width="64" height="128">
+  <object id="6327" name="Flame" gid="194" x="29056" y="-384" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105585,7 +105585,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6329" name="Flame" gid="73" x="29440" y="-320" width="64" height="128">
+  <object id="6329" name="Flame" gid="194" x="29440" y="-320" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105614,7 +105614,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="5357" name="Flame" gid="73" x="26304" y="-512" width="64" height="128">
+  <object id="5357" name="Flame" gid="194" x="26304" y="-512" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105643,7 +105643,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Obstacles/Flame/Flame1.png"/>
    </properties>
   </object>
-  <object id="6321" name="Flame" gid="73" x="26432" y="768" width="64" height="128">
+  <object id="6321" name="Flame" gid="194" x="26432" y="768" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105674,7 +105674,7 @@
   </object>
  </objectgroup>
  <objectgroup id="24" name="Items">
-  <object id="5216" name="Health" gid="74" x="16442" y="-346" width="64" height="64">
+  <object id="5216" name="Health" gid="195" x="16442" y="-346" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105701,7 +105701,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="6355" name="Health" gid="74" x="4936" y="356" width="64" height="64">
+  <object id="6355" name="Health" gid="195" x="4936" y="356" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105728,7 +105728,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="6356" name="Health" gid="74" x="9328" y="152" width="64" height="64">
+  <object id="6356" name="Health" gid="195" x="9328" y="152" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105755,7 +105755,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="6367" name="Health" gid="74" x="13368" y="280" width="64" height="64">
+  <object id="6367" name="Health" gid="195" x="13368" y="280" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105782,7 +105782,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="5408" name="Health" gid="74" x="31888" y="736" width="64" height="64">
+  <object id="5408" name="Health" gid="195" x="31888" y="736" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105809,7 +105809,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="6365" name="Health" gid="74" x="35584" y="-92" width="64" height="64">
+  <object id="6365" name="Health" gid="195" x="35584" y="-92" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105836,7 +105836,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="6366" name="Health" gid="74" x="40720" y="-92" width="64" height="64">
+  <object id="6366" name="Health" gid="195" x="40720" y="-92" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105863,7 +105863,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="5409" name="Health" gid="74" x="26398" y="-536" width="64" height="64">
+  <object id="5409" name="Health" gid="195" x="26398" y="-536" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105890,7 +105890,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health.png"/>
    </properties>
   </object>
-  <object id="5217" name="Ammo" gid="75" x="17166" y="-286" width="64" height="64">
+  <object id="5217" name="Ammo" gid="196" x="17166" y="-286" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105916,7 +105916,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5405" name="Ammo" gid="75" x="19888" y="-594" width="64" height="64">
+  <object id="5405" name="Ammo" gid="196" x="19888" y="-594" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105942,7 +105942,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5406" name="Ammo" gid="75" x="21600" y="-598" width="64" height="64">
+  <object id="5406" name="Ammo" gid="196" x="21600" y="-598" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105968,7 +105968,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5407" name="Ammo" gid="75" x="26944" y="-832" width="64" height="64">
+  <object id="5407" name="Ammo" gid="196" x="26944" y="-832" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -105994,7 +105994,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="6360" name="Ammo" gid="75" x="29556" y="-88" width="64" height="64">
+  <object id="6360" name="Ammo" gid="196" x="29556" y="-88" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106020,7 +106020,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="6361" name="Ammo" gid="75" x="26420" y="432" width="64" height="64">
+  <object id="6361" name="Ammo" gid="196" x="26420" y="432" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106046,7 +106046,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="6362" name="Ammo" gid="75" x="30132" y="740" width="64" height="64">
+  <object id="6362" name="Ammo" gid="196" x="30132" y="740" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106072,7 +106072,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="6363" name="Ammo" gid="75" x="36872" y="168" width="64" height="64">
+  <object id="6363" name="Ammo" gid="196" x="36872" y="168" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106098,7 +106098,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="6364" name="Ammo" gid="75" x="39552" y="-96" width="64" height="64">
+  <object id="6364" name="Ammo" gid="196" x="39552" y="-96" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106124,7 +106124,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo.png"/>
    </properties>
   </object>
-  <object id="5220" name="Health Recharger" gid="76" x="21120" y="-896" width="64" height="128">
+  <object id="5220" name="Health Recharger" gid="197" x="21120" y="-896" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106156,7 +106156,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health Recharger On.png"/>
    </properties>
   </object>
-  <object id="6358" name="Health Recharger" gid="76" x="26176" y="768" width="64" height="128">
+  <object id="6358" name="Health Recharger" gid="197" x="26176" y="768" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106188,7 +106188,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Health Recharger On.png"/>
    </properties>
   </object>
-  <object id="6359" name="Ammo Recharger" gid="77" x="33472" y="768" width="64" height="128">
+  <object id="6359" name="Ammo Recharger" gid="198" x="33472" y="768" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106220,7 +106220,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo Recharger On.png"/>
    </properties>
   </object>
-  <object id="8430" name="Ammo Recharger" gid="77" x="24896" y="-640" width="64" height="128">
+  <object id="8430" name="Ammo Recharger" gid="198" x="24896" y="-640" width="64" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106252,7 +106252,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Ammo Recharger On.png"/>
    </properties>
   </object>
-  <object id="5397" name="Spring" gid="78" x="15872" y="64" width="128" height="128">
+  <object id="5397" name="Spring" gid="199" x="15872" y="64" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106285,7 +106285,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5410" name="Spring" gid="78" x="16576" y="-320" width="128" height="128">
+  <object id="5410" name="Spring" gid="199" x="16576" y="-320" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106318,7 +106318,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5411" name="Spring" gid="78" x="19328" y="-256" width="128" height="128">
+  <object id="5411" name="Spring" gid="199" x="19328" y="-256" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106351,7 +106351,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5412" name="Spring" gid="78" x="20480" y="-576" width="128" height="128">
+  <object id="5412" name="Spring" gid="199" x="20480" y="-576" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106384,7 +106384,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5413" name="Spring" gid="78" x="27584" y="-512" width="128" height="128">
+  <object id="5413" name="Spring" gid="199" x="27584" y="-512" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106417,7 +106417,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="6334" name="Spring" gid="78" x="26560" y="768" width="128" height="128">
+  <object id="6334" name="Spring" gid="199" x="26560" y="768" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106450,7 +106450,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="8429" name="Spring" gid="78" x="27072" y="768" width="128" height="128">
+  <object id="8429" name="Spring" gid="199" x="27072" y="768" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106483,7 +106483,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5970" name="Spring" gid="78" x="33920" y="768" width="128" height="128">
+  <object id="5970" name="Spring" gid="199" x="33920" y="768" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106516,7 +106516,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5971" name="Spring" gid="78" x="35648" y="448" width="128" height="128">
+  <object id="5971" name="Spring" gid="199" x="35648" y="448" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106549,7 +106549,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="6354" name="Spring" gid="78" x="36032" y="192" width="128" height="128">
+  <object id="6354" name="Spring" gid="199" x="36032" y="192" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106582,7 +106582,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5972" name="Spring" gid="78" x="39168" y="192" width="128" height="128">
+  <object id="5972" name="Spring" gid="199" x="39168" y="192" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106615,7 +106615,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5973" name="Spring" gid="78" x="41280" y="-64" width="128" height="128">
+  <object id="5973" name="Spring" gid="199" x="41280" y="-64" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106648,7 +106648,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="5974" name="Spring" gid="78" x="41920" y="-320" width="128" height="128">
+  <object id="5974" name="Spring" gid="199" x="41920" y="-320" width="128" height="128">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -106681,7 +106681,7 @@
     <property name="startSpriteTexturePath" value="Textures/Objects/Items/Spring/Spring1.png"/>
    </properties>
   </object>
-  <object id="6043" name="Teleporter" gid="90" x="42816" y="-576" width="128" height="192">
+  <object id="6043" name="Teleporter" gid="211" x="42816" y="-576" width="128" height="192">
    <properties>
     <property name="Faction" type="int" value="1"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109095,7 +109095,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5208" name="Bomb Launcher Bullet" gid="71" x="15773" y="-659.667" width="30" height="30">
+  <object id="5208" name="Bomb Launcher Bullet" gid="192" x="15773" y="-659.667" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109124,7 +109124,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5976" name="Bomb Launcher Bullet" gid="71" x="14141" y="148.333" width="30" height="30">
+  <object id="5976" name="Bomb Launcher Bullet" gid="192" x="14141" y="148.333" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109153,7 +109153,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6001" name="Bomb Launcher Bullet" gid="71" x="27709" y="-875.667" width="30" height="30">
+  <object id="6001" name="Bomb Launcher Bullet" gid="192" x="27709" y="-875.667" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109182,7 +109182,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6416" name="Bomb Launcher Bullet" gid="71" x="28669" y="724.333" width="30" height="30">
+  <object id="6416" name="Bomb Launcher Bullet" gid="192" x="28669" y="724.333" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109211,7 +109211,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6421" name="Bomb Launcher Bullet" gid="71" x="31933" y="660.333" width="30" height="30">
+  <object id="6421" name="Bomb Launcher Bullet" gid="192" x="31933" y="660.333" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109240,7 +109240,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6444" name="Bomb Launcher Bullet" gid="71" x="34557" y="404.333" width="30" height="30">
+  <object id="6444" name="Bomb Launcher Bullet" gid="192" x="34557" y="404.333" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109269,7 +109269,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6453" name="Bomb Launcher Bullet" gid="71" x="36669" y="148.333" width="30" height="30">
+  <object id="6453" name="Bomb Launcher Bullet" gid="192" x="36669" y="148.333" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109298,7 +109298,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6467" name="Bomb Launcher Bullet" gid="71" x="37949" y="148.333" width="30" height="30">
+  <object id="6467" name="Bomb Launcher Bullet" gid="192" x="37949" y="148.333" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109327,7 +109327,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6458" name="Bomb Launcher Bullet" gid="71" x="39997" y="-107.667" width="30" height="30">
+  <object id="6458" name="Bomb Launcher Bullet" gid="192" x="39997" y="-107.667" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109356,7 +109356,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6401" name="Bomb Launcher Bullet" gid="71" x="29501" y="-427.667" width="30" height="30">
+  <object id="6401" name="Bomb Launcher Bullet" gid="192" x="29501" y="-427.667" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109385,7 +109385,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5227" name="Bomb Launcher Bullet" gid="71" x="19260.9" y="-441.485" width="30" height="30">
+  <object id="5227" name="Bomb Launcher Bullet" gid="192" x="19260.9" y="-441.485" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109414,7 +109414,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="5241" name="Bomb Launcher Bullet" gid="71" x="21509.4" y="-999.061" width="30" height="30">
+  <object id="5241" name="Bomb Launcher Bullet" gid="192" x="21509.4" y="-999.061" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -109443,7 +109443,7 @@
     <property name="objectType" type="int" value="1"/>
    </properties>
   </object>
-  <object id="6384" name="Bomb Launcher Bullet" gid="71" x="23805" y="-683.671" width="30" height="30">
+  <object id="6384" name="Bomb Launcher Bullet" gid="192" x="23805" y="-683.671" width="30" height="30">
    <properties>
     <property name="Faction" type="int" value="2"/>
     <property name="activeObject" type="bool" value="true"/>
@@ -112418,7 +112418,7 @@
     <property name="startSpriteTexturePath" value="Textures/UI/UI Buttons/Colored Large Buttons/Back Button.png"/>
    </properties>
   </object>
-  <object id="6044" name="Refresh Button" gid="91" x="448" y="256" width="64" height="64">
+  <object id="6044" name="Refresh Button" gid="212" x="448" y="256" width="64" height="64">
    <properties>
     <property name="Faction" type="int" value="0"/>
     <property name="UIButtonInteractSound" value="Sounds/Sound Effects/Pause  Menu/Menu Button Interact.wav"/>

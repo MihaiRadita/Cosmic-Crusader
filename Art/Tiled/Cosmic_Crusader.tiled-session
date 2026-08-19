@@ -72,24 +72,87 @@
         },
         "LevelMap1/Level Map.tmx": {
             "expandedObjectLayers": [
-                3,
-                16,
-                4,
                 15,
-                13
+                13,
+                3,
+                4,
+                16
             ],
-            "scale": 0.33,
-            "selectedLayer": 9,
+            "scale": 0.25,
+            "selectedLayer": 23,
             "viewCenter": {
-                "x": 16618.18181818182,
-                "y": -484.84848484848476
+                "x": 108,
+                "y": 520
             }
         },
         "LevelMap1/Level Map.tmx#Bomb Launcher": {
             "scaleInDock": 1
         },
+        "LevelMap1/Level Map.tmx#Building1": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Building2": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Building2Rotated": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Building3": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Building3Rotated": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Building4": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Bulding1Rotated": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Clouds": {
+            "scaleInDock": 1
+        },
         "LevelMap1/Level Map.tmx#Main Menu": {
             "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platform10": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platform3": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platform4": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platform5": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platform6": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platform7": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platform8": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platform9": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Platforms Collection": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Refresh Button": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Sky Bacground": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Teleporter": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Level Map.tmx#Wall1": {
             "scaleInDock": 1
         },
         "LevelMap1/Main Menu.tmx": {
@@ -101,13 +164,19 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 32,
-                "y": 31.5
+                "y": 31
             }
         },
         "LevelMap1/Main Menu.tmx#Main Menu": {
             "dynamicWrapping": true,
             "scaleInDock": 0.25,
             "scaleInEditor": 1
+        },
+        "LevelMap1/Main Menu.tmx#MainMenuBackground": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Main Menu.tmx#Refresh Button": {
+            "scaleInDock": 1
         },
         "LevelMap1/Main Menu.tsx": {
             "dynamicWrapping": true,
@@ -126,6 +195,12 @@
         "LevelMap1/Next Value Button.tsx": {
             "scaleInDock": 0.25,
             "scaleInEditor": 1
+        },
+        "LevelMap1/Platform1.tsx": {
+            "scaleInDock": 1
+        },
+        "LevelMap1/Platforms Collection.tsx": {
+            "scaleInDock": 1
         },
         "LevelMap1/PlatformsTile.tsx": {
             "dynamicWrapping": false,
