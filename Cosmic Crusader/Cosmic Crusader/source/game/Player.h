@@ -28,7 +28,6 @@ namespace ratchet
 
 		float m_timeLimitInvulnerable = 1.f;
 
-		bool m_isOnSpring = false;
 
 
 		std::vector<sf::Event> m_playerEvents;

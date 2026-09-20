@@ -168,6 +168,12 @@ namespace ratchet
             Player* player = dynamic_cast<Player*>(m_target);
             if (player)
             {
+                if (player->m_isDeath)
+                {
+                    player->m_isOnSpring = true;
+                    return;
+                }
+
                 if (m_isItemInteracting)
                 {
                     if (player->getIsOnSpring())

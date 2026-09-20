@@ -471,7 +471,7 @@ namespace ratchet
 			}
 			
 
-			if (m_isDeath && isGrounded())
+			if (m_isDeath && (isGrounded() || isOnSpring()))
 			{
 				if (m_currentAnimationState != DIE)
 				{

@@ -231,6 +231,7 @@ namespace ratchet
 
 		// Physics
 		bool isGrounded() const { return m_isGround; };
+		bool isOnSpring() const { return m_isOnSpring; };
 
 		//Detections
 		void detectTarget(GameObject* target);
@@ -299,6 +300,7 @@ namespace ratchet
 		 sf::CircleShape m_shooitngPointCenter;
 
 		 bool m_isGround;
+		 bool m_isOnSpring = false;
 		 bool m_isTouchingUpPlatform;
 
 	private:
