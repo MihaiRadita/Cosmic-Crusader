@@ -9,7 +9,7 @@
 | `Mouse Wheel ↑ / ↓` | Switch weapons                                                 |
 | `1 - 9`             | Select weapon directly                                         |
 | `E`                 | Interact with checkpoints & chargers when inside their trigger |
-| `Esc`               | Pause / Resume                                                 |
+| `Esc`                | Pause / Resume                                                 |
 | `R`                 | Apply & save Options settings                                  |
 | `F1`                | Toggle Fullscreen                                              |
 
@@ -30,3 +30,4 @@
 - **Checkpoints (Flags) / Health & Ammo Chargers:** enter their trigger, then press `E`.
 - **UI:** move the cursor over a button and press `Left Click`.
 - **Options:** after changing settings, press the **Refresh** UI button or `R` to apply and save them.
+- **Fullscreen:** press `F1` to toggle between fullscreen and window mode. When returning to window mode, the game restores the current resolution saved in Options. Fullscreen adapts to the monitor's resolution.
