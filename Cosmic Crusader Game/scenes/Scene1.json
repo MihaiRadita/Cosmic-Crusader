@@ -1,0 +1,18 @@
+{
+    "tiledMapPath" : "tiledMap.tmj",
+    "otherGameObjects" : 
+    [
+        {
+            "height":0,
+            "id":3830,
+            "name":"PathPoint",
+            "point":true,
+            "rotation":0,
+            "type":"",
+            "visible":true,
+            "width":0,
+            "x":640,
+            "y":576
+        },
+    ]
+}
